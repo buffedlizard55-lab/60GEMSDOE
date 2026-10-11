@@ -1,0 +1,86 @@
+{
+ "evidence_class": "HOLDOUT-DTI",
+ "evaluator_version": "gems60-exp1-v1",
+ "question": "do channels crossing withheld segments show larger steepness steps than random lines of the same orientation?",
+ "statistic": "Sigma = log10(ksn_up / ksn_dn) on the chi-profile segmentation window",
+ "parameters": {
+  "window_samples": 31,
+  "area_threshold_px": 100,
+  "theta_ref": 0.45,
+  "control": "translated identical component",
+  "radius_px": 1.5,
+  "n_control_draws": 20,
+  "seed": 2026,
+  "buffer_px": 3,
+  "min_component_px": 8
+ },
+ "pooled": {
+  "n_crossing": 9488,
+  "n_control": 45967,
+  "mean_crossing": 0.08832374505788144,
+  "mean_control": 0.11126991399135673,
+  "median_crossing": -0.01767523368435784,
+  "median_control": -0.012528303619297446,
+  "delta_mean": -0.022946168933475286,
+  "ci95_delta": [
+   -0.16572629205138067,
+   0.16221502157755552
+  ],
+  "mannwhitney_U": 199033497.0,
+  "p_one_sided": 1.0,
+  "leakage_canary_auc": 0.45922686533659984
+ },
+ "per_fold": [
+  {
+   "fold": "Q0",
+   "n_crossing": 4409,
+   "n_control": 24180,
+   "mean_crossing": 0.0642664197143546,
+   "mean_control": 0.10963763919711532,
+   "median_crossing": -0.01743127621737896,
+   "median_control": -0.012405366255496517,
+   "delta_mean": -0.045371219482760725,
+   "mannwhitney_U": 47547956.0,
+   "p_one_sided": 1.0
+  },
+  {
+   "fold": "Q1",
+   "n_crossing": 1045,
+   "n_control": 9958,
+   "mean_crossing": 0.09291673005130896,
+   "mean_control": 0.053774551040618734,
+   "median_crossing": 0.0820248989396148,
+   "median_control": -0.012753636017257177,
+   "delta_mean": 0.039142179010690226,
+   "mannwhitney_U": 6378834.0,
+   "p_one_sided": 1.1435926927471475e-33
+  },
+  {
+   "fold": "Q2",
+   "n_crossing": 2075,
+   "n_control": 6686,
+   "mean_crossing": -0.09561456135194117,
+   "mean_control": 0.16866333482898901,
+   "median_crossing": -0.02098539509687674,
+   "median_control": -0.012226505554033547,
+   "delta_mean": -0.26427789618093017,
+   "mannwhitney_U": 4805982.0,
+   "p_one_sided": 1.0
+  },
+  {
+   "fold": "Q3",
+   "n_crossing": 1959,
+   "n_control": 5143,
+   "mean_crossing": 0.3348480247525522,
+   "mean_control": 0.15565545104517692,
+   "median_crossing": -0.014959214911428645,
+   "median_control": -0.012471468388201293,
+   "delta_mean": 0.1791925737073753,
+   "mannwhitney_U": 5047417.5,
+   "p_one_sided": 0.44926023686512934
+  }
+ ],
+ "predeclared_rule": "proceed iff p_one_sided < 0.01 AND ci95_delta lower bound > 0",
+ "verdict": "STOP",
+ "withheld_positive_pixels": 56619
+}

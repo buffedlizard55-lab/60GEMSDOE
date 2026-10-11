@@ -1,0 +1,106 @@
+{
+ "evidence_class": "HOLDOUT-DTI",
+ "evaluator_version": "gems60-exp2-v1",
+ "experiment": "corrected first test: sharpened statistic + position-matched control",
+ "why_re_run": "Experiment 1's window was 31 samples = 3.1 km, ~10x the length of the base-level step under test, and its control was an unrelated translated line.  Both defects were named before this run; the rule is unchanged.",
+ "parameters": {
+  "window_samples": 7,
+  "gap": 2,
+  "theta_ref": 0.45,
+  "area_threshold_px": 100,
+  "cast_half_length_px": 12,
+  "cast_threshold_sigma": 1.0268145401637627,
+  "radius_px": 1.5,
+  "seed": 2026
+ },
+ "armA_vs_control": {
+  "n_crossing": 17117,
+  "n_control": 102702,
+  "mean_crossing": 0.02590927019149369,
+  "mean_control": 0.06076766240004957,
+  "median_crossing": -0.004481071462870191,
+  "median_control": -0.003547326505343631,
+  "delta_mean": -0.03485839220855588,
+  "ci95_delta": [
+   -0.08056582623216794,
+   -0.006490355172688651
+  ],
+  "auc": 0.47945804189688124,
+  "mannwhitney_U": 820607319.5,
+  "p_one_sided": 1.0,
+  "per_fold": [
+   {
+    "fold": "Q0",
+    "n_crossing": 9011,
+    "n_control": 54066,
+    "mean_crossing": 0.0365389333087073,
+    "mean_control": 0.05737098231318767,
+    "median_crossing": -0.004480550443945242,
+    "median_control": -0.003840667588848567,
+    "delta_mean": -0.020832049004480373,
+    "auc": 0.4680763661595897,
+    "p_one_sided": 1.0
+   },
+   {
+    "fold": "Q1",
+    "n_crossing": 2222,
+    "n_control": 13332,
+    "mean_crossing": -0.012957181018820665,
+    "mean_control": 0.07061253919718723,
+    "median_crossing": 0.004991734762954386,
+    "median_control": -0.0022961970822696935,
+    "delta_mean": -0.08356972021600789,
+    "auc": 0.4918598126689357,
+    "p_one_sided": 0.8907603991365969
+   },
+   {
+    "fold": "Q2",
+    "n_crossing": 3127,
+    "n_control": 18762,
+    "mean_crossing": -0.021974837099852103,
+    "mean_control": 0.06112982094007002,
+    "median_crossing": -0.004902725931278944,
+    "median_control": -0.003786169221200111,
+    "delta_mean": -0.08310465803992212,
+    "auc": 0.4523968150416779,
+    "p_one_sided": 1.0
+   },
+   {
+    "fold": "Q3",
+    "n_crossing": 2757,
+    "n_control": 16542,
+    "mean_crossing": 0.07680189396376245,
+    "mean_control": 0.06352417247071653,
+    "median_crossing": -0.003919206957745427,
+    "median_control": -0.0032371823190640112,
+    "delta_mean": 0.01327772149304593,
+    "auc": 0.48280202289622576,
+    "p_one_sided": 0.9981103763585093
+   }
+  ]
+ },
+ "holdout_auc_surfaces": {
+  "sigma": {
+   "n_pos": 4375,
+   "n_neg": 87500,
+   "auc_signed": 0.46041738448979586,
+   "auc_abs": 0.5519911418775509
+  },
+  "resid": {
+   "n_pos": 2774,
+   "n_neg": 55480,
+   "auc_signed": 0.5322531317429484,
+   "auc_abs": 0.5755133932400408
+  }
+ },
+ "cast_field": {
+  "auc": 0.49839602226565044,
+  "n_casts": 116547,
+  "threshold": 1.0268145401637627,
+  "n_pos": 56619,
+  "n_neg": 1132380,
+  "max_value": 6059.36223580998
+ },
+ "predeclared_rule": "proceed iff p_one_sided < 0.01 AND ci95_delta lower bound > 0",
+ "verdict": "STOP"
+}

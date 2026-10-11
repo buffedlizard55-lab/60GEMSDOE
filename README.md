@@ -17,6 +17,26 @@
 >   [`docs/executive-summary.html`](docs/executive-summary.html) explains the exact submission ritual
 >   for any future PROMOTED file, including the fix for the historical
 >   *"Predicted values must be in range [0, 1]"* portal rejection.
+> * **ONE-CLICK status read-out for every file in `docs/downloads/`:** each artefact page prints a
+>   `DOWNLOAD: OK/NO · SUBMIT TO THE COMPETITION: YES/NO` line. The historical portal-rejected
+>   baseline `gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif` (owner-reported 0.26) is kept
+>   in `docs/downloads/` with its receipt as the worked example of the
+>   *"Predicted values must be in range [0, 1]"* fix.
+
+
+>
+> ### ⬇ SECOND, INDEPENDENT RUN OF THIS SAME LANE — session `arena/16fc977d-60gemsdoe`
+> **[⬇ `docs/downloads/gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif`](docs/downloads/gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif)** ·
+> [receipt](docs/downloads/checks-gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif.json) ·
+> [full report](docs/lane-chi-report.html) ·
+> **DOWNLOAD: OK (research artefact) · SUBMIT TO THE COMPETITION: NO** — same verdict, reached
+> independently with a different DEM, a different statistic and a different holdout.
+> Keys: absolute-elevation GeoDAWN DEM (`data/geodawn_dem_a2_100m.tif`, sha256 `d32762a3…`);
+> pre-registered test STOP twice (Δmean −0.0229 CI95 [−0.166, +0.162]; then −0.0349
+> CI95 [−0.0806, −0.0065], AUC 0.4795); channel-normal cast field AUC **0.4984**;
+> **15/15** format checks PASS; **unique** (worst ρ = −0.015, worst 3-px overlap 0.000 over
+> 170 registry rasters); HOLDOUT-DTI 0.00039 vs matched random control 0.00042.
+> Code lives in `src/gems60chi/` so it never forks or overwrites this session's `src/gems60/`.
 
 ---
 
@@ -458,3 +478,54 @@ holds the 35 comparator rasters used by the uniqueness stop rule.
    the labelled faults, contradicting the portal's "total fault absence" description.
 5. **Unverified / pending:** the egress probe's receipt (runner-side reachability of the 3DEP hosts) and
    the submissions page widget (no authenticated session). Treat both as open items, not as facts.
+
+
+---
+
+## Lane-60 second run (session `arena/16fc977d-60gemsdoe`) — independent corroboration
+
+A second, fully independent run of the **same lane** was executed on the same
+competition grid and reached the **same verdict**, **negative**, with a different DEM
+(absolute-elevation GeoDAWN 100 m rather than a derived product), a different
+statistic (channel-normal casting of χ-profile steepness steps), and its own
+buffered whole-component holdout. That two independent implementations agree is the
+strongest evidence available locally that the STOP is a property of the method at
+100 m, not of one implementation.
+
+**Engine:** `src/gems60chi/{metric,holdout,hydro,knick,field}.py`, with 14 tests in
+`tests/test_chi_*.py` — hydrology primitives (priority-flood fill, D8 routing,
+accumulation, χ) are verified against **independent brute-force implementations**.
+
+**Experiments (budget 3/3):**
+
+| exp | pre-registered question / artefact | result |
+| --- | --- | --- |
+| 1 | the brief's first test, as written (3.1 km segmentation window) | pooled Δmean **−0.0229**, CI95 [−0.166, +0.162], p = 1.0, AUC 0.459 → **STOP** |
+| 2 | corrected: 700 m statistic + position-matched, area-binned control | Δmean **−0.0349**, CI95 [−0.0806, −0.0065] *(excludes 0 on the wrong side)*, AUC 0.4795 → **STOP** |
+| 3 | emission, format validation, uniqueness | 15/15 checks PASS; **unique** (worst ρ = −0.015, worst 3-px forward overlap 0.000 over 170 obtainable registry rasters); HOLDOUT-DTI 0.00039 vs a matched random-on-the-same-support control of 0.00042 |
+
+**The 0.2778 question, answered from the family's own record.** `h33-h33-2-b2` is the
+owner-reported 0.2708 raster with **2,545 dots deleted and none added**, every removed dot
+1.4–2.0 px from the mapped catalogue (`equals_base_pruned_at_2px: true`, 57GEMSDOE
+`evidence/session6_mechanism_and_witness.json`). The metric reduces to
+`1/DTI = α + α(F/T) + β(|G|/T)`, so a unit of mass pays only if its realised kernel credit
+beats `α·DTI` ≈ 0.052 — within ~284 m of a hidden truth pixel. Beating 0.3195 / 0.3774 is
+therefore a *detector* problem: `T` must rise ≈ **+45 % at fixed mass**. Nothing here is
+written as a score.
+
+**Irregularities flagged (IR-60-01 … IR-60-08)** — full table in
+[`docs/lane-chi-report.html`](docs/lane-chi-report.html): the brief's 0.3195 is **rank 8**
+(the board leader is **0.3774**); the official 19-band stack carries only **detrended**
+elevation, so a χ transform is undefined on it; `prd-tnm.s3.amazonaws.com` returns
+**HTTP 000** here, so the lane ran at 100 m and the missing 10 m DEM is named as the most
+likely cause; the inherited off-catalogue emission rule is degenerate on a catalogue-truth
+holdout; uniqueness scope is 170 of 696 registry rasters; two hydrology bugs were caught by
+brute force before any scientific number; and a **0.034 m** DEM grid offset would have been
+a portal geotransform mismatch had `scripts/verify_submission.py` not caught it.
+
+**Ranked next steps (unchanged, now doubly motivated):** (1) re-run this lane on a **10 m
+3DEP DEM** — `scripts/fetch_3dep_10m.sh` probes the host and refuses to claim success it
+did not get; (2) χ-**transient** inversion instead of a χ-steady step; (3) knickpoint
+**recurrence in χ** across basins rather than knickpoint position; (4) a playa /
+closed-basin base-level mask (the fill raises **899,623 cells, 17.4 %** of the valid grid);
+(5) lithology-normalised ksn.
