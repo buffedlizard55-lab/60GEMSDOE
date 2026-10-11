@@ -1,0 +1,214 @@
+{
+ "checked": 110,
+ "our_dots": 8811,
+ "max_our_dots_within_3px_of_registry": 0.9997730110089661,
+ "worst_path": "registry/rasters/calib_r13lattice_00904.tif",
+ "max_abs_spearman": 0.061444710255971945,
+ "limits": {
+  "dot_overlap": 0.7,
+  "abs_spearman": 0.9
+ },
+ "verdict": "FAIL",
+ "top_rows": [
+  {
+   "path": "registry/rasters/calib_r13lattice_00904.tif",
+   "mine_within_3px": 0.9997730110089661,
+   "registry_within_3px": 0.04015380122651611,
+   "spearman": -0.0012300176004329535,
+   "registry_support_frac_of_footprint": 0.04003871986790967,
+   "registry_dots": 206895
+  },
+  {
+   "path": "registry/rasters/r13_lattice_s5_00904.tif",
+   "mine_within_3px": 0.9997730110089661,
+   "registry_within_3px": 0.04015380122651611,
+   "spearman": -0.0012300176004329535,
+   "registry_support_frac_of_footprint": 0.04003871986790967,
+   "registry_dots": 206895
+  },
+  {
+   "path": "registry/rasters/r14_union_tips10_lat6.tif",
+   "mine_within_3px": 0.7669958007036659,
+   "registry_within_3px": 0.04161393945293488,
+   "spearman": 0.0007790539840324742,
+   "registry_support_frac_of_footprint": 0.03720091427500976,
+   "registry_dots": 192231
+  },
+  {
+   "path": "registry/rasters/r11_greedy_mp.tif",
+   "mine_within_3px": 0.6918624446714334,
+   "registry_within_3px": 0.05368441545799669,
+   "spearman": -0.006163001945380391,
+   "registry_support_frac_of_footprint": 0.052803039378035994,
+   "registry_dots": 272853
+  },
+  {
+   "path": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+   "mine_within_3px": 0.658381568493928,
+   "registry_within_3px": 0.04745449235860995,
+   "spearman": 0.024249687091247116,
+   "registry_support_frac_of_footprint": 0.007740877231041769,
+   "registry_dots": 40000
+  },
+  {
+   "path": "docs/downloads/submission.tif",
+   "mine_within_3px": 0.6283055271819317,
+   "registry_within_3px": 0.27956779908498003,
+   "spearman": 0.0061343577053324105,
+   "registry_support_frac_of_footprint": 0.190397519203665,
+   "registry_dots": 983855
+  },
+  {
+   "path": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+   "mine_within_3px": 0.5408012711383497,
+   "registry_within_3px": 0.11447483695123138,
+   "spearman": 0.061444710255971945,
+   "registry_support_frac_of_footprint": 0.007740877231041769,
+   "registry_dots": 40000
+  },
+  {
+   "path": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif",
+   "mine_within_3px": 0.5402337986607649,
+   "registry_within_3px": 0.027742626301956584,
+   "spearman": 0.01428091536223306,
+   "registry_support_frac_of_footprint": 0.007740877231041769,
+   "registry_dots": 40000
+  },
+  {
+   "path": "docs/downloads/gems60-h73p-pure-lane-corridor-12000-20261011T195818Z-zeros.tif",
+   "mine_within_3px": 0.526046986721144,
+   "registry_within_3px": 0.019517180959797528,
+   "spearman": 0.018492212655415976,
+   "registry_support_frac_of_footprint": 0.0023222631693125308,
+   "registry_dots": 12000
+  },
+  {
+   "path": "docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif",
+   "mine_within_3px": 0.5145840426739303,
+   "registry_within_3px": 0.08571011389078166,
+   "spearman": 0.05121924033482238,
+   "registry_support_frac_of_footprint": 0.007286874781441169,
+   "registry_dots": 37654
+  },
+  {
+   "path": "docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif",
+   "mine_within_3px": 0.4431960049937578,
+   "registry_within_3px": 0.10819624257763068,
+   "spearman": 0.05867496799012449,
+   "registry_support_frac_of_footprint": 0.007740877231041769,
+   "registry_dots": 40000
+  },
+  {
+   "path": "docs/downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-nan.tif",
+   "mine_within_3px": 0.3652252865736012,
+   "registry_within_3px": 0.031052272948505794,
+   "spearman": 0.009271570854430037,
+   "registry_support_frac_of_footprint": 0.009289052677250123,
+   "registry_dots": 48000
+  },
+  {
+   "path": "docs/downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif",
+   "mine_within_3px": 0.3652252865736012,
+   "registry_within_3px": 0.031052272948505794,
+   "spearman": 0.009271570854430037,
+   "registry_support_frac_of_footprint": 0.009289052677250123,
+   "registry_dots": 48000
+  },
+  {
+   "path": "registry/rasters/h60_union_d2_75308.tif",
+   "mine_within_3px": 0.3295880149812734,
+   "registry_within_3px": 0.014163340796262046,
+   "spearman": 0.0029144584214631543,
+   "registry_support_frac_of_footprint": 0.014573749562882338,
+   "registry_dots": 75308
+  },
+  {
+   "path": "docs/downloads/gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204-zeros.tif",
+   "mine_within_3px": 0.3149472250595846,
+   "registry_within_3px": 0.06069307894480677,
+   "spearman": 0.03189982473154822,
+   "registry_support_frac_of_footprint": 0.007740877231041769,
+   "registry_dots": 40000
+  },
+  {
+   "path": "registry/rasters/calib_h28ridge_01839.tif",
+   "mine_within_3px": 0.3088185223016684,
+   "registry_within_3px": 0.01538012265161102,
+   "spearman": 0.0002827221297242894,
+   "registry_support_frac_of_footprint": 0.01340739288609512,
+   "registry_dots": 69281
+  },
+  {
+   "path": "docs/downloads/gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif",
+   "mine_within_3px": 0.30859153331063444,
+   "registry_within_3px": 0.056507349362406305,
+   "spearman": 0.026748673398642425,
+   "registry_support_frac_of_footprint": 0.006966789507937592,
+   "registry_dots": 36000
+  },
+  {
+   "path": "registry/rasters/calib_h25ctx_01280.tif",
+   "mine_within_3px": 0.3034842810123709,
+   "registry_within_3px": 0.040007787403874236,
+   "spearman": 0.003515878431050566,
+   "registry_support_frac_of_footprint": 0.03371771304297174,
+   "registry_dots": 174232
+  },
+  {
+   "path": "registry/rasters/h52_coincidence8_80k.tif",
+   "mine_within_3px": 0.2881625241175803,
+   "registry_within_3px": 0.01903046821765794,
+   "spearman": 0.002447766216544072,
+   "registry_support_frac_of_footprint": 0.015481754462083538,
+   "registry_dots": 80000
+  },
+  {
+   "path": "registry/rasters/calib_hedgev2_01563_sample.tif",
+   "mine_within_3px": 0.2278969469980706,
+   "registry_within_3px": 0.03528667380512022,
+   "spearman": -0.006141236829473655,
+   "registry_support_frac_of_footprint": 0.04402759390506549,
+   "registry_dots": 227507
+  },
+  {
+   "path": "registry/rasters/hedge_v2_01563.tif",
+   "mine_within_3px": 0.2278969469980706,
+   "registry_within_3px": 0.03528667380512022,
+   "spearman": -0.006141236829473655,
+   "registry_support_frac_of_footprint": 0.04402759390506549,
+   "registry_dots": 227507
+  },
+  {
+   "path": "docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif",
+   "mine_within_3px": 0.18056974236749518,
+   "registry_within_3px": 0.010951036698140758,
+   "spearman": 0.0017283710047346474,
+   "registry_support_frac_of_footprint": 0.007740877231041769,
+   "registry_dots": 40000
+  },
+  {
+   "path": "docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif",
+   "mine_within_3px": 0.14164113040517534,
+   "registry_within_3px": 0.009198870826438237,
+   "spearman": 0.007108965174250465,
+   "registry_support_frac_of_footprint": 0.0038704386155208846,
+   "registry_dots": 20000
+  },
+  {
+   "path": "registry/rasters/57GEMSDOE__faultzone-anatomy-60000px-prev.tif",
+   "mine_within_3px": 0.1062308478038815,
+   "registry_within_3px": 0.010659009052857004,
+   "spearman": 7.577607460945094e-05,
+   "registry_support_frac_of_footprint": 0.011611315846562654,
+   "registry_dots": 60000
+  },
+  {
+   "path": "registry/rasters/h60_officialstack_50k.tif",
+   "mine_within_3px": 0.09499489274770173,
+   "registry_within_3px": 0.004380414679256303,
+   "spearman": -0.0017640488565915577,
+   "registry_support_frac_of_footprint": 0.009676096538802212,
+   "registry_dots": 50000
+  }
+ ]
+}

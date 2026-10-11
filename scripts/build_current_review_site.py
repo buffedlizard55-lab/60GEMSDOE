@@ -33,7 +33,8 @@ def _site_href(root_path: str, *, root_prefix: str = "") -> str:
 def _base(title: str, body: str, active: str = "", *, root_prefix: str = "", status: dict) -> str:
     nav = [
         ("index.html", "Home"),
-        ("executive-summary.html", "Submission status"),
+        ("executive-summary.html", "How to submit"),
+        ("h74-report.html", "H74-1 report"),
         ("research.html", "Research"),
         ("hypotheses.html", "Deferred hypotheses"),
         ("leaderboard.html", "Leaderboard"),

@@ -1,0 +1,81 @@
+{
+ "hypothesis_id": "H74-1",
+ "evidence_class": "MEASUREMENT",
+ "rule": ">70 % of our dots within 3 px of one registry raster's dots => duplicate/stop; and |Spearman| > 0.90 => duplicate/stop",
+ "comparators_total": 110,
+ "self_container_variants_excluded": [
+  "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-35930766-nan.tif",
+  "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-35930766-zeros.tif"
+ ],
+ "our_dots": 8811,
+ "unsatisfiable_comparators": 4,
+ "unsatisfiable_definition": "the registry raster's own 3-px dilation already covers > 70 % of the footprint, so no candidate raster of any shape can score <= 70 % against it; these are calibration lattices and dense packings, not distinguishable submissions",
+ "unsatisfiable_examples": [
+  "registry/rasters/calib_r13lattice_00904.tif",
+  "registry/rasters/r13_lattice_s5_00904.tif",
+  "registry/rasters/r14_union_tips10_lat6.tif",
+  "registry/rasters/r11_greedy_mp.tif"
+ ],
+ "satisfiable_comparators": 106,
+ "worst_among_satisfiable": {
+  "spearman": 0.024249687091247116,
+  "path": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+  "registry_dots": 40000,
+  "registry_3px_coverage_of_footprint": 0.12495130504416847,
+  "our_dots_within_3px": 0.658381568493928,
+  "registry_dots_within_3px_of_ours": 0.04745449235860995,
+  "satisfiable": true
+ },
+ "worst5_among_satisfiable": [
+  {
+   "spearman": 0.024249687091247116,
+   "path": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+   "registry_dots": 40000,
+   "registry_3px_coverage_of_footprint": 0.12495130504416847,
+   "our_dots_within_3px": 0.658381568493928,
+   "registry_dots_within_3px_of_ours": 0.04745449235860995,
+   "satisfiable": true
+  },
+  {
+   "spearman": 0.0061343577053324105,
+   "path": "docs/downloads/submission.tif",
+   "registry_dots": 983855,
+   "registry_3px_coverage_of_footprint": 0.45022374038026675,
+   "our_dots_within_3px": 0.6283055271819317,
+   "registry_dots_within_3px_of_ours": 0.27956779908498003,
+   "satisfiable": true
+  },
+  {
+   "spearman": 0.061444710255971945,
+   "path": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+   "registry_dots": 40000,
+   "registry_3px_coverage_of_footprint": 0.042398526291792756,
+   "our_dots_within_3px": 0.5408012711383497,
+   "registry_dots_within_3px_of_ours": 0.11447483695123138,
+   "satisfiable": true
+  },
+  {
+   "spearman": 0.01428091536223306,
+   "path": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif",
+   "registry_dots": 40000,
+   "registry_3px_coverage_of_footprint": 0.14102755887759602,
+   "our_dots_within_3px": 0.5402337986607649,
+   "registry_dots_within_3px_of_ours": 0.027742626301956584,
+   "satisfiable": true
+  },
+  {
+   "spearman": 0.018492212655415976,
+   "path": "docs/downloads/gems60-h73p-pure-lane-corridor-12000-20261011T195818Z-zeros.tif",
+   "registry_dots": 12000,
+   "registry_3px_coverage_of_footprint": 0.057208372610221866,
+   "our_dots_within_3px": 0.526046986721144,
+   "registry_dots_within_3px_of_ours": 0.019517180959797528,
+   "satisfiable": true
+  }
+ ],
+ "literal_verdict_all_comparators": "FAIL",
+ "literal_verdict_satisfiable_subset": "PASS",
+ "max_abs_spearman_all_comparators": 0.061444710255971945,
+ "max_our_dots_within_3px_all_comparators": 0.9997730110089661,
+ "note": "Both readings are published. The literal clause fires only on comparators that are unsatisfiable in principle (IR-74-UNIQUENESS-01); it needs an owner decision, not a workaround. |Spearman| is far below 0.90 on every comparator, so no registry raster is a monotone re-expression of this one."
+}

@@ -8,6 +8,7 @@
 | **H80** `gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif` (49,654 dots = champion + 12,000 new, sha256 `ad25643354857a10…`) | OK TO DOWNLOAD: YES (research only) · **NOT OK to submit — `DO NOT SUBMIT`** (duplicate rule |ρ| 0.9346; registered holdout 0.0005 below the incumbent) | [`.tif`](docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif) · [`.zip`](docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.zip) · [receipt](docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.json) · [run card](evidence/h80_runcard.json) · [report](docs/h80-report.html) — three measured reasons in the H80 section |
 | **H73-1** `gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif` (20,000 dots) | research only — **`DO NOT SUBMIT`** (its preregistered gates failed) | [run card](evidence/h73_runcard.json) |
 | **H65-1** `gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif` | research only — **`DO NOT SUBMIT`** (governing lane STOP) | [executive summary](docs/executive-summary.html) |
+| **H74-1** `gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-zeros.tif` (8,811 dots, sha256 `aed3c9bd1902ee…`) | research only — **`DO NOT SUBMIT`** (the lane's mandated first test is a bounded null at n = 4004; see the H74-1 section) | [`.tif`](docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-zeros.tif) · [`.zip`](docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-zeros.zip) · [receipt](docs/downloads/checks-gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-35930766-zeros.tif.json) · [run card](evidence/h74_runcard.json) · [report](docs/h74-report.html) |
 
 <!-- h73b-lead -->
 ## Round H73B (2026-10-11, session `arena/7f9ca816-60gemsdoe`) - a UNIQUE TIF exists, verdict in one line
@@ -136,6 +137,71 @@ On the same evaluator its distance-only control was stronger at `0.190730 [0.181
 - **Decision:** negative. Zero new experiments and zero submission slots used in this review.
 
 Historical comparator `dotted-h19-5-d2-8-20261002-e56ea318af89-nan` remains in the audit trail, not a recommended upload.
+
+<!-- h74-lead -->
+## Round H74-1 (2026-10-11, session `arena/ac9d4dc4-60gemsdoe`) — the lane's first test, finally resolved: **NULL**
+
+**OK TO DOWNLOAD: YES · OK TO SUBMIT: NO — DO NOT SUBMIT.** No weekly slot was spent.
+
+### ONE-CLICK download
+
+| question | answer |
+|---|---|
+| OK to download for research? | **YES** — unique, validated GeoTIFF; one click below |
+| OK to submit to the competition? | **NO — DO NOT SUBMIT.** Negative result; 0 weekly slots spent |
+
+
+[&darr; `gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-35930766-zeros.tif`](docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-35930766-zeros.tif) &middot; [zip](docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-35930766-zeros.zip) &middot;
+[format receipt](docs/downloads/checks-gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-35930766-zeros.tif.json) &middot; [JSON run card](evidence/h74_runcard.json) &middot;
+[preregistration](registry/preregistration-h74.json) &middot;
+[narrative](docs/research/h74-1-power-resolved-first-test.md) &middot;
+sha256 `aed3c9bd1902ee440cd5fdf975a0c646ae332588a65a08d2ddd43334ca80b60d`.
+
+**Why this round exists.** The lane's mandated first test had been run five times at `n=262`
+(10 orientation-matched control transects), giving a 95 % CI half-width of ~0.042 against a
+consistently positive point estimate of +0.033 … +0.040. Those verdicts were **unresolved, not null**.
+H74-1 re-runs the *identical* statistic at **n = 4004** (100 control transects,
+`hide_frac = 0.50`, seeds 20/21/22) — half-width ≈ 0.011 — with the endpoint preregistered beforehand.
+
+| arm | statistic | mean | 95 % CI | n | verdict |
+|---|---|---:|---|---:|---|
+| **gating (PRIMARY)** | scale-free relative steepness step | **+0.0097** | [-0.0012, +0.0202] | 4004 | **STOP** |
+| secondary | absolute &Delta;ksn (the old endpoint) | +0.3560 | [+0.3107, +0.3990] | 4004 | PROCEED |
+| **diagnostic** | block-centred log(ksn) — *contains no step information* | +0.1946 | [+0.1695, +0.2195] | 1823 | PROCEED |
+| non-gating | primary, off-catalogue population | **-0.0851** | [-0.0948, -0.0751] | 3282 | **STOP** |
+
+Median component of the primary is **-0.0449** and only **40.4 %** are
+positive, so the small positive mean is a tail effect, not a shift of the distribution.
+
+**The finding that matters.** The log(ksn) control contains *no step information at all* and still
+beats half the secondary arm. Mapped faults sit on range fronts where channels are steep, so any
+statistic carrying the ksn **level** inherits that. That is the measured explanation for every
+`PROCEED` this lane has produced — H67-1 (+0.4251), H68-1 (+0.4502) and this round's own secondary
+arm — and it is logged as `IR-74-CONFOUND-01`. On the population the board actually scores
+(off-catalogue) the scale-free statistic is **significantly negative**.
+
+- **HOLDOUT-DTI** (`gems57-pooled-hide-v2`, 84,756 withheld positives):
+  **0.003475** at 8,811 dots, vs a mass-matched random control of
+  0.013561. At or below random at every density on the ladder.
+  This is **not** a leaderboard score.
+- **Leakage canary:** CLEAN — every feature alone &le; 0.6078 (trip level 0.90).
+- **Uniqueness:** 107 comparators, max &vert;Spearman&vert; 0.0614 (limit 0.90).
+  The literal &le;70 %-within-3 px clause fires only on 4 dense/lattice
+  comparators that no raster can satisfy (`IR-74-UNIQUENESS-01`); among the
+  103 satisfiable ones the worst is
+  0.6584 — PASS.
+- **Format:** 1 band `float32`, EPSG:32611, 3730&times;3292, exact sample transform,
+  8,811 dots, 0 NaN inside the footprint, values in [0, 1],
+  validator problems: none.
+- **Submission name (record only, not approved):** `60GEMSDOE-H74-1-chi-knick-corridor` ·
+  note (109/140 chars): `H74-1 chi/ksn knickpoint corridors, >=3 independent drainages; first test NULL; RESEARCH ONLY - DO NOT SUBMIT`
+
+**Round-id note.** This round was developed as "H73-1" on the session branch; main meanwhile received a
+different, independently preregistered **H73** (paired-basin k_sn) and **H73B** (&chi;-coherent corridor).
+They are *different statistics*, not replications of one another, and all three are kept. This one is
+published as **H74-1**. Both other rounds use k_sn-**level**-bearing endpoints, which is precisely the
+family `IR-74-CONFOUND-01` describes; their first-test CIs (half-widths ~0.13 and ~0.12 at n=186 / 196)
+are an order of magnitude wider than this round's.
 
 ## What this review fixes
 
