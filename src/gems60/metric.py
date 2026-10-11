@@ -1,31 +1,24 @@
-"""Distance-weighted Tversky index -- literal transcription of the published metric.
-
-PROVENANCE (protocol rule 2, "reuse, don't rebuild"):
-  Reused verbatim from buffedlizard55-lab/GEMSDOE52 @ main, path `src/gems52/metric.py`,
-  sha256 3d454119edfcec3cc2a83278c2015d7e41d39d8c1142fca12311409a18ce7d1a (computed in this checkout with
-  sha256sum; the same value is recorded in registry/source_pins.json).
-  The file is copied rather than re-implemented so that every DTI number printed by THIS repository
-  is computed by the same code that computed the numbers it is compared against.  If the shared
-  tool is wrong, fix it once in the template and report it -- never keep a private fork.
-
-Verification performed in this checkout (`python -m pytest tests/test_metric.py`):
-  * the organiser's own worked-example arithmetic TPw=3.00, FPw=1.89, FNw=2.00 -> 0.6026516673
-    (the competition page prints 0.60);
-  * FNw == |G| - TPw identically;
-  * the reduced identity DTI = T / (0.2*(T + S - M) + 0.8*|G|);
-  * an analytic single-pixel case DTI == k(d);
-  * agreement with a loop-for-loop brute-force transcription of the published equations.
-
-The published definitions (source of truth, read 2026-10-11):
-    https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric
-
-    k(d)  = max(1 - d/R, 0)                                   (triangular kernel, R = 300 m)
-    TPw   = sum_{g in G} max_{x : d(x,g) <= R} p(x) k(d(x,g))
-    FPw   = sum_{x : p(x) > 0} p(x) [ 1 - max_{g in G} k(d(x,g)) ]
-    FNw   = sum_{g in G} [ 1 - max_{x : d(x,g) <= R} p(x) k(d(x,g)) ]
-    DTI   = TPw / (TPw + alpha*FPw + beta*FNw + eps),  alpha = 0.2, beta = 0.8
-
--- begin verbatim upstream body (unmodified below this line) --
+# PROVENANCE -- protocol rule 2 ('reuse, don't rebuild').
+#
+# This module is the shared evaluator, copied byte-for-byte from the template repository
+#   buffedlizard55-lab/GEMSDOE52 @ main : src/gems52/metric.py
+#   sha256 3d454119edfcec3cc2a83278c2015d7e41d39d8c1142fca12311409a18ce7d1a
+#   sha256 recorded in registry/source_pins.json, recomputed with hashlib at read time.
+#
+# It is copied rather than reimplemented so that every DTI number printed by THIS repository is
+# computed by the same code that computed the numbers it is compared against. If the shared tool
+# is wrong, fix it once in the template and report it -- never keep a private fork.
+#
+# Verified in this checkout by tests/test_metric.py, which pins:
+#   * the organiser's own worked-example arithmetic TPw=3.00, FPw=1.89, FNw=2.00 -> 0.6026516673
+#     (the competition page prints 0.60);
+#   * FNw == |G| - TPw identically;  DTI = T / (0.2*(T + S - M) + 0.8*|G|);
+#   * an analytic single-pixel case in which DTI is exactly the kernel weight k(d);
+#   * agreement with a loop-for-loop brute-force transcription of the published equations.
+#
+# Published metric (source of truth read 2026-10-11):
+#   https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric
+#
 """Distance-weighted Tversky index -- literal transcription of the published metric.
 
 Source of truth (read 2026-10-06, agent fetch):

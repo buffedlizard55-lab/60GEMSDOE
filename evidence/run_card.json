@@ -1,0 +1,443 @@
+{
+  "hypothesis": "faults absent from the USGS/INGENIOUS catalogue still force a knickpoint (steepness step) into every channel that crosses them; because a fault is a line, those knickpoints from INDEPENDENT first-order drainages are collinear along the fault strike, so collinearity is the detector and the traces it yields are the submission",
+  "mechanism": "Kirby & Whipple (2012) channel steepness + Perron & Royden (2013) chi transform on a priority-flood-filled DEM; per-link least-squares dz/dchi segmentation (Gailleton et al. 2019); one strongest knickpoint per first-order basin; strike chaining of knickpoints from >= 3 distinct basins (offset tolerance 3 px + 3 deg wedge, 36 azimuth bins, NMS by support then residual, principal-axis refit); masked for catalogue ring, playa/closed basin and acquisition striping",
+  "named_non_fault_mimic_process": [
+    "a strike-parallel LITHOLOGIC CONTACT between resistant and weak units produces the same collinear knickpoint train with no fault (this lane cannot separate the two with DEM alone)",
+    "transient incision from a base-level fall propagates as a WAVE up a master drainage and can align knickpoints along a structural grain without recent faulting",
+    "PLEISTOCENE/HOLOCENE SURFICIAL EDGES (fan heads, basalt flow margins, pediment break-in-slope) cut channels at slope breaks that mimic fault traces",
+    "DEM ACQUISITION STRIPING (flagged: 56 rows) and the coarse 100 m substrate itself"
+  ],
+  "substrate": {
+    "dem_source": "topo_dem_mean",
+    "theta": 0.45,
+    "ac_m2": 1000000.0,
+    "min_drop_m": 20.0,
+    "knick_ratio": 1.6,
+    "diagnostics": {
+      "acc_max_px": 1650685.0,
+      "filled_raised_fraction": 0.31391695107504625,
+      "hack_exponent_A_vs_L": 0.02644983116595324,
+      "flow_distance_max_km": 289.9,
+      "median_segment_slope": 34.01712441962345
+    }
+  },
+  "first_test": {
+    "question": "do channels crossing withheld catalogue segments show larger steepness steps than random lines of the SAME orientation distribution?",
+    "statistic": "median-over-lines of the 90th percentile of |d z / d chi| on channel pixels",
+    "per_fold": [
+      {
+        "median_on_truth": 3.671430826187134,
+        "median_control": 2.9201345443725586,
+        "paired": {
+          "mean": 0.2958632786258621,
+          "ci95": [
+            -0.8027274060518408,
+            1.3559693976141598
+          ],
+          "n": 1306,
+          "frac_positive": 0.16232771822358347
+        }
+      },
+      {
+        "median_on_truth": 10.43046760559082,
+        "median_control": 2.5461413860321045,
+        "paired": {
+          "mean": 0.009072144302099813,
+          "ci95": [
+            -1.0781377375693622,
+            1.0287590595652405
+          ],
+          "n": 1364,
+          "frac_positive": 0.1935483870967742
+        }
+      },
+      {
+        "median_on_truth": 0.39289459586143494,
+        "median_control": 0.021012701094150543,
+        "paired": {
+          "mean": 0.5304716210253191,
+          "ci95": [
+            -0.3346913862852928,
+            1.3242429587660023
+          ],
+          "n": 1548,
+          "frac_positive": 0.19767441860465115
+        }
+      },
+      {
+        "median_on_truth": 9.98147964477539,
+        "median_control": 4.4143781661987305,
+        "paired": {
+          "mean": 0.9454312039565523,
+          "ci95": [
+            0.1480064943812978,
+            1.801002630797464
+          ],
+          "n": 1487,
+          "frac_positive": 0.17014122394082046
+        }
+      },
+      {
+        "median_on_truth": 0.8976843357086182,
+        "median_control": 0.17717158049345016,
+        "paired": {
+          "mean": -0.03657718577528902,
+          "ci95": [
+            -0.8955388901045278,
+            0.8216004695362872
+          ],
+          "n": 1414,
+          "frac_positive": 0.15983026874115983
+        }
+      }
+    ],
+    "median_on_truth_pooled": 3.671430826187134,
+    "median_control_pooled": 2.5461413860321045,
+    "folds_with_positive_mean": "4/5",
+    "folds_with_ci95_above_zero": 1,
+    "passes": false
+  },
+  "holdouts": {
+    "off_catalogue": {
+      "label": "HOLDOUT-DTI",
+      "population": "SGMC faults >= 300 m from the catalogue, thinned to the |G| pin 14088.7",
+      "n_withheld_positives": 14089,
+      "arms": {
+        "random_null": {
+          "dti": 0.02683830565611923,
+          "mass": 12000.0,
+          "tp_w": 367.1409447018099,
+          "fp_w": 11675.540664712747,
+          "fn_w": 13721.85905529819
+        },
+        "lane": {
+          "dti": 0.010799728129992381,
+          "mass": 12000.0,
+          "tp_w": 147.57098476211272,
+          "fp_w": 11818.049238383634,
+          "fn_w": 13941.429015237887
+        },
+        "lane_ungated": {
+          "dti": 0.01441003437051361,
+          "mass": 12000.0,
+          "tp_w": 196.97331218754834,
+          "fp_w": 11792.912312694454,
+          "fn_w": 13892.026687812451
+        }
+      },
+      "budget": 12000
+    },
+    "catalogue_hide_and_recover": {
+      "label": "HOLDOUT-DTI",
+      "pooled": {
+        "dti": 0.00011571712856957002,
+        "tp_w": 7.034487885406194,
+        "fp_w": 59992.851130197756,
+        "fn_w": 60980.96551211459,
+        "n_truth": 60988.0,
+        "mass": 60000.0,
+        "n_folds": 5
+      },
+      "folds": [
+        {
+          "fold": 0,
+          "n_truth": 12230,
+          "budget": 12000,
+          "lane_dti": 0.00012204254061164831,
+          "random_dti": 8.918484979816104e-05,
+          "lane_tp_w": 1.48696491886635,
+          "lane_fp_w": 11998.455844122716,
+          "lane_fn_w": 12228.513035081134
+        },
+        {
+          "fold": 1,
+          "n_truth": 11823,
+          "budget": 12000,
+          "lane_dti": 0.00011092502465714049,
+          "random_dti": 7.23423376061735e-05,
+          "lane_tp_w": 1.3153920436125404,
+          "lane_fp_w": 11998.62741699797,
+          "lane_fn_w": 11821.684607956387
+        },
+        {
+          "fold": 2,
+          "n_truth": 12435,
+          "budget": 12000,
+          "lane_dti": 7.873714715783293e-05,
+          "random_dti": 3.705277513309785e-05,
+          "lane_tp_w": 0.972246293104921,
+          "lane_fp_w": 11999.027753706896,
+          "lane_fn_w": 12434.027753706896
+        },
+        {
+          "fold": 3,
+          "n_truth": 11698,
+          "budget": 12000,
+          "lane_dti": 0.00013618747752264107,
+          "random_dti": 7.2957577244272e-05,
+          "lane_tp_w": 1.601346835702223,
+          "lane_fp_w": 11998.398653164299,
+          "lane_fn_w": 11696.398653164299
+        },
+        {
+          "fold": 4,
+          "n_truth": 12802,
+          "budget": 12000,
+          "lane_dti": 0.00013119682588597645,
+          "random_dti": 4.9764313267094496e-05,
+          "lane_tp_w": 1.6585377941201596,
+          "lane_fp_w": 11998.341462205879,
+          "lane_fn_w": 12800.341462205879
+        }
+      ]
+    },
+    "submitted_raster_vs_off_catalogue": {
+      "label": "HOLDOUT-DTI",
+      "dti": 0.006402819590077509,
+      "ci95": [
+        0.005250892557123153,
+        0.007536552363802552
+      ],
+      "n_truth": 14089,
+      "n_boot": 1500,
+      "note": "LOWER-bound CI: truth-side bootstrap (T and FN resampled), FP_w held fixed"
+    }
+  },
+  "budget": {
+    "policy": "entire gated trace set (the lane's whole product)",
+    "n_dots_placed": 3770,
+    "allowed_gated_px": 25191,
+    "analytic_rule_at_measured_dti": {
+      "n_dots": 150,
+      "bracket": [
+        {
+          "dti_assumed": 0.008639782503993906,
+          "bar": 0.0017279565007987812,
+          "keep_fraction": 0.0017279565007987812,
+          "quantile_on_positive_values": 788.0750122070312,
+          "n_dots": 150
+        },
+        {
+          "dti_assumed": 0.010799728129992381,
+          "bar": 0.0021599456259984765,
+          "keep_fraction": 0.0021599456259984765,
+          "quantile_on_positive_values": 788.0750122070312,
+          "n_dots": 150
+        },
+        {
+          "dti_assumed": 0.013499660162490476,
+          "bar": 0.0026999320324980953,
+          "keep_fraction": 0.0026999320324980953,
+          "quantile_on_positive_values": 788.0750122070312,
+          "n_dots": 150
+        }
+      ],
+      "n_allowed": 25191,
+      "spacing_px": 18.327029219161517,
+      "note": "budget derived from the marginal-acceptance bar alpha*DTI at three assumed DTI"
+    },
+    "curve_argmax_budget": 48000,
+    "curve_budgets_beating_random": "1/9",
+    "curve": [
+      {
+        "budget": 1000,
+        "lane_dti": 0.003809682758452119,
+        "random_dti": 0.0031203287587499963,
+        "lane_minus_random": 0.0006893539997021225,
+        "lane_tp_w": 43.69902285618542,
+        "random_tp_w": 35.797333616948116,
+        "mass": 1000.0
+      },
+      {
+        "budget": 2000,
+        "lane_dti": 0.0053179706842352795,
+        "random_dti": 0.005553824639300031,
+        "lane_minus_random": -0.00023585395506475152,
+        "lane_tp_w": 62.06074463669333,
+        "random_tp_w": 64.82822693804978,
+        "mass": 2000.0
+      },
+      {
+        "budget": 4000,
+        "lane_dti": 0.006378417555870358,
+        "random_dti": 0.009018071393532131,
+        "lane_minus_random": -0.002639653837661773,
+        "lane_tp_w": 76.98675448741281,
+        "random_tp_w": 108.88271283584422,
+        "mass": 4000.0
+      },
+      {
+        "budget": 8000,
+        "lane_dti": 0.008898206891643659,
+        "random_dti": 0.019002998261898447,
+        "lane_minus_random": -0.010104791370254789,
+        "lane_tp_w": 114.49416896934619,
+        "random_tp_w": 244.72420917541461,
+        "mass": 8000.0
+      },
+      {
+        "budget": 12000,
+        "lane_dti": 0.010799728129992381,
+        "random_dti": 0.02718160409211673,
+        "lane_minus_random": -0.01638187596212435,
+        "lane_tp_w": 147.57098476211272,
+        "random_tp_w": 371.8608311851312,
+        "mass": 12000.0
+      },
+      {
+        "budget": 16000,
+        "lane_dti": 0.01238453428495814,
+        "random_dti": 0.03241967462825431,
+        "lane_minus_random": -0.020035140343296173,
+        "lane_tp_w": 179.10720175528948,
+        "random_tp_w": 469.4859844748986,
+        "mass": 16000.0
+      },
+      {
+        "budget": 24000,
+        "lane_dti": 0.014224043015407918,
+        "random_dti": 0.04317288116189622,
+        "lane_minus_random": -0.028948838146488305,
+        "lane_tp_w": 228.4127813817277,
+        "random_tp_w": 694.3735034724815,
+        "mass": 24000.0
+      },
+      {
+        "budget": 32000,
+        "lane_dti": 0.01865242277654631,
+        "random_dti": 0.05312089745636711,
+        "lane_minus_random": -0.034468474679820796,
+        "lane_tp_w": 329.23777881048017,
+        "random_tp_w": 939.4829030228151,
+        "mass": 32000.0
+      },
+      {
+        "budget": 48000,
+        "lane_dti": 0.0314143974493262,
+        "random_dti": 0.06501538122492449,
+        "lane_minus_random": -0.033600983775598295,
+        "lane_tp_w": 654.2471145568475,
+        "random_tp_w": 1358.0772176611854,
+        "mass": 48000.0
+      }
+    ]
+  },
+  "uniqueness": {
+    "n_registry_rasters": 35,
+    "max_frac_within_3px": 0.8305039787798408,
+    "max_abs_spearman": 0.0025400884035193805,
+    "lane_rule_stop_gt_0.70": true,
+    "lane_rule_stop_gt_0.90": false
+  },
+  "raster": {
+    "primary": {
+      "file": "gems60-chi-ksn-knick-coherent-3770px-20261011T010511Z-zeros.tif",
+      "sha256": "d3c411f5137c65f530bf1e2846482d4a06a5ac9a1b27d8d90dc0ec344d84692a",
+      "bytes": 65898,
+      "width": 3292,
+      "height": 3730,
+      "count": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "crs_epsg": 32611,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "n_finite": 12279160,
+      "n_nonfinite": 0,
+      "min_finite": 0.0,
+      "max_finite": 1.0,
+      "n_values_outside_0_1": 0,
+      "n_positive": 3770,
+      "mass": 3770.0,
+      "n_distinct_positive_values": 1,
+      "checks": {
+        "single_band_float32": true,
+        "crs_epsg_32611": true,
+        "shape_matches": true,
+        "transform_matches": true,
+        "all_values_in_0_1": true,
+        "no_nan_in_finite_container": true
+      },
+      "passes_portal_range_test": true,
+      "passes_all_literal_checks": true
+    },
+    "nan_variant": {
+      "file": "gems60-chi-ksn-knick-coherent-3770px-20261011T010511Z-nan.tif",
+      "sha256": "4878334499bba92d34d7575805e8336032cef2beb79fb77acb02aab51b42a948",
+      "bytes": 108286,
+      "width": 3292,
+      "height": 3730,
+      "count": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "crs_epsg": 32611,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "nan",
+      "n_finite": 5167373,
+      "n_nonfinite": 7111787,
+      "min_finite": 0.0,
+      "max_finite": 1.0,
+      "n_values_outside_0_1": 0,
+      "n_positive": 3770,
+      "mass": 3770.0,
+      "n_distinct_positive_values": 1,
+      "checks": {
+        "single_band_float32": true,
+        "crs_epsg_32611": true,
+        "shape_matches": true,
+        "transform_matches": true,
+        "all_values_in_0_1": true,
+        "no_nan_in_finite_container": false
+      },
+      "passes_portal_range_test": true,
+      "passes_all_literal_checks": false
+    }
+  },
+  "submission": {
+    "name": "gems60-chi-ksn-knick-coherent-3770px-20261011T010511Z-zeros",
+    "note": "kinematic trace x chi-steepness; 3770px; NEGATIVE first test (False)",
+    "note_len": 68,
+    "files": [
+      "submission/gems60-chi-ksn-knick-coherent-3770px-20261011T010511Z-zeros.tif",
+      "submission/gems60-chi-ksn-knick-coherent-3770px-20261011T010511Z-nan.tif"
+    ]
+  },
+  "leakage_canary": {
+    "knick_strength": {
+      "auc_vs_off_catalogue_truth": 0.5002890561238293
+    },
+    "ksn_seg": {
+      "auc_vs_off_catalogue_truth": 0.5050826095187098
+    },
+    "coherence": {
+      "auc_vs_off_catalogue_truth": 0.584336535090587
+    },
+    "score": {
+      "auc_vs_off_catalogue_truth": 0.5013614817831903
+    },
+    "|detrended slope|": {
+      "auc_vs_off_catalogue_truth": 0.3142375526949335
+    },
+    "det_elev": {
+      "auc_vs_off_catalogue_truth": 0.29243109183647037
+    },
+    "flagged_gt_0.90": []
+  },
+  "verdict": "negative",
+  "verdict_reason": "the mandated first test did not clear its pre-registered bar AND the lane scores below the uniform-random null on the off-catalogue instrument at every budget tested; no submission slot may be spent on this file",
+  "reproduce": "python scripts/run_lane.py --data-dir data --out-dir submission --evidence evidence"
+}

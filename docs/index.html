@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>60GEMSDOE — submission download and verdict</title>
+<style>
+ :root{--ink:#111;--mut:#555;--red:#a4161a;--redbg:#fbeaea;--grn:#1b5e20;--grnbg:#e8f5e9;--line:#d8d8d8}
+ *{box-sizing:border-box}
+ body{margin:0;font:16px/1.55 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#fff}
+ main{max-width:960px;margin:0 auto;padding:28px 20px 80px}
+ h1{font-size:1.6rem;margin:.2em 0 .1em}
+ h2{font-size:1.15rem;margin:1.6em 0 .4em;border-bottom:1px solid var(--line);padding-bottom:.25em}
+ .sub{color:var(--mut);margin:0 0 18px}
+ .verdict{border:2px solid var(--red);background:var(--redbg);border-radius:10px;padding:14px 18px;margin:0 0 20px}
+ .verdict h2{border:0;margin:.1em 0 .3em;color:var(--red);font-size:1.25rem}
+ .verdict p{margin:.3em 0}
+ .ok{border-color:var(--grn);background:var(--grnbg)} .ok h2{color:var(--grn)}
+ .dl{border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:0 0 8px;background:#fafafa}
+ .dl a.btn{display:inline-block;background:#111;color:#fff;text-decoration:none;padding:11px 18px;border-radius:8px;font-weight:600}
+ .dl a.btn:hover{background:#333}
+ .meta{font-size:.86rem;color:var(--mut);margin-top:10px;word-break:break-all}
+ table{border-collapse:collapse;width:100%;font-size:.9rem;margin:.5em 0}
+ th,td{border:1px solid var(--line);padding:6px 8px;vertical-align:top;text-align:left}
+ th{background:#f4f4f4}
+ code{background:#f2f2f2;padding:1px 4px;border-radius:4px;font-size:.86em}
+ .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:.78rem;font-weight:700;letter-spacing:.02em}
+ .pill.no{background:var(--red);color:#fff} .pill.yes{background:var(--grn);color:#fff} .pill.mut{background:#e6e6e6;color:#333}
+ ul{margin:.3em 0 .3em 1.1em}
+</style>
+</head>
+<body>
+<main>
+
+<h1>60GEMSDOE — DOEGEMS geothermal exploration lane</h1>
+<p class="sub">Tectonic-geomorphology lane: χ-transform and normalised channel steepness (Kirby &amp; Whipple 2012; Perron &amp; Royden 2013), knickpoint segmentation (Gailleton et al. 2019), strike-aligned knickpoint chaining across independent first-order drainages. Run of 2026-10-11.</p>
+
+<div class="verdict">
+  <h2>VERDICT: <span class="pill no">NOT OK TO SUBMIT</span> — this run is a NEGATIVE</h2>
+  <p><strong>Why:</strong> the lane's mandated first test did not clear its pre-registered bar
+  (4/5 segment folds positive but only 1/5 with a 95% bootstrap interval above zero), and — decisively —
+  <strong>the lane's own tracing field scores below a uniform-random map of the same mass at 8 of 9 budgets</strong>
+  on the held-out off-catalogue instrument (at 12,000 dots: lane <code>0.0108</code> vs random <code>0.0268</code>; HOLDOUT-DTI, 14,089 withheld positives).</p>
+  <p>The file below is a real, validated, unique GeoTIFF — it is here for audit and for the record of the negative, not for a submission slot.
+  See <a href="executive-summary.html">the executive summary</a> for exactly how a submission would be made and what would have to be true before one is.</p>
+</div>
+
+<div class="dl">
+  <p style="margin:.1em 0 .7em"><strong>The candidate raster (download first)</strong> — validated single-band float32 GeoTIFF, EPSG:32611, 100 m, 3292×3730, values in [0,1], null outside the competition footprint.</p>
+  <a class="btn" href="submission/gems60-candidate-3770px-zeros.tif" download>Download candidate GeoTIFF (65.9 kB)</a>
+  <p class="meta">
+    name: <code>gems60-chi-ksn-knick-coherent-3770px-20261011T010511Z-zeros</code><br>
+    sha256: <code>d3c411f5137c65f530bf1e2846482d4a06a5ac9a1b27d8d90dc0ec344d84692a</code><br>
+    note for the portal (68/140 chars): <code>kinematic trace x chi-steepness; 3770px; NEGATIVE first test</code><br>
+    identical-content variant with NaN outside the footprint: <a href="submission/gems60-candidate-3770px-nan.tif">gems60-candidate-3770px-nan.tif</a> (108.3 kB, sha256 <code>4878334499bba92d34d7575805e8336032cef2beb79fb77acb02aab51b42a948</code>)<br>
+    validator: <code>{"single_band_float32": true, "crs_epsg_32611": true, "shape_matches": true, "transform_matches": true, "all_values_in_0_1": true, "no_nan_in_finite_container": true, "passes_portal_range_test": true}</code><br>
+    emitted mass: 3,770 unit pixels (the lane's entire gated strike-trace set, thinned to 3 px minimum separation)
+  </p>
+</div>
+
+<h2>What is in the file</h2>
+<ul>
+  <li>3,770 unit dots on <strong>strike traces</strong>: lines admitted only where ≥3 knickpoints from ≥3 <em>independent</em> first-order basins chain within 24 px along a common strike (36 azimuth bins, 3 px offset tolerance + 3° wedge, non-maximum suppression by support then residual, principal-axis refit).</li>
+  <li>Masked for the 200 m catalogue ring, playa/closed basins, and acquisition-striped rows; no term in the field rewards proximity to the supplied catalogue.</li>
+  <li>Substrate: real elevation — USGS 3DEP 1/3 arc-second seamless DEM, 10 m, mean-reduced to the competition's 100 m grid (public domain). The cube's own band 12 is <em>detrended</em> elevation and was measured to carry a drainage network too noisy to trust; both substrates were run and both give the negative.</li>
+</ul>
+
+<h2>Evidence (all machine-readable, committed)</h2>
+<table>
+<tr><th>File</th><th>What it establishes</th></tr>
+<tr><td><a href="submission/run_card.json">run_card.json</a></td><td>hypothesis, mechanism, named non-fault mimics, both holdouts, budget, uniqueness, raster sha256, validator output, verdict</td></tr>
+<tr><td><a href="submission/selector_verdict.json">selector_verdict.json</a></td><td>the separate promotion step: the four pre-registered rules, the registry-overlap <em>control</em>, and the instrument-bias diagnostic</td></tr>
+<tr><td><a href="submission/external_benchmark_offcat.json">external_benchmark_offcat.json</a></td><td>the champion raster and our candidate scored on the same held-out instrument, with the uniform-random null at matched mass</td></tr>
+<tr><td><a href="https://github.com/buffedlizard55-lab/60GEMSDOE/tree/arena/c536fb3c-60gemsdoe/evidence">evidence/</a></td><td>first test, both instruments, leakage canary, budget curve, strike traces, uniqueness, source pins</td></tr>
+</table>
+
+<h2>Pages</h2>
+<ul>
+  <li><a href="executive-summary.html"><strong>Executive summary</strong></a> — how a submission is made, the official metric, what 0.2778 really is, and what must be true before the next submission slot is spent.</li>
+  <li><a href="data.html">Competition data — auditable table with official links</a></li>
+  <li><a href="hypotheses.html">Five ranked candidate hypotheses</a> (expected DTI gain vs implementation cost)</li>
+</ul>
+
+<p class="meta">Every number on this site is labelled either HOLDOUT-DTI (this repository's holdout instrument, with the number of withheld positives and a 95% interval) or PUBLIC-BOARD / owner-published (the leaderboard and the sibling repositories' published evidence). No projection is written as a score.</p>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ranked candidate hypotheses — 60GEMSDOE</title>
+<style>
+ body{margin:0;font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#111;background:#fff}
+ main{max-width:920px;margin:0 auto;padding:28px 20px 90px}
+ h1{font-size:1.55rem;margin:.2em 0 .1em}
+ h2{font-size:1.14rem;margin:1.8em 0 .3em}
+ h3{font-size:1rem;margin:1.1em 0 .3em}
+ .sub{color:#555;margin:0 0 14px}
+ code{background:#f2f2f2;padding:1px 4px;border-radius:4px;font-size:.87em;word-break:break-word}
+ table{border-collapse:collapse;width:100%;font-size:.88rem;margin:.5em 0}
+ th,td{border:1px solid #d8d8d8;padding:6px 8px;text-align:left;vertical-align:top}
+ th{background:#f4f4f4}
+ .h{border:1px solid #d8d8d8;border-radius:8px;padding:2px 18px 14px;margin:1.1em 0;background:#fbfbfb}
+ .rank{display:inline-block;background:#111;color:#fff;border-radius:6px;padding:1px 9px;font-weight:700;font-size:.85rem;margin-right:8px}
+ .lab{font-weight:700;font-size:.78rem;letter-spacing:.03em;text-transform:uppercase;color:#555}
+ ul{margin:.3em 0 .5em 1.1em}
+</style>
+</head>
+<body>
+<main>
+
+<h1>Five ranked candidate hypotheses</h1>
+<p class="sub">Ranked by expected DTI improvement per unit of implementation cost, after this run's negative. "Expected ΔDTI" is an <em>estimate under the metric algebra in the <a href="executive-summary.html">executive summary</a></em>, labelled as an estimate and never written as a score. <a href="index.html">← download page</a></p>
+
+<h2>The ranking at a glance</h2>
+<table>
+<tr><th>#</th><th>Hypothesis</th><th>Expected ΔDTI (estimate)</th><th>Cost</th><th>Blocks</th></tr>
+<tr><td>1</td><td>Relief-stratified off-catalogue instrument</td><td>0 directly; it is the measurement every later claim depends on</td><td>low (hours)</td><td>everything else</td></tr>
+<tr><td>2</td><td>χ–k<sub>sn</sub> knickpoint traces on the real 10 m 3DEP DEM</td><td>+0.05 to +0.15 if the trace detector gains skill; unknown until the instrument is fixed</td><td>medium (one runner job + code)</td><td>—</td></tr>
+<tr><td>3</td><td>Emission-hygiene layer (ring deletion, playa/ephemeral masking, marginal-rule budget)</td><td>+0.03 to +0.13 at fixed recall — the champion's own history shows the ring deletion is free</td><td>low (already coded)</td><td>needs #2 for anything to place</td></tr>
+<tr><td>4</td><td>χ-wave discrimination (base-level fall waves vs fault steps)</td><td>protects #2 from the strongest mimic process</td><td>medium-high</td><td>needs #2 to be positive first</td></tr>
+<tr><td>5</td><td>Multi-physics collinearity (magnetic/gravity/conductivity step along the topographic trace)</td><td>+0.02 to +0.08 on top of a working topographic detector</td><td>medium</td><td>needs #2</td></tr>
+</table>
+
+<div class="h">
+<p><span class="rank">1</span><strong>Relief-stratified off-catalogue instrument — fix the measurement before any more geology.</strong></p>
+<p><span class="lab">Layers / data</span> nothing new: SGMC quaternary fault raster + the cube's band 12 (detrended elevation) and band 19; the committed 3DEP-derived pack (<code>relief_local</code>, <code>slope_p90</code>, <code>dem_mean</code>) for stratification.</p>
+<p><span class="lab">Physical signature</span> none — this is an instrument, not a detector. It replaced an artefact: this run measured that the current thinning puts the off-catalogue sample in low-relief, high-elevation ground (AUC 0.90/0.90/0.88 for relief/slope/elevation), so every relief-based method is handicapped by construction and every "no skill" verdict is suspect.</p>
+<p><span class="lab">Why it matters for catalogue-missing faults</span> the catalogue's blind spot is not sampled uniformly: faults missing from USGS/INGENIOUS are disproportionately those with subtle or buried expression, which live in particular relief/landform settings. A prevalence-preserving, relief-stratified sample is the only way to ask "would this map have found a fault the catalogue missed without being told where to look".</p>
+<p><span class="lab">Difference from prior work</span> the sibling repositories all thin by maximal separation to a global |G| pin; none stratifies. This is the first instrument change, and it retro-validates or retro-invalidates the whole family's negative ledger (H91/H93/H94/H95/H96).</p>
+</div>
+
+<div class="h">
+<p><span class="rank">2</span><strong>χ–k<sub>sn</sub> knickpoint traces on the real 10 m 3DEP DEM (the lane's mandated substrate).</strong></p>
+<p><span class="lab">Layers / data</span> USGS 3DEP 1/3 arc-second seamless DEM at native 10 m (<a href="https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/USGS_Seamless_DEM_13.vrt">VRT</a>, public domain); competition band 12 (detrended elevation, used this run) as a cross-check; band 19 (its slope) as a sanity mask. Fetch happens in a GitHub Actions runner; the sandbox has no route to the S3 host.</p>
+<p><span class="lab">Physical signature</span> χ (Perron &amp; Royden) and normalised channel steepness k<sub>sn</sub> (Kirby &amp; Whipple); knickpoints where the local dz/dχ steps up (Gailleton segmentation); the detector is the <em>collinear chain</em> of knickpoints from ≥3 independent first-order basins along a common strike — implemented and unit-tested in this repository (<code>src/gems60/surface.py::strike_trace_support</code>).</p>
+<p><span class="lab">Why it can catch a fault the catalogue misses</span> the catalogue is a mapping product: it under-records faults with no young surface rupture and faults first recognised by paleoseismology. Those faults still put a step in every channel that crosses them, and the step survives in the χ-space profile even when the surface trace does not. A line of such steps from independent drainages is a fault trace or nothing.</p>
+<p><span class="lab">Difference from prior work</span> the family's 1 m lidar work (r7-nms3-dem10-scarp, H20) detects <em>scarps</em>; its H43 lane ran knickpoints on the <em>100 m detrended-elevation proxy</em> with strict D8 and died in flats (max accumulation 109 px). This lane uses real elevation, priority-flood + ε routing, the χ transform, and cross-drainage strike collinearity; this run is the first time the routing has been diagnosable (it is not yet physical at 100 m: 31% of cells raised by filling, per-cell A-vs-L exponent ≈0.03).</p>
+</div>
+
+<div class="h">
+<p><span class="rank">3</span><strong>Emission hygiene: catalogue-ring deletion, playa/ephemeral masking, and the metric's own marginal-rule budget.</strong></p>
+<p><span class="lab">Layers / data</span> labels.tif (catalogue) for the ring; the 3DEP pack's <code>relief_local</code>/<code>steep_frac</code> and the drainage network's own accumulation for playa and ephemeral-channel masking; the metric algebra for the budget.</p>
+<p><span class="lab">Physical signature</span> not geology — base levels. Playa floors and closed basins have no through-going channel, so any "knickpoint" there is a base-level artefact; ephemeral channels with very large contributing-area thresholds carry no steady-state χ signal.</p>
+<p><span class="lab">Why it matters for catalogue-missing faults</span> it converts emission mass into expected credit: at DTI ≈ 0.28 the metric accepts a dot only if its chance of lying within 300 m of an unseen fault exceeds ~5.6%, and the champion's own history shows the 100–200 m ring around known faults earns exactly zero while paying the 0.2 mass tax.</p>
+<p><span class="lab">Difference from prior work</span> the family's dot maps apply a 200 m ring and a global budget; none of the reviewed lanes ties the budget to a measured holdout DTI, and none uses a drainage-network-derived playa mask. Both are implemented here (`nodes.budget_from_marginal_rule`, `surface.build` confounds).</p>
+</div>
+
+<div class="h">
+<p><span class="rank">4</span><strong>χ-wave discrimination: separate base-level-fall waves from fault steps.</strong></p>
+<p><span class="lab">Layers / data</span> 10 m DEM + derived drainage; the competition cube's band 12 only as a fallback. Key auxiliary: the elevation of the nearest base level (playa edge / trunk junction) for each first-order basin.</p>
+<p><span class="lab">Physical signature</span> a knickpoint generated by a falling base level propagates upstream and its χ position is set by the wave's age and the basin's drainage area; a fault step is fixed in space and independent of the basin's size. Multiple knickpoints in <em>one</em> basin at χ positions predicted by a single wave time, versus multiple basins sharing one <em>spatial</em> line, separate the two.</p>
+<p><span class="lab">Why it matters for catalogue-missing faults</span> the named mimic process for hypothesis 2 is exactly the transient wave; without this test a "trace" of knickpoints can be a wavefront crossing a structural grain, which would produce a believable but wrong map.</p>
+<p><span class="lab">Difference from prior work</span> the family has never modelled χ-space wave timing (H43b used per-basin knickpoint strength only, with no χ-age test).</p>
+</div>
+
+<div class="h">
+<p><span class="rank">5</span><strong>Multi-physics collinearity: require a magnetic / gravity / conductivity step along the same topographic trace.</strong></p>
+<p><span class="lab">Layers / data</span> cube bands 14–16 (RTP magnetic anomaly, TMI, vertical and horizontal TMI slopes), band 17 (top-of-crustal magnetic source depth), bands 8–9 (isostatic gravity anomaly and slope), bands 1–2 (surface conductivity, depth-to-conductive-base); USGS GeoDAWN Th/K, U/K, U/Th and TMI extensions as independent confirmations.</p>
+<p><span class="lab">Physical signature</span> a fault that offsets magnetised or conductive rock produces a <em>lateral step</em> in those fields, running along the same azimuth as the topographic trace. Requiring the step to be collinear with the geomorphic trace removes lithologic contacts (which are usually also conductivity anomalies, but lack a coincident magnetic step when offset is small).</p>
+<p><span class="lab">Why it matters for catalogue-missing faults</span> buried faults with no surface rupture still offset magnetic basement and conductivity structure; this is the one channel that can see a fault the topography cannot, and the cube already contains these layers.</p>
+<p><span class="lab">Difference from prior work</span> the family's H16/H18/H25 lanes used these layers through ridge/fusion templates and gradients, but never gated a <em>geomorphic trace</em> on a coincident collinear step; this lane's output is a line, so the coincidence test is well posed.</p>
+</div>
+
+<p class="sub">Every "expected ΔDTI" above is an estimate from the metric algebra with the published pins, not a measurement. The only measurements in this repository are labelled HOLDOUT-DTI or PUBLIC-BOARD on the other pages.</p>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,340 @@
+{
+ "rules": {
+  "first_test_passes": "evidence/first_test.json passes == true",
+  "lane_beats_random_off_catalogue": "off-catalogue HOLDOUT-DTI at the matched budget > random",
+  "uniqueness_excess_below_stop": "max overlap EXCESS over the random control < 0.70 and max |Spearman| < 0.90 vs every registry raster",
+  "no_leakage_flag": "leakage canary flagged_gt_0.90 == []"
+ },
+ "checks": {
+  "first_test_passes": false,
+  "lane_beats_random_off_catalogue": false,
+  "uniqueness_excess_below_stop": true,
+  "no_leakage_flag": true
+ },
+ "verdict": "NEGATIVE (no submission slot spent)",
+ "first_test": {
+  "passes": false,
+  "folds_with_positive_mean": "4/5",
+  "folds_with_ci95_above_zero": 1,
+  "mean_of_fold_means": 0.34885221242690884
+ },
+ "off_catalogue_instrument": {
+  "label": "HOLDOUT-DTI",
+  "n_withheld_positives": 14089,
+  "lane_dti": 0.010799728129992381,
+  "random_dti": 0.02683830565611923,
+  "budget": 12000,
+  "merged_ci95": [
+   0.005250892557123153,
+   0.007536552363802552
+  ]
+ },
+ "overlap_control": {
+  "worst": {
+   "raster": "r13_lattice_s5_00904.tif",
+   "frac_dots_within_3px": 0.8305039787798408,
+   "frac_random_within_3px": 0.8374005305039788,
+   "frac_footprint_within_3px": 0.353669632124673,
+   "excess_over_random": -0.006896551724137945,
+   "excess_over_footprint": 0.47683434665516783
+  },
+  "all": [
+   {
+    "raster": "dotted_b2_prune_02778.tif",
+    "frac_dots_within_3px": 0.16790450928381964,
+    "frac_random_within_3px": 0.1323607427055703,
+    "frac_footprint_within_3px": 0.05742990562872379,
+    "excess_over_random": 0.03554376657824934,
+    "excess_over_footprint": 0.11047460365509584
+   },
+   {
+    "raster": "dotted_d2_8_02600.tif",
+    "frac_dots_within_3px": 0.1856763925729443,
+    "frac_random_within_3px": 0.15490716180371353,
+    "frac_footprint_within_3px": 0.06574619110753505,
+    "excess_over_random": 0.03076923076923077,
+    "excess_over_footprint": 0.11993020146540925
+   },
+   {
+    "raster": "dotted_d2_8_02708.tif",
+    "frac_dots_within_3px": 0.17692307692307693,
+    "frac_random_within_3px": 0.14350132625994694,
+    "frac_footprint_within_3px": 0.0610014854436297,
+    "excess_over_random": 0.033421750663129995,
+    "excess_over_footprint": 0.11592159147944724
+   },
+   {
+    "raster": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+    "frac_dots_within_3px": 0.1856763925729443,
+    "frac_random_within_3px": 0.15490716180371353,
+    "frac_footprint_within_3px": 0.06574619110753505,
+    "excess_over_random": 0.03076923076923077,
+    "excess_over_footprint": 0.11993020146540925
+   },
+   {
+    "raster": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+    "frac_dots_within_3px": 0.1856763925729443,
+    "frac_random_within_3px": 0.15490716180371353,
+    "frac_footprint_within_3px": 0.06574619110753505,
+    "excess_over_random": 0.03076923076923077,
+    "excess_over_footprint": 0.11993020146540925
+   },
+   {
+    "raster": "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+    "frac_dots_within_3px": 0.11326259946949602,
+    "frac_random_within_3px": 0.15755968169761272,
+    "frac_footprint_within_3px": 0.06862407526247724,
+    "excess_over_random": -0.04429708222811671,
+    "excess_over_footprint": 0.044638524207018776
+   },
+   {
+    "raster": "gems32-bayesopt-dilation-scarp-d28-20261004-zeros.tif",
+    "frac_dots_within_3px": 0.11326259946949602,
+    "frac_random_within_3px": 0.15755968169761272,
+    "frac_footprint_within_3px": 0.06862407526247724,
+    "excess_over_random": -0.04429708222811671,
+    "excess_over_footprint": 0.044638524207018776
+   },
+   {
+    "raster": "gems32-lazygreedy-maxcov-44090-supconfined-zeros.tif",
+    "frac_dots_within_3px": 0.17824933687002653,
+    "frac_random_within_3px": 0.14748010610079576,
+    "frac_footprint_within_3px": 0.0628356499956023,
+    "excess_over_random": 0.03076923076923077,
+    "excess_over_footprint": 0.11541368687442423
+   },
+   {
+    "raster": "gems32-probe-S1-ANCHOR-identical-to-live-02600.tif",
+    "frac_dots_within_3px": 0.1856763925729443,
+    "frac_random_within_3px": 0.15490716180371353,
+    "frac_footprint_within_3px": 0.06574619110753505,
+    "excess_over_random": 0.03076923076923077,
+    "excess_over_footprint": 0.11993020146540925
+   },
+   {
+    "raster": "gems32-probe-S2-SCALE-lambda-0.5.tif",
+    "frac_dots_within_3px": 0.1856763925729443,
+    "frac_random_within_3px": 0.15490716180371353,
+    "frac_footprint_within_3px": 0.06574619110753505,
+    "excess_over_random": 0.03076923076923077,
+    "excess_over_footprint": 0.11993020146540925
+   },
+   {
+    "raster": "gems32-probe-S3-NULLADD-2000px.tif",
+    "frac_dots_within_3px": 0.1856763925729443,
+    "frac_random_within_3px": 0.16153846153846155,
+    "frac_footprint_within_3px": 0.06979565377436242,
+    "excess_over_random": 0.02413793103448275,
+    "excess_over_footprint": 0.11588073879858188
+   },
+   {
+    "raster": "gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-nan.tif",
+    "frac_dots_within_3px": 0.1856763925729443,
+    "frac_random_within_3px": 0.15490716180371353,
+    "frac_footprint_within_3px": 0.06574619110753505,
+    "excess_over_random": 0.03076923076923077,
+    "excess_over_footprint": 0.11993020146540925
+   },
+   {
+    "raster": "gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-zeros.tif",
+    "frac_dots_within_3px": 0.1856763925729443,
+    "frac_random_within_3px": 0.15490716180371353,
+    "frac_footprint_within_3px": 0.06574619110753505,
+    "excess_over_random": 0.03076923076923077,
+    "excess_over_footprint": 0.11993020146540925
+   },
+   {
+    "raster": "gemsdoe32-h32a-dip-projected-step-46090-20261004T183200Z-838fcd84-nan.tif",
+    "frac_dots_within_3px": 0.18885941644562335,
+    "frac_random_within_3px": 0.16206896551724137,
+    "frac_footprint_within_3px": 0.06898183589105444,
+    "excess_over_random": 0.026790450928381976,
+    "excess_over_footprint": 0.1198775805545689
+   },
+   {
+    "raster": "gemsdoe32-h32a-dip-projected-step-46090-20261004T183200Z-838fcd84-zeros.tif",
+    "frac_dots_within_3px": 0.18885941644562335,
+    "frac_random_within_3px": 0.16206896551724137,
+    "frac_footprint_within_3px": 0.06898183589105444,
+    "excess_over_random": 0.026790450928381976,
+    "excess_over_footprint": 0.1198775805545689
+   },
+   {
+    "raster": "gemsdoe32-h32b-transtensional-swarm-45890-20261004T183200Z-27b7c9e6-nan.tif",
+    "frac_dots_within_3px": 0.18992042440318302,
+    "frac_random_within_3px": 0.16339522546419097,
+    "frac_footprint_within_3px": 0.06864573798207695,
+    "excess_over_random": 0.02652519893899205,
+    "excess_over_footprint": 0.12127468642110607
+   },
+   {
+    "raster": "gemsdoe32-h32b-transtensional-swarm-45890-20261004T183200Z-27b7c9e6-zeros.tif",
+    "frac_dots_within_3px": 0.18992042440318302,
+    "frac_random_within_3px": 0.16339522546419097,
+    "frac_footprint_within_3px": 0.06864573798207695,
+    "excess_over_random": 0.02652519893899205,
+    "excess_over_footprint": 0.12127468642110607
+   },
+   {
+    "raster": "gemsdoe32-h32c-mt-claycap-breach-45890-20261004T183200Z-a5963d0a-nan.tif",
+    "frac_dots_within_3px": 0.19442970822281166,
+    "frac_random_within_3px": 0.1623342175066313,
+    "frac_footprint_within_3px": 0.06846640975441316,
+    "excess_over_random": 0.03209549071618037,
+    "excess_over_footprint": 0.1259632984683985
+   },
+   {
+    "raster": "gemsdoe32-h32c-mt-claycap-breach-45890-20261004T183200Z-a5963d0a-zeros.tif",
+    "frac_dots_within_3px": 0.19442970822281166,
+    "frac_random_within_3px": 0.1623342175066313,
+    "frac_footprint_within_3px": 0.06846640975441316,
+    "excess_over_random": 0.03209549071618037,
+    "excess_over_footprint": 0.1259632984683985
+   },
+   {
+    "raster": "gemsdoe32-h32d-equalbudget-44090-20261004T183200Z-350cdc3f-nan.tif",
+    "frac_dots_within_3px": 0.18594164456233422,
+    "frac_random_within_3px": 0.15570291777188328,
+    "frac_footprint_within_3px": 0.06625078588437645,
+    "excess_over_random": 0.030238726790450948,
+    "excess_over_footprint": 0.11969085867795777
+   },
+   {
+    "raster": "gemsdoe32-h32d-equalbudget-44090-20261004T183200Z-350cdc3f-zeros.tif",
+    "frac_dots_within_3px": 0.18594164456233422,
+    "frac_random_within_3px": 0.15570291777188328,
+    "frac_footprint_within_3px": 0.06625078588437645,
+    "excess_over_random": 0.030238726790450948,
+    "excess_over_footprint": 0.11969085867795777
+   },
+   {
+    "raster": "gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-nan.tif",
+    "frac_dots_within_3px": 0.19124668435013262,
+    "frac_random_within_3px": 0.16259946949602122,
+    "frac_footprint_within_3px": 0.0687488394971643,
+    "excess_over_random": 0.028647214854111397,
+    "excess_over_footprint": 0.12249784485296832
+   },
+   {
+    "raster": "gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif",
+    "frac_dots_within_3px": 0.19124668435013262,
+    "frac_random_within_3px": 0.16259946949602122,
+    "frac_footprint_within_3px": 0.0687488394971643,
+    "excess_over_random": 0.028647214854111397,
+    "excess_over_footprint": 0.12249784485296832
+   },
+   {
+    "raster": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif",
+    "frac_dots_within_3px": 0.16790450928381964,
+    "frac_random_within_3px": 0.1323607427055703,
+    "frac_footprint_within_3px": 0.05742990562872379,
+    "excess_over_random": 0.03554376657824934,
+    "excess_over_footprint": 0.11047460365509584
+   },
+   {
+    "raster": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+    "frac_dots_within_3px": 0.16790450928381964,
+    "frac_random_within_3px": 0.1323607427055703,
+    "frac_footprint_within_3px": 0.05742990562872379,
+    "excess_over_random": 0.03554376657824934,
+    "excess_over_footprint": 0.11047460365509584
+   },
+   {
+    "raster": "gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-nan.tif",
+    "frac_dots_within_3px": 0.16790450928381964,
+    "frac_random_within_3px": 0.1363395225464191,
+    "frac_footprint_within_3px": 0.058558077262614056,
+    "excess_over_random": 0.03156498673740055,
+    "excess_over_footprint": 0.10934643202120559
+   },
+   {
+    "raster": "gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-zeros.tif",
+    "frac_dots_within_3px": 0.16790450928381964,
+    "frac_random_within_3px": 0.1363395225464191,
+    "frac_footprint_within_3px": 0.058558077262614056,
+    "excess_over_random": 0.03156498673740055,
+    "excess_over_footprint": 0.10934643202120559
+   },
+   {
+    "raster": "h52_coincidence8_80k.tif",
+    "frac_dots_within_3px": 0.27771883289124666,
+    "frac_random_within_3px": 0.2326259946949602,
+    "frac_footprint_within_3px": 0.09654438902986849,
+    "excess_over_random": 0.045092838196286456,
+    "excess_over_footprint": 0.18117444386137815
+   },
+   {
+    "raster": "h60_officialstack_50k.tif",
+    "frac_dots_within_3px": 0.11511936339522547,
+    "frac_random_within_3px": 0.17559681697612733,
+    "frac_footprint_within_3px": 0.07593890787317699,
+    "excess_over_random": -0.06047745358090187,
+    "excess_over_footprint": 0.03918045552204848
+   },
+   {
+    "raster": "h60_union_d2_75308.tif",
+    "frac_dots_within_3px": 0.25225464190981434,
+    "frac_random_within_3px": 0.2854111405835544,
+    "frac_footprint_within_3px": 0.12255797627850765,
+    "excess_over_random": -0.03315649867374004,
+    "excess_over_footprint": 0.1296966656313067
+   },
+   {
+    "raster": "hedge_v2_01563.tif",
+    "frac_dots_within_3px": 0.276657824933687,
+    "frac_random_within_3px": 0.26525198938992045,
+    "frac_footprint_within_3px": 0.1134115037184954,
+    "excess_over_random": 0.011405835543766563,
+    "excess_over_footprint": 0.16324632121519161
+   },
+   {
+    "raster": "r11_greedy_mp.tif",
+    "frac_dots_within_3px": 0.7416445623342175,
+    "frac_random_within_3px": 0.6888594164456233,
+    "frac_footprint_within_3px": 0.2930658123194095,
+    "excess_over_random": 0.052785145888594176,
+    "excess_over_footprint": 0.448578750014808
+   },
+   {
+    "raster": "r13_lattice_s5_00904.tif",
+    "frac_dots_within_3px": 0.8305039787798408,
+    "frac_random_within_3px": 0.8374005305039788,
+    "frac_footprint_within_3px": 0.353669632124673,
+    "excess_over_random": -0.006896551724137945,
+    "excess_over_footprint": 0.47683434665516783
+   },
+   {
+    "raster": "r14_union_tips10_lat6.tif",
+    "frac_dots_within_3px": 0.6777188328912467,
+    "frac_random_within_3px": 0.6610079575596817,
+    "frac_footprint_within_3px": 0.2773833877887413,
+    "excess_over_random": 0.01671087533156501,
+    "excess_over_footprint": 0.4003354451025054
+   },
+   {
+    "raster": "tip_stepover_r30_02632.tif",
+    "frac_dots_within_3px": 0.1830238726790451,
+    "frac_random_within_3px": 0.14986737400530503,
+    "frac_footprint_within_3px": 0.06351379084562787,
+    "excess_over_random": 0.03315649867374007,
+    "excess_over_footprint": 0.11951008183341723
+   }
+  ],
+  "note": "the naive >70%-overlap stop rule fires against a raster whose (2r+1)^2 halo already covers most of the footprint; the excess over the random control is the quantity that can actually indicate duplication"
+ },
+ "instrument_bias": {
+  "relief_local_u8": {
+   "auc_vs_off_catalogue_truth": 0.8957336131039995,
+   "auc_vs_catalogue": 0.8153907889545151
+  },
+  "slope_p90_u8": {
+   "auc_vs_off_catalogue_truth": 0.8954692744865206,
+   "auc_vs_catalogue": 0.816761361853804
+  },
+  "dem_mean_u8": {
+   "auc_vs_off_catalogue_truth": 0.8745431379630156,
+   "auc_vs_catalogue": 0.7936426804134817
+  }
+ },
+ "registry_rasters": 35
+}

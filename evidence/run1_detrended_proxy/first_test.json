@@ -1,0 +1,77 @@
+{
+  "question": "do channels crossing withheld catalogue segments show larger steepness steps than random lines of the SAME orientation distribution?",
+  "statistic": "median-over-lines of the 90th percentile of |d z / d chi| on channel pixels",
+  "per_fold": [
+    {
+      "median_on_truth": 9.328946113586426,
+      "median_control": 5.3768134117126465,
+      "paired": {
+        "mean": 0.4529838359664809,
+        "ci95": [
+          -0.5385963673642378,
+          1.4271408392740481
+        ],
+        "n": 1295,
+        "frac_positive": 0.14826254826254825
+      }
+    },
+    {
+      "median_on_truth": 8.415688514709473,
+      "median_control": 2.655050754547119,
+      "paired": {
+        "mean": 0.2520179477182586,
+        "ci95": [
+          -0.710663752193866,
+          1.166557786223429
+        ],
+        "n": 1321,
+        "frac_positive": 0.17032551097653292
+      }
+    },
+    {
+      "median_on_truth": 1.046378254890442,
+      "median_control": 0.7727317810058594,
+      "paired": {
+        "mean": 0.1924622282812068,
+        "ci95": [
+          -0.6287892205960836,
+          0.9818121994622834
+        ],
+        "n": 1453,
+        "frac_positive": 0.15760495526496904
+      }
+    },
+    {
+      "median_on_truth": 5.682899475097656,
+      "median_control": 2.3935256004333496,
+      "paired": {
+        "mean": 1.6434345747111365,
+        "ci95": [
+          1.0096824263521629,
+          2.3144512710714635
+        ],
+        "n": 1456,
+        "frac_positive": 0.15934065934065933
+      }
+    },
+    {
+      "median_on_truth": 1.6992733478546143,
+      "median_control": 1.952233076095581,
+      "paired": {
+        "mean": 0.16620286421266794,
+        "ci95": [
+          -0.598914160021196,
+          0.9595642040644737
+        ],
+        "n": 1363,
+        "frac_positive": 0.13573000733675716
+      }
+    }
+  ],
+  "median_on_truth_pooled": 5.682899475097656,
+  "median_control_pooled": 2.3935256004333496,
+  "mean_of_fold_means": 0.5414202901779501,
+  "folds_with_positive_mean": "5/5",
+  "folds_with_ci95_above_zero": 1,
+  "passes": false
+}

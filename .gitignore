@@ -1,0 +1,9 @@
+# Large official rasters are NOT committed; restore them with scripts/fetch_inputs.sh from the
+# integrity-pinned mirrors (see registry/source_pins.json and docs/data.html).
+data/*.tif
+data/*.zip
+# runtime scratch
+.cache/
+__pycache__/
+*.pyc
+.pytest_cache/
