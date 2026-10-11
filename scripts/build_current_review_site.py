@@ -98,6 +98,57 @@ def _write_page(path: Path, text: str) -> None:
     from build_site import preserve_status_blocks
     path.write_text(preserve_status_blocks(path, text))
 
+def _post_review_artifacts_html(status: dict) -> str:
+    """Render the post-STOP research-artifact boards recorded in the status file.
+
+    Parallel lane sessions used to hand-edit ``docs/index.html`` to publish their boards; the
+    next regeneration then deleted every one of them, because a renderer-owned page cannot
+    carry hand HTML.  The boards are data now (``post_review_artifacts``), so a render is
+    lossless, the STOP wording travels with every artifact, and no session has to choose
+    between publishing and being reproducible (IR-H80-SITE-01).
+    """
+    items = status.get("post_review_artifacts") or []
+    if not items:
+        return ""
+    rows = []
+    for a in items:
+        files = []
+        for f in a.get("files", []):
+            cls = "btn alt" if files else "btn"
+            label = f.get("variant") or Path(f["file"]).name
+            files.append(f'<a class="{cls}" href="{_site_href(f["file"])}" download>&#11015; {_e(label)}</a>')
+        links = " ".join(f'<a href="{_site_href(l["href"])}">{_e(l["label"])}</a>'
+                         for l in a.get("links", []))
+        rows.append(
+            f"<tr><td><b>{_e(a['id'])}</b><br><code>{_e(a.get('short_name', ''))}</code><br>"
+            f"<span style=\"color:#5b7183\">{_e(a.get('detail', ''))}</span></td>"
+            f"<td>{' '.join(files)}</td><td>{links}</td></tr>")
+    return (
+        '<div class="wrap" style="border:3px solid #b42318;background:#fffafa;padding:12px 16px;margin:8px auto">'
+        '<h2 style="margin:0 0 6px">&#9940; Additional research artifacts added under this STOP '
+        '&mdash; DOWNLOAD for research: YES &middot; SUBMIT: <b>NO &mdash; DO NOT SUBMIT</b></h2>'
+        f'<p style="margin:4px 0">{_e(status.get("post_review_artifacts_note", ""))}</p>'
+        '<table><tr><th>artifact</th><th>download (research only)</th><th>measured evidence</th></tr>'
+        f'{"".join(rows)}</table></div>')
+
+
+def _post_review_artifacts_summary(status: dict) -> str:
+    """Compact list of the post-STOP artifact boards for the submission-status page."""
+    items = status.get("post_review_artifacts") or []
+    if not items:
+        return ""
+    rows = []
+    for a in items:
+        first = a["files"][0] if a.get("files") else None
+        dl = (f' · <a href="{_site_href(first["file"])}" download>download .tif (research only)</a>'
+              if first else "")
+        rows.append(f'<li><b>{_e(a["id"])}</b> — {_e(a.get("detail", ""))}{dl}</li>')
+    return ('<h2>Post-STOP research artifacts — none of them is cleared to submit</h2><ul>'
+            + "".join(rows) + "</ul>"
+            '<p>Every entry above is <b>research only</b>: download is fine, submission is not. '
+            'The board with the download buttons is on the <a href="index.html">home page</a>.</p>')
+
+
 def render(root: Path | None = None) -> dict:
     root = root or Path(__file__).resolve().parents[1]
     docs = root / "docs"
@@ -161,7 +212,7 @@ cleared submission. No submission slot has been spent by any of them.</p>
         post_html = ""
 
     # Home: never surface registry/submission_build.json as a recommendation while the stop applies.
-    body = _common_status(status) + f'''<h2>Current research state</h2>
+    body = _common_status(status) + _post_review_artifacts_html(status) + f'''<h2>Current research state</h2>
 <div class="grid"><section class="card"><h3>H65-1 — latest 10 m result</h3>
 <p><b>First test:</b> 262 withheld components; mean log-ksn step contrast
 {first['mean_log_ksn_step_contrast']:+.4f}, 95% CI [{first['ci95'][0]:+.4f}, {first['ci95'][1]:+.4f}],
@@ -231,6 +282,7 @@ file remains an audit example, not a recommendation.</p>'''
 <li>Download the selected <code>.tif</code> from its own run-card link (or a ZIP containing exactly one TIFF). Verify its SHA-256 and use the shared writer/validator: one <code>float32</code> band, exact sample CRS/shape/transform, no NaN/Inf anywhere, every value in [0,1], no nodata tag.</li>
 <li>On the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/">DrivenData submissions page</a>, sign in with your own account, choose <em>New submission</em>, choose that exact file, and paste the run-card's unique name and ≤140-character note into the available fields. Do not upload a research-only artifact to test the portal.</li>
 <li>Submit only after the selector approves the slot; preserve the organizer receipt, score and file hash together. Until then, a local PASS says only that the TIFF passes <em>local</em> format checks.</li></ol>
+{_post_review_artifacts_summary(status)}
 <h2>Local format receipt is not an organizer receipt</h2>
 <p>The local validator reports single-band float32, EPSG:32611, 3292×3730 on the 100 m grid, values in [0,1],
 no NaN/Inf, and 40,000 positive cells; it lists no problems. That does <b>not</b> prove that DrivenData accepted
@@ -338,7 +390,10 @@ requirements for any separately authorized research. USGS says legacy NHD is ret
 <tr><td>H65-1 first test</td><td>Mean log-ksn step contrast {first['mean_log_ksn_step_contrast']:+.5f}, 95% CI [{first['ci95'][0]:+.5f}, {first['ci95'][1]:+.5f}]; inconclusive means STOP under the registered rule. No rerun at another resolution.</td></tr>
 <tr><td>H65-1 registry uniqueness</td><td>651/655 rasters checked; max |Spearman| {unique['max_abs_spearman_reported']:.4f}; final 3-px dot overlap {unique['max_final_dot_overlap_within_3px']:.0%} exceeds the 70% threshold; tool verdict unique=false. Pre-placement screen is not documented, so no clearance. See <code>IR-60-GATE-01</code> / <code>IR-60-CORPUS-01</code>.</td></tr>
 <tr><td>H65-1 DEM cache</td><td>The first local cache did not match its recorded hash; a rebuild from pinned input TIFs matched all 11 arrays and reproduced the shipped raster. Root cause of the stale scratch cache is unknown. See <code>IR-65-CACHE-01</code>.</td></tr>
-<tr><td>c7653 historical outcome</td><td>Earlier placement/orientation AUCs were 0.22436/0.25641, a negative stop. Its six final-mask comparisons did not establish full-registry or pre-placement uniqueness; no feature-by-feature canary audit was recorded.</td></tr>
+<tr><td>H80-1 uniqueness clause</td><td>The operator's clause 1 (dense field) and the literal clause 3 (≤70 % of dots within 3 px of any earlier raster) are jointly unsatisfiable: the already-scored champion is 0.99915 inside the 3-px neighbourhood of <code>calib_r13lattice_00904.tif</code>, and a mass-matched random emission scores 0.9987 literal / 0.8746 matched against it, so four comparators (<code>calib_r13lattice_00904</code>, <code>r13_lattice_s5_00904</code>, <code>r11_greedy_mp</code>, <code>r14_union_tips10_lat6</code>) are non-decidable. Measured frontier: the like-for-like limit is crossed only at 24,000–30,000 added dots (union ≈62,000–68,000). See <code>IR-H80-PROFILE-01</code>, <code>IR-H80-G3-UNSAT-01</code>, <code>evidence/h80_g3_frontier.json</code>.</td></tr>
+<tr><td>H80-1 shared scan tool</td><td><code>scripts/build_h71_field.py::uniqueness_scan</code> could not be reused as published (relative <code>extra_dirs</code> crashed the <code>source</code> label; the emitted-field distance transform was recomputed per comparator). Fixed in place; re-scan 121 rasters in 219 s at a 1.04 GB peak. See <code>IR-H80-TOOL-04</code>.</td></tr>
+<tr><td>H80-1 post-STOP boards</td><td>Post-STOP artifact boards were hand HTML in <code>docs/index.html</code> and would be deleted by the next <code>build_current_review_site.py</code> render; they are now data (<code>registry/current_site_status.json → post_review_artifacts</code>) and the renderer renders them. See <code>IR-H80-SITE-01</code>.</td></tr>
+<td>Earlier placement/orientation AUCs were 0.22436/0.25641, a negative stop. Its six final-mask comparisons did not establish full-registry or pre-placement uniqueness; no feature-by-feature canary audit was recorded.</td></tr>
 <tr><td>H33-2-B2 score attribution</td><td>0.2778 remains owner-reported/unverified. A same-named artifact was elsewhere reported as 0.2708; no organizer receipt reconciles either value or links it to exact bytes. Local LM diagnostics and public ranks do not establish attribution.</td></tr>
 <tr><td>Public board freshness</td><td>Snapshot is a manual 2026-10-11 read and may become stale. No competition-host polling is performed.</td></tr>
 <tr><td>Automated leaderboard fetch (fixed 2026-10-11)</td><td>The scheduled refresh preserves manual board snapshots and probes only non-competition sources; it makes no request to the DrivenData host. See <code>IR-60-LB-AUTO-20261011</code>.</td></tr>

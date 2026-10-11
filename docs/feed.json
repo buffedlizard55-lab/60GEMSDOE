@@ -1,7 +1,7 @@
 {
- "generated_utc": "2026-10-11T19:18:44Z",
+ "generated_utc": "2026-10-11T20:45:15Z",
  "repo": "60GEMSDOE",
- "session": "2026-10-11 lane stop audit (H68) + H70-1 paired-polarity knickpoint trains: preregistered G1 first test STOP; NEGATIVE result, no new TIFF, no slot spent. Research TIFF download remains H65-1 (do not submit).",
+ "session": "2026-10-11 H80 convergent-cover emission: NEGATIVE. Restricted-profile union 49,654 dots, G3 FAIL, no slot spent. Research TIFF download remains H65-1 (do not submit).",
  "current_official_leaderboard_top": {
   "rank": 1,
   "score": 0.4133,
@@ -146,6 +146,19 @@
    "research_note": "research/h70-paired-knickpoint-trains.md",
    "submitted_to_competition": false,
    "archive_status": "NEGATIVE lane record; no TIFF exists to download; no slot spent; next preregistered question: H71 paired-basin ksn contrast"
+  },
+  {
+   "name": "60GEMSDOE-H80-CONVCOMP-49654-20261011T202055Z",
+   "file": "downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif",
+   "sha256": "ad25643354857a1071f3d5ce7de8da711f22e1ed2096e7acd8d14f560f5ad459",
+   "dots": 49654,
+   "profile": "restricted",
+   "verdict": "NEGATIVE - G1 PASS, G2 PASS only by the registered -0.0005 tolerance and below the champion (0.003844 vs 0.004385), G3 FAIL like-for-like 0.8864, G4 not run",
+   "evidence_class": "HOLDOUT-DTI",
+   "run_card_evidence": "../evidence/h80_runcard.json",
+   "report_page": "h80-report.html",
+   "submitted_to_competition": false,
+   "do_not_submit": true
   }
  ],
  "anchor_owner_scored": {

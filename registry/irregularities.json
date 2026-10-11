@@ -444,6 +444,36 @@
    "severity": "low",
    "statement": "Session brief's quoted leaderboard targets (0.3195, later 0.3774) are stale relative to the repository's verified snapshot (public top xiaofanhu 0.4133 on 2026-10-11, 50 rows). The group's own best remains owner-reported 0.2778 (the participant row at rank 23 shows the same value; byte attribution of files to that row is not possible from public data).",
    "mitigation": "All H70 planning used 0.4133 as the public target; the score-gap algebra in docs/research/h70-paired-knickpoint-trains.md is computed against it."
+  },
+  {
+   "id": "IR-H80-TOOL-04",
+   "severity": "medium",
+   "statement": "scripts/build_h71_field.py::uniqueness_scan could not be reused as published. Reading its output: (a) the per-raster ``source`` label crashed with ValueError for any repository-relative ``extra_dirs`` entry (``f.parent.relative_to(ROOT)`` needs an absolute path), so an ad-hoc re-scan of the H80 artifact died and no uniqueness number existed for it; (b) ``d_mine`` (a property of the emitted field, not of the comparator) was recomputed inside the per-raster loop together with a full float64 rankdata over the whole 12.3 MP grid per raster, making a 120-raster scan needlessly slow and memory-hungry. Neither defect changes any published H71/H72 number.",
+   "mitigation": "Fixed in place: the label is now computed with a candidate-path fallback, ``d_mine`` is computed once, ranks use float32, and the loop frees each comparator. Re-scan of the H80 artifact then completed in 219 s with a 1.04 GB peak, and the runner itself now frees its feature stacks before the scan (the H80 run that regressed to 415 s versus 275 s is the same defect seen from the runner side)."
+  },
+  {
+   "id": "IR-H80-PROFILE-01",
+   "severity": "medium",
+   "statement": "The operator's clause-1 rule ('no comparison to a previous submission; the emission must carry real information') and clause 3 ('no more than 70% of dots within 3 px of any earlier raster') cannot both hold for any emission in this family. Measured: the already-scored champion is 0.99915 inside the 3-px neighbourhood of calib_r13lattice_00904.tif, so ANY union containing the champion fails the literal clause; and a mass-matched random emission scores 0.9987 literal / 0.8746 matched against that raster and 0.7011/0.6401 against r11_greedy_mp.tif, i.e. overlap with those four comparators carries no lane information.",
+   "mitigation": "The clause is read like-for-like (limited to comparators that are themselves below the 70% limit), the four non-decidable comparators are listed explicitly in the run card and in evidence/h80_g3_frontier.json, and no dense-raster exception is claimed. The like-for-like reading still fails for the emitted 49,654-dot union at 0.8864."
+  },
+  {
+   "id": "IR-H80-G3-UNSAT-01",
+   "severity": "medium",
+   "statement": "Measured clause frontier: even under the like-for-like reading, the 70% limit against the one discriminating comparator (gems60-h72-union-champ-convcomp-43654) is crossed only between M = 24,000 (0.7167) and M = 30,000 (0.6535) added dots, i.e. a union of about 62,000-68,000 dots. The H80 eligibility ladder selected 12,000 dots (0.8864) because it was bounded at 12,000, not because the pool is empty - the restricted pool holds 91,370 dots under 2.8-px non-maximum suppression. A like-for-like-compliant emission is therefore mechanically reachable, but not by the emitted artifact, and the registered holdout gets worse with this added mass (H72 -0.000288 at 6,000; H80 -0.000541 at 12,000), so compliance and score are not aligned.",
+   "mitigation": "Recorded as the H80 negative result; a larger-mass compliant variant is written up as experiment 4 in docs/research/h80-complementary-cover.md and is explicitly NOT run, because it would exceed the preregistered 3-experiment budget and the available evidence says it would not improve the score."
+  },
+  {
+   "id": "IR-H80-SITE-01",
+   "severity": "low",
+   "statement": "docs/index.html carried a hand-written H71/H72 artifact board from session arena/161d8066-60gemsdoe. scripts/build_current_review_site.py regenerates that page from registry state, so any later render would have deleted the board silently - the same class of defect as IR-66-SITE-01, which build_site.preserve_status_blocks fixed only for marker-delimited blocks; under a STOP the same helper deliberately strips marker blocks instead of preserving them.",
+   "mitigation": "The three existing boards plus H80 were migrated into registry/current_site_status.json -> post_review_artifacts, the renderer now renders that key, and the page was re-rendered, so the boards are reproducible from data and every board keeps its DO NOT SUBMIT wording. (The H80 round is also published as a standalone page, docs/h80-report.html.)"
+  },
+  {
+   "id": "IR-H80-DUP-01",
+   "severity": "high",
+   "statement": "The parallel-run duplicate rule ('|rho| > 0.90 or > 70 % of dots within 3 px of one registry raster -> log as duplicate and stop') and any union strategy in this project are mutually exclusive, because the live-scored incumbent is itself the most duplicative raster in the corpus. Measured under the shared tool: the 37,654-dot champion is 1.0000 literal within 3 px of six registry/download rasters (gems25-dotted-h19-5-d2-8 nan+zeros 44,090 dots; gems32-lazygreedy-maxcov-44090; gems32-probe-S1-ANCHOR named 'identical-to-live-02600'; S2-SCALE; S3-NULLADD) and byte-identical (|rho| = 1.0000) to registry/rasters/dotted_b2_prune_02778.tif. Consequently the H80 union fails the rule at 0.8864 / |rho| 0.9346 while its 12,000-dot complement alone passes it (0.5299 decidable, |rho| 0.6914) - the failure is inherited from the incumbent, not produced by the new mass.",
+   "mitigation": "Recorded for the owner as a decision, not waived: (i) keep the incumbent and accept that any union inherits a duplicate-rule failure; (ii) emit the complement alone (passes the rule, but its projection at the metric bar is far below the incumbent's owner-reported 0.2778); or (iii) treat the duplicate rule as satisfied by the EMITTED RASTER being byte-unique while its dot support is inherited. H80 spent no slot and does not choose; evidence/h80_artifact_comparison.json holds every reading."
   }
  ]
 }

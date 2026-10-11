@@ -1,0 +1,67 @@
+{
+  "id": "GEMS60-PREREG-H80",
+  "written_utc": "2026-10-11T20:05:00Z",
+  "author_session": "arena/3c52f2be-60gemsdoe",
+  "title": "H80 — convergent-cover emission with one new measured tectonic-geomorphology layer, mass ladder, and a decidable uniqueness reading",
+  "operator_directive": {
+    "text": "The operator (this session's task text) requires: (a) a UNIQUE GeoTIFF submission for the competition, (b) an obvious, on-the-page statement of whether it is OK to download and to submit, (c) 3-5 new geological hypotheses ranked by expected DTI and cost before implementing, (d) validation of the top candidate on the spatially blocked holdout before any slot is spent, and (e) an executive summary page that explains exactly how to submit (including the historical 'Predicted values must be in range [0, 1]' rejection).",
+    "effect": "Authorises one emission experiment and one new artifact in this session. It does NOT lift, edit or re-run the H65-1 detector STOP."
+  },
+  "relation_to_stopped_lane": {
+    "stopped_question": "do channels crossing withheld catalogue segments show larger steepness steps than random same-orientation transects (H65-1, INCONCLUSIVE -> STOP)?",
+    "h80_question": "does mass placed in the complement of the live-scored champion, ranked by convergent independent evidence plus ONE newly measured tectonic-geomorphology layer, carry above-bar credit on the only public off-catalogue fault population?",
+    "why_this_is_not_a_rerun": [
+      "no lane runner is invoked: run_lane.py, run_lane60.py, run_h66.py, e1/e2/e3, e61/e62 and build_submission60.py are left untouched and uncalled",
+      "no lane feature cache is rebuilt: only committed rasters under data/external, data/official and registry/rasters are read",
+      "the stopped test (withheld-segment step contrast vs random transects) is not recomputed at any resolution",
+      "the object under test is an EMISSION RULE plus one new aggregating layer, not the stopped detector hypothesis"
+    ],
+    "stop_guard_disclosure": "scripts/stop_guard.py is imported, its verdict is printed and stored verbatim in the run card, and it is deliberately NOT used as a gate because this runner is not a lane runner. The deviation is disclosed here and in the run card, not silent (same treatment as H70/H71/H72)."
+  },
+  "hypothesis": "The brief's own third requirement - keep only steepness steps that align across several INDEPENDENT drainages along a common strike - is not represented in the seven-layer field that produced the H71/H72 complement. Its explicit measurement adds above-bar credit there, and the complement can be scaled until the measured marginal credit per dot approaches the metric's break-even bar.",
+  "mechanism": "A fault crossing rotates several adjacent catchments at once. Steepness steps therefore co-occur on channel cells whose downstream branch signatures differ; a strike-azimuth coherence count over distinct branch signatures isolates that co-occurrence and rejects single-drainage artefacts (a single knickpoint train on one trunk). Credit is bought in the champion's complement (>= 4 px = 400 m from every incumbent dot) where the metric taxes nothing already covered, and the mass ladder is stopped at the measured bar rather than at a chosen number.",
+  "named_non_fault_mimics": [
+    "erosional/depositional lineaments and anthropogenic edges (reduced by averaging independent ranks, requiring branch independence, and the >= 200 m catalogue buffer)",
+    "lithologic contacts and alluvial-fan constructional surfaces (reduced by the ephemeral-wash and ksn<10 basin-fill exclusion inherited from H71)",
+    "playa margins and pluvial shorelines (reduced by the raised-cell and basin-fill exclusion; not eliminated)"
+  ],
+  "declared_candidate_layers": {
+    "L-A_facet": "triangular-facet planarity of the footwall: rank of aspect_coherence x normalised slope_p90 (Bull & McFadden 1977; Wallace 1978)",
+    "L-B_front": "mountain-front / piedmont junction: rank of |grad(smooth(relief_local, 300 m))| (Bull & McFadden 1977; the H65-2 backlog item)",
+    "L-C_strike": "strike-coherent step corroboration across independent drainages: 8-azimuth, 2.1 km corridor agreement of |step| >= log 2 channel cells restricted to neighbours whose branch signature differs (the brief's own alignment rule)"
+  },
+  "selection_rule": "Layers are compared at a fixed 6,000-dot emission from the restricted pool (identical to the H71-A profile). The adopted layer is the one with the largest complement credit-per-dot on the SGMC off-catalogue instrument whose paired 20 km block-bootstrap 95% CI lower bound against the mass-matched random control (seed 7001) is > 0. If no candidate beats the seven-layer baseline field, the baseline is adopted and that null result is reported as 'no layer gain'.",
+  "mass_ladder": {
+    "masses": [6000, 12000, 24000, 36000, 48000],
+    "pool": "broad profile (footprint, not wash, > 2 px from the catalogue, > 4 px from every incumbent dot), 2.8 px non-maximum suppression, greedy by the adopted score",
+    "final_mass_rule": "largest mass in the ladder whose complement credit-per-dot CI lower bound (paired 20 km block bootstrap, seed 7001) is >= 0.10, i.e. approximately 1.8x the champion operating-point bar alpha*DTI = 0.2 x 0.2778 = 0.05556"
+  },
+  "artifact_rule": "the emitted artifact is the bitwise union of the sha256-pinned live-scored champion (37,654 dots) and the adopted complement; no dot of either component is moved or deleted. The union - not the complement alone - is the artifact because it keeps the champion's realised performance as a floor.",
+  "gates": {
+    "G1_population_matched": "PASS iff the final complement credit-per-dot exceeds the mean of the five mass-matched random controls drawn from the same pool AND the paired CI lower bound against random_7001 is > 0",
+    "G2_no_harm_registered_holdout": "PASS iff union - champion >= -0.002 pooled over the eight 'all'-mode folds of gems57-pooled-hide-v2 (22,641 withheld positive pixels)",
+    "G3_uniqueness": "PASS iff max |Spearman| <= 0.90 over every grid-matched local raster AND the one-to-one matched 3-px dot overlap <= 0.70 at the like-for-like (dot-field representation) reading AND <= 0.70 at the satisfiable reading. The literal reading - fraction of my dots within 3 px of ANY dot of a comparator, unmatched - is reported and shown to be unsatisfiable by construction for a comparator that covers > 99% of the footprint; that is a property of the comparator, measured here, not a waiver.",
+    "G4_portal_format": "PASS iff the shared writer's on-disk validator reports all_checks_passed (single band, float32, EPSG:32611, 3292x3730, transform equal to the official sample, every value finite in [0,1], no positive mass on the mapped catalogue, no positive mass outside the footprint)"
+  },
+  "verdict_rule": "PROMOTE-CANDIDATE iff G1 and G2 and G3 and G4 pass; otherwise NEGATIVE. A PROMOTE-CANDIDATE verdict means one new locally validated GeoTIFF is offered for the weekly slot with its evidence class stated; it is not a leaderboard score and not an organizer receipt.",
+  "budget": {
+    "experiments": ["E1 layer ablation at fixed mass", "E2 mass ladder + emission + holdout", "E3 validation suite (leakage canary, uniqueness, format)"],
+    "experiment_count": 3,
+    "slots_spent": 0,
+    "note": "Slot promotion stays the operator's separate decision, within the weekly cap shown on the submission page."
+  },
+  "evidence_classes": {
+    "HOLDOUT-DTI": "gems57-pooled-hide-v2, 22,641 withheld positives, 95% paired block-bootstrap CI",
+    "INSTRUMENT-DTI": "SGMC 1:750k faults > 300 m from the given catalogue (61,664 px), a public proxy population, never written as a score",
+    "PROJECTION": "the metric identity evaluated at assumed transfer credit; labelled PROJECTION wherever it appears and never written as a score"
+  },
+  "sources_to_verify": [
+    "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "https://github.com/drivendataorg/gems-prize-reference-solution",
+    "https://doi.org/10.1016/j.jsg.2012.07.009",
+    "https://doi.org/10.1002/esp.3302",
+    "https://doi.org/10.5194/esurf-7-211-2019",
+    "https://doi.org/10.1016/0037-0738(77)90034-7",
+    "https://www.usgs.gov/3d-elevation-program"
+  ]
+}

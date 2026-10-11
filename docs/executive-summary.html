@@ -4,42 +4,7 @@
 <header class="top"><div class="wrap"><h1>Submission status — research only</h1><nav><a href="index.html">Home</a> <a href="executive-summary.html" class=active>Submission status</a> <a href="research.html">Research</a> <a href="hypotheses.html">Deferred hypotheses</a> <a href="leaderboard.html">Leaderboard</a> <a href="sources.html">Sources</a> <a href="irregularities.html">Irregularities</a></nav>
 <div class="dlbtn"><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download H65-1 GeoTIFF — research only, DO NOT SUBMIT</a> <a class="btn alt" href="research/active-lane-review-2026-10-11.md">Read current review</a></div></div></header>
 <div class="values"><div class="wrap"><b>Maximize P(Win).</b> No slot is spent on an unvalidated candidate. <b>Own the Outcome.</b> Negative results and evidence limits are published clearly.</div></div>
-<main class="wrap">
-<div class="wrap" style="border:3px solid #b42318;background:#fffafa;padding:12px 16px;margin:8px auto">
-<h2 style="margin:0 0 6px">&#9940; Additional research artifacts (session <code>arena/161d8066-60gemsdoe</code>, 2026-10-11) &mdash; DOWNLOAD for research: YES &middot; SUBMIT: <b>NO — DO NOT SUBMIT</b></h2>
-<p style="margin:4px 0">These are <b>research artifacts</b> from the complementary-cover line of work, added on top of the governing STOP. They are
-<b>not</b> cleared to submit: the channel-steepness lane STOP in <code>registry/current_site_status.json</code> still governs, and the literal
-70-raster uniqueness rule fails for <b>every</b> artifact in this project — including the already-scored champion and main's H65-1/H66-1/H68-1 —
-because two lattice comparators lie within 3&nbsp;px of 99.87&nbsp;% of the footprint (measured; see
-<a href="../evidence/h71_artifact_comparison.json">evidence/h71_artifact_comparison.json</a>). No dense-raster exception is claimed.</p>
-<table>
-<tr><th>artifact</th><th>download (research only)</th><th>measured evidence</th></tr>
-<tr><td><b>H72 union</b><br><code>gems60-h72-union-champ-convcomp-43654-&hellip;</code><br><span style="color:#5b7183">43,654 dots = champion + 6,000 complement</span></td>
-<td><a class=btn href="downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif" download>&#11015; .tif (spec-literal)</a>
-<a class="btn alt" href="downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif" download>&#11015; .tif (zeros outside)</a>
-<a href="downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros-runcard.json">run card</a></td>
-<td>Population-matched instrument (62,226 state-map fault pixels &gt;300 m off the catalogue): added mass <b>0.4018 credit/dot</b> vs
-break-even 0.0556; union &minus; champion paired <b>+0.03799 [+0.03379, +0.04208]</b>. Registered holdout (8-cell protocol): &Delta; &minus;0.000288.
-Literal uniqueness 1.0000 vs the lattice &rarr; <b>not cleared</b>.</td></tr>
-<tr><td><b>H71-A probe</b> (6,000 dots)<br><b>H71-B field</b> (12,000 dots)</td>
-<td><a class=btn href="downloads/gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif" download>&#11015; A .tif</a>
-<a class=btn href="downloads/gems60-h71b-convcomp-12000-20261011T184819Z-zeros.tif" download>&#11015; B .tif</a>
-<a href="../evidence/h71_artifact_comparison.json">comparison</a></td>
-<td>H71-B is the strongest field measured on the population-matched instrument (<b>0.13265 DTI, 0.5864 credit/dot</b> vs champion 0.09463/0.1456,
-H68-1 0.06418/0.0933); H71-A is its uniqueness-cleaner 6,000-dot subset. Both fail the literal uniqueness rule.</td></tr>
-<tr><td><b>H69-A / H69-B identification pair</b></td>
-<td><a class=btn href="downloads/gems60-h69a-champ-half-20261011T182938Z-zeros.tif" download>&#11015; A .tif</a>
-<a class=btn href="downloads/gems60-h69b-champ-nulladd-2000px-20261011T182938Z-zeros.tif" download>&#11015; B .tif</a>
-<a href="../evidence/h69_probe_build.json">build record</a></td>
-<td>Two uploads plus the 0.2778 anchor identify <code>T</code>, <code>K</code>, <code>F</code> exactly (<code>scripts/h69_recovery.py</code>).
-Diagnostics, not candidates.</td></tr>
-</table>
-<p style="margin:6px 0 0">Reasoning, ranked hypotheses and the governance question:
-<a href="research/why-02778-and-what-beats-it-2026-10-11.md">why the champion scored 0.2778, and what can beat it</a> &middot;
-machine-readable status: <a href="../registry/artifact_status_2026-10-11.json">registry/artifact_status_2026-10-11.json</a>.</p>
-</div>
-
-<div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
+<main class="wrap"><div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
 <p><b>Governing STOP record:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
 <strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast +0.0326,
 95% CI [-0.0144, +0.0790] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
@@ -65,6 +30,7 @@ The earlier c7653 run also stopped. Later H66/H67/H68 artifacts do not lift this
 <li>Download the selected <code>.tif</code> from its own run-card link (or a ZIP containing exactly one TIFF). Verify its SHA-256 and use the shared writer/validator: one <code>float32</code> band, exact sample CRS/shape/transform, no NaN/Inf anywhere, every value in [0,1], no nodata tag.</li>
 <li>On the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/">DrivenData submissions page</a>, sign in with your own account, choose <em>New submission</em>, choose that exact file, and paste the run-card's unique name and ≤140-character note into the available fields. Do not upload a research-only artifact to test the portal.</li>
 <li>Submit only after the selector approves the slot; preserve the organizer receipt, score and file hash together. Until then, a local PASS says only that the TIFF passes <em>local</em> format checks.</li></ol>
+<h2>Post-STOP research artifacts — none of them is cleared to submit</h2><ul><li><b>GEMS60-H72</b> — G1 population-matched: added mass 0.4018 credit/dot (break-even 0.0556); union - champion paired +0.03799 DTI [+0.03379, +0.04208]. G2 registered holdout (8-cell protocol): -0.000288. Literal uniqueness 1.0000 vs the lattice - fails, as it does for every artifact in the project. · <a href="downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif" download>download .tif (research only)</a></li><li><b>GEMS60-H71-A</b> — SGMC-off credit/dot 0.4018 vs 0.0336 mass-matched random; satisfiable-reading overlap 0.5187; |rho| &lt;= 0.0147 over 102 rasters; literal 1.0000 vs the lattice · <a href="downloads/gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif" download>download .tif (research only)</a></li><li><b>GEMS60-H71-B</b> — strongest field measured: SGMC-off DTI 0.13265, 0.5864 credit/dot; literal uniqueness 0.9982 - fails · <a href="downloads/gems60-h71b-convcomp-12000-20261011T184819Z-zeros.tif" download>download .tif (research only)</a></li><li><b>GEMS60-H69-A/B</b> — two uploads plus the 0.2778 anchor identify T, K and F exactly (scripts/h69_recovery.py self-test exact) · <a href="downloads/gems60-h69a-champ-half-20261011T182938Z-zeros.tif" download>download .tif (research only)</a></li><li><b>GEMS60-H80</b> — restricted profile, mass 12,000 + champion 37,654 = 49,654 dots. VERDICT NEGATIVE: the parallel-run duplicate rule stops it (0.8864 of its dots within 3 px of the H72-union artifact, |rho| 0.9346 &gt; 0.90) — inherited from the incumbent, not from the new mass, whose 12,000 dots alone pass at 0.5299 / |rho| 0.6914 (IR-H80-DUP-01); G1 PASS (0.5864 credit/dot vs 0.1074 random), G2 PASS only by the registered -0.0005 DTI tolerance and below the champion (0.003844 vs 0.004385), G3 FAIL (literal 0.9984, which the incumbent 1.00000 and a redrawn random emission also fail), G4 not run (nothing is cleared to upload). · <a href="downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif" download>download .tif (research only)</a></li></ul><p>Every entry above is <b>research only</b>: download is fine, submission is not. The board with the download buttons is on the <a href="index.html">home page</a>.</p>
 <h2>Local format receipt is not an organizer receipt</h2>
 <p>The local validator reports single-band float32, EPSG:32611, 3292×3730 on the 100 m grid, values in [0,1],
 no NaN/Inf, and 40,000 positive cells; it lists no problems. That does <b>not</b> prove that DrivenData accepted

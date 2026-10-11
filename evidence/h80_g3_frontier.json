@@ -1,0 +1,79 @@
+{
+  "id": "H80-G3-FRONTIER",
+  "generated_utc": "2026-10-11T20:55:00Z",
+  "evidence_class": "MEASUREMENT",
+  "question": "Is the parallel-run protocol's uniqueness clause (<= 70% of emitted dots within 3 px of any earlier raster) jointly satisfiable with the same protocol's clause 1 (a dense, image-like field)? For which added mass M does the emitted union clear the like-for-like reading, and which comparators are non-decidable?",
+  "grain_px": 100.0,
+  "overlap_radius_px": 3.0,
+  "nms_radius_px": 2.8,
+  "provenance": {
+    "method": "ad-hoc invocation of scripts/build_h71_field.py (build_field + greedy_order), then 3-px overlap measured against the named comparators with scipy.ndimage.distance_transform_edt (literal reading: fraction of emitted dots inside the distance-3 neighbourhood of the comparator) and a greedy one-to-one cKDTree matching (matched reading: each comparator dot absorbs at most one emitted dot).",
+    "runner": "not the H80 runner; the numbers are clause diagnostics and carry no DTI/G2 reading",
+    "reproduce": "build the restricted field (BH.build_field(grid, 'restricted')), take the top M of BH.greedy_order(score, allowed, 200000, 2.8), union with the champion mask, measure."
+  },
+  "restricted_pool": {
+    "pixels": 265134,
+    "greedy_capacity_2p8px": 91370,
+    "note": "the pool, not the ladder, is the binding constraint on M: 91,370 dots are available under 2.8-px non-maximum suppression"
+  },
+  "champion_reference": {
+    "dots": 37654,
+    "literal_overlap_vs_calib_r13lattice_00904": 0.99915,
+    "note": "the already-scored champion itself is 99.9% inside the 3-px neighbourhood of the dense lattice comparator"
+  },
+  "ladder": [
+    {
+      "M_added": 12000,
+      "N_union": 49654,
+      "champion_share_of_union": 0.7583,
+      "literal_vs_gems60_h72_union": 0.8864,
+      "matched_vs_gems60_h72_union": 0.8792,
+      "literal_vs_r11_greedy_mp": 0.674,
+      "matched_vs_r11_greedy_mp": 0.5381,
+      "literal_vs_calib_r13lattice_00904": 0.9984,
+      "matched_vs_calib_r13lattice_00904": 0.7942,
+      "emitted": true
+    },
+    {
+      "M_added": 18000,
+      "N_union": 55654,
+      "champion_share_of_union": 0.6766,
+      "literal_vs_gems60_h72_union": 0.793,
+      "matched_vs_gems60_h72_union": 0.7844,
+      "literal_vs_r11_greedy_mp": 0.6014,
+      "matched_vs_r11_greedy_mp": 0.4801,
+      "literal_vs_calib_r13lattice_00904": 0.9983,
+      "matched_vs_calib_r13lattice_00904": 0.8057,
+      "emitted": false
+    },
+    {
+      "M_added": 24000,
+      "N_union": 61654,
+      "champion_share_of_union": 0.6107,
+      "literal_vs_gems60_h72_union": 0.7167,
+      "matched_vs_gems60_h72_union": 0.708,
+      "literal_vs_r11_greedy_mp": 0.5428,
+      "matched_vs_r11_greedy_mp": 0.4334,
+      "literal_vs_calib_r13lattice_00904": 0.9983,
+      "matched_vs_calib_r13lattice_00904": 0.8138,
+      "emitted": false
+    },
+    {
+      "M_added": 30000,
+      "N_union": 67654,
+      "champion_share_of_union": 0.5566,
+      "literal_vs_gems60_h72_union": 0.6535,
+      "matched_vs_gems60_h72_union": 0.6453,
+      "literal_vs_r11_greedy_mp": 0.4947,
+      "matched_vs_r11_greedy_mp": 0.395,
+      "literal_vs_calib_r13lattice_00904": 0.9982,
+      "matched_vs_calib_r13lattice_00904": 0.8172,
+      "emitted": false
+    }
+  ],
+  "reading": {
+    "like_for_like_clause": "against the one discriminating dot-field comparator (gems60-h72-union, itself a GEMS-60-family artifact), the 70% limit is crossed between M = 24,000 (0.7167) and M = 30,000 (0.6535), i.e. at a union of about 62,000-68,000 dots - five to six times the 12,000-dot mass the H80 eligibility ladder selected. The emitted M = 12,000 artifact is 0.8864 and fails.",
+    "universal_blockers": "calib_r13lattice_00904, r13_lattice_s5_00904, r11_greedy_mp and r14_union_tips10_lat6 are within 3 px of >= 70% of the footprint themselves (measured footprint fractions 0.9987 / 0.9987 / 0.7397 / 0.7620). For any emission covering most of the footprint the clause's own limit is already exceeded by the comparator, so the clause carries no discriminating information against them; a mass-matched random emission scores 0.9987 literal / 0.8746 matched against the lattice and 0.7011 / 0.6401 against r11, while the H72-union comparator gives a random emission 0.0402 / 0.0343."
+  },
+  "conclusion": "Clause 1 (dense field) and clause 3 read literally (including the lattice comparators) are jointly unsatisfiable: the champion alone is 0.99915 inside the lattice, so ANY emission containing the champion fails, and omitting the champion discards the only live-scored mass. Read like-for-like (the clause's own 70% limit applied to comparators that are themselves below it), clause 3 needs a union of at least about 64,000 dots - the emitted 49,654-dot restricted union fails at 0.8864. Because the G2 holdout reading deteriorates with this added mass (H80: -0.000541 at 12,000 versus H72's -0.000288 at 6,000), a like-for-like-compliant larger emission is not a path to a better score; it is a protocol experiment and would be experiment 4, outside the 3-experiment budget."
+}

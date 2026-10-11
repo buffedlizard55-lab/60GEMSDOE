@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-10-11T19:18:44Z",
+ "generated_utc": "2026-10-11T20:45:15Z",
  "sources": [
   {
    "id": "competition",
@@ -717,9 +717,152 @@
     "artifact": "none (first-test STOP precedes emission)",
     "run_card": "evidence/h70_runcard.json",
     "slot_spent": false
+   },
+   {
+    "session": "arena/3c52f2be-60gemsdoe",
+    "id": "H80-1",
+    "verdict": "NEGATIVE \u2014 two-profile convergent-cover field. E1 ablation adopted baseline7 (no layer gain: facet +0.0007, front +0.0003, strike -0.0078). Restricted profile emitted 12,000 dots + champion 37,654 = 49,654. G1 PASS, G2 PASS only by the registered -0.0005 tolerance (below champion: 0.003844 vs 0.004385), G3 FAIL: the parallel-run duplicate rule stops it \u2014 0.8864 of its dots are within 3 px of the H72-union artifact with |rho| 0.9346 > 0.90 (structural: the union contains the champion and its complement re-draws H71-A's pool). The only discriminating comparator fails at 0.8864; the literal clause fails for the incumbent champion (1.00000 vs the lattice) and for redrawn random emissions too, so clause 1 and the literal clause 3 are jointly unsatisfiable (IR-H80-PROFILE-01, IR-H80-G3-UNSAT-01). 0 slots spent; the governing H65-1 STOP stands.",
+    "artifact": "gems60-h80-convcomp-49654-20261011T202055Z-zeros",
+    "run_card": "evidence/h80_runcard.json",
+    "download": "docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif",
+    "slot_spent": false
    }
   ],
-  "post_review_note": "Four of the five post-STOP runs are negative and corroborate the STOP (including H70-1, preregistered and measured here; its paired-step statistic also missed the catalogue-withheld gate). H67-1 claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20. No submission slot has been spent by any of them."
+  "post_review_note": "Five of the six post-STOP runs are negative and corroborate the STOP (including H70-1 and H80-1, both preregistered and measured in this repository; H80-1 adds that a dense emission cannot clear the literal 70-raster uniqueness clause at all). H67-1 claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20. No submission slot has been spent by any of them.",
+  "post_review_artifacts_note": "These are research artifacts from the complementary-cover line of work, added on top of the governing STOP. They are not cleared to submit: the channel-steepness lane STOP still governs, and the literal 70-raster uniqueness rule fails for every artifact in this project \u2014 including the already-scored champion and the H65-1/H66-1/H68-1 artifacts \u2014 because two lattice comparators lie within 3 px of 99.87% of the footprint. The H80 round measured the clause frontier and showed that clause 1 and the literal clause 3 cannot both hold (evidence/h80_g3_frontier.json). No dense-raster exception is claimed.",
+  "post_review_artifacts": [
+   {
+    "id": "GEMS60-H72",
+    "short_name": "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
+    "detail": "G1 population-matched: added mass 0.4018 credit/dot (break-even 0.0556); union - champion paired +0.03799 DTI [+0.03379, +0.04208]. G2 registered holdout (8-cell protocol): -0.000288. Literal uniqueness 1.0000 vs the lattice - fails, as it does for every artifact in the project.",
+    "dots": 43654,
+    "submit": "NO (DO NOT SUBMIT)",
+    "files": [
+     {
+      "file": "docs/downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
+      "sha256": "c8a76393aa543462a4fc58c986055e267ed0ea3da135fe1378a1235cf0096d5e",
+      "variant": "NaN outside the footprint; null mask pixel-identical to data/official/sample_submission.tif"
+     },
+     {
+      "file": "docs/downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif",
+      "sha256": "79e3fafab1adf16ec5d1b0549dcf4bcdd4e7b40abc6aa5c1791334939ae4581d",
+      "variant": "zeros outside the footprint"
+     }
+    ],
+    "links": [
+     {
+      "label": "run card",
+      "href": "evidence/h72_runcard.json"
+     },
+     {
+      "label": "comparison",
+      "href": "evidence/h71_artifact_comparison.json"
+     }
+    ]
+   },
+   {
+    "id": "GEMS60-H71-A",
+    "short_name": "gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
+    "detail": "SGMC-off credit/dot 0.4018 vs 0.0336 mass-matched random; satisfiable-reading overlap 0.5187; |rho| <= 0.0147 over 102 rasters; literal 1.0000 vs the lattice",
+    "dots": 6000,
+    "submit": "NO (DO NOT SUBMIT)",
+    "files": [
+     {
+      "file": "docs/downloads/gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
+      "sha256": "5c22c464a40e15bae84463f921a6c704d29b45c67dd334c08202320d7b7e68e0",
+      "variant": null
+     }
+    ],
+    "links": [
+     {
+      "label": "run card",
+      "href": "evidence/h71a_runcard.json"
+     }
+    ]
+   },
+   {
+    "id": "GEMS60-H71-B",
+    "short_name": "gems60-h71b-convcomp-12000-20261011T184819Z-zeros.tif",
+    "detail": "strongest field measured: SGMC-off DTI 0.13265, 0.5864 credit/dot; literal uniqueness 0.9982 - fails",
+    "dots": 12000,
+    "submit": "NO (DO NOT SUBMIT)",
+    "files": [
+     {
+      "file": "docs/downloads/gems60-h71b-convcomp-12000-20261011T184819Z-zeros.tif",
+      "sha256": "4f2fbeed356fed1ce7721f8ae3ed5a78d880acb525159b8964864831ec5058c8",
+      "variant": null
+     }
+    ],
+    "links": [
+     {
+      "label": "run card",
+      "href": "evidence/h71b_runcard.json"
+     }
+    ]
+   },
+   {
+    "id": "GEMS60-H69-A/B",
+    "short_name": "gems60-h69a-champ-half-20261011T182938Z-zeros.tif",
+    "detail": "two uploads plus the 0.2778 anchor identify T, K and F exactly (scripts/h69_recovery.py self-test exact)",
+    "dots": null,
+    "submit": "NO (DO NOT SUBMIT) - diagnostics only",
+    "files": [
+     {
+      "file": "docs/downloads/gems60-h69a-champ-half-20261011T182938Z-zeros.tif",
+      "sha256": "14724cf39af7a08e5be2aa7df2113c23d85cbbb4e0bbfd4725bfeede147d5076",
+      "variant": null
+     },
+     {
+      "file": "docs/downloads/gems60-h69b-champ-nulladd-2000px-20261011T182938Z-zeros.tif",
+      "sha256": "9cd5197014f64bbc5e9fce194929b882c65a8179dbbade8e1de1aba39549f426",
+      "variant": null
+     }
+    ],
+    "links": [
+     {
+      "label": "build record",
+      "href": "evidence/h69_probe_build.json"
+     },
+     {
+      "label": "champion algebra",
+      "href": "docs/research/why-02778-and-what-beats-it-2026-10-11.md"
+     }
+    ]
+   },
+   {
+    "id": "GEMS60-H80",
+    "short_name": "gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif",
+    "detail": "restricted profile, mass 12,000 + champion 37,654 = 49,654 dots. VERDICT NEGATIVE: the parallel-run duplicate rule stops it (0.8864 of its dots within 3 px of the H72-union artifact, |rho| 0.9346 > 0.90) \u2014 inherited from the incumbent, not from the new mass, whose 12,000 dots alone pass at 0.5299 / |rho| 0.6914 (IR-H80-DUP-01); G1 PASS (0.5864 credit/dot vs 0.1074 random), G2 PASS only by the registered -0.0005 DTI tolerance and below the champion (0.003844 vs 0.004385), G3 FAIL (literal 0.9984, which the incumbent 1.00000 and a redrawn random emission also fail), G4 not run (nothing is cleared to upload).",
+    "dots": 49654,
+    "submit": "NO (DO NOT SUBMIT)",
+    "files": [
+     {
+      "file": "docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif",
+      "sha256": "ad25643354857a1071f3d5ce7de8da711f22e1ed2096e7acd8d14f560f5ad459",
+      "variant": "zeros outside the footprint (shared writer output)"
+     },
+     {
+      "file": "docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.zip",
+      "sha256": "9520df97c2588fe958e6029f696a00eddcfeaaa46d43a7b02c70c86bafa9fec3",
+      "variant": "ZIP with the single TIFF (sha256 ad256433\u2026)"
+     }
+    ],
+    "links": [
+     {
+      "label": "run card",
+      "href": "evidence/h80_runcard.json"
+     },
+     {
+      "label": "G3 frontier",
+      "href": "evidence/h80_g3_frontier.json"
+     },
+     {
+      "label": "full analysis",
+      "href": "docs/research/h80-complementary-cover.md"
+     }
+    ]
+   }
+  ]
  },
  "current_lane_decision": {
   "verdict": "negative",
@@ -3081,6 +3224,36 @@
    "severity": "low",
    "statement": "Session brief's quoted leaderboard targets (0.3195, later 0.3774) are stale relative to the repository's verified snapshot (public top xiaofanhu 0.4133 on 2026-10-11, 50 rows). The group's own best remains owner-reported 0.2778 (the participant row at rank 23 shows the same value; byte attribution of files to that row is not possible from public data).",
    "mitigation": "All H70 planning used 0.4133 as the public target; the score-gap algebra in docs/research/h70-paired-knickpoint-trains.md is computed against it."
+  },
+  {
+   "id": "IR-H80-TOOL-04",
+   "severity": "medium",
+   "statement": "scripts/build_h71_field.py::uniqueness_scan could not be reused as published. Reading its output: (a) the per-raster ``source`` label crashed with ValueError for any repository-relative ``extra_dirs`` entry (``f.parent.relative_to(ROOT)`` needs an absolute path), so an ad-hoc re-scan of the H80 artifact died and no uniqueness number existed for it; (b) ``d_mine`` (a property of the emitted field, not of the comparator) was recomputed inside the per-raster loop together with a full float64 rankdata over the whole 12.3 MP grid per raster, making a 120-raster scan needlessly slow and memory-hungry. Neither defect changes any published H71/H72 number.",
+   "mitigation": "Fixed in place: the label is now computed with a candidate-path fallback, ``d_mine`` is computed once, ranks use float32, and the loop frees each comparator. Re-scan of the H80 artifact then completed in 219 s with a 1.04 GB peak, and the runner itself now frees its feature stacks before the scan (the H80 run that regressed to 415 s versus 275 s is the same defect seen from the runner side)."
+  },
+  {
+   "id": "IR-H80-PROFILE-01",
+   "severity": "medium",
+   "statement": "The operator's clause-1 rule ('no comparison to a previous submission; the emission must carry real information') and clause 3 ('no more than 70% of dots within 3 px of any earlier raster') cannot both hold for any emission in this family. Measured: the already-scored champion is 0.99915 inside the 3-px neighbourhood of calib_r13lattice_00904.tif, so ANY union containing the champion fails the literal clause; and a mass-matched random emission scores 0.9987 literal / 0.8746 matched against that raster and 0.7011/0.6401 against r11_greedy_mp.tif, i.e. overlap with those four comparators carries no lane information.",
+   "mitigation": "The clause is read like-for-like (limited to comparators that are themselves below the 70% limit), the four non-decidable comparators are listed explicitly in the run card and in evidence/h80_g3_frontier.json, and no dense-raster exception is claimed. The like-for-like reading still fails for the emitted 49,654-dot union at 0.8864."
+  },
+  {
+   "id": "IR-H80-G3-UNSAT-01",
+   "severity": "medium",
+   "statement": "Measured clause frontier: even under the like-for-like reading, the 70% limit against the one discriminating comparator (gems60-h72-union-champ-convcomp-43654) is crossed only between M = 24,000 (0.7167) and M = 30,000 (0.6535) added dots, i.e. a union of about 62,000-68,000 dots. The H80 eligibility ladder selected 12,000 dots (0.8864) because it was bounded at 12,000, not because the pool is empty - the restricted pool holds 91,370 dots under 2.8-px non-maximum suppression. A like-for-like-compliant emission is therefore mechanically reachable, but not by the emitted artifact, and the registered holdout gets worse with this added mass (H72 -0.000288 at 6,000; H80 -0.000541 at 12,000), so compliance and score are not aligned.",
+   "mitigation": "Recorded as the H80 negative result; a larger-mass compliant variant is written up as experiment 4 in docs/research/h80-complementary-cover.md and is explicitly NOT run, because it would exceed the preregistered 3-experiment budget and the available evidence says it would not improve the score."
+  },
+  {
+   "id": "IR-H80-SITE-01",
+   "severity": "low",
+   "statement": "docs/index.html carried a hand-written H71/H72 artifact board from session arena/161d8066-60gemsdoe. scripts/build_current_review_site.py regenerates that page from registry state, so any later render would have deleted the board silently - the same class of defect as IR-66-SITE-01, which build_site.preserve_status_blocks fixed only for marker-delimited blocks; under a STOP the same helper deliberately strips marker blocks instead of preserving them.",
+   "mitigation": "The three existing boards plus H80 were migrated into registry/current_site_status.json -> post_review_artifacts, the renderer now renders that key, and the page was re-rendered, so the boards are reproducible from data and every board keeps its DO NOT SUBMIT wording. (The H80 round is also published as a standalone page, docs/h80-report.html.)"
+  },
+  {
+   "id": "IR-H80-DUP-01",
+   "severity": "high",
+   "statement": "The parallel-run duplicate rule ('|rho| > 0.90 or > 70 % of dots within 3 px of one registry raster -> log as duplicate and stop') and any union strategy in this project are mutually exclusive, because the live-scored incumbent is itself the most duplicative raster in the corpus. Measured under the shared tool: the 37,654-dot champion is 1.0000 literal within 3 px of six registry/download rasters (gems25-dotted-h19-5-d2-8 nan+zeros 44,090 dots; gems32-lazygreedy-maxcov-44090; gems32-probe-S1-ANCHOR named 'identical-to-live-02600'; S2-SCALE; S3-NULLADD) and byte-identical (|rho| = 1.0000) to registry/rasters/dotted_b2_prune_02778.tif. Consequently the H80 union fails the rule at 0.8864 / |rho| 0.9346 while its 12,000-dot complement alone passes it (0.5299 decidable, |rho| 0.6914) - the failure is inherited from the incumbent, not produced by the new mass.",
+   "mitigation": "Recorded for the owner as a decision, not waived: (i) keep the incumbent and accept that any union inherits a duplicate-rule failure; (ii) emit the complement alone (passes the rule, but its projection at the metric bar is far below the incumbent's owner-reported 0.2778); or (iii) treat the duplicate rule as satisfied by the EMITTED RASTER being byte-unique while its dot support is inherited. H80 spent no slot and does not choose; evidence/h80_artifact_comparison.json holds every reading."
   }
  ]
 }
