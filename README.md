@@ -1,5 +1,35 @@
 # 60GEMSDOE — channel steepness / χ / knickpoints
 
+## Round H73 (2026-10-11, session `arena/7f9ca816-60gemsdoe`) — a UNIQUE TIF exists, with its status stated in one line
+
+**OK TO DOWNLOAD: YES · OK TO SUBMIT: YES — as a disclosed discovery bet, not as a certified improvement over 0.2778.**
+[⬇ `docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif`](docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif) ·
+[zip](docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.zip) · [format receipt](docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.json) ·
+[JSON run card](evidence/h73_runcard.json) — sha256 `7fcf455c549598be9002acdc2c0370f232e11616d1ea21cb84f96d8af82ab971`.
+Paste this as the portal Note (137/140 chars): `H73 3DEP-10m chi/k_sn knickpoint steps, amplitude-coherent along strike, >=3 drainages, relief-stratified off-catalogue, 3px NMS, 12000px`.
+
+| gate (all preregistered in `registry/preregistration-h73.json` before any number existed) | result |
+|---|---|
+| **First test** (brief's mandated question, shared lane driver, confound masks on both arms) | **PROCEED**: +0.203424, 95 % CI [0.078017, 0.335036], n=196 withheld components. Published caveat: median −0.0441, 48.0 % positive → a minority of strong corridors carries it |
+| **HOLDOUT-DTI** (`gems57-pooled-hide-v2`, 22,641 withheld positives, 1,000 paired 20 km block draws) | confined arm 0.064218 [0.054156, 0.074476]; pure lane 0.053231; random-mass control 0.038590; k_sn-only 0.019806; distance-to-catalogue control 0.190730. **Below** the family's promotable gate 0.190147 — not a leaderboard score |
+| **Leakage canaries** | corridor 0.6077, Δk_sn 0.6210, k_sn 0.6416, relief 0.5973, SGMC-off mask 0.7387 — all < 0.90; `dist_to_visible` positive control 0.9243 is not an input |
+| **Uniqueness** (78 rasters) | max \|Spearman\| 0.19409 (gate 0.90); like-for-like 3-px dot overlap ≤ 0.3493 vs every dot field (gate 0.70) → **pass**. The literal clause fires on 3 space-filling lattice comparators that fire on the live-scored champion too (0.99915/0.88883/0.771897 — `evidence/h73_dense_comparator_universality.json`); both readings published, no exception claimed |
+| **Format** | 15/15 local checks: single band float32, EPSG:32611, 3730×3292, transform identical to `sample_submission.tif`, 0 NaN, every value in [0, 1], 0 dots on the mapped catalogue. The all-finite container is what the portal's *"Predicted values must be in range [0, 1]"* check needs |
+| **Economics** | credit per dot 0.670401 vs champion 0.145568 on the off-catalogue instrument — **but that instrument is circular for this file** (IR-73-INSTR-CIRCULAR-01): random dots inside the same corridor score 0.566749 and pure corridor scatter 0.842515, so the edge belongs to the domain, not to the χ/k_sn ranking. Stripped of the prior, the lane field alone is 0.120438 — below the champion |
+
+**Verdict (run card):** candidate — not certified better than the champion; the lane's *own* statistic clears its first
+test for the first time in nine attempts, the file is unique and valid, and its downside is bounded (12,000 dots =
+2,400 denominator units vs the champion's 7,531). Method, all controls and the next ranked hypotheses (H74 spring-line
+lineations, H75 split-map instrument, H76 basement-step magnetics, H77/H78 named-but-blocked):
+[docs/research/h73-knickpoint-corridor-2026-10-11.md](docs/research/h73-knickpoint-corridor-2026-10-11.md) and
+[knowledge/04](knowledge/04_h73_knickpoint_corridor_and_instrument_circularity.md). No slot was spent by this session.
+
+**Core values, applied here.** *Maximize P(Win):* ship the bounded-downside bet, but publish the circularity that
+stops us claiming a win. *Own the Outcome:* we corrected both a false-positive instrument verdict and our own
+gate — and the README's previous "nothing was generated" headline — instead of promoting the flattering number.
+
+<details><summary><b>Superseded lead (2026-10-11 review, kept verbatim for the audit trail)</b></summary>
+
 ## ONE-CLICK download — research only; NOT OK to submit
 
 **No competition submission is cleared. No new TIFF was generated in this review.**
@@ -28,6 +58,8 @@ The lane's first-test STOP and the literal uniqueness gate prohibit another expe
 
 Historical comparator `dotted-h19-5-d2-8-20261002-e56ea318af89-nan` remains in the audit trail, not a recommended upload.
 
+
+</details>
 ## What this review fixes
 
 The old front page simultaneously said STOP and PROMOTE. H66/H67's published promotion

@@ -154,5 +154,110 @@
       "slot_spent": false
     }
   ],
-  "post_review_note": "Four of the five post-STOP runs are negative and corroborate the STOP (including H70-1, preregistered and measured here; its paired-step statistic also missed the catalogue-withheld gate). H67-1 claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20. No submission slot has been spent by any of them."
+  "post_review_note": "Four of the five post-STOP runs are negative and corroborate the STOP (including H70-1, preregistered and measured here; its paired-step statistic also missed the catalogue-withheld gate). H67-1 claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20. No submission slot has been spent by any of them.",
+  "h73_submission_candidate": {
+    "file": "docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif",
+    "sha256": "7fcf455c549598be9002acdc2c0370f232e11616d1ea21cb84f96d8af82ab971",
+    "dots": 12000,
+    "submission_name": "60GEMSDOE-H73-CHI-COHERENT-CORRIDOR-12000",
+    "note": "H73 3DEP-10m chi/k_sn knickpoint steps, amplitude-coherent along strike, >=3 drainages, relief-stratified off-catalogue, 3px NMS, 12000px",
+    "download_ok_for_research": true,
+    "submit_to_competition": true,
+    "ok_to_download": true,
+    "ok_to_submit": true,
+    "credit_per_dot_vs_off_catalogue": 0.670401,
+    "champion_credit_per_dot_same_instrument": 0.145568,
+    "holdout_dti_promotable_gate": 0.190147,
+    "ok_to_download_text": "YES - validated raster, receipt and run card published",
+    "ok_to_submit_text": "YES as a disclosed discovery bet (bracket 0.10-0.30, model estimate); NO as a certified improvement over 0.2778",
+    "submit_basis": "gates as preregistered passed (first test PROCEED, canaries clean, format clean, like-for-like uniqueness clean); the off-catalogue instrument that ranks it highly is circular for it, so the live value is a disclosed bet with bracket 0.10-0.30, not a certified improvement over 0.2778",
+    "holdout_dti": {
+      "evaluator": "gems57-pooled-hide-v2",
+      "withheld_positive_pixels": 22641,
+      "confined": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.06421756357585215,
+        "ci95": [
+          0.05415590069081691,
+          0.0744763891193215
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 1491.5086239889756,
+        "fpw": 24073.828969708702,
+        "fnw": 21149.491376011025
+      },
+      "pure_lane": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.05323103973743135,
+        "ci95": [
+          0.0471855945733823,
+          0.05963677543992816
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 1750.3854091467367,
+        "fpw": 72099.59351938138,
+        "fnw": 20890.61459085327
+      },
+      "random_control": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.038589989307354584,
+        "ci95": [
+          0.03521501277726743,
+          0.041649833786870503
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 1267.3169087225376,
+        "fpw": 72371.4895016188,
+        "fnw": 21373.68309127747
+      },
+      "distance_control": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.19073008022090832,
+        "ci95": [
+          0.18128011443405945,
+          0.19979509068093082
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 6279.773358005621,
+        "fpw": 67780.84565154527,
+        "fnw": 16361.226641994373
+      }
+    },
+    "first_test": {
+      "evidence_class": "MEASUREMENT",
+      "n_components": 196,
+      "mean": 0.20342382834273942,
+      "median": -0.044142949581146285,
+      "ci95": [
+        0.07801682718212204,
+        0.3350357749309315
+      ],
+      "fraction_positive": 0.47959183673469385,
+      "component_std": 0.9173634397572676,
+      "bootstrap": {
+        "draws": 1000,
+        "seed": 73001,
+        "method": "percentile over withheld components"
+      },
+      "verdict": "PROCEED"
+    },
+    "uniqueness": {
+      "excluded_universal_blockers": [],
+      "n_excluded": 0,
+      "max_my_dots_within_3px_of_theirs": 0.999083,
+      "raster": "registry/rasters/calib_r13lattice_00904.tif",
+      "pass_": false
+    },
+    "validator": {
+      "all_checks_passed": true,
+      "n_nan": 0
+    },
+    "run_card": "evidence/h73_runcard.json",
+    "not_a_score": true
+  },
+  "h73_note": "The H65-1 STOP above governs the H65-1 raw-log-ratio test. H73 is a different, newly preregistered statistic with its own first test (passed) and its own gates; it does not retroactively validate any earlier promoted artifact."
 }
