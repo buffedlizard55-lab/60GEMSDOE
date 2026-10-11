@@ -87,6 +87,12 @@ def main() -> int:
                     help="audit the continuous lane SURFACE (rank field before dot placement) "
                          "instead of the shipped dots, as the parallel-run protocol requires "
                          "both to be checked")
+    # H66-1 (2026-10-11, session arena/b219bfe1): mirror the production-surface
+    # flags so the audited surface is byte-identical to what will be emitted.
+    ap.add_argument("--include-ephemeral", action="store_true",
+                    help="surface rebuild: add the ephemeral-channel mask to the confound exclusion")
+    ap.add_argument("--litho-arm", choices=("none", "T", "L"), default="none",
+                    help="surface rebuild: H66-1 preregistered basement-step arm")
     a = ap.parse_args()
     t0 = time.time()
     grid = G57.load_grid()
@@ -96,7 +102,7 @@ def main() -> int:
         sys.path.insert(0, str(ROOT / "scripts"))
         from gems60 import geomorph as gm
         from gems60 import lane as L
-        from run_lane60 import confound_masks, load
+        from run_lane60 import confound_masks, load, litho_step_mask
         import os
         cache = ROOT / ".cache" / os.environ.get("GEMS60_FEATURE_CACHE", "features60")
         step = np.load(cache / "step.npy")
@@ -106,7 +112,12 @@ def main() -> int:
         else:
             branch = gm.branch_signature(np.load(cache / "dircode.npy"), fp,
                                          k=L.CORRIDOR_HALF_LEN_PX - 1).astype(np.int64)
-        exclude, _conf = confound_masks(step, channel)
+        acc = np.load(cache / "acc.npy").astype(np.float64)
+        exclude, _conf = confound_masks(step, channel,
+                                        acc=acc if a.include_ephemeral else None)
+        if a.litho_arm != "none":
+            litho, _thr = litho_step_mask(fp)
+            channel = channel & (litho if a.litho_arm == "L" else ~litho)
         z, cand, cand_diag = L.prepare_candidates(step, channel, exclude)
         res = L.surface_from_candidates(z, cand, branch, grid.catalogue, dict(cand_diag))
         mine = np.clip(np.nan_to_num(res.p, nan=0.0), 0.0, 1.0).astype(np.float32)

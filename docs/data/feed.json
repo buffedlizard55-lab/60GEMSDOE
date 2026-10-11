@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-10-11T11:28:40Z",
+ "generated_utc": "2026-10-11T16:51:17Z",
  "sources": [
   {
    "id": "competition",
@@ -954,7 +954,7 @@
    "expected_dti": "RANK 5 by cost-adjusted expectation: unknown ceiling, possibly high, but implementation is high-cost and the data is unreachable from this sandbox",
    "cost": "high: ~716 tiles; requires an egress-capable runner",
    "data_status": "SOURCE NAMED + PINS EXIST, OBTAINABILITY PARTIAL: https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif (USGS 3DEP, public domain; 716 URLs + sha256 pins upstream data/dem_links.json; egress probe evidence/probe-egress-receipt.json shows HTTP 200 from a GitHub Actions runner, but THIS sandbox cannot reach the host - measured, see docs/irregularities.html)",
-   "status": "EXECUTED 2026-10-11 as H65-1 (session arena/96ecd67e): NEGATIVE. Native 3DEP 10 m on 18 pinned 1x1-degree tiles (not ~716: that count is for 1 m tiles); first test INCONCLUSIVE +0.0326 [-0.0144, +0.0790] -> STOP; HOLDOUT-DTI 0.01158 [0.0084, 0.0146] vs random 0.03908. evidence/h65_runcard.json"
+   "status": "EXECUTED 2026-10-11 as H65-1 (session arena/96ecd67e): NEGATIVE. Native 3DEP 10 m on 18 pinned 1x1-degree tiles (not ~716: that count is for 1 m tiles); first test INCONCLUSIVE +0.0326 [-0.0144, +0.0790] -> STOP; HOLDOUT-DTI 0.01158 [0.0084, 0.0146] vs random 0.03908. evidence/h65_runcard.json  |  2026-10-11 H66-1 (session arena/b219bfe1): the masked variant (brief's four named confounds masked in the statistic) is ALSO NEGATIVE - the lane is exhausted at both resolutions and with/without confound masking."
   },
   {
    "id": "H65-1",
@@ -971,7 +971,7 @@
    "expected_dti": "MEASURED: HOLDOUT-DTI 0.01158 [0.0084, 0.0146] (gems57-pooled-hide-v2, 22,641 withheld positives) < random 0.03908",
    "cost": "done (Actions run 38113556275, ~4 min wall)",
    "data_status": "obtained and pinned",
-   "status": "NEGATIVE: first test INCONCLUSIVE -> STOP; resolution was NOT the cause (E1 at 100 m +0.1089 vs 10 m +0.0326)"
+   "status": "NEGATIVE: first test INCONCLUSIVE -> STOP; resolution was NOT the cause (E1 at 100 m +0.1089 vs 10 m +0.0326)  |  Superseded as the lane's newest artifact by H66-1 (masked variant, also NEGATIVE); retained as research artifact."
   },
   {
    "id": "H65-2",
@@ -1042,6 +1042,31 @@
    "cost": "high",
    "data_status": "USGS 3DEP 10 m - verified obtainable",
    "status": "PROPOSED"
+  },
+  {
+   "id": "H66-1",
+   "rank": 36,
+   "slate": "H66 (2026-10-11, session arena/b219bfe1) - masked variant of the 10 m lane",
+   "slate_rank": 0,
+   "title": "Masked 10 m chi/ksn strike-concordant knickpoints (H62-5 with the brief's four named confounds masked in the statistic)",
+   "layers": [
+    "H65-1 sha-pinned USGS 3DEP 10 m reduction (.cache/features65)",
+    "confound layers: playa (cache), basin fill (depth_to_base > p90), conductive surface (cond > p95), ephemeral (A < 1e6 m2) from data/official/training_features.tif bands 15/17 + channel mask"
+   ],
+   "signature": "same H65-1 statistic (blockwise z-scored dz/dchi two-segment step, >=3 independent drainages in strike corridors), but candidates crossing masked confound cells are excluded from the statistic itself, not just from the emitted dots; preregistered arms T (crossing on continuous basement) and L (crossing on a depth-to-basement step)",
+   "why_off_catalogue": "tests whether H65-1's negative was confound inflation; if masking changes nothing, the knickpoint method is exhausted",
+   "differs_from_repo": "first run with the brief's named confounds masked inside the statistic (H65-1 masked none of them in the statistic)",
+   "expected_dti": "MEASURED: HOLDOUT-DTI 0.00960 [0.00654, 0.01307] (gems57-pooled-hide-v2, 22,641 withheld positives) < random 0.03908; masked E1 +0.0404 [-0.0029, +0.0871] INCONCLUSIVE -> STOP",
+   "cost": "done (this session, ~2 min wall on cached features)",
+   "status": "EXECUTED 2026-10-11 (session arena/b219bfe1): NEGATIVE. Masked first test INCONCLUSIVE (+0.0404, 239 comps) -> preregistered stop; pooled HOLDOUT-DTI 0.00960 below mass-matched random 0.03908 (paired -0.02948, CI excludes 0). 6th consecutive negative of the lane; the method is fully exhausted. evidence/h66_runcard.json",
+   "evidence": [
+    "evidence/h66_e1_first_test.json",
+    "evidence/h66_holdout.json",
+    "evidence/h66_uniqueness_surface.json",
+    "evidence/h66_uniqueness_dots.json",
+    "evidence/h66_overlap_control_dots.json",
+    "evidence/h66_runcard.json"
+   ]
   }
  ],
  "claims": [
@@ -1084,29 +1109,29 @@
   }
  ],
  "submission": {
-  "name": "60GEMSDOE-H61A-XCRD-37654px",
-  "note": "H61-A XCRD: 30-channel off-catalogue detector; 37,654 dots >=350 m from catalogue; unique vs 35 rasters; UNSCORED, projection only.",
-  "status_line": "PRIMARY = H61-A XCRD (2026-10-11), the session's UNIQUE artifact: max |Spearman| 0.024 against all 35 registry rasters, worst within-3-px share 46 % (brief's stop rule 70 %). DOWNLOAD: YES. SLOT DECISION: NOT CLEARED - no local instrument can certify it beats the owner-reported 0.2778 (the repository's catalogue hide-and-recover gate scores every off-catalogue emission exactly 0 by construction: evidence/e6_blocked_gate.json), so it is an explicit bounded-downside bet (only the best submission counts). Screens: 2.46 vs the champion's 1.62 at equal 37,654-dot mass on the one mass-normalised screen that reproduces the ladder (Spearman +0.94, evidence/e2b_xcrd_screen.json); independent LiDAR scarp screen NEGATIVE (0.48x), stated on purpose. The parallel 2026-10-11b GEMS61 lane artifact keeps its own NEGATIVE verdict and is retained alongside.",
+  "name": "gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd",
+  "note": "H66-1 10m chi/ksn knickpoints, confound masks (ephemeral/playa/basin-fill/conductive), 40k dots; E1 INCONCLUSIVE -> NEGATIVE, research only",
+  "status_line": "PRIMARY = H66-1 masked knickpoint lane (2026-10-11b), the session's UNIQUE artifact: 10 m 3DEP chi/ksn knickpoint corridors with the brief's four named confounds (ephemeral/playa/basin-fill/conductive) masked INSIDE the statistic, 40,000 dots, 0 on the mapped catalogue; max |Spearman| 0.0382 (surface) / 0.0299 (final dots) vs 651/655 registry rasters, byte- and pixel-unique. DOWNLOAD: OK (research artifact) / SUBMIT: NO (NEGATIVE, slot never spent): masked E1 first test INCONCLUSIVE (+0.0404, 95% CI [-0.0029, +0.0871], 239 comps) trips the preregistered stop rule, and the pooled HOLDOUT-DTI 0.00960 [0.00654, 0.01307] sits below the mass-matched random control 0.03908 (paired -0.02948, 95% CI excludes 0). Six consecutive negative runs now exhaust the knickpoint lane method.",
   "file": {
-   "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
-   "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
-   "bytes": 127363,
-   "positive_px": 37654
+   "path": "docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif",
+   "sha256": "56f9f89ec97c265e6b9e75031c94441ca80688f556040fe20c5ab18105082ef8",
+   "bytes": 96075,
+   "positive_px": 40000
   },
   "file_zeros": {
-   "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
-   "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
-   "bytes": 127363,
-   "positive_px": 37654
+   "path": "docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif",
+   "sha256": "56f9f89ec97c265e6b9e75031c94441ca80688f556040fe20c5ab18105082ef8",
+   "bytes": 96075,
+   "positive_px": 40000
   },
   "zip": {
-   "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.zip",
-   "sha256": "b9e66142e20d103dd4bf9663d56b532b754c372deb28b31cd1efe406a560cdfd",
-   "bytes": 86350
+   "path": "docs/downloads/gems60-h66-masked-knick-40000.zip",
+   "sha256": "9416dcf0620f5b774984224745e01e700cbf7fb107f33394fe38e8cd43c44c6b",
+   "bytes": 54370
   },
-  "candidate_id": "H61-A XCRD",
+  "candidate_id": "H66-1 masked knickpoints",
   "tier": 2,
-  "hypothesis": "H61-A",
+  "hypothesis": "H62-5 (true-10 m chi/ksn concordance), H66-1 masked variant",
   "selection_rule": {
    "tier_1": "slot-eligible under the live-anchored gate (LM-cal +margin in 4/4 quadrants over a live-scored base, safety factor >= 2.0) AND on_catalogue_pixels == 0; highest projected live DTI wins",
    "tier_2": "scripts/build_slot_plan.py's frozen holdout rule: beats the owner-reported 0.2600 incumbent on all three holdout instruments AND 0 on-catalogue dots",
@@ -1329,18 +1354,37 @@
     "bytes": 221921,
     "positive_px": 38554,
     "note": "kept for the audit trail; see docs/research/ for its status"
+   },
+   {
+    "role": "AVAILABLE DOWNLOAD (NEGATIVE research artifact, H65-1)",
+    "path": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+    "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
+    "bytes": 104586,
+    "positive_px": 40000,
+    "note": "H65-1 unmasked 10 m chi/ksn knickpoints; E1 INCONCLUSIVE -> NEGATIVE; do not spend a slot"
+   },
+   {
+    "role": "AVAILABLE DOWNLOAD (NEGATIVE research artifact, H66-1)",
+    "path": "docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif",
+    "sha256": "56f9f89ec97c265e6b9e75031c94441ca80688f556040fe20c5ab18105082ef8",
+    "bytes": 96075,
+    "positive_px": 40000,
+    "note": "H66-1 masked variant of the same lane; E1 INCONCLUSIVE -> NEGATIVE; do not spend a slot"
    }
   ],
   "rule": "E2/E3: strike-concordant knickpoints (chi/ksn on the 3DEP-10m-reduced 100 m pack) x INGENIOUS thermal corroboration (springs, 2 m probes, paleo travertine), 3-px NMS, 2-px catalogue ring, 40,000-dot budget chosen as the in-sample maximum of the audited selection instrument; the emission rule is unchanged from the audited selector",
-  "provenance": "built by scripts/e62_lane_thermal.py (E2/E3) and scripts/e62b_substrate.py (E2b) from the hash-pinned bridge + data/external inputs; every digest re-read from the written bytes; receipts evidence/e62_lane_thermal.json, evidence/e62b_substrate.json, docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.json",
-  "verdict": "OK TO DOWNLOAD; slot NOT CLEARED (explicit bounded-downside bet). Superseded parallel-session claims and their negative verdicts are preserved in superseded_primaries.",
+  "provenance": "built by scripts/build_submission60.py --include-ephemeral --slug h66-masked-knick (GEMS60_FEATURE_CACHE=features65, sha-pinned 10 m USGS 3DEP reduction); every digest re-read from the written bytes; --verify-existing reproduces the shipped TIF dot-for-dot (identical=True); receipt docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.json, run card evidence/h66_runcard.json",
+  "verdict": "OK TO DOWNLOAD as a research artifact; SUBMIT: NO (slot never spent). The masked first test is INCONCLUSIVE (preregistered stop rule) and the pooled holdout DTI 0.00960 is below the mass-matched random control 0.03908; the lane is the 6th consecutive negative of this family. Superseded session artifacts (H61-A, H65-1) are preserved in superseded_primaries and remain downloadable in docs/downloads.",
   "evidence": {
-   "lane_thermal": "evidence/e62_lane_thermal.json",
-   "substrate_diagnostic": "evidence/e62b_substrate.json",
-   "instrument_audit": "evidence/e61_instrument_audit.json",
-   "receipt": "docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.json"
+   "e1_first_test": "evidence/h66_e1_first_test.json",
+   "holdout_dti": "evidence/h66_holdout.json",
+   "uniqueness_surface": "evidence/h66_uniqueness_surface.json",
+   "uniqueness_final_dots": "evidence/h66_uniqueness_dots.json",
+   "overlap_control": "evidence/h66_overlap_control_dots.json",
+   "submission_build": "evidence/h66_submission_build.json",
+   "run_card": "evidence/h66_runcard.json"
   },
-  "session": "2026-10-11 H61-H63",
+  "session": "2026-10-11 H65-H66",
   "file_nan_twin": {
    "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-nan.tif",
    "sha256": "8cbd52542e7bb8ea4949497d4f1b40f2f7936167f87d841f9242fe29f85e1383",
@@ -1350,28 +1394,64 @@
    "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-audit.json",
    "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros-audit.json"
   ],
-  "run_card": "evidence/run_card_h61_20261011.json",
-  "writeup": "docs/research/h61-h63-session-20261011.md",
+  "run_card": "evidence/h66_runcard.json",
+  "writeup": "docs/lane-knick-corridor-report.html",
   "screens": {
-   "sgmc_offcat_quality_ratio_at_equal_mass": 2.4637,
-   "champion_same_screen": 1.6177,
-   "lidar_scarp_enrichment": 0.4819,
-   "lidar_scarp_enrichment_champion": 1.8352,
-   "held_out_auc_folds": [
-    0.7575,
-    0.7281,
-    0.7989,
-    0.7849
-   ],
+   "masked_e1_first_test": {
+    "mean": 0.04039842808701666,
+    "ci95": [
+     -0.002870678727197792,
+     0.08710208994789784
+    ],
+    "n_components": 239,
+    "verdict": "INCONCLUSIVE"
+   },
+   "pooled_holdout_dti": {
+    "lane": 0.009598840531222471,
+    "ci95": [
+     0.006540940977949029,
+     0.013074468339030563
+    ],
+    "random_mass_control": 0.03908023346196293,
+    "distance_only": 0.19073008022090832,
+    "n_withheld": 22641,
+    "paired_lane_minus_random": -0.02948139293074046
+   },
+   "leakage_canary_max_abs_auc": 0.5179098117816949,
    "uniqueness": {
-    "max_abs_spearman": 0.0241,
-    "worst_within_3px_frac": 0.4586,
-    "random": 0.1749
+    "max_abs_spearman_surface": 0.038232,
+    "max_abs_spearman_final_dots": 0.029923283200001843,
+    "byte_unique": true,
+    "pixel_unique": true,
+    "registry_rasters_checked": "651/655",
+    "overlap_gate_note": "58 dense priors fire the literal 3-px clause; 58/58 fire for 5 uniform-random 40k-dot sets too (IR-60-GATE-01)"
    }
   },
   "approved_for_weekly_slot": false,
   "promoted": false,
   "superseded_primaries": [
+   {
+    "name": "gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b",
+    "verdict": "NEGATIVE - deliverable negative result; do not spend a submission slot. Unmasked 10 m chi/ksn knickpoint lane: E1 INCONCLUSIVE (+0.0326, CI straddles 0, 262 comps); pooled HOLDOUT-DTI 0.01158 [0.0084, 0.01462] vs mass-matched random 0.03908 -> lane below random.",
+    "status_line": "PRIMARY (2026-10-11b, H65-1) = unmasked native 10 m chi/ksn knickpoint emission. VERDICT NEGATIVE: unique, format-valid, leakage-free, E1 first test INCONCLUSIVE (stop rule), pooled HOLDOUT-DTI 0.01158 below the mass-matched random control 0.03908. DOWNLOAD: OK (research artifact) / SUBMIT: NO. Superseded as site PRIMARY by the masked H66-1 run.",
+    "file": {
+     "path": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+     "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
+     "bytes": 104586,
+     "positive_px": 40000
+    }
+   },
+   {
+    "name": "60GEMSDOE-H61A-XCRD-37654px",
+    "verdict": "UNSCORED projection-only artifact of the 2026-10-11a session (H61-A XCRD); slot decision NOT CLEARED at the time. Superseded as the site PRIMARY by the 2026-10-11b knickpoint-lane artifacts (H65-1, then H66-1).",
+    "status_line": "PRIMARY (2026-10-11a) = H61-A XCRD: the session's UNIQUE artifact, max |Spearman| 0.024 against all 35 registry rasters, worst within-3-px share 46 %; DOWNLOAD: YES, slot NOT CLEARED (bounded-downside bet). Kept downloadable; superseded as the site PRIMARY by the 2026-10-11b masked-knickpoint run H66-1 (NEGATIVE).",
+    "file": {
+     "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
+     "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
+     "bytes": 127363,
+     "positive_px": 37654
+    }
+   },
    {
     "name": "gems61-lane-thermal-knick-40000px-20261011T020352Z",
     "verdict": "NEGATIVE - deliverable negative result; do not spend a submission slot (brief: never submit anything that has not beaten the family's best promotable holdout)",
@@ -2164,6 +2244,18 @@
    "status": "open (protocol amendment needed)",
    "statement": "The literal uniqueness gate 'more than 70% of dots within 3 px of one registry raster = duplicate' is uninformative against dense lattice rasters: H62-1 scored 83.1% vs r13_lattice_s5, and a matched uniform-random set of the same size scored 83.7% (H62-1 excess-over-random -0.0059, evidence/h62_uniqueness_excess_control.json). The family selector already uses excess-over-random; the shared protocol text should adopt that form. Preregistered gates are not retroactively passed: H62-1 remains G4-FAIL in the record.",
    "evidence": "evidence/h62_uniqueness.json; evidence/h62_uniqueness_excess_control.json; registry/preregistration-h62.json"
+  },
+  {
+   "id": "IR-H66-BUILD-01",
+   "severity": "medium",
+   "statement": "The first H66-1 build (dot digest 66c49029b6cb, TIF sha 958c176d...) produced 12 of 40,000 dots that differ from a fresh recompute, and that process was OOM-killed (exit 137) in its built-in final-dot uniqueness audit. Three independent fresh recomputes (z, candidates, p, dots all hash-compared) are bit-identical to each other and to the shipped file (digest 3306ed8afbcd; --verify-existing identical=True). The cause of the first build's deviation was not identified.",
+   "mitigation": "The superseded TIF is not the artifact and is not in the repository; the shipped file is verified dot-for-dot (--verify-existing identical=True), re-audited standalone (evidence/h66_uniqueness_dots.json), and the final-dot audit is always run as a separate process (the in-build audit OOMs)."
+  },
+  {
+   "id": "IR-H66-NOTE-01",
+   "severity": "low",
+   "statement": "build_submission60.py truncates over-long portal notes to 140 chars with a '...' suffix but its format validator does not check note length at all; the <=140-char ritual limit is enforced nowhere in the pipeline. The first H66 build embedded a 141-char note that was silently truncated mid-word.",
+   "mitigation": "count note chars before building; the H66-1 shipped note is 139 chars (verified in the receipt and the run card)"
   }
  ]
 }

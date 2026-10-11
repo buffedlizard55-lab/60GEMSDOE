@@ -6,18 +6,19 @@
 **Live leaderboard top (re-checked 2026-10-11, H65 session): 0.4133** (an earlier same-day reading said 0.3774; see IR-65-LB-01) · **Group best (owner-reported): 0.2778**
 
 
-<!-- H65-STATUS:BEGIN -->
-> ## 🚦 READ THIS FIRST (2026-10-11, H65-1): is a file here OK to submit?
+<!-- H66-STATUS:BEGIN -->
+> ## 🚦 READ THIS FIRST (2026-10-11, H66-1): is a file here OK to submit?
 > | file | download | submit? |
 > |---|---|---|
-> | **Newest unique TIF, H65-1** (native 3DEP 10 m knickpoints) | [⬇ `gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif`](docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif) · [zip](docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.zip) · [run card](docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros-runcard.json) | ❌ **NO: NEGATIVE.** First test INCONCLUSIVE (+0.0326 [-0.0144, +0.0790]) → stop; HOLDOUT-DTI 0.01158 [0.00840, 0.01462] < random 0.03908 (gems57-pooled-hide-v2, 22,641 withheld positives) |
+> | **Newest unique TIF, H66-1** (10 m chi/ksn knickpoints, brief's confounds masked in the statistic) | [⬇ `gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif`](docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif) · [zip](docs/downloads/gems60-h66-masked-knick-40000.zip) · [run card](docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-runcard.json) | ❌ **NO: NEGATIVE.** Masked first test INCONCLUSIVE (+0.0404 [-0.0029, +0.0871], 239 comps) → preregistered stop; HOLDOUT-DTI 0.00960 [0.00654, 0.01307] < random 0.03908 (paired −0.02948, CI excludes 0; gems57-pooled-hide-v2, 22,641 withheld positives). 6th consecutive negative of the lane — the method is now fully exhausted. |
+> | Previous unique TIF, H65-1 (unmasked native 3DEP 10 m knickpoints) | [⬇ `gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif`](docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif) · [zip](docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.zip) · [run card](evidence/h65_runcard.json) | ❌ **NO: NEGATIVE.** First test INCONCLUSIVE (+0.0326 [-0.0144, +0.0790]) → stop; HOLDOUT-DTI 0.01158 [0.00840, 0.01462] < random 0.03908 (gems57-pooled-hide-v2, 22,641 withheld positives) |
 > | Group champion, already scored 0.2778 | [⬇ `gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif`](docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif) | already scored; re-uploading repeats a known score |
 > | Registry primary, H61-A XCRD (earlier session) | [⬇ `gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif`](docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif) | ⚠️ **NOT CLEARED**: unique bounded-downside bet; no local holdout certifies it beats the champion |
 > | every other 2026-10-11 file below | see its box | ❌ NO (NEGATIVE or NOT CLEARED) |
 >
 > **No file in this repository is cleared by a holdout for a new slot.** All files are portal-safe (float32, [0, 1], 0 NaN). If the
-> H65-1 file is uploaded for research: name `60GEMSDOE-H65-1-DEM10-KNICK-40000`, note `H65-1 native 3DEP 10m chi/ksn knickpoints, >=3 independent drainages, 40000 dots; E1 failed: NEGATIVE, research only` (116 chars).
-> Details are in [H65-1 session](#h65-1-session-2026-10-11--native-3dep-10-m-knickpoint-lane-negative) and [`docs/h65-report.html`](docs/h65-report.html).
+> H66-1 file is uploaded for research: name `gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd`, note `H66-1 10m chi/ksn knickpoints, confound masks (ephemeral/playa/basin-fill/conductive), 40k dots; E1 INCONCLUSIVE -> NEGATIVE, research only` (139 chars). H65-1 ritual: name `60GEMSDOE-H65-1-DEM10-KNICK-40000`, note `H65-1 native 3DEP 10m chi/ksn knickpoints, >=3 independent drainages, 40000 dots; E1 failed: NEGATIVE, research only` (116 chars).
+> Details are in the [H66-1 session](#h66-1-session-2026-10-11--masked-10-m-knickpoint-lane-negative-lane-closed) and [H65-1 session](#h65-1-session-2026-10-11--native-3dep-10-m-knickpoint-lane-negative) boxes and [`docs/h65-report.html`](docs/h65-report.html).
 <!-- H65-STATUS:END -->
 
 > ## 📦 ONE-CLICK SUBMISSION DOWNLOADS (start here)
@@ -111,6 +112,49 @@
 > [0, 1], zeros outside the footprint — the container that cannot trip the historical
 > *"Predicted values must be in range [0, 1]"* rejection. The parallel 2026-10-11b GEMS61 lane keeps its own
 > NEGATIVE verdict.
+
+<!-- H66-SECTION:BEGIN -->
+## H66-1 session (2026-10-11) — masked 10 m knickpoint lane, NEGATIVE — lane closed
+
+Session `arena/b219bfe1-60gemsdoe`. It closes the knickpoint lane: it asks whether H65-1's
+non-signal survives when the lane brief's four named confounds — **ephemeral channels**
+(A < 10⁶ m²), **playa**, **basin fill**, **conductive surface** — are masked *inside the
+statistic itself* (not just off the emitted dots). Preregistration: the stop rule and arm
+splits are in `evidence/h66_e1_first_test.json` / `run_lane60.py` before any H66 number
+existed. Run card: [`evidence/h66_runcard.json`](evidence/h66_runcard.json). Every number
+below is read from an evidence file.
+
+**Verdict: NEGATIVE. SUBMIT: NO. 0 slots spent. The lane method is now fully exhausted (6/6 runs negative).**
+
+| step | what was done | result |
+|---|---|---|
+| Data | H65-1 sha-pinned 10 m USGS 3DEP reduction (`.cache/features65`, rebuilt this session from the pinned TIFs; all 11 arrays match) + confound layers (`data/official/training_features.tif` bands 15/17, `playa` cache) | masks (MEASUREMENT): playa 550,267 px · basin fill 516,432 px · conductive 257,039 px · ephemeral 317,451 px; 386,327 of 786,299 channel px excluded; `masks_applied_to_statistic = true` |
+| E1 first test (MEASUREMENT): do channels crossing withheld segments show larger steps than random same-orientation lines, with the confound masks applied? | `run_lane60.py --include-ephemeral`, 239 withheld components, 1,000-draw bootstrap (seed 60101) | **+0.0404 log-ksn, 95 % CI [−0.0029, +0.0871]**, median −0.0042, 49.0 % positive → **INCONCLUSIVE → STOP** (the brief says "if not, stop"). Masking moved the mean only from +0.0326 (H65-1) to +0.0404: the confounds did not create the (non-)signal |
+| Preregistered arms | same statistic, split on basement-surface continuity | T (crossing on continuous basement): n = 174, +0.0030 [−0.0404, +0.0506] → INCONCLUSIVE; L (crossing on a depth-to-basement step, the named lithologic mimic): n = 14, +0.0696 [−0.1242, +0.2979] → INCONCLUSIVE, underpowered |
+| E3 HOLDOUT-DTI (diagnostic after the stop; evaluator `gems57-pooled-hide-v2`, 22,641 withheld positives, 159-cluster paired bootstrap, 1,000 draws, seed 60101) | lane vs three controls at equal mass | lane **0.00960 [0.00654, 0.01307]**; ksn-only 0.02000; random 0.03908; distance-only 0.19073. Lane minus random **−0.02948 [−0.03391, −0.02488]** — below the mass-matched random control |
+| Leakage canary | AUC of each lane feature vs withheld truth | lane features ≤ 0.518, so no leakage. `dist_to_visible` 0.924 is the deliberate positive control |
+| Uniqueness | `scripts/check_uniqueness60.py` on **both** the lane surface and the final 40,000 dots, 651/655 registry rasters | surface worst ρ **0.0382**; final dots worst ρ **0.0299**, worst Jaccard 0.0112, byte- and pixel-unique. The literal 3-px gate fires on 58 dense priors (≥ 192,231 dots each); 5 uniform-random 40,000-dot sets fire on all 58 too (max excess +0.0012), so this is IR-60-GATE-01, not copying. Tool verdict stays `unique=false` |
+| Format | `build_submission60.py` validator | **ok = True, problems = []**, 40,000 dots, 0 NaN, min 0, max 1, 0 dots on the catalogue. Reproduced dot-for-dot by `--verify-existing` (identical = True) |
+| Artifact | one-click | [⬇ `docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif`](docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif) · [zip](docs/downloads/gems60-h66-masked-knick-40000.zip) · sha256 `56f9f89e…` |
+
+**What this closes.** H65-1 showed the lane is negative at native 10 m; H66-1 shows it stays
+negative once every named confound is masked in the statistic. The knickpoint-corridor method
+(H60-A → second run → H63 → H61 → H65-1 → H66-1) has now produced six consecutive negative
+first tests / holdouts across 100 m and 10 m substrates. Next sessions should work the
+ranked alternatives in `knowledge/03_why_02778_and_path_beyond.md` instead.
+
+**Known irregularity (IR-H66-BUILD-01):** the first H66 build (dot digest `66c49029b6cb`)
+produced 12/40,000 dots different from a fresh recompute and that process was OOM-killed in
+its built-in final-dot audit. Three independent fresh recomputes are bit-identical to each
+other and to the shipped file (digest `3306ed8afbcd`, `--verify-existing` identical = True);
+the first build's deviation was not identified and that TIF is not the artifact. Also: the
+`build_submission60.py` format validator does not check the ≤140-char note limit (ritual rule)
+— count the note before building.
+
+**Remaining work and limitations:** H65-2…H65-5 untried; the leaderboard 0.4133 top is still
+unverifiable from the sandbox (IR-65-LB-01); 4 registry rasters unfetchable (IR-60-CORPUS-01);
+the `refresh_feed.py` raw-page patch is in this commit but untested.
+<!-- H66-SECTION:END -->
 
 <!-- H65-SECTION:BEGIN -->
 ## H65-1 session (2026-10-11) — native 3DEP 10 m knickpoint lane, NEGATIVE

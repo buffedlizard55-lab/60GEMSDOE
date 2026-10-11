@@ -261,6 +261,18 @@
    "status": "open (protocol amendment needed)",
    "statement": "The literal uniqueness gate 'more than 70% of dots within 3 px of one registry raster = duplicate' is uninformative against dense lattice rasters: H62-1 scored 83.1% vs r13_lattice_s5, and a matched uniform-random set of the same size scored 83.7% (H62-1 excess-over-random -0.0059, evidence/h62_uniqueness_excess_control.json). The family selector already uses excess-over-random; the shared protocol text should adopt that form. Preregistered gates are not retroactively passed: H62-1 remains G4-FAIL in the record.",
    "evidence": "evidence/h62_uniqueness.json; evidence/h62_uniqueness_excess_control.json; registry/preregistration-h62.json"
+  },
+  {
+   "id": "IR-H66-BUILD-01",
+   "severity": "medium",
+   "statement": "The first H66-1 build (dot digest 66c49029b6cb, TIF sha 958c176d...) produced 12 of 40,000 dots that differ from a fresh recompute, and that process was OOM-killed (exit 137) in its built-in final-dot uniqueness audit. Three independent fresh recomputes (z, candidates, p, dots all hash-compared) are bit-identical to each other and to the shipped file (digest 3306ed8afbcd; --verify-existing identical=True). The cause of the first build's deviation was not identified.",
+   "mitigation": "The superseded TIF is not the artifact and is not in the repository; the shipped file is verified dot-for-dot (--verify-existing identical=True), re-audited standalone (evidence/h66_uniqueness_dots.json), and the final-dot audit is always run as a separate process (the in-build audit OOMs)."
+  },
+  {
+   "id": "IR-H66-NOTE-01",
+   "severity": "low",
+   "statement": "build_submission60.py truncates over-long portal notes to 140 chars with a '...' suffix but its format validator does not check note length at all; the <=140-char ritual limit is enforced nowhere in the pipeline. The first H66 build embedded a 141-char note that was silently truncated mid-word.",
+   "mitigation": "count note chars before building; the H66-1 shipped note is 139 chars (verified in the receipt and the run card)"
   }
  ]
 }

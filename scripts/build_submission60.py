@@ -36,7 +36,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from gems57 import grid as G57                     # noqa: E402
 from gems57 import gates, submission_writer, uniqueness as U   # noqa: E402
 from gems60 import lane as L                       # noqa: E402
-from run_lane60 import confound_masks, load        # noqa: E402
+from run_lane60 import confound_masks, load, litho_step_mask        # noqa: E402
 
 CACHE = ROOT / ".cache" / os.environ.get("GEMS60_FEATURE_CACHE", "features60")
 # Substrate-agnostic driver (shared-tool change 2026-10-11, session arena/96ecd67e, H65-1):
@@ -105,6 +105,15 @@ def main() -> int:
     ap.add_argument("--hypothesis", default="H60-A")
     ap.add_argument("--note", default=None, help="<=140-char portal note (default: the H60-A note)")
     ap.add_argument("--substrate", default="det_elev band 12, 100 m")
+    # H66-1 (2026-10-11, session arena/b219bfe1): lane-brief confound masks on the
+    # production surface. Defaults reproduce H60-A/H65 byte-for-byte.
+    ap.add_argument("--include-ephemeral", action="store_true",
+                    help="add the ephemeral-channel mask (10 m drainage area < 1 km2) "
+                         "to the confound exclusion")
+    ap.add_argument("--litho-arm", choices=("none", "T", "L"), default="none",
+                    help="H66-1 preregistered arm: T = candidates on a CONTINUOUS "
+                         "basement surface, L = candidates ON a depth_to_base_surf "
+                         "step (the named lithologic mimic)")
     ap.add_argument("--skip-uniqueness", action="store_true",
                     help="use scripts/check_uniqueness60.py instead; if "
                          "evidence/h60a_uniqueness.json exists it is merged into the receipt")
@@ -133,7 +142,16 @@ def main() -> int:
     mark(("independence=substrate branch_sig " if (CACHE / "branch_sig.npy").is_file() else
           f"independence=branch_signature(k={L.CORRIDOR_HALF_LEN_PX - 1}) ") +
          f"distinct={int(np.unique(branch[channel]).size)}")
-    exclude, conf = confound_masks(step, channel)
+    acc = load("acc").astype(np.float64)
+    exclude, conf = confound_masks(step, channel,
+                                   acc=acc if a.include_ephemeral else None)
+    if a.litho_arm != "none":
+        # H66-1 preregistered arm split (same litho_step rule as run_lane60.py)
+        litho, litho_thr = litho_step_mask(load("footprint"))
+        channel = channel & (litho if a.litho_arm == "L" else ~litho)
+        conf["litho_arm"] = a.litho_arm
+        conf["litho_step_thr_m"] = litho_thr
+        mark(f"litho arm {a.litho_arm}: channel px {int(channel.sum())} (thr {litho_thr:.1f} m)")
     z, cand, cand_diag = L.prepare_candidates(step, channel, exclude)
     mark(f"candidates={cand_diag}")
 

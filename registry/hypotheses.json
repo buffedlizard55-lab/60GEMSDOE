@@ -625,7 +625,7 @@
    "expected_dti": "RANK 5 by cost-adjusted expectation: unknown ceiling, possibly high, but implementation is high-cost and the data is unreachable from this sandbox",
    "cost": "high: ~716 tiles; requires an egress-capable runner",
    "data_status": "SOURCE NAMED + PINS EXIST, OBTAINABILITY PARTIAL: https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif (USGS 3DEP, public domain; 716 URLs + sha256 pins upstream data/dem_links.json; egress probe evidence/probe-egress-receipt.json shows HTTP 200 from a GitHub Actions runner, but THIS sandbox cannot reach the host - measured, see docs/irregularities.html)",
-   "status": "EXECUTED 2026-10-11 as H65-1 (session arena/96ecd67e): NEGATIVE. Native 3DEP 10 m on 18 pinned 1x1-degree tiles (not ~716: that count is for 1 m tiles); first test INCONCLUSIVE +0.0326 [-0.0144, +0.0790] -> STOP; HOLDOUT-DTI 0.01158 [0.0084, 0.0146] vs random 0.03908. evidence/h65_runcard.json"
+   "status": "EXECUTED 2026-10-11 as H65-1 (session arena/96ecd67e): NEGATIVE. Native 3DEP 10 m on 18 pinned 1x1-degree tiles (not ~716: that count is for 1 m tiles); first test INCONCLUSIVE +0.0326 [-0.0144, +0.0790] -> STOP; HOLDOUT-DTI 0.01158 [0.0084, 0.0146] vs random 0.03908. evidence/h65_runcard.json  |  2026-10-11 H66-1 (session arena/b219bfe1): the masked variant (brief's four named confounds masked in the statistic) is ALSO NEGATIVE - the lane is exhausted at both resolutions and with/without confound masking."
   },
   {
    "id": "H65-1",
@@ -642,7 +642,7 @@
    "expected_dti": "MEASURED: HOLDOUT-DTI 0.01158 [0.0084, 0.0146] (gems57-pooled-hide-v2, 22,641 withheld positives) < random 0.03908",
    "cost": "done (Actions run 38113556275, ~4 min wall)",
    "data_status": "obtained and pinned",
-   "status": "NEGATIVE: first test INCONCLUSIVE -> STOP; resolution was NOT the cause (E1 at 100 m +0.1089 vs 10 m +0.0326)"
+   "status": "NEGATIVE: first test INCONCLUSIVE -> STOP; resolution was NOT the cause (E1 at 100 m +0.1089 vs 10 m +0.0326)  |  Superseded as the lane's newest artifact by H66-1 (masked variant, also NEGATIVE); retained as research artifact."
   },
   {
    "id": "H65-2",
@@ -713,7 +713,32 @@
    "cost": "high",
    "data_status": "USGS 3DEP 10 m - verified obtainable",
    "status": "PROPOSED"
+  },
+  {
+   "id": "H66-1",
+   "rank": 36,
+   "slate": "H66 (2026-10-11, session arena/b219bfe1) - masked variant of the 10 m lane",
+   "slate_rank": 0,
+   "title": "Masked 10 m chi/ksn strike-concordant knickpoints (H62-5 with the brief's four named confounds masked in the statistic)",
+   "layers": [
+    "H65-1 sha-pinned USGS 3DEP 10 m reduction (.cache/features65)",
+    "confound layers: playa (cache), basin fill (depth_to_base > p90), conductive surface (cond > p95), ephemeral (A < 1e6 m2) from data/official/training_features.tif bands 15/17 + channel mask"
+   ],
+   "signature": "same H65-1 statistic (blockwise z-scored dz/dchi two-segment step, >=3 independent drainages in strike corridors), but candidates crossing masked confound cells are excluded from the statistic itself, not just from the emitted dots; preregistered arms T (crossing on continuous basement) and L (crossing on a depth-to-basement step)",
+   "why_off_catalogue": "tests whether H65-1's negative was confound inflation; if masking changes nothing, the knickpoint method is exhausted",
+   "differs_from_repo": "first run with the brief's named confounds masked inside the statistic (H65-1 masked none of them in the statistic)",
+   "expected_dti": "MEASURED: HOLDOUT-DTI 0.00960 [0.00654, 0.01307] (gems57-pooled-hide-v2, 22,641 withheld positives) < random 0.03908; masked E1 +0.0404 [-0.0029, +0.0871] INCONCLUSIVE -> STOP",
+   "cost": "done (this session, ~2 min wall on cached features)",
+   "status": "EXECUTED 2026-10-11 (session arena/b219bfe1): NEGATIVE. Masked first test INCONCLUSIVE (+0.0404, 239 comps) -> preregistered stop; pooled HOLDOUT-DTI 0.00960 below mass-matched random 0.03908 (paired -0.02948, CI excludes 0). 6th consecutive negative of the lane; the method is fully exhausted. evidence/h66_runcard.json",
+   "evidence": [
+    "evidence/h66_e1_first_test.json",
+    "evidence/h66_holdout.json",
+    "evidence/h66_uniqueness_surface.json",
+    "evidence/h66_uniqueness_dots.json",
+    "evidence/h66_overlap_control_dots.json",
+    "evidence/h66_runcard.json"
+   ]
   }
  ],
- "updated_utc": "2026-10-11T05:16:19Z"
+ "updated_utc": "2026-10-11T16:45:36Z"
 }

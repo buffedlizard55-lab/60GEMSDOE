@@ -41,8 +41,22 @@ def parse_leaderboard(html):
 def main():
     health = FEED.refresh_sources(ROOT)
     print(f"probed {len(health['results'])} sources")
+    # IR-66-FEED-01 (2026-10-11, session arena/b219bfe1): since the page started
+    # client-side rendering the public table, parse_leaderboard silently returns
+    # [] and the raw HTML was thrown away, so the feed's leaderboard rows froze
+    # at 2026-10-04 while the site kept printing them.  Keep the raw page (first
+    # 500 KB) as evidence on every run so the parser can be debugged/retargeted
+    # offline, and say so loudly when it matches nothing.
     try:
-        rows = parse_leaderboard(fetch(LB))
+        html = fetch(LB)
+        page = ROOT / "evidence" / "leaderboard_page_latest.html"
+        page.write_text(html[:500_000], encoding="utf-8")
+        rows = parse_leaderboard(html)
+        if not rows:
+            print(f"WARNING: leaderboard page fetched ({len(html)} chars, kept "
+                  f"at {page}) but parse_leaderboard matched 0 rows -- the page "
+                  "layout has probably changed again; the feed keeps the LAST "
+                  "verified snapshot rather than publishing a stale one")
     except Exception as exc:                                       # noqa: BLE001
         print(f"leaderboard read failed ({type(exc).__name__}: {exc}); nothing written")
         rows = []
