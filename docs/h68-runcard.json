@@ -1,0 +1,57 @@
+{
+  "run": "H68 stop-gate review 2026-10-11",
+  "hypothesis": "channel χ/ksn steepness steps across ≥3 independent drainages trace unmapped faults",
+  "mechanism": "tectonic base-level perturbation changes channel profiles and normalized steepness; not scarp shape",
+  "named_non_fault_process": "rock-erodibility contrasts at lithologic contacts; playa outlet changes and ephemeral flow",
+  "experiment_count_this_session": 0,
+  "stop_reason": "registered H65 first-test CI includes zero; H66-2 off-catalogue first test failed; H67 literal registry overlap >70%",
+  "first_test_E1": {
+    "evidence_class": "MEASUREMENT (historical H65-1, not rerun)",
+    "n_components": 262,
+    "mean": 0.0326,
+    "ci95": [
+      -0.0144,
+      0.079
+    ],
+    "decision": "STOP"
+  },
+  "holdout_dti": {
+    "evidence_class": "HOLDOUT-DTI (historical H66-1, not independently rerun)",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "withheld_positive_pixels": 22641,
+    "dti": 0.065739,
+    "ci95": [
+      0.055715,
+      0.076201
+    ],
+    "gate_status": "cannot override STOP / literal overlap"
+  },
+  "leakage_canary": "historical single-feature results in evidence/h66_runcard.json and evidence/h67_runcard.json; no new predictor evaluated",
+  "correlation_overlap_vs_registry": {
+    "surface": "historical H67 checked surface; see evidence/h67_runcard.json (incomplete registry coverage)",
+    "final_dots_within_3px_max": 0.9987,
+    "limit": 0.7,
+    "literal_gate": "FAIL",
+    "note": "68-file subset; full registry not rescanned this session"
+  },
+  "raster_sha256": null,
+  "new_tiff_generated": false,
+  "existing_research_raster_sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1",
+  "validator_output": {
+    "artifact": "existing H66-1 research TIFF only",
+    "no_nan_inside_footprint": true,
+    "all_finite": true,
+    "values_in_0_1": true,
+    "crs_shape_transform_match_sample": true,
+    "single_band_float32": true,
+    "nodata": null,
+    "organizer_acceptance": false
+  },
+  "submission_name": "60GEMSDOE-H68-STOP-AUDIT-NO-SUBMISSION",
+  "note": "STOP: first test inconclusive and registry overlap failed; research-only existing TIFF, no new submission",
+  "okay_to_download_existing_for_research": true,
+  "okay_to_submit": false,
+  "weekly_slots_used": 0,
+  "verdict": "negative",
+  "report": "docs/research/2026-10-11-lane-stop-audit.md"
+}
