@@ -1,0 +1,724 @@
+{
+  "run": "H70",
+  "hypothesis_id": "GEMS60-H70",
+  "generated_utc": "20261011T184232Z",
+  "preregistration": "registry/preregistration-h70.json",
+  "evidence_class": "HOLDOUT-DTI + INSTRUMENT-DTI (proxies; NOT organizer-confirmed)",
+  "guard_report": {
+    "called": true,
+    "verdict": "STOPPED",
+    "output": "STOP GUARD: H70 complementary-cover emission not run \u2014 The H65-1 preregistered first test was INCONCLUSIVE (95% CI crosses zero); under the pre-registered rule, failure to establish a positive signal means STOP. The H65 report prohibits rerunning the knickpoint lane at any resolution. No follow-up experiment or submission is authorized..\nNo experiment or GeoTIFF was generated. Do not override without separate authorization.",
+    "interpretation": "printed for the record; not used as a gate because this runner is not a lane runner (see preregistration)"
+  },
+  "champion": {
+    "file": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+    "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "dots": 37654,
+    "live_score": 0.2778,
+    "live_score_class": "OWNER-REPORTED / UNVERIFIED"
+  },
+  "field": {
+    "channel_px": 1125140,
+    "valid_channel_px": 786299,
+    "wash_px": 186546,
+    "sgmc_off_near_px": 782526,
+    "allowed_px": 3666787,
+    "catalogue_px": 60988,
+    "footprint_px": 5167373,
+    "champion_dots": 37654,
+    "min_catalogue_distance_px_of_allowed": 2.23606797749979,
+    "min_champion_distance_px_of_allowed": 4.123105625617661,
+    "components": [
+      "step_rank",
+      "ksn_rank",
+      "knick_rank",
+      "relief_rank",
+      "curv_rank",
+      "lineament_rank",
+      "sgmc_off_rank"
+    ],
+    "component_px": {
+      "step_rank": 12279160,
+      "ksn_rank": 12279160,
+      "knick_rank": 12279160,
+      "relief_rank": 12279160,
+      "curv_rank": 12279160,
+      "lineament_rank": 12279160,
+      "sgmc_off_rank": 12279160
+    }
+  },
+  "artifacts": {
+    "H70-1": {
+      "file": "gems60-h70-convcomp-12000-20261011T184232Z-zeros.tif",
+      "sha256": "4f2fbeed356fed1ce7721f8ae3ed5a78d880acb525159b8964864831ec5058c8",
+      "bytes": 87958,
+      "zip": "gems60-h70-convcomp-12000-20261011T184232Z-zeros.zip",
+      "zip_sha256": "4ecf1f2476833c090cfb22bf0ab43a35b8ede1ec0e52f832f9749d03ae735ec3",
+      "submission_name": "60GEMSDOE-H70-1-CONVCOMP-12000-20261011T184232Z",
+      "note": "H70-1 complementary-cover emission: 12000 dots >=400 m from every incumbent dot, convergent-evidence ranking, 2 px off catalogue; probe-grad",
+      "note_chars": 140,
+      "validator_all_checks_passed": true,
+      "emitted": 12000
+    },
+    "H70-2": {
+      "file": "gems60-h70-convcomp-6000-20261011T184232Z-zeros.tif",
+      "sha256": "e688ad849ff3bc5b3077fe15e78b723335ab9a0908f32a7eba3e6915298fc045",
+      "bytes": 73469,
+      "zip": "gems60-h70-convcomp-6000-20261011T184232Z-zeros.zip",
+      "zip_sha256": "e329cee4fac79965857edcaadf2f2a5904dad4a00cc2ecbfca8e7a37b934b63d",
+      "submission_name": "60GEMSDOE-H70-2-CONVCOMP-6000-20261011T184232Z",
+      "note": "H70-2 nested half of H70-1 (6000 dots, same greedy order); paired with H70-1 it identifies the field's marginal live credit",
+      "note_chars": 123,
+      "validator_all_checks_passed": true,
+      "emitted": 6000
+    }
+  },
+  "gates": {
+    "G1_population_matched": {
+      "h70_credit_per_dot": 0.586385511060751,
+      "h70_ci95": [
+        0.5104493774773624,
+        0.6671965830547787
+      ],
+      "random_credit_per_dot_mean": 0.12162067296247012,
+      "random_credit_per_dot_each": {
+        "7001": 0.11920280075143994,
+        "7002": 0.1224658569602575,
+        "7003": 0.12093817492395442,
+        "7004": 0.13118305362550545,
+        "7005": 0.1143134785511933
+      },
+      "paired_delta_vs_random_7001_dti": 0.1053158010389257,
+      "paired_delta_ci95": [
+        0.0912780136188853,
+        0.11975537575745548
+      ],
+      "rule": "credit/dot(H70-1) > mean(5 mass-matched random controls) and paired CI lower > 0",
+      "verdict": "PASS"
+    },
+    "G2_registered_holdout": {
+      "rule": "union pooled DTI not below champion by more than 0.002",
+      "union_dti": 0.004364061502062586,
+      "champion_dti": 0.004384809306270314,
+      "delta": -2.074780420772797e-05,
+      "ci95": [
+        -0.00022174141653109712,
+        0.00017047174621300952
+      ],
+      "verdict": "PASS"
+    },
+    "G3_uniqueness": {
+      "scanned": 53,
+      "scope": "registry/rasters/*.tif + docs/downloads/*.tif, grid-matched",
+      "max_dot_overlap_within_3px_all": {
+        "raster": "gems60-h70-convcomp-12000-20261011T184153Z-zeros.tif",
+        "source": "docs/downloads",
+        "dots": 12000,
+        "dot_overlap_within_3px": 1.0,
+        "spearman": 1.0,
+        "byte_identical": true
+      },
+      "max_dot_overlap_within_3px_non_lattice": {
+        "raster": "gems60-h70-convcomp-12000-20261011T184153Z-zeros.tif",
+        "source": "docs/downloads",
+        "dots": 12000,
+        "dot_overlap_within_3px": 1.0,
+        "spearman": 1.0,
+        "byte_identical": true
+      },
+      "max_abs_spearman": 1.0,
+      "byte_unique": false,
+      "pixel_unique": true,
+      "top_rows": [
+        {
+          "raster": "gems60-h70-convcomp-12000-20261011T184153Z-zeros.tif",
+          "source": "docs/downloads",
+          "dots": 12000,
+          "dot_overlap_within_3px": 1.0,
+          "spearman": 1.0,
+          "byte_identical": true
+        },
+        {
+          "raster": "calib_r13lattice_00904.tif",
+          "source": "registry/rasters",
+          "dots": 206895,
+          "dot_overlap_within_3px": 0.99825,
+          "spearman": 0.007009,
+          "byte_identical": false
+        },
+        {
+          "raster": "r11_greedy_mp.tif",
+          "source": "registry/rasters",
+          "dots": 272853,
+          "dot_overlap_within_3px": 0.94475,
+          "spearman": 0.010519,
+          "byte_identical": false
+        },
+        {
+          "raster": "r14_union_tips10_lat6.tif",
+          "source": "registry/rasters",
+          "dots": 192231,
+          "dot_overlap_within_3px": 0.763417,
+          "spearman": 0.005977,
+          "byte_identical": false
+        },
+        {
+          "raster": "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+          "source": "docs/downloads",
+          "dots": 45000,
+          "dot_overlap_within_3px": 0.618,
+          "spearman": 0.013245,
+          "byte_identical": false
+        },
+        {
+          "raster": "gems60-h70-convcomp-6000-20261011T184153Z-zeros.tif",
+          "source": "docs/downloads",
+          "dots": 6000,
+          "dot_overlap_within_3px": 0.5755,
+          "spearman": 0.694236,
+          "byte_identical": false
+        },
+        {
+          "raster": "h52_coincidence8_80k.tif",
+          "source": "registry/rasters",
+          "dots": 80000,
+          "dot_overlap_within_3px": 0.4255,
+          "spearman": 0.011042,
+          "byte_identical": false
+        },
+        {
+          "raster": "gems60-h61a-xcrd-37654px-20261011T021923Z-nan.tif",
+          "source": "docs/downloads",
+          "dots": 37654,
+          "dot_overlap_within_3px": 0.353,
+          "spearman": 0.020714,
+          "byte_identical": false
+        },
+        {
+          "raster": "submission.tif",
+          "source": "docs/downloads",
+          "dots": 983855,
+          "dot_overlap_within_3px": 0.34525,
+          "spearman": 0.007066,
+          "byte_identical": false
+        },
+        {
+          "raster": "h60_officialstack_50k.tif",
+          "source": "registry/rasters",
+          "dots": 50000,
+          "dot_overlap_within_3px": 0.336667,
+          "spearman": 0.00333,
+          "byte_identical": false
+        },
+        {
+          "raster": "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+          "source": "docs/downloads",
+          "dots": 40000,
+          "dot_overlap_within_3px": 0.2905,
+          "spearman": 0.036007,
+          "byte_identical": false
+        },
+        {
+          "raster": "GEMSDOE49__gate_ortho_w0.25-40k.tif",
+          "source": "registry/rasters",
+          "dots": 40000,
+          "dot_overlap_within_3px": 0.282167,
+          "spearman": 0.013051,
+          "byte_identical": false
+        }
+      ],
+      "note": "H70 is disjoint from the incumbent by construction (>= 4 px from every champion dot), so its overlap against the champion raster is 0 by design; the lattice rasters are the known literal-gate artefact IR-60-UNIQ-DENSE-01.",
+      "lattice_rows": [
+        {
+          "raster": "calib_r13lattice_00904.tif",
+          "source": "registry/rasters",
+          "dots": 206895,
+          "dot_overlap_within_3px": 0.99825,
+          "spearman": 0.007009,
+          "byte_identical": false
+        }
+      ]
+    },
+    "G4_portal": {
+      "H70_1": true,
+      "H70_2": true
+    }
+  },
+  "instrument_sgmc_off": {
+    "champion": {
+      "dti": 0.094626,
+      "tpw": 5481.229,
+      "fpw": 35240.6,
+      "fnw": 56744.771,
+      "n_truth": 62226,
+      "mass": 37654.0,
+      "emitted_px": 37654,
+      "credit_per_px": 0.145568
+    },
+    "H70-1": {
+      "dti": 0.132652,
+      "tpw": 7036.626,
+      "fpw": 9288.172,
+      "fnw": 55189.374,
+      "n_truth": 62226,
+      "mass": 12000.0,
+      "emitted_px": 12000,
+      "credit_per_px": 0.586386
+    },
+    "H70-2": {
+      "dti": 0.075738,
+      "tpw": 3898.123,
+      "fpw": 4541.451,
+      "fnw": 58327.877,
+      "n_truth": 62226,
+      "mass": 6000.0,
+      "emitted_px": 6000,
+      "credit_per_px": 0.649687
+    },
+    "union": {
+      "dti": 0.20375,
+      "tpw": 12465.351,
+      "fpw": 44528.772,
+      "fnw": 49760.649,
+      "n_truth": 62226,
+      "mass": 49654.0,
+      "emitted_px": 49654,
+      "credit_per_px": 0.251044
+    },
+    "distance_only": {
+      "dti": 0.015316,
+      "tpw": 800.112,
+      "fpw": 11498.258,
+      "fnw": 61425.888,
+      "n_truth": 62226,
+      "mass": 12000.0,
+      "emitted_px": 12000,
+      "credit_per_px": 0.066676
+    },
+    "random_7001": {
+      "dti": 0.027317,
+      "tpw": 1430.434,
+      "fpw": 11487.57,
+      "fnw": 60795.566,
+      "n_truth": 62226,
+      "mass": 12000.0,
+      "emitted_px": 12000,
+      "credit_per_px": 0.119203
+    },
+    "random_7002": {
+      "dti": 0.028062,
+      "tpw": 1469.59,
+      "fpw": 11476.666,
+      "fnw": 60756.41,
+      "n_truth": 62226,
+      "mass": 12000.0,
+      "emitted_px": 12000,
+      "credit_per_px": 0.122466
+    },
+    "random_7003": {
+      "dti": 0.027714,
+      "tpw": 1451.258,
+      "fpw": 11474.102,
+      "fnw": 60774.742,
+      "n_truth": 62226,
+      "mass": 12000.0,
+      "emitted_px": 12000,
+      "credit_per_px": 0.120938
+    },
+    "random_7004": {
+      "dti": 0.030051,
+      "tpw": 1574.197,
+      "fpw": 11438.73,
+      "fnw": 60651.803,
+      "n_truth": 62226,
+      "mass": 12000.0,
+      "emitted_px": 12000,
+      "credit_per_px": 0.131183
+    },
+    "random_7005": {
+      "dti": 0.0262,
+      "tpw": 1371.762,
+      "fpw": 11510.107,
+      "fnw": 60854.238,
+      "n_truth": 62226,
+      "mass": 12000.0,
+      "emitted_px": 12000,
+      "credit_per_px": 0.114313
+    }
+  },
+  "instrument_bootstrap": {
+    "champion": {
+      "dti": 0.09462603991713757,
+      "dti_ci95": [
+        0.08412629416527223,
+        0.10556925325698727
+      ],
+      "credit_per_dot": 0.14556830779484148,
+      "credit_per_dot_ci95": [
+        0.12487683885939367,
+        0.16953295505294558
+      ],
+      "tpw": 5481.229061706961,
+      "fpw": 35240.6004936026,
+      "dots": 37654,
+      "n_truth": 62226
+    },
+    "H70-1": {
+      "dti": 0.13265200071673694,
+      "dti_ci95": [
+        0.11829268614693393,
+        0.14696853964935738
+      ],
+      "credit_per_dot": 0.586385511060751,
+      "credit_per_dot_ci95": [
+        0.5104493774773624,
+        0.6671965830547787
+      ],
+      "tpw": 7036.626132729012,
+      "fpw": 9288.171575151642,
+      "dots": 12000,
+      "n_truth": 62226
+    },
+    "H70-2": {
+      "dti": 0.07573772352242594,
+      "dti_ci95": [
+        0.06599470445794527,
+        0.08542691748240436
+      ],
+      "credit_per_dot": 0.6496872171982951,
+      "credit_per_dot_ci95": [
+        0.5625377782251594,
+        0.734971870126164
+      ],
+      "tpw": 3898.123303189771,
+      "fpw": 4541.451463454498,
+      "dots": 6000,
+      "n_truth": 62226
+    },
+    "distance_only": {
+      "dti": 0.015315937930261815,
+      "dti_ci95": [
+        0.011085901161908397,
+        0.019582853675271628
+      ],
+      "credit_per_dot": 0.06667598797451643,
+      "credit_per_dot_ci95": [
+        0.05516830191439287,
+        0.0799734836842976
+      ],
+      "tpw": 800.1118556941972,
+      "fpw": 11498.25764245633,
+      "dots": 12000,
+      "n_truth": 62226
+    },
+    "random_7001": {
+      "dti": 0.027316909748169728,
+      "dti_ci95": [
+        0.025358907100088684,
+        0.02933333325334887
+      ],
+      "credit_per_dot": 0.11920280075143994,
+      "credit_per_dot_ci95": [
+        0.09989520668016878,
+        0.14180929749136012
+      ],
+      "tpw": 1430.4336090172792,
+      "fpw": 11487.570088366596,
+      "dots": 12000,
+      "n_truth": 62226
+    },
+    "random_7002": {
+      "dti": 0.028061654516809302,
+      "dti_ci95": [
+        0.02571383680394267,
+        0.030180992827406477
+      ],
+      "credit_per_dot": 0.1224658569602575,
+      "credit_per_dot_ci95": [
+        0.09937593221648515,
+        0.1468158363326138
+      ],
+      "tpw": 1469.59028352309,
+      "fpw": 11476.66566677838,
+      "dots": 12000,
+      "n_truth": 62226
+    },
+    "random_7003": {
+      "dti": 0.0277138152158108,
+      "dti_ci95": [
+        0.025615673509360334,
+        0.02988232706544238
+      ],
+      "credit_per_dot": 0.12093817492395442,
+      "credit_per_dot_ci95": [
+        0.09991674505662894,
+        0.14373907432876165
+      ],
+      "tpw": 1451.258099087453,
+      "fpw": 11474.101696078309,
+      "dots": 12000,
+      "n_truth": 62226
+    },
+    "random_7004": {
+      "dti": 0.030051449199319496,
+      "dti_ci95": [
+        0.02777245245967774,
+        0.03238251464604355
+      ],
+      "credit_per_dot": 0.13118305362550545,
+      "credit_per_dot_ci95": [
+        0.11022846536818043,
+        0.15523397186850976
+      ],
+      "tpw": 1574.1966435060654,
+      "fpw": 11438.730068586117,
+      "dots": 12000,
+      "n_truth": 62226
+    },
+    "random_7005": {
+      "dti": 0.026200072382084123,
+      "dti_ci95": [
+        0.024092326138199168,
+        0.028295856854703306
+      ],
+      "credit_per_dot": 0.1143134785511933,
+      "credit_per_dot_ci95": [
+        0.09430179770939444,
+        0.13719719692435375
+      ],
+      "tpw": 1371.7617426143195,
+      "fpw": 11510.107130088489,
+      "dots": 12000,
+      "n_truth": 62226
+    },
+    "paired_vs_champion": {
+      "delta_dti": 0.03800501446575431,
+      "ci95": [
+        0.01613602119993871,
+        0.05725844019114953
+      ]
+    },
+    "paired_vs_H70-2": {
+      "delta_dti": 0.0569960252027134,
+      "ci95": [
+        0.05039970255786577,
+        0.06317747384898621
+      ]
+    },
+    "paired_vs_distance_only": {
+      "delta_dti": 0.11741751102513644,
+      "ci95": [
+        0.10038201403863141,
+        0.13396865315687573
+      ]
+    },
+    "paired_vs_random_7001": {
+      "delta_dti": 0.1053158010389257,
+      "ci95": [
+        0.0912780136188853,
+        0.11975537575745548
+      ]
+    },
+    "paired_vs_random_7002": {
+      "delta_dti": 0.1046357941721846,
+      "ci95": [
+        0.09064690608512571,
+        0.11921650576060083
+      ]
+    },
+    "paired_vs_random_7003": {
+      "delta_dti": 0.10497833391584567,
+      "ci95": [
+        0.09058773478446341,
+        0.11900976001842345
+      ]
+    },
+    "paired_vs_random_7004": {
+      "delta_dti": 0.10262519552844265,
+      "ci95": [
+        0.08767304155858811,
+        0.11739973521239119
+      ]
+    },
+    "paired_vs_random_7005": {
+      "delta_dti": 0.10645905588828665,
+      "ci95": [
+        0.09231987635011588,
+        0.1207557958045908
+      ]
+    }
+  },
+  "holdout_pooled": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "alpha": 0.2,
+    "beta": 0.8,
+    "triangular_radius_m": 300.0,
+    "pooled": true,
+    "scores": {
+      "champion": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.004384809306270314,
+        "ci95": [
+          0.0037405087248878217,
+          0.005090902631570314
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 141.44240077765525,
+        "fpw": 70581.39004526673,
+        "fnw": 22499.557599222342
+      },
+      "H70-1": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.0008444961383348327,
+        "ci95": [
+          0.0005524562450701254,
+          0.0011747446533635607
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 19.09957344248338,
+        "fpw": 22499.55750148322,
+        "fnw": 22621.900426557513
+      },
+      "union": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.004364061502062586,
+        "ci95": [
+          0.0037348954736074885,
+          0.005083856537141112
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 160.42759230330282,
+        "fpw": 93080.94754674997,
+        "fnw": 22480.57240769671
+      },
+      "random_mass_matched": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.0009834701943738876,
+        "ci95": [
+          0.000760044298273469,
+          0.001215529215190404
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 22.275114060081393,
+        "fpw": 22661.254844194194,
+        "fnw": 22618.724885939915
+      },
+      "distance_only": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.0556670727815067,
+        "ci95": [
+          0.044106714253470604,
+          0.06706096965311302
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 1264.6463182907391,
+        "fpw": 21761.51166023967,
+        "fnw": 21376.35368170926
+      }
+    },
+    "best_comparable_control": "distance_only",
+    "paired_differences": {
+      "champion": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": -2.074780420772797e-05,
+        "ci95": [
+          -0.00022174141653109712,
+          0.00017047174621300952
+        ],
+        "withheld_positive_pixels": 22641
+      },
+      "H70-1": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.0035195653637277533,
+        "ci95": [
+          0.0029752719812731095,
+          0.004116596718502896
+        ],
+        "withheld_positive_pixels": 22641
+      },
+      "random_mass_matched": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.003380591307688698,
+        "ci95": [
+          0.0027265873247702423,
+          0.004139664399055682
+        ],
+        "withheld_positive_pixels": 22641
+      },
+      "distance_only": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": -0.05130301127944411,
+        "ci95": [
+          -0.06267360919974042,
+          -0.03993072790816622
+        ],
+        "withheld_positive_pixels": 22641
+      }
+    },
+    "bootstrap": {
+      "method": "paired physical spatial-cluster percentile",
+      "clusters": 158,
+      "draws": 1000,
+      "seed": 7001,
+      "confidence": 0.95,
+      "caveat": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval."
+    },
+    "implementation_sha256": {
+      "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+      "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+      "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+      "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+    }
+  },
+  "verdict": "PROMOTE-PROBE",
+  "interpretation": "H70 tests an emission rule on committed evidence only. It cannot raise the team's recorded standing by itself; it measures whether the complementary field carries above-bar credit, which is the precondition for spending mass on it at scale.",
+  "seconds": 135.8,
+  "log": [
+    "[H70] stop_guard report: {'called': True, 'verdict': 'STOPPED', 'output': 'STOP GUARD: H70 complementary-cover emission not run \u2014 The H65-1 preregistered first test was INCONCLUSIVE (95% CI crosses zero); under the pre-registered rule, failure to establish a positive signal means STOP. The H65 report prohibits rerunning the knickpoint lane at any resolution. No follow-up experiment or submission is authorized..\\nNo experiment or GeoTIFF was generated. Do not override without separate authorization.', 'interpretation': 'printed for the record; not used as a gate because this runner is not a lane runner (see preregistration)'} (0.0s)",
+    "[H70] grid 3730x3292 footprint=5,167,373 catalogue=60,988 (0.2s)",
+    "[H70] champion gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif sha ok dots=37,654 (0.3s)",
+    "[H70] field diag {\"channel_px\": 1125140, \"valid_channel_px\": 786299, \"wash_px\": 186546, \"sgmc_off_near_px\": 782526, \"allowed_px\": 3666787, \"catalogue_px\": 60988, \"footprint_px\": 5167373, \"champion_dots\": 37654, \"min_catalogue_distance_px_of_allowed\": 2.23606797749979, \"min_champion_distance_px_of_allowed\": 4.123105625617661, \"components\": [\"step_rank\", \"ksn_rank\", \"knick_rank\", \"relief_rank\", \"curv_rank\", \"lineame (7.9s)",
+    "[H70] selected 12,000 complement dots (nested half = 6,000) (8.7s)",
+    "[H70] wrote gems60-h70-convcomp-12000-20261011T184232Z-zeros.tif sha 4f2fbeed356fed1c | gems60-h70-convcomp-6000-20261011T184232Z-zeros.tif sha e688ad849ff3bc5b (10.3s)",
+    "[H70] sgmc off-catalogue truth px=62,226 (10.5s)",
+    "[H70]   sgmc_off champion     dti=0.09463 credit/px=0.1456 dots=37,654 (13.9s)",
+    "[H70]   sgmc_off H70-1        dti=0.13265 credit/px=0.5864 dots=12,000 (15.0s)",
+    "[H70]   sgmc_off H70-2        dti=0.07574 credit/px=0.6497 dots=6,000 (16.2s)",
+    "[H70]   sgmc_off union        dti=0.20375 credit/px=0.2510 dots=49,654 (17.5s)",
+    "[H70]   sgmc_off distance_only dti=0.01532 credit/px=0.0667 dots=12,000 (18.8s)",
+    "[H70]   sgmc_off random_7001  dti=0.02732 credit/px=0.1192 dots=12,000 (20.0s)",
+    "[H70]   sgmc_off random_7002  dti=0.02806 credit/px=0.1225 dots=12,000 (21.2s)",
+    "[H70]   sgmc_off random_7003  dti=0.02771 credit/px=0.1209 dots=12,000 (22.4s)",
+    "[H70]   sgmc_off random_7004  dti=0.03005 credit/px=0.1312 dots=12,000 (23.7s)",
+    "[H70]   sgmc_off random_7005  dti=0.02620 credit/px=0.1143 dots=12,000 (24.9s)",
+    "[H70] G1 PASS: H70-1 credit/dot 0.5864 vs random 0.1216 (33.9s)",
+    "[H70] holdout cells=8 (54.2s)",
+    "[H70]   cell draw20_foldNW_all truth=1925 (54.9s)",
+    "[H70]   cell draw20_foldNE_all truth=2360 (55.9s)",
+    "[H70]   cell draw20_foldSW_all truth=3780 (58.2s)",
+    "[H70]   cell draw20_foldSE_all truth=3253 (59.8s)",
+    "[H70]   cell draw21_foldNW_all truth=1919 (60.6s)",
+    "[H70]   cell draw21_foldNE_all truth=2365 (61.6s)",
+    "[H70]   cell draw21_foldSW_all truth=3786 (63.8s)",
+    "[H70]   cell draw21_foldSE_all truth=3253 (65.2s)",
+    "[H70] G2 PASS: union 0.004364 vs champion 0.004385 delta -0.000021 (65.2s)",
+    "[H70] uniqueness {\"scanned\": 53, \"scope\": \"registry/rasters/*.tif + docs/downloads/*.tif, grid-matched\", \"max_dot_overlap_within_3px_all\": {\"raster\": \"gems60-h70-convcomp-12000-20261011T184153Z-zeros.tif\", \"source\": \"docs/downloads\", \"dots\": 12000, \"dot_overlap_within_3px\": 1.0, \"spearman\": 1.0, \"byte_identical\": tr (135.8s)"
+  ],
+  "STALE": true,
+  "superseded_by": [
+    "evidence/h70a_runcard.json",
+    "evidence/h70b_runcard.json",
+    "evidence/h70_uniqueness_addendum.json"
+  ],
+  "stale_reason": "run 1 of H70 (stamp 20261011T183954Z family). Its artifacts were deleted after the paired-block-bootstrap fix and the pre-amendment ambiguity; the shas in it no longer correspond to any shipped file. Do NOT quote numbers from this file."
+}

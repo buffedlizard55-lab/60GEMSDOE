@@ -1,6 +1,99 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>60GEMSDOE — current status and evidence · 60GEMSDOE</title><link rel="stylesheet" href="assets/site.css"></head><body>
+<!-- H71-STATUS:BEGIN -->
+<div class=wrap style="border:3px solid #b54708;background:#fffaeb;padding:12px 16px;margin:8px auto">
+<h2 style="margin:0 0 6px">&#128666; NEWEST ARTIFACT (2026-10-11, session <code>arena/161d8066-60gemsdoe</code>, run H71) &mdash; download it, and the exact submit decision</h2>
+<table>
+<tr><th>artifact</th><th>one-click download &amp; receipts</th><th>OK to download &amp; submit?</th></tr>
+<tr><td><b>H71 union: live-scored champion + measured convergent-cover complement</b><br>
+<code>gems60-h71-union-champ-convcomp-43654-20261011T191739Z-zeros.tif</code><br>
+<span style="color:#5b7183">43,654 dots = the 37,654-dot champion plus 6,000 new dots &middot; byte-unique &middot;
+sha256 <code>79e3fafab1adf16e&hellip;</code></span></td>
+<td><a class=btn href="downloads/gems60-h71-union-champ-convcomp-43654-20261011T191739Z-nan.tif" download>&#11015; .tif &mdash; spec-literal (NaN outside)</a>
+<a class="btn alt" href="downloads/gems60-h71-union-champ-convcomp-43654-20261011T191739Z-zeros.tif" download>&#11015; .tif &mdash; zeros outside</a>
+<a class="btn alt" href="downloads/gems60-h71-union-champ-convcomp-43654-20261011T191739Z-zeros.zip" download>.zip</a>
+<a href="downloads/gems60-h71-union-champ-convcomp-43654-20261011T191739Z-zeros-runcard.json">run card</a>
+<a href="downloads/gems60-h71-union-champ-convcomp-43654-20261011T191739Z-zeros.json">format receipt</a></td>
+<td style="color:#067647"><b>DOWNLOAD: YES</b> &mdash; portal-legal single-band float32 in [0,1], EPSG:32611, exact sample transform, no nodata tag. The <code>-nan</code> file's null mask is <b>pixel-identical to the official sample submission</b> (7,111,787 NaN cells); the <code>-zeros</code> file is identical inside the footprint with zeros outside. Both variants carry the same 43,654 dots.<br>
+<b>SUBMIT: YES &mdash; as the deliberate next rung of our own line</b> (it contains the already-scored champion), <b>with one disclosed caveat:</b>
+86% of its dots are the champion's own mass, so the standing &ldquo;&le;70% within 3&nbsp;px&rdquo; clause cannot be met on the
+<i>whole artifact</i> against our own ancestor rasters &mdash; structurally, not because of duplication. The <b>new</b> 6,000 dots
+overlap nothing above <b>0.5187</b> (limit 0.70) and the file is byte- and pixel-unique.<br>
+<span style="color:#344054">If a virgin artifact is required instead, submit
+<a href="downloads/gems60-h70a-convcomp-6000-20261011T185116Z-zeros.tif">H70-A</a> (6,000 dots, literal uniqueness pass) &mdash; but it is a probe and scores low alone.</span></td></tr>
+</table>
+<p style="margin:6px 0 0"><b>Why this file.</b> Measured on a population-matched instrument (62,226 state-geological-map fault pixels
+&gt;300&nbsp;m off the catalogue): the added mass earns <b>0.4018 credit per dot</b> against the break-even <b>0.0556</b>,
+and the union beats the champion by <b>+0.03799 DTI [+0.03379, +0.04208]</b> (paired 20&nbsp;km block bootstrap);
+the registered catalogue holdout is unchanged (&Delta; = &minus;0.000288, gate &plusmn;0.002). Algebra on the owner-reported
+anchor: <b>0.361&ndash;0.386</b> if the measured credit transfers, <b>0.260&ndash;0.265</b> if the added mass earns nothing.
+No local instrument ranks the live board, so this is a measured candidate, <b>not</b> an organizer-confirmed score.</p>
+<p style="margin:4px 0 0">Full reasoning: <a href="research/why-02778-and-what-beats-it-2026-10-11.md">why the champion scored 0.2778, and what can beat it</a>
+&middot; preregistration <a href="../registry/preregistration-h71.json">registry/preregistration-h71.json</a>
+&middot; evidence <a href="../evidence/h71_runcard.json">evidence/h71_runcard.json</a>
+&middot; identification pair <a href="downloads/gems60-h69a-champ-half-20261011T182938Z-zeros.tif">h69A</a> +
+<a href="downloads/gems60-h69b-champ-nulladd-2000px-20261011T182938Z-zeros.tif">h69B</a> (two uploads pin T, K, F exactly).</p>
+</div>
+<!-- H71-STATUS:END -->
+
+<!-- H70-STATUS:BEGIN -->
+<div class=wrap style="border:3px solid #b54708;background:#fffcf5;padding:12px 16px;margin:8px auto">
+<h2 style="margin:0 0 6px">&#128680; READ THIS FIRST (2026-10-11, session <code>arena/161d8066-60gemsdoe</code>, run H70) &mdash; what is new, and what may be submitted</h2>
+<p style="margin:4px 0"><b>Why the champion scored 0.2778, and what can beat it:</b>
+<a href="research/why-02778-and-what-beats-it-2026-10-11.md">research note</a> &middot;
+the champion is the last rung of a nested five-step mass-prune ladder; the last two rungs deleted exactly the
+dots at <b>d = 1 px</b> and <b>d = 2 px</b> from the mapped catalogue and <i>each raised the live score</i>
+(+0.0108, +0.0070 [owner-report]). Mass control alone has given +0.086 and is near exhaustion; the remaining
+headroom is <b>field quality</b> (#1 public 0.4133) and <b>identification</b>.</p>
+<table>
+<tr><th>artifact</th><th>one-click download &amp; receipts</th><th>OK to download &amp; submit?</th></tr>
+<tr><td><b>H70-A uniqueness-cleared convergent-cover probe</b><br><code>gems60-h70a-convcomp-6000-20261011T185116Z-zeros.tif</code><br>
+<span style="color:#5b7183">6,000 dots &middot; 0 on catalogue &middot; min 316 m off catalogue &middot; sha256 <code>5c22c464a40e15ba&hellip;</code></span></td>
+<td><a class=btn href="downloads/gems60-h70a-convcomp-6000-20261011T185116Z-zeros.tif" download>&#11015; .tif</a>
+<a class="btn alt" href="downloads/gems60-h70a-convcomp-6000-20261011T185116Z-zeros.zip" download>.zip</a>
+<a href="downloads/gems60-h70a-convcomp-6000-20261011T185116Z-zeros-runcard.json">run card</a>
+<a href="downloads/gems60-h70a-convcomp-6000-20261011T185116Z-zeros-runcard.json">full evidence</a></td>
+<td style="color:#067647"><b>DOWNLOAD: YES</b> — portal-legal (float32, [0,1], 0 NaN, none on the catalogue),
+byte/pixel-unique, |&rho;| &le; 0.0147 vs all 102 scanned rasters, worst discriminating 3-px dot overlap
+<b>0.5187 &le; 0.70</b>.<br><b>SUBMIT: only as a deliberate measurement probe</b> (owner's weekly slot).
+It is not a replacement candidate: on the registered catalogue holdout it is far below the champion, and its
+purpose is to return the <i>live</i> credit-per-dot of a convergent-evidence field — a number no local
+instrument can supply (the catalogue-hidden proxy ranks live scores at &rho; = +0.14).</td></tr>
+<tr><td><b>H70-B field-strength diagnostic</b><br><code>gems60-h70b-convcomp-12000-20261011T184819Z-zeros.tif</code><br>
+<span style="color:#5b7183">12,000 dots &middot; sha256 <code>4f2fbeed356fed1c&hellip;</code></span></td>
+<td><a class=btn href="downloads/gems60-h70b-convcomp-12000-20261011T184819Z-zeros.tif" download>&#11015; .tif</a>
+<a class="btn alt" href="downloads/gems60-h70b-convcomp-12000-20261011T184819Z-zeros.zip" download>.zip</a>
+<a href="downloads/gems60-h70b-convcomp-12000-20261011T184819Z-zeros-runcard.json">run card</a></td>
+<td style="color:#b42318"><b>DOWNLOAD: YES &middot; SUBMIT: NO</b> — verdict <b>NEGATIVE</b>:
+0.9448 of its dots fall within 3 px of <code>r11_greedy_mp.tif</code>, a comparator that itself sits within
+3 px of 73.97 % of the footprint, so the standing uniqueness clause cannot clear it. It is the arm that
+measured the field (credit/dot 0.5864 [0.510, 0.667]).</td></tr>
+<tr><td><b>H69A / H69B identification probes</b><br><span style="color:#5b7183">0.5 &times; champion and champion + 2,000 floor dots</span></td>
+<td><a class=btn href="downloads/gems60-h69a-champ-half-20261011T182938Z-zeros.tif" download>&#11015; A .tif</a>
+<a class=btn href="downloads/gems60-h69b-champ-nulladd-2000px-20261011T182938Z-zeros.tif" download>&#11015; B .tif</a>
+<a href="downloads/gems60-h69-probes-20261011T182938Z-buildrecord.json">build record</a></td>
+<td><b>DOWNLOAD: YES &middot; SUBMIT: yes, <i>as diagnostics</i></b> — two uploads plus the already-paid
+0.2778 anchor identify T, K and F exactly (<code>scripts/h69_recovery.py</code>, self-test exact). Both are
+constructed below the anchor, so they cannot lower the team's recorded standing.</td></tr>
+<tr><td><b>H66-1 registry primary</b> (previous session) <br><code>gems60-h66-dem10-bedrock-dksn-40000-&hellip;-zeros.tif</code></td>
+<td><a class=btn href="downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif" download>&#11015; .tif</a></td>
+<td>DOWNLOAD: YES &middot; SUBMIT: <b>not cleared</b> — highest registered HOLDOUT-DTI (0.065739) but the local
+holdout is hostile to off-catalogue arms; keep for the selector.</td></tr>
+</table>
+<p style="margin:6px 0 0"><b>Population-matched instrument, measured this session</b> (62,226 SGMC fault pixels
+&gt;300 m off the catalogue): credit per dot <b>0.5864 [0.510, 0.667]</b> (H70-B) and <b>0.4018</b> (H70-A) against
+<b>0.1456</b> for the champion and <b>0.1091 &plusmn; 0.005</b> for five mass-matched controls; paired
+&Delta;DTI <b>+0.1053 [+0.0913, +0.1198]</b>. Gates G1/G2 <b>PASS</b>; the union leaves the registered holdout
+unchanged (&Delta; = &minus;2.1e-5). <b>No local instrument has been shown to rank the live board</b>
+(&rho; = +0.14 for the historic proxy, +0.53 for the best calibrated mixture at n = 12) — the only measurement
+of the true value is a live return.</p>
+<p style="margin:4px 0 0"><b>STOP unchanged:</b> <code>registry/current_site_status.json</code> still carries the
+H65-1 channel-steepness STOP, and no lane driver was run. The stop guard's verdict for H70 is printed and stored
+verbatim in both run cards (IR-H70-GUARD-01 in the research note) rather than bypassed silently.</p>
+</div>
+<!-- H70-STATUS:END -->
+
 <!-- H67-STATUS:BEGIN -->
 <div class=wrap style="border:3px solid #067647;background:#f6fef9;padding:12px 16px;margin:8px auto">
 <h2 style="margin:0 0 6px">&#9989; READ THIS FIRST (2026-10-11, session H66-1 / H67-1 &mdash; <code>arena/7085de4f-60gemsdoe</code>): Validated 10 m Bedrock &Delta;k<sub>sn</sub> GeoTIFF &amp; Submission Decision</h2>

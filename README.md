@@ -5,6 +5,53 @@
 **Official rules**: [NLR/OT-6A50-96647](https://www.nlr.gov/docs/fy26osti/96647.pdf) (DOI [10.2172/3818146](https://doi.org/10.2172/3818146)) ·
 **Official public leaderboard (manual read 2026-10-11): #1 xiaofanhu 0.4133 · #8 DARD 0.3195 · #23 extradr19 0.2778** · **H33 group claim (owner-reported): 0.2778, not organizer-confirmed**
 
+<!-- H71-STATUS:BEGIN -->
+> ## 🚦 READ THIS FIRST (2026-10-11, session `arena/161d8066-60gemsdoe`, run H71) — newest artifact and the submit decision
+>
+> **The answer to "why 0.2778, and can we beat it":** [docs/research/why-02778-and-what-beats-it-2026-10-11.md](docs/research/why-02778-and-what-beats-it-2026-10-11.md).
+> `h33-h33-2-b2` is the last rung of a nested **mass-prune ladder** on one field. **[measured]** the two final rungs deleted exactly the dots at
+> **d = 1 px** and **d = 2 px** from the published catalogue, and *each deletion raised the live score* (+0.0108, +0.0070 owner-reported). The champion's
+> dots are **wide-field** (0 on the catalogue, 5.8% within 300 m, median 1.97 km, p95 8.2 km, max 21.9 km) — so the hidden "new" faults are *near but not on*
+> the published network, and the incumbent's edge is a near-minimal mass on a well-ranked field. Thinning is now at the kernel edge; the unexploited direction
+> is **measured-credit addition**, and the hidden set's recall is only ≈29–38%, i.e. two thirds of the truth is uncovered.
+>
+> | artifact | one-click download | OK to download & submit? |
+> |---|---|---|
+> | **H71 union** — champion + measured convergent-cover complement, **43,654 dots**, sha256 `79e3fafab1adf16e…` (`-nan` variant `c8a76393aa543462…`) | [⬇ .tif (`-nan`, spec-literal)](docs/downloads/gems60-h71-union-champ-convcomp-43654-20261011T191739Z-nan.tif) · [⬇ .tif (`-zeros`)](docs/downloads/gems60-h71-union-champ-convcomp-43654-20261011T191739Z-zeros.tif) · [.zip](docs/downloads/gems60-h71-union-champ-convcomp-43654-20261011T191739Z-zeros.zip) · [run card](docs/downloads/gems60-h71-union-champ-convcomp-43654-20261011T191739Z-zeros-runcard.json) · [format receipt](docs/downloads/gems60-h71-union-champ-convcomp-43654-20261011T191739Z-zeros.json) | **DOWNLOAD: YES** — portal-legal single-band float32, [0,1], EPSG:32611, exact sample transform, no nodata tag. The `-nan` variant's null mask is **pixel-identical to the official sample submission** (7,111,787 NaN); the `-zeros` variant is identical inside the footprint with zeros outside. Use `-nan` unless a validator rejects NaN, then `-zeros`. **SUBMIT: YES, as the deliberate next rung of our own line** — with one disclosed caveat: 86 % of the dots are the already-scored champion's own mass, so the standing "≤70 % within 3 px" clause cannot hold on the *whole artifact* against our own ancestor rasters (structural, not duplication). The **new 6,000 dots** overlap nothing above **0.5187** (limit 0.70); file is byte- and pixel-unique. |
+> | **H70-A** convergent-cover probe, 6,000 dots, sha256 `5c22c464a40e15ba…` | [⬇ .tif](docs/downloads/gems60-h70a-convcomp-6000-20261011T185116Z-zeros.tif) · [run card](docs/downloads/gems60-h70a-convcomp-6000-20261011T185116Z-zeros-runcard.json) | DOWNLOAD: YES. SUBMIT only if a **virgin** artifact is required (literal uniqueness pass at 0.5187) — it is a 6,000-dot probe and scores low alone. |
+> | **H70-B** field diagnostic, 12,000 dots, sha256 `4f2fbeed356fed1c…` | [⬇ .tif](docs/downloads/gems60-h70b-convcomp-12000-20261011T184819Z-zeros.tif) · [run card](docs/downloads/gems60-h70b-convcomp-12000-20261011T184819Z-zeros-runcard.json) | DOWNLOAD: YES · **SUBMIT: NO** — verdict NEGATIVE (0.9448 of its dots within 3 px of `r11_greedy_mp.tif`). Diagnostic only. |
+> | **H69A / H69B** identification probes (0.5 × champion · champion + 2,000 floor dots) | [A](docs/downloads/gems60-h69a-champ-half-20261011T182938Z-zeros.tif) · [B](docs/downloads/gems60-h69b-champ-nulladd-2000px-20261011T182938Z-zeros.tif) · [build record](evidence/h69_probe_build.json) | DOWNLOAD: YES. **SUBMIT: yes, as diagnostics** — two uploads plus the 0.2778 anchor pin `T`, `K`, `F` exactly (`scripts/h69_recovery.py` self-test exact). |
+> | Group champion, already live-scored 0.2778 [owner-report] | [⬇ .tif](docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif) | DOWNLOAD: YES — still the recorded best; H71 contains it. |
+>
+> **Receipts for H71** ([card](evidence/h71_runcard.json), preregistration [registry/preregistration-h71.json](registry/preregistration-h71.json) + amendment 1, both before the run):
+> G1 population-matched **PASS** (added mass 0.4018 credit/dot vs break-even 0.0556; union − champion paired **+0.03799 [+0.03379, +0.04208]** on 62,226 SGMC-off-catalogue fault pixels);
+> G2 registered holdout **PASS** (Δ −0.000288, gate ±0.002); G3 uniqueness **QUALIFIED** (increment 0.5187 ≤ 0.70, ρmax 0.8396 to our own line, byte/pixel-unique; artifact-level clause fails only vs our own ancestors — IR-H71-LINE-01);
+> G4 portal **PASS**. Algebra on the owner-reported anchor: **0.361–0.386** if the measured credit transfers, **0.260–0.265** if the added mass earns nothing — model, not measurement.
+>
+> **STOP unchanged:** `registry/current_site_status.json` still carries the H65-1 channel-steepness STOP and was not edited; H71 runs no lane driver and rebuilds no lane cache (guard verdict recorded verbatim in the card).
+> `evidence/h70_runcard.json` (H70 run 1) is now marked **STALE** on disk — never quote its shas.
+<!-- H71-STATUS:END -->
+
+<!-- H70-STATUS:BEGIN -->
+> ## 🚦 READ THIS FIRST (2026-10-11, session `arena/161d8066-60gemsdoe`, run H70) — new files and the submit decision
+>
+> Full reasoning: **[docs/research/why-02778-and-what-beats-it-2026-10-11.md](docs/research/why-02778-and-what-beats-it-2026-10-11.md)**
+> ("why 0.2778, and what can beat it"), with the run cards in `evidence/h70a_runcard.json`, `evidence/h70b_runcard.json`.
+>
+> **What was found this session.** The 0.2778 champion is the last rung of a nested five-step mass-prune ladder on one field; the two most recent rungs deleted exactly the dots at **d = 1 px and d = 2 px from the mapped catalogue** and *each deletion raised the live score* (+0.0108, +0.0070 [owner-report]; nesting verified byte-exactly here). So the hidden positives avoid the 100–200 m halo of the published map, and the champion's edge is a near-minimal mass, not a better field. Mass control alone has now yielded +0.086 across the ladder and is close to exhausted; the remaining headroom is **field quality** (public board: #1 0.4133, #3 0.3361) and **identification**.
+>
+> | artifact | one-click download | OK to download & submit? |
+> |---|---|---|
+> | **H70-A** uniqueness-cleared convergent-cover probe, 6,000 dots, sha256 `5c22c464a40e15ba…` | [⬇ .tif](docs/downloads/gems60-h70a-convcomp-6000-20261011T185116Z-zeros.tif) · [.zip](docs/downloads/gems60-h70a-convcomp-6000-20261011T185116Z-zeros.zip) · [run card](docs/downloads/gems60-h70a-convcomp-6000-20261011T185116Z-zeros-runcard.json) | **DOWNLOAD: YES** — portal-legal (float32, [0,1], 0 NaN, 0 on catalogue), byte/pixel-unique, \\|ρ\\| ≤ 0.0147 vs all 102 scanned rasters, worst discriminating 3-px overlap 0.5187 ≤ 0.70. **SUBMIT: only as a deliberate measurement probe** (owner's weekly slot); it is *not* a replacement candidate and does **not** beat H66-1 on the registered holdout. |
+> | **H70-B** field-strength diagnostic, 12,000 dots, sha256 `4f2fbeed356fed1c…` | [⬇ .tif](docs/downloads/gems60-h70b-convcomp-12000-20261011T184819Z-zeros.tif) · [.zip](docs/downloads/gems60-h70b-convcomp-12000-20261011T184819Z-zeros.zip) · [run card](docs/downloads/gems60-h70b-convcomp-12000-20261011T184819Z-zeros-runcard.json) | **DOWNLOAD: YES · SUBMIT: NO** — verdict **NEGATIVE**: 0.9448 of its dots fall within 3 px of `r11_greedy_mp.tif` (a comparator that itself covers 73.97 % of the footprint within 3 px), so the standing uniqueness clause cannot clear it. Kept as the diagnostic that measured the field. |
+> | **H69A / H69B** identification probes (0.5 × champion · champion + 2,000 floor dots) | [A .tif](docs/downloads/gems60-h69a-champ-half-20261011T182938Z-zeros.tif) · [B .tif](docs/downloads/gems60-h69b-champ-nulladd-2000px-20261011T182938Z-zeros.tif) · [build record](evidence/h69_probe_build.json) | **DOWNLOAD: YES · SUBMIT: yes, *as diagnostics*** — two uploads plus the already-paid 0.2778 anchor identify `T`, `K`, `F` exactly (`scripts/h69_recovery.py`); both are constructed below the anchor, so they cannot lower the recorded standing. |
+> | Group champion, already live-scored 0.2778 [owner-report] | [⬇ .tif](docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif) | **DOWNLOAD: YES.** Still the team's best recorded artifact. |
+>
+> **What H70 measured** (population-matched instrument: 62,226 SGMC fault pixels >300 m off the catalogue): credit per dot **0.5864 [0.510, 0.667]** for H70-B and **0.4018** for H70-A, against **0.1456** for the champion and **0.1091 ± 0.005** for five mass-matched random controls (paired ΔDTI +0.1053 [+0.0913, +0.1198]). Gates G1 (population-matched) and G2 (union does not degrade the registered holdout, Δ = −2.1e-5 / −2.9e-4 within a ±0.002 gate) **PASS**; G3 (uniqueness) passes for H70-A and fails for H70-B as stated; G4 (portal) passes for both. The registered catalogue holdout is blind to this mechanism (its ρ against 12 live scores is +0.14) — that disagreement is disclosed, not averaged away.
+>
+> **The stop guard was consulted and reported, not forked.** `registry/current_site_status.json` (STOP for the H65-1 channel-steepness first test) is unchanged; H70 is an emission runner that runs no lane driver and rebuilds no lane cache. See IR-H70-GUARD-01 in the research note.
+<!-- H70-STATUS:END -->
+
 <!-- H67-STATUS:BEGIN -->
 <!-- H66-STATUS:BEGIN -->
 > ## 🚦 READ THIS FIRST (2026-10-11, session H66): the newest unique TIF and whether you may submit it

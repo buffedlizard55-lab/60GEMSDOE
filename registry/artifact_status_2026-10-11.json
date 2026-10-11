@@ -1,0 +1,75 @@
+{
+  "generated_utc": "2026-10-11T19:22:00Z",
+  "session": "arena/161d8066-60gemsdoe",
+  "purpose": "machine-readable status of the artifacts this session built or promoted; every sha256 is the shipped file, every verdict comes from the named run card. No live score exists for any of them.",
+  "artifacts": [
+    {
+      "id": "GEMS60-H71",
+      "kind": "candidate",
+      "file": "docs/downloads/gems60-h71-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
+      "sha256": "c8a76393aa543462a4fc58c986055e267ed0ea3da135fe1378a1235cf0096d5e",
+      "variant": "NaN outside the footprint; null mask pixel-identical to data/official/sample_submission.tif",
+      "dots": 43654,
+      "verdict": "PROMOTE-CANDIDATE-UNIQUENESS-QUALIFIED",
+      "card": "evidence/h71_runcard.json",
+      "submit_guidance": "download yes; submit as the deliberate next rung of our own line (contains the champion's dots); new mass uniqueness-clean at 0.5187",
+      "key_evidence": "G1 paired +0.03799 DTI [+0.03379, +0.04208] vs champion on 62,226 SGMC-off-catalogue fault pixels; G2 delta -0.000288 (gate 0.002); G4 validator pass"
+    },
+    {
+      "id": "GEMS60-H71",
+      "kind": "candidate",
+      "file": "docs/downloads/gems60-h71-union-champ-convcomp-43654-20261011T191739Z-zeros.tif",
+      "sha256": "79e3fafab1adf16ec5d1b0549dcf4bcdd4e7b40abc6aa5c1791334939ae4581d",
+      "variant": "zeros outside the footprint (for validators that reject NaN)",
+      "dots": 43654,
+      "verdict": "PROMOTE-CANDIDATE-UNIQUENESS-QUALIFIED",
+      "card": "evidence/h71_runcard.json"
+    },
+    {
+      "id": "GEMS60-H70-A",
+      "kind": "probe",
+      "file": "docs/downloads/gems60-h70a-convcomp-6000-20261011T185116Z-zeros.tif",
+      "sha256": "5c22c464a40e15bae84463f921a6c704d29b45c67dd334c08202320d7b7e68e0",
+      "dots": 6000,
+      "verdict": "PROMOTE-PROBE",
+      "card": "evidence/h70a_runcard.json",
+      "submit_guidance": "download yes; submit only as a deliberate field-strength probe - scores low alone",
+      "key_evidence": "SGMC-off credit/dot 0.4018 vs random 0.0336; satisfiable uniqueness 0.5187; |rho| <= 0.0147 over 102 rasters"
+    },
+    {
+      "id": "GEMS60-H70-B",
+      "kind": "diagnostic",
+      "file": "docs/downloads/gems60-h70b-convcomp-12000-20261011T184819Z-zeros.tif",
+      "sha256": "4f2fbeed356fed1ce7721f8ae3ed5a78d880acb525159b8964864831ec5058c8",
+      "dots": 12000,
+      "verdict": "NEGATIVE",
+      "card": "evidence/h70b_runcard.json",
+      "submit_guidance": "download yes; submit NO",
+      "key_evidence": "satisfiable uniqueness 0.94475 vs r11_greedy_mp; field strength 0.5864 credit/dot"
+    },
+    {
+      "id": "GEMS60-H69A",
+      "kind": "identification",
+      "file": "docs/downloads/gems60-h69a-champ-half-20261011T182938Z-zeros.tif",
+      "sha256": "14724cf39af7a08e5be2aa7df2113c23d85cbbb4e0bbfd4725bfeede147d5076",
+      "dots": 37654,
+      "verdict": "built, not uploaded",
+      "card": "evidence/h69_probe_build.json",
+      "submit_guidance": "download yes; submit as a diagnostic (two uploads pin T, K, F)"
+    },
+    {
+      "id": "GEMS60-H69B",
+      "kind": "identification",
+      "file": "docs/downloads/gems60-h69b-champ-nulladd-2000px-20261011T182938Z-zeros.tif",
+      "sha256": "9cd5197014f64bbc5e9fce194929b882c65a8179dbbade8e1de1aba39549f426",
+      "dots": 39654,
+      "verdict": "built, not uploaded",
+      "card": "evidence/h69_probe_build.json",
+      "submit_guidance": "download yes; submit as a diagnostic"
+    }
+  ],
+  "not_included": {
+    "evidence/h70_runcard.json": "STALE (H70 run 1); its artifacts were deleted - never quote its shas",
+    "h33-h33-2-b2 champion": "already live-scored 0.2778 (owner-reported); no new upload needed"
+  }
+}

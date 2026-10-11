@@ -1,0 +1,35 @@
+{
+  "generated_utc": "2026-10-11T18:58:00Z",
+  "results": {
+    "B": {
+      "artifact": "gems60-h70b-convcomp-12000-20261011T184819Z-zeros.tif",
+      "verdict": "NEGATIVE",
+      "literal": 0.99825,
+      "literal_raster": "calib_r13lattice_00904.tif",
+      "satisfiable": 0.94475,
+      "satisfiable_raster": "r11_greedy_mp.tif",
+      "max_abs_rho": 0.036007,
+      "byte_unique": true,
+      "scanned": 102,
+      "universal_blockers": [
+        "calib_r13lattice_00904.tif",
+        "r13_lattice_s5_00904.tif"
+      ]
+    },
+    "A": {
+      "artifact": "gems60-h70a-convcomp-6000-20261011T185116Z-zeros.tif",
+      "verdict": "PROMOTE-PROBE",
+      "literal": 0.996333,
+      "literal_raster": "calib_r13lattice_00904.tif",
+      "satisfiable": 0.518667,
+      "satisfiable_raster": "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+      "max_abs_rho": 0.014668,
+      "byte_unique": true,
+      "scanned": 102,
+      "universal_blockers": [
+        "calib_r13lattice_00904.tif",
+        "r13_lattice_s5_00904.tif"
+      ]
+    }
+  }
+}
