@@ -348,7 +348,101 @@
     "deq_autocorr_3km": 0.8408
    },
    "verdict": "NAMED SOURCE, obtainability NOT verified from this environment; ranked and NOT proposed as ready, per the brief's rule for externally-dependent candidates."
+  },
+  {
+   "id": "H62-D",
+   "rank": 21,
+   "slate": "H62-H64 (2026-10-11)",
+   "slate_rank": 1,
+   "title": "Catalogue flank peel, ring 3: continue the only live-verified emission rule (delete every dot within one kernel radius of the visible catalogue)",
+   "layers": [
+    "the exact nested deletion chain A(44,090 px, 0.2600) -> B(40,199, 0.2708) -> C(37,654, 0.2778), verified as pixel-exact subsets",
+    "distance-to-catalogue on the pinned 100 m grid (no external data needed)"
+   ],
+   "signature": "dots survive only beyond 300 m of the visible catalogue; the removed rings are ground that cannot be near the hidden truth because the hidden set excludes the catalogue by construction",
+   "why_off_catalogue": "each removal step gained a MEASURED +2.78e-6 and +2.75e-6 per dot (owner-reported ladder); the 3 px ring (2,171 dots) is the next step of the same rule",
+   "differs_from_repo": "the repository treats the ladder as history; this states the rule and extends it, and shows D3 is 94 % of its parent's cells (|rho| 0.974) so it trips the uniqueness gate it is measured against",
+   "expected_dti": "+0.006 -> 0.2838 (MODEL from two owner-reported deltas); per-dot rate must decay",
+   "cost": "zero (one mask operation on an existing artifact)",
+   "data_status": "built and measured: evidence/e4_ring_peel.json",
+   "status": "BUILT; highest modelled expectation, NOT unique -- do not submit as a novel artifact"
+  },
+  {
+   "id": "H61-A",
+   "rank": 22,
+   "slate": "H62-H64 (2026-10-11)",
+   "slate_rank": 2,
+   "title": "Cross-channel residual detector (XCRD): 30-channel physics/topography/radiometrics classifier for off-catalogue fault locality",
+   "layers": [
+    "19 official physics bands minus deq_n100a15/ieq_n100a15",
+    "9-band 3DEP 10 m derived topographic pack (registry-pinned)",
+    "4-band GeoDAWN radiometric pack K/Th/U/TC (USGS DOI 10.5066/P93LGLVQ mirror)",
+    "SGMC fault raster (USGS DOI 10.5066/P1A3DQZK) as the positivity proxy only"
+   ],
+   "signature": "gradient-boosted likelihood over 30 channels, positives = SGMC faults >300 m from the visible catalogue, negatives stratified by distance-to-catalogue decile so proximity cannot be used",
+   "why_off_catalogue": "positives are by construction ground the catalogue does not contain; distance-to-catalogue is deliberately excluded from the features",
+   "differs_from_repo": "the repository's detectors are ridge filters on 1-2 channels with catalogue-adjacent training targets; XCRD is trained on the off-catalogue population itself and emits out-of-fold",
+   "expected_dti": "screen A 2.45 vs the champion's 1.62 at equal mass (MODEL slope implies 0.28-0.36); independent LiDAR scarp screen is NEGATIVE (0.46), so the bet is on the non-scarp reading of the labels",
+   "cost": "~10 min per full 4-fold fit on 2 cores",
+   "data_status": "built and measured: evidence/e2_xcrd.json, evidence/e2b_xcrd_screen.json",
+   "status": "BUILT, UNIQUE (max |rho| 0.023 vs 35 registry rasters); not cleared by any local gate"
+  },
+  {
+   "id": "H63-A",
+   "rank": 23,
+   "slate": "H62-H64 (2026-10-11)",
+   "slate_rank": 3,
+   "title": "Scarp x structure co-locality: dots where a state-survey structural lineament and independent LiDAR surface-rupture evidence coincide, far from the catalogue",
+   "layers": [
+    "SGMC off-catalogue 300 m kernel",
+    "h52 LiDAR scarp count product, 300 m kernel (validation channel, never a feature elsewhere)",
+    "distance-to-catalogue exclusion >= 350 m"
+   ],
+   "signature": "rank lattice positions by the sum of the two max-normalised kernels; the intersection of the tubes is the physical claim (mapped structure WITH surface expression, NOT in the catalogue)",
+   "why_off_catalogue": "the intersection is defined by the two independent off-catalogue channels; the catalogue contributes only an exclusion zone",
+   "differs_from_repo": "no registry artifact combines the state-survey structural channel with the LiDAR rupture channel; H52 arms used scarps as an addition to a topo-ridge field, not as a co-locality with structure",
+   "expected_dti": "unknown sign; screen A 13.4 and screen B 3.73 at 8,128 dots (mass-limited)",
+   "cost": "low (kernels built; needs a justified mass-restoration rule before it can use a full budget)",
+   "data_status": "screened: evidence/e5_scarp_structure.json",
+   "status": "BUILT PARTITALLY (mass-limited to 8,128 dots); not cleared"
+  },
+  {
+   "id": "H62-A",
+   "rank": 24,
+   "slate": "H62-H64 (2026-10-11)",
+   "slate_rank": 4,
+   "title": "State-survey structural locality: emit on SGMC fault traces absent from the USGS Quaternary catalogue",
+   "layers": [
+    "USGS SGMC derived fault raster (DOI 10.5066/P1A3DQZK, sha 643cbe99...)",
+    "distance-to-catalogue exclusion"
+   ],
+   "signature": "dots sit exactly on off-catalogue SGMC traces (screen A 14.5, the highest value any arm has reached)",
+   "why_off_catalogue": "the traces are, by construction, faults the catalogue does not contain",
+   "differs_from_repo": "the group never isolated the trace population; r13_lattice_s5 contains it inside 206,895 dots and scored 0.0904 live",
+   "expected_dti": "REJECTED: the arm is 0.46x random on the independent LiDAR scarp screen, because off-catalogue SGMC traces are themselves scarp-depleted (0.68x of random, while catalogue pixels are 1.53x)",
+   "cost": "low (built)",
+   "data_status": "built and falsified: evidence/e3_sgmc_locality.json",
+   "status": "REJECTED -- do not submit"
+  },
+  {
+   "id": "H64-A",
+   "rank": 25,
+   "slate": "H62-H64 (2026-10-11)",
+   "slate_rank": 5,
+   "title": "Three-slot identification experiment: anchor + lambda=0.5 rescale + null-add 2,000 dots measure T, K and F exactly",
+   "layers": [
+    "the best scored emission (anchor)",
+    "the same emission with every positive halved",
+    "the anchor plus 2,000 dots placed at the belief-floor far from the catalogue"
+   ],
+   "signature": "1/DTI(lambda) = alpha + alpha(F/T) + (beta K/T)(1/lambda): the lambda sweep is linear, so three returns invert exactly (knowledge/02 sections 6 uses the same algebra)",
+   "why_off_catalogue": "the null-add dots are placed >300 m from every catalogue pixel so the organisers' masking rule cannot move the number",
+   "differs_from_repo": "no DTI improvement by construction: it is the only action available that replaces every projection in this repository with a measurement of K, T and F",
+   "expected_dti": "no direct gain; both probes are constructed to score below the anchor and only the best submission counts, so standing cannot be damaged",
+   "cost": "two submission slots, zero compute",
+   "data_status": "algebra verified elsewhere in the repository; never executed",
+   "status": "PROPOSED -- highest information value, operator decision required"
   }
  ],
- "updated_utc": "2026-10-04T14:30:19Z"
+ "updated_utc": "2026-10-11T00:00:00Z"
 }

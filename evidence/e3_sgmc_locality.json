@@ -1,0 +1,73 @@
+{
+  "schema": "e3-sgmc-locality/1",
+  "budget": 37654,
+  "population": {
+    "sgmc_px": 83593,
+    "offcat_sgmc_px": 62703,
+    "footprint_px": 5167373,
+    "allowed_px": 4805331,
+    "on_trace_available": 64335
+  },
+  "arms": {
+    "sgmc_pure": {
+      "mass": 17174,
+      "sgmc_offcat_coverage": 0.266266,
+      "expected_if_random": 0.01109,
+      "e1_offcat_excess": 0.255176,
+      "scarp_offcat_enrichment": 0.0,
+      "scarp_known_fault_enrichment": 0.0448,
+      "median_dist_to_catalogue_px": 21.19
+    },
+    "sgmc_scarp": {
+      "mass": 17227,
+      "sgmc_offcat_coverage": 0.267123,
+      "expected_if_random": 0.011124,
+      "e1_offcat_excess": 0.255999,
+      "scarp_offcat_enrichment": 0.0,
+      "scarp_known_fault_enrichment": 0.069,
+      "median_dist_to_catalogue_px": 21.19
+    },
+    "sgmc_hybrid": {
+      "mass": 17450,
+      "sgmc_offcat_coverage": 0.270698,
+      "expected_if_random": 0.011268,
+      "e1_offcat_excess": 0.25943,
+      "scarp_offcat_enrichment": 0.0,
+      "scarp_known_fault_enrichment": 0.0682,
+      "median_dist_to_catalogue_px": 21.19
+    },
+    "xcrd_control": {
+      "mass": 37654,
+      "sgmc_offcat_coverage": 0.057782,
+      "expected_if_random": 0.024315,
+      "e1_offcat_excess": 0.033467,
+      "scarp_offcat_enrichment": 0.2854,
+      "scarp_known_fault_enrichment": 0.0159,
+      "median_dist_to_catalogue_px": 22.63
+    },
+    "random": {
+      "mass": 37654,
+      "sgmc_offcat_coverage": 0.026307,
+      "expected_if_random": 0.024315,
+      "e1_offcat_excess": 0.001993,
+      "scarp_offcat_enrichment": 0.8767,
+      "scarp_known_fault_enrichment": 0.0166,
+      "median_dist_to_catalogue_px": 25.5
+    }
+  },
+  "mass_sweep": {},
+  "best_arm": {
+    "name": "sgmc_hybrid",
+    "e1_offcat_excess": 0.25943
+  },
+  "uniqueness": {
+    "max_abs_spearman": 0.09844718573047023,
+    "worst_peer": "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+    "max_within_3px_excess": 0.4423495702005731,
+    "worst_peer_3px": "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+    "worst_peer_3px_frac": 0.61954,
+    "worst_peer_3px_random": 0.17719,
+    "pass_spearman_gate": true,
+    "pass_within_3px_gate": false
+  }
+}

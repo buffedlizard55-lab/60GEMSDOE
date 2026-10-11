@@ -5,18 +5,35 @@
 **Official rules**: [NLR/OT-6A50-96647](https://www.nlr.gov/docs/fy26osti/96647.pdf) (DOI [10.2172/3818146](https://doi.org/10.2172/3818146)) ·
 **Live leaderboard top (verified 2026-10-11): 0.3774** · **Group best (owner-reported): 0.2778**
 
-> ## ⚠️ SESSION VERDICT (read first)
-> **The generated submission TIF is a NEGATIVE result: do NOT submit it.**
-> * File: [`docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif`](docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif)
->   (unique — passed the registry gate; validated — 0 problems; portal-safe all-finite container)
-> * Why: the lane's preregistered first test failed — withheld fault segments carry **lower**
->   channel-steepness anomaly than orientation-matched random lines (AUC 0.224 < 0.55 stop rule),
->   and pooled holdout DTI is 0.00214 [0.0018, 0.0025] vs 0.086 for the best comparison arm.
-> * The brief's rule "If not, stop." was applied. Negative results are deliverables.
-> * Site: `docs/index.html` (front page states the verdict at the top) ·
->   [`docs/executive-summary.html`](docs/executive-summary.html) explains the exact submission ritual
->   for any future PROMOTED file, including the fix for the historical
->   *"Predicted values must be in range [0, 1]"* portal rejection.
+> ## ⚠️ SESSION VERDICT (read first) — ONE-CLICK DOWNLOAD AND WHAT IT MEANS
+> **The file to download is [docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif](docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif)
+> ([zip](docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.zip), [receipt](docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.json)) — the ONE-CLICK artifact of
+> this session.** It is format-valid, portal-safe (float32, all values finite in [0, 1], zeros outside the
+> footprint, so it cannot trip the historical *"Predicted values must be in range [0, 1]"* portal rejection)
+> and **unique**: max |Spearman| **0.024** against all 35 registry rasters, worst within-3-px share 46 % (the
+> brief's stop rule is 70 %).
+>
+> **Is it OK to submit?** — *Download: yes. Slot: not cleared.* No local instrument can certify that it beats
+> the owner-reported best of **0.2778** (`h33-h33-2-b2-…-zeros`, 37,654 px); the repository's catalogue
+> hide-and-recover holdout scores every off-catalogue emission **exactly 0 by construction**
+> (`evidence/e6_blocked_gate.json`). It is an explicit, bounded-downside bet: only the best submission counts,
+> so a losing probe cannot cost standing.
+>
+> **Why this file:** on the one *mass-normalised* screen that reproduces the owner-reported ladder
+> (Spearman **+0.94**), it sits at **2.46** where the champion sits at 1.62 — at identical 37,654-dot mass.
+> Its honest counter-evidence: the independent LiDAR scarp screen is **negative** (0.48×) and is stated in the
+> receipt and on the site.
+>
+> **Values the project runs on: Maximize P(Win) and Own the Outcome.** Everything here is labelled
+> ORGANIZER-CONFIRMED / HOLDOUT-DTI / OWNER-REPORT / MODEL, and no projection is ever written as a score.
+>
+> **Do not submit the parallel lane's negative result**
+> (`docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif`, AUC 0.224 < 0.55 stop rule), and **do
+> not resubmit a copy of any prior artifact** — the live ladder's own files
+> (`dotted_d2_8_02600`, `gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan`, `dotted_b2_prune_02778`) are
+> copies by definition and are only for learning. The ring-peel continuation D3 (35,483 px, projected +0.006
+> MODEL) has the highest modelled expectation but trips the uniqueness gate (|rho| 0.974 vs its parent) and is
+> therefore **not** the headline download.
 
 ---
 

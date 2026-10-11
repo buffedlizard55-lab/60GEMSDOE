@@ -50,3 +50,9 @@ data/bridge/gems-geodawn-numerical-features.tif.part-*
 !data/external/
 !data/external/*.tif
 !data/external/*.json
+
+# --- H61-H63 session (2026-10-11) ---
+# work/ holds regenerable numpy caches (ignored globally via *.npy).  The one small external input the
+# session's scripts need offline is the USGS SGMC derivative (198 KB, sha256 643cbe99...); labels.tif is
+# a byte copy of the tracked data/bridge/existing_faults.tif, so it is not committed twice.
+work/labels.tif

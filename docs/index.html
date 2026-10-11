@@ -31,10 +31,28 @@ footer{color:var(--mut);font-size:13px;margin:26px 0}
 <div class="wrap">
 <h1>60GEMSDOE — Tectono-geomorphic knickpoint lane</h1>
 <p style="margin:10px 0 0;padding:10px 14px;border-left:4px solid #a4161a;background:#fbeaea"><strong>Parallel lane — Lane 1 (χ / normalised channel steepness, knickpoint strike traces):</strong> <a href="lane1/index.html">download page and verdict</a> (NEGATIVE, 2026-10-11) · <a href="lane1/executive-summary.html">executive summary</a> · <a href="lane1/data.html">data table</a> · <a href="lane1/hypotheses.html">ranked hypotheses</a></p>
+<div class="dl">
+<h2>✅ ONE-CLICK DOWNLOAD — this session's unique artifact</h2>
+<p><b>Is it OK to download and submit this TIF?</b> <b>Download: YES.</b>
+Submit decision: <b>NOT CLEARED</b> — an explicit, bounded-downside bet, explained in three lines below.</p>
+<p><a class="btn" href="downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif">Download gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif</a>
+<a class="btn ghost" href="downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.zip">zip</a>
+<a class="btn ghost" href="downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.json">receipt</a></p>
+<div class="kv">
+<div>file</div><div><code>docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif</code> · sha256 <code>3ede96840cdc1a5c…</code> · 127,363 bytes · 37,654 dots</div>
+<div>format</div><div>float32, EPSG:32611, 3730×3292, all values finite in [0, 1], zeros outside the footprint — the container that cannot trip the historical <i>"Predicted values must be in range [0, 1]"</i> portal rejection</div>
+<div>unique?</div><div><b>YES</b> — max |Spearman| <b>0.024</b> vs all 35 registry rasters; worst within-3-px share 46 % (stop rule 70 %)</div>
+<div>why it might win</div><div>on the one mass-normalised screen that reproduces the owner-reported ladder (Spearman +0.94) it scores <b>2.46</b> where the champion scores 1.62, at identical 37,654-dot mass; four-fold held-out AUC 0.73–0.80</div>
+<div>why it might lose</div><div>the independent LiDAR scarp screen is <b>negative (0.48×)</b>; if the hidden labels are scarp-expressed Quaternary rupture this candidate loses. Catalogue hide-and-recover holdout scores every off-catalogue emission 0 by construction (<code>evidence/e6_blocked_gate.json</code>)</div>
+<div>what is NOT ok</div><div>the parallel χ/knickpoint lane file (<a href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif">negative result</a>) and any copy of a prior submission such as <code>gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan</code></div>
+</div>
+<p class="mut">Values applied: <b>Maximize P(Win)</b> and <b>Own the Outcome</b>. No ORGANIZER-CONFIRMED score exists for this file; every number is labelled HOLDOUT-DTI, OWNER-REPORT or MODEL.</p>
+</div>
+
 <p class="mut">DOE GEMS Prize (DrivenData #306) · session 2026-10-11 · lane: channel steepness &amp; knickpoints (Kirby &amp; Whipple 2012; Perron &amp; Royden 2013)</p>
 
 <div class="banner">
-<h2>⚠️ VERDICT: NEGATIVE — DO NOT SUBMIT THIS FILE TO THE COMPETITION</h2>
+<h2>⚠️ PARALLEL LANE 1 (χ / knickpoint): NEGATIVE — DO NOT SUBMIT THAT FILE</h2>
 <p><b>Answer to “is it OK to download and submit this TIF?”: NO.</b> The lane's preregistered
 first test failed (E1: withheld fault segments carry <i>lower</i> channel-steepness anomaly than
 orientation-matched random lines; AUC&nbsp;=&nbsp;<b>0.224</b> &lt; 0.55 stop rule), and the pooled
@@ -61,7 +79,7 @@ the exact form entries are on the <a href="executive-summary.html">executive sum
 <div class="card">
 <h3>Also in this repository (merged parallel session, PR #1)</h3>
 <p><b>The group's live-scored champion</b> (owner-reported <b>0.2778</b>, the group best) is also hosted here:
-<a href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif" download>⬇ gemsdoe32-h33-h33-2-b2-…-e5eb6e7e-zeros.tif</a>
+<a href="downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif" download>⬇ gemsdoe32-h33-h33-2-b2-…-e5eb6e7e-zeros.tif</a>
 — this is the file the 0.2778 receipt refers to. The parallel session's dense H61 knickpoint raster
 (<code>downloads/submission.tif</code>, 983,855 px, local holdout 0.0131 on its own uncalibrated instrument)
 is published alongside; our sparse raster passed the lane-drift gate against it (ρ=+0.007, 36.7% 3-px overlap &lt; 70%).

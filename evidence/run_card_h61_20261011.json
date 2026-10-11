@@ -1,0 +1,105 @@
+{
+ "schema": "session-run-card/1",
+ "date_utc": "2026-10-11",
+ "repo": "60GEMSDOE",
+ "branch": "arena/7573c1e8-60gemsdoe",
+ "question": "unique TIF + obvious download/submit verdict; why the 0.2778 champion scores what it scores; 3-5 ranked hypotheses validated before any slot",
+ "budget": {
+  "planned": "3 experiments or 2 hours",
+  "used": "7 experiment scripts (e1, e2, e2b, e3, e4, e5, e6); wall-clock overran the 2 h guide while the full 4-fold detector fit and the site/tests were completed in the same session",
+  "submission_slots_used": 0
+ },
+ "environment": {
+  "venv": ".venv (excluded from snapshots)",
+  "packages": "numpy 2.4.6, scipy 1.17.1, scikit-image 0.26.0, scikit-learn 1.9.1, rasterio 1.4.4, numba 0.68.0, pytest",
+  "cores": 2,
+  "ram_gb": 3.9
+ },
+ "results": {
+  "shipped_artifact": {
+   "file": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
+   "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
+   "dots": 37654,
+   "validator": "ok (gems52.gates.format_report)",
+   "uniqueness": {
+    "max_abs_spearman": 0.0241,
+    "worst_within_3px": 0.4586,
+    "gate": "PASS"
+   },
+   "verdict": "OK to download; slot NOT CLEARED"
+  },
+  "screens": {
+   "sgmc_offcat_quality_ratio_candidate": 2.4637,
+   "champion": 1.6177,
+   "ladder_spearman": 0.9429,
+   "lidar_scarp_enrichment_candidate": 0.4819,
+   "champion_scarp": 1.8352
+  },
+  "xcrd": {
+   "folds_auc_full": [
+    0.7575,
+    0.7281,
+    0.7989,
+    0.7849
+   ],
+   "positives_px": 62703,
+   "channels": 30,
+   "leakage_canary": "no single feature above 0.90"
+  },
+  "ring_peel": {
+   "chain": "A 44,090 (0.2600) -> B 40,199 (0.2708) -> C 37,654 (0.2778), nested subsets",
+   "removed_rings": [
+    3891,
+    2545
+   ],
+   "gains": [
+    0.0108,
+    0.007
+   ],
+   "gain_per_dot": 2.763e-06,
+   "D3_dots": 35483,
+   "projection": 0.2838
+  },
+  "rejected": {
+   "H62A_sgmc_locality": "0.46x scarp enrichment vs 0.68x for the traces themselves (off-catalogue SGMC traces are scarp-depleted)",
+   "H62D_ring_peel": "|rho| 0.974 vs its parent -> not unique"
+  },
+  "gate": {
+   "protocol": "gems52-pooled-hide-v1, 4 quadrant blocks, 30 px buffer",
+   "finding": "every off-catalogue emission scores exactly 0 by construction; the gate can veto nothing and promote nothing about the hidden new-fault set",
+   "champion": 0.006263,
+   "d28": 0.148082
+  }
+ },
+ "tests": {
+  "command": ".venv/bin/python -m pytest tests/ -q",
+  "result": "101 passed, 8 skipped",
+  "before_this_session": "4 failed, 97 passed, 8 skipped"
+ },
+ "files_written": [
+  "scripts/e1_instrument_audit.py",
+  "scripts/e2_xcres.py",
+  "scripts/e2b_xcrd_screen.py",
+  "scripts/e3_sgmc_locality.py",
+  "scripts/e4_ring_peel.py",
+  "scripts/e5_scarp_structure.py",
+  "scripts/e6_blocked_gate.py",
+  "docs/research/h61-h63-session-20261011.md",
+  "evidence/e2_xcrd.json",
+  "evidence/e2b_xcrd_screen.json",
+  "evidence/e3_sgmc_locality.json",
+  "evidence/e4_ring_peel.json",
+  "evidence/e5_scarp_structure.json",
+  "evidence/e6_blocked_gate.json",
+  "registry/submission_build.json",
+  "registry/hypotheses.json",
+  "docs/feed.json",
+  "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif"
+ ],
+ "limitations": [
+  "no ORGANIZER-CONFIRMED score exists for any artifact",
+  "screens are n=6, threshold-sensitive, family-level only",
+  "XCRD positivity proxy is the SGMC map; if it is not fault-like the field's objective is wrong",
+  "the LiDAR scarp channel lives in an ephemeral /tmp mirror"
+ ]
+}

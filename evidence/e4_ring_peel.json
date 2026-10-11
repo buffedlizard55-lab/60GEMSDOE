@@ -1,0 +1,282 @@
+{
+  "schema": "e4-ring-peel/1",
+  "rule": "remove every dot within one kernel radius of the visible catalogue; A->B removed the 1 px ring, B->C the 2 px ring",
+  "ladder": {
+    "A": {
+      "file": "dotted_d2_8_02600.tif",
+      "live_dti": 0.26,
+      "mass": 44090
+    },
+    "B": {
+      "file": "dotted_d2_8_02708.tif",
+      "live_dti": 0.2708,
+      "mass": 40199
+    },
+    "C": {
+      "file": "dotted_b2_prune_02778.tif",
+      "live_dti": 0.2778,
+      "mass": 37654
+    }
+  },
+  "nesting_defects": {
+    "B inside A": 0,
+    "C inside B": 0
+  },
+  "rings": {
+    "A": {
+      "mass": 44090,
+      "within_1px": 3891,
+      "within_2px": 6436,
+      "within_3px": 8607,
+      "within_6px": 13237,
+      "median_dist_px": 15.0
+    },
+    "B": {
+      "mass": 40199,
+      "within_1px": 0,
+      "within_2px": 2545,
+      "within_3px": 4716,
+      "within_6px": 9346,
+      "median_dist_px": 17.69
+    },
+    "C": {
+      "mass": 37654,
+      "within_1px": 0,
+      "within_2px": 0,
+      "within_3px": 2171,
+      "within_6px": 6801,
+      "median_dist_px": 19.65
+    },
+    "D3": {
+      "mass": 35483,
+      "within_1px": 0,
+      "within_2px": 0,
+      "within_3px": 0,
+      "within_6px": 4630,
+      "median_dist_px": 21.21
+    },
+    "D4": {
+      "mass": 33829,
+      "within_1px": 0,
+      "within_2px": 0,
+      "within_3px": 0,
+      "within_6px": 2976,
+      "median_dist_px": 22.8
+    },
+    "D6": {
+      "mass": 30853,
+      "within_1px": 0,
+      "within_2px": 0,
+      "within_3px": 0,
+      "within_6px": 0,
+      "median_dist_px": 25.61
+    }
+  },
+  "observed_gains": {
+    "A->B": {
+      "dots_removed": 3891,
+      "live_gain": 0.0108,
+      "gain_per_dot": 2.776e-06
+    },
+    "B->C": {
+      "dots_removed": 2545,
+      "live_gain": 0.007,
+      "gain_per_dot": 2.75e-06
+    }
+  },
+  "gain_per_dot_mean": 2.763e-06,
+  "projection": {
+    "C": 0.2778,
+    "D3": 0.2838,
+    "D4": 0.2884,
+    "D6": 0.2966
+  },
+  "projection_class": "MODEL (owner-reported ladder deltas; not a score)",
+  "uniqueness": {
+    "max_abs_spearman": 0.973614375364356,
+    "worst_peer": "dotted_b2_prune_02778.tif",
+    "max_within_3px_frac": 1.0,
+    "worst_peer_3px": "dotted_b2_prune_02778.tif",
+    "n_registry_rasters": 35,
+    "raster_rows": {
+      "dotted_b2_prune_02778.tif": {
+        "spearman": 0.9736,
+        "within_3px": 1.0,
+        "random_within_3px": 0.14886
+      },
+      "dotted_d2_8_02600.tif": {
+        "spearman": 0.9025,
+        "within_3px": 1.0,
+        "random_within_3px": 0.17042
+      },
+      "dotted_d2_8_02708.tif": {
+        "spearman": 0.9426,
+        "within_3px": 1.0,
+        "random_within_3px": 0.15878
+      },
+      "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif": {
+        "spearman": 0.9025,
+        "within_3px": 1.0,
+        "random_within_3px": 0.17042
+      },
+      "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif": {
+        "spearman": 0.9025,
+        "within_3px": 1.0,
+        "random_within_3px": 0.17042
+      },
+      "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif": {
+        "spearman": 0.0128,
+        "within_3px": 0.25942,
+        "random_within_3px": 0.17513
+      },
+      "gems32-bayesopt-dilation-scarp-d28-20261004-zeros.tif": {
+        "spearman": 0.0128,
+        "within_3px": 0.25942,
+        "random_within_3px": 0.17513
+      },
+      "gems32-lazygreedy-maxcov-44090-supconfined-zeros.tif": {
+        "spearman": 0.4044,
+        "within_3px": 1.0,
+        "random_within_3px": 0.16157
+      },
+      "gems32-probe-S1-ANCHOR-identical-to-live-02600.tif": {
+        "spearman": 0.9025,
+        "within_3px": 1.0,
+        "random_within_3px": 0.17042
+      },
+      "gems32-probe-S2-SCALE-lambda-0.5.tif": {
+        "spearman": 0.9025,
+        "within_3px": 1.0,
+        "random_within_3px": 0.17042
+      },
+      "gems32-probe-S3-NULLADD-2000px.tif": {
+        "spearman": 0.8697,
+        "within_3px": 1.0,
+        "random_within_3px": 0.18082
+      },
+      "gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-nan.tif": {
+        "spearman": 0.9025,
+        "within_3px": 1.0,
+        "random_within_3px": 0.17042
+      },
+      "gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-zeros.tif": {
+        "spearman": 0.9025,
+        "within_3px": 1.0,
+        "random_within_3px": 0.17042
+      },
+      "gemsdoe32-h32a-dip-projected-step-46090-20261004T183200Z-838fcd84-nan.tif": {
+        "spearman": 0.8717,
+        "within_3px": 0.99377,
+        "random_within_3px": 0.1798
+      },
+      "gemsdoe32-h32a-dip-projected-step-46090-20261004T183200Z-838fcd84-zeros.tif": {
+        "spearman": 0.8717,
+        "within_3px": 0.99377,
+        "random_within_3px": 0.1798
+      },
+      "gemsdoe32-h32b-transtensional-swarm-45890-20261004T183200Z-27b7c9e6-nan.tif": {
+        "spearman": 0.876,
+        "within_3px": 0.99484,
+        "random_within_3px": 0.17794
+      },
+      "gemsdoe32-h32b-transtensional-swarm-45890-20261004T183200Z-27b7c9e6-zeros.tif": {
+        "spearman": 0.876,
+        "within_3px": 0.99484,
+        "random_within_3px": 0.17794
+      },
+      "gemsdoe32-h32c-mt-claycap-breach-45890-20261004T183200Z-a5963d0a-nan.tif": {
+        "spearman": 0.8753,
+        "within_3px": 0.99465,
+        "random_within_3px": 0.17665
+      },
+      "gemsdoe32-h32c-mt-claycap-breach-45890-20261004T183200Z-a5963d0a-zeros.tif": {
+        "spearman": 0.8753,
+        "within_3px": 0.99465,
+        "random_within_3px": 0.17665
+      },
+      "gemsdoe32-h32d-equalbudget-44090-20261004T183200Z-350cdc3f-nan.tif": {
+        "spearman": 0.863,
+        "within_3px": 0.98478,
+        "random_within_3px": 0.17282
+      },
+      "gemsdoe32-h32d-equalbudget-44090-20261004T183200Z-350cdc3f-zeros.tif": {
+        "spearman": 0.863,
+        "within_3px": 0.98478,
+        "random_within_3px": 0.17282
+      },
+      "gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-nan.tif": {
+        "spearman": 0.8635,
+        "within_3px": 0.9936,
+        "random_within_3px": 0.17975
+      },
+      "gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif": {
+        "spearman": 0.8635,
+        "within_3px": 0.9936,
+        "random_within_3px": 0.17975
+      },
+      "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif": {
+        "spearman": 0.9736,
+        "within_3px": 1.0,
+        "random_within_3px": 0.14886
+      },
+      "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif": {
+        "spearman": 0.9736,
+        "within_3px": 1.0,
+        "random_within_3px": 0.14886
+      },
+      "gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-nan.tif": {
+        "spearman": 0.9612,
+        "within_3px": 1.0,
+        "random_within_3px": 0.15159
+      },
+      "gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-zeros.tif": {
+        "spearman": 0.9612,
+        "within_3px": 1.0,
+        "random_within_3px": 0.15159
+      },
+      "h52_coincidence8_80k.tif": {
+        "spearman": 0.0116,
+        "within_3px": 0.37993,
+        "random_within_3px": 0.2382
+      },
+      "h60_officialstack_50k.tif": {
+        "spearman": -0.0035,
+        "within_3px": 0.2265,
+        "random_within_3px": 0.19006
+      },
+      "h60_union_d2_75308.tif": {
+        "spearman": -0.0043,
+        "within_3px": 0.09334,
+        "random_within_3px": 0.3188
+      },
+      "hedge_v2_01563.tif": {
+        "spearman": 0.0418,
+        "within_3px": 0.63112,
+        "random_within_3px": 0.2849
+      },
+      "r11_greedy_mp.tif": {
+        "spearman": 0.0139,
+        "within_3px": 0.88203,
+        "random_within_3px": 0.74295
+      },
+      "r13_lattice_s5_00904.tif": {
+        "spearman": 0.0116,
+        "within_3px": 0.99913,
+        "random_within_3px": 0.99865
+      },
+      "r14_union_tips10_lat6.tif": {
+        "spearman": 0.0128,
+        "within_3px": 0.76851,
+        "random_within_3px": 0.76473
+      },
+      "tip_stepover_r30_02632.tif": {
+        "spearman": 0.7811,
+        "within_3px": 0.99994,
+        "random_within_3px": 0.16422
+      }
+    },
+    "pass_spearman_gate": false,
+    "pass_within_3px_rule": false,
+    "caveat": "the worst peer is the parent artifact C, which this rule prunes; the two gates measure a new *lane*, and D3 is a continuation of the live-verified chain, stated as such rather than presented as an independent construction"
+  }
+}

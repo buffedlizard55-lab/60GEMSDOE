@@ -1,26 +1,27 @@
 {
- "name": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
- "note": "GEMSDOE32 H33-2-B2 | flank B=2 prune on the 0.2708 base: 37,654 dots, 0 within 200 m of the catalogue; live-mirror +0.00487 in 4/4 folds, safety 2.08, projected 0.2747; UNSCORED",
- "status_line": "PRIMARY = H33-2-B2 (Tier 1: live-anchored gate). 0.2708 base with every dot at d(catalogue) <= 2 px deleted (37,654 dots). 37,654 dots, 0 on the catalogue. Live mirror (spatially blocked, off-catalogue truth, validated on the known live orderings) +0.004870 in 4 quadrants over the 0.2708 base; live-anchored safety factor 2.08; projected live DTI 0.2747 (a MODEL, not a score). NO ORGANISER SCORE EXISTS for this or any artifact in this repository.",
+ "name": "60GEMSDOE-H61A-XCRD-37654px",
+ "note": "H61-A XCRD: 30-channel off-catalogue detector; 37,654 dots >=350 m from catalogue; unique vs 35 rasters; UNSCORED, projection only.",
+ "status_line": "PRIMARY (2026-10-11) = H61-A XCRD, the session's UNIQUE artifact: max |Spearman| 0.024 against all 35 registry rasters and 46 % worst-case within-3-px share (rule <=70 %). Screen A (SGMC off-catalogue kernel, the one mass-normalised screen that reproduces the owner-reported ladder at rho +0.94) puts it at 2.46 versus the champion's 1.62 at equal 37,654-dot mass. Independent LiDAR scarp screen is NEGATIVE (0.48), so this is an explicit bet on the non-scarp reading of the hidden labels. NO ORGANISER SCORE EXISTS and no local instrument can certify it beats 0.2778; the downside is bounded because only the best submission counts.",
  "file": {
-  "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
-  "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
-  "bytes": 219065,
+  "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
+  "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
+  "bytes": 127363,
   "positive_px": 37654
  },
  "file_zeros": {
-  "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
-  "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
-  "bytes": 219065
+  "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
+  "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
+  "bytes": 127363,
+  "positive_px": 37654
  },
  "zip": {
-  "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.zip",
-  "sha256": "0322d0b413530b9fb445a366ca1ad234c5180868c2f89cdc70fe2ce80bd4439f",
-  "bytes": 216
+  "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.zip",
+  "sha256": "b9e66142e20d103dd4bf9663d56b532b754c372deb28b31cd1efe406a560cdfd",
+  "bytes": 86350
  },
- "candidate_id": "H33-2-B2",
- "tier": 1,
- "hypothesis": "H33-2",
+ "candidate_id": "H61-A XCRD",
+ "tier": 2,
+ "hypothesis": "H61-A",
  "selection_rule": {
   "tier_1": "slot-eligible under the live-anchored gate (LM-cal +margin in 4/4 quadrants over a live-scored base, safety factor >= 2.0) AND on_catalogue_pixels == 0; highest projected live DTI wins",
   "tier_2": "scripts/build_slot_plan.py's frozen holdout rule: beats the owner-reported 0.2600 incumbent on all three holdout instruments AND 0 on-catalogue dots",
@@ -245,5 +246,26 @@
   }
  ],
  "rule": "0.2708 base (GEMS28-H27-4-R1-SOLO-D2.8, 40,199 dots) minus every dot within 2 px (200 m) of the published catalogue",
- "provenance": "built by scripts/build_submission_build.py from evidence/h33_validation.json + registry/slot_plan.json; every digest re-read from the written bytes; receipts evidence/h33_submission_bundles.json and docs/research/hypotheses-round4.md"
+ "provenance": "built by scripts/build_submission_build.py from evidence/h33_validation.json + registry/slot_plan.json; every digest re-read from the written bytes; receipts evidence/h33_submission_bundles.json and docs/research/hypotheses-round4.md",
+ "superseded_primary": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
+ "screens": {
+  "sgmc_offcat_quality_ratio_at_equal_mass": 2.4637,
+  "champion_same_screen": 1.6177,
+  "lidar_scarp_enrichment": 0.4819,
+  "lidar_scarp_enrichment_champion": 1.8352,
+  "held_out_auc_folds": [
+   0.7575,
+   0.7281,
+   0.7989,
+   0.7849
+  ],
+  "uniqueness": {
+   "max_abs_spearman": 0.0241,
+   "worst_within_3px_frac": 0.4586,
+   "random_within_3px_frac": 0.1749
+  }
+ },
+ "verdict": "OK TO DOWNLOAD. Slot decision: NOT CLEARED by any local gate (the repository's catalogue hide-and-recover holdout scores every off-catalogue emission exactly 0 by construction; evidence/e6_blocked_gate.json). Submit only as an explicit bet.",
+ "approved_for_weekly_slot": false,
+ "promoted": false
 }

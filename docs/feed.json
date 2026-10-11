@@ -1,7 +1,7 @@
 {
- "generated_utc": "2026-10-11T01:10:00Z",
+ "generated_utc": "2026-10-11T02:30:00Z",
  "repo": "60GEMSDOE",
- "session": "2026-10-11 tectono-geomorphic knickpoint lane",
+ "session": "2026-10-11 H61-H63: unique off-catalogue detector + the two screens that can and cannot rank",
  "current_official_leaderboard_top": {
   "score": 0.3774,
   "participant": "xiaofanhu",
@@ -14,6 +14,20 @@
   "evidence_class": "OWNER-REPORT"
  },
  "submissions": [
+  {
+   "name": "gems60-h61a-xcrd-37654px-20261011T021923Z",
+   "file": "downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
+   "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
+   "dots": 37654,
+   "verdict": "UNIQUE and format-valid - OK to download; slot NOT CLEARED (no local instrument can certify it beats 0.2778; explicit bounded-downside bet)",
+   "evidence_class": "MODEL",
+   "screen_sgmc_offcat_ratio": 2.4637,
+   "screen_champion_same": 1.6177,
+   "lidar_scarp_enrichment": 0.4819,
+   "uniqueness": "PASS (max |rho| 0.024 across 35 registry rasters; worst within-3-px 0.459 < 0.70)",
+   "validator": "ok",
+   "submitted_to_competition": false
+  },
   {
    "name": "gems60-lane-knickpoint-c7653-20261011T000000Z",
    "file": "downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
@@ -45,8 +59,9 @@
   "GitHub API rate limit (60/h unauthenticated) hit; use clones/codeload"
  ],
  "next_steps": [
-  "hypotheses 2-4 (basement-step, seismicity coupling, TDR contacts) run on bands already on disk",
-  "full 10m chi/ksn lane needs one unrestricted run (S3 egress) - pins ready",
-  "selector step: no promotable file this session; champion family remains the live anchor"
+  "Operator decision: submit the unique XCRD file as a bounded-downside bet, or spend the slots on the three-slot identification experiment (S1 anchor / S2 lambda=0.5 / S3 null-add) that measures T, K and F.",
+  "Do not submit D3 (ring peel): highest modelled expectation, |rho| 0.974 against its parent.",
+  "Rebuild H63-A (scarp x structure) with a justified mass-restoration rule, then re-screen.",
+  "AUC/screen work needs the ephemeral /tmp/gemsdoe48 LiDAR mirror; re-fetch via codeload if absent."
  ]
 }

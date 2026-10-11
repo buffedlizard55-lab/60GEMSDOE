@@ -1,0 +1,113 @@
+{
+  "schema": "e6-blocked-gate/1",
+  "protocol": "gems52-pooled-hide-v1, 4 quadrant blocks, 30 px buffer, block train mask",
+  "note": "Withheld truth is the VISIBLE catalogue (a proxy): a candidate can win here by better recovering mapped faults while being worse on the hidden new-fault set. This gate can promote nothing on its own; it can only veto.",
+  "scores": {
+    "champion_C(0.2778)": {
+      "dti": 0.006263,
+      "ci95": [
+        0.00556,
+        0.006998
+      ],
+      "withheld_positive_pixels": 36329
+    },
+    "D2.8_A(0.2600)": {
+      "dti": 0.148082,
+      "ci95": [
+        0.13613,
+        0.16047
+      ],
+      "withheld_positive_pixels": 36329
+    },
+    "ring_peel_D3": {
+      "dti": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "withheld_positive_pixels": 36329
+    },
+    "xcrd_H61A": {
+      "dti": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "withheld_positive_pixels": 36329
+    },
+    "sgmc_trace_H62A": {
+      "dti": 0.000655,
+      "ci95": [
+        0.000548,
+        0.000765
+      ],
+      "withheld_positive_pixels": 36329
+    },
+    "scarp_structure_H63A": {
+      "dti": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "withheld_positive_pixels": 36329
+    }
+  },
+  "paired_delta_vs_champion": {
+    "D2.8_A(0.2600)": {
+      "delta": -0.141819,
+      "ci95": [
+        -0.154043,
+        -0.130496
+      ]
+    },
+    "ring_peel_D3": {
+      "delta": 0.006263,
+      "ci95": [
+        0.00556,
+        0.006998
+      ]
+    },
+    "xcrd_H61A": {
+      "delta": 0.006263,
+      "ci95": [
+        0.00556,
+        0.006998
+      ]
+    },
+    "sgmc_trace_H62A": {
+      "delta": 0.005609,
+      "ci95": [
+        0.004928,
+        0.006326
+      ]
+    },
+    "scarp_structure_H63A": {
+      "delta": 0.006263,
+      "ci95": [
+        0.00556,
+        0.006998
+      ]
+    }
+  },
+  "implementation_sha256": {
+    "evaluate_holdout.py": "e4211fe530ccb8f1ffeab2ef2f8e94a563492c2a3644c908d1a81e379fcbd9d4",
+    "holdout.py": "f6706d781de72092e59332074af26e1d58cf734f95bf947a0d7c3fea577e6145",
+    "metric.py": "3d454119edfcec3cc2a83278c2015d7e41d39d8c1142fca12311409a18ce7d1a",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "ranking": [
+    "D2.8_A(0.2600)",
+    "champion_C(0.2778)",
+    "sgmc_trace_H62A",
+    "ring_peel_D3",
+    "xcrd_H61A",
+    "scarp_structure_H63A"
+  ],
+  "beats_champion": {
+    "D2.8_A(0.2600)": false,
+    "ring_peel_D3": true,
+    "xcrd_H61A": true,
+    "sgmc_trace_H62A": true,
+    "scarp_structure_H63A": true
+  }
+}
