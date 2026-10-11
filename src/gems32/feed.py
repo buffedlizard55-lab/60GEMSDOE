@@ -58,6 +58,21 @@ def build(root: Path = ROOT) -> dict:
     feed["leaderboard_observed_utc"] = rows[-1].get("observed_utc") if rows else None
     feed["leaderboard_verified"] = bool(rows and rows[-1].get("verified"))
     feed["leaderboard_snapshots"] = len(rows)
+    # Apply a committed same-day manual erratum to the public feed while keeping
+    # the original capture untouched in its registry JSON for audit.
+    snap = _read_json(reg / "leaderboard_snapshot_2026-10-11.json")
+    recheck = (snap or {}).get("erratum_2026_10_11_recheck", {}).get("live_read_verified_rows", [])
+    top_recheck = [row for row in recheck if row["rank"] <= 10]
+    if snap and top_recheck:
+        original = snap["rows"]
+        old_by_name = {row["participant"]: row for row in original}
+        names = {row["participant"] for row in top_recheck}
+        feed["leaderboard"] = ([{**old_by_name.get(row["participant"], {}), **row}
+                                for row in top_recheck] +
+                               [row for row in original
+                                if row["rank"] > 10 and row["participant"] not in names])
+        feed["leaderboard_observed_utc"] = snap["observed_utc"]
+        feed["leaderboard_erratum_applied"] = True
     feed["leaderboard_retrieval_policy"] = "manual rendered-page snapshots only; no automated competition-host request"
     # Current operating status is intentionally separate from registry/submission_build.json:
     # a historic primary must not override a later preregistered stop verdict.
@@ -75,6 +90,19 @@ def build(root: Path = ROOT) -> dict:
             "research_raster_sha256": stop_audit["existing_research_raster_sha256"],
             "report": stop_audit["report"],
             "note": "Snapshot of this repository; NOT a live DrivenData score feed.",
+        }
+    h73 = _read_json(root / "evidence" / "h73_runcard.json")
+    if h73:
+        # Newer negative run supersedes the dated H68 status in the feed without
+        # erasing H68's historical evidence or inventing a portal approval.
+        feed["current_lane_decision"] = {
+            "run": h73["run"], "verdict": h73["verdict"],
+            "submit_to_competition": h73["submit_to_competition"],
+            "new_tiff_generated": True, "download_ok": h73["download_ok"],
+            "research_raster_sha256": h73["raster_sha256"],
+            "holdout_dti": h73["holdout_dti"],
+            "report": "docs/research/h73-result-and-h33-analysis.md",
+            "note": h73["selector_decision"],
         }
 
     hyp = _read_json(reg / "hypotheses.json", {"hypotheses": []})

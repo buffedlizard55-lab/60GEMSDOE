@@ -33,7 +33,7 @@ def main() -> int:
     print(json.dumps(report.to_dict(), indent=2))
     if report.passed:
         # Format/footprint only. Uniqueness (registry overlap/rho), the lane STOP and
-        # the organizer's rules are NOT checked here; see README "Round H73".
+        # the organizer's rules are NOT checked here; see README and the H73 run card.
         print(f"\n[FORMAT-PASSED] {args.geotiff.name} passes format/footprint checks only. "
               "NOT uniqueness-cleared, NOT governance-cleared; do not submit without the selector step.")
         return 0

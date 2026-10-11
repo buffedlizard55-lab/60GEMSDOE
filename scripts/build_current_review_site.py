@@ -44,11 +44,11 @@ def _base(title: str, body: str, active: str = "", *, root_prefix: str = "", sta
         f'<a href="{root_prefix}{href}"{" class=active" if href == active else ""}>{label}</a>'
         for href, label in nav
     )
-    artifact = status["research_artifact"]
+    artifact = status.get("latest_generated_artifact", status["research_artifact"])
     tif = _site_href(artifact["path"], root_prefix=root_prefix)
-    review = f'{root_prefix}research/active-lane-review-2026-10-11.md'
-    btn = (f'<a class="btn" href="{tif}" download>Download H65-1 GeoTIFF — research only, DO NOT SUBMIT</a> '
-           f'<a class="btn alt" href="{review}">Read current review</a>')
+    review = f'{root_prefix}research/h73-ranked-hypotheses-2026-10-11.md'
+    btn = (f'<a class="btn" href="{tif}" download>Download NEW H73 GeoTIFF — research only, DO NOT SUBMIT</a> '
+           f'<a class="btn alt" href="{review}">Read H73 research</a>')
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{_e(title)} · 60GEMSDOE</title><link rel="stylesheet" href="{root_prefix}assets/site.css"></head><body>
@@ -73,11 +73,28 @@ def _common_status(status: dict, *, prefix: str = "") -> str:
     ci = first["ci95"]
     mean_text = f"{first['mean_log_ksn_step_contrast']:+.4f}"
     hold_text = f"{hold['mean']:.5f}"
-    return f'''<div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
+    h73_path = prefix + "downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif"
+    h73_zip = prefix + "downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.zip"
+    h73_receipt = prefix + "downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.json"
+    h73_card = prefix + "downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros-runcard.json"
+    return f'''<div class="banner current-stop-notice"><h2>NEW BYTE/PIXEL-UNIQUE H73 GeoTIFF — DOWNLOAD OK; COMPETITION SUBMISSION: NO</h2>
+<p><a class="btn" href="{h73_path}" download>Download H73 .tif (95,592 bytes)</a>
+<a class="btn alt" href="{h73_zip}" download>Download one-TIFF .zip</a>
+<strong>DO NOT SUBMIT.</strong> This is a newly computed, exact-byte/pixel-unique negative artifact—not a copied prior submission and not selector-cleared.</p>
+<ul><li><b>Local format:</b> PASS — single-band float32, EPSG:32611, 3730×3292, exact transform, 0 NaN/Inf, range [0,1], 0 outside-footprint and 0 catalogue positives.</li>
+<li><b>HOLDOUT-DTI</b> (<code>gems57-pooled-hide-v2</code>, 22,641 withheld positives): <b>0.085263</b>, 95% CI [0.074915, 0.096019] — below H68 0.171894, so the improvement gate failed.</li>
+<li><b>First tests:</b> catalogue-withheld +0.2841 [+0.1439,+0.4205] passed; preregistered SGMC-off-catalogue −0.2909 [−0.4757,−0.0947] failed → dual gate STOP.</li>
+<li><b>Uniqueness:</b> new SHA-256 <code>594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3</code>; no decoded or byte-identical match in 680 checked unique-SHA rasters (all 655 pinned rows plus 25 later local files). Exact full-footprint max |Spearman| 0.1561 ≤ 0.90. The literal 3-px overlap is 1.000 &gt; 0.70 because earlier continuous registry rasters are positive on every footprint cell; no exception is claimed, so the protocol verdict remains DUPLICATE-STOP.</li>
+<li><b>Portal name:</b> <code>60GEMSDOE-H73-PAIRED-BASIN-KSN-20000-20261011T200117Z</code>. <b>Note (94 chars):</b> <code>H73 paired-basin ksn, 20k weighted cells; holdout negative; unique bytes/pixels; DO NOT SUBMIT</code>.</li></ul>
+<p><a href="{h73_receipt}">Format receipt</a> · <a href="{h73_card}">JSON run card</a> ·
+<a href="{prefix}research/h73-result-and-h33-analysis.md">H73 result + why H33 reported 0.2778</a> ·
+<a href="{prefix}research/h73-ranked-hypotheses-2026-10-11.md">ranked hypotheses and official sources</a> ·
+<a href="{prefix}../evidence/h73_preplacement_uniqueness.json">680-raster audit</a></p></div>
+<div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
 <p><b>Governing STOP record:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
 <strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast {mean_text},
 95% CI [{ci[0]:+.4f}, {ci[1]:+.4f}] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
-The earlier c7653 run also stopped. Later H66/H67/H68 artifacts do not lift this STOP; their literal uniqueness clearance failed against the dense calibration lattice corpus. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
+The earlier c7653 run also stopped. H66/H67/H68 did not lift that STOP. The later H73 session generated a new format-valid negative research TIFF but failed its SGMC, holdout, and literal-overlap gates; it likewise used no slot. No artifact is cleared for competition submission.</p>
 <p><a class="btn" href="{tif}" download>Download the existing H65-1 GeoTIFF for research only</a>
 <a class="btn alt" href="{prefix}downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif" download>Download H68-1 GeoTIFF (research only)</a>
 <strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
@@ -103,6 +120,18 @@ def render(root: Path | None = None) -> dict:
     docs = root / "docs"
     status = _read(root / "registry/current_site_status.json")
     snapshot = _read(root / status["leaderboard_snapshot"])
+    leader_rows = snapshot["rows"]
+    # A later manual re-read corrected stale ranks 2-10 in the first capture.
+    # Keep the original rows in JSON for audit, but render its explicit erratum.
+    recheck = snapshot.get("erratum_2026_10_11_recheck", {}).get("live_read_verified_rows", [])
+    top_recheck = [row for row in recheck if row["rank"] <= 10]
+    if top_recheck:
+        old_by_participant = {row["participant"]: row for row in leader_rows}
+        verified_names = {row["participant"] for row in top_recheck}
+        corrected = [{**old_by_participant.get(row["participant"], {}), **row}
+                     for row in top_recheck]
+        leader_rows = corrected + [row for row in leader_rows
+                                   if row["rank"] > 10 and row["participant"] not in verified_names]
     art = status["research_artifact"]
     tif_path = root / art["path"]
     if not tif_path.is_file():
@@ -198,7 +227,7 @@ The local LM-calibrated delta (+0.0048695) is instrument evidence only. Public r
 private-test performance, or file attribution.</p>
 <table><tr><th>rank</th><th>participant</th><th>public score</th></tr>
 <tr><td>1</td><td>xiaofanhu</td><td>0.4133</td></tr>
-<tr><td>8</td><td>DARD</td><td>0.3195</td></tr>
+<tr><td>9</td><td>DARD</td><td>0.3195</td></tr>
 <tr><td>23</td><td>extradr19</td><td>0.2778</td></tr></table>
 <p><a href="leaderboard.html">Open all 50 rows →</a> · <a href="data/feed.json">Current repository feed</a></p>
 {post_html}
@@ -248,15 +277,15 @@ That checklist does not override H65-1's negative stop or authorize submitting H
     rows = "".join(
         f"<tr><td>{int(r['rank'])}</td><td>{_e(r['participant'])}</td><td>{float(r['score']):.4f}</td>"
         f"<td>{_e(r.get('submissions', ''))}</td><td>{_e(r.get('last_activity', ''))}</td></tr>"
-        for r in snapshot["rows"]
+        for r in leader_rows
     )
-    body = f'''<h2>Official public leaderboard <span class="pill">manual snapshot</span></h2>
-<p>Observed on <b>{_e(snapshot['observed_utc'])}</b> by a manual rendered-page fetch in three chunks.
+    body = f'''<h2>Official public leaderboard <span class="pill">manual snapshot + erratum</span></h2>
+<p>Observed on <b>{_e(snapshot['observed_utc'])}</b> by manual rendered-page reads. The first capture's stale ranks 2–10 are retained in the JSON for audit; this table applies the later same-day top-10 re-read recorded in its erratum.
 The repository does not automate requests to <code>drivendata.org</code>. The public board is dynamic and may change.</p>
 <p><b>Scope:</b> these are public leaderboard rows only. They are not this repository's score, are not private-test results,
 and do not identify the TIFF associated with a row. In particular, the public 0.2778 at rank 23 belongs to extradr19;
 it does not attribute H33-2-B2.</p>
-<p>Headline values: #1 xiaofanhu <b>0.4133</b>; #8 DARD <b>0.3195</b>; #23 extradr19 <b>0.2778</b>.
+<p>Headline values: #1 xiaofanhu <b>0.4133</b>; #2 cfld__ <b>0.3585</b>; #9 DARD <b>0.3195</b>; #23 extradr19 <b>0.2778</b>.
 At the current leader score, the nonredundant one-dot special case has marginal credit bar αs = 0.08266;
 this is an algebraic condition, not a score projection.</p>
 <table><tr><th>rank</th><th>participant</th><th>public score</th><th>submissions</th><th>last activity as displayed</th></tr>{rows}</table>
@@ -279,7 +308,7 @@ does not override this literal gate.</li>
 its incomplete uniqueness and leakage reviews remain incomplete.</li>
 <li><b>H33 score attribution is unresolved.</b> The 0.2778 claim remains owner-reported; a same-named archived file is reported as
 0.2708. No organizer receipt reconciles the numbers or ties either to exact bytes. Public ranks 23 and 36 are not file attributions.</li>
-<li><b>The leaderboard was manually captured.</b> #1 xiaofanhu 0.4133; #8 DARD 0.3195; #23 extradr19 0.2778. No file attribution is available.</li></ol>
+<li><b>The leaderboard was manually captured and corrected by a same-day re-read.</b> #1 xiaofanhu 0.4133; #2 cfld__ 0.3585; #9 DARD 0.3195; #23 extradr19 0.2778. No file attribution is available.</li></ol>
 <h2>Metric decision rule</h2>
 <p>For a candidate unit-mass dot with maximum kernel weight <code>q</code> and actual incremental weighted truth credit <code>ΔT</code>,
 its general improvement condition is <code>ΔT(1−αs) &gt; αs(1−q)</code>. Only for the nonredundant special case
@@ -387,9 +416,10 @@ altering equations or claims during HTML conversion.</p><pre>{markdown}</pre>
         text = re.sub(r'<div class=wrap style="border:2px solid #0a7d33.*?</div>\s*', "", text, flags=re.S)
         text = re.sub(r'<div class=dlbtn[^>]*>\s*<b>Registry primary.*?</div>\s*', "", text, flags=re.S)
         text = re.sub(r'<div class="banner current-stop-notice">.*?</div>\s*', "", text, flags=re.S)
+        h73 = status.get("latest_generated_artifact", art)
         research_button = (
-            '<a class="btn" href="' + _site_href(art["path"]) + '" download>'
-            'Download H65-1 — research only, DO NOT SUBMIT</a>'
+            '<a class="btn" href="' + _site_href(h73["path"]) + '" download>'
+            'Download NEW H73 — research only, DO NOT SUBMIT</a>'
         )
         text = re.sub(r'(<div class=dlbtn>).*?(</div>)',
                       lambda m: m.group(1) + research_button + m.group(2), text,

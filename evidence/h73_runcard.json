@@ -1,83 +1,227 @@
 {
-  "run_id": "H73",
-  "session": "arena/970ed663-60gemsdoe",
-  "date": "2026-10-11",
-  "lane": "channel steepness / chi / knickpoints (tectonic geomorphology)",
-  "experiments_run_this_session": 0,
-  "experiment_budget": 3,
-  "submission_slots_used": 0,
-  "new_tif_generated": false,
-  "verdict": "negative",
-  "verdict_reason": "No candidate clears the governing gates. The lane STOP (registry/current_site_status.json) stands. The literal >70% dot-overlap rule fails for the strongest candidate (H68-1) against a dense lattice comparator. The first test was not re-run, because the preregistered rule prohibits re-running the lane.",
-
-  "hypothesis": "Question posed in the brief: can a submission beat 0.3195 (DARD, live rank 9) or 0.4133 (xiaofanhu, live rank 1)? Answered negatively for this lane. No new raster was produced.",
-  "mechanism": "Bedrock-channel steepness (ksn) and chi-transform knickpoints record rock-uplift gradients across active normal faults (Kirby & Whipple 2012). Chi transform per Perron & Royden (2013). Segmentation per Gailleton et al. (2019).",
-  "named_non_fault_mimic": "Lithologic contrasts (resistant over weak rock) and base-level steps from playas or ephemeral channels both create steepness steps without faulting.",
-  "first_test": {
-    "preregistered_test": "withheld-segment steepness-step contrast vs same-orientation random transects",
-    "source": "evidence/h65_e1_first_test.json (H65-1, quoted in active-lane review)",
-    "result": "INCONCLUSIVE; n=262; mean log-ksn step contrast 0.03259; 95% CI [-0.01435, 0.07900]; decision STOP",
-    "source_h70": "evidence/h70_e1_first_test.json (H70-1 gate G1): n=241 mean -0.0347 CI [-0.0853, +0.0126] -> STOP"
+  "run": "H73-1",
+  "hypothesis_id": "H73-1",
+  "lane": "tectonic geomorphology: channel steepness / chi / knickpoints",
+  "hypothesis": "A kilometre-scale paired-basin gradient in log(1+ksn), supported by positive upstream delta-ksn and aligned across >=3 independent drainages, records differential uplift across buried normal faults.",
+  "mechanism": "Differential uplift changes drainage-area-normalized channel slope across adjacent catchments; channel profiles can retain a base-level step after the scarp degrades or is buried.",
+  "named_non_fault_process": "A resistant-to-weak lithologic contact; secondary mimics are climate gradients, ephemeral channels, playa base levels and routing artefacts.",
+  "first_test_catalogue": {
+    "gating": true,
+    "summary": {
+      "evidence_class": "MEASUREMENT",
+      "n_components": 186,
+      "mean": 0.2841284397788601,
+      "median": 0.16746914349496364,
+      "ci95": [
+        0.1439116050771773,
+        0.4204521240279678
+      ],
+      "fraction_positive": 0.5752688172043011,
+      "component_std": 0.942410546038218,
+      "bootstrap": {
+        "draws": 1000,
+        "seed": 60101,
+        "method": "percentile over withheld components"
+      },
+      "verdict": "PROCEED"
+    },
+    "rows_scored": 186,
+    "rows_skipped": 146
   },
-
-  "best_candidate_checked": {
-    "name": "gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros",
-    "file": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif",
-    "sha256": "f4aa17400c7ff9ae12a428862ccaa4e2b0397015a3a7e7b55aa006341599f8ed",
-    "sha256_recomputed_this_session": true
+  "first_test_sgmc_offcatalogue": {
+    "gating": true,
+    "offcatalogue_px": 62703,
+    "summary": {
+      "evidence_class": "MEASUREMENT",
+      "n_components": 70,
+      "mean": -0.29091079110146634,
+      "median": -0.4677824303507805,
+      "ci95": [
+        -0.47572908451195284,
+        -0.09473771456374598
+      ],
+      "fraction_positive": 0.2857142857142857,
+      "component_std": 0.8074458859961374,
+      "bootstrap": {
+        "draws": 1000,
+        "seed": 60101,
+        "method": "percentile over withheld components"
+      },
+      "verdict": "STOP"
+    },
+    "rows_scored": 70,
+    "rows_skipped": 54
   },
-
+  "dual_first_test_gate": {
+    "passed": false,
+    "verdict": "STOP"
+  },
   "holdout_dti": {
     "evidence_class": "HOLDOUT-DTI",
-    "evaluator": "gems57-pooled-hide-v2 (alpha 0.2, beta 0.8, 300 m triangular kernel)",
+    "evaluator_version": "gems57-pooled-hide-v2",
     "withheld_positive_pixels": 22641,
-    "h68_1_lane": {"dti": 0.171894, "ci95": [0.157848, 0.183994], "source": "evidence/h68_holdout.json pooled_binary.scores.lane_h60a"},
-    "distance_only_control": {"dti": 0.190730, "ci95": [0.181999, 0.199647], "source": "evidence/h68_holdout.json pooled_binary.scores.distance_only"},
-    "random_mass_control": {"dti": 0.039080, "ci95": [0.035678, 0.042310]},
-    "paired_h68_minus_distance_only": {"ci95": [-0.034536, -0.004729], "interpretation": "H68-1 is below a pure proximity-to-visible-catalogue baseline; the CI excludes zero"},
+    "dti": 0.08526338663186674,
+    "ci95": [
+      0.0749149264446467,
+      0.0960187658379737
+    ],
+    "tpw": 2014.935566250866,
+    "fpw": 25580.549169592075,
+    "fnw": 20626.064433749125,
+    "recorded_h68_best": {
+      "run": "H68-1",
+      "dti": 0.171894,
+      "ci95": [
+        0.157848,
+        0.183994
+      ],
+      "same_evaluator": "gems57-pooled-hide-v2"
+    },
+    "gate_beats_h68": false,
     "not_a_leaderboard_score": true
   },
-
   "leakage_canary": {
-    "status": "Reused from prior runs, not re-run this session. h65_runcard: knickpoint_step 0.517, ksn 0.5134, drainage_area 0.5179, lane_p 0.5167 (threshold 0.90). Positive control dist_to_visible 0.9243 (expected to be high)."
+    "rule": "max(AUC,1-AUC)>0.90 is leakage until proven otherwise",
+    "rows": [
+      {
+        "feature": "combined_stat",
+        "auc": 0.5166586539869309,
+        "max_abs_auc": 0.5166586539869309,
+        "worst_cell": "draw21_foldNE_all",
+        "leakage_flag": false,
+        "positive_control": false
+      },
+      {
+        "feature": "dist_to_visible",
+        "auc": 0.9085346927074416,
+        "max_abs_auc": 0.9085346927074416,
+        "worst_cell": "draw21_foldNW_all",
+        "leakage_flag": true,
+        "positive_control": true
+      },
+      {
+        "feature": "dksn",
+        "auc": 0.4849542672472406,
+        "max_abs_auc": 0.5150457327527593,
+        "worst_cell": "draw21_foldNW_all",
+        "leakage_flag": false,
+        "positive_control": false
+      },
+      {
+        "feature": "lane_p",
+        "auc": 0.6522791172948619,
+        "max_abs_auc": 0.6522791172948619,
+        "worst_cell": "draw21_foldNE_all",
+        "leakage_flag": false,
+        "positive_control": false
+      },
+      {
+        "feature": "paired_basin_contrast",
+        "auc": 0.6626842300495454,
+        "max_abs_auc": 0.6626842300495454,
+        "worst_cell": "draw21_foldNE_all",
+        "leakage_flag": false,
+        "positive_control": false
+      }
+    ],
+    "geological_features_pass": true
   },
-
-  "uniqueness_vs_registry": {
-    "evidence": "evidence/h68_uniqueness.json and evidence/h68_surface_uniqueness.json",
-    "registry_rasters_checked": 70,
-    "scope_note": "70 committed local rasters. The registry index expects 655 (see registry/current_site_status.json). This is not a complete registry scan.",
-    "worst_full_footprint_spearman": 0.1485,
-    "spearman_limit": 0.90,
-    "worst_dot_overlap_within_3px": 0.9985,
-    "worst_overlap_comparator": "registry/rasters/calib_r13lattice_00904.tif",
-    "overlap_limit": 0.70,
-    "duplicate_count": 3,
-    "verdict": "negative (literal 70% rule fails)"
+  "correlation_overlap_vs_registry": {
+    "checked_unique_sha_rasters": 680,
+    "pinned_registry_complete": true,
+    "pinned_registry_rows": 655,
+    "later_local_additions_included": 25,
+    "surface_before_placement": {
+      "max_abs_spearman": 0.15608361498291262,
+      "max_overlap_within_3px": 1.0,
+      "worst_overlap_raster": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+      "byte_unique": true,
+      "pixel_unique": true,
+      "passes": false
+    },
+    "final_dots": {
+      "same_decoded_array_as_preplacement_surface": true,
+      "max_abs_spearman": 0.15608361498291262,
+      "max_overlap_within_3px": 1.0,
+      "passes": false
+    },
+    "irregularity": "The literal overlap rule is unsatisfiable for every non-empty raster because multiple registered continuous fields have positive support on all 5,167,373 footprint cells. H73 is exact-byte/pixel unique but duplicate-stopped by the literal rule; no exception is claimed."
   },
-
+  "raster_sha256": "594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3",
+  "zip_sha256": "660a525b798ac7d3940ce66ea45470ee47ccbdf17484b84df60ee78cb4b7f0fc",
   "validator_output": {
-    "command": "PYTHONPATH=src python scripts/check_submission.py <tif> --template data/official/sample_submission.tif --strict-finite",
-    "result": "format checks passed: shape 3730x3292 matches template; 1 band; EPSG:32611; transform matches; dtype float32; in-footprint range [0,1] all finite; whole-array range [0,1] finite=True",
-    "meaning": "format only. Not uniqueness, not governance, not organizer acceptance. Message wording corrected this session (was 'ready for submission')."
+    "file": "docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif",
+    "bytes": 95592,
+    "sha256": "594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0011491014156490564,
+    "emitted_positive_pixels": 20000,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 20000,
+    "footprint_fraction": 0.0038704386155208846
   },
-
-  "submission_name": null,
-  "submission_note": null,
-  "submission_note_chars": 0,
-
-  "organizer_facts": {
-    "official_format_page": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/ (float32, one band, EPSG:32611, 100 m, values in [0,1], NaN outside bounds)",
-    "official_leaderboard_read_2026_10_11": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/ (#1 xiaofanhu 0.4133; #2 cfld__ 0.3585; #8 kinghorton42 0.3261; #9 DARD 0.3195; #23 extradr19 0.2778)",
-    "label": "ORGANIZER-CONFIRMED is NOT available for any repo score. Leaderboard rows are public and carry no file attribution."
-  },
-
-  "irregularities_logged": [
-    "IR-H73-01: validator printed 'ready for submission' on a format-only check; wording fixed (scripts/check_submission.py).",
-    "IR-H73-02: registry/leaderboard_snapshot_2026-10-11.json has cfld__ at rank 10 (0.3108); the live board shows cfld__ at #2 (0.3585). The snapshot is not reliable for ranks 2-10. Erratum added; rows kept for audit.",
-    "IR-H73-03: README stated DARD 0.3195 at rank 8. Live board: rank 9. Corrected in README.",
-    "IR-H73-04: H68-1 is headlined as 2.61x H66-1, but its holdout DTI (0.1719) is below the distance_only control (0.1907), with paired CI excluding zero. The headline omits this comparison.",
-    "IR-H73-05: H68 uniqueness scan covered 70 local rasters; the registry index expects 655. Not a complete scan."
-  ],
-
-  "recommendation_to_owner": "Do not upload any current lane raster. Decide whether the literal 70% overlap rule should exempt dense 'universal-support' comparators. Any such change must be a documented amendment, not a silent waiver. Next lane work needs a new preregistered question that reports against the distance_only control first."
+  "submission_name": "60GEMSDOE-H73-PAIRED-BASIN-KSN-20000-20261011T200117Z",
+  "submission_note": "H73 paired-basin ksn, 20k weighted cells; holdout negative; unique bytes/pixels; DO NOT SUBMIT",
+  "submission_note_chars": 94,
+  "verdict": "negative",
+  "download_ok": true,
+  "submit_to_competition": false,
+  "selector_decision": "DO NOT SUBMIT: SGMC dual gate failed, HOLDOUT-DTI 0.085263 did not beat H68 0.171894, and literal registry overlap is 1.0 > 0.70. No weekly slot used.",
+  "experiments_used": 1,
+  "experiments_cap": 3,
+  "submission_slots_used": 0,
+  "preregistration": "registry/preregistration-h73.json",
+  "evidence": {
+    "hypotheses": "docs/research/h73-ranked-hypotheses-2026-10-11.md",
+    "feature_cache": "evidence/h73_feature_cache.json",
+    "first_test": "evidence/h73_e1_first_test.json",
+    "holdout": "evidence/h73_holdout.json",
+    "uniqueness": "evidence/h73_preplacement_uniqueness.json",
+    "receipt": "docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.json"
+  }
 }
