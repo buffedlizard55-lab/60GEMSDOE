@@ -1,0 +1,99 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Home - 60GEMSDOE</title>
+<link rel="stylesheet" href="assets/site.css"></head><body><div class="wrap">
+<header><h1>60GEMSDOE &middot; tectonic-geomorphology lane</h1>
+<div class="sub">Channel steepness, &chi; and knickpoints &mdash; DOE GEMS Prize
+(DrivenData #306). Lane 60 of the parallel run.</div>
+<nav style="margin-top:12px"><a href="index.html" style=color:#e8ecf3>Home</a><a href="executive-summary.html">How to submit</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a><a href="results.html">Results</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a></nav></header>
+
+<div class="status stop">
+<h2>🔴 Download: OK (research artefact) &nbsp;·&nbsp; Submit to the competition: NO</h2>
+<p>The lane's own <b>pre-registered go / no-go test</b> &mdash; <i>&ldquo;do channels
+crossing withheld fault segments show larger steepness steps than random lines of the
+same orientation? If not, stop&rdquo;</i> &mdash; returned <b>STOP</b>, twice, under two
+independently parameterised detectors. The emission also scores
+<b>below its own random control</b> on the only holdout available here.
+Submitting it would spend one of <b>three weekly competition slots</b> on a field with no
+measurable skill, so the status is <b>do not submit</b>. It is published because the brief
+requires a unique, reproducible, format-validated GeoTIFF and because
+<b>negative results are deliverables</b>.</p>
+<p style="margin-bottom:0">The exact thing that would turn this green is named, costed and
+verified in <a href="#unblock">What unblocks the lane</a>.</p>
+</div>
+<h2>⬇️ The download</h2>
+<div class="card">
+<p><span class="pill mut">research artefact</span>
+<span class="pill bad">not cleared for a submission slot</span></p>
+<p><b>gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif</b><br>
+<span class="mut">226,472 bytes &middot; sha256
+<code>af68d90ec9d3927c6b9c80352f7eb521…</code> &middot; 6,000 binary dots</span></p>
+<p><a class="dl" href="downloads/gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif">⬇ Download the GeoTIFF</a>
+<a class="dl" style="background:#2a3140;color:#cfd6e2"
+href="downloads/checks-gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif.json">format + uniqueness receipt</a></p>
+<table>
+<tr><th>property</th><th>value</th></tr>
+<tr><td>CRS / shape / transform</td><td>EPSG:32611 &middot; 3730 × 3292 &middot;
+<code>(100, 0, 243350, 0, -100, 4508550)</code> — matches the submission format</td></tr>
+<tr><td>dtype / band</td><td>Float32 &middot; single band &middot; no nodata tag</td></tr>
+<tr><td>value range</td><td>all cells finite, 0 NaN, 0 Inf, every value in [0, 1]</td></tr>
+<tr><td>outside the footprint</td><td>0 (zero-filled — the validated pattern)</td></tr>
+<tr><td>dots on the mapped catalogue</td><td><b>0</b>; minimum distance 2.24 px</td></tr>
+<tr><td>local format checks</td><td><b>15 / 15 PASS</b></td></tr>
+<tr><td>uniqueness</td><td>worst Spearman <b>ρ = -0.015</b>,
+worst 3-px forward overlap <b>0.000</b>
+&rarr; <b>unique</b></td></tr>
+<tr><td>built from</td><td>the GeoDAWN 100 m absolute-elevation DEM only. <b>No previous
+submission and no template raster was copied, read or reused as input.</b></td></tr>
+</table>
+<p class="mut">Suggested <i>note</i> field, if you submit it anyway against this advice
+(133/140 characters):</p>
+<pre>GEMS60 chi/ksn lane: channel-normal knickpoint casts; pre-registered first test returned STOP - NEGATIVE RESULT, do not spend a slot.</pre>
+</div>
+<h2>Why the highest GEMSDOE score is 0.2778</h2>
+<div class="card">
+<p><b>It is a pruning result, not a model result.</b> <code>h33-h33-2-b2</code> is the
+owner-reported <b>0.2708</b> raster with <b>2,545 dots deleted and none added</b>; every
+removed dot was 1.4&ndash;2.0 px from the mapped catalogue. Source: the family's own
+<code>evidence/session6_mechanism_and_witness.json</code>
+(<code>equals_base_pruned_at_2px: true</code>).</p>
+<p>The metric reduces exactly to
+<code>1/DTI = &alpha; + &alpha;&middot;(F/T) + &beta;&middot;(|G|/T)</code>, so adding one
+unit of mass raises DTI <i>iff</i> its realised kernel credit exceeds
+<code>&alpha;&middot;DTI</code> &mdash; <b>0.052</b> at DTI = 0.26, i.e. the dot must land
+within <b>~284 m</b> of a hidden truth pixel. Every deleted dot failed that test.</p>
+<p>Beating the leader is therefore a <i>field</i> problem: holding mass and the hidden
+|G| fixed, the retained credit <code>T</code> has to rise about <b>+45 %</b>. This
+repository does not claim to have done that, and nothing here is written as a score.</p>
+</div>
+<h2>Public leaderboard (ORGANIZER-PUBLISHED, retrieved 2026-10-10)</h2>
+<div class="card"><table>
+<tr><th>rank</th><th>participant</th><th>public DTI</th></tr>
+<tr><td>1</td><td>xiaofanhu</td><td><b>0.3774</b></td></tr>
+<tr><td>2</td><td>JerryDataWorks</td><td>0.3418</td></tr>
+<tr><td>3</td><td>alexoktaba</td><td>0.3361</td></tr>
+<tr><td>5</td><td>nchuzhoy</td><td>0.3262</td></tr>
+<tr><td>8</td><td>DARD</td><td><b>0.3195</b></td></tr>
+</table>
+<p class="mut">Source:
+<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">competition
+leaderboard</a>. The session brief said the highest score was 0.3195 &mdash; that is rank
+8. Recorded as an irregularity.</p></div>
+
+<h2 id="unblock">What unblocks the lane</h2>
+<div class="card">
+<p>The lane asks for a <b>3DEP 10 m DEM</b>. This sandbox cannot reach the official USGS
+bucket: <code>curl https://prd-tnm.s3.amazonaws.com</code> returns
+<b>HTTP 000</b>
+(measured, see <code>evidence/connectivity.json</code>). The only absolute-elevation grid
+obtainable here is the GeoDAWN 100 m DEM, and at 100 m the base-level step the method
+looks for is not resolved — which is the most likely cause of the STOP verdict.</p>
+<p><code>scripts/fetch_3dep_10m.sh</code> is written, probes the host, and refuses to
+claim success it did not get. Run it where egress is normal; the rest of the lane
+(<code>src/gems60/*</code>) then runs unchanged.</p>
+</div>
+<div class="foot">Every number on this site is labelled <b>HOLDOUT-DTI</b> (evaluator
+version, number of withheld positives, 95&nbsp;% CI),
+<b>ORGANIZER-PUBLISHED</b>, <b>OWNER-REPORTED</b> or <b>MEASURED</b>.
+A projection is never written as a score. Nothing here has been submitted to the
+competition by this project.</div></div></body></html>

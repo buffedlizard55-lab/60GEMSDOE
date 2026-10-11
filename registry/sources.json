@@ -1,0 +1,37 @@
+[
+ {
+  "id": "metric",
+  "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+  "verified": "HTTP 000 from this sandbox; read via the family's committed mirror of the page text"
+ },
+ {
+  "id": "leaderboard",
+  "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+  "verified": "via the family's ORGANIZER-PUBLISHED snapshot docs/data/leaderboard_snapshot.json, retrieved 2026-10-10T20:40:27Z"
+ },
+ {
+  "id": "rules_pdf",
+  "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+  "verified": "HTTP 000 here; identity verified in a previous session against the canonical NLR URL"
+ },
+ {
+  "id": "reference_solution",
+  "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
+  "verified": "cloned 2026-10-11; README.md, environment(.yml/-cpu.yml), pyproject.toml, unet-mc-cv-reference-solution.ipynb, uv.lock; author Prof. John Lipor"
+ },
+ {
+  "id": "geodawn_dem",
+  "url": "https://github.com/jklinck/geothermal_research",
+  "verified": "cloned 2026-10-11; 22103_dem_a2.tif 49,531,304 B, sha256 d32762a38222764389e948da423ebc6cadd00ac617ad3938d3dd79c6cfe14431, EPSG:32611, 100 m, 3730x3292, grid aligned to the competition rasters"
+ },
+ {
+  "id": "features_bridge",
+  "url": "https://github.com/buffedlizard55-lab/6GEMSDOE",
+  "verified": "parts reassembled 2026-10-11; whole-file sha256 4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5 matches the manifest pin exactly"
+ },
+ {
+  "id": "three_dep",
+  "url": "https://apps.nationalmap.gov/downloader/",
+  "verified": "HTTP 000 for the staged-products bucket from this sandbox (evidence/connectivity.json)"
+ }
+]

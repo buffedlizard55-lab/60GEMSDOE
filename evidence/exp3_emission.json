@@ -1,0 +1,70 @@
+{
+ "name": "gems60-chi-knickpoint-cast-lane-v1",
+ "file": "gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif",
+ "sha256": "af68d90ec9d3927c6b9c80352f7eb5216ba95023e51fc366b6a71a1097fbe139",
+ "bytes": 226472,
+ "note": "GEMS60 chi/ksn lane: channel-normal knickpoint casts; pre-registered first test returned STOP - NEGATIVE RESULT, do not spend a slot.",
+ "n_positive": 6000,
+ "evidence_class": "HOLDOUT-DTI",
+ "evaluator_version": "gems60-exp3-v1",
+ "budget_curve_offcatalogue": {
+  "500": 2.2975835134846595e-05,
+  "1000": 5.0515740396271196e-05,
+  "2000": 0.00010107908010752989,
+  "3000": 0.0001736999815408647,
+  "4000": 0.00023749391312174748,
+  "6000": 0.0003867765292039581
+ },
+ "budget_curve_unrestricted": {
+  "500": 0.0003630848245845473,
+  "1000": 0.0012159582344395833,
+  "2000": 0.0024195007203252875,
+  "3000": 0.004281314279852584,
+  "4000": 0.0059700578672340935,
+  "6000": 0.008946361743403092
+ },
+ "chosen_budget": 6000,
+ "n_peaks_offcatalogue": 6082,
+ "n_peaks_unrestricted": 6382,
+ "controls_at_chosen_budget": {
+  "random_on_offcatalogue_support": 0.0004231810426433035,
+  "random_in_footprint": 0.012942459129751028
+ },
+ "holdout_dti_at_chosen_budget": 0.0003867765292039581,
+ "withheld_positive_pixels": 56619,
+ "format_checks": {
+  "crs_matches": true,
+  "shape_matches": true,
+  "transform_matches": true,
+  "single_band": true,
+  "dtype_float32": true,
+  "no_nodata_tag": true,
+  "all_finite": true,
+  "range_0_1": true,
+  "no_negative": true,
+  "no_nan": true,
+  "no_inf": true,
+  "finite_footprint_equals_labels": false,
+  "zero_outside_footprint": true,
+  "n_positive": 6000,
+  "no_catalogue_hit": true,
+  "min_distance_to_catalogue_px": 2.23606797749979,
+  "all_pass": true
+ },
+ "uniqueness": {
+  "evidence_class": "REGISTRY-MEASUREMENT",
+  "rasters_expected": 696,
+  "rasters_checked": 170,
+  "scope_note": "Checked against every registry raster obtainable in this sandbox. Un-fetched entries are a stated scope limitation, never a claim of absence.",
+  "thresholds": {
+   "rho": 0.9,
+   "forward_overlap": 0.7
+  },
+  "worst_spearman_full_footprint": -0.01521393919147074,
+  "worst_spearman_submission": "/tmp/study/gr/GeoDAWN_tiffs/22103_area2_tiffs/22103_dem_a2.tif",
+  "worst_forward_overlap": 0.0,
+  "worst_forward_overlap_submission": null,
+  "unique": true
+ },
+ "verdict": "negative - do not spend a competition slot"
+}

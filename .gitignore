@@ -1,0 +1,16 @@
+# Large official payloads are NOT committed (they exceed practical repo size).
+# Reconstruct with:  bash scripts/fetch_competition_features.sh
+data/training_features.tif
+data/gems-geodawn-numerical-features.tif
+data/reconstructed/
+data/external/
+
+# Scratch
+*.pyc
+__pycache__/
+.venv/
+.ipynb_checkpoints/
+work/
+
+# test / build caches
+.pytest_cache/
