@@ -223,6 +223,12 @@
    "statement": "All four label-free H33 surfaces score BELOW a uniform-random control on the catalogue-hidden instrument at 44,090 px (H33-A 0.01874, H33-B 0.02177, H33-C 0.02407, H33-D 0.00394, union 0.02006, random 0.03438), while H33-B scores 0.09072 on the off-catalogue SGMC instrument against the incumbent's 0.06059. The catalogue-hidden instrument therefore has no power to rank hypotheses whose purpose is to find faults the catalogue lacks.",
    "evidence": "evidence/h33_holdout.json; evidence/h33_candidates.json.",
    "mitigation": "the sign disagreement is reported as the session's central finding; promotion stays gated on the identification experiment (measuring T, K and F live) rather than on this instrument."
+  },
+  {
+   "id": "IR-CHI-CI-01",
+   "severity": "medium",
+   "statement": "An artifact-deploy workflow (.github/workflows/pages.yml, added with the second lane run) failed on every push to main: it ran scripts/build_site.py on a bare runner with no dependencies installed, and the repository's Pages is in any case configured server-side as the legacy builder (build_type=legacy, source main:/), so actions/deploy-pages could never have published. Measured: run 38102678303 X build in 6s, exit 1; meanwhile pages build and deployment (legacy) succeeded in 30s on the same push.",
+   "mitigation": "pages.yml removed; the legacy builder already publishes the root landing page and docs/ that scripts/build_site.py writes, which is what the generator's own comment assumes. Verified after removal: ci on main green (run 38102678293), pages build succeeded at 2026-10-11T01:41:32Z."
   }
  ]
 }
