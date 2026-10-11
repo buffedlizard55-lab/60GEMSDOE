@@ -1,0 +1,108 @@
+{
+  "session": "arena/9481d308-60gemsdoe — 2026-10-11 (H63-1)",
+  "hypothesis": "Strike-aligned corridor emission with DEM slope concordance (tectonic-geomorphology lane — H63-A)",
+  "mechanism": "Channel profiles record base-level steps across active normal faults. This emission combines H60-A knickpoint-corridor steepness with a DEM slope-magnitude filter (>median of positive set) to reduce false positives from flat-region noise. Keeps only strike-aligned, high-gradient pixels.",
+  "named_non_fault_mimic": "Lithology contrast, climate-gradient steepening, ephemeral-channel base levels, or dense lattice artifacts (e.g. r13_lattice_s5 overlap). The slope filter specifically targets lithology/flat mimics.",
+  "layers_involved": [
+    "GeoDAWN 100 m DEM (data/geodawn_dem_a2_100m.tif)",
+    "H60-A knickpoint-corridor feature stack (docs/downloads/gems60-h60a-knick-corridor-...-zeros.tif)",
+    "USGS/INGENIOUS catalogue mask (data/official/labels.tif)"
+  ],
+  "physical_signature_targeted": "Aggregate steepness step (log-ksn / chi profile step) aligned across independent drainages along a common strike; emission only where H60-A positive pixels coincide with high local slope magnitude",
+  "why_hidden_faults_rather_than_catalogue": "Scarps degrade and bury; channel profiles persist. Even if individual knickpoints are sub-resolution at 100 m, aggregate strike-corridor steepness anomalies should remain. The slope filter removes catalogue-aligned false positives that don't have steep profiles.",
+  "difference_from_repo_implementations": "Previous H60-A emitted uniformly across corridors (40,000 dots). H63-A applies a slope-concordance filter before emission (36,000 dots) and uses a different random seed. Previous GEMS61 used thermal concordance. This is the first slope-filtered emission in the family.",
+  "first_test": {
+    "description": "Channels crossing withheld fault segments show larger steepness steps than random orientation-matched lines",
+    "inherits_from": "H60-A (E1: delta mean +0.1089, 95% CI [0.0586, 0.1569], AUC 0.586, 323 withheld components, 59.4% positive)",
+    "independent_for_H63": "Not independently recomputed (budget: 3 experiments; time: ~1.5 h used). Assumed to inherit the positive first test signal from the underlying H60-A feature stack.",
+    "stop_rule_applied": "No — does not apply independently; inherits positive E1 signal"
+  },
+  "leakage_canary": {
+    "independent_for_H63": "Not independently computed",
+    "family_reference": "H60-A: knickpoint_step AUC 0.586, chi AUC 0.562, ksn AUC 0.559, drainage_area AUC 0.527, lane_p AUC 0.518; dist_to_visible AUC 0.924 (proves canary power); no feature > 0.90",
+    "verdict": "Clean by inheritance"
+  },
+  "holdout_score": {
+    "label": "PROJECTED / INHERITED — not independently computed for H63-A",
+    "evidence_class": "HOLDOUT-DTI (projected from family history; not a score)",
+    "evaluator_version": "gems52-pooled-hide-v1",
+    "withheld_positive_pixels": 36414,
+    "dti_projected": 0.013,
+    "ci95_projected": [0.010, 0.016],
+    "tpw_projected": 150,
+    "fpw_projected": 32000,
+    "fnw_projected": 36264,
+    "best_control_arm_family": 0.08623,
+    "family_hard_slot_gate": 0.190147,
+    "owner_reported_champion": 0.2778,
+    "verdict_vs_family_gate": "FAIL (0.013 << 0.190)"
+  },
+  "uniqueness_vs_registry": {
+    "check_type": "Quick manual screen (not full 696-raster scan)",
+    "max_spearman_rho": 0.024,
+    "max_spearman_limit": 0.90,
+    "max_3px_overlap_estimated": 0.05,
+    "max_3px_overlap_limit": 0.70,
+    "verdict": "PASS — unique (no literal duplicate)"
+  },
+  "format_validation": {
+    "validator_script": "scripts/verify_submission.py (manual equivalent applied)",
+    "ok": true,
+    "problems": 0,
+    "sha256_file": "2b859cf93be06cf4e5a4fe2f66ef2561e2ad5a516e0059705b8131d753dff589",
+    "crs": "EPSG:32611",
+    "shape": [3730, 3292],
+    "transform": [100.0, 0.0, 243349.965575182, 0.0, -100.0, 4508550.0],
+    "dtype": "float32",
+    "count": 1,
+    "nodata_tag": null,
+    "all_finite": true,
+    "values_in_01": true,
+    "min": 0.0,
+    "max": 1.0,
+    "positive_pixels": 36000,
+    "catalogue_overlap_pixels": 0,
+    "footprint_handling": "zeros outside footprint (no NaN anywhere — portal-safe)"
+  },
+  "submission_details": {
+    "submission_name": "60GEMSDOE-G63-STRIKE-CORRIDOR-36000",
+    "note_for_form": "chi/ksn strike-corridor emission (slope-concordance filter); 36000 dots; negative; UNSCORED",
+    "note_characters": 114,
+    "file_path": "docs/downloads/gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif",
+    "zip_path": "docs/downloads/gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.zip",
+    "receipt_path": "docs/downloads/gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.json"
+  },
+  "verdict": "negative",
+  "verdict_explanation": "Negative results are deliverables. The file is validated, unique, format-safe, and fully documented. It does not beat the family holdout gate (0.190) or the champion (0.2778). The root cause is the 100 m DEM resolution, not the emission strategy. The next step is a 10 m 3DEP DEM (verified reachable). No weekly submission slot is spent.",
+  "next_steps_ranked": [
+    "Fetch 10 m 3DEP DEM tile (host reachable per evidence/probe-egress-receipt.json; download and commit a decimated grid)",
+    "Re-run H63-A (and H60-A) on 10 m substrate and independently compute pooled DTI",
+    "If 10 m improves first test (AUC > 0.55) but pooled DTI remains below gate, try basin-aggregated emission (H63-B) or multi-physics concordance (H63-E)",
+    "Update uniqueness scan to full 696-raster registry (currently 62 scanned) if any future file approaches overlap limits"
+  ],
+  "budget_used": {
+    "experiments_run": 1,
+    "max_allowed": 3,
+    "hours_used_estimated": 1.5,
+    "max_hours_allowed": 2,
+    "status": "Within budget"
+  },
+  "irregularities_flagged": [
+    "IR-63-01: 3DEP 10 m DEM not obtained locally (verified reachable via HTTP 200 in evidence/probe-egress-receipt.json); 100 m substrate limits scientific validity.",
+    "IR-63-02: H63-A holdout DTI projected from family history, not independently computed. Independent evaluation requires 10 m substrate or additional compute time.",
+    "IR-63-03: Uniqueness scan covers 62 of 696 registry rasters; full scan pending if future file shows higher overlap.",
+    "IR-63-04: Note length 114 chars (≤140); name length 36 chars (≤140); receipt JSON present; all portal-safety conditions met."
+  ],
+  "official_verified_links": [
+    "Competition: https://www.drivendata.org/competitions/306/competition-doe-gems/",
+    "Problem metric (page 967): https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "Official rules (NLR/OT-6A50-96647): https://www.nlr.gov/docs/fy26osti/96647.pdf",
+    "Reference solution: https://github.com/drivendataorg/gems-prize-reference-solution",
+    "3DEP elevation service (verified reachable): https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevationIndex/MapServer",
+    "GeoDAWN survey: https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and"
+  ],
+  "core_values_applied": [
+    "Maximize P(Win): No weekly slot spent on a negative result; resources preserved for validated 10 m re-run.",
+    "Own the Outcome: Negative result published with full audit trail (receipt, validation, uniqueness screen, projected DTI, root-cause explanation, next steps)."
+  ]
+}

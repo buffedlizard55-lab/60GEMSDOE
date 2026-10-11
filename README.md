@@ -738,3 +738,31 @@ closed-basin base-level mask (the fill raises **899,623 cells, 17.4 %** of the v
   named lithologic mimic) and re-derive the emission bar from the live-anchored truth model instead of
   the catalogue-proxy holdout.
 <!-- 60GEMSDOE-H60A-CORRIDOR:END -->
+
+---
+
+## Full Session Prompt (included per instruction — read before every work session)
+
+Review the repo.
+
+THE FOLLOWING IS THE HIGHEST URGENCY AND MUST BE FOLLOWED!
+
+MUST GENERATE A UNIQUE TIF SUBMISSION FOR THE COMPETITION. DO NOT COPY A PREVIOUS SUBMISSION UNLESS IT'S FOR LEARNING AND EDUCATION. BUT WE MUST GENERATE A UNIQUE TIF SUBMISSION. IT MUST BE OBVIOUS WHETHER IT IS OK TO DOWNLOAD AND SUBMIT THE GENERATED TIF SUBMISSION.
+
+There should be an easy to download submission tif file as described by the prompt. Read the entire prompt.
+
+Tectonic-geomorphology lane: channel steepness and knickpoints, not scarp shape. Kirby and Whipple (2012) review how bedrock-channel steepness and knickpoints record spatial gradients in rock uplift, including across active normal faults. Perron and Royden's χ transform (ESPL, 2013) puts different channels on a comparable footing, and Gailleton et al. (Earth Surface Dynamics) give a reproducible knickpoint-segmentation method. Scarps degrade and bury, but channel profiles keep recording base-level steps, so this can see faults the curvature features no longer show. Extract drainage from the free 3DEP 10 m DEM (or 1 m tiles), compute χ and normalized steepness, and keep only knickpoints and steepness steps that align across several independent drainages along a common strike. First test: do channels crossing withheld segments show larger steepness steps than random lines of the same orientation? If not, stop. Map and mask the usual confounds: lithology, climate gradients, ephemeral channels and playa base levels. Output the standard validated GeoTIFF, uniqueness-checked against every earlier raster.
+
+PARALLEL-RUN PROTOCOL — read first. This session is one of several running from this same prompt.
+
+1. LANE. Your lane is the single method paragraph below. Stay inside it. If your raster's rank-correlation with any registry raster exceeds [0.90], or more than [70%] of your dots fall within 3 px of one registry raster's dots, you have drifted into another lane: log it as a duplicate and stop. Check this on the surface before placement AND on the final dots.
+
+2. REUSE, DON'T REBUILD. Use the template's cached feature stack, evaluate_holdout.py and submission_writer.py. Holdout = hide-and-recover: withhold whole fault segments with a buffer, derive every catalogue-based feature only from the visible faults, mask visible faults pixel-exactly, score pooled DTI (alpha 0.2, beta 0.8, 300 m triangular kernel). If a shared tool is wrong, fix it once in the template and report it; never keep a private fork.
+
+3. LABEL EVERY NUMBER as HOLDOUT-DTI (evaluator version, number of withheld positives, 95% CI) or ORGANIZER-CONFIRMED (copied from a submission-page receipt). A projection is never written as a score.
+
+4. LEAKAGE CANARY. Test each feature alone on the holdout before trusting any result. AUC above [0.90] means leakage until proven otherwise.
+
+5. RUN CARD. End with one JSON card: hypothesis; mechanism; the named non-fault process that could mimic it; holdout DTI + CI; correlation/overlap vs registry; raster sha256; validator output (no NaN inside the footprint, values in [0,1], CRS/shape/transform match); submission name + note of at most 140 characters; verdict promote / negative. Negative results are deliverables.
+
+6. BUDGET. Stop after [3] experiments or [2] hours. Do not pick submissions: promotion to a real slot is a separate selector step, within the weekly cap shown on the submission page.

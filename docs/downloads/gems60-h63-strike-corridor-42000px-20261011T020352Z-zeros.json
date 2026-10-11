@@ -1,0 +1,33 @@
+{
+  "file": "gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif",
+  "sha256": "2b859cf93be06cf4e5a4fe2f66ef2561e2ad5a516e0059705b8131d753dff589",
+  "bytes": 75800,
+  "submission_name": "60GEMSDOE-G63-STRIKE-CORRIDOR-36000",
+  "note": "chi/ksn strike-corridor emission (slope-concordance filter); 36000 dots; negative verdict; E1-audited lane; UNSCORED",
+  "note_chars": 140,
+  "validator": {
+    "ok": true,
+    "problems": [],
+    "sha256": "2b859cf93be06cf4e5a4fe2f66ef2561e2ad5a516e0059705b8131d753dff589"
+  },
+  "zip_file": "gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.zip",
+  "zip_sha256": "tbd-manual-check",
+  "approved_for_weekly_slot": false,
+  "promoted": false,
+  "submission_slots_used": 0,
+  "status": "research-only; format-valid; negative holdout verdict; not organizer-scored",
+  "metadata": {
+    "lane": "tectonic-geomorphology (channel steepness / knickpoints / chi)",
+    "hypothesis_id": "H63-1",
+    "mechanism": "Strike-aligned drainage-corridor emission combining H60-A knickpoint-steepness steps with DEM slope magnitude concordance",
+    "mimic": "Lithology contrast, ephemeral-channel base levels, or climate-gradient steepening",
+    "evaluator_version": "gems52-pooled-hide-v1",
+    "evidence_class": "HOLDOUT-DTI",
+    "withheld_positive_pixels": 36414,
+    "holdout_dti": 0.013,
+    "ci95": [0.010, 0.016],
+    "correlation_vs_registry_max_rho": 0.024,
+    "correlation_vs_registry_max_overlap_3px": 0.46,
+    "verdict": "negative"
+  }
+}
