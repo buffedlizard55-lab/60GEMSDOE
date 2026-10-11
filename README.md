@@ -247,6 +247,11 @@ Repository layout: `src/gems52/` — shared template (metric/holdout/evaluate_ho
 vendored verbatim from GEMSDOE52 + this lane's `lane_hydro.py`, `lane_channels.py`); `scripts/` — the
 four experiment runners; `evidence/` — E1/E1b/E2/E3 JSONs + run card; `docs/` — the site.
 
+Registry provenance (uniqueness anchors, all re-fetchable from the org's public repos): champion
+`h33-2-b2` zeros ← `GEMSDOE32/docs/downloads`; dotted-d2.8 zeros ← `GEMSDOE32/docs/downloads`;
+`h27-4-r1-solo` ← `GEMSDOE28/docs/downloads`; `h16-1` ← `16GEMSDOE/docs/downloads`;
+lidar-scarp ridge ← `7GEMSDOE/downloads`; dem10-multiphysics ← `12GEMSDOE/docs/downloads`.
+
 ## Limitations (stated, not hidden)
 
 1. **No DrivenData auth** → competition rasters come from the hash-pinned owner bridge
