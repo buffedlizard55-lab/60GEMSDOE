@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-10-11T02:21:31Z",
+ "generated_utc": "2026-10-11T11:28:40Z",
  "sources": [
   {
    "id": "competition",
@@ -775,6 +775,273 @@
    "cost": "high",
    "data_status": "the official link table is mirrored in a sibling repository (sha256 8804dbff8754...); the tiles themselves were NOT obtained and their obtainability from this sandbox is unverified",
    "status": "registered; data obtainability unverified; no slot requested"
+  },
+  {
+   "id": "H62-D",
+   "rank": 26,
+   "slate": "H62-H64 (2026-10-11, session arena/7573c1e8)",
+   "slate_rank": 1,
+   "title": "Catalogue flank peel ring 3: extend the only live-verified emission rule",
+   "layers": [
+    "the nested chain A 44,090 (0.2600) -> B 40,199 (0.2708) -> C 37,654 (0.2778), verified pixel-exact",
+    "distance-to-catalogue on the pinned grid"
+   ],
+   "signature": "dots survive only beyond one kernel radius of the visible catalogue",
+   "why_off_catalogue": "each removal gained a MEASURED +2.78e-6 and +2.75e-6 per dot; hidden truth excludes the catalogue",
+   "differs_from_repo": "states the rule behind the ladder and extends it; D3 is 94 % of its parent's cells (|rho| 0.974) so it trips the uniqueness gate",
+   "expected_dti": "+0.0060 -> 0.2838 (MODEL from two owner-reported deltas)",
+   "cost": "zero",
+   "data_status": "evidence/e4_ring_peel.json",
+   "status": "BUILT; highest modelled expectation, NOT unique - do not submit as a novel artifact"
+  },
+  {
+   "id": "H61-A",
+   "rank": 27,
+   "slate": "H62-H64 (2026-10-11, session arena/7573c1e8)",
+   "slate_rank": 2,
+   "title": "Cross-channel residual detector (XCRD): 30-channel classifier for off-catalogue fault locality",
+   "layers": [
+    "19 physics bands minus deq/ieq n100a15",
+    "9-band 3DEP topographic pack",
+    "4-band GeoDAWN radiometrics K/Th/U/TC",
+    "SGMC faults (DOI 10.5066/P1A3DQZK) as positivity proxy"
+   ],
+   "signature": "gradient boosting over 30 channels; positives = SGMC faults >300 m off-catalogue; negatives stratified by distance decile",
+   "why_off_catalogue": "positives are ground the catalogue lacks; distance-to-catalogue is excluded from the features",
+   "differs_from_repo": "trained on the off-catalogue population itself and emitted out-of-fold; prior detectors are ridge filters on 1-2 channels",
+   "expected_dti": "screen 2.46 vs champion 1.62 at equal mass; held-out AUC 0.73-0.80; independent scarp screen NEGATIVE (0.48x)",
+   "cost": "~10 min per 4-fold fit on 2 cores",
+   "data_status": "evidence/e2_xcrd.json, evidence/e2b_xcrd_screen.json",
+   "status": "BUILT, UNIQUE (max |rho| 0.024); OK to download, slot NOT CLEARED"
+  },
+  {
+   "id": "H63-A",
+   "rank": 28,
+   "slate": "H62-H64 (2026-10-11, session arena/7573c1e8)",
+   "slate_rank": 3,
+   "title": "Scarp x structure co-locality: mapped structure WITH surface rupture, not in the catalogue",
+   "layers": [
+    "SGMC off-catalogue kernel",
+    "h52 LiDAR scarp kernel (validation channel)",
+    ">=350 m catalogue exclusion"
+   ],
+   "signature": "rank lattice positions by the two max-normalised kernels; the tube intersection is the physical claim",
+   "why_off_catalogue": "defined by two independent off-catalogue channels; the catalogue only supplies an exclusion zone",
+   "differs_from_repo": "no registry artifact combines structural mapping with rupture evidence as a co-locality",
+   "expected_dti": "screen A 13.4 / screen B 3.73 at 8,128 dots (mass-limited)",
+   "cost": "low",
+   "data_status": "evidence/e5_scarp_structure.json",
+   "status": "BUILT PARTIALLY (8,128 dots); not cleared"
+  },
+  {
+   "id": "H62-A",
+   "rank": 29,
+   "slate": "H62-H64 (2026-10-11, session arena/7573c1e8)",
+   "slate_rank": 4,
+   "title": "State-survey structural locality: emit on SGMC traces absent from the USGS Quaternary catalogue",
+   "layers": [
+    "USGS SGMC derived faults (sha 643cbe99...)",
+    ">=350 m catalogue exclusion"
+   ],
+   "signature": "dots sit exactly on off-catalogue SGMC traces (screen A 14.5)",
+   "why_off_catalogue": "the traces are by construction absent from the catalogue",
+   "differs_from_repo": "isolates the trace population that r13_lattice_s5 contains inside 206,895 dots (live 0.0904)",
+   "expected_dti": "REJECTED: 0.46x random on the independent LiDAR scarp screen (traces themselves 0.68x; catalogue 1.53x)",
+   "cost": "low",
+   "data_status": "evidence/e3_sgmc_locality.json",
+   "status": "REJECTED - do not submit"
+  },
+  {
+   "id": "H64-A",
+   "rank": 30,
+   "slate": "H62-H64 (2026-10-11, session arena/7573c1e8)",
+   "slate_rank": 5,
+   "title": "Three-slot identification experiment: anchor + lambda=0.5 rescale + null-add measures T, K and F exactly",
+   "layers": [
+    "best scored emission",
+    "its lambda=0.5 rescale",
+    "null-add dots at the belief floor far from the catalogue"
+   ],
+   "signature": "1/DTI(lambda) = alpha + alpha(F/T) + (beta K/T)(1/lambda) is linear, so three returns invert exactly",
+   "why_off_catalogue": "null-add dots are >300 m from every catalogue pixel so the masking rule cannot move the number",
+   "differs_from_repo": "no DTI gain by construction; it is the only action that replaces every projection here with a measurement",
+   "expected_dti": "none directly; both probes score below the anchor and only the best submission counts",
+   "cost": "two submission slots, zero compute",
+   "data_status": "algebra verified; never executed",
+   "status": "PROPOSED - highest information value, operator decision required"
+  },
+  {
+   "id": "H62-1",
+   "rank": 1,
+   "title": "Under-cover basement-step x gravity-step concordance: a conjunctive buried-contrast detector (low-relief arm + ungated ablation)",
+   "layers": [
+    "official cube band 15 depth_to_base_surf (sha 4371c82e...)",
+    "official cube band 13 iso_grav_anom (gradient computed here, per-px)",
+    "topo pack bands slope_p90 / relief_local (low-relief gate: slope_p90 <= 8 deg AND relief_local <= 25 m)",
+    "official cube band 19 det_elev_slope (reported as canary only)"
+   ],
+   "signature": "conj = min(pctile_rank(|grad depth_to_base_surf|), pctile_rank(|grad iso_grav_anom|)) over the footprint; primary arm multiplies conj by the low-relief gate (surface quiescence); emission = hex-lattice top-k with 3 px minimum separation, >= 200 m from the catalogue",
+   "why_off_catalogue": "a buried fault offsets the cover-basement contact and the density contrast across it without any surface scarp; the USGS/INGENIOUS catalogue is a surficial map (scarps + lineaments), so covered steps are systematically absent from it while remaining in the SGMC off-catalogue population the board scores",
+   "differs_from_repo": "H61-1 registered single-field basement-step ridge extraction but was never built (registry status: registered; NOT validated); nothing in this repo multiplies an independent gravity-gradient corroboration into the step field with a min() conjunction, and no arm has run a two-field product under a preregistered relief gate",
+   "expected_dti": "RANK 1 by expected DTI: the only candidate whose predicted placement (basin floors / low relief) matches the measured instrument bias (off-catalogue truth carries AUC 0.90 for local relief, 0.90 for slope p90 - knowledge/02 + evidence); conjunctive corroboration should cut the false-positive mass of a single-field ridge ( EXPECTED, not a score )",
+   "cost": "low: four on-disk bands, one Sobel, two rank transforms, NMS emit; minutes on this sandbox",
+   "data_status": "ON DISK and sha-pinned: registry/data_manifest.json training_features 4371c82e3b83..., data/external/topo_10m_derived_100m_u8.manifest.json (USGS 3DEP-derived, public domain)",
+   "status": "registered 2026-10-11; TOP candidate; preregistered in registry/preregistration-h62.json BEFORE computation; validated this session - see evidence/h62_validation.json"
+  },
+  {
+   "id": "H62-2",
+   "rank": 2,
+   "title": "Hydrothermal alteration-front contacts: Th/K ratio edges coincident with hillshade lineaments, gated to bedrock outcrop",
+   "layers": [
+    "external geodawn_extensions_u8 band ThK (Th/K, USGS GeoDAWN DOI 10.5066/P93LGLVQ)",
+    "external geodawn_rad_u8 bands K, Th (absolute levels for ratio sanity)",
+    "topo pack band hs_lineament (hillshade lineament intensity)",
+    "topo pack relief_local / slope_p90 (OUTCROP gate - high relief, opposite sign to H62-1)"
+   ],
+   "signature": "edge field on the Th/K ratio gradient (K leached, Th immobile along hydrothermal conduits) multiplied by hs_lineament intensity, emitted only where relief shows bedrock outcrop; 3 px NMS, catalogue ring held out",
+   "why_off_catalogue": "hydrothermal alteration follows permeable fault conduits in range outcrops where the fault itself may be buried under talus or never mapped; a ratio anomaly is fluid evidence, not scarp evidence, so it can sit off the surficial catalogue",
+   "differs_from_repo": "the prose candidate #2 on docs/hypotheses.html was never implemented and is not in this registry; GEMSDOE46 r11f/r12 fused radiometrics WITH scarp detections (scarp-first), whereas this is scarp-free and ratio-edge-first; no registry arm uses the precomputed ThK band",
+   "expected_dti": "RANK 2: sharp physical edges + official high-resolution radiometrics, but placement is in range outcrops (high relief) which the measured instrument bias disfavours - partially offsetting its physical case ( EXPECTED, not a score )",
+   "cost": "medium: ratio quantisation noise needs care; all bands already on disk",
+   "data_status": "ON DISK and sha-pinned: external/geodawn_rad_u8.tif c22420f7..., external/geodawn_extensions_u8.tif a35a9c6d... (derived from the official USGS GeoDAWN release, DOI 10.5066/P93LGLVQ)",
+   "status": "registered 2026-10-11; not tested this session (budget: 3 experiments)"
+  },
+  {
+   "id": "H62-3",
+   "rank": 3,
+   "title": "Warm-spring corridor chaining: straight corridor segments supported by >= 3 independent spring clusters",
+   "layers": [
+    "external gdr_wellspring_in_footprint.csv (27,092 rows, temp_c + geothermometer columns)",
+    "topo pack hs_lineament / relief_local (corridor must coincide with a topographic lineament)",
+    "official cube band 16 ieq_n100a15 as an optional corroboration filter only"
+   ],
+   "signature": "cluster springs to ~2 km groups, chain groups whose centroids are collinear within 3 px along a common bearing, require >= 3 clusters per corridor AND lineament coincidence; emit mid-corridor dots at 3 px NMS",
+   "why_off_catalogue": "springs discharge along permeable fault zones; H33-1 measured that 15/53 high-temperature sites lie > 3 km from any mapped trace, so spring geometry carries off-catalogue signal even when chemistry-as-removal was too expensive per dot",
+   "differs_from_repo": "H33-1 used spring chemistry only as a REMOVAL prior (falsified as addition); H18-5 (16GEMSDOE) registered thermal-anchor linking and was never built; no arm in this repo has chained spring LOCATIONS into positive corridor emission",
+   "expected_dti": "RANK 3: sharp, cheap, and physically direct for geothermal plumbing, but the cluster-collinearity step may yield few corridors and springs also cluster on known faults that the ring already excludes ( EXPECTED, not a score )",
+   "cost": "low: one CSV + clustering + collinearity + lineament mask",
+   "data_status": "ON DISK and sha-pinned: external/gdr_wellspring_in_footprint.csv 122718e6... (Geothermal Data Repository submission 1391, official, CC BY 4.0, DOI 10.15121/1881483)",
+   "status": "registered 2026-10-11; not tested this session (budget: 3 experiments)"
+  },
+  {
+   "id": "H62-4",
+   "rank": 4,
+   "title": "Playa-margin annular fault rings: closed gravity/conductivity rims around basin-fill depressions",
+   "layers": [
+    "official cube band 13 iso_grav_anom and band 17 cond_surf (rim contrast)",
+    "topo pack dem_mean + relief_local (closed low-relief depression outline)",
+    "official cube band 15 depth_to_base_surf (basin-fill thickness rim)"
+   ],
+   "signature": "closed-contour (ring) extraction around playa/closed-basin outlines where gravity or conductivity shows an annular step; ring arcs are emitted as NMS dots, interior playa pixels excluded",
+   "why_off_catalogue": "playa-margin ring and peripheral faults are buried under evaporites and Quaternary fill; surficial mapping misses them, and several Great Basin geothermal fields sit on such marginal structures",
+   "differs_from_repo": "every registered detector is LINEAR (lineaments, chains, corridors, traces); closed-ring geometry appears nowhere in this repo or the registry; the lane currently MASKS playas as a confound rather than targeting their margins",
+   "expected_dti": "RANK 4: genuinely novel geometry and potentially high credit per dot (few rings), but sample size is small and ring-to-truth coincidence is speculative ( EXPECTED, not a score )",
+   "cost": "low: contour tracing on three on-disk bands",
+   "data_status": "ON DISK and sha-pinned (same cube + topo pack as H62-1)",
+   "status": "registered 2026-10-11; not tested this session (budget: 3 experiments)"
+  },
+  {
+   "id": "H62-5",
+   "rank": 5,
+   "title": "True-10 m chi/ksn concordance - the tectonic-geomorphology lane done at the resolution it requires",
+   "layers": [
+    "USGS 3DEP 10 m DEM tiles (Elevation/13/TIFF/current/..., official, public domain) - NOT on disk here",
+    "competition 100 m grid for output resampling"
+   ],
+   "signature": "priority-flood fill -> D8 -> chi/ksn (theta = 0.45) at 10 m; per-link dz/dchi segmentation; one knickpoint per first-order basin; strike chaining from >= 3 independent basins (Gailleton-style segmentation), output dots on the 100 m grid",
+   "why_off_catalogue": "base-level steps persist in channel profiles after scarps degrade or bury (Kirby & Whipple 2012; Perron & Royden 2013); the 100 m substrate cannot resolve first-order channels (measured: 31% of cells raised by filling, A-vs-L exponent 0.03), so the lane failed at the wrong resolution rather than on the physics",
+   "differs_from_repo": "this session and run 1/2 of the lane measured the NEGATIVE only on the 100 m substrate; the registered parent H60-5 has never run; nothing in the repo executes at 10 m",
+   "expected_dti": "RANK 5 by cost-adjusted expectation: unknown ceiling, possibly high, but implementation is high-cost and the data is unreachable from this sandbox",
+   "cost": "high: ~716 tiles; requires an egress-capable runner",
+   "data_status": "SOURCE NAMED + PINS EXIST, OBTAINABILITY PARTIAL: https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif (USGS 3DEP, public domain; 716 URLs + sha256 pins upstream data/dem_links.json; egress probe evidence/probe-egress-receipt.json shows HTTP 200 from a GitHub Actions runner, but THIS sandbox cannot reach the host - measured, see docs/irregularities.html)",
+   "status": "EXECUTED 2026-10-11 as H65-1 (session arena/96ecd67e): NEGATIVE. Native 3DEP 10 m on 18 pinned 1x1-degree tiles (not ~716: that count is for 1 m tiles); first test INCONCLUSIVE +0.0326 [-0.0144, +0.0790] -> STOP; HOLDOUT-DTI 0.01158 [0.0084, 0.0146] vs random 0.03908. evidence/h65_runcard.json"
+  },
+  {
+   "id": "H65-1",
+   "rank": 31,
+   "slate": "H65 (2026-10-11, session arena/96ecd67e) - ranked after the 10 m result",
+   "slate_rank": 0,
+   "title": "Native 3DEP 10 m chi/ksn strike-concordant knickpoints (executes H62-5)",
+   "layers": [
+    "USGS 3DEP 1/3 arc-second DEM, 18 current 1x1 degree tiles, sha256-pinned (data/external/dem10_chi_100m.manifest.json)"
+   ],
+   "signature": "10 m priority-flood -> D8 -> chi (true D8 length) -> dz/dchi 500 m two-segment steepness step -> 100 m step_max -> H60-A corridor rule (>=3 independent drainages)",
+   "why_off_catalogue": "base-level steps persist after scarps degrade (Kirby & Whipple 2012)",
+   "differs_from_repo": "first run of the lane at 10 m; every earlier run was 100 m",
+   "expected_dti": "MEASURED: HOLDOUT-DTI 0.01158 [0.0084, 0.0146] (gems57-pooled-hide-v2, 22,641 withheld positives) < random 0.03908",
+   "cost": "done (Actions run 38113556275, ~4 min wall)",
+   "data_status": "obtained and pinned",
+   "status": "NEGATIVE: first test INCONCLUSIVE -> STOP; resolution was NOT the cause (E1 at 100 m +0.1089 vs 10 m +0.0326)"
+  },
+  {
+   "id": "H65-2",
+   "rank": 32,
+   "slate": "H65 (2026-10-11, session arena/96ecd67e) - ranked after the 10 m result",
+   "slate_rank": 1,
+   "title": "Mountain-front piedmont junction at 10 m, weighted by front sinuosity (Bull & McFadden 1977)",
+   "layers": [
+    "the committed 10 m pipeline (dem10-chi workflow) extended with a hillslope/fan slope-break band",
+    "visible catalogue only for strike"
+   ],
+   "signature": "trace the 10 m break in slope where bedrock hillslope meets alluvial fan (profile-curvature minimum of the range envelope); weight by low mountain-front sinuosity Smf and low valley-floor width/height Vf",
+   "why_off_catalogue": "range-bounding normal faults sit at the junction even where Quaternary scarps are buried or eroded; the catalogue maps scarps in fan deposits, not the buried junction",
+   "differs_from_repo": "no file in the repo traces the range-front junction or uses Smf/Vf; family scarp/curvature work is 100 m hillslope curvature, not a junction trace",
+   "expected_dti": "UNVALIDATED; best of the slate because H65-1's step support is only 1.04-1.19x enriched near mapped faults, while junctions are where mapped faults are",
+   "cost": "medium: one new reduction band in scripts/dem10_block.py + one runner run (~4 min)",
+   "data_status": "USGS 3DEP 10 m - verified obtainable 2026-10-11 (18 tiles, n39w119 sha256 b7fe301c... matches the independent probe pin)",
+   "status": "PROPOSED - first experiment of the next session"
+  },
+  {
+   "id": "H65-3",
+   "rank": 33,
+   "slate": "H65 (2026-10-11, session arena/96ecd67e) - ranked after the 10 m result",
+   "slate_rank": 2,
+   "title": "Fan-apex alignment + fan-head trenching",
+   "layers": [
+    "10 m DEM: channel confinement (valley width) along each trunk",
+    "visible catalogue for strike"
+   ],
+   "signature": "fan apex = downstream point where confinement width jumps >3x; keep apices that align (>=3) along a common strike; fan-head trench depth as activity weight",
+   "why_off_catalogue": "apices of adjacent fans line up on the range-bounding fault whether or not a scarp survives",
+   "differs_from_repo": "uses channel confinement, not steepness, slope or curvature; not in any registry raster",
+   "expected_dti": "UNVALIDATED; moderate",
+   "cost": "medium-high (valley-width extraction at 10 m)",
+   "data_status": "USGS 3DEP 10 m - verified obtainable",
+   "status": "PROPOSED"
+  },
+  {
+   "id": "H65-4",
+   "rank": 34,
+   "slate": "H65 (2026-10-11, session arena/96ecd67e) - ranked after the 10 m result",
+   "slate_rank": 3,
+   "title": "Divide asymmetry of tilted blocks (chi across divides; Willett et al. 2014 Science 343, 1248765; Forte & Whipple 2018 EPSL 493, 102-117)",
+   "layers": [
+    "10 m DEM chi computed from range-front base levels (needs a global-datum chi, not the block-local one)"
+   ],
+   "signature": "chi contrast across main divides -> divide migration direction -> steep (footwall) flank; the bounding fault is on the steep flank's base",
+   "why_off_catalogue": "identifies which side of an unfaulted-looking range is fault-bounded even under alluvial cover",
+   "differs_from_repo": "no divide-based measurement anywhere in the family",
+   "expected_dti": "UNVALIDATED; low-moderate (coarse localisation, ~km)",
+   "cost": "high (global chi datum across blocks)",
+   "data_status": "USGS 3DEP 10 m - verified obtainable",
+   "status": "PROPOSED"
+  },
+  {
+   "id": "H65-5",
+   "rank": 35,
+   "slate": "H65 (2026-10-11, session arena/96ecd67e) - ranked after the 10 m result",
+   "slate_rank": 4,
+   "title": "Knickpoint recurrence in chi (transient wave) instead of position",
+   "layers": [
+    "10 m knickpoints (H65-1 output) + global-datum chi"
+   ],
+   "signature": "knickpoints from one base-level fall sit at similar chi in neighbouring basins (Crosby & Whipple 2006, Geomorphology 82, 16-38); cluster in chi, project the cluster's downstream end onto the range front",
+   "why_off_catalogue": "ties a knickpoint population to the fault that generated it even after the knickpoints migrated kilometres upstream",
+   "differs_from_repo": "H65-1 used knickpoint POSITION; this uses chi-space recurrence (listed as next step (3) by the 2nd lane run, never built)",
+   "expected_dti": "UNVALIDATED; low (H65-1 shows 10 m knickpoint support barely enriched near faults)",
+   "cost": "high",
+   "data_status": "USGS 3DEP 10 m - verified obtainable",
+   "status": "PROPOSED"
   }
  ],
  "claims": [
@@ -817,41 +1084,29 @@
   }
  ],
  "submission": {
-  "name": "gems61-lane-thermal-knick-40000px-20261011T020352Z",
-  "note": "chi/ksn knickpoint strike-concordance x INGENIOUS thermal corroboration; 40000 dots; E1-audited selector; UNSCORED",
-  "status_line": "PRIMARY = this session's GEMS61 thermally-corroborated knickpoint-lane file. ITS VERDICT IS NEGATIVE: it is unique, format-valid, leakage-free and fully documented, but it is NOT recommended for a weekly slot. Measured: pooled HOLDOUT-DTI (evaluator gems52-pooled-hide-v1, 36,439 withheld positives, 20 km-block bootstrap, 1,000 draws / 161 clusters) = 0.002495, 95% CI [0.001506, 0.003511]; paired difference versus the owner-reported 0.2778 champion control -0.001417 [-0.002430, -0.000312] and versus a mass-matched random control -0.037464 [-0.040658, -0.034271] - it loses to every control and sits ~76x below the family's hard slot gate (best promotable holdout DTI 0.190147). Root cause measured separately (E2b): both available 100 m elevation products fail published drainage-network validity tests (Hack exponent b = +0.026 and -0.027 against 1.6-2.0 for real networks; channel networks agree at Jaccard 0.231), so this is a SUBSTRATE (resolution) verdict, not a detector verdict. NO ORGANISER SCORE EXISTS for this or any artifact in this repository. The already-scored fallback anchor is linked below.",
+  "name": "60GEMSDOE-H61A-XCRD-37654px",
+  "note": "H61-A XCRD: 30-channel off-catalogue detector; 37,654 dots >=350 m from catalogue; unique vs 35 rasters; UNSCORED, projection only.",
+  "status_line": "PRIMARY = H61-A XCRD (2026-10-11), the session's UNIQUE artifact: max |Spearman| 0.024 against all 35 registry rasters, worst within-3-px share 46 % (brief's stop rule 70 %). DOWNLOAD: YES. SLOT DECISION: NOT CLEARED - no local instrument can certify it beats the owner-reported 0.2778 (the repository's catalogue hide-and-recover gate scores every off-catalogue emission exactly 0 by construction: evidence/e6_blocked_gate.json), so it is an explicit bounded-downside bet (only the best submission counts). Screens: 2.46 vs the champion's 1.62 at equal 37,654-dot mass on the one mass-normalised screen that reproduces the ladder (Spearman +0.94, evidence/e2b_xcrd_screen.json); independent LiDAR scarp screen NEGATIVE (0.48x), stated on purpose. The parallel 2026-10-11b GEMS61 lane artifact keeps its own NEGATIVE verdict and is retained alongside.",
   "file": {
-   "path": "docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif",
-   "sha256": "a856efbac5e229194da7374c720eb83d5fd2e88568657b0f763a2e6af3d95d90",
-   "bytes": 75800,
-   "positive_px": 40000,
-   "nan_inside_footprint": 0,
-   "on_catalogue_pixels": 0,
-   "values_range": [
-    0.0,
-    1.0
-   ]
+   "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
+   "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
+   "bytes": 127363,
+   "positive_px": 37654
   },
   "file_zeros": {
-   "path": "docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif",
-   "sha256": "a856efbac5e229194da7374c720eb83d5fd2e88568657b0f763a2e6af3d95d90",
-   "bytes": 75800,
-   "positive_px": 40000,
-   "nan_inside_footprint": 0,
-   "on_catalogue_pixels": 0,
-   "values_range": [
-    0.0,
-    1.0
-   ]
+   "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
+   "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
+   "bytes": 127363,
+   "positive_px": 37654
   },
   "zip": {
-   "path": "docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.zip",
-   "sha256": "9a1dcc97e15edc63c47dbfbfb69d2c608dce422a0bb32a13a6eeb062f66f318b",
-   "bytes": 27427
+   "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.zip",
+   "sha256": "b9e66142e20d103dd4bf9663d56b532b754c372deb28b31cd1efe406a560cdfd",
+   "bytes": 86350
   },
-  "candidate_id": "G61-LANE-THERMAL-40000",
-  "tier": 0,
-  "hypothesis": "G61-1 (thermally-corroborated chi/ksn knickpoint lane, E2/E3)",
+  "candidate_id": "H61-A XCRD",
+  "tier": 2,
+  "hypothesis": "H61-A",
   "selection_rule": {
    "tier_1": "slot-eligible under the live-anchored gate (LM-cal +margin in 4/4 quadrants over a live-scored base, safety factor >= 2.0) AND on_catalogue_pixels == 0; highest projected live DTI wins",
    "tier_2": "scripts/build_slot_plan.py's frozen holdout rule: beats the owner-reported 0.2600 incumbent on all three holdout instruments AND 0 on-catalogue dots",
@@ -1078,13 +1333,51 @@
   ],
   "rule": "E2/E3: strike-concordant knickpoints (chi/ksn on the 3DEP-10m-reduced 100 m pack) x INGENIOUS thermal corroboration (springs, 2 m probes, paleo travertine), 3-px NMS, 2-px catalogue ring, 40,000-dot budget chosen as the in-sample maximum of the audited selection instrument; the emission rule is unchanged from the audited selector",
   "provenance": "built by scripts/e62_lane_thermal.py (E2/E3) and scripts/e62b_substrate.py (E2b) from the hash-pinned bridge + data/external inputs; every digest re-read from the written bytes; receipts evidence/e62_lane_thermal.json, evidence/e62b_substrate.json, docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.json",
-  "verdict": "NEGATIVE - deliverable negative result; do not spend a submission slot (brief: never submit anything that has not beaten the family's best promotable holdout)",
+  "verdict": "OK TO DOWNLOAD; slot NOT CLEARED (explicit bounded-downside bet). Superseded parallel-session claims and their negative verdicts are preserved in superseded_primaries.",
   "evidence": {
    "lane_thermal": "evidence/e62_lane_thermal.json",
    "substrate_diagnostic": "evidence/e62b_substrate.json",
    "instrument_audit": "evidence/e61_instrument_audit.json",
    "receipt": "docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.json"
-  }
+  },
+  "session": "2026-10-11 H61-H63",
+  "file_nan_twin": {
+   "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-nan.tif",
+   "sha256": "8cbd52542e7bb8ea4949497d4f1b40f2f7936167f87d841f9242fe29f85e1383",
+   "bytes": 1560705
+  },
+  "audit_receipts": [
+   "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-audit.json",
+   "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros-audit.json"
+  ],
+  "run_card": "evidence/run_card_h61_20261011.json",
+  "writeup": "docs/research/h61-h63-session-20261011.md",
+  "screens": {
+   "sgmc_offcat_quality_ratio_at_equal_mass": 2.4637,
+   "champion_same_screen": 1.6177,
+   "lidar_scarp_enrichment": 0.4819,
+   "lidar_scarp_enrichment_champion": 1.8352,
+   "held_out_auc_folds": [
+    0.7575,
+    0.7281,
+    0.7989,
+    0.7849
+   ],
+   "uniqueness": {
+    "max_abs_spearman": 0.0241,
+    "worst_within_3px_frac": 0.4586,
+    "random": 0.1749
+   }
+  },
+  "approved_for_weekly_slot": false,
+  "promoted": false,
+  "superseded_primaries": [
+   {
+    "name": "gems61-lane-thermal-knick-40000px-20261011T020352Z",
+    "verdict": "NEGATIVE - deliverable negative result; do not spend a submission slot (brief: never submit anything that has not beaten the family's best promotable holdout)",
+    "status_line": "PRIMARY = this session's GEMS61 thermally-corroborated knickpoint-lane file. ITS VERDICT IS NEGATIVE: it is unique, format-valid, leakage-free and fully documented, but it is NOT recommended for a weekly slot. Measured: pooled HOLDOUT-DTI (evaluator gems52-pooled-hide-v1, 36,439 withheld positives, 20 km-block bootstrap, 1,000 draws / 161 clusters) = 0.002495, 95% CI [0.001506, 0.003511]; paired d"
+   }
+  ]
  },
  "holdout": {
   "preregistration": "GEMSDOE32-PREREG-1",
@@ -1857,6 +2150,20 @@
    "severity": "medium",
    "statement": "The mirrored example submission is not a plausible sample submission: data/bridge/example_submission.tif is float32 with values {0, 1} and exactly 7,172,775 cells equal to 1.0 - the complement of the label raster's zero set (labels nonzero = 7,172,775, including the -1 sentinel) - with no NaN anywhere, contradicting the portal's 'total fault absence' description of the sample.",
    "mitigation": "Flagged for review; nothing in this repository derives anything from that file. It is used only as a shape/CRS template, and every emitted raster is validated against data/bridge/existing_faults.tif instead."
+  },
+  {
+   "id": "IR-32-H62-01",
+   "severity": "medium",
+   "status": "fixed (2026-10-11)",
+   "statement": "Three shared-tool CI blind spots made the full suite un-runnable on a fresh clone: requirements.txt omitted numba (tests/test_lane_core.py import error), scripts/e3_validate.py read a private sandbox path /home/user/registry_rasters instead of registry/rasters, and scripts/run_lane.py ignored the manifest's external/ destination for derived_sgmc_faults_100m_u8.tif. Additionally tests/test_gems32.py pinned verified_files_count == 22 while registry/data_manifest.json lists 23 (the assertion only ever ran via skip on CI). All four fixed in the shared template, never as private forks.",
+   "evidence": "requirements.txt; scripts/e3_validate.py; scripts/run_lane.py; tests/test_gems32.py; full suite 104 passed 0 failed on 2026-10-11"
+  },
+  {
+   "id": "IR-32-H62-02",
+   "severity": "medium",
+   "status": "open (protocol amendment needed)",
+   "statement": "The literal uniqueness gate 'more than 70% of dots within 3 px of one registry raster = duplicate' is uninformative against dense lattice rasters: H62-1 scored 83.1% vs r13_lattice_s5, and a matched uniform-random set of the same size scored 83.7% (H62-1 excess-over-random -0.0059, evidence/h62_uniqueness_excess_control.json). The family selector already uses excess-over-random; the shared protocol text should adopt that form. Preregistered gates are not retroactively passed: H62-1 remains G4-FAIL in the record.",
+   "evidence": "evidence/h62_uniqueness.json; evidence/h62_uniqueness_excess_control.json; registry/preregistration-h62.json"
   }
  ]
 }
