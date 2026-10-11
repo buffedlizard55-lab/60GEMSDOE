@@ -14,7 +14,7 @@ ACTIVE_TIFF = ROOT / ACTIVE_RECORD["path"]
 ACTIVE_NAME = ACTIVE_TIFF.name
 # The artifact this session's home page offers.  Legacy pages still link to the historical
 # H65-1 research artifact, so both names are accepted as "a research-only TIFF".
-CURRENT_TIFF = ROOT / STATUS["home_page_artifact"]["path"]
+CURRENT_TIFF = ROOT / STATUS["h74_1"]["home_page_artifact"]["path"]
 CURRENT_NAME = CURRENT_TIFF.name
 RESEARCH_ONLY_TIFFS = {ACTIVE_NAME, CURRENT_NAME}
 
@@ -33,7 +33,8 @@ def _assert_local_links(page: Path, html: str):
 
 def test_current_site_status_is_stopped_and_research_only():
     assert STATUS["status"] == "STOP"
-    assert STATUS["active_run"] == "H73-1"
+    assert STATUS["h74_1"]["active_run"] == "H74-1"
+    assert STATUS["h74_1"]["status"] == "STOP"
     assert STATUS["recommended_competition_submission"] is None
     assert STATUS["new_tiff_created_in_this_review"] is True
     assert STATUS["submission_slots_used_in_this_review"] == 0
@@ -102,7 +103,7 @@ def test_h65_report_and_readme_preserve_latest_stop_and_h33_attribution_caveat()
 
 def test_run_card_is_final_negative_and_matches_the_protocol_contract():
     """The run card must carry every field the parallel-run protocol names, and nothing promoted."""
-    card = json.loads((ROOT / STATUS["final_run_card"]).read_text())
+    card = json.loads((ROOT / STATUS["h74_1"]["final_run_card"]).read_text())
     for field in ("hypothesis", "mechanism", "named_non_fault_process_that_could_mimic_it",
                   "first_test", "holdout_dti", "uniqueness", "raster", "validator_output",
                   "submission", "verdict"):

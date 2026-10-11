@@ -187,32 +187,34 @@
  },
  "leakage_verdict": "CLEAN - every single feature alone is <= 0.6078 max(AUC, 1-AUC), far below the 0.90 trip level.",
  "uniqueness": {
-  "comparators_checked": 107,
+  "comparators_checked": 110,
   "our_dots": 8811,
   "max_abs_spearman": 0.061444710255971945,
   "max_our_dots_within_3px_all_comparators": 0.9997730110089661,
   "unsatisfiable_comparators": 4,
   "unsatisfiable_note": "a registry raster whose own 3-px dilation already covers > 70% of the footprint makes the literal rule unsatisfiable for ANY candidate; these are calibration lattices and dense packings, not distinguishable submissions",
   "worst_among_satisfiable": {
+   "spearman": 0.024249687091247116,
    "path": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
    "registry_dots": 40000,
    "registry_3px_coverage_of_footprint": 0.12495130504416847,
    "our_dots_within_3px": 0.658381568493928,
    "registry_dots_within_3px_of_ours": 0.04745449235860995,
-   "spearman": 0.024249687091247116
+   "satisfiable": true
   },
   "verdict_all_comparators": "FAIL",
   "verdict_satisfiable_subset": "PASS",
-  "satisfiable_comparators": 103
+  "satisfiable_comparators": 106
  },
  "raster": {
-  "path": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif",
+  "path": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-35930766-zeros.tif",
   "sha256": "aed3c9bd1902ee440cd5fdf975a0c646ae332588a65a08d2ddd43334ca80b60d",
   "bytes": 174507,
   "positive_px": 8811,
-  "zip": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.zip",
-  "zip_sha256": "620c21928d4abd99027ad7e5dd4eba4da8ed37f961c0cf2c082188c19de7cb28",
-  "variant_nan_outside": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T201814Z-35930766-nan.tif"
+  "zip": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-35930766-zeros.zip",
+  "zip_sha256": "39241b255082b3fdd54f33737dc99a8a98342a1c616b5dd7bf8741f60a7301be",
+  "variant_nan_outside": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-35930766-nan.tif",
+  "checks": "docs/downloads/checks-gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-35930766-zeros.tif.json"
  },
  "validator_output": {
   "bands": 1,

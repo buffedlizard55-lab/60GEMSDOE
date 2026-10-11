@@ -1,11 +1,11 @@
 {
- "generated_utc": "2026-10-11T20:20:44Z",
+ "generated_utc": "2026-10-11T20:50:16Z",
  "hypothesis": "H74-1",
  "submission_name": "60GEMSDOE-H74-1-chi-knick-corridor",
  "note": "H74-1 chi/ksn knickpoint corridors, >=3 independent drainages; first test NULL; RESEARCH ONLY - DO NOT SUBMIT",
  "note_chars": 109,
  "primary": {
-  "path": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif",
+  "path": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-35930766-zeros.tif",
   "bytes": 174507,
   "sha256": "aed3c9bd1902ee440cd5fdf975a0c646ae332588a65a08d2ddd43334ca80b60d",
   "bands": 1,
@@ -32,7 +32,7 @@
   "problems": []
  },
  "variant_nan_outside": {
-  "path": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T201814Z-35930766-nan.tif",
+  "path": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-35930766-nan.tif",
   "bytes": 222336,
   "sha256": "36e128437107ffb77df4b2293cd68a11616098402169e4b5824e4ce1344ffd68",
   "bands": 1,
@@ -59,11 +59,11 @@
   "problems": []
  },
  "zip": {
-  "path": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.zip",
+  "path": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-35930766-zeros.zip",
   "bytes": 26650,
-  "sha256": "620c21928d4abd99027ad7e5dd4eba4da8ed37f961c0cf2c082188c19de7cb28",
+  "sha256": "39241b255082b3fdd54f33737dc99a8a98342a1c616b5dd7bf8741f60a7301be",
   "members": [
-   "gems60-h74-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif"
+   "gems60-h74-chi-knick-corridor-8811px-20261011T204755Z-35930766-zeros.tif"
   ]
  }
 }

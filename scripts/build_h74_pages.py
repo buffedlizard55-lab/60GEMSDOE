@@ -43,7 +43,7 @@ def site_href(path: str, prefix: str = "") -> str:
 
 
 NAV = [("index.html", "Home"), ("executive-summary.html", "How to submit"),
-       ("h73-report.html", "H74-1 report"), ("research.html", "Research"),
+       ("h74-report.html", "H74-1 report"), ("research.html", "Research"),
        ("hypotheses.html", "Deferred hypotheses"), ("leaderboard.html", "Leaderboard"),
        ("sources.html", "Sources"), ("irregularities.html", "Irregularities")]
 
@@ -74,7 +74,9 @@ def main() -> int:
     status = _read(ROOT / "registry" / "current_site_status.json")
     card = _read(ROOT / "evidence" / "h74_runcard.json")
     tif = _read(ROOT / "evidence" / "h74_tiff.json")
-    art = status["home_page_artifact"]
+    # This round's own record lives under `h74_1`; the top-level keys belong to whichever
+    # session published the site last.
+    art = status.get("h74_1", {}).get("home_page_artifact") or status["home_page_artifact"]
     tif_href = site_href(art["path"])
     zip_href = site_href(art["zip"])
     prim = tif["primary"]
@@ -360,7 +362,7 @@ unresolved one.</li>
         '&middot; validator problems: none. <b>Research only &mdash; DO NOT SUBMIT.</b></p>\n'
         '</div>\n'
     )
-    for home, pref in ((DOCS / "index.html", ""), (ROOT / "index.html", "../")):
+    for home, pref in ((DOCS / "index.html", ""), (ROOT / "index.html", "docs/")):
         if not home.exists():
             continue
         txt = home.read_text()
@@ -368,6 +370,7 @@ unresolved one.</li>
             continue
         b = banner.replace('href="downloads/', f'href="{pref}downloads/') \
                   .replace('href="h74-report.html"', f'href="{pref}h74-report.html"')
+        b = b.replace(f'href="{pref}downloads/', f'href="{pref}downloads/')
         if '<div class="values">' in txt:
             i = txt.index('<div class="values">')
             j = txt.find('</div>', i)

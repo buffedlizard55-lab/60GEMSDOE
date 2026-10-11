@@ -22,7 +22,7 @@ CARD = _j("evidence/h74_runcard.json")
 E1 = _j("evidence/h74_e1_first_test.json")
 E1B = _j("evidence/h74_e1b_offcatalogue.json")
 TIFF = _j("evidence/h74_tiff.json")
-UNI = _j("evidence/h74_uniqueness.json")
+UNI = _j("evidence/h74_uniqueness_satisfiable.json")
 HOLD = _j("evidence/h74_holdout.json")
 PRE = _j("registry/preregistration-h74.json")
 
@@ -95,12 +95,19 @@ def test_leakage_canary_is_clean():
 
 
 def test_uniqueness_reports_both_readings_and_the_unsatisfiable_comparators():
-    assert UNI["max_abs_spearman"] <= 0.90
+    raw = _j("evidence/h74_uniqueness.json")
+    assert UNI["max_abs_spearman_all_comparators"] <= 0.90
+    assert raw["max_abs_spearman"] <= 0.90
     assert UNI["unsatisfiable_comparators"] > 0, \
-        "the four dense calibration comparators must still be reported as unsatisfiable"
-    assert UNI["verdict_all_comparators"] == "FAIL"
+        "the dense calibration comparators must still be reported as unsatisfiable"
+    # our own NaN-container variant is not a comparator: identical dot pattern by construction
+    assert UNI["self_container_variants_excluded"], \
+        "the second container of this emission must be excluded, not scored as a duplicate"
+    assert UNI["comparators_total"] >= 100
+    assert UNI["literal_verdict_all_comparators"] == "FAIL", \
+        "the literal 70% clause does fire; that must not be hidden"
     assert UNI["worst_among_satisfiable"]["our_dots_within_3px"] <= 0.70
-    assert UNI["verdict_satisfiable_subset"] == "PASS"
+    assert UNI["literal_verdict_satisfiable_subset"] == "PASS"
 
 
 def test_raster_matches_its_card_and_the_official_grid():
@@ -123,11 +130,13 @@ def test_raster_matches_its_card_and_the_official_grid():
 
 
 def test_the_site_states_both_verdicts_plainly():
-    for rel in ("docs/executive-summary.html", "docs/h73-report.html", "docs/index.html",
+    for rel in ("docs/executive-summary.html", "docs/h74-report.html", "docs/index.html",
                 "index.html", "README.md"):
         txt = (ROOT / rel).read_text()
         assert "DO NOT SUBMIT" in txt, f"{rel} does not state the submit verdict"
     readme = (ROOT / "README.md").read_text()
-    assert "OK to download for research?" in readme
+    assert "OK TO DOWNLOAD" in readme and "OK TO SUBMIT" in readme
     assert "OK to submit to the competition?" in readme
     assert "Predicted values must be in range [0, 1]" in readme
+    assert "DO NOT SUBMIT" in readme.split("## Sources and project values")[0], \
+        "the submit verdict must appear before the historical appendix"

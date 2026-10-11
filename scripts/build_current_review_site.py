@@ -34,7 +34,7 @@ def _base(title: str, body: str, active: str = "", *, root_prefix: str = "", sta
     nav = [
         ("index.html", "Home"),
         ("executive-summary.html", "How to submit"),
-        ("h73-report.html", "H73-1 report"),
+        ("h74-report.html", "H74-1 report"),
         ("research.html", "Research"),
         ("hypotheses.html", "Deferred hypotheses"),
         ("leaderboard.html", "Leaderboard"),
