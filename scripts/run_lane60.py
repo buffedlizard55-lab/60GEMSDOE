@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -36,7 +37,12 @@ from gems57 import metric as M                   # noqa: E402
 from gems60 import geomorph as gm                # noqa: E402
 from gems60 import lane as L                     # noqa: E402
 
-CACHE = ROOT / ".cache" / "features60"
+CACHE = ROOT / ".cache" / os.environ.get("GEMS60_FEATURE_CACHE", "features60")
+# Substrate-agnostic driver (shared-tool change 2026-10-11, session arena/96ecd67e, H65-1):
+# GEMS60_FEATURE_CACHE selects the feature cache (default: the 100 m det_elev cache of H60-A;
+# H65-1 points it at the native-3DEP-10 m reduction) and GEMS60_TAG prefixes every evidence
+# file, so a new substrate never overwrites the H60-A record.  Defaults reproduce H60-A exactly.
+TAG = os.environ.get("GEMS60_TAG", "h60a")
 EVID = ROOT / "evidence"
 DENSITY = 40_000 / 5_106_385          # declared production budget / allowed cells
 BOOT_DRAWS = 1000
@@ -291,11 +297,18 @@ def run(args) -> int:
 
     step = load("step").astype(np.float64)
     channel = load("channel")
-    terminal = gm.branch_signature(load("dircode"), load("footprint"),
-                                   k=L.CORRIDOR_HALF_LEN_PX - 1).astype(np.int64)
+    if (CACHE / "branch_sig.npy").is_file():
+        # substrate supplies its own branch signature (H65-1: the 10 m network's cell 500 m
+        # downstream, expressed as a global 100 m index) -- same independence definition
+        terminal = load("branch_sig").astype(np.int64)
+    else:
+        terminal = gm.branch_signature(load("dircode"), load("footprint"),
+                                       k=L.CORRIDOR_HALF_LEN_PX - 1).astype(np.int64)
     mark(f"independence=branch_signature(k={L.CORRIDOR_HALF_LEN_PX - 1})")
     ksn = load("ksn").astype(np.float64)
-    chi = load("chi").astype(np.float64)
+    # chi is only a canary row; a substrate without a comparable chi datum (H65-1: chi is
+    # block-local on the 10 m runner) omits it rather than faking one
+    chi = load("chi").astype(np.float64) if (CACHE / "chi.npy").is_file() else None
     acc = load("acc").astype(np.float64)
     exclude, conf_diag = confound_masks(step, channel)
     mark(f"confounds {conf_diag}")
@@ -317,11 +330,11 @@ def run(args) -> int:
                    components=len(e1_rows),
                    skipped=sum(1 for r in e1_rows if "skipped" in r),
                    rows=e1_rows)
-    (EVID / "h60a_e1_first_test.json").write_text(
+    (EVID / f"{TAG}_e1_first_test.json").write_text(
         json.dumps(e1_full, indent=2, allow_nan=False) + "\n")
     mark(f"E1 {e1}")
     if e1.get("verdict") == "STOP":
-        (EVID / "h60a_lane_stop.json").write_text(json.dumps(dict(
+        (EVID / f"{TAG}_lane_stop.json").write_text(json.dumps(dict(
             reason="mandated first test failed: withheld crossings do not exceed "
                    "random same-orientation transects", summary=e1), indent=2) + "\n")
         mark("E1 verdict STOP -> lane halts here per the brief")
@@ -387,9 +400,11 @@ def run(args) -> int:
                                     origin=origin, global_shape=gshape)
             surf_terms[arm].append(t)
         # canary: each feature alone
-        for name, feat in (("knickpoint_step", step[bb]), ("ksn", ksn[bb]), ("chi", chi[bb]),
-                           ("drainage_area", acc[bb]), ("lane_p", p),
-                           ("dist_to_visible", -d)):
+        feats = [("knickpoint_step", step[bb]), ("ksn", ksn[bb])]
+        if chi is not None:
+            feats.append(("chi", chi[bb]))
+        feats += [("drainage_area", acc[bb]), ("lane_p", p), ("dist_to_visible", -d)]
+        for name, feat in feats:
             canary_rows.append(dict(cell=cell.key, feature=name,
                                     auc=auc(feat, truth_by_cell[cell.key][bb] & cell.active,
                                             allowed)))
@@ -421,11 +436,11 @@ def run(args) -> int:
                canary=list(can.values()),
                canary_rule="max(AUC,1-AUC) > 0.90 is leakage until proven otherwise",
                cell_diagnostics=diag_cells, log=log)
-    (EVID / "h60a_holdout.json").write_text(json.dumps(out, indent=2, allow_nan=False) + "\n")
+    (EVID / f"{TAG}_holdout.json").write_text(json.dumps(out, indent=2, allow_nan=False) + "\n")
     mark(f"pooled binary: {json.dumps(pooled_dots['scores'], default=float)[:600]}")
     mark(f"paired deltas: {json.dumps(pooled_dots['paired_differences'], default=float)[:600]}")
     mark(f"canary flags: {[c['feature'] for c in can.values() if c['leakage_flag']]}")
-    mark(f"wrote {EVID/'h60a_holdout.json'}")
+    mark(f"wrote {EVID/(TAG + '_holdout.json')}")
     return 0
 
 
