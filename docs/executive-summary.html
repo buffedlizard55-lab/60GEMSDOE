@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Summary & Submission Guide - 60GEMSDOE</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; color: #333; background: #f9f9f9; }
+        header { background: #005A9C; color: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center; }
+        h1 { margin: 0 0 10px 0; }
+        nav { background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        nav a { margin-right: 15px; text-decoration: none; color: #005A9C; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        .card { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        ol { padding-left: 20px; }
+        li { margin-bottom: 15px; }
+        .highlight { background: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin: 15px 0; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Executive Summary & Submission Guide</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="executive-summary.html">Executive Summary & Submission Guide</a>
+        <a href="hypotheses.html">Hypotheses</a>
+    </nav>
+
+    <div class="card">
+        <h2>Executive Summary</h2>
+        <p>The goal of this project is to discover hidden geothermal vents using multi-modal geophysical and topographic data for the DOE GEMS competition. We are testing the <strong>H61 Tectonic-Geomorphology Hypothesis</strong>.</p>
+        <p>Rather than relying solely on high-resolution LiDAR scarps (which degrade over time), this hypothesis leverages the idea that channel profiles persistently record base-level steps. We extract local valley networks and compute channel steepness, searching for collinear knickpoints (steps in steepness) that align across multiple independent drainages.</p>
+        <p>This approach gives us a unique signal uncorrelated with standard edge detectors and catalogue-heavy ML models, bringing true scientific discovery to the forefront.</p>
+    </div>
+
+    <div class="card">
+        <h2>How to Make a Submission</h2>
+        <p>Follow these exact steps to submit our generated TIF file into the competition:</p>
+        
+        <ol>
+            <li>
+                <strong>Download the file:</strong> Go to the <a href="index.html">Home</a> page and click the green <strong>"Download TIF Submission"</strong> button. The file will save as <code>h61-geomorph-submission.tif</code>.
+            </li>
+            <li>
+                <strong>Navigate to DrivenData:</strong> Go to the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/" target="_blank">Competition Submission Page</a>. Ensure you are logged into your account.
+            </li>
+            <li>
+                <strong>Upload:</strong> Click "Choose File" under the "File to submit" section and select the <code>h61-geomorph-submission.tif</code> you just downloaded.
+            </li>
+            <li>
+                <strong>Add Note (Optional):</strong> In the Note section, add a short comment to identify it, such as: <em>"H61: collinear steepness steps across drainages"</em>.
+            </li>
+            <li>
+                <strong>Submit:</strong> Click the submit button.
+                <div class="highlight">
+                    <strong>Note:</strong> Our file correctly guarantees all predicted values are in the range <code>[0, 1]</code> and matches the exact CRS, shape, and geotransform required.
+                </div>
+            </li>
+        </ol>
+    </div>
+</body>
+</html>
