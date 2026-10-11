@@ -39,6 +39,9 @@ def main() -> int:
     build = load("h60a_submission_build.json", {}) or {}
     hold = load("h60a_holdout.json", {}) or {}
     uniq = build.get("uniqueness") or load("h60a_uniqueness.json") or {}
+    # the protocol requires the duplicate check on the SURFACE before placement AND
+    # on the final dots; both receipts are read and both are reported
+    uniq_surf = load("h60a_uniqueness_surface.json") or {}
     pre = load("preregistration_h60a.json", {}) or {}
     cache = load("geomorph_feature_cache.json", {}) or {}
 
@@ -84,12 +87,13 @@ def main() -> int:
                  beats_best_control_paired_ci=beats_control,
                  uniqueness_literal_or_sparse_clear=uniq_ok,
                  uniqueness_literal=bool(uniq.get("unique")),
+                 uniqueness_surface_literal=bool(uniq_surf.get("unique")),
                  dense_prior_firings=dense_fired)
     okay_to_download = bool(file_ok and range_ok)
     okay_to_submit = bool(okay_to_download and e1_ok and not leak and beats_control and uniq_ok)
     failing = [k for k, v in gates.items() if v is False and k in (
         "file_written_and_format_valid", "value_range_0_1", "first_test_proceed",
-        "no_leakage_canary_flag", "beats_best_control_paired_ci",
+        "no_lane_feature_leakage", "beats_best_control_paired_ci",
         "uniqueness_literal_or_sparse_clear")]
 
     card = dict(
@@ -144,6 +148,23 @@ def main() -> int:
             rho_limit=uniq.get("rho_limit"), overlap_limit=uniq.get("overlap_limit"),
             dense_support_priors=scope.get("dense_support_rows"),
             irregularity="IR-60-GATE-01"),
+        registry_surface=dict(
+            note="same literal gate applied to the continuous lane surface (rank field before dot placement)",
+            checked=uniq_surf.get("registry_rasters_checked"),
+            expected=uniq_surf.get("registry_rasters_expected"),
+            complete_accessible_scan=uniq_surf.get("complete_accessible_scan"),
+            positive_pixels=uniq_surf.get("my_dots"),
+            worst_spearman_full_footprint=uniq_surf.get("worst_spearman_full_footprint"),
+            worst_dot_overlap=uniq_surf.get("worst_dot_overlap"),
+            worst_jaccard=uniq_surf.get("worst_jaccard_dot_sets"),
+            duplicate_count=uniq_surf.get("duplicate_count"),
+            unique_literal=uniq_surf.get("unique"),
+            stop_required=uniq_surf.get("stop_required"),
+            dense_support_priors=(uniq_surf.get("scope") or {}).get("dense_support_rows"),
+            worst_rho_sparse_submission_like=(uniq_surf.get("scope") or {}).get(
+                "worst_rho_sparse_submission_like"),
+            worst_overlap_sparse_submission_like=(uniq_surf.get("scope") or {}).get(
+                "worst_overlap_sparse_submission_like")),
         raster=dict(file=build.get("file"), name=build.get("name"),
                     sha256=build.get("sha256"), zip_sha256=build.get("zip_sha256"),
                     bytes=build.get("bytes"), dots=build.get("dots"),
@@ -207,7 +228,11 @@ def main() -> int:
     out.write_text(json.dumps(card, indent=2, allow_nan=False) + "\n")
     obs = ROOT / "registry" / "observations.jsonl"
     obs.parent.mkdir(parents=True, exist_ok=True)
-    with obs.open("a") as fh:
+    # append-only ledger, but idempotent: re-running the card must not duplicate rows
+    prior = [ln for ln in obs.read_text().splitlines() if ln.strip()] if obs.is_file() else []
+    keep = [ln for ln in prior if json.loads(ln).get("sha256") != card["raster"]["sha256"]]
+    with obs.open("w") as fh:
+        fh.write("\n".join(keep + [""]) if keep else "")
         fh.write(json.dumps(dict(
             utc=None, session="60GEMSDOE", hypothesis="H60-A", name=card["submission_name"],
             sha256=card["raster"]["sha256"], dots=card["raster"]["dots"],

@@ -266,6 +266,22 @@
     "dense_support_priors": 49,
     "irregularity": "IR-60-GATE-01"
   },
+  "registry_surface": {
+    "note": "same literal gate applied to the continuous lane surface (rank field before dot placement)",
+    "checked": 655,
+    "expected": 655,
+    "complete_accessible_scan": true,
+    "positive_pixels": 348923,
+    "worst_spearman_full_footprint": 0.05197152384725631,
+    "worst_dot_overlap": 1.0,
+    "worst_jaccard": 0.06802771468606648,
+    "duplicate_count": 60,
+    "unique_literal": false,
+    "stop_required": true,
+    "dense_support_priors": 49,
+    "worst_rho_sparse_submission_like": 0.05197152384725631,
+    "worst_overlap_sparse_submission_like": 0.9975094791687564
+  },
   "raster": {
     "file": "downloads/gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204-zeros.tif",
     "name": "gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204",
@@ -323,6 +339,7 @@
     "beats_best_control_paired_ci": false,
     "uniqueness_literal_or_sparse_clear": false,
     "uniqueness_literal": false,
+    "uniqueness_surface_literal": false,
     "dense_prior_firings": true
   },
   "failing_gates": [

@@ -77,19 +77,41 @@ def rho(a, b, mask=None, idx=None):
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--candidate", required=True, type=Path)
+    ap.add_argument("--candidate", type=Path, default=None)
     ap.add_argument("--out", default=str(ROOT / "evidence" / "h60a_uniqueness.json"))
     ap.add_argument("--rows-cache", default=str(ROOT / "evidence" / "uniqueness_rows.jsonl"),
                     help="incremental per-raster rows; re-used with --reuse-rows so a "
                          "summarise failure can never cost another full 8-minute scan")
     ap.add_argument("--reuse-rows", action="store_true")
+    ap.add_argument("--surface", action="store_true",
+                    help="audit the continuous lane SURFACE (rank field before dot placement) "
+                         "instead of the shipped dots, as the parallel-run protocol requires "
+                         "both to be checked")
     a = ap.parse_args()
     t0 = time.time()
     grid = G57.load_grid()
     fp = grid.footprint
-    with rasterio.open(a.candidate) as src:
-        mine = src.read(1).astype(np.float32)
-        mine[~np.isfinite(mine)] = 0.0
+    if a.surface:
+        # rebuild the exact production surface from the cached feature stack
+        sys.path.insert(0, str(ROOT / "scripts"))
+        from gems60 import geomorph as gm
+        from gems60 import lane as L
+        from run_lane60 import confound_masks, load
+        cache = ROOT / ".cache" / "features60"
+        step = np.load(cache / "step.npy")
+        channel = np.load(cache / "channel.npy")
+        branch = gm.branch_signature(np.load(cache / "dircode.npy"), fp,
+                                     k=L.CORRIDOR_HALF_LEN_PX - 1).astype(np.int64)
+        exclude, _conf = confound_masks(step, channel)
+        z, cand, cand_diag = L.prepare_candidates(step, channel, exclude)
+        res = L.surface_from_candidates(z, cand, branch, grid.catalogue, dict(cand_diag))
+        mine = np.clip(np.nan_to_num(res.p, nan=0.0), 0.0, 1.0).astype(np.float32)
+        print(f"[uniq] surface rebuilt: positive_px={int((mine > 0).sum())} "
+              f"p_max={float(mine.max()):.4f}", flush=True)
+    else:
+        with rasterio.open(a.candidate) as src:
+            mine = src.read(1).astype(np.float32)
+            mine[~np.isfinite(mine)] = 0.0
     mine_dots = mine > 0
     n_mine = int(mine_dots.sum())
     my_ys, my_xs = np.nonzero(mine_dots)
@@ -167,8 +189,12 @@ def main() -> int:
         del theirs, theirs_near, t_dots, rec
         if (i + 1) % 50 == 0:
             print(f"[uniq] {i + 1}/{len(rows_index)} ({time.time() - t0:.0f}s)", flush=True)
-    cand_meta = dict(my_file=a.candidate.name, my_dots=n_mine,
-                     candidate_file_sha256=hashlib.sha256(a.candidate.read_bytes()).hexdigest(),
+    cand_meta = dict(my_file=(a.candidate.name if a.candidate
+                              else "lane surface rebuilt from .cache/features60 (--surface)"),
+                     my_dots=n_mine,
+                     audit_target=("surface" if a.surface else "shipped dots"),
+                     candidate_file_sha256=(hashlib.sha256(a.candidate.read_bytes()).hexdigest()
+                                            if a.candidate else None),
                      candidate_decoded_sha256=hashlib.sha256(mine.tobytes()).hexdigest(),
                      candidate_rank_variation=bool(np.ptp(mine[fp]) > 0))
     dense = [r for r in rows if r["their_dots"] > 0.5 * int(fp.sum())]

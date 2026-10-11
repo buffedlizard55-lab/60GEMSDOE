@@ -95,7 +95,14 @@ has power; it is not a lane feature and it is not promoted.</p>
 <tr><td>worst forward 3-px dot overlap</td><td class="h60a-num">1.00000</td><td>0.70</td><td><strong>FIRES on 60 rows</strong></td></tr>
 <tr><td>worst Jaccard of dot sets (diagnostic only)</td><td class="h60a-num">0.01158</td><td>0.50</td><td>clear</td></tr>
 <tr><td>byte-identical / pixel-identical to any prior</td><td>no / no</td><td>&mdash;</td><td>clear</td></tr>
-<tr><td><code>unique</code> (literal, fail-closed)</td><td><strong>False</strong></td><td>&mdash;</td><td><code>stop_required = True</code></td></tr></table>
+<tr><td><code>unique</code> (literal, fail-closed)</td><td><strong>False</strong></td><td>&mdash;</td><td><code>stop_required = True</code></td></tr>
+<tr><td colspan="4"><strong>Same gate on the continuous SURFACE before dot placement</strong>
+(655/655 rasters,
+None positive cells): worst &rho;
+0.05197 &middot; worst forward overlap
+1.00000 &middot; worst Jaccard
+&mdash; &middot; firings 60
+&middot; <code>unique = None</code></td></tr></table>
 <p class="h60a-warn">The literal overlap gate fires because dense universal-support priors in the
 family corpus (support = the whole footprint, 5,167,373 cells, or the whole grid, 12,279,160 cells)
 contain <em>any</em> non-empty candidate &mdash; IR-60-GATE-01, the same structural finding the other
@@ -447,6 +454,22 @@ lane brief's named free 3DEP DEM was therefore not obtainable; band 12 <code>det
     &quot;dense_support_priors&quot;: 49,
     &quot;irregularity&quot;: &quot;IR-60-GATE-01&quot;
   },
+  &quot;registry_surface&quot;: {
+    &quot;note&quot;: &quot;same literal gate applied to the continuous lane surface (rank field before dot placement)&quot;,
+    &quot;checked&quot;: 655,
+    &quot;expected&quot;: 655,
+    &quot;complete_accessible_scan&quot;: true,
+    &quot;positive_pixels&quot;: 348923,
+    &quot;worst_spearman_full_footprint&quot;: 0.05197152384725631,
+    &quot;worst_dot_overlap&quot;: 1.0,
+    &quot;worst_jaccard&quot;: 0.06802771468606648,
+    &quot;duplicate_count&quot;: 60,
+    &quot;unique_literal&quot;: false,
+    &quot;stop_required&quot;: true,
+    &quot;dense_support_priors&quot;: 49,
+    &quot;worst_rho_sparse_submission_like&quot;: 0.05197152384725631,
+    &quot;worst_overlap_sparse_submission_like&quot;: 0.9975094791687564
+  },
   &quot;raster&quot;: {
     &quot;file&quot;: &quot;downloads/gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204-zeros.tif&quot;,
     &quot;name&quot;: &quot;gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204&quot;,
@@ -504,6 +527,7 @@ lane brief's named free 3DEP DEM was therefore not obtainable; band 12 <code>det
     &quot;beats_best_control_paired_ci&quot;: false,
     &quot;uniqueness_literal_or_sparse_clear&quot;: false,
     &quot;uniqueness_literal&quot;: false,
+    &quot;uniqueness_surface_literal&quot;: false,
     &quot;dense_prior_firings&quot;: true
   },
   &quot;failing_gates&quot;: [
