@@ -1,0 +1,267 @@
+{
+  "hypothesis": "Withheld normal-fault segments carry localized channel-steepness (knickpoint/ksn) signals on drainages crossing the trace (Kirby & Whipple 2012; Perron & Royden 2013).",
+  "mechanism": "Priority-Flood fill -> D8 accumulation -> chi/ksn on official 100 m det_elev; DoG log-ksn steepness-step anomaly; multi-drainage concordance; playa/flat/lithology masks; 2px catalogue ring; 3px NMS dots.",
+  "named_confound": "Range-front alluvial cover: traces crossing piedmonts have no bedrock channels; straight orientation-matched nulls cut more steep headwater terrain and out-score real traces (E1b).",
+  "holdout": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems52-pooled-hide-v1",
+    "dti": 0.0021375045131882472,
+    "ci95": [
+      0.0017900288395109047,
+      0.002513410633773401
+    ],
+    "withheld_positive_pixels": 36414,
+    "tpw": 75.36469878762749,
+    "fpw": 30559.956144356285,
+    "fnw": 36338.63530121237
+  },
+  "holdout_all_arms": {
+    "lane7653": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems52-pooled-hide-v1",
+      "dti": 0.0021375045131882472,
+      "ci95": [
+        0.0017900288395109047,
+        0.002513410633773401
+      ],
+      "withheld_positive_pixels": 36414,
+      "tpw": 75.36469878762749,
+      "fpw": 30559.956144356285,
+      "fnw": 36338.63530121237
+    },
+    "canary_anom": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems52-pooled-hide-v1",
+      "dti": 0.008948026507284322,
+      "ci95": [
+        0.0065895538436718795,
+        0.011297033580114784
+      ],
+      "withheld_positive_pixels": 36414,
+      "tpw": 315.5798860478964,
+      "fpw": 30368.915859573888,
+      "fnw": 36098.42011395211
+    },
+    "champion": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems52-pooled-hide-v1",
+      "dti": 0.004066112431797188,
+      "ci95": [
+        0.0034973841344132944,
+        0.004609417675240994
+      ],
+      "withheld_positive_pixels": 36414,
+      "tpw": 240.98580708543977,
+      "fpw": 150437.42590386423,
+      "fnw": 36173.01419291457
+    },
+    "d28": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems52-pooled-hide-v1",
+      "dti": 0.08623051953519958,
+      "ci95": [
+        0.07610170184857615,
+        0.09587993390649414
+      ],
+      "withheld_positive_pixels": 36414,
+      "tpw": 5608.627586351358,
+      "fpw": 173946.65587703415,
+      "fnw": 30805.372413648623
+    },
+    "h274r1": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems52-pooled-hide-v1",
+      "dti": 0.027462193830208315,
+      "ci95": [
+        0.0241051057486567,
+        0.030672301406538614
+      ],
+      "withheld_positive_pixels": 36414,
+      "tpw": 1687.7952371090778,
+      "fpw": 159950.5250098971,
+      "fnw": 34726.204762890906
+    },
+    "h16topo": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems52-pooled-hide-v1",
+      "dti": 0.05714296632356753,
+      "ci95": [
+        0.04889398940579964,
+        0.06536685337482333
+      ],
+      "withheld_positive_pixels": 36414,
+      "tpw": 7339.917245534368,
+      "fpw": 489245.61463195574,
+      "fnw": 29074.082754465628
+    }
+  },
+  "paired_differences": {
+    "canary_anom": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems52-pooled-hide-v1",
+      "delta": -0.0068105219940960745,
+      "ci95": [
+        -0.009224190234746481,
+        -0.0044901565448338945
+      ],
+      "withheld_positive_pixels": 36414
+    },
+    "champion": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems52-pooled-hide-v1",
+      "delta": -0.0019286079186089404,
+      "ci95": [
+        -0.002450495991544516,
+        -0.0014213825906271502
+      ],
+      "withheld_positive_pixels": 36414
+    },
+    "d28": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems52-pooled-hide-v1",
+      "delta": -0.08409301502201133,
+      "ci95": [
+        -0.09366774330474799,
+        -0.07406446769723067
+      ],
+      "withheld_positive_pixels": 36414
+    },
+    "h274r1": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems52-pooled-hide-v1",
+      "delta": -0.025324689317020067,
+      "ci95": [
+        -0.02828052104756938,
+        -0.022073509545514507
+      ],
+      "withheld_positive_pixels": 36414
+    },
+    "h16topo": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems52-pooled-hide-v1",
+      "delta": -0.05500546181037928,
+      "ci95": [
+        -0.06313394302742037,
+        -0.04692889302993034
+      ],
+      "withheld_positive_pixels": 36414
+    }
+  },
+  "canary": {
+    "field_auc_vs_held_truth": 0.5014511579116284,
+    "note": "label-free features cannot leak labels; reported for protocol"
+  },
+  "uniqueness": {
+    "champion-h33-2-b2-zeros.tif": {
+      "spearman": 0.00468810835135536,
+      "overlap": {
+        "ours_within": 0.2391219129753038,
+        "theirs_within": 0.061693312795453335,
+        "n_ours": 7653,
+        "n_theirs": 37654
+      }
+    },
+    "dotted-d28-zeros.tif": {
+      "spearman": 0.003813641966015014,
+      "overlap": {
+        "ours_within": 0.25754606036848293,
+        "theirs_within": 0.057926967566341574,
+        "n_ours": 7653,
+        "n_theirs": 44090
+      }
+    },
+    "h16-1-topo-nan.tif": {
+      "spearman": 0.004191710091696564,
+      "overlap": {
+        "ours_within": 0.3236639226447145,
+        "theirs_within": 0.05417181032604749,
+        "n_ours": 7653,
+        "n_theirs": 123939
+      }
+    },
+    "h274r1-solo-nan.tif": {
+      "spearman": 0.004322510228101322,
+      "overlap": {
+        "ours_within": 0.2495753299359728,
+        "theirs_within": 0.06082240851762482,
+        "n_ours": 7653,
+        "n_theirs": 40199
+      }
+    },
+    "h7-lidarscarp.tif": {
+      "spearman": 0.0038698932237631383,
+      "overlap": {
+        "ours_within": 0.4590356722853783,
+        "theirs_within": 0.04192324707346589,
+        "n_ours": 7653,
+        "n_theirs": 1828699
+      }
+    },
+    "r7-dem10-multiphys.tif": {
+      "spearman": 0.001146184307943494,
+      "overlap": {
+        "ours_within": 0.1581079315301189,
+        "theirs_within": 0.04324338791915173,
+        "n_ours": 7653,
+        "n_theirs": 224173
+      }
+    }
+  },
+  "uniqueness_gate_pass": true,
+  "validator": {
+    "path": "/home/user/60GEMSDOE/docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
+    "bytes": 78835,
+    "sha256": "c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c",
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "ref_bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "blocksize": [
+      256,
+      256
+    ],
+    "fixture_grid": false,
+    "has_validity_mask": false,
+    "nan_pixels": 0,
+    "infinity_pixels": 0,
+    "n_nan": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0006232510786503553,
+    "n_nonzero": 7653,
+    "mass": 7653.0,
+    "mass_outside_footprint": 0,
+    "problems": [],
+    "ok": true,
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+  },
+  "sha256": "c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c",
+  "submission_name": "gems60-lane-knickpoint-c7653-20261011T000000Z",
+  "note": "tectono-geomorphic chi/ksn knickpoint lane; 7653 concordant channel dots; E1 negative AUC 0.224; RESEARCH-ONLY, not promoted",
+  "verdict": "NEGATIVE (do not spend a slot; research-only)",
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator_version": "gems52-pooled-hide-v1",
+  "seed": 20261011
+}

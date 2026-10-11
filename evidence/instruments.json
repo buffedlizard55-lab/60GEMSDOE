@@ -1,0 +1,12 @@
+{
+  "truth_px": 60988,
+  "off_catalogue": {
+    "raw_px": 63121,
+    "min_dist_m": 300.0,
+    "target_px": 14089,
+    "thinned_px": 14089,
+    "thinning_radius_px": 2.116639276867163,
+    "sampling": "random-order maximal-separation thinning",
+    "prevalence_vs_pin": 1.000021293660877
+  }
+}

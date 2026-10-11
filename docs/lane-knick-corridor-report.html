@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lane report &middot; H60-A knickpoint corridors &middot; 60GEMSDOE</title>
+<link rel="stylesheet" href="assets/site.css"></head>
+<body class="h60a-body">
+<div class="h60a-head"><h1>Third independent run of the tectonic-geomorphology lane</h1>
+<p class="h60a-sub">Session <code>arena/54b1897a-60gemsdoe</code> &middot; hypothesis <strong>H60-A</strong>
+&middot; channel steepness (<code>ksn</code>), knickpoints and the Perron &amp; Royden <code>&chi;</code>
+transform, with cross-drainage corridor corroboration on visible-catalogue strikes.
+Code: <code>src/gems60/geomorph.py</code>, <code>src/gems60/lane.py</code> (new files; it neither forks
+nor overwrites the other two runs' modules).</p></div>
+
+<div class="h60a-banner h60a-hold">
+<h2>ARTEFACT RELEASED FOR RESEARCH</h2>
+<p class="h60a-big">DOWNLOAD: OK &nbsp;&middot;&nbsp;
+SUBMIT TO THE COMPETITION: NO &nbsp;&middot;&nbsp; verdict: <strong>negative</strong></p>
+<p>RESEARCH / EDUCATION DOWNLOAD ONLY - DO NOT SUBMIT. The lane passed its mandated first test (channels crossing withheld faults step +0.1089 log-ksn harder than random same-orientation lines, 95% CI [+0.0586, +0.1569]), but the emission built from that signal loses on the pooled hide-and-recover holdout: HOLDOUT-DTI 0.01639 [0.01223, 0.02061] against 0.03908 for random mass at the same 40k budget and 0.19073 for the distance-to-visible control, paired deltas -0.02269 [-0.02740, -0.01768] and -0.17434 [-0.18319, -0.16583]. Spending a weekly slot on this file is negative expected value. Failing gate(s): beats_best_control_paired_ci, uniqueness_literal_or_sparse_clear.</p>
+<p class="h60a-dl"><a class="h60a-btn" href="downloads/gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204-zeros.tif">Download the .tif</a><a class="h60a-btn h60a-alt" href="downloads/gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204-zeros.zip">Download the .zip</a><a class="h60a-btn h60a-alt" href="downloads/gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204-zeros.json">Writer receipt</a></p>
+<p class="h60a-sub"><strong>Repository primary (selector-declared, NOT this run&#39;s file):</strong> <a href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</a> &middot; name <code>gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros</code> &mdash; this run&#39;s verdict is <code>negative</code>, so nothing here replaces it. See the <a href="index.html">front page</a>.</p>
+<p class="h60a-sub">Submission name <code>gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204</code> &middot;
+note field (110 chars) <code>60GEMSDOE H60-A knickpoint-corridor | chi/ksn on det_elev, &gt;=3 independent drainages, 40000 dots off-catalogue</code> &middot;
+sha256 <code>e9dbbb64e1d52b3b2786df53b79699af&hellip;</code> &middot;
+40000 dots &middot; zero dots on mapped catalogue faults</p>
+</div>
+
+<div class="h60a-nav"><a href="index.html">&larr; site front page</a> &middot;
+<a href="executive-summary.html">how to submit (shared ritual)</a> &middot;
+<a href="lane-chi-report.html">second run of this lane</a> &middot;
+<a href="irregularities.html">irregularities ledger</a> &middot;
+<a href="sources.html">sources</a> &middot;
+<a href="https://github.com/buffedlizard55-lab/60GEMSDOE">repository</a></div>
+
+<div class="h60a-sec"><h2>Where this run sits next to the other two</h2>
+<p>Three sessions have now run this lane from the same brief with different DEMs, different statistics
+and different holdout instruments. All three are negative. The convergence is the result.</p>
+<table class="h60a-table">
+<tr><th>run</th><th>elevation source</th><th>first test</th><th>HOLDOUT-DTI</th><th>verdict</th></tr>
+<tr><td>lane 1 (<code>gems60-knickpoint-lane-c7653</code>)</td><td>given stack</td>
+<td>FAILED (AUC 0.224 &lt; 0.55 stop rule)</td><td>0.00214 [0.0018, 0.0025] vs 0.086 best arm</td><td>negative</td></tr>
+<tr><td>lane 2 (<code>gems60-chi-knickpoint-cast-lane-v1</code>, session <code>arena/16fc977d</code>)</td>
+<td>GeoDAWN absolute-elevation DEM</td><td>STOP twice (&Delta; &minus;0.0229, then &minus;0.0349; cast AUC 0.4984)</td>
+<td>0.00039 vs matched random 0.00042</td><td>negative</td></tr>
+<tr><td><strong>this run</strong> (<code>gems60-h60a-knick-corridor-40000</code>)</td><td>band 12 <code>det_elev</code> of the given stack</td>
+<td><strong>PROCEED</strong> (+0.1089 log-<code>ksn</code>, CI [0.05862, 0.15695], 323 components)</td>
+<td><strong>0.01639</strong> [0.01223, 0.02061] vs random mass
+0.03908</td><td><strong>negative</strong></td></tr>
+</table>
+<p class="h60a-warn">This run is the only one of the three whose mandated first test <em>passed</em>:
+channels crossing withheld faults really do step harder in <code>ksn</code> than orientation-matched
+random lines, with a CI that excludes zero. It still lost the emission contest &mdash; which localises
+the failure to the step from &ldquo;a real geomorphic signal exists&rdquo; to &ldquo;a 40&thinsp;k-dot
+budget placed on that signal beats random placement&rdquo;. The signal is too weak per pixel
+(~11 % of a log-ratio) to out-spend a uniform prior under &beta; = 0.8.</p>
+</div>
+
+<div class="h60a-sec"><h2>E1 &mdash; the mandated first test</h2>
+<p></p>
+<table class="h60a-table"><tr><th>quantity</th><th>value</th></tr>
+<tr><td>withheld fault components compared</td><td class="h60a-num">323</td></tr>
+<tr><td>mean paired difference (crossing &minus; random same-orientation), log-<code>ksn</code></td><td class="h60a-num">0.10889</td></tr>
+<tr><td>95 % bootstrap CI over components (1000 draws, seed 60101)</td><td class="h60a-num">[0.05862, 0.15695]</td></tr>
+<tr><td>components with a positive difference</td><td class="h60a-num">59.4 %</td></tr>
+<tr><td>verdict declared in advance</td><td><strong>PROCEED</strong></td></tr></table>
+</div>
+
+<div class="h60a-sec"><h2>E3 &mdash; pooled HOLDOUT-DTI</h2>
+<p>Evaluator <code>gems57-pooled-hide-v2</code>, &alpha; = 0.2,
+&beta; = 0.8, 300.0 m triangular kernel,
+4 quadrant folds &times; 2 seeds, 159 physical spatial
+clusters, 1000 paired draws. Every arm at the same
+0.007833330232640117 density budget, every dot &ge; 200 m off the visible catalogue.</p>
+<table class="h60a-table"><tr><th>arm</th><th>HOLDOUT-DTI</th><th>95 % CI</th><th>withheld positives</th></tr><tr><td>distance_only</td><td class='h60a-num'>0.19073</td><td class='h60a-num'>[0.18200, 0.19965]</td><td class='h60a-num'>22641</td></tr><tr><td>random_mass_control</td><td class='h60a-num'>0.03908</td><td class='h60a-num'>[0.03568, 0.04231]</td><td class='h60a-num'>22641</td></tr><tr><td>ksn_only_no_alignment</td><td class='h60a-num'>0.03118</td><td class='h60a-num'>[0.02602, 0.03576]</td><td class='h60a-num'>22641</td></tr><tr><td><strong>lane_h60a</strong></td><td class='h60a-num'>0.01639</td><td class='h60a-num'>[0.01223, 0.02061]</td><td class='h60a-num'>22641</td></tr></table>
+<table class="h60a-table"><tr><th>paired difference</th><th>&Delta; DTI</th><th>95 % CI</th></tr><tr><td>lane &minus; ksn_only_no_alignment</td><td class='h60a-num'>-0.01479</td><td class='h60a-num'>[-0.02061, -0.00860]</td></tr><tr><td>lane &minus; distance_only</td><td class='h60a-num'>-0.17434</td><td class='h60a-num'>[-0.18319, -0.16583]</td></tr><tr><td>lane &minus; random_mass_control</td><td class='h60a-num'>-0.02269</td><td class='h60a-num'>[-0.02740, -0.01768]</td></tr></table>
+<p>Continuous-surface arm: lane 0.01377
+[0.01075, 0.01683] vs
+<code>distance_only</code> 0.05942,
+paired &Delta; -0.04566.</p>
+<p class="h60a-warn"><span class="h60a-tag">HOLDOUT-DTI</span> is a proxy: the hide-and-recover
+truth <em>is</em> the given catalogue, so this instrument cannot reward a genuinely new fault
+(IR-60-PROXY-01). No projection is written as a score anywhere on this page.</p>
+<h3>E2 &mdash; leakage canary (each feature alone)</h3>
+<table class="h60a-table"><tr><th>feature</th><th>max(AUC, 1&minus;AUC)</th><th>status</th><th>worst cell</th></tr><tr><td>knickpoint_step</td><td class='h60a-num'>0.5861</td><td>pass</td><td>draw20_foldNE_all</td></tr><tr><td>ksn</td><td class='h60a-num'>0.5593</td><td>pass</td><td>draw20_foldSE_all</td></tr><tr><td>chi</td><td class='h60a-num'>0.5625</td><td>pass</td><td>draw20_foldNW_all</td></tr><tr><td>drainage_area</td><td class='h60a-num'>0.5268</td><td>pass</td><td>draw21_foldNW_all</td></tr><tr><td>lane_p</td><td class='h60a-num'>0.5181</td><td>pass</td><td>draw21_foldNW_all</td></tr><tr><td>dist_to_visible</td><td class='h60a-num'>0.9243</td><td><strong>LEAKAGE FLAG</strong></td><td>draw21_foldNW_all</td></tr></table>
+<p><code>dist_to_visible</code> is a deliberate control: on a hide-and-recover fold the withheld
+segment abuts its own visible continuation, so AUC &gt; 0.90 is expected. Its flag proves the canary
+has power; it is not a lane feature and it is not promoted.</p>
+</div>
+
+<div class="h60a-sec"><h2>Uniqueness &mdash; complete scan of 655/655 registry rasters</h2>
+<table class="h60a-table"><tr><th>statistic</th><th>value</th><th>limit</th><th>status</th></tr>
+<tr><td>registry rasters compared (651 fetched + 4 recovered by blob SHA from <code>55GEMSDOE</code> git history)</td>
+<td class="h60a-num">655 / 655</td><td>&mdash;</td><td>complete scan: True</td></tr>
+<tr><td>worst full-footprint Spearman &rho;</td><td class="h60a-num">0.02088</td><td>0.90</td><td>clear</td></tr>
+<tr><td>worst &rho; among sparse submission-like priors</td><td class="h60a-num">0.01802</td><td>0.90</td><td>clear</td></tr>
+<tr><td>worst forward 3-px dot overlap</td><td class="h60a-num">1.00000</td><td>0.70</td><td><strong>FIRES on 60 rows</strong></td></tr>
+<tr><td>worst Jaccard of dot sets (diagnostic only)</td><td class="h60a-num">0.01158</td><td>0.50</td><td>clear</td></tr>
+<tr><td>byte-identical / pixel-identical to any prior</td><td>no / no</td><td>&mdash;</td><td>clear</td></tr>
+<tr><td><code>unique</code> (literal, fail-closed)</td><td><strong>False</strong></td><td>&mdash;</td><td><code>stop_required = True</code></td></tr></table>
+<p class="h60a-warn">The literal overlap gate fires because dense universal-support priors in the
+family corpus (support = the whole footprint, 5,167,373 cells, or the whole grid, 12,279,160 cells)
+contain <em>any</em> non-empty candidate &mdash; IR-60-GATE-01, the same structural finding the other
+sessions logged. Every discriminating statistic says the content is novel (&rho; = 0.021, Jaccard =
+0.012, no identical prior). The protocol is literal and fail-closed, so the firing is reported and the
+file is not cleared &mdash; not argued away.</p>
+</div>
+
+<div class="h60a-sec"><h2>Method, declared before it ran</h2>
+<p><strong>Hypothesis.</strong> Bedrock channels that cross an active normal fault carry an upstream-steepening knickpoint; a knickpoint corroborated by &gt;=3 independent drainage networks inside a strike-aligned corridor marks a fault trace, including traces absent from the USGS/INGENIOUS catalogue.</p>
+<p><strong>Mechanism.</strong> Fault-crossing channels record a step in rock-uplift rate as a step in normalized steepness ksn = S*(A/A0)^theta along chi (Kirby &amp; Whipple 2012; Perron &amp; Royden 2013). Single-channel knickpoints are ambiguous; strike-aligned corroboration across drainage divides is not, because no single-channel process is strike-aligned.</p>
+<p><strong>Named non-fault mimic.</strong> Lithologic contact / basin-fill boundary: a hard-to-soft rock contact also steps ksn and can be strike-aligned across drainages. Secondary mimics: closed-basin (playa) base level, ephemeral/alluvial reaches, regional climate-precipitation gradient, and post-wildfire or landslide-derived steepening.</p>
+<p><strong>Confound controls.</strong></p><ul><li>climate/regional gradient: knickpoint magnitude is z-scored inside 40 km blocks (blockwise_zscore), never ranked globally</li><li>playa / closed-basin base level: cells whose priority-flood raise exceeds 20 m are excluded (542,309 px measured)</li><li>lithology / basin fill: cells with depth_to_base_surf above its 90th footprint percentile are excluded (thick sedimentary cover = no bedrock channel)</li><li>ephemeral / alluvial: cells with cond_surf above its 95th percentile are excluded (clay-rich, evaporitic, non-bedrock)</li><li>channel-hood: only pixels with contributing area &gt;= 20 cells (0.20 km^2) are eligible</li></ul>
+<p><strong>Declared parameters.</strong></p><div class="h60a-pre">{
+  &quot;band&quot;: &quot;12 det_elev (Detrended elevation - topography with regional trends removed)&quot;,
+  &quot;theta_ref&quot;: 0.45,
+  &quot;A0_m2&quot;: 1.0,
+  &quot;pixel_m&quot;: 100.0,
+  &quot;a_min_cells&quot;: 20,
+  &quot;knickpoint_window_cells&quot;: 5,
+  &quot;step_floor_ksn&quot;: 0.5,
+  &quot;step_winsor_log_ratio&quot;: 2.302585092994046,
+  &quot;z_min_candidate&quot;: 1.5,
+  &quot;n_drainage_min&quot;: 3,
+  &quot;corridor_half_len_px&quot;: 6,
+  &quot;corridor_half_width_px&quot;: 2,
+  &quot;n_strike_bins&quot;: 18,
+  &quot;trace_decay&quot;: 0.5,
+  &quot;block_px&quot;: 400,
+  &quot;catalogue_buffer_px&quot;: 2,
+  &quot;production_dot_budget&quot;: 40000
+}</div>
+<p><strong>Confound masks measured on the grid</strong> (1105880 channel-adjacent cells excluded):
+playa base level 542309 px, basin fill
+(depth-to-base &gt; p90 = 1279.3 m)
+516432 px, conductive/clay-rich alluvium
+(cond_surf &gt; p95 = 3.911)
+257039 px.</p>
+<p><strong>Independence.</strong> &ldquo;several independent drainages&rdquo; means independent
+<em>channel branches</em>, not independent terminal sinks: the northwestern Great Basin is internally
+drained, so 5.17 M cells share only 1,224 sinks and sink identity rejected 36,556 of 36,633
+candidates. <code>geomorph.branch_signature</code> (identity of the cell 5 steps downstream) replaced it
+before any score was recorded; with it, 32980 of
+None knickpoint candidates are corroborated by
+&ge; 3 independent branches (median 6,
+max 27).</p>
+<p><strong>Reproducibility.</strong> the surface and the 40,000 dots were recomputed from scratch and
+asserted pixel-identical to the shipped file
+(<code>identical=None</code>).</p>
+</div>
+
+<div class="h60a-sec"><h2>Three further candidate hypotheses from this lane (ranked, not run)</h2>
+<table class="h60a-table"><tr><th>#</th><th>hypothesis</th><th>signature targeted</th><th>why it could find a catalogue-missing fault</th><th>gain / cost</th></tr>
+<tr><td>H60-D</td><td>keep a knickpoint only where <code>depth_to_base_surf</code> (band 15) also steps</td>
+<td>coincidence of a basement-depth gradient with a <code>ksn</code> step</td>
+<td>directly kills the named mimic: a lithologic contact steps <code>ksn</code> but not basement depth</td><td>high / low &mdash; band already local</td></tr>
+<tr><td>H60-B</td><td>cluster breakpoints at equal <code>&chi;</code>, not equal distance</td>
+<td>isochronous knickpoints (Perron &amp; Royden)</td>
+<td>a base-level fall arrives at equal &chi; in every drainage, so the cluster is a line even where the scarp is buried</td><td>medium / low &mdash; &chi; cached</td></tr>
+<tr><td>H60-C</td><td>drainage-divide migration asymmetry across mapped faults, projected along strike</td>
+<td>divide-height asymmetry (Vx-style index)</td>
+<td>divides migrate away from the uplifted block; survives alluvial burial that hides the trace</td><td>medium / medium</td></tr>
+</table>
+<p class="h60a-warn">Given three convergent negative results, the honest recommendation to the next
+session is <strong>leave this lane</strong>: H60-D is worth one cheap experiment only because it tests
+the mimic directly, and the emission bar should be re-derived from the live-anchored truth model rather
+than from the catalogue-proxy holdout.</p>
+</div>
+
+<div class="h60a-sec"><h2>Verified sources for manual review</h2>
+<table class="h60a-table"><tr><th>source</th><th>link</th></tr><tr><td>Competition page (metric: alpha 0.2, beta 0.8, 300 m triangular kernel)</td><td><a href='https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/'>https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/</a></td></tr><tr><td>Competition leaderboard</td><td><a href='https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/'>https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/</a></td></tr><tr><td>Official reference solution</td><td><a href='https://github.com/drivendataorg/gems-prize-reference-solution'>https://github.com/drivendataorg/gems-prize-reference-solution</a></td></tr><tr><td>Submission format / rules (OSTI 96647)</td><td><a href='https://docs.nlr.gov/docs/fy26osti/96647.pdf'>https://docs.nlr.gov/docs/fy26osti/96647.pdf</a></td></tr><tr><td>USGS GeoDAWN NW Great Basin magnetics/radiometrics (DOI 10.5066/P93LGLVQ)</td><td><a href='https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and'>https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and</a></td></tr><tr><td>INGENIOUS / GDR submission 1391 (wells, springs, Quaternary faults)</td><td><a href='https://gdr.openei.org/submissions/1391'>https://gdr.openei.org/submissions/1391</a></td></tr><tr><td>USGS 3DEP elevation (the lane&#x27;s named free DEM)</td><td><a href='https://www.usgs.gov/3d-elevation-program'>https://www.usgs.gov/3d-elevation-program</a></td></tr><tr><td>EPSG:32611 (UTM zone 11N)</td><td><a href='https://epsg.io/32611'>https://epsg.io/32611</a></td></tr><tr><td>Tversky index (the DTI is a distance-weighted Tversky index)</td><td><a href='https://en.wikipedia.org/wiki/Tversky_index'>https://en.wikipedia.org/wiki/Tversky_index</a></td></tr><tr><td>Kirby &amp; Whipple (2012) JGR 117 F04002</td><td><a href='https://doi.org/10.1029/2011JF002090'>https://doi.org/10.1029/2011JF002090</a></td></tr><tr><td>Perron &amp; Royden (2013) ESPL 40 703-716 — the chi transform</td><td><a href='https://doi.org/10.1002/esp.3310'>https://doi.org/10.1002/esp.3310</a></td></tr><tr><td>Royden &amp; Perron (2013) ESPL 40 1043-1058 — sliding-window ksn</td><td><a href='https://doi.org/10.1002/esp.3309'>https://doi.org/10.1002/esp.3309</a></td></tr><tr><td>Gailleton et al. (2019) Earth Surf. Dynam. 7 647-668 — knickpoint segmentation</td><td><a href='https://doi.org/10.5194/esurf-7-647-2019'>https://doi.org/10.5194/esurf-7-647-2019</a></td></tr><tr><td>Wobus et al. (2006) GSA Special Paper 398 55-74 — ksn = S (A/A0)^theta</td><td><a href='https://doi.org/10.1130/2006.2398(04)'>https://doi.org/10.1130/2006.2398(04)</a></td></tr><tr><td>Barnes, Lehman &amp; Mulla (2014) Computers &amp; Geosciences 62 124-138 — priority flood</td><td><a href='https://doi.org/10.1016/j.cageo.2013.10.004'>https://doi.org/10.1016/j.cageo.2013.10.004</a></td></tr><tr><td>Sibling repository holding the owner-reported 0.2778 champion</td><td><a href='https://github.com/buffedlizard55-lab/GEMSDOE32'>https://github.com/buffedlizard55-lab/GEMSDOE32</a></td></tr><tr><td>Sibling template repository (shared tools reused here)</td><td><a href='https://github.com/buffedlizard55-lab/57GEMSDOE'>https://github.com/buffedlizard55-lab/57GEMSDOE</a></td></tr><tr><td>This repository (parallel lane sessions)</td><td><a href='https://github.com/buffedlizard55-lab/60GEMSDOE'>https://github.com/buffedlizard55-lab/60GEMSDOE</a></td></tr></table>
+<p class="h60a-warn">This sandbox can reach only github.com, api.github.com, codeload.github.com,
+pypi.org, files.pythonhosted.org and registry.npmjs.org. DrivenData, USGS, DOI, nlr.gov and github.io
+links are recorded for manual review and were <strong>not</strong> fetched here (IR-60-CITE-01). The
+lane brief's named free 3DEP DEM was therefore not obtainable; band 12 <code>det_elev</code> stands in
+(IR-60-DATA-01).</p>
+</div>
+
+<div class="h60a-sec"><h2>Feature-build log (band 12 &rarr; &chi; / <code>ksn</code> / knickpoints)</h2>
+<table class="h60a-table"><tr><th>step</th><th>t (s)</th><th>diagnostics</th></tr><tr><td>labels</td><td class='h60a-num'>0.4</td><td class='h60a-code'>{&quot;footprint_pixels&quot;: 5167373, &quot;catalogue_pixels&quot;: 60988}</td></tr><tr><td>dem_loaded</td><td class='h60a-num'>4.7</td><td class='h60a-code'>{&quot;band&quot;: 12, &quot;finite&quot;: 5164312, &quot;nan_inside_footprint&quot;: 3061, &quot;min&quot;: -589.9837036132812, &quot;max&quot;: 1469.9127197265625, &quot;sha256&quot;: &quot;4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5&quot;}</td></tr><tr><td>nan_repaired</td><td class='h60a-num'>13.7</td><td class='h60a-code'>{&quot;repaired&quot;: 3061, &quot;still_nan&quot;: 0}</td></tr><tr><td>priority_flood</td><td class='h60a-num'>41.8</td><td class='h60a-code'>{&quot;cells&quot;: 5167373, &quot;closed&quot;: 5167373, &quot;waves&quot;: 0, &quot;raised&quot;: 914097.0, &quot;max_raise_m&quot;: 283.6378701171898}</td></tr><tr><td>d8</td><td class='h60a-num'>44.1</td><td class='h60a-code'>{&quot;outlets&quot;: 7113011, &quot;routed&quot;: 5166149}</td></tr><tr><td>upslope_area</td><td class='h60a-num'>47.7</td><td class='h60a-code'>{&quot;max_cells&quot;: 825425.0, &quot;max_level&quot;: 2335, &quot;mean_cells_inside_footprint&quot;: 581.9197478099607}</td></tr><tr><td>drainage_identity</td><td class='h60a-num'>52.0</td><td class='h60a-code'>{&quot;distinct_terminals&quot;: 1224}</td></tr><tr><td>chi</td><td class='h60a-num'>53.8</td><td class='h60a-code'>{&quot;theta&quot;: 0.45, &quot;max_chi&quot;: 51.03868127724301, &quot;median_chi_channels&quot;: 9.94344130810904}</td></tr><tr><td>ksn</td><td class='h60a-num'>56.5</td><td class='h60a-code'>{&quot;channel_pixels&quot;: 942898, &quot;ksn_p50&quot;: 10.603668663977382, &quot;ksn_p95&quot;: 79.26397683098526, &quot;ksn_p999&quot;: 251.93641339339712}</td></tr><tr><td>knickpoint_step</td><td class='h60a-num'>62.8</td><td class='h60a-code'>{&quot;window&quot;: 5, &quot;channel_with_both_windows&quot;: 942898, &quot;step_p50&quot;: -0.025207733855965246, &quot;step_p95&quot;: 0.8486523981338138, &quot;step_p999&quot;: 2.302585092994046, &quot;frac_step_positive&quot;: 0.39045474696096505, &quot;step_floor_ksn&quot;: 0.5, &quot;step_winsor&quot;: 2.302585092994046}</td></tr><tr><td>confound_masks</td><td class='h60a-num'>63.0</td><td class='h60a-code'>{&quot;playa_basin_floor_pixels&quot;: 542309, &quot;max_raise_m&quot;: 283.6378701171898, &quot;raise_p99&quot;: 188.0346732031248}</td></tr><tr><td>cached</td><td class='h60a-num'>64.5</td><td class='h60a-code'>{&quot;files&quot;: 14}</td></tr></table>
+</div>
+
+<div class="h60a-sec"><h2>Run card</h2>
+<div class="h60a-pre">{
+  &quot;schema_version&quot;: 1,
+  &quot;session&quot;: &quot;60GEMSDOE&quot;,
+  &quot;lane&quot;: &quot;tectonic-geomorphology: channel steepness (ksn) and knickpoints, not scarp shape&quot;,
+  &quot;hypothesis_id&quot;: &quot;H60-A&quot;,
+  &quot;hypothesis&quot;: &quot;Bedrock channels that cross an active normal fault carry an upstream-steepening knickpoint; a knickpoint corroborated by &gt;=3 independent drainage networks inside a strike-aligned corridor marks a fault trace, including traces absent from the USGS/INGENIOUS catalogue.&quot;,
+  &quot;mechanism&quot;: &quot;Fault-crossing channels record a step in rock-uplift rate as a step in normalized steepness ksn = S*(A/A0)^theta along chi (Kirby &amp; Whipple 2012; Perron &amp; Royden 2013). Single-channel knickpoints are ambiguous; strike-aligned corroboration across drainage divides is not, because no single-channel process is strike-aligned.&quot;,
+  &quot;named_non_fault_mimic&quot;: &quot;Lithologic contact / basin-fill boundary: a hard-to-soft rock contact also steps ksn and can be strike-aligned across drainages. Secondary mimics: closed-basin (playa) base level, ephemeral/alluvial reaches, regional climate-precipitation gradient, and post-wildfire or landslide-derived steepening.&quot;,
+  &quot;confound_controls&quot;: [
+    &quot;climate/regional gradient: knickpoint magnitude is z-scored inside 40 km blocks (blockwise_zscore), never ranked globally&quot;,
+    &quot;playa / closed-basin base level: cells whose priority-flood raise exceeds 20 m are excluded (542,309 px measured)&quot;,
+    &quot;lithology / basin fill: cells with depth_to_base_surf above its 90th footprint percentile are excluded (thick sedimentary cover = no bedrock channel)&quot;,
+    &quot;ephemeral / alluvial: cells with cond_surf above its 95th percentile are excluded (clay-rich, evaporitic, non-bedrock)&quot;,
+    &quot;channel-hood: only pixels with contributing area &gt;= 20 cells (0.20 km^2) are eligible&quot;
+  ],
+  &quot;declared_parameters&quot;: {
+    &quot;band&quot;: &quot;12 det_elev (Detrended elevation - topography with regional trends removed)&quot;,
+    &quot;theta_ref&quot;: 0.45,
+    &quot;A0_m2&quot;: 1.0,
+    &quot;pixel_m&quot;: 100.0,
+    &quot;a_min_cells&quot;: 20,
+    &quot;knickpoint_window_cells&quot;: 5,
+    &quot;step_floor_ksn&quot;: 0.5,
+    &quot;step_winsor_log_ratio&quot;: 2.302585092994046,
+    &quot;z_min_candidate&quot;: 1.5,
+    &quot;n_drainage_min&quot;: 3,
+    &quot;corridor_half_len_px&quot;: 6,
+    &quot;corridor_half_width_px&quot;: 2,
+    &quot;n_strike_bins&quot;: 18,
+    &quot;trace_decay&quot;: 0.5,
+    &quot;block_px&quot;: 400,
+    &quot;catalogue_buffer_px&quot;: 2,
+    &quot;production_dot_budget&quot;: 40000
+  },
+  &quot;holdout&quot;: {
+    &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
+    &quot;evaluator_version&quot;: &quot;gems57-pooled-hide-v2&quot;,
+    &quot;implementation_sha256&quot;: {
+      &quot;evaluate_holdout.py&quot;: &quot;ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a&quot;,
+      &quot;holdout.py&quot;: &quot;7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1&quot;,
+      &quot;metric.py&quot;: &quot;4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f&quot;,
+      &quot;spatial.py&quot;: &quot;fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8&quot;
+    },
+    &quot;withheld_positive_pixels&quot;: 22641,
+    &quot;dti&quot;: 0.01639304420547242,
+    &quot;ci95&quot;: [
+      0.012233534705380116,
+      0.02061303931096163
+    ],
+    &quot;tpw&quot;: 535.8244173581776,
+    &quot;fpw&quot;: 72330.59480255263,
+    &quot;fnw&quot;: 22105.17558264183,
+    &quot;n_emitted&quot;: null,
+    &quot;controls&quot;: {
+      &quot;ksn_only_no_alignment&quot;: {
+        &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
+        &quot;evaluator_version&quot;: &quot;gems57-pooled-hide-v2&quot;,
+        &quot;dti&quot;: 0.03118412858232041,
+        &quot;ci95&quot;: [
+          0.026017694726175072,
+          0.03576328731278811
+        ],
+        &quot;withheld_positive_pixels&quot;: 22641,
+        &quot;tpw&quot;: 1021.745893086654,
+        &quot;fpw&quot;: 72238.92061786479,
+        &quot;fnw&quot;: 21619.254106913344
+      },
+      &quot;distance_only&quot;: {
+        &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
+        &quot;evaluator_version&quot;: &quot;gems57-pooled-hide-v2&quot;,
+        &quot;dti&quot;: 0.19073008022090832,
+        &quot;ci95&quot;: [
+          0.1819994346977787,
+          0.19964658277767058
+        ],
+        &quot;withheld_positive_pixels&quot;: 22641,
+        &quot;tpw&quot;: 6279.773358005621,
+        &quot;fpw&quot;: 67780.84565154527,
+        &quot;fnw&quot;: 16361.226641994373
+      },
+      &quot;random_mass_control&quot;: {
+        &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
+        &quot;evaluator_version&quot;: &quot;gems57-pooled-hide-v2&quot;,
+        &quot;dti&quot;: 0.03908023346196293,
+        &quot;ci95&quot;: [
+          0.03567772377036994,
+          0.04231026849449676
+        ],
+        &quot;withheld_positive_pixels&quot;: 22641,
+        &quot;tpw&quot;: 1283.5344245589695,
+        &quot;fpw&quot;: 72370.32085108092,
+        &quot;fnw&quot;: 21357.465575441034
+      }
+    },
+    &quot;best_comparable_control&quot;: &quot;distance_only&quot;,
+    &quot;paired_difference_vs_best_control&quot;: {
+      &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
+      &quot;evaluator_version&quot;: &quot;gems57-pooled-hide-v2&quot;,
+      &quot;delta&quot;: -0.1743370360154359,
+      &quot;ci95&quot;: [
+        -0.18319495710023154,
+        -0.16582500621858756
+      ],
+      &quot;withheld_positive_pixels&quot;: 22641
+    },
+    &quot;pooled_surface&quot;: {
+      &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
+      &quot;evaluator_version&quot;: &quot;gems57-pooled-hide-v2&quot;,
+      &quot;alpha&quot;: 0.2,
+      &quot;beta&quot;: 0.8,
+      &quot;triangular_radius_m&quot;: 300.0,
+      &quot;pooled&quot;: true,
+      &quot;scores&quot;: {
+        &quot;lane_h60a&quot;: {
+          &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
+          &quot;evaluator_version&quot;: &quot;gems57-pooled-hide-v2&quot;,
+          &quot;dti&quot;: 0.013765113957398092,
+          &quot;ci95&quot;: [
+            0.010746358401177943,
+            0.016834785539141292
+          ],
+          &quot;withheld_positive_pixels&quot;: 22641,
+          &quot;tpw&quot;: 1151.6798459391878,
+          &quot;fpw&quot;: 326617.1612418801,
+          &quot;fnw&quot;: 21489.320154060813
+        },
+        &quot;distance_only&quot;: {
+          &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
+          &quot;evaluator_version&quot;: &quot;gems57-pooled-hide-v2&quot;,
+          &quot;dti&quot;: 0.05942212993955824,
+          &quot;ci95&quot;: [
+            0.05625377282224246,
+            0.06263887669342484
+          ],
+          &quot;withheld_positive_pixels&quot;: 22641,
+          &quot;tpw&quot;: 4989.711692772912,
+          &quot;fpw&quot;: 324299.27050832304,
+          &quot;fnw&quot;: 17651.288307227085
+        }
+      },
+      &quot;best_comparable_control&quot;: &quot;distance_only&quot;,
+      &quot;paired_differences&quot;: {
+        &quot;distance_only&quot;: {
+          &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
+          &quot;evaluator_version&quot;: &quot;gems57-pooled-hide-v2&quot;,
+          &quot;delta&quot;: -0.04565701598216015,
+          &quot;ci95&quot;: [
+            -0.049217189766562225,
+            -0.042281815835591145
+          ],
+          &quot;withheld_positive_pixels&quot;: 22641
+        }
+      },
+      &quot;bootstrap&quot;: {
+        &quot;method&quot;: &quot;paired physical spatial-cluster percentile&quot;,
+        &quot;clusters&quot;: 159,
+        &quot;draws&quot;: 1000,
+        &quot;seed&quot;: 60101,
+        &quot;confidence&quot;: 0.95,
+        &quot;caveat&quot;: &quot;Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval.&quot;
+      },
+      &quot;implementation_sha256&quot;: {
+        &quot;evaluate_holdout.py&quot;: &quot;ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a&quot;,
+        &quot;holdout.py&quot;: &quot;7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1&quot;,
+        &quot;metric.py&quot;: &quot;4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f&quot;,
+        &quot;spatial.py&quot;: &quot;fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8&quot;
+      }
+    },
+    &quot;first_test&quot;: {
+      &quot;evidence_class&quot;: &quot;MEASUREMENT&quot;,
+      &quot;n_components&quot;: 323,
+      &quot;mean&quot;: 0.10889086512076065,
+      &quot;median&quot;: 0.08840817468745078,
+      &quot;ci95&quot;: [
+        0.05862447079625996,
+        0.1569473087504349
+      ],
+      &quot;fraction_positive&quot;: 0.5944272445820433,
+      &quot;component_std&quot;: 0.43430997647211406,
+      &quot;bootstrap&quot;: {
+        &quot;draws&quot;: 1000,
+        &quot;seed&quot;: 60101,
+        &quot;method&quot;: &quot;percentile over withheld components&quot;
+      },
+      &quot;verdict&quot;: &quot;PROCEED&quot;
+    },
+    &quot;canary&quot;: [
+      {
+        &quot;feature&quot;: &quot;knickpoint_step&quot;,
+        &quot;max_abs_auc&quot;: 0.5860564233220498,
+        &quot;auc&quot;: 0.5860564233220498,
+        &quot;worst_cell&quot;: &quot;draw20_foldNE_all&quot;,
+        &quot;leakage_flag&quot;: false
+      },
+      {
+        &quot;feature&quot;: &quot;ksn&quot;,
+        &quot;max_abs_auc&quot;: 0.559284579691987,
+        &quot;auc&quot;: 0.559284579691987,
+        &quot;worst_cell&quot;: &quot;draw20_foldSE_all&quot;,
+        &quot;leakage_flag&quot;: false
+      },
+      {
+        &quot;feature&quot;: &quot;chi&quot;,
+        &quot;max_abs_auc&quot;: 0.5624859180640195,
+        &quot;auc&quot;: 0.5624859180640195,
+        &quot;worst_cell&quot;: &quot;draw20_foldNW_all&quot;,
+        &quot;leakage_flag&quot;: false
+      },
+      {
+        &quot;feature&quot;: &quot;drainage_area&quot;,
+        &quot;max_abs_auc&quot;: 0.5268033289513474,
+        &quot;auc&quot;: 0.5268033289513474,
+        &quot;worst_cell&quot;: &quot;draw21_foldNW_all&quot;,
+        &quot;leakage_flag&quot;: false
+      },
+      {
+        &quot;feature&quot;: &quot;lane_p&quot;,
+        &quot;max_abs_auc&quot;: 0.518066446001654,
+        &quot;auc&quot;: 0.518066446001654,
+        &quot;worst_cell&quot;: &quot;draw21_foldNW_all&quot;,
+        &quot;leakage_flag&quot;: false
+      },
+      {
+        &quot;feature&quot;: &quot;dist_to_visible&quot;,
+        &quot;max_abs_auc&quot;: 0.9243383423012624,
+        &quot;auc&quot;: 0.9243383423012624,
+        &quot;worst_cell&quot;: &quot;draw21_foldNW_all&quot;,
+        &quot;leakage_flag&quot;: true
+      }
+    ],
+    &quot;canary_rule&quot;: &quot;max(AUC,1-AUC) &gt; 0.90 is leakage until proven otherwise&quot;,
+    &quot;canary_lane_features&quot;: [
+      &quot;knickpoint_step&quot;,
+      &quot;ksn&quot;,
+      &quot;chi&quot;,
+      &quot;drainage_area&quot;,
+      &quot;lane_p&quot;
+    ],
+    &quot;canary_leakage_flags_lane&quot;: [],
+    &quot;canary_leakage_flags_controls&quot;: [
+      {
+        &quot;feature&quot;: &quot;dist_to_visible&quot;,
+        &quot;max_abs_auc&quot;: 0.9243383423012624
+      }
+    ],
+    &quot;canary_note&quot;: &quot;distance_to_visible_catalogue is a deliberately leaky control: on a hide-and-recover holdout the withheld segment lies next to its own visible continuation, so AUC&gt;0.90 is expected and proves the canary has power; it is not a lane feature and it is not promoted&quot;,
+    &quot;caveat&quot;: &quot;proxy truth: the hide-and-recover holdout&#x27;s positives are withheld catalogue segments, so it cannot reward a genuinely new fault (IR-60-PROXY-01); this is not a leaderboard interval and no projection is written as a score&quot;
+  },
+  &quot;registry&quot;: {
+    &quot;corpus&quot;: &quot;evidence/registry_full_index.json (655 pinned grid rasters, 56 sibling repositories)&quot;,
+    &quot;expected&quot;: 655,
+    &quot;checked&quot;: 655,
+    &quot;missing&quot;: 0,
+    &quot;complete_accessible_scan&quot;: true,
+    &quot;worst_spearman_full_footprint&quot;: 0.02087665174535126,
+    &quot;worst_rho_submission&quot;: &quot;GEMSDOE48:docs/downloads/diagnostics/gemsdoe48-h48-1-unassigned_dempster_mTheta.tif&quot;,
+    &quot;worst_dot_overlap&quot;: 1.0,
+    &quot;worst_overlap_submission&quot;: &quot;17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif&quot;,
+    &quot;worst_rho_sparse_submission_like&quot;: 0.018023901350762123,
+    &quot;worst_overlap_sparse_submission_like&quot;: 0.99905,
+    &quot;duplicate_count&quot;: 60,
+    &quot;unique_literal&quot;: false,
+    &quot;stop_required&quot;: true,
+    &quot;rho_limit&quot;: 0.9,
+    &quot;overlap_limit&quot;: 0.7,
+    &quot;dense_support_priors&quot;: 49,
+    &quot;irregularity&quot;: &quot;IR-60-GATE-01&quot;
+  },
+  &quot;raster&quot;: {
+    &quot;file&quot;: &quot;downloads/gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204-zeros.tif&quot;,
+    &quot;name&quot;: &quot;gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204&quot;,
+    &quot;sha256&quot;: &quot;e9dbbb64e1d52b3b2786df53b79699af098222f4a99d9dcc73e658de15ca88cc&quot;,
+    &quot;zip_sha256&quot;: &quot;6779536d39ae2695bb43787c1ccdc5d66d0b49ce3fc819130e9d649a1bd7f495&quot;,
+    &quot;bytes&quot;: 111604,
+    &quot;dots&quot;: 40000,
+    &quot;mode&quot;: &quot;zeros (finite everywhere; 0.0 outside the footprint)&quot;,
+    &quot;crs&quot;: &quot;EPSG:32611&quot;,
+    &quot;shape&quot;: [
+      3730,
+      3292
+    ],
+    &quot;transform&quot;: [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    &quot;dtype&quot;: &quot;float32&quot;,
+    &quot;nodata&quot;: null
+  },
+  &quot;validator&quot;: {
+    &quot;template_report_ok&quot;: true,
+    &quot;template_problems&quot;: [],
+    &quot;non_zero_cells&quot;: 40000,
+    &quot;range_0_1&quot;: true,
+    &quot;no_nan_anywhere&quot;: true,
+    &quot;no_inf_anywhere&quot;: true,
+    &quot;in_footprint_all_finite&quot;: true,
+    &quot;in_footprint_range_0_1&quot;: true,
+    &quot;outside_footprint_zero&quot;: true,
+    &quot;crs_shape_transform_match&quot;: {
+      &quot;crs_epsg_32611&quot;: true,
+      &quot;dimensions&quot;: true,
+      &quot;transform_matches_sample_submission&quot;: true
+    },
+    &quot;zero_positive_pixels_on_catalogue&quot;: 0,
+    &quot;emitted_positive_pixels&quot;: 40000,
+    &quot;footprint_fraction&quot;: 0.007740877231041769,
+    &quot;min&quot;: 0.0,
+    &quot;max&quot;: 1.0,
+    &quot;all_checks_passed&quot;: true
+  },
+  &quot;submission_name&quot;: &quot;gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204&quot;,
+  &quot;submission_note&quot;: &quot;60GEMSDOE H60-A knickpoint-corridor | chi/ksn on det_elev, &gt;=3 independent drainages, 40000 dots off-catalogue&quot;,
+  &quot;submission_note_chars&quot;: 110,
+  &quot;gates&quot;: {
+    &quot;file_written_and_format_valid&quot;: true,
+    &quot;value_range_0_1&quot;: true,
+    &quot;first_test_proceed&quot;: true,
+    &quot;no_lane_feature_leakage&quot;: true,
+    &quot;beats_best_control_paired_ci&quot;: false,
+    &quot;uniqueness_literal_or_sparse_clear&quot;: false,
+    &quot;uniqueness_literal&quot;: false,
+    &quot;dense_prior_firings&quot;: true
+  },
+  &quot;failing_gates&quot;: [
+    &quot;beats_best_control_paired_ci&quot;,
+    &quot;uniqueness_literal_or_sparse_clear&quot;
+  ],
+  &quot;okay_to_download&quot;: true,
+  &quot;okay_to_submit&quot;: false,
+  &quot;permission_reason&quot;: &quot;RESEARCH / EDUCATION DOWNLOAD ONLY - DO NOT SUBMIT. The lane passed its mandated first test (channels crossing withheld faults step +0.1089 log-ksn harder than random same-orientation lines, 95% CI [+0.0586, +0.1569]), but the emission built from that signal loses on the pooled hide-and-recover holdout: HOLDOUT-DTI 0.01639 [0.01223, 0.02061] against 0.03908 for random mass at the same 40k budget and 0.19073 for the distance-to-visible control, paired deltas -0.02269 [-0.02740, -0.01768] and -0.17434 [-0.18319, -0.16583]. Spending a weekly slot on this file is negative expected value. Failing gate(s): beats_best_control_paired_ci, uniqueness_literal_or_sparse_clear.&quot;,
+  &quot;download_permission_status&quot;: {
+    &quot;scope&quot;: &quot;research download and, if okay_to_submit, competition submission&quot;,
+    &quot;granted_by&quot;: &quot;run card gates above&quot;
+  },
+  &quot;verdict&quot;: &quot;negative&quot;,
+  &quot;slots_used&quot;: 0,
+  &quot;experiments_run&quot;: 3,
+  &quot;feature_build&quot;: [
+    {
+      &quot;step&quot;: &quot;labels&quot;,
+      &quot;t_s&quot;: 0.4,
+      &quot;footprint_pixels&quot;: 5167373,
+      &quot;catalogue_pixels&quot;: 60988
+    },
+    {
+      &quot;step&quot;: &quot;dem_loaded&quot;,
+      &quot;t_s&quot;: 4.67,
+      &quot;band&quot;: 12,
+      &quot;finite&quot;: 5164312,
+      &quot;nan_inside_footprint&quot;: 3061,
+      &quot;min&quot;: -589.9837036132812,
+      &quot;max&quot;: 1469.9127197265625,
+      &quot;sha256&quot;: &quot;4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5&quot;
+    },
+    {
+      &quot;step&quot;: &quot;nan_repaired&quot;,
+      &quot;t_s&quot;: 13.66,
+      &quot;repaired&quot;: 3061,
+      &quot;still_nan&quot;: 0
+    },
+    {
+      &quot;step&quot;: &quot;priority_flood&quot;,
+      &quot;t_s&quot;: 41.79,
+      &quot;cells&quot;: 5167373,
+      &quot;closed&quot;: 5167373,
+      &quot;waves&quot;: 0,
+      &quot;raised&quot;: 914097.0,
+      &quot;max_raise_m&quot;: 283.6378701171898
+    },
+    {
+      &quot;step&quot;: &quot;d8&quot;,
+      &quot;t_s&quot;: 44.1,
+      &quot;outlets&quot;: 7113011,
+      &quot;routed&quot;: 5166149
+    },
+    {
+      &quot;step&quot;: &quot;upslope_area&quot;,
+      &quot;t_s&quot;: 47.68,
+      &quot;max_cells&quot;: 825425.0,
+      &quot;max_level&quot;: 2335,
+      &quot;mean_cells_inside_footprint&quot;: 581.9197478099607
+    },
+    {
+      &quot;step&quot;: &quot;drainage_identity&quot;,
+      &quot;t_s&quot;: 52.01,
+      &quot;distinct_terminals&quot;: 1224
+    },
+    {
+      &quot;step&quot;: &quot;chi&quot;,
+      &quot;t_s&quot;: 53.84,
+      &quot;theta&quot;: 0.45,
+      &quot;max_chi&quot;: 51.03868127724301,
+      &quot;median_chi_channels&quot;: 9.94344130810904
+    },
+    {
+      &quot;step&quot;: &quot;ksn&quot;,
+      &quot;t_s&quot;: 56.55,
+      &quot;channel_pixels&quot;: 942898,
+      &quot;ksn_p50&quot;: 10.603668663977382,
+      &quot;ksn_p95&quot;: 79.26397683098526,
+      &quot;ksn_p999&quot;: 251.93641339339712
+    },
+    {
+      &quot;step&quot;: &quot;knickpoint_step&quot;,
+      &quot;t_s&quot;: 62.75,
+      &quot;window&quot;: 5,
+      &quot;channel_with_both_windows&quot;: 942898,
+      &quot;step_p50&quot;: -0.025207733855965246,
+      &quot;step_p95&quot;: 0.8486523981338138,
+      &quot;step_p999&quot;: 2.302585092994046,
+      &quot;frac_step_positive&quot;: 0.39045474696096505,
+      &quot;step_floor_ksn&quot;: 0.5,
+      &quot;step_winsor&quot;: 2.302585092994046
+    },
+    {
+      &quot;step&quot;: &quot;confound_masks&quot;,
+      &quot;t_s&quot;: 62.96,
+      &quot;playa_basin_floor_pixels&quot;: 542309,
+      &quot;max_raise_m&quot;: 283.6378701171898,
+      &quot;raise_p99&quot;: 188.0346732031248
+    },
+    {
+      &quot;step&quot;: &quot;cached&quot;,
+      &quot;t_s&quot;: 64.54,
+      &quot;files&quot;: 14
+    }
+  ],
+  &quot;irregularities&quot;: [
+    &quot;IR-60-DATA-01&quot;,
+    &quot;IR-60-CITE-01&quot;,
+    &quot;IR-60-GATE-01&quot;,
+    &quot;IR-60-API-01&quot;,
+    &quot;IR-60-PROXY-01&quot;,
+    &quot;IR-60-MEM-01&quot;
+  ],
+  &quot;owner_reported_context&quot;: {
+    &quot;note&quot;: &quot;quoted from the owner&#x27;s request and sibling repositories; NOT organizer receipts&quot;,
+    &quot;group_best&quot;: 0.2778,
+    &quot;group_best_file&quot;: &quot;h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros&quot;,
+    &quot;board_leaders_quoted&quot;: [
+      0.3195,
+      0.3774
+    ]
+  }
+}</div>
+</div>
+
+<div class="h60a-foot"><p>Rendered by <code>scripts/build_site60.py</code> from
+<code>evidence/*.json</code>. No number on this page is typed by hand. Shared tools
+(<code>src/gems57/</code>) were used unmodified except where a fix is recorded in the run card.</p></div>
+</body></html>

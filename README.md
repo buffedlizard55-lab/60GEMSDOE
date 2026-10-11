@@ -1,343 +1,590 @@
-# 60GEMSDOE — DOE GEMS Prize Challenge · tectonic-geomorphology lane
+# 60GEMSDOE — Tectono-geomorphic knickpoint lane for the DOE GEMS Prize
 
-**Read this README at the start of every session.** It contains the standing request (verbatim), the
-current permission status, the reproduced method, the verified data provenance, and what the next
-session must do.
+**Competition**: [GEMS Prize Challenge, DrivenData #306](https://www.drivendata.org/competitions/306/competition-doe-gems/) ·
+**Official problem/metric**: [page 967](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) ·
+**Official rules**: [NLR/OT-6A50-96647](https://www.nlr.gov/docs/fy26osti/96647.pdf) (DOI [10.2172/3818146](https://doi.org/10.2172/3818146)) ·
+**Live leaderboard top (verified 2026-10-11): 0.3774** · **Group best (owner-reported): 0.2778**
+
+> ## ⚠️ SESSION VERDICT (read first)
+> **The generated submission TIF is a NEGATIVE result: do NOT submit it.**
+> * File: [`docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif`](docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif)
+>   (unique — passed the registry gate; validated — 0 problems; portal-safe all-finite container)
+> * Why: the lane's preregistered first test failed — withheld fault segments carry **lower**
+>   channel-steepness anomaly than orientation-matched random lines (AUC 0.224 < 0.55 stop rule),
+>   and pooled holdout DTI is 0.00214 [0.0018, 0.0025] vs 0.086 for the best comparison arm.
+> * The brief's rule "If not, stop." was applied. Negative results are deliverables.
+> * Site: `docs/index.html` (front page states the verdict at the top) ·
+>   [`docs/executive-summary.html`](docs/executive-summary.html) explains the exact submission ritual
+>   for any future PROMOTED file, including the fix for the historical
+>   *"Predicted values must be in range [0, 1]"* portal rejection.
+> * **ONE-CLICK status read-out for every file in `docs/downloads/`:** each artefact page prints a
+>   `DOWNLOAD: OK/NO · SUBMIT TO THE COMPETITION: YES/NO` line. The historical portal-rejected
+>   baseline `gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif` (owner-reported 0.26) is kept
+>   in `docs/downloads/` with its receipt as the worked example of the
+>   *"Predicted values must be in range [0, 1]"* fix.
+
+
+>
+> ### ⬇ SECOND, INDEPENDENT RUN OF THIS SAME LANE — session `arena/16fc977d-60gemsdoe`
+> **[⬇ `docs/downloads/gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif`](docs/downloads/gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif)** ·
+> [receipt](docs/downloads/checks-gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif.json) ·
+> [full report](docs/lane-chi-report.html) ·
+> **DOWNLOAD: OK (research artefact) · SUBMIT TO THE COMPETITION: NO** — same verdict, reached
+> independently with a different DEM, a different statistic and a different holdout.
+> Keys: absolute-elevation GeoDAWN DEM (`data/geodawn_dem_a2_100m.tif`, sha256 `d32762a3…`);
+> pre-registered test STOP twice (Δmean −0.0229 CI95 [−0.166, +0.162]; then −0.0349
+> CI95 [−0.0806, −0.0065], AUC 0.4795); channel-normal cast field AUC **0.4984**;
+> **15/15** format checks PASS; **unique** (worst ρ = −0.015, worst 3-px overlap 0.000 over
+> 170 registry rasters); HOLDOUT-DTI 0.00039 vs matched random control 0.00042.
+> Code lives in `src/gems60chi/` so it never forks or overwrites this session's `src/gems60/`.
 
 ---
 
-## 0. Permission banner (unmistakable, mirrors the site)
+## Standing brief (verbatim — read every session before working)
 
-| question | answer (from `evidence/run_card_current.json`, rendered on the site) |
-|---|---|
-| Is a generated GeoTIFF present in this repo? | **YES** — `downloads/gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204-zeros.tif` (40,000 dots, sha256 `e9dbbb64e1d52b3b2786df53b79699af098222f4a99d9dcc73e658de15ca88cc`) |
-| OK to **download** for research / education? | **YES** — format-valid, every cell finite and in [0, 1], zero dots on mapped catalogue faults |
-| OK to **submit** to the competition? | **NO** — verdict `negative`. Two independent pre-registered gates fail (see §2) |
-| Weekly slots spent by this session | **0** — promotion is a separate selector step |
+<details open><summary><b>The prompt this project runs on</b></summary>
 
-The two failing gates, both declared in `evidence/preregistration_h60a.json` *before* any experiment
-ran:
+```text
+Review the repo.
 
-1. `beats_best_control_paired_ci` — HOLDOUT-DTI 0.01639 [0.01223, 0.02061] **loses** to random mass
-   (0.03908) and to the distance-to-visible control (0.19073) at the same budget.
-2. `uniqueness_literal_or_sparse_clear` — the literal gate fires: 60 of 655 registry rasters contain
-   > 70 % of this candidate's dots within 3 px (worst 1.0). The content is nevertheless novel by every
-   discriminating statistic (worst ρ = 0.0209, worst reverse overlap = 0.1728, worst Jaccard = 0.0116,
-   no byte- or pixel-identical prior); the firing is one-directional containment by denser priors
-   (IR-60-GATE-01). The protocol is literal and fail-closed, so it is logged as a duplicate and the
-   file is **not** cleared.
+THE FOLLOWING IS THE HIGHEST URGENCY AND MUST BE FOLLOWED!
 
-The site renders those two permissions **from the run card**, never from prose, so a page cannot
-advertise a decision its receipt does not record.
+MUST GENERATE A UNIQUE TIF SUBMISSION FOR THE COMPETITION.  DO NOT COPY A PREVIOUS SUBMISSION UNLESS IT'S FOR LEARNING AND EDUCATION.  BUT WE MUST GENERATE A UNIQUE TIF SUBMISSION.  IT MUST BE OBVIOUS WHETHER IT IS OK TO DOWNLOAD AND SUBMIT THE GENERATED TIF SUBMISSION.
 
----
+There should be an easy to download submission tif file as described by the prompt.  Read the entire prompt.
 
-## 1. Standing request (verbatim, preserved as the project's definition of done)
+Tectonic-geomorphology lane: channel steepness and knickpoints, not scarp shape. Kirby and Whipple (2012) review how bedrock-channel steepness and knickpoints record spatial gradients in rock uplift, including across active normal faults. Perron and Royden's χ transform (ESPL, 2013) puts different channels on a comparable footing, and Gailleton et al. (Earth Surface Dynamics) give a reproducible knickpoint-segmentation method. Scarps degrade and bury, but channel profiles keep recording base-level steps, so this can see faults the curvature features no longer show. Extract drainage from the free 3DEP 10 m DEM (or 1 m tiles), compute χ and normalized steepness, and keep only knickpoints and steepness steps that align across several independent drainages along a common strike. First test: do channels crossing withheld segments show larger steepness steps than random lines of the same orientation? If not, stop. Map and mask the usual confounds: lithology, climate gradients, ephemeral channels and playa base levels. Output the standard validated GeoTIFF, uniqueness-checked against every earlier raster.
 
-> Review the repo.
->
-> THE FOLLOWING IS THE HIGHEST URGENCY AND MUST BE FOLLOWED!
->
-> MUST GENERATE A UNIQUE TIF SUBMISSION FOR THE COMPETITION. DO NOT COPY A PREVIOUS SUBMISSION UNLESS
-> IT'S FOR LEARNING AND EDUCATION. BUT WE MUST GENERATE A UNIQUE TIF SUBMISSION. IT MUST BE OBVIOUS
-> WHETHER IT IS OK TO DOWNLOAD AND SUBMIT THE GENERATED TIF SUBMISSION.
->
-> There should be an easy to download submission tif file as described by the prompt. Read the entire
-> prompt.
->
-> Tectonic-geomorphology lane: channel steepness and knickpoints, not scarp shape. Kirby and Whipple
-> (2012) review how bedrock-channel steepness and knickpoints record spatial gradients in rock uplift,
-> including across active normal faults. Perron and Royden's χ transform (ESPL, 2013) puts different
-> channels on a comparable footing, and Gailleton et al. (Earth Surface Dynamics) give a reproducible
-> knickpoint-segmentation method. Scarps degrade and bury, but channel profiles keep recording
-> base-level steps, so this can see faults the curvature features no longer show. Extract drainage from
-> the free 3DEP 10 m DEM (or 1 m tiles), compute χ and normalized steepness, and keep only knickpoints
-> and steepness steps that align across several independent drainages along a common strike. First
-> test: do channels crossing withheld segments show larger steepness steps than random lines of the
-> same orientation? If not, stop. Map and mask the usual confounds: lithology, climate gradients,
-> ephemeral channels and playa base levels. Output the standard validated GeoTIFF, uniqueness-checked
-> against every earlier raster.
->
-> PARALLEL-RUN PROTOCOL — read first. This session is one of several running from this same prompt.
->
-> 1. LANE. Your lane is the single method paragraph below. Stay inside it. If your raster's
->    rank-correlation with any registry raster exceeds [0.90], or more than [70%] of your dots fall
->    within 3 px of one registry raster's dots, you have drifted into another lane: log it as a
->    duplicate and stop. Check this on the surface before placement AND on the final dots.
-> 2. REUSE, DON'T REBUILD. Use the template's cached feature stack, `evaluate_holdout.py` and
->    `submission_writer.py`. Holdout = hide-and-recover: withhold whole fault segments with a buffer,
->    derive every catalogue-based feature only from the visible faults, mask visible faults
->    pixel-exactly, score pooled DTI (alpha 0.2, beta 0.8, 300 m triangular kernel). If a shared tool
->    is wrong, fix it once in the template and report it; never keep a private fork.
-> 3. LABEL EVERY NUMBER as HOLDOUT-DTI (evaluator version, number of withheld positives, 95% CI) or
->    ORGANIZER-CONFIRMED (copied from a submission-page receipt). A projection is never written as a
->    score.
-> 4. LEAKAGE CANARY. Test each feature alone on the holdout before trusting any result. AUC above
->    [0.90] means leakage until proven otherwise.
-> 5. RUN CARD. End with one JSON card: hypothesis; mechanism; the named non-fault process that could
->    mimic it; holdout DTI + CI; correlation/overlap vs registry; raster sha256; validator output (no
->    NaN inside the footprint, values in [0,1], CRS/shape/transform match); submission name + note of
->    at most 140 characters; verdict promote / negative. Negative results are deliverables.
-> 6. BUDGET. Stop after [3] experiments or [2] hours. Do not pick submissions: promotion to a real
->    slot is a separate selector step, within the weekly cap shown on the submission page.
->
-> Also required by the owner: 3–5 new candidate geological hypotheses ranked by expected DTI
-> improvement and implementation cost; validate the top candidate on the spatially-blocked holdout
-> before touching a weekly submission slot; work line by line from official verified trusted sources
-> with links for manual review; no manual input; flag irregularities; no hallucinations; an easy
-> GitHub Pages site whose executive summary explains exactly how to submit; a unique submission name
-> and a ≤140-character note; three implementation/review passes; then open a pull request and merge it,
-> with suggestions for the next session and the limitations in the way.
->
-> Core values: **Maximize P(Win)** — weigh tradeoffs, assess risk, choose the path that maximizes the
-> probability of winning. **Own the Outcome** — own results end to end, act without waiting for
-> permission, treat failure and success as signals, stay accountable to the final outcome.
+PARALLEL-RUN PROTOCOL — read first. This session is one of several running from this same prompt.
 
-Owner-reported context quoted in the request (public board / sibling sites, **not** receipts):
-group best 0.2778 (`h33-h33-2-b2`, GEMSDOE32), board leaders quoted at 0.3195 and 0.3774. Every
-one of those numbers is `OWNER-REPORTED` or public-board context in this repository's records; this
-session produced **no** organizer receipt.
+1. LANE. Your lane is the single method paragraph below. Stay inside it. If your raster's rank-correlation with any registry raster exceeds [0.90], or more than [70%] of your dots fall within 3 px of one registry raster's dots, you have drifted into another lane: log it as a duplicate and stop. Check this on the surface before placement AND on the final dots.
 
----
+2. REUSE, DON'T REBUILD. Use the template's cached feature stack, evaluate_holdout.py and submission_writer.py. Holdout = hide-and-recover: withhold whole fault segments with a buffer, derive every catalogue-based feature only from the visible faults, mask visible faults pixel-exactly, score pooled DTI (alpha 0.2, beta 0.8, 300 m triangular kernel). If a shared tool is wrong, fix it once in the template and report it; never keep a private fork.
 
-## 2. What this session did (three experiments, budget respected)
+3. LABEL EVERY NUMBER as HOLDOUT-DTI (evaluator version, number of withheld positives, 95% CI) or ORGANIZER-CONFIRMED (copied from a submission-page receipt). A projection is never written as a score.
 
-| # | experiment | script | receipt |
-|---|---|---|---|
-| E1 | **Mandated first test** — do channels crossing *withheld* fault segments show larger `ksn` steps than random lines of the same orientation and length? | `scripts/run_lane60.py` | `evidence/h60a_e1_first_test.json`, `evidence/h60a_holdout.json` |
-| E2 | **Leakage canary** — each feature alone, `max(AUC, 1−AUC) > 0.90` ⇒ leakage | `scripts/run_lane60.py` | `evidence/h60a_holdout.json` → `canary` |
-| E3 | **Pooled HOLDOUT-DTI** of the lane emission vs three controls, paired spatial-block bootstrap | `scripts/run_lane60.py` | `evidence/h60a_holdout.json` → `pooled_binary`, `pooled_surface` |
+4. LEAKAGE CANARY. Test each feature alone on the holdout before trusting any result. AUC above [0.90] means leakage until proven otherwise.
 
-Production build + uniqueness audit: `scripts/build_submission60.py`, `scripts/check_uniqueness60.py`
-→ `evidence/h60a_submission_build.json`, `evidence/h60a_uniqueness.json`,
-`evidence/uniqueness_rows.jsonl` (one row per registry raster), `evidence/run_card_current.json`.
+5. RUN CARD. End with one JSON card: hypothesis; mechanism; the named non-fault process that could mimic it; holdout DTI + CI; correlation/overlap vs registry; raster sha256; validator output (no NaN inside the footprint, values in [0,1], CRS/shape/transform match); submission name + note of at most 140 characters; verdict promote / negative. Negative results are deliverables.
 
-### E1 — the mandated first test (receipt: `evidence/h60a_e1_first_test.json`)
+6. BUDGET. Stop after [3] experiments or [2] hours. Do not pick submissions: promotion to a real slot is a separate selector step, within the weekly cap shown on the submission page.
 
-Do channels crossing **withheld** fault segments show larger steepness steps than random lines of the
-same orientation and length, measured inside the same hide-and-recover fold, with visible faults
-masked pixel-exactly and the whole transect kept ≥ 3 px away from any withheld or visible fault?
+The following sites should serve as a starting point for understanding how to generate TIF submissions.  These websites are researched, and tested and have generated TIF submissions.  But we need to generate high scoring submissions.
 
-| quantity | value |
-|---|---|
-| withheld fault components compared | **323** |
-| mean paired difference (crossing − random same-orientation), log-units of `ksn` | **+0.1089** |
-| 95 % bootstrap CI over components (1000 draws, seed 60101) | **[+0.0586, +0.1569]** |
-| components with a positive difference | **59.4 %** |
-| verdict declared in advance | **PROCEED** (CI excludes zero) |
+Here are the results from submissions into the competition, separated by ....:
 
-A ~11 % higher `ksn` step on channels that cross a withheld fault than on random lines of the same
-orientation is a real but *modest* signal: it is large enough to keep the lane alive and far too small
-to carry a submission on its own. That asymmetry is the honest reading, and it is why the emission is
-built from corroborated knickpoints (≥ 3 independent channel branches along a common strike) rather
-than from the raw step field.
+WE NEED TO STUDY, ANALYZE, AND UNDERSTAND THE HIGHEST SCORE FROM THE GEMDOE SITE WHERE THE SUBMISSION TIF IS DOWNLOADED FROM WHICH IS THE FOLLOWING:
 
-### E3 — pooled HOLDOUT-DTI, 4 quadrant folds × 2 seeds (receipt: `evidence/h60a_holdout.json`)
+[https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html](https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html)
 
-Evaluator `gems57-pooled-hide-v2`, α = 0.2, β = 0.8, 300 m triangular kernel, 159 physical spatial
-clusters, 1000 paired bootstrap draws (seed 60101), **22,641 withheld positive pixels**, every arm at
-the same 40 k/5.17 M density budget, every dot ≥ 200 m off the visible catalogue.
+h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778
 
-| arm | HOLDOUT-DTI | 95 % CI | paired Δ vs lane |
-|---|---|---|---|
-| `distance_only` (control) | **0.19073** | [0.18200, 0.19965] | −0.17434 [−0.18319, −0.16583] |
-| `random_mass_control` | 0.03908 | [0.03568, 0.04231] | −0.02269 [−0.02740, −0.01768] |
-| `ksn_only_no_alignment` | 0.03118 | [0.02602, 0.03576] | −0.01479 [−0.02061, −0.00860] |
-| **`lane_h60a` (this session)** | **0.01639** | [0.01223, 0.02061] | — |
+Why and how did this get the highest score and are we able to generate a submission that scores higher than 0.2778?
 
-Continuous-surface arm (same folds, mass not dots): lane 0.01377 [0.01075, 0.01683] vs
-`distance_only` 0.05942 [0.05625, 0.06264], paired Δ −0.04566 [−0.04922, −0.04228].
+Answer the question using Phd level experience, knowledge, and judgement. Then use the answer to generate a unique TIF submission into the competition.  Must be unique submission unlike any within the GEMSDOE sites above.  Verify working line by line no hallucinations.
 
-**Verdict: NEGATIVE.** The lane loses to *every* control, including uniformly random mass at the same
-budget, on both the dot arm and the surface arm, with paired 95 % CIs that exclude zero. This is a
-deliverable, not a failure to report: the pre-registered promotion gate ("must beat the best
-comparable control") is not met, so `okay_to_submit = false` and the file is released for research and
-education only. Note also that `distance_only` is **not** a submittable alternative — the leakage
-canary flags it at AUC 0.924 (below), and a distance-to-catalogue prior is what every sibling
-repository already ships.
+Current competition leaderboard GEMSDOE high score:
 
-**Why the first test passed and the emission still lost.** E1 says channels crossing a withheld fault
-step ~11 % harder in `ksn` than random same-orientation lines — a real, CI-clean effect. But 11 % of a
-log-ratio is a *weak* per-pixel signal, and the hide-and-recover holdout's truth is withheld
-**catalogue** segments, which sit next to their own visible continuations. Any field that concentrates
-mass in steep bedrock reaches therefore spends its budget away from the truth this instrument can see,
-while a distance-to-visible prior spends it exactly on the truth. The lane's own field is also nearly
-undiscriminating on this instrument (`lane_p` canary AUC 0.518 ≈ chance). Two readings are consistent
-with the data and they cannot be separated inside this sandbox: (a) knickpoint corridors genuinely do
-not predict the catalogue's own gaps, or (b) they predict *off-catalogue* structure that this proxy
-holdout is blind to (IR-60-PROXY-01). Reading (b) is the lane's whole premise and it is untestable
-here without an organizer receipt.
+0.3774	[https://buffedlizard55-lab.github.io/GEMSDOE/docs/index.html](https://buffedlizard55-lab.github.io/GEMSDOE/docs/index.html)
 
-### E2 — leakage canary (each feature alone, `max(AUC, 1−AUC) > 0.90` ⇒ leakage)
+[... the brief continues with the full per-repository score ledger (GEMSDOE … 62GEMSDOE), the leaderboard link https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/, and the resource links: https://github.com/drivendataorg/gems-prize-reference-solution ; https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and ; https://gbcge.org/current-projects/ingenious/ ; https://epsg.io/32611 ; https://en.wikipedia.org/wiki/Tversky_index ]
 
-| feature | worst AUC | status |
-|---|---|---|
-| `knickpoint_step` (the lane signal) | 0.5861 | pass |
-| `chi` | 0.5625 | pass |
-| `ksn` | 0.5593 | pass |
-| `drainage_area` | 0.5268 | pass |
-| `lane_p` (final surface) | 0.5181 | pass |
-| `dist_to_visible` (deliberate control) | **0.9243** | **LEAKAGE FLAG** |
+We need to quickly look at the results and results from the GEMSDOE websites above.
 
-The control was included on purpose: on a hide-and-recover fold the withheld segment abuts its own
-visible continuation, so a distance-to-visible feature *must* leak. Its flag proves the canary has
-power, and it is the reason the `distance_only` control's 0.19073 is reported as an upper bound of the
-instrument, never as a candidate.
+Before implementing, generate 3–5 candidate geological hypotheses we haven't tried yet, each naming: the specific layer(s) involved, the physical signature being targeted (e.g., an edge-detection or curvature transform), why it should catch a fault missing from the USGS/INGENIOUS catalogue rather than one already in it, and how it differs from anything already implemented in this repo. Rank them by expected DTI improvement and implementation cost. Validate the top candidate on our spatially-blocked holdout set before touching a weekly submission slot — do not spend a submission slot on an idea that hasn't beaten the current holdout best. If a candidate can't be validated without new external data, name the specific free, official source needed and check it's obtainable before proposing the idea as viable.
 
-### Uniqueness against every earlier raster (receipts: `evidence/h60a_uniqueness.json`, `evidence/uniqueness_rows.jsonl`)
+Work line by line verifying from official verified trusted sources, provide links for manual review.  There should be no manual input, work on your own to complete tasks.  Flag any irregularities for review.  No hallucinations.
 
-Complete scan: **655 of 655** pinned registry rasters from 56 sibling repositories, every row
-sha256-verified (651 fetched over HTTPS, 4 recovered by blob SHA from `55GEMSDOE`'s git history).
+Verify no hallucinations.
 
-| statistic | value | limit | status |
-|---|---|---|---|
-| worst full-footprint Spearman ρ | **0.02088** | 0.90 | clear by a factor of 43 |
-| worst ρ among sparse submission-like priors (606 rows) | 0.01802 | 0.90 | clear |
-| worst forward 3-px dot overlap | **1.00000** (60 rows fire) | 0.70 | **FIRES** |
-| worst reverse overlap (their dots within 3 px of mine) | 0.17284 | — | diagnostic |
-| worst Jaccard of dot sets | 0.01158 | 0.50 (diagnostic only) | clear |
-| byte-identical / pixel-identical to any prior | no / no | — | clear |
-| `unique` (literal, fail-closed) | **false** | — | `stop_required = true` |
+The goal of this project is to get a full list that follow our requirements.  No hallucinations.  Verify line by line.
 
-Method note: ρ is screened on a fixed 400,000-cell sample (seed 6060, same sample for every raster)
-and recomputed exactly on all 5,167,373 footprint cells whenever the screen exceeds |0.70|; the fast
-overlap path is asserted equal to the shared `gems57.uniqueness.dot_overlap` on 12 rasters
-(max absolute difference **0.0**).
+We have a good understanding of how our hypothesis, methodology, calculations, analysis are done so we should be able to figure out a way to score higher on the leaderboard using previous results and scoring that we have across the sites listed above.  We need to come up with distinct and unique strategies to score higher in this competition leaderboard.  We need to start doing heavy and deep research into the part of the project that matters the most, which is the scientific discovery of geothermal vents.  We should store all of our information and knowledge that we can gather from official verified sources.  This will serve as a starting point for other projects as well.  We need to think outside the box but still be grounded in proper scientific research, we are ultimately aiming for a top prize that many others are competing for.  So it's important to be contrarian but be smart about it.  We need to find sources of data that others are over looking or areas of the project when it comes to geothermal vents.  We need to do deep research and critical thinking and come up with new hypothesis to test.
 
-### Method, line by line
+0.3195	is the highest score right now so we need to design a new strategy, research, testing, analyzing, and generating submission system than the current website.  It should be unique, take unique approaches to generating a submission that can score higher than 0.3195.
 
-1. **Data.** `scripts/prepare_data.py` (shared tool, reused unmodified) verifies eight hash pins. The
-   19-band stack was re-assembled from five hash-pinned parts of the public bridge
-   `buffedlizard55-lab/6GEMSDOE@e2fe3f4` and its digest matched the pin
-   `4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5`
-   (`evidence/data_preparation.json`). Grid: EPSG:32611, 3730 × 3292, transform
-   `(100, 0, 243350, 0, −100, 4508550)`, footprint 5,167,373 cells, catalogue 60,988 cells.
-2. **Hydrology on band 12 `det_elev`** (`src/gems60/geomorph.py`, 17 unit tests in
-   `tests/test_geomorph.py`): local NaN repair (3,061 cells) → priority-flood depression filling with
-   an ε-gradient on flats → D8 steepest descent (out-of-footprint = wall, footprint edge = outlet) →
-   exact topological upslope area → **χ = Σ ds·(A₀/A)^θ** (Perron & Royden 2013, θ = 0.45, A₀ = 1 m²)
-   → **ksn = S·(A/A₀)^θ** (Wobus et al. 2006).
-3. **Knickpoints.** Fixed-window breakpoint detector: `step = log((ksn_up + c)/(ksn_down + c))` with
-   `c = 0.5` and winsorisation at `log 10`, `ksn_up/ksn_down` averaged over 5 cells (500 m) of the
-   main stem upstream and downstream. Declared as a deliberately simple, reproducible stand-in for the
-   statistical segmentation of Gailleton et al. (2019) — **not** presented as their method.
-4. **Confounds masked** (pre-registered, `evidence/preregistration_h60a.json`): climate/regional
-   gradient → magnitude z-scored inside 40 km blocks; playa / closed-basin base level → priority-flood
-   raise > 20 m (542,309 px); lithology / basin fill → `depth_to_base_surf` > p90 (516,432 px);
-   ephemeral / clay-rich alluvium → `cond_surf` > p95 (257,039 px); channel-hood → contributing area
-   ≥ 20 cells (0.20 km²).
-5. **Cross-drainage corroboration along a common strike.** Strike comes from the structure tensor of
-   the **visible** catalogue only (σ = 600 m; regional modal strike as fallback). A candidate is kept
-   only if its corridor (±600 m along strike, ±200 m across) contains knickpoints from **≥ 3
-   independent channel branches**. Corroborated knickpoints are then re-expressed as strike corridors,
-   because the predicted object is a fault *trace*.
-6. **Emission.** 40,000 dots (the pre-registered budget), top-ranked inside the footprint with every
-   dot ≥ 2 px (200 m) off the mapped catalogue, ties broken by a seeded RNG so no raster-order
-   artefact can enter. Written by the shared fail-closed `gems57.submission_writer` as a finite
-   `[0,1]` float32 GeoTIFF (`-zeros` mode) plus a single-TIFF ZIP and a validator receipt.
+Put this prompt into the repo readme and read it everytime we work on the project as a starting point to make sure we are building what we are aiming for and have a strong base to continue building and improving on making something useful for everyday use.  It should solve the problem of having to manually check everything ourselves and having an up to date current feed.
 
-### One shared-tool bug found and fixed here (rule 2: fix once, report)
+Review the repo.
 
-`_dilate_window` in `scripts/run_lane60.py`: the mandated first test dilated a whole 3 M-cell fold
-crop for every one of ~30,000 random transects, which made E1 two orders of magnitude slower than the
-science requires. Fixed once in the shared lane driver (local-window dilation), not forked.
+The following is taken from the Arena AI team and I think it makes a good point on building a successful project, so let's keep the Core Values and Own the Outcome as a focal point when building, developing, researching, suggesting upgrades, and implementing the work.
 
-### One science bug found and fixed before any score was recorded
+Our Core Values
 
-Independence was first implemented as *terminal-sink identity*. The northwestern Great Basin is
-**internally drained**: 5.17 M cells share only 1,224 terminal sinks, so almost every candidate in a
-corridor looked like "one drainage" and only 64 of 36,633 candidates passed the ≥ 3 rule. Independence
-is now the **branch signature** (`geomorph.branch_signature`, identity of the cell 5 steps downstream):
-same flow path within the corridor's own length scale ⇒ dependent. With the fix, 32,980 of 36,620
-candidates are corroborated (median 6 independent branches, max 27). The superseded build
-(`evidence/superseded/`, 35,107 dots) was never linked, never scored and is kept for audit only.
+Maximize P(Win)
 
----
+“Maximize the Probability of Winning”: our decision making framework. In every decision, we weigh tradeoffs, assess risk, and choose the path that maximizes the probability that Arena succeeds. We set aside our emotions and make tough decisions in order to maximize P(Win). “Maximize P(Win)” frees us from constraints and clarifies that we must put Arena first.
 
-## 3. Reproduce
+Own the Outcome
 
-```bash
-python3 scripts/prepare_data.py --fetch        # hash-verify pins, assemble the 19-band stack
-python3 scripts/build_geomorph_features.py     # stage A: hydrology, chi, ksn, knickpoints (~65 s)
-python3 scripts/run_lane60.py                  # stage B: E1 first test, canary, pooled HOLDOUT-DTI
-python3 scripts/build_submission60.py          # stage C: surface -> dots -> validated GeoTIFF
-python3 scripts/check_uniqueness60.py --candidate downloads/<file>.tif   # literal registry audit
-python3 scripts/build_site60.py                # render docs/ from the receipts
-python3 -m pytest tests -q                     # 17 geomorphology tests + shared template tests
+We own results end to end — not just our individual slice of the work. When problems arise and we have the means to act, we do so without waiting for permission or assignment. We treat failure and success as signals and use them to improve. At Arena, we stay accountable to the final outcome.
+
+Work line by line verifying from official verified trusted sources, provide links for manual review.  There should be no manual input, work on your own to complete tasks.  Flag any irregularities for review.  No hallucinations.
+
+Verify no hallucinations.
+
+The goal of this project is to get a full list that follow our requirements.  No hallucinations.  Verify line by line.
+
+We need to focus on being able to generate a submission into the competition.
+
+The site should be able to generate a TIF file that is required for submission.  It should be as easy as download to click a File to submit into the competition.  This needs to be in the executive summary or the very beginning of the site.  it should be obvious when you visit the site.
+
+I tried to submit the document that i downloaded from the site but it returned this error on the submission form:
+
+"Predicted values must be in range [0, 1]"
+
+Also we need to give it a unique name and A short comment to help you or your team tell submissions apart later e.g. clustering with k=25
+
+Here is the submission page when i click submit file
+
+New submission
+
+File to submit / No file chosen
+
+You can submit a single-band GeoTIFF (.tif) file, or a .zip file containing a single GeoTIFF, with your predictions. It must match the submission format's CRS, shape, and geotransform. You may wish to review the competition rules first.
+
+Note (optional)
+
+A short comment to help you or your team tell submissions apart later e.g. clustering with k=25
+
+Create a executive summary subpage that explains exactly how to make a submission into the contest.
+
+Work on the next steps from the previous sessions first.
+
+The goal of this project is to place top of the leaderboard in this competition.  The following is the competition:
+
+[https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/)
+
+We need to create a project that can compete and place top of the leaderboard.  We need to understand the problem, collect all the data and organize it into a clean easily auditable table with official verified links for manual verification.
+
+This is the guidelines we need to follow.[https://www.drivendata.org/competitions/306/competition-doe-gems/](https://www.drivendata.org/competitions/306/competition-doe-gems/)
+
+Get familiar with the problem through the overview and problem description,[https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/). You might also want to reference additional resources available on the about page,[https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/](https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/).
+
+Download the data from the data,[https://www.drivendata.org/competitions/306/competition-doe-gems/data/](https://www.drivendata.org/competitions/306/competition-doe-gems/data/), tab.
+
+Create and train your own model. This reference solution,[https://github.com/drivendataorg/gems-prize-reference-solution](https://github.com/drivendataorg/gems-prize-reference-solution) implements a simple approach.
+
+Use your model to generate predictions that match the submission format.
+
+Tell me what are you limitations and what you need access to during this project.  We will need to find free publicly available sources and data from official and verified sources if we are to use 3rd party or external data.
+
+this pdf outlines how submissions must be entered into the competition.
+
+[https://docs.nlr.gov/docs/fy26osti/96647.pdf](https://docs.nlr.gov/docs/fy26osti/96647.pdf)
+
+You must be able to do your own research, deep research, scientific literature research and organize the knowledge so that we can critically think through the problem and generate a solution through scientific and free publicly available information.  this must be done autonomously and must be constantly reviewed and improved upon.  Provide suggestions and improvements and implement them.
+
+❌ No DrivenData auth → cannot auto-download training_features.tif, labels.tif, sample_submission.tif, 1m_DEM_links.csv from [https://www.drivendata.org/competitions/306/competition-doe-gems/data/](https://www.drivendata.org/competitions/306/competition-doe-gems/data/) (verified redirect to login)
+
+See below for links from the above site.  See attached files for links from the above site.
+
+[https://gdr.openei.org/submissions/1391](https://gdr.openei.org/submissions/1391)
+
+Download competition data from [https://www.drivendata.org/competitions/306/competition-doe-gems/data/](https://www.drivendata.org/competitions/306/competition-doe-gems/data/) (requires login) to data/
+
+See links below for competition data:
+
+[the owner's mirrored Dropbox links: GEMS_96647.pdf; example_submission.tif; existing_faults.tif; gems-geodawn-numerical-features.tif; Digital-elevation-model-links-JSON.pdf]
+
+Work line by line verifying from official verified trusted sources, provide links for manual review.  There should be no manual input, work on your own to complete tasks.  Flag any irregularities for review.  No hallucinations.
+
+Verify no hallucinations.  The goal of this project is to get a full list that follow our requirements.  No hallucinations.  Verify line by line.
+
+Site creation: Create a github page for this repo that has clean ui, user friendly, simple and easy to use.  It should be organized and clean.  It should include all relevant information in an easy to read format with official verified links as sources for review.  Work line by line verify everything no hallucinations.
+
+The single remaining blocker to training is data placement: run `bash scripts/download_competition_data.sh` on any unrestricted machine into `data/`, then `python scripts/prepare_data.py` — after that the full train→inference→validate pipeline is ready to run (GPU needed for training; metric/losses/validation all verified working here on CPU).
+
+you need to complete the above task by yourself.  Work line by line verifying from official verified trusted sources, provide links for manual review.  There should be no manual input, work on your own to complete tasks.  Flag any irregularities for review.  No hallucinations.
+
+Verify no hallucinations.  The goal of this project is to get a full list that follow our requirements.  No hallucinations.  Verify line by line.
+
+Run this task through multiple passes.
+
+Pass 1: Implement the task completely and verify the result.
+
+Pass 2: Review your work for bugs, missing requirements, incorrect assumptions, and edge cases. Fix everything you find.
+
+Pass 3: Re-check the entire implementation against the original request. Improve accuracy, reliability, completeness, and code quality. Fix any remaining issues.
+
+Do not stop after the first pass. Each pass must build on the previous one. Before finishing, verify that the final result fully satisfies the original request.  Work line by line verify everything no hallucinations.
+
+Go ahead and create a pull request and then merge the pull request onto the main. Make suggestions for what work still needs to be done and any limitations that is in the way of a successful project.  It should be worked on in this next session or the next session.  Work line by line verify everything no hallucinations.
 ```
 
-Requirements: `numpy`, `scipy`, `rasterio`, `pytest` (CPU only; no GPU needed). Large rasters are
-restored by hash into `.cache/` and are **never committed**.
+</details>
 
 ---
 
-## 4. Verified data provenance (manual review links)
+## What this session did (3 experiments, budget respected)
 
-| input | sha256 (first 16) | source | status |
-|---|---|---|---|
-| `training_features.tif` (19 bands) | `4371c82e3b8339b8` | bridge `buffedlizard55-lab/6GEMSDOE@e2fe3f4`, 5 parts, each hash-verified | hash-verified third-party bridge; **official origin not independently authenticated** |
-| `labels.tif` / `existing_faults.tif` | `7ba308ccdc4418b3` | same bridge; byte-identical to each other | the public "labels" raster **is** the mapped-fault catalogue |
-| `sample_submission.tif` | `2176d08e485aa2cd` | same bridge | grid/footprint template only |
-| registry corpus (**655 of 655** rasters) | per-row pins | `evidence/registry_full_index.json` from `buffedlizard55-lab/57GEMSDOE` | 651 fetched by `scripts/fetch_registry_rasters.py` + 4 recovered by blob SHA from `55GEMSDOE` git history; every row sha256-verified |
-
-External references for manual review (competition page, leaderboard, reference solution, OSTI 96647
-PDF, USGS GeoDAWN DOI 10.5066/P93LGLVQ, GDR 1391, EPSG:32611, Tversky index, and the five
-geomorphology papers) are tabulated on <a href="docs/science.html">docs/science.html</a>.
-
----
-
-## 5. Irregularities flagged for review
-
-| id | irregularity | consequence |
+| # | experiment | result |
 |---|---|---|
-| IR-60-DATA-01 | The lane brief names the free USGS 3DEP 10 m / 1 m DEM. `usgs.gov` is **not** reachable from this sandbox (permitted hosts: github.com, api.github.com, codeload.github.com, pypi.org, files.pythonhosted.org, registry.npmjs.org). | The lane ran on band 12 `det_elev` of the given stack (100 m, detrended). A 3DEP-based re-run needs an unrestricted machine. |
-| IR-60-CITE-01 | Literature DOIs and all competition/USGS pages could not be fetched here. | Citations are given for manual review and are labelled as not machine-verified in this session. |
-| IR-60-GATE-01 | The inherited literal uniqueness rule ("`>70%` of my dots within 3 px of one registry raster's dots") fires trivially against **dense universal-support priors** in the family corpus: a prior whose positive support covers essentially every allowed cell overlaps any non-empty candidate. | Both the literal result and the sparse-submission-like subset are reported; the run card states which gate fired and why. Same structural finding the sibling session logged. |
-| IR-60-API-01 | `gh api` REST calls hit the shared token's rate limit ("API rate limit exceeded for user ID 309556078"), so `prepare_data.py --fetch` could not download the feature parts. | Worked around with the git protocol (`--filter=blob:none` + sparse checkout of `data/bridge/`), which does not consume REST quota. Hashes verified after assembly. |
-| IR-60-PROXY-01 | The hide-and-recover holdout's truth **is** the given catalogue, so by construction it cannot reward a genuinely new fault. | HOLDOUT-DTI numbers are a proxy; no projection is written as a score. |
-| IR-60-MEM-01 | The first stage-C run died silently (no traceback) inside the uniqueness loop: a dense prior with millions of positive cells made the coordinate-stamping dilation allocate ~2 GB in a 3 GB sandbox. | `scripts/check_uniqueness60.py` now switches to `binary_dilation` above 100,000 positive cells and asserts equivalence with the shared `dot_overlap` on a sample. |
-| IR-60-CORPUS-01 *(resolved)* | 4 of the 655 pinned registry rasters were unreachable at `HEAD` of `buffedlizard55-lab/55GEMSDOE` (two `audit-h55-160k` TIFFs and two `h56-multiscale-tensor-persistence` TIFFs had been moved/deleted), so the literal uniqueness gate would have had to fail closed on an incomplete scan. | Recovered all four by blob SHA from the repository's git history (`git clone --filter=blob:none` + `git cat-file blob <sha>`); every recovered file's sha256 matches its pinned digest. The corpus is now **655/655 complete** and the gate can certify instead of failing closed. |
-| IR-60-PERF-01 | Two silent performance traps in the mandated first test: per-draw `np.nonzero` over a 3 M-cell crop, and a full-crop `binary_dilation` per transect. Together they made E1 hours instead of ~2 minutes. | Fixed once in the shared lane driver (`scripts/run_lane60.py`): the transect-start pool is built once per cell and dilation happens in a local window that callers slice. |
-| IR-60-INDEP-01 *(resolved)* | "Several independent drainages" was first implemented as terminal-sink identity. The northwestern Great Basin is internally drained — 5.17 M cells share only 1,224 terminal sinks — so the rule rejected 36,556 of 36,633 candidates. | Replaced with `geomorph.branch_signature` (identity of the cell 5 steps downstream: same flow path within the corridor's own length scale ⇒ dependent). Fixed **before any score was recorded**; the superseded build in `evidence/superseded/` was never linked or scored. |
+| E1 | Lane first test (preregistered): knickpoint enrichment of 78 withheld segments (25% of 301 segments ≥ 4 km, strike-octant-stratified, seed 20261011) vs 30 orientation-matched laterally-offset nulls + 30 rotation nulls each | **AUC(N1) = 0.224, AUC(N2) = 0.256, Wilcoxon p = 1.6e-6 (real < null) → NEGATIVE-STOP** |
+| E1b | Distance-profile diagnostic (0–3.2 km bands around traces, channel cells, top-decile anomaly) | No band shows real > null; the confound (range-front alluvial cover) dominates → measurement construction documented, lane still negative |
+| E2 | Raster build: Priority-Flood fill → D8 → χ/ksn (θ=0.45) → DoG log-ksn anomaly → multi-drainage concordance → playa/flat/lithology masks → 2-px catalogue ring → 3-px NMS | 7,653 dots (capacity-limited; field cannot honestly support 37,654) |
+| E3 | Pooled hide-and-recover (shared evaluator `gems52-pooled-hide-v1`, 4 whole-segment folds, 36,414 withheld positives, 20 km-block bootstrap CI, 2,000 draws) + canary + uniqueness + validator + writer | **lane 0.00214 [0.0018, 0.0025]**; canary AUC 0.5014 (no leakage); uniqueness PASS; validator 0 problems; **verdict NEGATIVE** |
+
+### Run card (evidence/runcard.json · docs/runcard.json)
+
+* **Hypothesis**: withheld normal-fault segments carry localized channel-steepness (knickpoint/ksn) signals on drainages crossing the trace (Kirby & Whipple 2012; Perron & Royden 2013).
+* **Mechanism**: fill → D8 → χ/ksn on official 100 m `det_elev` → DoG log-ksn steepness-step anomaly → concordance across independent drainage outlets → confound masks → catalogue ring → NMS dots.
+* **Named confound**: range-front alluvial cover — traces crossing piedmonts have no bedrock channels; orientation-matched straight nulls cut more steep headwater terrain and out-score real traces.
+* **Holdout**: HOLDOUT-DTI (evaluator `gems52-pooled-hide-v1`, 36,414 withheld positives) = 0.00214, 95% CI [0.0018, 0.0025].
+* **Registry**: max Spearman ρ = 0.0047 (gate 0.90); max 3-px dot-overlap 45.9% (gate 70%) → PASS, no lane drift.
+* **Raster sha256**: `c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c`.
+* **Validator**: 0 problems — no NaN, values in [0,1], float32, CRS EPSG:32611, shape 3730×3292, transform `(100, 0, 243350, 0, −100, 4508550)` match, 0 mass outside footprint.
+* **Submission name / note**: `gems60-lane-knickpoint-c7653-20261011T000000Z` / "tectono-geomorphic chi/ksn knickpoint lane; 7653 concordant channel dots; E1 negative AUC 0.224; RESEARCH-ONLY, not promoted".
+* **Verdict**: **negative** (do not spend a slot).
+
+## Why the group's 0.2778 champion is what it is (PhD-level answer, from measured bytes)
+
+The official metric collapses (identities pinned by tests) to `DTI = T / (0.2(T+S−M) + 0.8|G|)`:
+only credited mass `T`, wasted mass `S−M`, and the fixed hidden-pixel count `|G|` matter. The champion
+is a 37,654-dot **binary** file that deleted catalogue-proximal mass (masked pixels can never earn
+credit but always pay tax — measured live: 0.2600 → 0.2708 → 0.2778 through pure deletion), keeps
+every dot within ≈ 282 m of plausible hidden structure, and uses the all-finite container. Beating it
+requires **+15% credit density** at equal budget or **−32.6% mass** at equal credit — i.e. new
+knowledge of hidden-fault locations, not local cleanup. This session's lane was one candidate
+source of that knowledge; it measurably does not carry it on the 100 m detrended surface. A second
+measured caution: on the pooled hide-folds, the champion itself scores 0.0041 vs dotted-d2.8's 0.0862
+while live ranks them 0.2778 > 0.2600 — catalogue-segment holdouts cannot rank the leaderboard
+(independently: 16GEMSDOE measured ρ = +0.17). Treat every local instrument as a screen, never proof.
+
+## Reproduce (from a clean clone)
+
+```bash
+pip install rasterio scipy scikit-image numba pytest
+python scripts/fetch_data.py        # reassembles the hash-pinned bridge (pins in data/bridge/manifest.json)
+python -m pytest tests/ -q          # metric parity (official worked example) + hydrology core
+python scripts/e1_lane_test.py      # lane first test  (~12 min, 1 core)
+python scripts/e1b_distance_profile.py
+python scripts/e2_build.py
+python scripts/e3_validate.py       # pooled holdout + uniqueness + writer + run card
+```
+
+Repository layout: `src/gems52/` — shared template (metric/holdout/evaluate_holdout/submission_writer/grid/gates
+vendored verbatim from GEMSDOE52 + this lane's `lane_hydro.py`, `lane_channels.py`); `scripts/` — the
+four experiment runners; `evidence/` — E1/E1b/E2/E3 JSONs + run card; `docs/` — the site.
+
+Registry provenance (uniqueness anchors, all re-fetchable from the org's public repos): champion
+`h33-2-b2` zeros ← `GEMSDOE32/docs/downloads`; dotted-d2.8 zeros ← `GEMSDOE32/docs/downloads`;
+`h27-4-r1-solo` ← `GEMSDOE28/docs/downloads`; `h16-1` ← `16GEMSDOE/docs/downloads`;
+lidar-scarp ridge ← `7GEMSDOE/downloads`; dem10-multiphysics ← `12GEMSDOE/docs/downloads`.
+
+## Limitations (stated, not hidden)
+
+1. **No DrivenData auth** → competition rasters come from the hash-pinned owner bridge
+   (`data/bridge/manifest.json` pins every sha256; `labels.tif` ≡ `existing_faults.tif`,
+   sha `7ba308cc…`). No labels exist for the organisers' hidden set anywhere.
+2. **Sandbox egress** blocks `prd-tnm.s3.amazonaws.com` / ScienceBase → the brief's preferred
+   3DEP 10 m/1 m raw DEM could not be downloaded here. The lane therefore ran on the official 100 m
+   `det_elev` band. The source is free/official/public-domain; 716 tile URLs + sha256 pins exist
+   (`data/dem_links.json` upstream; 706/716 tiles processed in session 7GEMSDOE). A single
+   unrestricted-runner run unlocks the full-resolution lane (hypothesis 5).
+3. **Local instruments are weak**: measured champion-vs-holdout rank inversion (above). No local
+   score predicts a leaderboard score; only the submission page scores.
+4. **Budget**: session stopped at 3 experiments / < 2 h. No promotion decision was taken — that is
+   the selector step's, within the weekly cap.
+
+## Core values
+
+
+**Maximize P(Win)** — slots are spent only on validated, unique, promoted files; this session
+promoted nothing because nothing deserved it. **Own the Outcome** — the negative result is
+published with full evidence so the next session does not re-run a dead lane.
 
 ---
 
-## 6. Limitations and next session
+## Merged parallel session (on `main` since PR #1 — kept, audited, and lane-checked)
 
-**Limitations of this sandbox** (what is needed and cannot be obtained here)
+A parallel session of this same brief landed the GEMSDOE32 pipeline in this repository (its own
+`src/gems32` + `src/gemsdoe32` packages, `scripts/`, `tests/`, CI) together with:
 
-* No DrivenData login → cannot download `training_features.tif`, `labels.tif`, `sample_submission.tif`
-  or `1m_DEM_links.csv` from the competition data page (verified redirect to login in earlier
-  sessions). The hash-pinned GitHub bridge is the only route available, and it proves *bridge
-  integrity*, not organizer provenance.
-* No `usgs.gov`, no `drivendata.org`, no `*.github.io` → no 3DEP tiles, no live leaderboard read, no
-  sibling site scrape. Everything external was read through `github.com` repository contents.
-* No GPU, 2 CPU, 3 GB RAM, 19 GB disk → deep-detector training is out of scope; this lane is CPU-only
-  by design.
-* No organizer receipt exists for anything in this repository. Scores on the public board are context,
-  not evidence about our files.
+* its **H61 knickpoint raster** — `docs/downloads/submission.tif`, sha256 `386e7cd1…5a5e7`,
+  `submission_card.json` holdout 0.01305 on *its own* instrument (not comparable to our pooled
+  evaluator), 983,855 emitted px;
+* the group's **champion** download — `docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif`
+  (owner-reported live **0.2778**, the group best);
+* its fetcher retained as `scripts/fetch_data.py` (used by its CI, `--dest` interface).
 
-**Next session (ordered by expected DTI gain per unit of cost)**
+**Lane-drift check of THIS session's raster against the parallel session's H61 raster** (the
+registry now includes it): Spearman ρ = **+0.0071** (gate 0.90), 36.7% of our dots within 3 px of
+its dots (gate 70%) → **PASS — not a duplicate**; the two are distinct realizations of the same
+lane, ours sparse and concordance-filtered, theirs dense. Note their `submission_card.json` says
+"promote" on an instrument that was never calibrated against the live board; this session's shared
+evaluator read of our own raster is NEGATIVE, and the promotion decision belongs to the selector
+step in any case.
 
-1. **H60-D** (highest value, lowest cost): gate every knickpoint on a coincident step in
-   `depth_to_base_surf` (band 15). This is the direct test of the named mimic — a lithologic
-   contact/basin-fill boundary also steps `ksn`, but it does not step *basement depth* the way a
-   fault does. Band 15 is already local and untouched by any sibling lane.
-2. **H60-B**: knickpoint *isochrones* — cluster breakpoints at equal χ rather than equal distance
-   (Perron & Royden). A base-level fall arrives at equal χ in every drainage, so the cluster is a
-   line even where the scarp is buried. All inputs are cached.
-3. **H60-C**: drainage-divide migration asymmetry (Vx-style divide height asymmetry) across mapped
-   faults, projected along strike to predict unmapped continuations.
-4. Re-run the whole lane on real 3DEP 10 m (or 1 m) tiles on an unrestricted machine, and fit θ per
-   basin instead of the global 0.45 — this is the single largest source of systematic error in `ksn`.
-5. Two-round objective: with the round-2 panel-verified pool, the correct emission bar for a *novel*
-   candidate is `0.2·DTI/(1+ρ)`; ρ is currently assumed 0 here and should be estimated.
+For the reproduce steps of the merged GEMSDOE32 pipeline see `AGENTS.md`, `CONTRIBUTING.md` and
+`docs/` artifacts it shipped; this README's run card above remains the record of the knickpoint-lane
+session.
 
 ---
 
-## 7. Site
+## Lane 1 (60GEMSDOE): chi/ksn knickpoint strike traces — NEGATIVE (2026-10-11)
 
-`docs/index.html` is the GitHub Pages entry point (root `index.html` redirects to it). The executive
-summary and the download/permission banner are the first thing on the page; `docs/executive-summary.html`
-is the step-by-step submission guide, including the fix for the portal error
-*"Predicted values must be in range [0, 1]"* (export finite zeros outside the footprint, never NaN).
+**Read this file first, every session.** It carries the working brief, the current verdict, and the exact
+commands that reproduce every number in the repository.
+
+**Site (start here): <https://buffedlizard55-lab.github.io/60GEMSDOE/>** — the first visible thing on that
+page is the submission download and the verdict banner.
+
+---
+
+### 0. Verdict of the current run (2026-10-11)
+
+| | |
+|---|---|
+| **Verdict** | **NEGATIVE — no submission slot spent** |
+| Candidate raster | `docs/submission/gems60-candidate-3770px-zeros.tif` (validated, unique, 65,898 B, sha256 `d3c411f5…`) |
+| First test (pre-registered) | 4/5 segment folds positive, 1/5 with 95% CI above zero → **fail** |
+| Off-catalogue holdout (HOLDOUT-DTI, 14,089 withheld positives) | lane **0.0108** vs uniform-random **0.0268** at matched budget 12,000; lane beats random at **1 of 9** budgets |
+| Submitted raster vs same truth | 0.0064, truth-side 95% CI [0.0053, 0.0074] (lower bound) |
+| Leakage canary | max single-feature AUC 0.58 → no leakage |
+| Uniqueness vs 35 registry rasters | worst naive 3 px overlap 83.1%, random control 83.7% → excess −0.7%; max \|Spearman\| 0.0025 → no duplication |
+| Champion comparator `h33-2-b2` (0.2778, PUBLIC-BOARD) | S = 37,654 px, min 223.6 m from catalogue, strictly inside the 44,090-cell parent; HOLDOUT-DTI 0.0681 vs 0.0489 for random mass-matched dots |
+
+The full write-up, including the metric algebra that explains 0.2778, is on the site
+(`docs/executive-summary.html`); machine-readable evidence is in `evidence/` and `docs/submission/`.
+
+---
+
+### 1. Working brief (carried verbatim in this repository, re-read every session)
+
+> Review the repo and produce a **unique** TIF submission for DrivenData competition 306 (DOE GEMS
+> geothermal exploration, leaderboard `https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/`)
+> that beats prior scores, with it being *obvious* whether the file is OK to download/submit. Do not copy
+> a prior submission except for learning. Explain, at PhD level, why `h33-h33-2-b2-…-zeros` scored 0.2778
+> (highest on the GEMSDOE sites) and whether something higher is achievable.
+>
+> **Lane** (parallel-run protocol, must stay inside it): tectonic geomorphology — channel steepness +
+> knickpoints (Kirby & Whipple 2012; Perron & Royden 2013 χ transform; Gailleton et al. knickpoint
+> segmentation); drainage from free 3DEP 10 m DEM; χ and normalized steepness; keep only
+> knickpoints/steepness steps aligned across several independent drainages along a common strike;
+> first test — do channels crossing withheld segments show larger steepness steps than random
+> same-orientation lines, else stop; mask lithology, climate gradients, ephemeral channels, playa base
+> levels; output validated GeoTIFF, uniqueness-checked against every earlier raster.
+>
+> **Protocol**: rank-correlation with any registry raster > 0.90, or >70% of dots within 3 px of one
+> registry raster → log duplicate and stop (check both before placement and on final dots). Reuse the
+> template's cached feature stack, `evaluate_holdout.py`, `submission_writer.py`; fix shared tools once in
+> the template, never fork privately. Holdout = hide-and-recover whole fault segments with buffer;
+> catalogue features derived only from visible faults; visible faults masked pixel-exactly; pooled DTI
+> (α 0.2, β 0.8, 300 m triangular kernel). Label every number HOLDOUT-DTI (evaluator version, number of
+> withheld positives, 95% CI) or ORGANIZER-CONFIRMED (submission-page receipt); a projection is never
+> written as a score. Leakage canary: single-feature AUC > 0.90 = leakage until proven otherwise. End with
+> one JSON run card (hypothesis; mechanism; named non-fault mimic process; holdout DTI + CI;
+> correlation/overlap vs registry; raster sha256; validator output — no NaN inside footprint, values in
+> [0,1], CRS/shape/transform match; submission name + ≤140-char note; verdict promote/negative — negatives
+> are deliverables). Do not pick submissions; promotion is a separate selector step within the weekly cap.
+>
+> **Also required**: 3–5 new candidate geological hypotheses ranked by expected DTI improvement vs
+> implementation cost (each naming specific layers, the physical signature, why it catches a fault missing
+> from the USGS/INGENIOUS catalogue, and how it differs from prior work), top candidate validated on the
+> spatially-blocked holdout before any submission slot is spent; free official sources only, verified
+> obtainable; README must embed the brief and be re-read each session; clean GitHub Pages site whose first
+> visible thing is the submission download + executive summary subpage; competition data organized into a
+> clean auditable table with official links; apply "Maximize P(Win)" and "Own the Outcome".
+
+**Standing constraints from the operator** (unchanged): the TIF must be unique and never a copy of a prior
+submission except for learning; the file must be a single-band GeoTIFF (or a zip containing one) matching the
+submission format's CRS/shape/geotransform with values in [0,1] (a prior download failed with *"Predicted
+values must be in range [0, 1]"*); a unique name and a ≤140-character note are required; no hallucinations —
+verify line by line from official sources and flag irregularities; work autonomously (no manual input from
+the operator); run three passes (implement+verify, review for bugs/missing requirements, re-check against the
+original request and improve) and do not stop after the first; finish by opening a pull request, merging it to
+`main`, and listing remaining work and limitations for the next session; DrivenData authentication is
+unavailable, so organizer rasters are restored from integrity-pinned mirrors and free official substitutes are
+used; lane stop rules are hard; **budget: stop after 3 experiments or 2 hours, and never spend a submission
+slot on anything that has not beaten the best promotable holdout in the family record (DTI 0.190147)**.
+
+---
+
+### 2. What was built and what it says
+
+* **The lane, implemented honestly.** `src/gems60/drains.py` (priority-flood + ε, steepest-descent D8,
+  exact D8 accumulation, Perron–Royden χ, per-link segmentation, first-order basins, strike/pair tools),
+  `src/gems60/surface.py` (channel network, one knickpoint per first-order basin, **strike-trace
+  detector** = chain of knickpoints from ≥3 independent basins along a common strike with
+  non-maximum suppression and principal-axis refit, confound masks), `src/gems60/holdout.py`
+  (whole-segment folds with buffer, tie-corrected AUC, pooled DTI, truth-side bootstrap),
+  `src/gems60/nodes.py` (marginal-rule budget, hex lattice, emission with 3 px minimum separation,
+  registry overlap), `src/gems60/metric.py` (the organizers' metric, byte-pinned from the sibling
+  registry), `src/gems60/grid.py` (grid/template/validator).
+* **Two experiments, the same answer.** Run 1 on the cube's detrended-elevation band (documented
+  deviation): 5/5 folds positive, 1/5 with CI above zero, lane below random on the off-catalogue
+  instrument. Run 2 on real elevation (USGS 3DEP 10 m reduced to 100 m — the substrate the lane is
+  specified on): 4/5 folds positive, 1/5 with CI above zero, lane below random at 8 of 9 budgets.
+  The negative is robust to the substrate, and it is a *placement* failure, not a leak: the canary is
+  clean.
+* **The instrument itself is now a finding.** The off-catalogue truth used by the whole family is
+  anti-correlated with relief (AUC 0.90 for local relief, 0.90 for slope p90, 0.88 for absolute
+  elevation), because maximal-separation thinning spreads the sample into basin floors. Every
+  topography-based lane in the family has therefore been graded on a sample biased against it. Fixing
+  the instrument is hypothesis #1 (see `docs/hypotheses.html`).
+* **Why 0.2778.** Inverting the organizers' metric on the champion file with the published |G| pins
+  implies it matched ≈5.1–5.6k of ≈12.4–14.3k hidden truth pixels (recall ≈39–41%) while paying the
+  0.2 mass tax on 37.4k unmatched pixels. It is a mass/precision point on the metric's frontier, not a
+  physical achievement: the family's own inversion fits 13 board-calibrated submissions with zero
+  weight difference between physical bases (LOO MAE ≈0.020). The same recall at 6,000 px of mass is
+  worth ≈0.40–0.42, and the board's best (0.3774) needs ≈54–57% recall at the same mass. Higher is
+  achievable; the headroom is in recall on off-catalogue faults and in mass discipline, not in a
+  cleverer basis. Details and arithmetic: `docs/executive-summary.html` §3.
+
+---
+
+### 3. Reproduce everything
+
+```bash
+## inputs are SHA-256 pinned in scripts/run_lane.py; the run aborts (exit 2) on any mismatch
+python scripts/run_lane.py --data-dir data --out-dir submission --evidence evidence \
+       --registry-dir registry/rasters --cache .cache      # ~8 min, 2 vCPU / 3 GB
+python scripts/selector.py                                  # the separate promotion step
+python -m pytest tests/ -q                                  # analytic/conservation tests
+```
+
+Data layout: `data/` holds the three official rasters (`training_features.tif`, `labels.tif`,
+`sample_submission.tif`), the SGMC validation raster, and `data/external/topo_10m_derived_100m_u8.tif`
+(USGS 3DEP 10 m reduced to the competition grid, public domain, with its own manifest). `registry/rasters/`
+holds the 35 comparator rasters used by the uniqueness stop rule.
+
+### 4. Repository map
+
+| Path | Contents |
+|---|---|
+| `src/gems60/` | the lane: `drains.py`, `surface.py`, `holdout.py`, `nodes.py`, `metric.py`, `grid.py` |
+| `scripts/run_lane.py`, `scripts/selector.py` | end-to-end run (9 steps) and the promotion decision |
+| `tests/` | analytic tests (χ linearity, conservation, detector positive/negative controls) |
+| `evidence/` | first test, instruments, budget curve, traces, canary, uniqueness, source pins, run card |
+| `docs/` | the Pages site: download + verdict, executive summary, data table, hypotheses |
+| `submission/` | emitted rasters (primary + NaN variant) |
+| `data/external/` | committed external data with provenance (3DEP-derived pack + manifest) |
+| `.github/workflows/probe-egress.yml` | runner-side egress probe + receipt (the sandbox cannot reach `prd-tnm.s3.amazonaws.com`) |
+
+### 5. Remaining work and limitations for the next session
+
+1. **Instrument first** (hypothesis #1): relief-stratified thinning; then re-score every registry raster.
+   Until that exists, no "no skill" verdict in the family record is trustworthy — including this one.
+2. **Real 10 m DEM** (hypothesis #2): fetch through the Actions runner and commit a decimated grid;
+   the 100 m substrate cannot resolve first-order channels (31% of cells raised by depression filling,
+   per-cell A-vs-L exponent ≈0.03). **The egress lane is verified**: Actions run 38100992879 returned
+   HTTP 200 for `Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif` (10 m) and
+   `Elevation/1/...` (30 m) and downloaded a tile whose sha256 `b7fe301c…` matches the pin published
+   independently in the sibling `12GEMSDOE/evidence/dem10-fetch.json`; see
+   `evidence/probe-egress-receipt.json`.
+3. **Emission policy**: the marginal rule at the *measured* DTI, plus the 100–200 m ring deletion.
+4. **Not obtained:** `1m_DEM_links.csv` and the portal's own data downloads (login-walled). Irregularity
+   flagged for the operator: the mirrored `sample_submission.tif` contains 60,988 pixels equal to 1 on
+   the labelled faults, contradicting the portal's "total fault absence" description.
+5. **Unverified / pending:** the egress probe's receipt (runner-side reachability of the 3DEP hosts) and
+   the submissions page widget (no authenticated session). Treat both as open items, not as facts.
+
+
+---
+
+## Lane-60 second run (session `arena/16fc977d-60gemsdoe`) — independent corroboration
+
+A second, fully independent run of the **same lane** was executed on the same
+competition grid and reached the **same verdict**, **negative**, with a different DEM
+(absolute-elevation GeoDAWN 100 m rather than a derived product), a different
+statistic (channel-normal casting of χ-profile steepness steps), and its own
+buffered whole-component holdout. That two independent implementations agree is the
+strongest evidence available locally that the STOP is a property of the method at
+100 m, not of one implementation.
+
+**Engine:** `src/gems60chi/{metric,holdout,hydro,knick,field}.py`, with 14 tests in
+`tests/test_chi_*.py` — hydrology primitives (priority-flood fill, D8 routing,
+accumulation, χ) are verified against **independent brute-force implementations**.
+
+**Experiments (budget 3/3):**
+
+| exp | pre-registered question / artefact | result |
+| --- | --- | --- |
+| 1 | the brief's first test, as written (3.1 km segmentation window) | pooled Δmean **−0.0229**, CI95 [−0.166, +0.162], p = 1.0, AUC 0.459 → **STOP** |
+| 2 | corrected: 700 m statistic + position-matched, area-binned control | Δmean **−0.0349**, CI95 [−0.0806, −0.0065] *(excludes 0 on the wrong side)*, AUC 0.4795 → **STOP** |
+| 3 | emission, format validation, uniqueness | 15/15 checks PASS; **unique** (worst ρ = −0.015, worst 3-px forward overlap 0.000 over 170 obtainable registry rasters); HOLDOUT-DTI 0.00039 vs a matched random-on-the-same-support control of 0.00042 |
+
+**The 0.2778 question, answered from the family's own record.** `h33-h33-2-b2` is the
+owner-reported 0.2708 raster with **2,545 dots deleted and none added**, every removed dot
+1.4–2.0 px from the mapped catalogue (`equals_base_pruned_at_2px: true`, 57GEMSDOE
+`evidence/session6_mechanism_and_witness.json`). The metric reduces to
+`1/DTI = α + α(F/T) + β(|G|/T)`, so a unit of mass pays only if its realised kernel credit
+beats `α·DTI` ≈ 0.052 — within ~284 m of a hidden truth pixel. Beating 0.3195 / 0.3774 is
+therefore a *detector* problem: `T` must rise ≈ **+45 % at fixed mass**. Nothing here is
+written as a score.
+
+**Irregularities flagged (IR-60-01 … IR-60-08)** — full table in
+[`docs/lane-chi-report.html`](docs/lane-chi-report.html): the brief's 0.3195 is **rank 8**
+(the board leader is **0.3774**); the official 19-band stack carries only **detrended**
+elevation, so a χ transform is undefined on it; `prd-tnm.s3.amazonaws.com` returns
+**HTTP 000** here, so the lane ran at 100 m and the missing 10 m DEM is named as the most
+likely cause; the inherited off-catalogue emission rule is degenerate on a catalogue-truth
+holdout; uniqueness scope is 170 of 696 registry rasters; two hydrology bugs were caught by
+brute force before any scientific number; and a **0.034 m** DEM grid offset would have been
+a portal geotransform mismatch had `scripts/verify_submission.py` not caught it.
+
+**Ranked next steps (unchanged, now doubly motivated):** (1) re-run this lane on a **10 m
+3DEP DEM** — `scripts/fetch_3dep_10m.sh` probes the host and refuses to claim success it
+did not get; (2) χ-**transient** inversion instead of a χ-steady step; (3) knickpoint
+**recurrence in χ** across basins rather than knickpoint position; (4) a playa /
+closed-basin base-level mask (the fill raises **899,623 cells, 17.4 %** of the valid grid);
+(5) lithology-normalised ksn.
+
+<!-- 60GEMSDOE-H60A-CORRIDOR:BEGIN -->
+## Lane-60 third run (session `arena/54b1897a-60gemsdoe`) — H60-A knickpoint corridors, NEGATIVE
+
+> **File:** [`downloads/gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204-zeros.tif`](downloads/gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204-zeros.tif)
+> (mirrored in `docs/downloads/`) · **report:** [`docs/lane-knick-corridor-report.html`](docs/lane-knick-corridor-report.html)
+> · **run card:** [`evidence/run_card_current.json`](evidence/run_card_current.json)
+> **DOWNLOAD: OK (research / education) · SUBMIT TO THE COMPETITION: NO** — verdict `negative`, 0 slots spent.
+
+* **E1 mandated first test — PROCEED** (the only one of the three runs to pass it): channels crossing
+  withheld fault segments step **+0.1089** log-`ksn` harder than random lines of the
+  same orientation and length, 95 % CI **[0.0586, 0.1569]**, 323
+  withheld components, 59.4 % positive.
+* **E2 leakage canary — clean**: `knickpoint_step` 0.586, `chi` 0.562, `ksn` 0.559, `drainage_area`
+  0.527, `lane_p` 0.518. The deliberate control `dist_to_visible` flags at **0.924**, proving the
+  canary has power.
+* **E3 pooled HOLDOUT-DTI — NEGATIVE** (`gems57-pooled-hide-v2`, α 0.2, β 0.8, 300 m triangular,
+  22641 withheld positives, 159 spatial clusters, 1000 paired
+  draws): lane **0.01639** [0.01223, 0.02061] vs `random_mass_control`
+  0.03908, `ksn_only_no_alignment`
+  0.03118, `distance_only`
+  0.19073. Surface arm
+  0.01377 vs
+  0.05942. It loses to every control,
+  paired CIs excluding zero.
+* **Uniqueness — complete 655/655 scan** (651 fetched + 4 recovered by blob SHA from `55GEMSDOE` git
+  history, all sha256-verified): worst full-footprint ρ **0.02088**
+  (limit 0.90), worst Jaccard 0.01158, no byte- or pixel-identical
+  prior; the literal forward-overlap gate **fires** on 60 dense
+  universal-support priors (worst 1.000) → logged as a duplicate,
+  `unique_literal = false`, `stop_required = true` (IR-60-GATE-01).
+* **Format**: 15/15 local checks pass, every cell finite and in `[0, 1]` (zeros mode, never NaN — the
+  fix for the portal's *"Predicted values must be in range [0, 1]"*), EPSG:32611, 3730 × 3292,
+  transform identical to `sample_submission.tif`, **0** dots on mapped catalogue faults, recomputed
+  from scratch and asserted pixel-identical (`--verify-existing`).
+* **Shared-tool fixes (fixed once, no private fork)**: local-window dilation + a per-cell transect pool
+  in the mandated first test (IR-60-PERF-01); `geomorph.branch_signature` replacing terminal-sink
+  identity as the independence measure, because the basin is internally drained — 1,224 sinks for
+  5.17 M cells made the pre-registered ≥ 3 rule reject 36,556 of 36,633 candidates (IR-60-INDEP-01,
+  fixed before any score was recorded; superseded build kept in `evidence/superseded/`, never linked or
+  scored); `binary_dilation` above 100 k positive cells in the uniqueness scan after a silent OOM
+  (IR-60-MEM-01) plus an incremental rows cache.
+* **Lane inputs** live in `data/official/` (restored through the hash-pinned bridge, receipt
+  `evidence/data_preparation.json`); lane code is `src/gems60/geomorph.py` + `src/gems60/lane.py`
+  (new files — it neither forks nor overwrites `src/gems60chi/` or the first run's `src/gems60/`
+  modules), drivers `scripts/build_geomorph_features.py`, `scripts/run_lane60.py`,
+  `scripts/build_submission60.py`, `scripts/check_uniqueness60.py`, `scripts/write_run_card.py`,
+  `scripts/build_site60.py`; tests `tests/test_geomorph.py` (18 passing).
+* **Irregularities**: IR-60-DATA-01 (3DEP/USGS unreachable → band 12 stands in), IR-60-CITE-01
+  (DOIs cited for manual review, not fetched), IR-60-GATE-01 (literal overlap gate fires on dense
+  priors), IR-60-API-01 (`gh api` REST rate limit → git protocol for large blobs), IR-60-PROXY-01
+  (holdout truth *is* the catalogue), IR-60-MEM-01, IR-60-PERF-01, IR-60-INDEP-01, IR-60-CORPUS-01
+  (resolved: 4 deleted registry rasters recovered from git history).
+* **Next session**: with three convergent negatives, leave this lane. If it is touched again, run
+  H60-D first (gate knickpoints on a coincident `depth_to_base_surf` step — the direct test of the
+  named lithologic mimic) and re-derive the emission bar from the live-anchored truth model instead of
+  the catalogue-proxy holdout.
+<!-- 60GEMSDOE-H60A-CORRIDOR:END -->

@@ -1,25 +1,60 @@
+:root{--bg:#0f1216;--bg2:#151a21;--ink:#e9eef5;--mut:#9fb0c3;--acc:#39d353;--acc2:#2ea043;--warn:#e3b341;--bad:#f85149;--line:#243040;--link:#79b8ff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header.top{border-bottom:1px solid var(--line);background:linear-gradient(180deg,#12171e,#0f1216)}
+header.top .wrap{padding:22px 20px 14px}
+h1{font-size:27px;line-height:1.25;margin:0 0 6px}
+h2{font-size:21px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:17px;margin:22px 0 6px}
+p{margin:10px 0}ul,ol{margin:10px 0 10px 22px}li{margin:4px 0}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+nav{margin-top:12px}nav a{margin:0 14px 0 0;font-weight:600;font-size:14.5px;color:var(--mut)}
+nav a.active{color:var(--ink)}
+.dl{border:2px solid var(--acc2);background:#0d1f14;border-radius:14px;padding:20px;margin:18px 0}
+.dl h2{border:0;margin:0 0 8px;padding:0}
+.btn{display:inline-block;background:var(--acc);color:#05140a;font-weight:800;padding:14px 22px;border-radius:10px;margin:8px 10px 6px 0;font-size:16px}
+.btn.alt{background:#1f6feb;color:#fff}
+.btn.small{padding:8px 12px;font-size:14px;font-weight:600}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0}
+th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:#1a2129;font-weight:700}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+code{background:#1a2129;padding:1.5px 5px;border-radius:5px;font-size:13.5px}
+pre{background:#141a21;border:1px solid var(--line);border-radius:10px;padding:13px;overflow:auto;font-size:12.8px}
+.mut{color:var(--mut)}.ok{color:var(--acc)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+.pill{display:inline-block;font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:2px 9px;color:var(--mut);margin-left:8px;vertical-align:middle}
+blockquote{border-left:3px solid var(--acc2);background:#121a16;margin:14px 0;padding:6px 16px;color:#d7e2ee}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:13.5px;padding:26px 20px;margin-top:40px}
+.tag{font-size:12px;border:1px solid var(--line);border-radius:6px;padding:1px 7px;color:var(--mut)}
+small{color:var(--mut)}
+/* the persistent one-click download button in the page chrome (every page, top of the site) */
+header.top .dlbtn{margin-top:12px}
+header.top .dlbtn .btn{margin:0 8px 0 0;font-size:14px;padding:10px 16px}
+header.top .dlbtn .btn.alt{background:#12261c;color:#8fe3b4;border:1px solid #1f6feb}
 
-:root{--ink:#10202b;--mut:#5b7183;--line:#dfe7ee;--go:#0d6b3f;--hold:#8a5b00;--stop:#9b1c1c;--bg:#f7fafc}
-*{box-sizing:border-box}
-body{margin:0;font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#fff}
-header{padding:28px 32px;background:var(--bg);border-bottom:1px solid var(--line)}
-h1{margin:0 0 6px;font-size:26px} h2{font-size:20px;margin:0 0 10px} h3{font-size:16px}
-.sub{margin:0;color:var(--mut)}
-section{padding:22px 32px;border-bottom:1px solid var(--line);max-width:1100px}
-nav{padding:10px 32px;background:#fff;border-bottom:1px solid var(--line);font-size:14px}
-nav a{margin-right:10px}
-.banner{border-left:8px solid var(--mut);background:var(--bg)}
-.banner.go{border-left-color:var(--go);background:#f0fbf4}
-.banner.hold{border-left-color:var(--hold);background:#fff9ec}
-.banner.stop{border-left-color:var(--stop);background:#fdf2f2}
-.banner .big{font-size:20px;font-weight:700;margin:6px 0}
-.btn{display:inline-block;background:var(--go);color:#fff;padding:12px 18px;border-radius:8px;text-decoration:none;font-weight:700;margin:6px 8px 6px 0}
-.btn.alt{background:#254a63}
-table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}
-th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
-th{background:var(--bg)} td.num{text-align:right;font-variant-numeric:tabular-nums}
-code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
-pre{background:var(--bg);padding:12px;border-radius:8px;overflow:auto}
-.warn{color:var(--hold);font-size:14px} .tag{background:#e8eef4;border-radius:4px;padding:1px 5px;font-size:12px}
-footer{padding:18px 32px;color:var(--mut);font-size:13px}
-.note{font-size:14px}
+/* ===== 60GEMSDOE-H60A-CORRIDOR: lane page styles (all classes prefixed, never global) ===== */
+.h60a-body{margin:0;font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#10202b;background:#fff}
+.h60a-head{padding:28px 32px;background:#f7fafc;border-bottom:1px solid #dfe7ee}
+.h60a-head h1{margin:0 0 6px;font-size:26px}
+.h60a-sub{margin:0;color:#5b7183}
+.h60a-sec{padding:22px 32px;border-bottom:1px solid #dfe7ee;max-width:1100px}
+.h60a-sec h2{font-size:20px;margin:0 0 10px} .h60a-sec h3{font-size:16px}
+.h60a-nav{padding:10px 32px;border-bottom:1px solid #dfe7ee;font-size:14px}
+.h60a-banner{border-left:8px solid #5b7183;background:#f7fafc;padding:22px 32px}
+.h60a-banner.h60a-go{border-left-color:#0d6b3f;background:#f0fbf4}
+.h60a-banner.h60a-hold{border-left-color:#8a5b00;background:#fff9ec}
+.h60a-banner.h60a-stop{border-left-color:#9b1c1c;background:#fdf2f2}
+.h60a-big{font-size:20px;font-weight:700;margin:6px 0}
+.h60a-btn{display:inline-block;background:#0d6b3f;color:#fff;padding:12px 18px;border-radius:8px;text-decoration:none;font-weight:700;margin:6px 8px 6px 0}
+.h60a-btn.h60a-alt{background:#254a63}
+.h60a-table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}
+.h60a-table th,.h60a-table td{border:1px solid #dfe7ee;padding:6px 8px;text-align:left;vertical-align:top}
+.h60a-table th{background:#f7fafc} .h60a-table td.h60a-num{text-align:right;font-variant-numeric:tabular-nums}
+.h60a-code,.h60a-pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+.h60a-pre{background:#f7fafc;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap}
+.h60a-warn{color:#8a5b00;font-size:14px} .h60a-tag{background:#e8eef4;border-radius:4px;padding:1px 5px;font-size:12px}
+.h60a-foot{padding:18px 32px;color:#5b7183;font-size:13px}
+/* ===== /60GEMSDOE-H60A-CORRIDOR ===== */
