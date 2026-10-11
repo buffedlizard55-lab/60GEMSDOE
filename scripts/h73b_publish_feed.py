@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 """Append the H73 round to ``docs/data/feed.json`` without writing any number by hand.
 
-Every value comes from ``evidence/h73_runcard.json`` (the compact superset of this session's measurements) or from
+Every value comes from ``evidence/h73b_runcard.json`` (the compact superset of this session's measurements) or from
 the small evidence files embedded whole. Site invariants preserved (tests/test_site.py): the prior round stays
 ``STOP``, the top-level ``submission`` key stays ``null`` (only an organizer receipt may set it), and the 50-row
 manual leaderboard snapshot is untouched.
 
-    /home/user/.venv/bin/python scripts/h73_publish_feed.py
+    /home/user/.venv/bin/python scripts/h73b_publish_feed.py
 """
 from __future__ import annotations
 
@@ -33,12 +33,12 @@ def denan(o):
     return o
 
 
-card = rd(E / "h73_runcard.json")
-field = rd(E / "h73_field.json")
-ctl = rd(E / "h73_controls.json")
-uni = rd(E / "h73_uniqueness.json")
-uni_v = rd(E / "h73_dense_comparator_universality.json")
-pure = rd(E / "h73_purelane_package.json")
+card = rd(E / "h73b_runcard.json")
+field = rd(E / "h73b_field.json")
+ctl = rd(E / "h73b_controls.json")
+uni = rd(E / "h73b_uniqueness.json")
+uni_v = rd(E / "h73b_dense_comparator_universality.json")
+pure = rd(E / "h73b_purelane_package.json")
 reg_ir = rd(ROOT / "registry" / "irregularities.json")
 
 e1, hold, gates, raster, budget = (card["first_test_E1"], card["holdout_dti"], card["gates"],
@@ -51,7 +51,7 @@ hyp = {
     "status": ("PROMOTED to submission candidate 2026-10-11 - the first lane statistic in nine attempts to clear its "
                "preregistered first test (PROCEED). Emitted raster validated, uniqueness-clean, OK to download and "
                "OK to submit as a disclosed bet; NOT certified better than the owner-reported 0.2778 champion. "
-               "Record: docs/research/h73-knickpoint-corridor-2026-10-11.md"),
+               "Record: docs/research/h73b-knickpoint-corridor-2026-10-11.md"),
     "layers": [
         "data/external/dem10_chi_100m_i16.tif (step_max, step_min, ksn_max, log10area, zmean)",
         "data/external/dem10_chi_100m_u8.tif (chan_n, knick_n, raised_n, valid_n)",
@@ -82,23 +82,25 @@ hyp = {
                                        "champion on the same instrument; this is the non-circular read of the "
                                        "lane's marginal value")},
     "budget": budget,
-    "known_defects": card["irregularities_logged"],
+    "known_defects": card["irregularities_logged"] + ["IR-73B-ID-COLLISION-01"],
+    "sibling_round": ("main's H73 (paired-basin k_sn contrast, GEMS60-H73-1) is a different hypothesis and a "
+                      "different artifact; both rounds are kept, this one is H73B"),
 }
 feed["hypotheses"] = [x for x in feed["hypotheses"] if x.get("id") != "H73"] + [hyp]
 
 feed["evidence"].update(denan({
-    "h73_runcard.json": card,
-    "h73_field.json": field,
-    "h73_controls.json": ctl,
-    "h73_dense_comparator_universality.json": uni_v,
-    "h73_uniqueness_summary.json": {k: uni[k] for k in
+    "h73b_runcard.json": card,
+    "h73b_field.json": field,
+    "h73b_controls.json": ctl,
+    "h73b_dense_comparator_universality.json": uni_v,
+    "h73b_uniqueness_summary.json": {k: uni[k] for k in
                                     ("run", "evidence_class", "rasters_scanned", "readable", "errors", "limits",
                                      "surface_rank_reading", "like_for_like_reading", "literal_reading",
                                      "champion_cross_check", "my_dots") if k in uni},
 }))
 
-new_ids = ["IR-73-INSTR-CIRCULAR-01", "IR-73-GATE-UNSAT-01", "IR-73-MASSCAP-01",
-           "IR-73-MEDIAN-NEG-01", "IR-73-STOP-LANECONFLICT-01"]
+new_ids = ["IR-73B-INSTR-CIRCULAR-01", "IR-73B-GATE-UNSAT-01", "IR-73B-MASSCAP-01",
+           "IR-73B-MEDIAN-NEG-01", "IR-73B-STOP-LANECONFLICT-01", "IR-73B-ID-COLLISION-01"]
 by_id = {x["id"]: x for x in reg_ir["items"]}
 have = {x.get("id") for x in feed["irregularities"]}
 feed["irregularities"].extend(by_id[i] for i in new_ids if i not in have and i in by_id)
@@ -110,8 +112,8 @@ feed["submission_candidate"] = {
     "dots": raster["dots"], "ok_to_download": True, "ok_to_submit": True,
     "ok_to_submit_scope": (card["verdict"] + "; model-estimated bracket only, never quoted as a score"),
     "run_card": f"docs/downloads/{Path(raster['file']).name.replace('.tif', '-runcard.json')}",
-    "report": "docs/research/h73-knickpoint-corridor-2026-10-11.md",
-    "knowledge": "knowledge/04_h73_knickpoint_corridor_and_instrument_circularity.md",
+    "report": "docs/research/h73b-knickpoint-corridor-2026-10-11.md",
+    "knowledge": "knowledge/04_h73b_knickpoint_corridor_and_instrument_circularity.md",
     "why_the_submission_key_is_still_null": (
         "feed['submission'] records an organizer-verified live score; no receipt exists for this file and the "
         "public leaderboard does not show it, so the pointer stays null and this block carries the verdict instead"),

@@ -1,7 +1,7 @@
 {
   "run": "H73",
   "session_branch": "arena/7f9ca816-60gemsdoe",
-  "generated_utc": "2026-10-11T20:01:14Z",
+  "generated_utc": "2026-10-11T20:15:34Z",
   "evidence_classes": {
     "HOLDOUT-DTI": "conditional on fitted folds, catalogue labels, fixed budget; never a leaderboard score",
     "INSTRUMENT": "local proxy truth; never a score",
@@ -50,7 +50,7 @@
       "H70_1_paired_polarity": -0.0347
     },
     "skew_warning": "mean is positive with CI above zero, but the median is negative and fewer than half of components are positive: the contrast is carried by a minority of strong corridors. Reported, not smoothed over.",
-    "evidence": "evidence/h73_e1_first_test.json"
+    "evidence": "evidence/h73b_e1_first_test.json"
   },
   "leakage_canary": {
     "rule": "max(AUC,1-AUC) > 0.90 is leakage until proven otherwise",
@@ -170,7 +170,7 @@
     },
     "family_promotable_gate": 0.190147,
     "inversion_caveat": "the catalogue hide-and-recover instrument rewards mass next to mapped faults; live truth is off-catalogue, so a low HOLDOUT-DTI on off-catalogue mass is expected and the live/holdout ordering is inverted (knowledge/03 sec.4). Reported, not hidden.",
-    "evidence": "evidence/h73_holdout_prior.json"
+    "evidence": "evidence/h73b_holdout_prior.json"
   },
   "emission_economics": {
     "evidence_class": "INSTRUMENT",
@@ -219,7 +219,7 @@
     },
     "lane_increment_over_random_in_same_domain": 0.103652,
     "domain_increment_over_random_in_footprint": 0.458103,
-    "CIRCULARITY_WARNING": "the instrument truth (SGMC traces >300 m from the catalogue) and the production domain (within 500 m of those same traces) are the same structure, so every confined arm's credit per dot is self-referential and cannot be read as a live projection; the random-in-same-pool control (0.566749) and the pure-corridor control (0.842515) show the confined arm's apparent 4.6x edge over the champion belongs to the domain, not to the chi/k_sn ranking. Logged as IR-73-INSTR-CIRCULAR-01."
+    "CIRCULARITY_WARNING": "the instrument truth (SGMC traces >300 m from the catalogue) and the production domain (within 500 m of those same traces) are the same structure, so every confined arm's credit per dot is self-referential and cannot be read as a live projection; the random-in-same-pool control (0.566749) and the pure-corridor control (0.842515) show the confined arm's apparent 4.6x edge over the champion belongs to the domain, not to the chi/k_sn ranking. Logged as IR-73B-INSTR-CIRCULAR-01."
   },
   "registry_uniqueness": {
     "evidence_class": "REGISTRY-MEASUREMENT",
@@ -342,7 +342,7 @@
   "gates": {
     "P1_first_test": "PROCEED",
     "P2_leakage_canary": "PASS",
-    "P3_emission_economics": "PASS as preregistered, but VOID for live inference (IR-73-INSTR-CIRCULAR-01)",
+    "P3_emission_economics": "PASS as preregistered, but VOID for live inference (IR-73B-INSTR-CIRCULAR-01)",
     "P4_uniqueness": "PASS like-for-like (max 0.4235; max |Spearman| 0.1941); literal clause fires only on space-filling comparators that also fire on the champion",
     "P5_format": "PASS (15/15 local checks; 0 NaN; all cells in [0,1]; 0 dots on the catalogue)",
     "family_promotable_holdout_gate": "FAIL (0.064218 confined / 0.053231 pure vs 0.190147)"
@@ -362,11 +362,11 @@
     "deviation": "scripts/stop_guard.py printed and recorded, deliberately not used as a gate \u2014 same disclosed convention already accepted for scripts/build_h71_field.py"
   },
   "irregularities_logged": [
-    "IR-73-INSTR-CIRCULAR-01",
-    "IR-73-GATE-UNSAT-01",
-    "IR-73-MASSCAP-01",
-    "IR-73-STOP-LANECONFLICT-01",
-    "IR-73-MEDIAN-NEG-01"
+    "IR-73B-INSTR-CIRCULAR-01",
+    "IR-73B-GATE-UNSAT-01",
+    "IR-73B-MASSCAP-01",
+    "IR-73B-STOP-LANECONFLICT-01",
+    "IR-73B-MEDIAN-NEG-01"
   ],
   "reproduce": [
     "/home/user/.venv/bin/python scripts/run_h73.py --stage a   # field (16 s)",
@@ -375,7 +375,7 @@
     "H73_BUDGET_BASIS=prior /home/user/.venv/bin/python scripts/run_h73.py --stage d --mass 12000",
     "/home/user/.venv/bin/python scripts/run_h73.py --stage e --mass 12000   # uniqueness",
     "/home/user/.venv/bin/python scripts/run_h73.py --stage package --mass 12000",
-    "/home/user/.venv/bin/python scripts/h73_controls.py  # control decomposition",
-    "/home/user/.venv/bin/python scripts/h73_runcard.py"
+    "/home/user/.venv/bin/python scripts/h73b_controls.py  # control decomposition",
+    "/home/user/.venv/bin/python scripts/h73b_runcard.py"
   ]
 }

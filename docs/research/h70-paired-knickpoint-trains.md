@@ -38,7 +38,7 @@ The public top is now **0.4133** (xiaofanhu, verified snapshot 2026-10-11; the b
 
 | target DTI | required c = T/S at S = 37,654 | vs b2's 0.1022 |
 |---|---|---|
-| 0.3195 (DARD, rank 8) | 0.1176 | **+15 %** |
+| 0.3195 (DARD, rank 9 after same-day corrected re-read) | 0.1176 | **+15 %** |
 | 0.3774 | 0.1389 | +36 % |
 | **0.4133 (rank 1)** | **0.1522** | **+49 %** |
 

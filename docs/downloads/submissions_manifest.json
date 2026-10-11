@@ -1,13 +1,13 @@
 {
-  "generated_at_utc": "2026-10-11T19:58:18Z",
-  "generated_by": "scripts/h73_publish_site.py (H73 session)",
+  "generated_at_utc": "2026-10-11T19:58:19Z",
+  "generated_by": "scripts/h73b_publish_site.py (H73 session)",
   "validator_range_fix_verified": true,
   "portal_illegal": [],
   "primary": "gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros",
   "note": "H73 3DEP-10m chi/k_sn knickpoint steps, amplitude-coherent along strike, >=3 drainages, relief-stratified off-catalogue, 3px NMS, 12000px",
   "submissions": [
     {
-      "role": "PRIMARY \u2014 H73, unique this session, submit-cleared with disclosed bracket",
+      "role": "PRIMARY \u2014 H73B, unique this session, submit-cleared with disclosed bracket",
       "file": "gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif",
       "sha256": "7fcf455c549598be9002acdc2c0370f232e11616d1ea21cb84f96d8af82ab971",
       "bytes": 88968,
@@ -36,7 +36,7 @@
       "first_test": "PROCEED"
     },
     {
-      "role": "RESEARCH ONLY \u2014 H73-pure lane arm, DO NOT SUBMIT",
+      "role": "RESEARCH ONLY \u2014 H73B-pure lane arm, DO NOT SUBMIT",
       "file": "gems60-h73p-pure-lane-corridor-12000-20261011T195818Z-zeros.tif",
       "sha256": "5418f82f6ecee8c95e3ed6cb813faf17cb09de040db3e5e0368954fa2265b7a7",
       "bytes": 89546,
@@ -53,7 +53,7 @@
       "credit_per_unit_mass": 0.120438,
       "catalogue_proxy_DTI": 0.05323103973743135,
       "dots_on_catalogue": 0,
-      "note": "H73-pure lane field only, no off-catalogue structural prior",
+      "note": "H73B-pure lane field only, no off-catalogue structural prior",
       "ok_to_download": true,
       "ok_to_submit": false,
       "receipt": "gems60-h73p-pure-lane-corridor-12000-20261011T195818Z-zeros.json",
@@ -78,6 +78,20 @@
       "catalogue_proxy_DTI": 0.1617719780036745,
       "dots_on_catalogue": 0,
       "receipt": null
+    },
+    {
+      "role": "RESEARCH ONLY \u2014 H73 paired-basin (sibling session), DO NOT SUBMIT",
+      "file": "gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif",
+      "sha256": "594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3",
+      "bytes": 95592,
+      "emitted_px": 20000,
+      "note": "H73 paired-basin ksn, 20k weighted cells; holdout negative; unique bytes/pixels; DO NOT SUBMIT",
+      "portal_legal": true,
+      "ok_to_download": true,
+      "ok_to_submit": false,
+      "round_verdict": "negative",
+      "sibling_run_card": "gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros-runcard.json",
+      "verdict_source": "read from main's H73 receipt and evidence/h73_runcard.json by this script"
     },
     {
       "role": "AVAILABLE",
@@ -799,5 +813,6 @@
       "dots_on_catalogue": 0,
       "receipt": null
     }
-  ]
+  ],
+  "artifact_stamp_utc": "2026-10-11T19:58:18Z"
 }

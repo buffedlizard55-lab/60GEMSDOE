@@ -4,6 +4,20 @@ Durable notes for the next sessions (2026-10-11, H73). Facts are labelled MEASUR
 OFFICIAL (competition/publisher source), MODEL (algebra on published quantities) or OWNER-REPORT
 (the group's own ledger, unverified). Read this before proposing any new emission or any new lane test.
 
+## 0. Round-id collision, and the rule it teaches (IR-73B-ID-COLLISION-01)
+
+Two sessions cut from the same commit both called their round **H73** for different hypotheses: ours
+(amplitude-coherent \u03c7/k_sn corridors, PROCEED at first test, emitted a 12,000-dot raster) and the one that
+merged first (paired-basin k_sn contrast, `GEMS60-H73-1`, negative, 20,000-dot research raster). They collided on
+`registry/preregistration-h73.json`, `scripts/run_h73.py` and `evidence/h73_{runcard,e1_first_test,holdout}.json`.
+**Rule: before claiming a round id, list `registry/preregistration-*.json`.** Resolution: main's round keeps id H73
+and its paths; ours is published as **H73B** with `h73b_*` evidence paths and `IR-73B-*` irregularities, while the
+delivered raster keeps its own validated submission name
+`60GEMSDOE-H73-CHI-COHERENT-CORRIDOR-12000` (sha256 `7fcf455c\u2026`) because its bytes, note and receipt were
+validated under that name. Both artifacts are listed in `docs/downloads/submissions_manifest.json` with separate
+verdicts, and both are linked from the site with different labels (H73B = OK to submit as a disclosed bet;
+H73 paired-basin = research only, DO NOT SUBMIT).
+
 ## 1. The scoring function, in the only form that matters for decisions
 
 OFFICIAL: `DTI = TPw / (TPw + 0.2·FPw + 0.8·FNw + ε)`, `k(d) = max(1 − d/300 m, 0)`, α = 0.2 false-positive weight,
@@ -31,7 +45,7 @@ Four operational consequences, all confirmed again today:
 `h33-h33-2-b2` (37,654 dots, owner-report 0.2778) is the parent dotted-ridge field minus 6,436 dots that sat
 100–200 m off mapped faults, its dots are ≥223.6 m from the catalogue, only 5.8 % of them within 300 m of it, and
 its credit per dot on the off-catalogue instrument is **0.145568** (re-measured today in
-`evidence/h73_emission.json`, identical to `evidence/h71_artifact_comparison.json` → the instrument is stable).
+`evidence/h73b_emission.json`, identical to `evidence/h71_artifact_comparison.json` → the instrument is stable).
 Nothing new was learned about geology in the last three promotion steps. **Consequence: to beat it you need either a
 field with >0.1456 credit/dot at similar mass, or the same credit at a third of the mass.**
 
@@ -56,7 +70,7 @@ value over "be near a mapped-but-uncatalogued structure" is +0.104 of 0.67 credi
 
 ## 4. The circularity trap — the single most transferable finding in this file
 
-MEASURED (`evidence/h73_controls.json`). The population-matched off-catalogue instrument uses as truth: *SGMC
+MEASURED (`evidence/h73b_controls.json`). The population-matched off-catalogue instrument uses as truth: *SGMC
 state-map fault pixels more than 300 m from the given catalogue* (62,226 px). If a candidate's **domain mask** is
 built from those same traces, the instrument grades the candidate on its own home ground:
 
@@ -71,7 +85,7 @@ built from those same traces, the instrument grades the candidate on its own hom
 Any of these can be made to "beat the champion" by confining mass to the truth set. **Rule for the next sessions: an
 instrument may not use a structure that also appears in the candidate's domain definition. Either (a) score against
 a disjoint split (different map sheet, different catalogue vintage, held-out quadrants of the trace set), or (b)
-report the confined arm as ungradeable.** Logged as IR-73-INSTR-CIRCULAR-01; the same trap is why
+report the confined arm as ungradeable.** Logged as IR-73B-INSTR-CIRCULAR-01; the same trap is why
 `catalogue-truth` instruments are anti-predictive of the live board (E1 instrument audit: emitted mass ρ = +0.94,
 catalogue-full ρ = −0.90).
 
@@ -82,7 +96,7 @@ this footprint. Three space-filling comparators cover 99.9–100 % of any dot se
 0.99915 / 0.88883 / 0.771897 against them, H73 measures 0.999083 / 0.86175 / 0.778417 (lower on two of three),
 and the like-for-like reading against the 75 dot-field rasters is 0.4235 max (0.3493 vs the closest sibling).
 **Use both readings, always, and never waive a gate by asserting intent** — publish the universality measurement
-instead (`evidence/h73_dense_comparator_universality.json`, `scripts/h73_*`).
+instead (`evidence/h73b_dense_comparator_universality.json`, `scripts/h73b_*`).
 
 ## 6. Data inventory that actually exists in this checkout (offline-usable, public domain / open)
 
@@ -111,9 +125,9 @@ an unrestricted machine (or the pinned `dem10-chi` GitHub Actions workflow, whic
    submission bet is 0.10 or 0.30.
 2. **H74 (LOW cost, new geology)**: Radon linearity of the 27,092 GDR spring/well points, ≥5 sources, ≥2 km,
    ≥300 m off catalogue — permeability structure, an independent evidence type that never needs a scarp.
-3. **Widen the corridor** 500 m → 1 km to lift the 12,204-dot NMS cap (IR-73-MASSCAP-01), and pre-register the mass
+3. **Widen the corridor** 500 m → 1 km to lift the 12,204-dot NMS cap (IR-73B-MASSCAP-01), and pre-register the mass
    ladder *after* the cap is known, since the metric rewards mass while credit/dot > 0.2·DTI.
-4. Sign-test / quantile variant of the first test: H73 passed on the mean with a negative median (IR-73-MEDIAN-NEG-01);
+4. Sign-test / quantile variant of the first test: H73 passed on the mean with a negative median (IR-73B-MEDIAN-NEG-01);
    a robustness gate makes the next "PROCEED" worth more.
 5. Keep the discipline: never quote a local instrument as a score; the only organizer-confirmed numbers in this
    project's record are public leaderboard rows (0.4133 / 0.3418 / 0.3361 at the top on 2026-10-11, manual read).

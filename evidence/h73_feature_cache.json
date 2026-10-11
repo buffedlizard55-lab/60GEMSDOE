@@ -1,0 +1,112 @@
+{
+  "evidence_class": "DATA-MEASUREMENT",
+  "hypothesis": "H73-1",
+  "generated_utc": "2026-10-11T19:42:30Z",
+  "preregistration": "registry/preregistration-h73.json",
+  "source_pins": {
+    "manifest": "data/external/dem10_chi_100m.manifest.json",
+    "files": {
+      "dem10_chi_100m_i16.tif": "8897ba9c30ef1cd7ad5f23c16c6dfd7bb070e7e757f36fd9486eb45edfd973a5",
+      "dem10_chi_100m_sig_i32.tif": "0ba7816bc082b8a71ebcb26596b5e330abb63231be94abad4e447eb316ffb95c",
+      "dem10_chi_100m_u8.tif": "e8830ba6f0bb99f525266b1b3a483b0722d25cd4758c2bbccc6e7f54eb6b1b6a"
+    },
+    "tiles": 18,
+    "blocks_ok": 25,
+    "blocks_total": 36
+  },
+  "diagnostics": {
+    "footprint_px": 5167373,
+    "catalogue_px": 60988,
+    "channel_all_px": 786299,
+    "bedrock_unmasked_channel_px": 415354,
+    "ephemeral_px": 186546,
+    "playa_px": 550267,
+    "radiometric_contact_px": 1590106,
+    "excluded_px": 2166875,
+    "candidate_z_ge_0p5_px": 99970,
+    "lattice_holes_in_footprint": 6649,
+    "lattice_holes_off_catalogue": 6514,
+    "stat_p50": -0.13079002499580383,
+    "stat_p95": 1.5308852195739746,
+    "basin_contrast_p95": 0.036291420459747314,
+    "distinct_branches": 280519,
+    "seconds": 7.52
+  },
+  "files": [
+    {
+      "name": "stat",
+      "dtype": "float32",
+      "sha256": "fc58d1936a47eb2d7b1a70d68ff65765d9db79b2b331a9a6e681cd73ebad0545"
+    },
+    {
+      "name": "raw_geo",
+      "dtype": "float32",
+      "sha256": "3e9612902193a6d1c903be84d34b8f30c87505c37dc81361a42f373ed10d08ec"
+    },
+    {
+      "name": "channel",
+      "dtype": "bool",
+      "sha256": "296b5385e8cf9d30c33a41a00d3fc2e74306e1544a473b9182d0a3d2df3e84b9"
+    },
+    {
+      "name": "branch",
+      "dtype": "int64",
+      "sha256": "d365c2748572b0dac905eba1de639fcd4f75576fd3c1bbf2746be04d521e5be9"
+    },
+    {
+      "name": "exclude",
+      "dtype": "bool",
+      "sha256": "62417873ab26f40ad3b07fa664ac84ae6749da80802d35fac5399503b4d32696"
+    },
+    {
+      "name": "ksn",
+      "dtype": "float32",
+      "sha256": "8a9d88bc332cfae33eb42e5ca932d77113f766296e8f0a247822a6716e7a1e03"
+    },
+    {
+      "name": "dksn",
+      "dtype": "float32",
+      "sha256": "9f706055e531e5a3fe1738cdeed4a4f4cb1e2ad33f676a6736d94f65f364e526"
+    },
+    {
+      "name": "basin_contrast",
+      "dtype": "float32",
+      "sha256": "7cc46009ab11f0211c5ec3b2db6755d966ec2bf5dbc9682b3cc790782afbeebd"
+    },
+    {
+      "name": "footprint",
+      "dtype": "bool",
+      "sha256": "c446094771775c00802862e9ec58846fd1b278b4e608303e68811a2404dfd246"
+    },
+    {
+      "name": "catalogue",
+      "dtype": "bool",
+      "sha256": "d77fa88ad58d0a268b736b3c1d6a8939fd237d5955369944bd2b299194b2555d"
+    },
+    {
+      "name": "lattice_holes",
+      "dtype": "bool",
+      "sha256": "9e61c91c5ee665395fdb9954a05ac90724577c56e59fad123da56bc02b3d842a"
+    },
+    {
+      "name": "support",
+      "dtype": "float32",
+      "sha256": "7c65ad3e92885aedd4badc3e9c77efe1b585f5bfb6c2714ca8deecafa78e0e20"
+    },
+    {
+      "name": "loga",
+      "dtype": "float32",
+      "sha256": "a25e2e373023f2a11f59fc1d0d6eea2af686f8b46354631529006867485e9078"
+    },
+    {
+      "name": "zmean",
+      "dtype": "float32",
+      "sha256": "f57a226c91ce8c538b1799f891f85adcfd9d161e35f50449204df6c7854f6550"
+    },
+    {
+      "name": "valid_n",
+      "dtype": "int16",
+      "sha256": "331eff723564a99e62321824b14f13ab9cb116ec944f7e489b238dfe424b16bb"
+    }
+  ]
+}

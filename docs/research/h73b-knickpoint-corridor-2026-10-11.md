@@ -1,4 +1,4 @@
-# H73 — amplitude-coherent χ/k_sn corridor knickpoints, and the instrument that flattered them
+# H73B (developed as "H73") — amplitude-coherent χ/k_sn corridor knickpoints, and the instrument that flattered them
 
 Session `arena/7f9ca816-60gemsdoe`, 2026-10-11. Lane: tectonic geomorphology (channel steepness, knickpoints,
 χ transform) — *not* scarp curvature. Every number below is copied from an evidence file named in the last column;
@@ -14,7 +14,7 @@ conditional), **INSTRUMENT** (public proxy truth, never a score), **MODEL** (ari
 **+0.203394**, 95 % CI **[+0.078017, +0.335036]**, n = 196 components, 10 same-orientation random transects per
 component, 3 px crossing zone, 40 km blockwise de-trend, and the brief's confound masks (playa, clay/alluvial
 radiometric cover, ephemeral wash k_sn < 10) applied to *both* arms (the IR-66-E1MASK-01 fix is inherited).
-MEASUREMENT — `evidence/h73_e1_first_test.json`.
+MEASUREMENT — `evidence/h73b_e1_first_test.json`.
 
 Two published caveats, not buried: the **median** contrast is −0.044143 and only **47.96 %** of components are
 positive, so the effect is a right-skewed minority of strong corridors, not a uniform shift; and this is the
@@ -52,10 +52,10 @@ et al. (2019, ESurf 7:211–230).
 
 Production domain (preregistered): footprint ∧ corridor-score > 0 ∧ >200 m from the mapped catalogue ∧ within 500 m
 of an SGMC state-map trace that the Quaternary catalogue omits → 51,552 px, of which the 3.0 px NMS order holds
-**12,204** dots (IR-73-MASSCAP-01: the 20k/30k/40k ladder arms could not be emitted).
+**12,204** dots (IR-73B-MASSCAP-01: the 20k/30k/40k ladder arms could not be emitted).
 Ranking key = **within-relief-quintile percentile** of the corridor score, which makes emitted mass proportional to
 footprint area in each relief stratum — the instrument repair the registry ranked #1 and no earlier session
-implemented. Realized stratum shares vs footprint shares: `evidence/h73_emission.json → relief_share_by_stratum`.
+implemented. Realized stratum shares vs footprint shares: `evidence/h73b_emission.json → relief_share_by_stratum`.
 
 Selected arm by the preregistered economics rule (largest mass whose credit per dot ≥ the champion's measured
 0.145568 on the same instrument): **lane_h73_12000**, credit/dot **0.670401**, proxy DTI 0.151384.
@@ -63,7 +63,7 @@ Selected arm by the preregistered economics rule (largest mass whose credit per 
 ## 4. The finding that matters most: the flattering instrument is circular
 
 INSTRUMENT — 12,000-dot arms scored against SGMC traces > 300 m off the catalogue (62,226 px)
-(`evidence/h73_controls.json`, `scripts/h73_controls.py`):
+(`evidence/h73b_controls.json`, `scripts/h73b_controls.py`):
 
 | arm | credit per dot | what it isolates |
 |---|---|---|
@@ -76,14 +76,14 @@ INSTRUMENT — 12,000-dot arms scored against SGMC traces > 300 m off the catalo
 The instrument's truth set *is* the structure the domain mask was built from. So the confined arm's 4.6× edge over
 the champion is arithmetic, not skill: the χ/k_sn ranking contributes **+0.103652** credit/dot over chance in the
 same corridor, and pure corridor scatter beats the whole lane recipe. Stripped of the circular prior, the lane field
-alone measures **0.120438** credit/dot (`evidence/h73_purelane_package.json`) — i.e. **below the champion**, exactly
-as the eight earlier negative lane runs said. Logged as **IR-73-INSTR-CIRCULAR-01**.
+alone measures **0.120438** credit/dot (`evidence/h73b_purelane_package.json`) — i.e. **below the champion**, exactly
+as the eight earlier negative lane runs said. Logged as **IR-73B-INSTR-CIRCULAR-01**.
 
 ## 5. The mandated instrument, reported as required
 
 HOLDOUT-DTI, evaluator `gems57-pooled-hide-v2`, 8 cells, 22,641 withheld positives, α 0.2, β 0.8, 300 m triangular
 kernel, 1,000 paired 20 km spatial-block bootstrap draws (seed 73001), mass basis identical to the recorded lane
-table (`evidence/h73_holdout_prior.json`):
+table (`evidence/h73b_holdout_prior.json`):
 
 | arm | HOLDOUT-DTI | 95 % CI |
 |---|---|---|
@@ -99,23 +99,23 @@ coherence* filters do something on the catalogue population. The `distance_only`
 H68-1's published 0.190730 to the last digit — the shared instrument is intact.
 
 At production mass (12,000 total rather than the prior 40k basis): 0.013331 confined, 0.004697 pure, 0.002995
-random (`evidence/h73_holdout.json`).
+random (`evidence/h73b_holdout.json`).
 
 Leakage canaries, each feature alone (same file): corridor 0.6077, Δk_sn 0.6210, k_sn 0.6416, relief 0.5973,
 SGMC-off mask 0.7387 — all < 0.90; the deliberate positive control `dist_to_visible` 0.9243 is not an input.
 
 ## 6. Uniqueness, and a gate that cannot be passed
 
-REGISTRY-MEASUREMENT, 78 locally available rasters scanned (`evidence/h73_uniqueness.json`):
+REGISTRY-MEASUREMENT, 78 locally available rasters scanned (`evidence/h73b_uniqueness.json`):
 max |Spearman| against my *surface* 0.19409 (gate 0.90) → pass. Like-for-like dot overlap: max
 0.349333 vs `h71b-convcomp-12000`, 0.331583 vs H68-1, 0.27725 vs H66-1, 0.153167 vs the c7653 lane file,
 0.0515 vs H65-1 (gate 0.70) → pass: this file is not another lane's file.
 
 The literal reading also names three comparators above 0.70 (0.999083, 0.86175, 0.778417). Those three are
 space-filling lattice/calibration rasters, and the *live-scored champion* measures 0.99915, 0.88883, 0.771897
-against them (`evidence/h73_dense_comparator_universality.json`) — as do H65-1 and H68-1. The clause is a property
+against them (`evidence/h73b_dense_comparator_universality.json`) — as do H65-1 and H68-1. The clause is a property
 of that registry, not of this candidate: no non-empty dot file in this footprint can satisfy it
-(IR-73-GATE-UNSAT-01). Both readings are published; no exception is claimed.
+(IR-73B-GATE-UNSAT-01). Both readings are published; no exception is claimed.
 
 ## 7. Verdict and the operator's decision
 
@@ -167,3 +167,15 @@ named with their data sources and are *not* proposed as viable until fetchabilit
 * Willett et al. 2014, *Science* 343:1126 (divide migration): <https://doi.org/10.1126/science.1248765>
 * Forte & Whipple 2018, *EPSL* 493:102–117: <https://doi.org/10.1016/j.epsl.2018.04.026>
 * CRS EPSG:32611: <https://epsg.io/32611> · Tversky index background: <https://en.wikipedia.org/wiki/Tversky_index>
+
+
+## 9. Governance note
+
+This round was developed as "H73" on `arena/7f9ca816-60gemsdoe`. While it was in flight, main merged a different,
+independently preregistered H73 (paired-basin k_sn contrast, `GEMS60-H73-1`, verdict negative, 20,000-dot research
+raster `gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif`). Nothing from that round was overwritten:
+the merge kept main's `registry/preregistration-h73.json`, `scripts/run_h73.py` and `evidence/h73_{runcard,
+e1_first_test,holdout}.json`, and this round's registry/evidence paths were renamed to `h73b_*` and re-derived by
+`scripts/h73b_publish_site.py` / `scripts/h73b_publish_feed.py`. The delivered file keeps its validated submission
+name `60GEMSDOE-H73-CHI-COHERENT-CORRIDOR-12000`. Logged as IR-73B-ID-COLLISION-01 with the rule: list
+`registry/preregistration-*.json` before claiming a round id.

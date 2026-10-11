@@ -1,0 +1,244 @@
+{
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator_version": "gems57-pooled-hide-v2",
+  "implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "run": "h73",
+  "cells": 8,
+  "density": 0.007833330232640117,
+  "budget_basis": "prior",
+  "budgets": {
+    "draw20_foldNW_all": {
+      "domain": 1056771,
+      "allowed": 106658,
+      "budget": 8278,
+      "pool_sgmc": 9080
+    },
+    "draw20_foldNE_all": {
+      "domain": 1311431,
+      "allowed": 152354,
+      "budget": 10273,
+      "pool_sgmc": 18893
+    },
+    "draw20_foldSW_all": {
+      "domain": 1266077,
+      "allowed": 102700,
+      "budget": 9918,
+      "pool_sgmc": 8887
+    },
+    "draw20_foldSE_all": {
+      "domain": 1019812,
+      "allowed": 107788,
+      "budget": 7989,
+      "pool_sgmc": 13886
+    },
+    "draw21_foldNW_all": {
+      "domain": 1056817,
+      "allowed": 106666,
+      "budget": 8278,
+      "pool_sgmc": 9174
+    },
+    "draw21_foldNE_all": {
+      "domain": 1311298,
+      "allowed": 152365,
+      "budget": 10272,
+      "pool_sgmc": 18920
+    },
+    "draw21_foldSW_all": {
+      "domain": 1266033,
+      "allowed": 102671,
+      "budget": 9917,
+      "pool_sgmc": 8758
+    },
+    "draw21_foldSE_all": {
+      "domain": 1019585,
+      "allowed": 107847,
+      "budget": 7987,
+      "pool_sgmc": 13898
+    }
+  },
+  "pooled": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "alpha": 0.2,
+    "beta": 0.8,
+    "triangular_radius_m": 300.0,
+    "pooled": true,
+    "scores": {
+      "lane_h73": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.05323103973743135,
+        "ci95": [
+          0.0471855945733823,
+          0.05963677543992816
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 1750.3854091467367,
+        "fpw": 72099.59351938138,
+        "fnw": 20890.61459085327
+      },
+      "lane_h73_sgmcconfined": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.06421756357585215,
+        "ci95": [
+          0.05415590069081691,
+          0.0744763891193215
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 1491.5086239889756,
+        "fpw": 24073.828969708702,
+        "fnw": 21149.491376011025
+      },
+      "ksn_only": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.019806070453293582,
+        "ci95": [
+          0.01619717978340913,
+          0.023738436032424617
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 647.140640929347,
+        "fpw": 72158.12598250959,
+        "fnw": 21993.85935907065
+      },
+      "distance_only": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.19073008022090832,
+        "ci95": [
+          0.18128011443405945,
+          0.19979509068093082
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 6279.773358005621,
+        "fpw": 67780.84565154527,
+        "fnw": 16361.226641994373
+      },
+      "random_mass_control": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.038589989307354584,
+        "ci95": [
+          0.03521501277726743,
+          0.041649833786870503
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 1267.3169087225376,
+        "fpw": 72371.4895016188,
+        "fnw": 21373.68309127747
+      }
+    },
+    "best_comparable_control": "distance_only",
+    "paired_differences": {
+      "lane_h73_sgmcconfined": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": -0.010986523838420796,
+        "ci95": [
+          -0.01999181237268581,
+          -0.0011690443095462072
+        ],
+        "withheld_positive_pixels": 22641
+      },
+      "ksn_only": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.03342496928413777,
+        "ci95": [
+          0.028161379727590446,
+          0.038673984487561416
+        ],
+        "withheld_positive_pixels": 22641
+      },
+      "distance_only": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": -0.13749904048347697,
+        "ci95": [
+          -0.14801268878352844,
+          -0.12633900170985993
+        ],
+        "withheld_positive_pixels": 22641
+      },
+      "random_mass_control": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.014641050430076769,
+        "ci95": [
+          0.008829581934208639,
+          0.0207741282085955
+        ],
+        "withheld_positive_pixels": 22641
+      }
+    },
+    "bootstrap": {
+      "method": "paired physical spatial-cluster percentile",
+      "clusters": 159,
+      "draws": 1000,
+      "seed": 73001,
+      "confidence": 0.95,
+      "caveat": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval."
+    },
+    "implementation_sha256": {
+      "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+      "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+      "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+      "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+    }
+  },
+  "canary": [
+    {
+      "feature": "corr",
+      "max_abs_auc": 0.6076940544454597,
+      "auc": 0.6076940544454597,
+      "leakage_flag": false
+    },
+    {
+      "feature": "dksn",
+      "max_abs_auc": 0.6210175880498595,
+      "auc": 0.6210175880498595,
+      "leakage_flag": false
+    },
+    {
+      "feature": "ksn",
+      "max_abs_auc": 0.6415785912148847,
+      "auc": 0.6415785912148847,
+      "leakage_flag": false
+    },
+    {
+      "feature": "relief",
+      "max_abs_auc": 0.5972718856223306,
+      "auc": 0.5972718856223306,
+      "leakage_flag": false
+    },
+    {
+      "feature": "sgmc_off_mask",
+      "max_abs_auc": 0.7386678066976883,
+      "auc": 0.7386678066976883,
+      "leakage_flag": false
+    },
+    {
+      "feature": "dist_to_visible_CONTROL",
+      "max_abs_auc": 0.9243383423012624,
+      "auc": 0.9243383423012624,
+      "leakage_flag": true
+    }
+  ],
+  "canary_rule": "max(AUC,1-AUC) > 0.90 is leakage until proven otherwise",
+  "prior_lane_numbers": {
+    "H65_1": 0.011576,
+    "H66_1": 0.065739,
+    "H68_1": 0.171894,
+    "distance_only_H68": 0.19073,
+    "champion_h33_2_b2": 0.0043848,
+    "best_promotable_gate": 0.190147
+  },
+  "inversion_note": "the catalogue hide-and-recover instrument rewards mass next to mapped faults; live truth is off-catalogue, so a low HOLDOUT-DTI on off-catalogue mass is expected and the live/holdout ordering is inverted (knowledge/03 sec.4). Reported, not hidden."
+}

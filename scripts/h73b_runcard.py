@@ -2,7 +2,7 @@
 """H73 run card: assembled programmatically from the evidence files (no hand-typed numbers).
 
 Every value below is copied out of an evidence JSON by this script; if a file is missing the script
-fails rather than inventing a number.  Run:  /home/user/.venv/bin/python scripts/h73_runcard.py
+fails rather than inventing a number.  Run:  /home/user/.venv/bin/python scripts/h73b_runcard.py
 """
 from __future__ import annotations
 import json, sys, time
@@ -19,17 +19,17 @@ def j(name):
 
 
 def main() -> int:
-    field = j("h73_field.json")
-    e1 = j("h73_e1_first_test.json")
-    emi = j("h73_emission.json")
-    hold = j("h73_holdout_prior.json")
-    uniq = j("h73_uniqueness.json")
-    ctrl = j("h73_controls.json")
-    pkg = j("h73_package.json")
-    pure = j("h73_purelane_package.json")
-    univ = j("h73_dense_comparator_universality.json")
-    guard = [ln for ln in (E / "h73_log.txt").read_text().splitlines() if "stop_guard" in ln]
-    pre = json.loads((ROOT / "registry" / "preregistration-h73.json").read_text())
+    field = j("h73b_field.json")
+    e1 = j("h73b_e1_first_test.json")
+    emi = j("h73b_emission.json")
+    hold = j("h73b_holdout_prior.json")
+    uniq = j("h73b_uniqueness.json")
+    ctrl = j("h73b_controls.json")
+    pkg = j("h73b_package.json")
+    pure = j("h73b_purelane_package.json")
+    univ = j("h73b_dense_comparator_universality.json")
+    guard = [ln for ln in (E / "h73b_log.txt").read_text().splitlines() if "stop_guard" in ln]
+    pre = json.loads((ROOT / "registry" / "preregistration-h73b.json").read_text())
     S = hold["pooled"]["scores"]
     sc = emi["arms"]
 
@@ -68,7 +68,7 @@ def main() -> int:
             "skew_warning": "mean is positive with CI above zero, but the median is negative and fewer than "
                             "half of components are positive: the contrast is carried by a minority of "
                             "strong corridors. Reported, not smoothed over.",
-            "evidence": "evidence/h73_e1_first_test.json",
+            "evidence": "evidence/h73b_e1_first_test.json",
         },
         "leakage_canary": {
             "rule": "max(AUC,1-AUC) > 0.90 is leakage until proven otherwise",
@@ -88,7 +88,7 @@ def main() -> int:
                                    for k, v in hold["pooled"]["paired_differences"].items()},
             "family_promotable_gate": 0.190147,
             "inversion_caveat": hold["inversion_note"],
-            "evidence": "evidence/h73_holdout_prior.json",
+            "evidence": "evidence/h73b_holdout_prior.json",
         },
         "emission_economics": {
             "evidence_class": "INSTRUMENT", "instrument": emi["instrument"],
@@ -113,7 +113,7 @@ def main() -> int:
                                    "cannot be read as a live projection; the random-in-same-pool control "
                                    "(0.566749) and the pure-corridor control (0.842515) show the confined "
                                    "arm's apparent 4.6x edge over the champion belongs to the domain, not to "
-                                   "the chi/k_sn ranking. Logged as IR-73-INSTR-CIRCULAR-01.",
+                                   "the chi/k_sn ranking. Logged as IR-73B-INSTR-CIRCULAR-01.",
         },
         "registry_uniqueness": {
             "evidence_class": "REGISTRY-MEASUREMENT",
@@ -172,7 +172,7 @@ def main() -> int:
         },
         "gates": {
             "P1_first_test": "PROCEED", "P2_leakage_canary": "PASS",
-            "P3_emission_economics": "PASS as preregistered, but VOID for live inference (IR-73-INSTR-CIRCULAR-01)",
+            "P3_emission_economics": "PASS as preregistered, but VOID for live inference (IR-73B-INSTR-CIRCULAR-01)",
             "P4_uniqueness": "PASS like-for-like (max 0.4235; max |Spearman| 0.1941); literal clause fires "
                              "only on space-filling comparators that also fire on the champion",
             "P5_format": "PASS (15/15 local checks; 0 NaN; all cells in [0,1]; 0 dots on the catalogue)",
@@ -193,21 +193,21 @@ def main() -> int:
                        "deviation": "scripts/stop_guard.py printed and recorded, deliberately not used as a "
                                     "gate — same disclosed convention already accepted for "
                                     "scripts/build_h71_field.py"},
-        "irregularities_logged": ["IR-73-INSTR-CIRCULAR-01", "IR-73-GATE-UNSAT-01", "IR-73-MASSCAP-01",
-                                  "IR-73-STOP-LANECONFLICT-01", "IR-73-MEDIAN-NEG-01"],
+        "irregularities_logged": ["IR-73B-INSTR-CIRCULAR-01", "IR-73B-GATE-UNSAT-01", "IR-73B-MASSCAP-01",
+                                  "IR-73B-STOP-LANECONFLICT-01", "IR-73B-MEDIAN-NEG-01"],
         "reproduce": ["/home/user/.venv/bin/python scripts/run_h73.py --stage a   # field (16 s)",
                       "/home/user/.venv/bin/python scripts/run_h73.py --stage b   # E1 first test (12 s)",
                       "/home/user/.venv/bin/python scripts/run_h73.py --stage c   # ladder + economics (10 s)",
                       "H73_BUDGET_BASIS=prior /home/user/.venv/bin/python scripts/run_h73.py --stage d --mass 12000",
                       "/home/user/.venv/bin/python scripts/run_h73.py --stage e --mass 12000   # uniqueness",
                       "/home/user/.venv/bin/python scripts/run_h73.py --stage package --mass 12000",
-                      "/home/user/.venv/bin/python scripts/h73_controls.py  # control decomposition",
-                      "/home/user/.venv/bin/python scripts/h73_runcard.py"],
+                      "/home/user/.venv/bin/python scripts/h73b_controls.py  # control decomposition",
+                      "/home/user/.venv/bin/python scripts/h73b_runcard.py"],
     }
-    (E / "h73_runcard.json").write_text(json.dumps(card, indent=2, allow_nan=False) + "\n")
+    (E / "h73b_runcard.json").write_text(json.dumps(card, indent=2, allow_nan=False) + "\n")
     Dl = D / (pkg["file"].replace("-zeros.tif", "-zeros-runcard.json"))
     Dl.write_text(json.dumps(card, indent=2, allow_nan=False) + "\n")
-    print("wrote", E / "h73_runcard.json", "and", Dl)
+    print("wrote", E / "h73b_runcard.json", "and", Dl)
     return 0
 
 

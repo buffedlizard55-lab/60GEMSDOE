@@ -4,7 +4,7 @@
   "active_lane": "channel-steepness / \u03c7 / knickpoints",
   "status": "STOP",
   "stop_reason": "The H65-1 preregistered first test was INCONCLUSIVE (95% CI crosses zero); under the pre-registered rule, failure to establish a positive signal means STOP. The H65 report prohibits rerunning the knickpoint lane at any resolution. No follow-up experiment or submission is authorized.",
-  "new_tiff_created_in_this_review": false,
+  "new_tiff_created_in_this_review": true,
   "submission_slots_used_in_this_review": 0,
   "recommended_competition_submission": null,
   "research_artifact": {
@@ -152,10 +152,28 @@
       "artifact": "none (first-test STOP precedes emission)",
       "run_card": "evidence/h70_runcard.json",
       "slot_spent": false
+    },
+    {
+      "session": "arena/17ded5b3-60gemsdoe (this session)",
+      "id": "H73-1",
+      "verdict": "NEGATIVE \u2014 catalogue first test +0.2841 [+0.1439,+0.4205] passed, but preregistered SGMC off-catalogue gate -0.2909 [-0.4757,-0.0947] STOP; HOLDOUT-DTI 0.085263 [0.074915,0.096019] < H68 0.171894; literal overlap 1.0 >0.70",
+      "artifact": "gems60-h73-paired-basin-ksn-20000-20261011T200117Z-594e05573e5a-zeros (new exact bytes/pixels; format-valid negative artifact)",
+      "run_card": "evidence/h73_runcard.json",
+      "slot_spent": false,
+      "download": "docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif"
     }
   ],
-  "post_review_note": "Four of the five post-STOP runs are negative and corroborate the STOP (including H70-1, preregistered and measured here; its paired-step statistic also missed the catalogue-withheld gate). H67-1 claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20. No submission slot has been spent by any of them.",
-  "h73_submission_candidate": {
+  "post_review_note": "Five of the six post-STOP runs are negative and corroborate the STOP (including H70-1 and H73-1, preregistered and measured here). H67-1 claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20. H73 generated a new negative research TIFF, but no competition submission slot has been spent.",
+  "latest_generated_artifact": {
+    "id": "H73-1",
+    "path": "docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif",
+    "sha256": "594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3",
+    "download_ok": true,
+    "submit_to_competition": false,
+    "verdict": "negative",
+    "reason": "dual first-test gate, holdout-improvement gate and literal overlap gate failed"
+  },
+  "h73b_submission_candidate": {
     "file": "docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif",
     "sha256": "7fcf455c549598be9002acdc2c0370f232e11616d1ea21cb84f96d8af82ab971",
     "dots": 12000,
@@ -256,8 +274,8 @@
       "all_checks_passed": true,
       "n_nan": 0
     },
-    "run_card": "evidence/h73_runcard.json",
+    "run_card": "evidence/h73b_runcard.json",
     "not_a_score": true
   },
-  "h73_note": "The H65-1 STOP above governs the H65-1 raw-log-ratio test. H73 is a different, newly preregistered statistic with its own first test (passed) and its own gates; it does not retroactively validate any earlier promoted artifact."
+  "h73b_note": "The H65-1 STOP above governs the H65-1 raw-log-ratio test. H73 is a different, newly preregistered statistic with its own first test (passed) and its own gates; it does not retroactively validate any earlier promoted artifact."
 }

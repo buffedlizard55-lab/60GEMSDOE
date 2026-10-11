@@ -27,9 +27,9 @@ for k,m in arms.items():
     r=INST.global_dti(m.astype(np.float32),truth,fp,cat); r['dots']=int(m.sum()); out[k]=r
     print(k, 'credit/dot', r['credit_per_px'], 'proxyDTI', r['dti'], 'on_catalogue_dots', int((m&cat).sum()))
 json.dump(dict(evidence_class='INSTRUMENT', run='h73-controls', n_truth=int(truth.sum()), mass=N,
-  arms=out, champion_reference=json.load(open(ROOT/'evidence/h73_emission.json'))['champion'],
+  arms=out, champion_reference=json.load(open(ROOT/'evidence/h73b_emission.json'))['champion'],
   decomposition=dict(lane_increment=out['lane_ranked_12000']['credit_per_px']-out['random_within_pool']['credit_per_px'],
                      domain_increment=out['random_within_pool']['credit_per_px']-out['random_within_footprint']['credit_per_px']),
   meaning='lane_increment = value of the chi/k_sn amplitude-coherent ranking over chance WITHIN the same '
           'off-catalogue domain; domain_increment = value of the domain itself. Both are reported; only the '
-          'sum is compared with the champion.'), open(ROOT/'evidence/h73_controls.json','w'), indent=2)
+          'sum is compared with the champion.'), open(ROOT/'evidence/h73b_controls.json','w'), indent=2)
