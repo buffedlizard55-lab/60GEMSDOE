@@ -38,6 +38,9 @@ OUT = ROOT / "evidence" / "e62b_substrate.json"
 
 
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "E62b substrate diagnostic"):
+        return 0
     t0 = time.time()
     valid, cat = dataio.load_footprint_and_labels()
     dems = {

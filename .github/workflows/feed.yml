@@ -1,5 +1,5 @@
 name: feed
-# Keeps docs/data/feed.json and the leaderboard history current without anyone checking by hand.
+# Refreshes non-competition source health automatically; DrivenData leaderboard snapshots remain manual.
 on:
   schedule: [{cron: '23 5 * * *'}]
   workflow_dispatch:
@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: '3.11'}
       - run: pip install numpy rasterio scikit-learn
-      - name: Probe official sources; snapshot the public leaderboard page once
+      - name: Probe non-competition sources; preserve the last manual leaderboard snapshot
         run: python scripts/refresh_feed.py
       - name: Rebuild the site and commit the refreshed feed
         run: |

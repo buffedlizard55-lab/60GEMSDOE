@@ -3,19 +3,19 @@
 Literature implemented here
 ---------------------------
 * Depression filling by **priority flood** - Barnes, Lehman & Mulla (2014),
-  *Priority-Flood: a priority queue based algorithm for optimal depression
-  filling*, Computers & Geosciences 62, 117-122.
-  https://doi.org/10.1016/j.cageo.2013.09.008
+  *Priority-flood: An optimal depression-filling and watershed-labeling algorithm for digital
+  elevation models*, Computers & Geosciences 62, 117-127.
+  https://doi.org/10.1016/j.cageo.2013.04.024
 * **D8** flow routing - O'Callaghan & Mark (1984), *The extraction of drainage
   networks from digital elevation data*, Computer Vision, Graphics and Image
   Processing 28, 323-344.  https://doi.org/10.1016/S0734-189X(84)80011-0
 * The **chi transform** - Perron & Royden (2013), *An integral approach to bedrock
-  river profile analysis*, Earth Surface Dynamics 1, 45-61.
-  https://doi.org/10.5194/esurf-1-45-2013
+  river profile analysis*, Earth Surface Processes and Landforms 38(6), 570-576.
+  https://doi.org/10.1002/esp.3302
       chi(x) = integral_{x_b}^{x} ( A0 / A(x') )^(m/n) dx'
 * **Normalised channel steepness** - Wobus et al. (2006), *Tectonics from
   topography: procedures, promise, and pitfalls*, GSA Special Paper 398.
-  https://doi.org/10.1130/2006.2398(03) ; Kirby & Whipple (2012), *Expression of
+  https://doi.org/10.1130/2006.2398(04) ; Kirby & Whipple (2012), *Expression of
   active tectonics in erosional landscapes*, J. Structural Geology 44, 54-75.
   https://doi.org/10.1016/j.jsg.2012.07.009
   In chi-space the slope dz/dchi *is* the normalised steepness ksn = (U/K)^(1/n).

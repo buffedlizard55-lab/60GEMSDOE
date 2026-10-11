@@ -20,8 +20,8 @@ two-segment linear fit inside a sliding window:
   reported as a knickpoint with its upstream/downstream steepness ratio.
 
 This is the reproducible, parameter-explicit form of the segmentation approach
-of Gailleton et al. (2019, *Earth Surface Dynamics* 7, 707-725,
-https://doi.org/10.5194/esurf-7-707-2019) and follows the two-segment / slope-break
+of Gailleton et al. (2019, *Earth Surface Dynamics* 7, 211-230,
+https://doi.org/10.5194/esurf-7-211-2019) and follows the two-segment / slope-break
 logic of Wobus et al. (2006) and Kirby & Whipple (2012).  All window sizes are
 declared parameters recorded in the run card - nothing is tuned on the label set.
 """

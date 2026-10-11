@@ -1,0 +1,55 @@
+{
+  "review_date": "2026-10-11",
+  "active_lane": "channel-steepness / \u03c7 / knickpoints",
+  "status": "STOP",
+  "stop_reason": "The preregistered c7653 E1 withheld-segment crossing test returned NEGATIVE-STOP; no further experiment is authorized in this lane.",
+  "new_tiff_created_in_this_review": false,
+  "submission_slots_used_in_this_review": 0,
+  "recommended_competition_submission": null,
+  "research_artifact": {
+    "path": "docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
+    "sha256": "c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c",
+    "submission_name": "gems60-lane-knickpoint-c7653-20261011T000000Z",
+    "note": "tectono-geomorphic chi/ksn knickpoint lane; 7653 concordant channel dots; E1 negative AUC 0.224; RESEARCH-ONLY, not promoted",
+    "download_ok_for_research": true,
+    "submit_to_competition": false,
+    "format_validation": "local format/range validation passed (0 listed problems); this is not organizer acceptance",
+    "validator_receipt": "docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.json"
+  },
+  "first_test": {
+    "segments": 78,
+    "withheld_positive_pixels": 5683,
+    "placement_null_auc": 0.22436,
+    "orientation_matched_null_auc": 0.25641,
+    "verdict": "NEGATIVE-STOP"
+  },
+  "pooled_holdout": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator": "gems52-pooled-hide-v1",
+    "withheld_positive_pixels": 36414,
+    "mean": 0.0021375,
+    "ci95": [
+      0.00179003,
+      0.00251341
+    ]
+  },
+  "clearance": {
+    "feature_by_feature_leakage_audit": "NOT CLEARED; one composite field was summarized by (Spearman rho + 1)/2 = 0.50145, not ROC AUC; no feature-by-feature AUC table exists.",
+    "full_registry_uniqueness": "NOT CLEARED; six listed final binary-dot-mask comparisons only; no pre-placement score-surface Spearman audit or complete-registry coverage.",
+    "full_registry_preplacement_and_postplacement_checks": "Pre-placement continuous surface Spearman not documented in the archived c7653 run; post-placement dot overlap recorded for six rasters only; full registry coverage is unknown."
+  },
+  "leaderboard_snapshot": "registry/leaderboard_snapshot_2026-10-11.json",
+  "leaderboard_source": "manual rendered-page read of the official public leaderboard; no automated request",
+  "h33_claim": {
+    "reported_score": 0.2778,
+    "status": "OWNER-REPORTED / UNVERIFIED",
+    "local_lm_instrument_delta": 0.0048695,
+    "organizer_receipt_linking_score_to_raster": false,
+    "archived_same_name_score_claim": 0.2708,
+    "scores_reconciled_to_identical_bytes": false,
+    "public_rows_are_project_file_attributions": false
+  },
+  "report": "docs/research/active-lane-review-2026-10-11.md",
+  "hypothesis_backlog": "docs/research/next-chi-hypotheses-2026-10-11.md",
+  "final_run_card": "evidence/runcard.json"
+}

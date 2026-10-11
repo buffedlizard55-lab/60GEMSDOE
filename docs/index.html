@@ -1,229 +1,40 @@
-<!doctype html><html lang=en><head><meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<title>60GEMSDOE - a fault-discovery system for the DOE GEMS Prize · 60GEMSDOE</title><link rel=stylesheet href=assets/site.css></head><body>
-<div class=wrap style="border:2px solid #0a7d33;background:#f0fff4;padding:10px 14px;margin:8px 0"><b>2026-10-11 H61-A XCRD &mdash; unique artifact of session H61-H63:</b> <a href="downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif">download gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif</a> (<a href="downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.zip">zip</a>, <a href="downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-audit.json">audit</a>) &mdash; <b>OK to download</b>; slot decision <b>NOT CLEARED</b> (explicit bounded-downside bet: screens 2.46 vs the champion's 1.62 at equal 37,654-dot mass; independent LiDAR scarp screen 0.48&times;). <a href="research/h61-h63-session-20261011.md">full write-up</a>. The GEMS61 artifact below keeps its own NEGATIVE verdict.</div>
-
-<header class=top><div class=wrap>
-<h1>60GEMSDOE - a fault-discovery system for the DOE GEMS Prize</h1><nav><a href="index.html" class=active>Home</a> <a href="executive-summary.html">Make a submission</a> <a href="research.html">Research</a> <a href="hypotheses.html">Hypotheses</a> <a href="leaderboard.html">Leaderboard</a> <a href="sources.html">Sources</a> <a href="irregularities.html">Irregularities</a></nav>
-<div class=dlbtn><a class="btn" href="downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif">&#11015; Download the submission GeoTIFF</a> <a class="btn alt" href="downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.zip">.zip</a></div>
-</div></header>
-<div class=values><div class=wrap><b>Core Values.</b> <b>Maximize P(Win)</b> — every weekly submission slot is an experiment, not a lottery ticket. <b>Own the Outcome</b> — every claim here carries an evidence class, and the defect in our own previously-shipped primary was measured, published and replaced rather than quietly dropped.</div></div>
-<main class=wrap><div class=dl>
-<h2>&#11015;&nbsp;ONE-CLICK SUBMISSION FILE</h2>
-<p><a class="btn" href="downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif">Download gems61-lane-thermal-knick-40000px-20261011T020352Z.tif</a> <a class="btn alt" href="downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.zip">.zip (single GeoTIFF inside)</a> </p>
-<p><b>Filename:</b> <code>gems61-lane-thermal-knick-40000px-20261011T020352Z.tif</code><br>
-<b>Unique submission name to use:</b> <code>60GEMSDOE-G61-LANE-THERMAL-40000</code><br>
-<b>Note to paste into the submit form's <em>Note (optional)</em> field
-(114/200 characters):</b><br>
-<code>chi/ksn knickpoint strike-concordance x INGENIOUS thermal corroboration; 40000 dots; E1-audited selector; UNSCORED</code></p>
-<p class=mut>single band · float32 · EPSG:32611 · 100 m · 3292&times;3730 ·
-40,000 predicted pixels · every cell finite · every value in [0, 1] ·
-0 NaN anywhere · no nodata tag · sha256 <code>a856efbac5e22919&hellip;</code>
-</p>
-<p><b>Already-scored fallback:</b> <a href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">0.2708 anchor (already-scored base)</a> </p>
-<h3>Identification pack &mdash; the other two queries</h3><table><tr><th>slot</th><th>file</th><th>sha256</th><th>what it gives</th></tr><tr><td><b>ANCHOR (already-scored base)</b></td><td><a href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</a> </td><td class=mut>c55bafc470054e82&hellip;</td><td class=mut>the owner-reported 0.2778 champion emission (H33-2-B2); kept downloadable as the audit-trail anchor and as the only already-scored upload</td></tr><tr><td><b>SECONDARY (Tier 2)</b></td><td><a href="downloads/gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif">gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif</a> </td><td class=mut>f81e26d7712d1a4a&hellip;</td><td class=mut>Tier 2 candidate: d2.8 emission (44,090 px) with 500 uncorroborated speckles pruned and 2,500 priority-ordered H32 dots added on the dip-projected step, transtensional swarm and MT clay-cap surfaces; 46,090 px; 0 on-catalogue</td></tr></table>
-<p class=warn><b>Status.</b> PRIMARY = this session&#x27;s GEMS61 thermally-corroborated knickpoint-lane file. ITS VERDICT IS NEGATIVE: it is unique, format-valid, leakage-free and fully documented, but it is NOT recommended for a weekly slot. Measured: pooled HOLDOUT-DTI (evaluator gems52-pooled-hide-v1, 36,439 withheld positives, 20 km-block bootstrap, 1,000 draws / 161 clusters) = 0.002495, 95% CI [0.001506, 0.003511]; paired difference versus the owner-reported 0.2778 champion control -0.001417 [-0.002430, -0.000312] and versus a mass-matched random control -0.037464 [-0.040658, -0.034271] - it loses to every control and sits ~76x below the family&#x27;s hard slot gate (best promotable holdout DTI 0.190147). Root cause measured separately (E2b): both available 100 m elevation products fail published drainage-network validity tests (Hack exponent b = +0.026 and -0.027 against 1.6-2.0 for real networks; channel networks agree at Jaccard 0.231), so this is a SUBSTRATE (resolution) verdict, not a detector verdict. NO ORGANISER SCORE EXISTS for this or any artifact in this repository. The already-scored fallback anchor is linked below.</p>
-</div>
-<!-- ===================== SESSION 2 (H62-1): the file generated THIS session ===================== -->
-<div class="banner">
-<h2>⚠️ VERDICT (2026-10-11, hypothesis H62-1): NEGATIVE — DO NOT SUBMIT THIS FILE</h2>
-<p><b>Answer to “is it OK to download and submit the TIF generated this session?”: NO.</b>
-H62-1 (under-cover basement-step × gravity-step concordance) was preregistered before computation
-(<code>registry/preregistration-h62.json</code>) and validated on the spatially-blocked holdout.
-It failed 3 of its 5 preregistered gates:</p>
-<table>
-<tr><th>gate</th><th>result</th><th>number (HOLDOUT-DTI, evaluator <code>gems52-pooled-hide-v1</code>)</th></tr>
-<tr><td>G0 surface uniqueness (pre-placement)</td><td style="color:var(--ok)">PASS</td><td>max |Spearman| 0.0995 vs 35 registry rasters (gate 0.90)</td></tr>
-<tr><td>G1 leakage canary</td><td style="color:var(--ok)">PASS</td><td>field AUC vs off-catalogue truth 0.4537; no feature &gt; 0.90</td></tr>
-<tr><td>G2 beats random</td><td style="color:var(--bad)">FAIL</td><td>hideout half OK (0.0042 vs 0.0020, 4/4 folds); off-catalogue instrument <b>0/9 budget rungs</b> (0.0117 vs 0.0567 at 48,000 px)</td></tr>
-<tr><td>G3 beats holdout best</td><td style="color:var(--bad)">FAIL</td><td>0.00420 [0.00321, 0.00528] vs best arm d28 0.08623 (36,414 withheld positives, 2,000 paired draws)</td></tr>
-<tr><td>G4 dots uniqueness (raw, preregistered)</td><td style="color:var(--bad)">FAIL</td><td>83.1% of dots ≤3 px from <code>r13_lattice_s5</code> (gate 70%) — but excess over matched random is −0.0059 and |Spearman| is 0.0156, so this is a dense-lattice artifact, not a duplicate (diagnostic <code>evidence/h62_uniqueness_excess_control.json</code>, post-hoc, does not pass G4)</td></tr>
-</table>
-<p>Per the brief (“do not spend a submission slot on an idea that hasn't beaten the current holdout
-best”), <b>no slot is spent; the file is published as a NEGATIVE-result artifact</b> (negative
-results are deliverables). The earlier knickpoint-lane run of the same day remains below — also
-NEGATIVE.</p>
-</div>
-
-<div class="dl">
-<h2>📦 ONE-CLICK submission download — file generated THIS session (2026-10-11, H62-1)</h2>
-<p>Validated all-finite <code>{0,1}</code> float32 GeoTIFF — portal-safe (0 NaN anywhere, values in
-[0,1], EPSG:32611, 3730×3292 @ 100 m, exact official transform), 48,000 dots. <b>The note to paste
-if the selector ever promotes it is printed under the buttons; this session's verdict is
-NEGATIVE, so do not upload it now.</b></p>
-<p>
-<a class="btn" href="downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif" download>⬇ gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif</a>
-<a class="btn ghost" href="downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.zip" download>⬇ .zip (same tif inside)</a>
-<a class="btn ghost" href="downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.json">receipt JSON</a>
-<a class="btn ghost" href="downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-nan.tif" download>NaN-outside diagnostic twin</a>
-</p>
-<p class="mut">sha256 <code>b8d29b2f445ccc9746af53e0716e22b866bb5747297cf81aa2ab973660af6857</code> ·
-validator: 0 problems (receipt JSON carries the literal checks) · submission name
-<code>h62-1-undercover-step-48000px-20261011T020550Z</code> · note (99 chars):<br>
-<code>H62-1 buried basement-step x gravity-step; 48000 dots; HOLDOUT-DTI 0.0042; NEGATIVE - do not submit</code><br>
-Full run card: <a href="h62_runcard.json">docs/h62_runcard.json</a> ·
-preregistration: <code>registry/preregistration-h62.json</code> · validation bundle:
-<code>evidence/h62_validation.json</code> · reference file used by the tests and the 0.2600
-owner-report: <code>gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan</code></p>
-</div>
-
-<!-- ===================== SESSION 2 (H62-1): end ===================== -->
-
-<div class="banner">
-<h2>⚠️ EARLIER RUN (same day): knickpoint lane — NEGATIVE, DO NOT SUBMIT THIS FILE EITHER</h2>
-<p><b>Answer to “is it OK to download and submit this TIF?”: NO.</b> The lane's preregistered
-first test failed (E1: withheld fault segments carry <i>lower</i> channel-steepness anomaly than
-orientation-matched random lines; AUC&nbsp;=&nbsp;<b>0.224</b> &lt; 0.55 stop rule), and the pooled
-hide-and-recover holdout DTI is <b>0.00214 [0.0018, 0.0025]</b> — far below the comparison arms.
-Per the brief (“If not, stop.”), this raster is a <b>negative-result research artifact</b>.
-Spending a weekly slot on it would waste the slot. The file is published for audit and reuse.</p>
-</div>
-
-<div class="dl">
-<h2>📦 The submission file (for the record / selector step only)</h2>
-<p>Validated all-finite <code>{0,1}</code> float32 GeoTIFF — portal-safe (no NaN anywhere, values in [0,1],
-EPSG:32611, 3730×3292 @ 100 m, exact official transform), 7,653 dots, none within 200 m of the mapped catalogue:</p>
-<p>
-<a class="btn" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif" download>⬇ gems60-knickpoint-lane-c7653-20261011T000000Z.tif</a>
-<a class="btn ghost" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.zip" download>⬇ .zip (same tif inside)</a>
-<a class="btn ghost" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.json">receipt JSON</a>
-</p>
-<p class="mut">sha256 <code>c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c</code> ·
-validator: 0 problems · uniqueness gate: PASS (max ρ = 0.0047 vs 6 registry rasters; max 3-px dot-overlap 45.9% &lt; 70%)</p>
-<p>If — and only if — the separate selector step ever chooses to spend a slot on it (not recommended),
-the exact form entries are on the <a href="executive-summary.html">executive summary / how-to-submit page</a>.</p>
-</div>
-
-<div class=dl>
-<h2>&#9888;&nbsp;The portal error <code>"Predicted values must be in range [0, 1]"</code> &mdash; fixed, and here is exactly how</h2>
-<p>DrivenData rejects a submission whose values fall outside <code>[0, 1]</code>, and it also rejects
-a raster whose <b>nodata tag</b> is a large negative sentinel such as
-<code>-3.4028234663852886e+38</code>, because that sentinel is not a value in <code>[0, 1]</code>.
-Two different failures produce the same message, and this repository has measured both.</p>
-<ul>
-<li><b>Mechanism 1 &mdash; the float32 sentinel.</b> <code>training_features.tif</code> uses
-<code>-3.4028234663852886e+38</code> as nodata: <b>7,113,308</b> cells, of which <b>3,061</b> lie
-<i>inside</i> the submission footprint. Writing those through unchanged puts them outside
-<code>[0, 1]</code>.</li>
-<li><b>Mechanism 2 &mdash; the NaN sentinel.</b> A raster carrying <code>nodata=NaN</code> with NaN
-cells outside the footprint is a legitimate competition format, but it is one validator change away
-from the same rejection. Every primary download here is written <b>all-finite</b>, with
-<code>nodata=None</code>.</li>
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>60GEMSDOE — current status and evidence · 60GEMSDOE</title><link rel="stylesheet" href="assets/site.css"></head><body>
+<header class="top"><div class="wrap"><h1>60GEMSDOE — current status and evidence</h1><nav><a href="index.html" class=active>Home</a> <a href="executive-summary.html">Submission status</a> <a href="research.html">Research</a> <a href="hypotheses.html">Deferred hypotheses</a> <a href="leaderboard.html">Leaderboard</a> <a href="sources.html">Sources</a> <a href="irregularities.html">Irregularities</a></nav>
+<div class="dlbtn"><a class="btn" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif" download>Download c7653 GeoTIFF — research only, DO NOT SUBMIT</a> <a class="btn alt" href="research/active-lane-review-2026-10-11.md">Read current review</a></div></div></header>
+<div class="values"><div class="wrap"><b>Maximize P(Win).</b> No slot is spent on an unvalidated candidate. <b>Own the Outcome.</b> Negative results and evidence limits are published clearly.</div></div>
+<main class="wrap"><div class="banner"><h2>STOP — no competition submission is cleared</h2>
+<p><b>Active lane:</b> channel-steepness / χ / knickpoints. The preregistered c7653 E1 test returned
+<strong>NEGATIVE-STOP</strong> (placement-null AUC 0.22436; orientation-matched AUC 0.25641).
+No follow-up experiment was run, no new TIFF was created, and no weekly slot was used.</p>
+<p><a class="btn" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif" download>Download the existing c7653 GeoTIFF for research only</a>
+<strong>DO NOT SUBMIT.</strong> This is not an approved/promoted file; local format validation is not organizer acceptance.</p>
+<p><a href="research/active-lane-review-2026-10-11.md">Full review</a> · <a href="../evidence/runcard.json">final JSON run card</a> ·
+<a href="../registry/leaderboard_snapshot_2026-10-11.json">manual 50-row public-board snapshot</a></p></div><h2>Current research state</h2>
+<div class="grid"><section class="card"><h3>c7653 negative result</h3>
+<p><b>First test:</b> 78 segments, 5,683 withheld pixels; placement AUC 0.22436 and orientation-matched AUC 0.25641.
+The preregistered action is stop.</p>
+<p><b>Pooled HOLDOUT-DTI:</b> 0.00213750, 95% CI [0.00179003, 0.00251341], 36,414 withheld positives,
+evaluator <code>gems52-pooled-hide-v1</code>. This is a catalogue hide-and-recover proxy, not a public or organizer score.</p>
+<p>Full-registry uniqueness and feature-by-feature leakage clearance were not established.</p></section>
+<section class="card"><h3>H33-2-B2 score claim</h3>
+<p>The reported 0.2778 remains <b>owner-reported / unverified</b>. A local LM-calibrated change of +0.0048695 is instrument evidence only.
+No organizer receipt links the bytes to a score. An older report calls a same-named file 0.2708; exact-byte identity is unresolved. Public rank 23 (0.2778, extradr19) and rank 36 (0.2708, smrtdoog5) are not file attributions.</p>
+<a href="research/active-lane-review-2026-10-11.md">What the evidence does and does not establish →</a></section></div>
+<h2>Official public leaderboard — manual read 2026-10-11</h2>
+<p class="mut">50 rows captured manually from the official page. Public ranks/scores only; not project scores, private-test performance, or file attribution.</p>
+<table><tr><th>rank</th><th>participant</th><th>public score</th></tr>
+<tr><td>1</td><td>xiaofanhu</td><td>0.4133</td></tr>
+<tr><td>8</td><td>DARD</td><td>0.3195</td></tr>
+<tr><td>23</td><td>extradr19</td><td>0.2778</td></tr></table>
+<p><a href="leaderboard.html">Open all 50 rows →</a> · <a href="data/feed.json">Current repository feed</a></p>
+<h2>Research paths</h2><ul>
+<li><a href="research/active-lane-review-2026-10-11.md">Executive review, algebra correction, H33 evidence limits and citations</a></li>
+<li><a href="research/next-chi-hypotheses-2026-10-11.md">Four ranked hypotheses — explicitly UNTESTED / DEFERRED</a></li>
+<li><a href="../evidence/runcard.json">c7653 JSON run card</a> · <a href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.json">local format receipt</a></li>
 </ul>
-<p><b>The fix, verified by re-reading the written bytes:</b> every file this site marks
-<b>PRIMARY</b>, <b>ANCHOR</b> or <b>SECONDARY</b>, and every <code>-zeros</code> variant of the
-audit trail, is single-band float32, EPSG:32611, 100 m, 3730&times;3292, <b>all 12,279,160 cells
-finite</b>, <b>min 0.0, max 1.0, zero cells outside <code>[0, 1]</code>, zero NaN</b>, and
-<b>no nodata tag</b>. Each download ships a <code>checks-*.json</code> format receipt produced by
-re-opening the file from disk. The <code>-nan.tif</code> twins are the deliberate exception: they
-use the competition's own NaN-outside format (7,111,787 NaN cells, <code>nodata=NaN</code>) and are
-offered only as the twin the portal's documentation describes &mdash; upload the all-finite file if
-you want the container that cannot trigger the <code>[0, 1]</code> rejection.</p>
-</div>
-
-<h2>What this is</h2>
-<p>60GEMSDOE is an auditable system for the <b>DOE GEMS Prize</b> (DrivenData #306, GeoDAWN / NW
-Nevada): find geothermal-indicative faults that are <em>not</em> in the USGS&nbsp;/&nbsp;INGENIOUS
-catalogue, and ship them as a legal GeoTIFF. It has three parts: an exact re-implementation of the
-competition metric and its decision theory; a preregistered spatially-blocked holdout that scores
-<em>emission rules</em> under that metric; and a Bayesian-optimisation slot gate that decides when a
-scarce weekly submission is worth spending.</p>
-<div class=grid>
-<div class=card><h3>Verified in this repository</h3><ul>
-<li>the published metric formula, the published worked example, and the identity
-<code>DTI = T/(0.2(T+S−M)+0.8|G|)</code> (the suite runs in CI on every push: <code>pytest tests -q</code>);</li>
-<li>the credit bar <code>k &gt; 0.2·DTI</code> that every emitted pixel must clear;</li>
-<li>the byte identity (sha256) of every raster this site offers;</li>
-<li>the official source links on the <a href="sources.html">sources</a> page.</li></ul></div>
-<div class=card><h3>Not claimed</h3><ul>
-<li>no score in this repository is organizer-verified; the group's own numbers are labelled
-<em>claim</em> (4 of them, see <a href="leaderboard.html">leaderboard</a>);</li>
-<li>the holdout's truth is the visible catalogue, so it <em>cannot</em> reward a genuinely new fault
-(IR-32-PROXY-01);</li>
-<li>the submitted file is a candidate, <b>not</b> a proven improvement.</li></ul></div>
-</div>
-<h2>The brief's question, answered</h2>
-<p><b>Why did the dotted H19-5 file score highest?</b> Because the metric is a budget: every unit of
-prediction mass that is not the best cover of a truth pixel costs 0.2, and one that is earns at most
-1. Thinning a thick surface while keeping its geometry removes mass that was already covered — it
-raises the credit per emitted pixel and moves the file to the point where the marginal pixel's
-credit equals the break-even bar. The group measured that break-even empirically at
-<b>0.0548</b>&nbsp;credit per dot; this repository derives the same number from the published
-formula, <code>0.2·0.26 = 0.0520</code>. Two independent routes, one answer.</p>
-<p><b>Can we beat 0.3262?</b> Only by raising the
-<em>credit density</em> of the top of the ranking: at the same emitted mass the leader needs
-≈25&nbsp;% more mean credit per pixel than the group's best field delivers. No public catalogue can
-supply that — the newest public compilation is already inside the given catalogue
-(59065
-px, of which all but one lie within 300&nbsp;m of it). The path is a better detector plus the
-two-round objective, and the plan is <a href="hypotheses.html">ranked here</a>.</p>
-<h2>Two instruments, and the disagreement between them</h2>
-<p>The blocked holdout scores emission rules against the <em>catalogue</em>; the model Monte Carlo
-scores candidate <em>files</em> against a generative description of the hidden set. They do not agree
-about every change — and that disagreement is a finding, not noise to shrug off:</p>
-<table><tr><th>change, at matched emitted mass</th><th>blocked holdout (catalogue truth)</th>
-<th>live-anchored truth model (official metric, paired draws)</th></tr>
-<tr><td>greedy packing of the <em>surface</em> vs the incumbent dot-thin</td>
-<td class=ok>+0.0100 mean, 4/4 folds positive</td>
-<td class=bad>&minus;0.0033, 0/12 draws positive</td></tr>
-<tr><td>greedy packing of the <em>scatter-smoothed</em> field, catalogue pixels excluded</td>
-<td class=mut>not measured on this instrument (it is off-catalogue by construction)</td>
-<td class=ok><b>+0.0247 &plusmn; 0.0005, 12/12 draws positive</b></td></tr></table>
-<p><b>Mechanism.</b> The holdout's truth is the catalogue, so it rewards covering the field surface
-where the catalogue runs. The hidden set is scattered <em>around</em> the surface (the group's own
-inference: a 1.85 px scale), so covering the surface is the wrong objective — the right one is to
-cover the surface blurred by that scale, which is what the shipped file does. Same mass, same field,
-same metric; only the objective changed.</p>
-<div class=card><b>truth_model_mc.json</b> — generative truth model + official metric, paired draws
-<p class=mut>Truth model: 12691 px,
-&sigma; = 1.85 px, drawn paired for every candidate; scored
-with the official metric. Source of the model: GEMSDOE25 H28 inference (owner-report-derived).</p>
-<table><tr><th>candidate</th><th>mean official DTI</th><th>px</th><th>mean TP<sub>w</sub></th></tr><tr><td>ours_maxcov_44090</td><td>0.2793</td><td>44090</td><td>5215.020811448044</td></tr><tr><td>incumbent_dotted_44090</td><td>0.2835</td><td>44090</td><td>5322.319695151823</td></tr><tr><td>surface_solid_121131</td><td>0.2222</td><td>121131</td><td>7104.062247104946</td></tr></table>
-<table><tr><th>paired difference</th><th>mean &plusmn; s.e.</th><th>draws positive</th></tr><tr><td>ours_maxcov_44090 &amp;minus; incumbent_dotted_44090</td><td>-0.0043 &plusmn; 0.0003</td><td>0/12</td></tr><tr><td>surface_solid_121131 &amp;minus; incumbent_dotted_44090</td><td>-0.0613 &plusmn; 0.0002</td><td>0/12</td></tr></table>
-</div><div class=card><b>emission_models_mc.json</b> — which layout of the same mass is best under the live-anchored truth model?
-<p class=mut>Truth model: 12691 px,
-&sigma; = 1.85 px, drawn paired for every candidate; scored
-with the official metric. Source of the model: GEMSDOE25 H28 (owner-report-derived prior).</p>
-<table><tr><th>candidate</th><th>mean official DTI</th><th>px</th><th>mean TP<sub>w</sub></th></tr><tr><td>incumbent_dot_thin_44090</td><td>0.2833</td><td>44090</td><td></td></tr><tr><td>greedy_surface_44090</td><td>0.2787</td><td>44090</td><td></td></tr><tr><td>greedy_smoothfield_44090</td><td>0.2972</td><td>44090</td><td></td></tr></table>
-<table><tr><th>paired difference</th><th>mean &plusmn; s.e.</th><th>draws positive</th></tr><tr><td>greedy_surface_44090 &amp;minus; incumbent_dot_thin_44090</td><td>-0.0045 &plusmn; 0.0003</td><td>0/16</td></tr><tr><td>greedy_smoothfield_44090 &amp;minus; incumbent_dot_thin_44090</td><td>+0.0140 &plusmn; 0.0003</td><td>16/16</td></tr></table>
-</div><div class=card><b>shipped_vs_incumbent_mc.json</b> — catalogue-aware generative truth model + official metric, paired draws
-<p class=mut>Truth model: 12691 px,
-&sigma; = 1.85 px, drawn paired for every candidate; scored
-with the official metric. Source of the model: GEMSDOE25 H28 inference (owner-report-derived prior).</p>
-<table><tr><th>candidate</th><th>mean official DTI</th><th>px</th><th>mean TP<sub>w</sub></th></tr><tr><td>shipped</td><td>0.3038</td><td>44090</td><td>5531.275525437785</td></tr><tr><td>incumbent</td><td>0.2791</td><td>44090</td><td>5119.976827302436</td></tr><tr><td>surface_greedy</td><td>0.2758</td><td>44090</td><td>5033.161873457625</td></tr></table>
-<table><tr><th>paired difference</th><th>mean &plusmn; s.e.</th><th>draws positive</th></tr><tr><td>shipped &amp;minus; incumbent</td><td>+0.0247 &plusmn; 0.0005</td><td>12/12</td></tr><tr><td>surface_greedy &amp;minus; incumbent</td><td>-0.0033 &plusmn; 0.0004</td><td>0/12</td></tr></table>
-</div>
-<h2>Holdout: does the emission rule beat the incumbent's own rule?</h2>
-<p>Four spatially blocked folds; the detector never sees the block it is scored on; every rival
-geometry is re-emitted at the <em>same pixel count</em> as the arm it is compared with, so no
-contrast can be won by emitting more mass. Preregistration:
-<code>GEMSDOE32-PREREG-1</code>. Mean detector AUC in-block
-0.681.</p>
-<table><tr><th>arm</th><th>mean proxy DTI</th><th>mean pixels</th></tr><tr><td>A1_greedy_fixed_budget</td><td>0.1793</td><td>8,000</td></tr><tr><td>A2_greedy_credit_bar</td><td>0.1793</td><td>8,000</td></tr><tr><td>A3_greedy_bar_discovery</td><td>0.1793</td><td>8,000</td></tr><tr><td>A0_dot_thin_matched</td><td>0.1693</td><td>8,067</td></tr><tr><td>A5_nms_ridge_matched</td><td>0.1557</td><td>8,000</td></tr><tr><td>A4_random_control</td><td>0.0174</td><td>8,000</td></tr></table>
-<table><tr><th>paired contrast</th><th>mean Δ</th><th>folds positive</th><th>per fold</th></tr><tr><td>A1_greedy_fixed_budget − A0_dot_thin_matched</td><td>+0.0100</td><td>4/4</td><td>+0.0101, +0.0095, +0.0094, +0.0111</td></tr><tr><td>A1_greedy_fixed_budget − A5_nms_ridge_matched</td><td>+0.0236</td><td>4/4</td><td>+0.0100, +0.0382, +0.0168, +0.0296</td></tr><tr><td>A1_greedy_fixed_budget − A4_random_control</td><td>+0.1619</td><td>4/4</td><td>+0.0886, +0.1739, +0.1946, +0.1906</td></tr></table>
-<p><b>Promotion rule (preregistered):</b> mean paired contrast &gt; 0 on &ge; 3 of 4 folds.
-Result: <b>PASS</b>.
-The proxy truth is the visible catalogue — a pass licenses packaging a candidate, never a score
-claim.</p>
-<h2>Where we stand</h2>
-<div class=grid>
-<div class=card><h3>Public leaderboard <span class=pill>verified read</span></h3>
-<p>#1 nchuzhoy <b>0.3262</b><br>
-<small>read 2026-10-04 from the official page; 2 snapshots stored</small></p>
-<p><a href="leaderboard.html">all rows &rarr;</a></p></div>
-<div class=card><h3>Group's own best <span class=pill>owner claim</span></h3>
-<p><code>gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif</code><br>
-<b>0.26</b> · 44090 px</p>
-<p>The gap to the public leader is <b>+0.0662</b> — a <b>+25.5&nbsp;%</b> increase in the score, which through the metric's own arithmetic is a similar increase in mean credit per emitted pixel at constant mass.</p></div>
-</div>
-<p class=mut>Irregularities flagged for review: 39 —
-<a href="irregularities.html">see the register</a>.</p>
-<h2>Sources</h2>
-<table><tr><th>id</th><th>source</th><th>status recorded here</th></tr><tr><td>competition</td><td>DOE GEMS Prize - overview</td><td>verified 2026-10-04</td></tr><tr><td>problem</td><td>Problem description, metric and submission format (verbatim source of metric.py)</td><td>verified 2026-10-04 (fetched twice; worked example TP=3.00 FP=1.89 FN=2.00 -&gt; 0.60 reproduced in tests)</td></tr><tr><td>about</td><td>About / additional resources</td><td>listed (not fetched)</td></tr><tr><td>data</td><td>Data download page (login-walled)</td><td>login required; not accessed from this repository</td></tr><tr><td>leaderboard</td><td>Public leaderboard</td><td>verified 2026-10-04: #1 nchuzhoy 0.3262, #2 DARD 0.3195, #3 alexoktaba 0.3042</td></tr><tr><td>rules_pdf</td><td>GEMS rules PDF (NLR document 96647)</td><td>mirrored in the group&#x27;s repos with sha256 50d854b1e0239fe6... (GEMSDOE28 docs/data/feed.json)</td></tr><tr><td>reference_solution</td><td>Official reference solution (U-Net, John Lipor, Portland State)</td><td>cloned 2026-10-04; architecture and TverskyLoss(0.2, 0.8) read from the notebook</td></tr><tr><td>geodawn</td><td>GeoDAWN airborne magnetic and radiometric surveys, NW Great Basin</td><td>listed</td></tr><tr><td>sciencebase_area</td><td>GeoDAWN study-area item</td><td>listed</td></tr><tr><td>gbcge</td><td>Great Basin Center for Geothermal Energy - INGENIOUS project</td><td>listed</td></tr><tr><td>mcre_srl</td><td>Koehler et al. 2021, Field response and surface rupture of the 2020 M6.5 Monte Cristo Range earthquake, SRL 92(2A) 823-829</td><td>verified 2026-10-04 via USGS Publications Warehouse record 70217872</td></tr><tr><td>mcre_bssa</td><td>Liu et al. 2021, Seismic and geodetic analysis of the 2020 Mw 6.5 MCRE, BSSA 111(6)</td><td>verified 2026-10-04</td></tr><tr><td>mcre_nbmg</td><td>NBMG Monte Cristo Range earthquake data (surface rupture maps)</td><td>listed; not reachable from this sandbox (unknown host) - CI fetch step required</td></tr><tr><td>mcre_reloc</td><td>Ruhl et al. relocated Monte Cristo seismicity catalogue</td><td>listed</td></tr><tr><td>usgs_qfaults</td><td>USGS Quaternary Fault and Fold Database</td><td>listed</td></tr><tr><td>nbmg_ingenious_rest</td><td>NBMG Qfaults-INGENIOUS ArcGIS REST service (1,179 features in footprint)</td><td>verified by the group 2026-10-03 (docs/data/vector_faults_status.json, sha256 4d6efc7bb365...)</td></tr><tr><td>gdr1391</td><td>GDR submission 1391 - Nevada geothermal data</td><td>listed</td></tr><tr><td>3dep</td><td>USGS 3DEP / The National Map elevation (1 m DEM links given by the competition)</td><td>link table mirrored in the group&#x27;s GEMSDOE repo (data/dem_links.json, sha256 8804dbff8754...)</td></tr><tr><td>comcat</td><td>USGS ANSS Comprehensive Earthquake Catalog (ComCat)</td><td>listed; not reachable from this sandbox</td></tr><tr><td>nbmg_ingenious_service</td><td>NBMG QFaults (INGENIOUS 6-27-2023) ArcGIS REST layer</td><td>listed, not fetched here</td></tr><tr><td>gdr_qfaults_v2_raster</td><td>GDR QFaults v2 traces rasterised to the competition grid (owner mirror, sha256-pinned)</td><td>verified locally 2026-10-04</td></tr><tr><td>usgs_sgmc_raster</td><td>USGS SGMC faults rasterised to the competition grid (owner mirror, sha256-pinned)</td><td>verified locally 2026-10-04</td></tr><tr><td>gemsdoe25_site</td><td>Owner site for the dotted H19-5 artifact (source of the 0.2600 owner claim and the H28 truth-model parameters)</td><td>read 2026-10-04, sha256 of its download re-verified here</td></tr><tr><td>sibling_repos</td><td>Sibling experiment repositories GEMSDOE19/24/25/27/28/29/30/31/33</td><td>listed</td></tr><tr><td>gemsdoe24_mirror</td><td>GEMSDOE24 mirrored feature packs (lidar scarp, GeoDAWN radiometrics, SGMC-derived, GDR 1391 extracts)</td><td>verified: every fetched blob re-hashed against registry/data_manifest.json pins</td></tr></table></main>
-<footer><div class=wrap>
-Site generated 2026-10-11 02:21 UTC from <code>registry/*.json</code> and <code>evidence/*.json</code> by
-<code>scripts/build_site.py</code>. Owner-reported scores are labelled <em>claim</em>; the only
-scores this repository reads itself are the other teams' public-leaderboard rows.
-<a href="https://github.com/buffedlizard55-lab/60GEMSDOE">Repository</a> ·
-<a href="data/feed.json">feed.json</a> · <a href="https://github.com/buffedlizard55-lab/60GEMSDOE/issues">report an irregularity</a>
-</div></footer></body></html>
+<p class="mut">The previous portal message “Predicted values must be in range [0, 1]” is a format/range rejection. For any future separately promoted raster, use the shared writer and validate the official grid, CRS, transform, dimensions, finite values and [0,1] range before upload. c7653 passed local format checks but is <b>not submit-cleared</b>. The historical <code>gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan</code> file remains an audit example, not a recommendation.</p></main>
+<footer><div class="wrap">Current review date: 2026-10-11 · Official board capture is a manual snapshot; the competition host is not polled automatically. ·
+<a href="data/feed.json">Machine-readable feed</a> · <a href="../README.md">README</a> ·
+<a href="https://github.com/buffedlizard55-lab/60GEMSDOE">Repository</a></div></footer></body></html>

@@ -47,6 +47,9 @@ def band_stats(an, ch, dist, band):
 
 
 def main():
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "E1b distance-profile runner"):
+        return 0
     det, slope_band, cat, valid = load_inputs()
     cs = get_channel_stack(det, valid)
     anomaly, channels = cs["anomaly"], cs["channels"]

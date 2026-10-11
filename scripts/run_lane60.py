@@ -430,6 +430,9 @@ def run(args) -> int:
 
 
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "H60A channel-knickpoint experiment runner"):
+        return 0
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--max-candidates", type=int, default=60_000)
     return run(ap.parse_args())

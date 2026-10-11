@@ -11,7 +11,8 @@ Method references (peer-reviewed; each is cited where it is implemented):
     chi(x) = integral_{x_b}^{x} (A0 / A(x'))**theta dx', putting channels that drain to different
     base levels on a common footing.
   * Gailleton, B., Mudd, S. M., Clubb, F. J., Peifer, D. & Hurst, M. D. (2019), "A segmentation
-    approach to computing channel steepness index", Earth Surface Dynamics 7, 459-483.  --
+    approach for the reproducible extraction and quantification of knickpoints from river long
+    profiles", Earth Surface Dynamics 7, 211-230. https://doi.org/10.5194/esurf-7-211-2019 --
     piecewise segmentation of the channel profile rather than one global S-A fit.
   * Wobus, C. et al. (2006), GSA Special Paper 398, "Tectonics from topography: procedures,
     promise, and pitfalls".  -- the confound list this module masks.
