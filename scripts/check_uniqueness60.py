@@ -90,6 +90,12 @@ def main() -> int:
                     help="audit the continuous lane SURFACE (rank field before dot placement) "
                          "instead of the shipped dots, as the parallel-run protocol requires "
                          "both to be checked")
+    # H66-6 (2026-10-11, session arena/b219bfe1): mirror the production-surface
+    # flags so the audited surface is byte-identical to what will be emitted.
+    ap.add_argument("--include-ephemeral", action="store_true",
+                    help="surface rebuild: add the ephemeral-channel mask to the confound exclusion")
+    ap.add_argument("--litho-arm", choices=("none", "T", "L"), default="none",
+                    help="surface rebuild: H66-6 preregistered basement-step arm")
     ap.add_argument("--local-corpus", action="store_true",
                     help="scan all committed local registry rasters (registry/rasters, "
                          "docs/downloads, submission) when .cache/registry is not populated")
@@ -104,7 +110,7 @@ def main() -> int:
         sys.path.insert(0, str(ROOT / "scripts"))
         from gems60 import geomorph as gm
         from gems60 import lane as L
-        from run_lane60 import confound_masks, load, load_meta, load_step
+        from run_lane60 import confound_masks, load, load_meta, load_step, litho_step_mask
         cache = ROOT / ".cache" / cache_name
         meta_cfg = load_meta()
         z_min = float(meta_cfg.get("z_min", L.Z_MIN))
@@ -116,7 +122,14 @@ def main() -> int:
         else:
             branch = gm.branch_signature(np.load(cache / "dircode.npy"), fp,
                                          k=L.CORRIDOR_HALF_LEN_PX - 1).astype(np.int64)
-        exclude, _conf = confound_masks(step, channel)
+        # H66-6: mirror the production build's mask flags (lazy: acc.npy is only
+        # read when the ephemeral mask is requested); the H67 precomputed
+        # ephemeral_wash / litho_core arrays apply inside confound_masks when present
+        acc = load("acc").astype(np.float64) if a.include_ephemeral else None
+        exclude, _conf = confound_masks(step, channel, acc=acc)
+        if a.litho_arm != "none":
+            litho, _thr = litho_step_mask(fp)
+            channel = channel & (litho if a.litho_arm == "L" else ~litho)
         z, cand, cand_diag = L.prepare_candidates(step, channel, exclude, z_min=z_min)
         res = L.surface_from_candidates(z, cand, branch, grid.catalogue, dict(cand_diag),
                                         include_positive_channels=inc_pos_ch)

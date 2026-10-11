@@ -2,7 +2,7 @@
   "run": "H70-1",
   "hypothesis_id": "H70-1",
   "lane": "tectonic geomorphology: chi / ksn / knickpoints (paired-polarity trains)",
-  "generated_utc": "2026-10-11T18:47:46Z",
+  "generated_utc": "2026-10-11T19:14:55Z",
   "preregistration": "registry/preregistration-h70.json",
   "budget_use": {
     "experiments_used": 1,
@@ -79,7 +79,7 @@
   "submission_name": null,
   "submission_note": null,
   "verdict": "negative",
-  "what_would_have_been_shipped": "nothing. The negative card is the deliverable. The incumbent validated lane artifact (H66-1, docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif) remains portal-legal and unique; whether its selector promotion stands is unchanged by H70 (H70 probes a different statistic and adds the IR-70-SEL-01 selection-history caveat).",
+  "what_would_have_been_shipped": "nothing. The negative card is the deliverable. Under the governing H68 lane-stop audit (registry/current_site_status.json) the only download is the H65-1 research artifact \u2014 research only, DO NOT SUBMIT; the H66/H67 artifacts carry negative errata (their literal registry-uniqueness clearance failed: max raw 3-px dot overlap 1.00 vs the 0.70 bound) and the H67-1 'promote' was reversed (IR-H66C-STOPCONFLICT-01, PRs #19/#20). H70 changes none of that (H70 probes a different statistic and adds the IR-70-SEL-01 selection-history caveat).",
   "next_preregistered_question_recommended": "H71: paired-basin ksn contrast across fault blocks (rank 1 of the deferred backlog): the E1b flip (+0.0567 off-catalogue with CI > 0) says the PAIRED signal does live on mapped structures absent from the catalogue, but the pixel-crossing test population is the wrong one for it; test it at basin scale on a fresh 10 m substrate with explicit catchment pairing, masked for erodibility, with E1a-catalogue and E1b-SGMC-off both preregistered as gating before any number is seen.",
   "links": {
     "run_log": "evidence/h70_run.log",

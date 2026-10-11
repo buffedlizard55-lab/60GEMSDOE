@@ -74,10 +74,10 @@ def _common_status(status: dict, *, prefix: str = "") -> str:
     mean_text = f"{first['mean_log_ksn_step_contrast']:+.4f}"
     hold_text = f"{hold['mean']:.5f}"
     return f'''<div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
-<p><b>Latest run:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
+<p><b>Governing STOP record:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
 <strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast {mean_text},
 95% CI [{ci[0]:+.4f}, {ci[1]:+.4f}] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
-The earlier c7653 run also stopped. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
+The earlier c7653 run also stopped. Later H66/H67 artifacts do not lift this STOP; their literal uniqueness clearance failed. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
 <p><a class="btn" href="{tif}" download>Download the existing H65-1 GeoTIFF for research only</a>
 <strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
 <p>H65-1 diagnostic <b>HOLDOUT-DTI</b>: {hold_text} [{hold['ci95'][0]:.5f}, {hold['ci95'][1]:.5f}],
@@ -118,6 +118,46 @@ def render(root: Path | None = None) -> dict:
     leak = status["leakage_review"]
     h33 = status["h33_claim"]
     previous = status["previous_run_c7653"]
+    post_runs = status.get("post_review_runs") or []
+
+    # Runs recorded in other sessions after the STOP review. Rendered factually:
+    # negative results corroborate the stop; any positive claim is shown as a
+    # claim, with its irregularity flag, never as an endorsement.
+    if post_runs:
+        rows = []
+        for r in post_runs:
+            flagged = "CONTRADICT" in r["verdict"].upper()
+            badge = ("⚠️ <b>claimed positive — contradicted this STOP file</b>; "
+                     "flagged IR-H66C-STOPCONFLICT-01 and promotion reversed by PRs #19/#20"
+                     if flagged else "corroborates the STOP")
+            card = (f'<a href="{_site_href(r["run_card"])}">run card</a>'
+                    if r.get("run_card") else "")
+            dl = (f' · <a href="{_site_href(r["download"])}" download>⬇ TIF</a>'
+                  if r.get("download") else "")
+            rows.append(
+                f"<tr><td>{_e(r['session'])}</td><td>{_e(r['id'])}</td>"
+                f"<td>{_e(r['verdict'])}</td><td>{_e(r['artifact'])} {dl} {card}</td>"
+                f"<td>{badge}</td></tr>")
+        # Hard-code no head-count here: sessions append post_review_runs rows later, and a
+        # fixed "three runs / two negative" sentence silently goes stale (H70-1 found this on
+        # 2026-10-11).  Count from the data instead.
+        _NUM = {0: "No", 1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five",
+               6: "Six", 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten"}
+        n_all, n_flag = len(post_runs), sum("CONTRADICT" in r["verdict"].upper() for r in post_runs)
+        n_neg = n_all - n_flag
+        post_html = f'''<h2>Lane runs recorded after this review (other sessions, same day)</h2>
+<div class="card"><p>{_NUM.get(n_all, str(n_all))} tectonic-geomorphology runs were recorded on 2026-10-11 after the
+review above. {_NUM.get(n_neg, str(n_neg))} are <b>negative and corroborate the STOP</b>; one <b>claimed a pass
+and promote</b> while the stop file was in force — it was flagged as
+<code>IR-H66C-STOPCONFLICT-01</code> and its promotion was <b>reversed</b> by session
+<code>arena/a856d257</code> (PRs #19/#20), so it remains a research artifact, not a
+cleared submission. No submission slot has been spent by any of them.</p>
+<table><tr><th>session</th><th>id</th><th>result (as recorded by that session)</th><th>artifact</th><th>relation to STOP</th></tr>
+{''.join(rows)}
+</table></div>
+'''
+    else:
+        post_html = ""
 
     # Home: never surface registry/submission_build.json as a recommendation while the stop applies.
     body = _common_status(status) + f'''<h2>Current research state</h2>
@@ -160,6 +200,7 @@ private-test performance, or file attribution.</p>
 <tr><td>8</td><td>DARD</td><td>0.3195</td></tr>
 <tr><td>23</td><td>extradr19</td><td>0.2778</td></tr></table>
 <p><a href="leaderboard.html">Open all 50 rows →</a> · <a href="data/feed.json">Current repository feed</a></p>
+{post_html}
 <h2>Research paths</h2><ul>
 <li><a href="research/active-lane-review-2026-10-11.md">Executive review, H65-1 / c7653 results, H33 evidence limits and citations</a></li>
 <li><a href="research/next-chi-hypotheses-2026-10-11.md">Four ranked hypotheses — explicitly UNTESTED / DEFERRED; no experiment authorized</a></li>
@@ -175,6 +216,7 @@ file remains an audit example, not a recommendation.</p>'''
     # Submission/executive page: disclose why the correct file is research-only and distinguish
     # format validity from organizer acceptance and uniqueness clearance.
     body = _common_status(status) + f'''<h2>Download / submission decision</h2>
+<p><a href="research/submission-status-review.md">Latest repository audit and H66/H67 decision erratum</a> · <a href="../evidence/review_run_card.json">Review run card</a> · <a href="../evidence/submission_status_audit.json">Fresh format audit</a></p>
 <p><a class="btn" href="{_site_href(art['path'])}" download>Download H65-1 GeoTIFF (research only)</a>
 <a class="btn alt" href="{receipt_href}">Local format receipt</a></p>
 <ul><li><b>OK to download for research:</b> yes.</li><li><b>OK to submit to DrivenData:</b> <b>no</b> — the first-test stop and failed raw-overlap gate prohibit promotion.</li>
@@ -183,6 +225,11 @@ file remains an audit example, not a recommendation.</p>'''
 <li><b>Artifact filename id:</b> <code>{_e(art['artifact_filename_id'])}</code>.</li>
 <li><b>Note ({art['note_chars']} characters):</b> <code>{_e(art['note'])}</code>.</li>
 <li><b>SHA-256:</b> <code>{art['sha256']}</code>.</li></ul>
+<h2>How to submit a future <em>cleared</em> file (not one of these research TIFFs)</h2>
+<ol><li>First require the first-test, leakage, full registry uniqueness, and spatially blocked holdout gates to pass; a separate selector must approve a weekly slot. <strong>None is approved now.</strong></li>
+<li>Download the selected <code>.tif</code> from its own run-card link (or a ZIP containing exactly one TIFF). Verify its SHA-256 and use the shared writer/validator: one <code>float32</code> band, exact sample CRS/shape/transform, no NaN/Inf anywhere, every value in [0,1], no nodata tag.</li>
+<li>On the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/">DrivenData submissions page</a>, sign in with your own account, choose <em>New submission</em>, choose that exact file, and paste the run-card's unique name and ≤140-character note into the available fields. Do not upload a research-only artifact to test the portal.</li>
+<li>Submit only after the selector approves the slot; preserve the organizer receipt, score and file hash together. Until then, a local PASS says only that the TIFF passes <em>local</em> format checks.</li></ol>
 <h2>Local format receipt is not an organizer receipt</h2>
 <p>The local validator reports single-band float32, EPSG:32611, 3292×3730 on the 100 m grid, values in [0,1],
 no NaN/Inf, and 40,000 positive cells; it lists no problems. That does <b>not</b> prove that DrivenData accepted
@@ -218,7 +265,7 @@ this is an algebraic condition, not a score projection.</p>
     _write_page((docs / "leaderboard.html"), _base("Public leaderboard — 2026-10-11 manual snapshot", body, "leaderboard.html", status=status))
 
     body = _common_status(status) + f'''<h2>Executive findings</h2>
-<ol><li><b>H65-1 is the latest run and stops.</b> The first-test mean was {first['mean_log_ksn_step_contrast']:+.5f}
+<ol><li><b>H65-1 is the governing STOP record.</b> The first-test mean was {first['mean_log_ksn_step_contrast']:+.5f}
 (95% CI [{first['ci95'][0]:+.5f}, {first['ci95'][1]:+.5f}]); it is inconclusive and therefore fails the preregistered PROCEED gate.
 The diagnostic HOLDOUT-DTI was {hold['mean']:.5f} [{hold['ci95'][0]:.5f}, {hold['ci95'][1]:.5f}], not a competition score.</li>
 <li><b>H65-1 is not uniqueness-cleared.</b> The reported max |Spearman| is {unique['max_abs_spearman_reported']:.4f},

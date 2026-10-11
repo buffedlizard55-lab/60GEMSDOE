@@ -21,15 +21,26 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from gems57 import uniqueness as U  # noqa: E402
 
+import argparse
+
 CAND = ROOT / "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif"
 CACHE = ROOT / ".cache/features65"
 REG = ROOT / ".cache/registry"
 
 
 def main() -> int:
-    rows = [json.loads(l) for l in (ROOT / "evidence/h65_uniqueness_rows.jsonl").open()]
+    # H66 (2026-10-11): CLI so the same control can be run for any session's
+    # candidate without forking the script.
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--candidate", type=Path, default=CAND)
+    ap.add_argument("--rows", type=Path,
+                    default=ROOT / "evidence/h65_uniqueness_rows.jsonl")
+    ap.add_argument("--out", type=Path,
+                    default=ROOT / "evidence/h65_overlap_control.json")
+    a = ap.parse_args()
+    rows = [json.loads(l) for l in a.rows.open()]
     fired = [r for r in rows if r["duplicate_by_overlap"]]
-    with rasterio.open(CAND) as ds:
+    with rasterio.open(a.candidate) as ds:
         mine = ds.read(1)
     mine_d = U._dots(mine)
     n = int(mine_d.sum())
@@ -55,12 +66,12 @@ def main() -> int:
                         random_also_fires=bool(min(rnd) > 0.70)))
     ex = [o["excess"] for o in out]
     res = dict(evidence_class="DIAGNOSTIC (post-hoc; does not change the literal gate)",
-               candidate=CAND.name, n_dots=n, allowed_px=int(allowed.sum()), random_sets=5, seed=65001,
+               candidate=a.candidate.name, n_dots=n, allowed_px=int(allowed.sum()), random_sets=5, seed=65001,
                radius_px=U.RADIUS_PX, n_fired=len(out),
                min_their_dots_among_fired=min(o["their_dots"] for o in out),
                n_where_random_also_fires=sum(o["random_also_fires"] for o in out),
                max_excess=max(ex), median_excess=float(np.median(ex)), rows=out)
-    (ROOT / "evidence/h65_overlap_control.json").write_text(json.dumps(res, indent=1) + "\n")
+    a.out.write_text(json.dumps(res, indent=1) + "\n")
     print(json.dumps({k: v for k, v in res.items() if k != "rows"}, indent=1))
     return 0
 

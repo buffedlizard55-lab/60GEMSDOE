@@ -276,11 +276,17 @@
   "submission_name": "60GEMSDOE-H66-1-DEM10-BEDROCK-DKSN-40000",
   "submission_note": "60GEMSDOE H66-1 | 3DEP 10m bedrock dksn + piedmont step, >=3 drainages, 4-confound mask, 2.8px NMS, 40000 dots",
   "submission_note_chars": 110,
-  "verdict": "promote",
+  "verdict": "negative",
   "selector_and_portal_decision": {
     "okay_to_download": true,
-    "promote_to_cross_lane_selector": true,
+    "promote_to_cross_lane_selector": false,
     "spend_standalone_weekly_portal_slot": false,
-    "explanation": "OK TO DOWNLOAD: YES (100% portal-legal, 0 NaN, all 12,279,160 float32 cells in [0.0, 1.0], EPSG:32611, 3730x3292, exact sample_submission.tif transform). VERDICT: PROMOTE to the cross-lane selector as the #1 Tectonic-Geomorphology Lane discovery raster (passes E1 with +0.4251 [+0.2253, +0.6273], clears leakage canary <= 0.60, achieves HOLDOUT-DTI = 0.065739 [0.055715, 0.076201] \u2014 5.68x H65-1, 4.01x H60-A, beating ksn_only by +0.0426 and random_mass_control by +0.0267 \u2014 and is unique against all 63 non-lattice dotted submissions with max rho = 0.1106 and max 3-px overlap = 0.3686). Per the Parallel-Run Protocol ('Do not pick submissions \u2014 that is a separate selector step'), do not spend a standalone weekly portal slot on a single-lane raster alone over the 0.2778 multi-physics champion (ANCHOR); use H66-1 as the tectonic-geomorphology input to the cross-lane selector."
+    "explanation": "Research download only. DO NOT SUBMIT: literal uniqueness failed; no organizer acceptance recorded."
+  },
+  "decision_erratum": {
+    "date": "2026-10-11",
+    "reason": "Literal registry overlap 0.998675 exceeds 0.70. Non-lattice exclusions are not authorized. Lane STOP remains binding. Historical measurements were not recomputed.",
+    "supersedes": "promote",
+    "evidence": "evidence/h67_uniqueness.json"
   }
 }

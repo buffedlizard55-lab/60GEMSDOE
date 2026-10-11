@@ -1,7 +1,7 @@
 {
- "generated_utc": "2026-10-11T18:47:46Z",
+ "generated_utc": "2026-10-11T19:14:55Z",
  "repo": "60GEMSDOE",
- "session": "2026-10-11 H70-1 paired-polarity knickpoint trains: G1 first test -0.0347 [-0.0853, +0.0126] -> STOP; NEGATIVE result, no new TIFF, no slot. E1b off-catalogue diagnostic +0.0567 [+0.0103, +0.1030] recorded for H71.",
+ "session": "2026-10-11 lane stop audit (H68) + H70-1 paired-polarity knickpoint trains: preregistered G1 first test STOP; NEGATIVE result, no new TIFF, no slot spent. Research TIFF download remains H65-1 (do not submit).",
  "current_official_leaderboard_top": {
   "rank": 1,
   "score": 0.4133,
@@ -110,6 +110,42 @@
    "first_test_verdict": "NEGATIVE-STOP",
    "download_status": "research only; DO NOT SUBMIT",
    "archive_status": "current research artifact only; NEGATIVE-STOP; do not submit"
+  },
+  {
+   "name": "60GEMSDOE-H70-1-NO-ARTIFACT",
+   "file": null,
+   "sha256": null,
+   "dots": null,
+   "verdict": "NEGATIVE - preregistered gate G1 STOP: paired-step chi/ksn contrast -0.0347 [-0.0853, +0.0126], n=241 withheld catalogue components; the lane stopped before emission",
+   "evidence_class": "MEASUREMENT",
+   "first_test": {
+    "statistic": "pair_strength = min(crest, -step_min(500 m downstream)) step contrast",
+    "mean": -0.03469608848006856,
+    "ci95": [
+     -0.08530424352747466,
+     0.01264583296723547
+    ],
+    "median": 0.049123004314606075,
+    "n_components": 241,
+    "verdict": "STOP",
+    "gate": "G1: verdict == PROCEED (mean > 0 AND 95% CI lower bound > 0) required; anything else stops the lane"
+   },
+   "off_catalogue_diagnostic_non_gating": {
+    "population": "SGMC 1:750k straight lines",
+    "mean": 0.05673608173227323,
+    "ci95": [
+     0.010346126782969709,
+     0.10300385759671851
+    ],
+    "n": 85
+   },
+   "tool_verification": "crest-only ablation on the identical kernel reproduces H65-1's published INCONCLUSIVE first test to ~1e-9",
+   "run_card": "../registry/preregistration-h70.json",
+   "run_card_evidence": "../evidence/h70_runcard.json",
+   "report_page": "h70-report.html",
+   "research_note": "research/h70-paired-knickpoint-trains.md",
+   "submitted_to_competition": false,
+   "archive_status": "NEGATIVE lane record; no TIFF exists to download; no slot spent; next preregistered question: H71 paired-basin ksn contrast"
   }
  ],
  "anchor_owner_scored": {
@@ -388,12 +424,12 @@
   "hypothesis_backlog": "docs/research/next-chi-hypotheses-2026-10-11.md",
   "final_run_card": "evidence/h65_runcard.json"
  },
- "latest_run": {
-  "id": "H70-1",
+ "current_lane_decision": {
   "verdict": "negative",
-  "new_tiff": false,
-  "slot_used": false,
-  "run_card": "../evidence/h70_runcard.json",
-  "primary_download_unchanged": "downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif"
+  "submit_to_competition": false,
+  "new_tiff_generated": false,
+  "research_raster_sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1",
+  "report": "docs/research/2026-10-11-lane-stop-audit.md",
+  "note": "Snapshot of this repository; NOT a live DrivenData score feed."
  }
 }

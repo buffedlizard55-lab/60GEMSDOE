@@ -135,10 +135,12 @@ def main() -> int:
         "submission_note": None,
         "verdict": "negative",
         "what_would_have_been_shipped": (
-            "nothing. The negative card is the deliverable. The incumbent validated lane artifact "
-            "(H66-1, docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif) "
-            "remains portal-legal and unique; whether its selector promotion stands is unchanged by "
-            "H70 (H70 probes a different statistic and adds the IR-70-SEL-01 selection-history caveat)."
+            "nothing. The negative card is the deliverable. Under the governing H68 lane-stop audit "
+            "(registry/current_site_status.json) the only download is the H65-1 research artifact — "
+            "research only, DO NOT SUBMIT; the H66/H67 artifacts carry negative errata (their literal "
+            "registry-uniqueness clearance failed: max raw 3-px dot overlap 1.00 vs the 0.70 bound) and "
+            "the H67-1 'promote' was reversed (IR-H66C-STOPCONFLICT-01, PRs #19/#20). H70 changes none "
+            "of that (H70 probes a different statistic and adds the IR-70-SEL-01 selection-history caveat)."
         ),
         "next_preregistered_question_recommended": (
             "H71: paired-basin ksn contrast across fault blocks (rank 1 of the deferred backlog): the "
@@ -158,60 +160,13 @@ def main() -> int:
     }
     (ROOT / "evidence" / "h70_runcard.json").write_text(json.dumps(card, indent=2) + "\n")
 
-    # ---- feed refresh ----------------------------------------------------- #
-    feed_path = ROOT / "docs" / "feed.json"
-    feed = json.loads(feed_path.read_text()) if feed_path.is_file() else {}
-    feed["generated_utc"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-    feed["session"] = ("2026-10-11 H70-1 paired-polarity knickpoint trains: G1 first test "
-                       "-0.0347 [-0.0853, +0.0126] -> STOP; NEGATIVE result, no new TIFF, no slot. "
-                       "E1b off-catalogue diagnostic +0.0567 [+0.0103, +0.1030] recorded for H71.")
-    feed["latest_run"] = {
-        "id": "H70-1", "verdict": "negative", "new_tiff": False, "slot_used": False,
-        "run_card": "../evidence/h70_runcard.json",
-        "primary_download_unchanged": "downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
-    }
-    feed_path.write_text(json.dumps(feed, indent=1) + "\n")
-
-    # ---- irregularities --------------------------------------------------- #
-    ir_path = ROOT / "registry" / "irregularities.json"
-    ir = json.loads(ir_path.read_text())
-    new_items = [
-        {
-            "id": "IR-70-GOV-01",
-            "severity": "medium",
-            "title": "Governance record is internally contradictory for the channel-steepness lane (STOP vs later 'promote' run card); H70 logged the deviation instead of editing either record",
-            "statement": "The committed registry/current_site_status.json carries status=STOP for the channel-steepness lane (H65-1 INCONCLUSIVE, 'no follow-up experiment or submission is authorized'), enforced fail-closed by scripts/stop_guard.py, while the committed evidence/h67_runcard.json (session H66-1, same lane, generated after the STOP was written) carries verdict 'promote' with a shipped UUID-stamped GeoTIFF and an updated registry/submission_build.json. Both are on main simultaneously. H70-1 neither edited the status file nor invoked the guarded old runners; it ran a new preregistered question with the protocol's own empirical G1 gate, and the gate failed.",
-            "mitigation": "H70's preregistration records the authorization chain (owner brief = PARALLEL-RUN PROTOCOL + highest-urgency TIF instruction + negative-results-are-deliverables). Recommend the next session reconcile current_site_status.json with the h66/h67 run cards in one audited commit.",
-        },
-        {
-            "id": "IR-70-SEL-01",
-            "severity": "medium",
-            "title": "Multiple-comparison selection history across the lane's first tests must travel with every E1 verdict",
-            "statement": "The lane's mandated first test has now been probed with five statistics: raw step_max log-ratio (H65-1: INCONCLUSIVE), abs-step both-limb (H66b: STOP), bedrock dksn on an off-catalogue target (H66: STOP), bedrock dksn + piedmont/basement composite (H66-1: PROCEED +0.4251 on catalogue truth), and paired-polarity train (H70-1: STOP on catalogue truth, +0.0567 PROCEED if it had been gated on the SGMC-off target). Two of five gated runs passed. A passing gate chosen after several formulations is weaker evidence than its CI suggests; H70 registered its statistic before measuring it and reports the full history here.",
-            "mitigation": "The H70 preregistration fixes the statistic, floor, z_min, budget and gates before computation; the run card carries this IR verbatim; the next lane question must be registered the same way.",
-        },
-        {
-            "id": "IR-70-DATA-01",
-            "severity": "medium",
-            "title": "H66-1's claimed 'piedmont profile curvature' input reads topo band 4 (slope_std), not band 6 (curv_prof_absmax), and in raw quantized codes; flagged for review",
-            "statement": "scripts/build_dem10_cache.py (mode h66) assigns curv_prof = src.read(4) of data/external/topo_10m_derived_100m_u8.tif; the pack's own manifest data/external/topo_10m_derived_100m_u8.manifest.json names band 4 'slope_std' and band 6 'curv_prof_absmax'. The values are then standardized against raw uint8 codes, which inflates the median/std-normalization but not the rank order. Therefore the pied_z term of the promoted H66-1 run card is a slope-variability corroborant, not the stated profile-curvature corroborant, and features66 cannot be rebuilt as committed (it also reads data/official/training_features.tif, which is not in this checkout, IR-66-DATA-01).",
-            "mitigation": "H70 does not rely on pied_z. Recommend the next authorized lane session fix the band index in the template (one shared fix, per protocol rule 2), rebuild the cache, and re-certify H66-1's dot-for-dot reproducibility before the selector relies on it.",
-        },
-        {
-            "id": "IR-70-LB-01",
-            "severity": "low",
-            "title": "Session brief's quoted leaderboard targets (0.3195, later 0.3774) are stale relative to the repo's verified snapshot (public top 0.4133 on 2026-10-11)",
-            "statement": "The brief asks to beat 0.3195 and elsewhere cites 0.3774 as the current high. registry/leaderboard_snapshot_2026-10-11.json (manual, verified) records xiaofanhu 0.4133 at rank 1 with 50 rows. The family's own best remains owner-reported 0.2778 (public row extradr19 at rank 23 shows the same value; byte attribution of files to that row is not possible from public data, IR-32-SCORE-01).",
-            "mitigation": "All H70 planning used 0.4133 as the public target; the score-gap algebra in docs/research/h70-paired-knickpoint-trains.md is computed against it.",
-        },
-    ]
-    have = {i["id"] for i in ir["items"]}
-    for item in new_items:
-        if item["id"] not in have:
-            ir["items"].append(item)
-    ir_path.write_text(json.dumps(ir, indent=1) + "\n")
-
-    print("wrote evidence/h70_runcard.json, docs/feed.json, registry/irregularities.json")
+    # ---- feed / irregularities registration ------------------------------- #
+    # Post-H68 main: docs/feed.json uses the `submissions` array and the
+    # irregularity register already carries the STOP-vs-promote conflict as
+    # IR-H66C-STOPCONFLICT-01 (resolved). Both registrations are done by
+    # scripts/h70_publish_site.py so the schemas stay in one place; run it
+    # after this script.
+    print("wrote evidence/h70_runcard.json (register feed + irregularities via scripts/h70_publish_site.py)")
     return 0
 
 

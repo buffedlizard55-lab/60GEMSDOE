@@ -370,31 +370,51 @@
    "mitigation": "Updated scripts/audit_shipped.py to verify np.allclose(tuple(prof['transform'])[:6], tuple(tpl_prof['transform'])[:6], atol=0.05) and record exact_sample_transform in docs/downloads/submissions_manifest.json."
   },
   {
-   "id": "IR-70-GOV-01",
+   "id": "IR-60-PROMOTION-CONFLICT",
+   "severity": "high",
+   "statement": "H67 PROMOTE banners and cards contradicted authoritative STOP and a raw 3px overlap of 0.998675; a dense-raster exclusion silently relaxed the literal 0.70 limit.",
+   "mitigation": "Published verdict corrected to negative; shared renderer suppresses old banners while stopped; selector uses raw overlap; H67 publishers now STOP-guarded. See docs/research/submission-status-review.md."
+  },
+  {
+   "id": "IR-H66-BUILD-01",
    "severity": "medium",
-   "title": "Governance record is internally contradictory for the channel-steepness lane (STOP vs later 'promote' run card); H70 logged the deviation instead of editing either record",
-   "statement": "The committed registry/current_site_status.json carries status=STOP for the channel-steepness lane (H65-1 INCONCLUSIVE, 'no follow-up experiment or submission is authorized'), enforced fail-closed by scripts/stop_guard.py, while the committed evidence/h67_runcard.json (session H66-1, same lane, generated after the STOP was written) carries verdict 'promote' with a shipped UUID-stamped GeoTIFF and an updated registry/submission_build.json. Both are on main simultaneously. H70-1 neither edited the status file nor invoked the guarded old runners; it ran a new preregistered question with the protocol's own empirical G1 gate, and the gate failed.",
-   "mitigation": "H70's preregistration records the authorization chain (owner brief = PARALLEL-RUN PROTOCOL + highest-urgency TIF instruction + negative-results-are-deliverables). Recommend the next session reconcile current_site_status.json with the h66/h67 run cards in one audited commit."
+   "statement": "The first H66-6 build (dot digest 66c49029b6cb, TIF sha 958c176d...) produced 12 of 40,000 dots that differ from a fresh recompute, and that process was OOM-killed (exit 137) in its built-in final-dot uniqueness audit. Three independent fresh recomputes (z, candidates, p, dots all hash-compared) are bit-identical to each other and to the shipped file (digest 3306ed8afbcd; --verify-existing identical=True). The cause of the first build's deviation was not identified.",
+   "mitigation": "The superseded TIF is not the artifact and is not in the repository; the shipped file is verified dot-for-dot (--verify-existing identical=True), re-audited standalone (evidence/h66c_uniqueness_dots.json), and the final-dot audit is always run as a separate process (the in-build audit OOMs)."
+  },
+  {
+   "id": "IR-H66-NOTE-01",
+   "severity": "low",
+   "statement": "build_submission60.py truncates over-long portal notes to 140 chars with a '...' suffix but its format validator does not check note length at all; the <=140-char ritual limit is enforced nowhere in the pipeline. The first H66-6 build embedded a 141-char note that was silently truncated mid-word.",
+   "mitigation": "count note chars before building; the H66-6 shipped note is 139 chars (verified in the receipt and the run card)"
+  },
+  {
+   "id": "IR-H66C-TIMING-01",
+   "severity": "medium",
+   "statement": "Two parallel sessions both self-identified as 'H66' on 2026-10-11 and this session's run (16:01-16:11 UTC) predates the parallel STOP registration in registry/current_site_status.json (review dated 16:34 UTC, PRs #15/#16) which states 'no follow-up experiment or submission is authorized'. The run was executed under this session's user-assigned lane brief (autonomous, no manual input) before the STOP file existed in this repository; its NEGATIVE result corroborates the STOP rather than contradicting it. The id collision (both sessions using H66-1) was resolved by renumbering this session's hypothesis to H66-6 and its evidence files to evidence/h66c_*; the other session keeps h66_*/h66b_*. No data value changed; only identity labels were renumbered.",
+   "mitigation": "registry/hypotheses.json carries the renumbering note in the H66-6 entry; the stop guard (scripts/stop_guard.py, adopted from the parallel merge) now blocks all lane runners, so no further lane runs can happen without explicit re-authorization."
+  },
+  {
+   "id": "IR-H66C-STOPCONFLICT-01",
+   "severity": "resolved",
+   "statement": "On main after PR #17 (session arena/7085de4f, 2026-10-11 ~16:24 UTC): hypothesis H67-1 (bedrock-subtracted delta-ksn step) is recorded as VALIDATED with E1 PASS +0.4251 [+0.2253, +0.6273] (262 comps), HOLDOUT-DTI 0.065739 [0.055715, 0.076201], verdict 'promote', and registry/submission_build.json carries promoted=True and PRIMARY = that artifact. This contradicts (a) registry/current_site_status.json (status STOP, review 16:34 UTC, 'no follow-up experiment or submission is authorized'), (b) scripts/stop_guard.py, which fails closed on that same status, and (c) the H66 review's finding that every 2026-10-11 knickpoint round was negative. Either the STOP registration is stale/wrong, or the H67-1 run was unauthorized and/or its numbers are wrong; this session has not independently re-derived them. Discovered while merging this session's work (PR #18).",
+   "mitigation": "RESOLVED 2026-10-11 by session arena/a856d257 (PRs #19/#20, merged before this merge): registry/submission_build.json promotion was reversed (promoted False), the stop guard was extended to fail closed, and the audited research-only pages were regenerated. The STOP registration stands; H67-1's artifact remains a research download, not a cleared submission. This session (PR #18) had flagged the contradiction first (IR text preserved as the record)."
   },
   {
    "id": "IR-70-SEL-01",
    "severity": "medium",
-   "title": "Multiple-comparison selection history across the lane's first tests must travel with every E1 verdict",
-   "statement": "The lane's mandated first test has now been probed with five statistics: raw step_max log-ratio (H65-1: INCONCLUSIVE), abs-step both-limb (H66b: STOP), bedrock dksn on an off-catalogue target (H66: STOP), bedrock dksn + piedmont/basement composite (H66-1: PROCEED +0.4251 on catalogue truth), and paired-polarity train (H70-1: STOP on catalogue truth, +0.0567 PROCEED if it had been gated on the SGMC-off target). Two of five gated runs passed. A passing gate chosen after several formulations is weaker evidence than its CI suggests; H70 registered its statistic before measuring it and reports the full history here.",
-   "mitigation": "The H70 preregistration fixes the statistic, floor, z_min, budget and gates before computation; the run card carries this IR verbatim; the next lane question must be registered the same way."
+   "statement": "Multiple-comparison selection history across the lane's first tests must travel with every E1 verdict: the lane's mandated first test has now been probed with five statistics (raw step_max log-ratio H65-1 INCONCLUSIVE; abs-step both-limb H66-2 STOP; bedrock dksn off-catalogue H66 STOP; bedrock dksn + piedmont composite H67-1 claimed PASS, erratum-applied; paired-polarity train H70-1 STOP on catalogue truth, +0.0567 would-be on the SGMC-off target). Two of five gated runs passed. A passing gate chosen after several formulations is weaker evidence than its CI suggests; H70 registered its statistic before measuring it.",
+   "mitigation": "The H70 preregistration (registry/preregistration-h70.json) fixes the statistic, floor, z_min, budget and gates before computation; the run card carries the full history; the next lane question must be registered the same way."
   },
   {
    "id": "IR-70-DATA-01",
    "severity": "medium",
-   "title": "H66-1's claimed 'piedmont profile curvature' input reads topo band 4 (slope_std), not band 6 (curv_prof_absmax), and in raw quantized codes; flagged for review",
-   "statement": "scripts/build_dem10_cache.py (mode h66) assigns curv_prof = src.read(4) of data/external/topo_10m_derived_100m_u8.tif; the pack's own manifest data/external/topo_10m_derived_100m_u8.manifest.json names band 4 'slope_std' and band 6 'curv_prof_absmax'. The values are then standardized against raw uint8 codes, which inflates the median/std-normalization but not the rank order. Therefore the pied_z term of the promoted H66-1 run card is a slope-variability corroborant, not the stated profile-curvature corroborant, and features66 cannot be rebuilt as committed (it also reads data/official/training_features.tif, which is not in this checkout, IR-66-DATA-01).",
-   "mitigation": "H70 does not rely on pied_z. Recommend the next authorized lane session fix the band index in the template (one shared fix, per protocol rule 2), rebuild the cache, and re-certify H66-1's dot-for-dot reproducibility before the selector relies on it."
+   "statement": "H66-1/H67-1's claimed 'piedmont profile curvature' input reads topo band 4 (slope_std), not band 6 (curv_prof_absmax), in raw quantized codes: scripts/build_dem10_cache.py (mode h66) assigns curv_prof = src.read(4) of topo_10m_derived_100m_u8.tif while the pack's own manifest names band 4 'slope_std' and band 6 'curv_prof_absmax'; values were z-scored against raw uint8 codes. The pied_z term is therefore a slope-variability corroborant, not the stated profile-curvature corroborant, and features66 cannot be rebuilt offline as committed (it also reads data/official/training_features.tif, which is not in this checkout, IR-66-DATA-01).",
+   "mitigation": "H70 does not rely on pied_z. Recommendation: fix the band index in the shared template, rebuild the cache, and re-certify H66-1's dot-for-dot reproducibility before any selector relies on it."
   },
   {
    "id": "IR-70-LB-01",
    "severity": "low",
-   "title": "Session brief's quoted leaderboard targets (0.3195, later 0.3774) are stale relative to the repo's verified snapshot (public top 0.4133 on 2026-10-11)",
-   "statement": "The brief asks to beat 0.3195 and elsewhere cites 0.3774 as the current high. registry/leaderboard_snapshot_2026-10-11.json (manual, verified) records xiaofanhu 0.4133 at rank 1 with 50 rows. The family's own best remains owner-reported 0.2778 (public row extradr19 at rank 23 shows the same value; byte attribution of files to that row is not possible from public data, IR-32-SCORE-01).",
+   "statement": "Session brief's quoted leaderboard targets (0.3195, later 0.3774) are stale relative to the repository's verified snapshot (public top xiaofanhu 0.4133 on 2026-10-11, 50 rows). The group's own best remains owner-reported 0.2778 (the participant row at rank 23 shows the same value; byte attribution of files to that row is not possible from public data).",
    "mitigation": "All H70 planning used 0.4133 as the public target; the score-gap algebra in docs/research/h70-paired-knickpoint-trains.md is computed against it."
   }
  ]

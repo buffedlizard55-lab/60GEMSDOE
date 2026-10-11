@@ -6,7 +6,7 @@ Run card: [`evidence/h70_runcard.json`](../../evidence/h70_runcard.json) · Prer
 
 > **What is OK to download and submit, plainly stated.**
 > - A *new* H70 submission file: **does not exist — NEGATIVE gate, nothing was emitted.** That is the protocol working, not a missing file.
-> - The incumbent validated lane artifact [`gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif`](../downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif): **format-validated, 0 NaN, all 12,279,160 cells in [0.0, 1.0], unique vs the local registry — OK to download: YES.** Whether to spend the weekly slot on it is the cross-lane selector's decision, not this lane's.
+> - Governing registry status is STOP: the only offered download is the H65-1 research artifact ([`gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif`](../downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif)) — **research only, DO NOT SUBMIT.** The H66/H67 artifacts carry negative errata: their literal registry-uniqueness clearance failed (max raw 3-px dot overlap 1.00 vs the 0.70 bound) and the H67-1 "promote" was reversed (IR-H66C-STOPCONFLICT-01, PRs #19/#20). No artifact is currently cleared; spending a slot is the cross-lane selector's decision and has not happened.
 > - Everything in this page is labeled **HOLDOUT-DTI / MEASUREMENT / INSTRUMENT / OWNER-REPORT / VERIFIED-SNAPSHOT**. No local number is a leaderboard score.
 
 ---
@@ -97,10 +97,11 @@ Conclusion: **H71 is viable** — its required inputs are committed or fetchable
 
 | id | severity | one-liner |
 |---|---|---|
-| IR-70-GOV-01 | medium | `current_site_status.json` (STOP) and `evidence/h67_runcard.json` (promote) coexist for one lane; reconciled by logging, not by editing either record |
 | IR-70-SEL-01 | medium | five-statistic selection history across the lane's first test must travel with every E1 verdict (2 of 5 gated runs passed) |
 | IR-70-DATA-01 | medium | H66-1's "piedmont profile curvature" reads topo band 4 `slope_std` (not band 6 `curv_prof_absmax`) in raw codes; features66 not rebuildable as committed (`training_features.tif` absent, IR-66-DATA-01) |
 | IR-70-LB-01 | low | brief's 0.3195 / 0.3774 targets are stale; verified 2026-10-11 public top is 0.4133 |
+
+The STOP-vs-'promote' governance conflict H70 observed at session start was already recorded upstream as **IR-H66C-STOPCONFLICT-01** and resolved by PRs #19/#20 (promotion reversed, errata applied), so H70 dropped its duplicate entry rather than double-logging it.
 
 ## 8. Sources for manual review
 
