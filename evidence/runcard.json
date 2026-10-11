@@ -148,12 +148,16 @@
     }
   },
   "canary": {
-    "field_auc_vs_held_truth": 0.5014511579116284,
-    "note": "label-free features cannot leak labels; reported for protocol"
+    "legacy_reported_spearman_midpoint_index": 0.5014511579116284,
+    "implied_spearman_rho": 0.0029023158232568402,
+    "method": "The prior script calculated (Spearman rho + 1) / 2. This value is not ROC AUC.",
+    "feature_by_feature_results_present": false,
+    "full_leakage_clearance": false,
+    "note": "Composite-field rank-association diagnostic only; not a feature-by-feature leakage audit and not a ROC-AUC measurement."
   },
   "uniqueness": {
     "champion-h33-2-b2-zeros.tif": {
-      "spearman": 0.00468810835135536,
+      "final_binary_dot_mask_spearman": 0.00468810835135536,
       "overlap": {
         "ours_within": 0.2391219129753038,
         "theirs_within": 0.061693312795453335,
@@ -162,7 +166,7 @@
       }
     },
     "dotted-d28-zeros.tif": {
-      "spearman": 0.003813641966015014,
+      "final_binary_dot_mask_spearman": 0.003813641966015014,
       "overlap": {
         "ours_within": 0.25754606036848293,
         "theirs_within": 0.057926967566341574,
@@ -171,7 +175,7 @@
       }
     },
     "h16-1-topo-nan.tif": {
-      "spearman": 0.004191710091696564,
+      "final_binary_dot_mask_spearman": 0.004191710091696564,
       "overlap": {
         "ours_within": 0.3236639226447145,
         "theirs_within": 0.05417181032604749,
@@ -180,7 +184,7 @@
       }
     },
     "h274r1-solo-nan.tif": {
-      "spearman": 0.004322510228101322,
+      "final_binary_dot_mask_spearman": 0.004322510228101322,
       "overlap": {
         "ours_within": 0.2495753299359728,
         "theirs_within": 0.06082240851762482,
@@ -189,7 +193,7 @@
       }
     },
     "h7-lidarscarp.tif": {
-      "spearman": 0.0038698932237631383,
+      "final_binary_dot_mask_spearman": 0.0038698932237631383,
       "overlap": {
         "ours_within": 0.4590356722853783,
         "theirs_within": 0.04192324707346589,
@@ -198,7 +202,7 @@
       }
     },
     "r7-dem10-multiphys.tif": {
-      "spearman": 0.001146184307943494,
+      "final_binary_dot_mask_spearman": 0.001146184307943494,
       "overlap": {
         "ours_within": 0.1581079315301189,
         "theirs_within": 0.04324338791915173,
@@ -207,7 +211,7 @@
       }
     }
   },
-  "uniqueness_gate_pass": true,
+  "uniqueness_gate_pass": false,
   "validator": {
     "path": "/home/user/60GEMSDOE/docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
     "bytes": 78835,
@@ -260,8 +264,104 @@
   "sha256": "c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c",
   "submission_name": "gems60-lane-knickpoint-c7653-20261011T000000Z",
   "note": "tectono-geomorphic chi/ksn knickpoint lane; 7653 concordant channel dots; E1 negative AUC 0.224; RESEARCH-ONLY, not promoted",
-  "verdict": "NEGATIVE (do not spend a slot; research-only)",
+  "verdict": "negative",
   "evidence_class": "HOLDOUT-DTI",
   "evaluator_version": "gems52-pooled-hide-v1",
-  "seed": 20261011
+  "seed": 20261011,
+  "preregistered_first_test": {
+    "evidence_class": "PREREGISTERED-SCREEN",
+    "source": "evidence/e1_lane_test.json",
+    "segments_tested": 78,
+    "withheld_pixels": 5683,
+    "auc_placement_null": 0.22435897435897437,
+    "auc_orientation_null": 0.2564102564102564,
+    "wilcoxon_p_placement": 1.6149055872007384e-06,
+    "wilcoxon_p_orientation": 3.816756215181013e-07,
+    "preregistered_verdict": "NEGATIVE-STOP",
+    "stop_rule_applied": true,
+    "followup_experiments_authorized": false
+  },
+  "canary_review": {
+    "legacy_reported_composite_field_value": 0.5014511579116284,
+    "legacy_value_is_roc_auc": false,
+    "legacy_method": "(Spearman rho + 1) / 2",
+    "implied_spearman_rho": 0.0029023158232568402,
+    "feature_by_feature_results_present": false,
+    "full_leakage_clearance": false,
+    "status": "NOT CLEARED; the old composite-field midpoint is not ROC AUC and no feature-by-feature canary results are recorded."
+  },
+  "registry_uniqueness_review": {
+    "listed_comparisons": 6,
+    "surface_gate_threshold_abs_spearman": 0.9,
+    "dot_overlap_threshold": 0.7,
+    "pre_placement_full_registry_check_documented": false,
+    "post_placement_full_registry_check_documented": false,
+    "full_registry_clearance": false,
+    "status": "NOT CLEARED; six named final binary-dot comparisons were recorded, but the required pre-placement score-surface Spearman screen and complete-registry coverage are not established.",
+    "max_abs_spearman_final_binary_dot_masks_among_listed": 0.00468810835135536,
+    "max_within_3px_overlap_final_dots_among_listed": 0.4590356722853783,
+    "pre_placement_surface_spearman_check_documented": false,
+    "post_placement_final_dot_overlap_check_documented": true,
+    "pre_placement_full_registry_surface_check_documented": false,
+    "post_placement_full_registry_dot_overlap_check_documented": false,
+    "legacy_binary_dot_mask_screen_pass_as_recorded_for_six_named_comparisons": true,
+    "legacy_binary_dot_spearman_is_not_the_required_pre_placement_surface_gate": true
+  },
+  "validator_output": {
+    "path": "/home/user/60GEMSDOE/docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
+    "bytes": 78835,
+    "sha256": "c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c",
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "ref_bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "blocksize": [
+      256,
+      256
+    ],
+    "fixture_grid": false,
+    "has_validity_mask": false,
+    "nan_pixels": 0,
+    "infinity_pixels": 0,
+    "n_nan": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0006232510786503553,
+    "n_nonzero": 7653,
+    "mass": 7653.0,
+    "mass_outside_footprint": 0,
+    "problems": [],
+    "ok": true,
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+  },
+  "raster_sha256": "c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c",
+  "note_chars": 124,
+  "download_ok_for_research": true,
+  "submit_to_competition": false,
+  "approved_for_weekly_slot": false,
+  "submission_slots_used": 0,
+  "verdict_detail": "negative: preregistered E1 NEGATIVE-STOP; research-only. No further experiment, promotion, or slot.",
+  "uniqueness_gate_status": "NOT CLEARED: pre-placement score-surface Spearman screen and complete-registry coverage are not established; listed post-placement dot checks are partial only."
 }

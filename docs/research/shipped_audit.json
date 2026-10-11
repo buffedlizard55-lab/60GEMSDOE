@@ -756,6 +756,49 @@
    "dots_on_catalogue": 0
   },
   {
+   "file": "gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif",
+   "bytes": 111211,
+   "sha256": "66f93c821cf7b8f91f14a1fba1746b7d58b1435f71b0004f599ee5c9d00ab944",
+   "profile": {
+    "crs": "EPSG:32611",
+    "transform": [
+     100.0,
+     0.0,
+     243350.0,
+     0.0,
+     -100.0,
+     4508550.0
+    ],
+    "shape": [
+     3730,
+     3292
+    ],
+    "res": [
+     100.0,
+     100.0
+    ],
+    "dtype": "float32",
+    "count": 1,
+    "nodata": null
+   },
+   "portal_legal": true,
+   "exact_sample_transform": true,
+   "finite_cells": 12279160,
+   "nan_cells": 0,
+   "min": 0.0,
+   "max": 1.0,
+   "range_violations": 0,
+   "positive_px": 37654,
+   "total_mass": 37654.0,
+   "off_h19_5_px": 37392,
+   "off_h19_5_frac": 0.9930419078982312,
+   "catalogue_proxy_T": 147.14138614723072,
+   "catalogue_proxy_F": 37514.51838364084,
+   "credit_per_unit_mass": 0.003907722583184541,
+   "catalogue_proxy_DTI": 0.0026124689098446967,
+   "dots_on_catalogue": 0
+  },
+  {
    "file": "gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
    "bytes": 78835,
    "sha256": "c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c",

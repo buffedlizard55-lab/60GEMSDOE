@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Assemble the H66-1 JSON Run Card from the evidence files written by the run.
+"""Assemble the H66-1 / H67-1 JSON Run Card from the evidence files written by the run.
 
 Every number is read from an evidence file (nothing is retyped by hand), so the
 run card cannot drift from the measurements.  Writes:
-  - evidence/h66_runcard.json
+  - evidence/h67_runcard.json
   - docs/downloads/<TIF>-runcard.json
   - docs/downloads/checks-<TIF>.json
   - submission_card.json (replaces the unmeasured H63-A card flagged in IR-65-H63-01)
@@ -36,8 +36,8 @@ def sha256(p: Path) -> str:
 
 
 def main() -> int:
-    hold = load("evidence/h66_holdout.json")
-    (ROOT / "evidence" / "h66_e2_canary.json").write_text(json.dumps({
+    hold = load("evidence/h67_holdout.json")
+    (ROOT / "evidence" / "h67_e2_canary.json").write_text(json.dumps({
         "evidence_class": "HOLDOUT-DTI",
         "evaluator_version": hold["evaluator_version"],
         "canary_rule": hold["canary_rule"],
@@ -45,10 +45,10 @@ def main() -> int:
     }, indent=2) + "\n")
     hold65 = load("evidence/h65_holdout.json")
     hold60 = load("evidence/h60a_holdout.json")
-    fcache = load("evidence/h66_feature_cache.json")
-    uniq = load("evidence/h66_uniqueness.json")
-    suniq = load("evidence/h66_surface_uniqueness.json")
-    build = load("evidence/h66_submission_build.json")
+    fcache = load("evidence/h67_feature_cache.json")
+    uniq = load("evidence/h67_uniqueness.json")
+    suniq = load("evidence/h67_surface_uniqueness.json")
+    build = load("evidence/h67_submission_build.json")
     rec = load(f"docs/downloads/{STEM}.json")
     man = load("data/external/dem10_chi_100m.manifest.json")
 
@@ -124,7 +124,7 @@ def main() -> int:
             "source": "USGS 3DEP 1/3 arc-second (~10 m) DEM + 10 m sub-cell curvature + official band 15/17",
             "tiles": len(man["source"]["tiles"]),
             "manifest": "data/external/dem10_chi_100m.manifest.json",
-            "feature_cache_receipt": "evidence/h66_feature_cache.json",
+            "feature_cache_receipt": "evidence/h67_feature_cache.json",
             "channel_pixels": fcache["diagnostics"]["channel_px"],
             "valid_bedrock_channel_pixels": hold["candidates"]["valid_channel_pixels"],
             "candidate_pixels": hold["candidates"]["candidate_pixels"],
@@ -210,14 +210,14 @@ def main() -> int:
             "evidence_class": "REGISTRY-MEASUREMENT",
             "local_registry_rasters_checked": f"{uniq['registry_rasters_checked']}/{uniq['registry_rasters_expected']}",
             "surface_before_placement": {
-                "file": "evidence/h66_surface_uniqueness.json",
+                "file": "evidence/h67_surface_uniqueness.json",
                 "positive_pixels": suniq["my_dots"],
                 "max_spearman_full_footprint": round(suniq["worst_spearman_full_footprint"], 4),
                 "max_spearman_raster": suniq["worst_rho_submission"],
                 "rho_gate_pass": bool(suniq["worst_spearman_full_footprint"] <= suniq["rho_limit"]),
             },
             "final_dots": {
-                "file": "evidence/h66_uniqueness.json",
+                "file": "evidence/h67_uniqueness.json",
                 "emitted_dots": uniq["my_dots"],
                 "max_spearman_full_footprint": round(uniq["worst_spearman_full_footprint"], 4),
                 "max_spearman_raster": uniq["worst_rho_submission"],
@@ -300,7 +300,7 @@ def main() -> int:
         },
     }
 
-    (ROOT / "evidence/h66_runcard.json").write_text(json.dumps(card, indent=2) + "\n")
+    (ROOT / "evidence/h67_runcard.json").write_text(json.dumps(card, indent=2) + "\n")
     (ROOT / "docs/downloads" / f"{STEM}-runcard.json").write_text(json.dumps(card, indent=2) + "\n")
     (ROOT / "submission_card.json").write_text(json.dumps(card, indent=2) + "\n")
 
@@ -351,12 +351,12 @@ def main() -> int:
         "sha256": zip_digest,
         "bytes": zip_path.stat().st_size,
     }
-    sub["run_card"] = "evidence/h66_runcard.json"
+    sub["run_card"] = "evidence/h67_runcard.json"
     sub["promoted"] = True
     sub["approved_for_weekly_slot"] = False
     sub["superseded_primaries"] = sup
     (ROOT / "registry/submission_build.json").write_text(json.dumps(sub, indent=1) + "\n")
-    print(f"Wrote evidence/h66_runcard.json, submission_card.json, and registry/submission_build.json")
+    print(f"Wrote evidence/h67_runcard.json, submission_card.json, and registry/submission_build.json")
     return 0
 
 

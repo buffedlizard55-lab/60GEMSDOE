@@ -115,6 +115,9 @@ def corridor_stat_bbox(anomaly: np.ndarray, channels: np.ndarray,
 
 
 def main():
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "E1 first-test runner"):
+        return 0
     t0 = time.time()
     det, slope_band, cat, valid = load_inputs()
     print(f"footprint cells: {int(valid.sum())}, catalogue px: {int(cat.sum())}")

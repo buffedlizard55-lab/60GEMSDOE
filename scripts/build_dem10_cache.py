@@ -43,6 +43,9 @@ def sha256(p: Path) -> str:
 
 
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "H65 DEM10 feature-cache builder"):
+        return 0
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--cache-dir", default=os.environ.get("GEMS60_FEATURE_CACHE", "features65"))
     ap.add_argument("--tag", default=os.environ.get("GEMS60_TAG", None))
@@ -50,7 +53,7 @@ def main() -> int:
     args = ap.parse_args()
     cache_name = args.cache_dir
     mode = args.mode or ("h66" if "66" in str(cache_name) else "h65")
-    tag = args.tag or ("h66" if mode == "h66" else "h65")
+    tag = args.tag or ("h67" if mode == "h66" else "h65")
     cache_dir = ROOT / ".cache" / cache_name
 
     man = json.loads((EXT / "dem10_chi_100m.manifest.json").read_text())

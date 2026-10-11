@@ -265,7 +265,7 @@
   "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-audit.json",
   "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros-audit.json"
  ],
- "run_card": "evidence/h66_runcard.json",
+ "run_card": "evidence/h67_runcard.json",
  "writeup": "docs/research/h61-h63-session-20261011.md",
  "screens": {
   "sgmc_offcat_quality_ratio_at_equal_mass": 2.4637,

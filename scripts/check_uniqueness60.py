@@ -76,6 +76,9 @@ def rho(a, b, mask=None, idx=None):
 
 
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "channel-lane uniqueness audit (H60A/H65)"):
+        return 0
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--candidate", type=Path, default=None)
     ap.add_argument("--out", default=str(ROOT / "evidence" / "h60a_uniqueness.json"))
@@ -101,12 +104,12 @@ def main() -> int:
         sys.path.insert(0, str(ROOT / "scripts"))
         from gems60 import geomorph as gm
         from gems60 import lane as L
-        from run_lane60 import confound_masks, load, load_meta
+        from run_lane60 import confound_masks, load, load_meta, load_step
         cache = ROOT / ".cache" / cache_name
         meta_cfg = load_meta()
         z_min = float(meta_cfg.get("z_min", L.Z_MIN))
         inc_pos_ch = bool(meta_cfg.get("include_positive_channels", False))
-        step = np.load(cache / "step.npy")
+        step = load_step()
         channel = np.load(cache / "channel.npy")
         if (cache / "branch_sig.npy").is_file():      # substrate-supplied independence (H65-1 / H66-1)
             branch = np.load(cache / "branch_sig.npy").astype(np.int64)
