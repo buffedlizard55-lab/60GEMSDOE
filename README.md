@@ -49,6 +49,8 @@ include layers, mechanisms, catalogue-generalization rationale, mimics, costs an
 They are **not cleared for execution** under the lane STOP. Full registry availability,
 official lithology/hydroclimate coverage, and organizer receipts remain unresolved.
 
+Parallel review retained: [H68 audit](docs/research/2026-10-11-lane-stop-audit.md) and [H68 historical review card](docs/h68-runcard.json). Both agree that no lane submission is cleared.
+
 ## Sources and project values
 
 [Official competition](https://www.drivendata.org/competitions/306/competition-doe-gems/) ·
