@@ -202,7 +202,7 @@
   "submission": "No recommendation; research-only TIFF; 0 slots used."
  },
  "irregularities": [
-  "2026-10-11 manual official board read: #1 xiaofanhu 0.4133; DARD #8 0.3195; extradr19 #23 0.2778. Public scores are not this project's scores; the H33 numeric match is not attribution.",
+  "2026-10-11 manual official board read: #1 xiaofanhu 0.4133; #2 cfld__ 0.3585; DARD #9 0.3195; extradr19 #23 0.2778. Public scores are not this project's scores; the H33 numeric match is not attribution.",
   "rules PDF host in brief (docs.nlr.gov) wrong; real host www.nlr.gov, DOI 10.2172/3818146",
   "official sample_submission.tif contains the 60,988-px catalogue pattern despite 'total fault absence' wording",
   "mirrored example_submission.tif is 7,172,775 cells of 1.0 (complement of the label zero-set) - flagged, never used",
@@ -247,14 +247,18 @@
    "score": 0.4133
   },
   "DARD": {
-   "rank": 8,
+   "rank": 9,
    "score": 0.3195
   },
   "extradr19": {
    "rank": 23,
    "score": 0.2778
   },
-  "retrieval": "manual page fetch; no automated competition-host request"
+  "retrieval": "manual page reads with same-day top-10 erratum; no automated competition-host request",
+  "cfld__": {
+   "rank": 2,
+   "score": 0.3585
+  }
  },
  "active_lane_review": {
   "lane": "channel steepness / chi / knickpoints",

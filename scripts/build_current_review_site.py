@@ -120,6 +120,18 @@ def render(root: Path | None = None) -> dict:
     docs = root / "docs"
     status = _read(root / "registry/current_site_status.json")
     snapshot = _read(root / status["leaderboard_snapshot"])
+    leader_rows = snapshot["rows"]
+    # A later manual re-read corrected stale ranks 2-10 in the first capture.
+    # Keep the original rows in JSON for audit, but render its explicit erratum.
+    recheck = snapshot.get("erratum_2026_10_11_recheck", {}).get("live_read_verified_rows", [])
+    top_recheck = [row for row in recheck if row["rank"] <= 10]
+    if top_recheck:
+        old_by_participant = {row["participant"]: row for row in leader_rows}
+        verified_names = {row["participant"] for row in top_recheck}
+        corrected = [{**old_by_participant.get(row["participant"], {}), **row}
+                     for row in top_recheck]
+        leader_rows = corrected + [row for row in leader_rows
+                                   if row["rank"] > 10 and row["participant"] not in verified_names]
     art = status["research_artifact"]
     tif_path = root / art["path"]
     if not tif_path.is_file():
@@ -215,7 +227,7 @@ The local LM-calibrated delta (+0.0048695) is instrument evidence only. Public r
 private-test performance, or file attribution.</p>
 <table><tr><th>rank</th><th>participant</th><th>public score</th></tr>
 <tr><td>1</td><td>xiaofanhu</td><td>0.4133</td></tr>
-<tr><td>8</td><td>DARD</td><td>0.3195</td></tr>
+<tr><td>9</td><td>DARD</td><td>0.3195</td></tr>
 <tr><td>23</td><td>extradr19</td><td>0.2778</td></tr></table>
 <p><a href="leaderboard.html">Open all 50 rows →</a> · <a href="data/feed.json">Current repository feed</a></p>
 {post_html}
@@ -265,15 +277,15 @@ That checklist does not override H65-1's negative stop or authorize submitting H
     rows = "".join(
         f"<tr><td>{int(r['rank'])}</td><td>{_e(r['participant'])}</td><td>{float(r['score']):.4f}</td>"
         f"<td>{_e(r.get('submissions', ''))}</td><td>{_e(r.get('last_activity', ''))}</td></tr>"
-        for r in snapshot["rows"]
+        for r in leader_rows
     )
-    body = f'''<h2>Official public leaderboard <span class="pill">manual snapshot</span></h2>
-<p>Observed on <b>{_e(snapshot['observed_utc'])}</b> by a manual rendered-page fetch in three chunks.
+    body = f'''<h2>Official public leaderboard <span class="pill">manual snapshot + erratum</span></h2>
+<p>Observed on <b>{_e(snapshot['observed_utc'])}</b> by manual rendered-page reads. The first capture's stale ranks 2–10 are retained in the JSON for audit; this table applies the later same-day top-10 re-read recorded in its erratum.
 The repository does not automate requests to <code>drivendata.org</code>. The public board is dynamic and may change.</p>
 <p><b>Scope:</b> these are public leaderboard rows only. They are not this repository's score, are not private-test results,
 and do not identify the TIFF associated with a row. In particular, the public 0.2778 at rank 23 belongs to extradr19;
 it does not attribute H33-2-B2.</p>
-<p>Headline values: #1 xiaofanhu <b>0.4133</b>; #8 DARD <b>0.3195</b>; #23 extradr19 <b>0.2778</b>.
+<p>Headline values: #1 xiaofanhu <b>0.4133</b>; #2 cfld__ <b>0.3585</b>; #9 DARD <b>0.3195</b>; #23 extradr19 <b>0.2778</b>.
 At the current leader score, the nonredundant one-dot special case has marginal credit bar αs = 0.08266;
 this is an algebraic condition, not a score projection.</p>
 <table><tr><th>rank</th><th>participant</th><th>public score</th><th>submissions</th><th>last activity as displayed</th></tr>{rows}</table>
@@ -296,7 +308,7 @@ does not override this literal gate.</li>
 its incomplete uniqueness and leakage reviews remain incomplete.</li>
 <li><b>H33 score attribution is unresolved.</b> The 0.2778 claim remains owner-reported; a same-named archived file is reported as
 0.2708. No organizer receipt reconciles the numbers or ties either to exact bytes. Public ranks 23 and 36 are not file attributions.</li>
-<li><b>The leaderboard was manually captured.</b> #1 xiaofanhu 0.4133; #8 DARD 0.3195; #23 extradr19 0.2778. No file attribution is available.</li></ol>
+<li><b>The leaderboard was manually captured and corrected by a same-day re-read.</b> #1 xiaofanhu 0.4133; #2 cfld__ 0.3585; #9 DARD 0.3195; #23 extradr19 0.2778. No file attribution is available.</li></ol>
 <h2>Metric decision rule</h2>
 <p>For a candidate unit-mass dot with maximum kernel weight <code>q</code> and actual incremental weighted truth credit <code>ΔT</code>,
 its general improvement condition is <code>ΔT(1−αs) &gt; αs(1−q)</code>. Only for the nonredundant special case

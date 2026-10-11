@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-10-11T20:07:52Z",
+ "generated_utc": "2026-10-11T20:10:55Z",
  "sources": [
   {
    "id": "competition",
@@ -35,7 +35,7 @@
    "title": "Public leaderboard",
    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
    "role": "manual public leaderboard snapshot only; not a project score or file attribution",
-   "status": "manual read 2026-10-11: 50 public rows; #1 xiaofanhu 0.4133, #8 DARD 0.3195, #23 extradr19 0.2778; dynamic snapshot; no file attribution; never automatically probed"
+   "status": "manual read 2026-10-11: 50 public rows; #1 xiaofanhu 0.4133, #2 cfld__ 0.3585, #9 DARD 0.3195, #23 extradr19 0.2778 (same-day top-10 re-read); dynamic snapshot; no file attribution; never automatically probed"
   },
   {
    "id": "rules_pdf",
@@ -217,66 +217,68 @@
   },
   {
    "rank": 2,
+   "participant": "cfld__",
+   "score": 0.3585,
+   "submissions": 4,
+   "last_activity": "14h 58min ago",
+   "note": "snapshot lists cfld__ at rank 10 with 0.3108 (stale)"
+  },
+  {
+   "rank": 3,
    "participant": "JerryDataWorks",
    "score": 0.3418,
    "submissions": 19,
    "last_activity": "1d 5h ago"
   },
   {
-   "rank": 3,
+   "rank": 4,
    "participant": "alexoktaba",
    "score": 0.3361,
    "submissions": 27,
    "last_activity": "1d 19h ago"
   },
   {
-   "rank": 4,
+   "rank": 5,
    "participant": "joeyfezster",
    "score": 0.3333,
    "submissions": 27,
    "last_activity": "1h 14min ago"
   },
   {
-   "rank": 5,
+   "rank": 6,
    "participant": "Batik Shirt Brothers",
    "score": 0.33,
    "submissions": 26,
    "last_activity": "23h 52min ago"
   },
   {
-   "rank": 6,
+   "rank": 7,
    "participant": "nchuzhoy",
    "score": 0.3262,
    "submissions": 6,
    "last_activity": "1w ago"
   },
   {
-   "rank": 7,
+   "rank": 8,
    "participant": "kinghorton42",
    "score": 0.3261,
    "submissions": 10,
    "last_activity": "1d 7h ago"
   },
   {
-   "rank": 8,
+   "rank": 9,
    "participant": "DARD",
    "score": 0.3195,
    "submissions": 18,
-   "last_activity": "1w 2d ago"
+   "last_activity": "1w 2d ago",
+   "note": "snapshot says rank 8 (shifted by the missing cfld__ row)"
   },
   {
-   "rank": 9,
+   "rank": 10,
    "participant": "mzoorob",
    "score": 0.3129,
    "submissions": 30,
    "last_activity": "4h 30min ago"
-  },
-  {
-   "rank": 10,
-   "participant": "cfld__",
-   "score": 0.3108,
-   "submissions": 4,
-   "last_activity": "14h 58min ago"
   },
   {
    "rank": 11,
@@ -562,6 +564,7 @@
  "leaderboard_observed_utc": "2026-10-11",
  "leaderboard_verified": true,
  "leaderboard_snapshots": 3,
+ "leaderboard_erratum_applied": true,
  "leaderboard_retrieval_policy": "manual rendered-page snapshots only; no automated competition-host request",
  "active_site_status": {
   "review_date": "2026-10-11",
@@ -2697,7 +2700,7 @@
   {
    "id": "IR-32-SCORE-01",
    "severity": "high",
-   "statement": "Every group's live score in the ledger, including H33-2-B2 0.2778, is owner-reported and has no organizer receipt linking the bytes to that score. A manual public-page read on 2026-10-11 records other participants only: #1 xiaofanhu 0.4133, #8 DARD 0.3195, and #23 extradr19 0.2778. The numerical match between extradr19's public score and the H33 claim is not attribution.",
+   "statement": "Every group's live score in the ledger, including H33-2-B2 0.2778, is owner-reported and has no organizer receipt linking the bytes to that score. A manual public-page read on 2026-10-11 records other participants only: #1 xiaofanhu 0.4133, #2 cfld__ 0.3585, #9 DARD 0.3195, and #23 extradr19 0.2778 (same-day corrected re-read). The numerical match between extradr19's public score and the H33 claim is not attribution.",
    "mitigation": "Keep owner reports, local HOLDOUT-DTI measurements, and official public-board snapshots as distinct evidence classes; require an organizer receipt to attribute a score to a raster. Manual dated snapshots only; no automated DrivenData access."
   },
   {
@@ -2988,7 +2991,7 @@
   {
    "id": "IR-60-LB-20261011",
    "severity": "high",
-   "statement": "Historical site/README fields incorrectly presented 0.3774 or DARD's 0.3195 as the current official leader. The manual 2026-10-11 public board has 50 rows: xiaofanhu #1 at 0.4133; DARD #8 at 0.3195; extradr19 #23 at 0.2778. The 0.2778 numeric match does not authenticate the H33-2-B2 owner claim.",
+   "statement": "Historical site/README fields incorrectly presented 0.3774 or DARD's 0.3195 as the current official leader. The manual 2026-10-11 public board has 50 rows: xiaofanhu #1 at 0.4133; a same-day corrected re-read added cfld__ #2 at 0.3585 and placed DARD #9 at 0.3195; extradr19 remained #23 at 0.2778. The 0.2778 numeric match does not authenticate the H33-2-B2 owner claim.",
    "mitigation": "Append the dated 50-row snapshot, distinguish public rank from owner-reported and HOLDOUT-DTI evidence, and refresh pages manually without polling the competition host."
   },
   {

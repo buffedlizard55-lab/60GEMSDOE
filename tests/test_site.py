@@ -68,8 +68,10 @@ def test_leaderboard_page_matches_manual_snapshot():
     html = (SITE / "leaderboard.html").read_text()
     assert len(snapshot["rows"]) == 50
     assert "xiaofanhu" in html and "0.4133" in html
-    assert "DARD" in html and "0.3195" in html
+    assert re.search(r"<td>2</td><td>cfld__</td><td>0\.3585</td>", html)
+    assert re.search(r"<td>9</td><td>DARD</td><td>0\.3195</td>", html)
     assert "extradr19" in html and "0.2778" in html
+    assert "same-day top-10 re-read" in html
     assert "not this repository's score" in html
     assert "Manual snapshot" in html or "manual snapshot" in html
 

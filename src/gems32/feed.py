@@ -58,6 +58,21 @@ def build(root: Path = ROOT) -> dict:
     feed["leaderboard_observed_utc"] = rows[-1].get("observed_utc") if rows else None
     feed["leaderboard_verified"] = bool(rows and rows[-1].get("verified"))
     feed["leaderboard_snapshots"] = len(rows)
+    # Apply a committed same-day manual erratum to the public feed while keeping
+    # the original capture untouched in its registry JSON for audit.
+    snap = _read_json(reg / "leaderboard_snapshot_2026-10-11.json")
+    recheck = (snap or {}).get("erratum_2026_10_11_recheck", {}).get("live_read_verified_rows", [])
+    top_recheck = [row for row in recheck if row["rank"] <= 10]
+    if snap and top_recheck:
+        original = snap["rows"]
+        old_by_name = {row["participant"]: row for row in original}
+        names = {row["participant"] for row in top_recheck}
+        feed["leaderboard"] = ([{**old_by_name.get(row["participant"], {}), **row}
+                                for row in top_recheck] +
+                               [row for row in original
+                                if row["rank"] > 10 and row["participant"] not in names])
+        feed["leaderboard_observed_utc"] = snap["observed_utc"]
+        feed["leaderboard_erratum_applied"] = True
     feed["leaderboard_retrieval_policy"] = "manual rendered-page snapshots only; no automated competition-host request"
     # Current operating status is intentionally separate from registry/submission_build.json:
     # a historic primary must not override a later preregistered stop verdict.

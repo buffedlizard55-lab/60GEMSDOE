@@ -30,6 +30,9 @@ It passes every local portal-format check, but its scientific/overlap gates fail
 
 [Download H68-1](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif) · [run card](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros-runcard.json).
 H68-1 `HOLDOUT-DTI` was `0.171894 [0.157848,0.183994]`; it also remains **DO NOT SUBMIT**.
+On the same evaluator its distance-only control was stronger at `0.190730 [0.181999,0.199647]`; H73 was preregistered against that stricter benchmark as well.
+
+### Prior H65 governing review (historical context)
 
 [Executive summary](docs/executive-summary.html) · [Site](docs/index.html) ·
 [Review and limitations](docs/research/submission-status-review.md) ·
@@ -163,7 +166,7 @@ Historical repository-page leaderboard figure (not current official board):
 
 0.3774	[https://buffedlizard55-lab.github.io/GEMSDOE/docs/index.html](https://buffedlizard55-lab.github.io/GEMSDOE/docs/index.html)
 
-**Dated erratum (2026-10-11):** this 0.3774 value is a historical repository-page figure, not the current official public leaderboard. The manual official-page read is #1 xiaofanhu 0.4133; DARD 0.3195 is rank 8. See [`registry/leaderboard_snapshot_2026-10-11.json`](registry/leaderboard_snapshot_2026-10-11.json).
+**Dated erratum (2026-10-11):** this 0.3774 value is a historical repository-page figure, not the current official public leaderboard. The manual official-page read is #1 xiaofanhu 0.4133; DARD 0.3195 is rank 9 (corrected by the same-day leaderboard re-read). See [`registry/leaderboard_snapshot_2026-10-11.json`](registry/leaderboard_snapshot_2026-10-11.json).
 
 [The full per-repository score ledger (GEMSDOE … 62GEMSDOE), dated public-board rows, and provenance distinctions are maintained in `docs/score-ledger.csv`; the official leaderboard link https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/, and the resource links: https://github.com/drivendataorg/gems-prize-reference-solution ; https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and ; https://gbcge.org/current-projects/ingenious/ ; https://epsg.io/32611 ; https://en.wikipedia.org/wiki/Tversky_index ]
 
@@ -181,7 +184,7 @@ We have a good understanding of how our hypothesis, methodology, calculations, a
 
 0.3195	is the highest score right now so we need to design a new strategy, research, testing, analyzing, and generating submission system than the current website.  It should be unique, take unique approaches to generating a submission that can score higher than 0.3195.
 
-**Dated erratum (2026-10-11):** the preceding 0.3195 statement is historical. The current manually read public leader is 0.4133 (xiaofanhu); 0.3195 (DARD) is rank 8. Public rows are not project scores or file attribution.
+**Dated erratum (2026-10-11):** the preceding 0.3195 statement is historical. The current manually read public leader is 0.4133 (xiaofanhu); 0.3195 (DARD) is rank 9 on the live board (same-day corrected re-read 2026-10-11). Public rows are not project scores or file attribution.
 
 Put this prompt into the repo readme and read it everytime we work on the project as a starting point to make sure we are building what we are aiming for and have a strong base to continue building and improving on making something useful for everyday use.  It should solve the problem of having to manually check everything ourselves and having an up to date current feed.
 
