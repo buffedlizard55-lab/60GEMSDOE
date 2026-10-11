@@ -1,7 +1,7 @@
 {
- "generated_utc": "2026-10-11T01:10:00Z",
+ "generated_utc": "2026-10-11T02:20:00Z",
  "repo": "60GEMSDOE",
- "session": "2026-10-11 tectono-geomorphic knickpoint lane",
+ "session": "2026-10-11b GEMS61 thermally-corroborated knickpoint lane + substrate diagnostic",
  "current_official_leaderboard_top": {
   "score": 0.3774,
   "participant": "xiaofanhu",
@@ -15,7 +15,29 @@
  },
  "submissions": [
   {
-   "name": "gems60-lane-knickpoint-c7653-20261011T000000Z",
+   "name": "gems61-lane-thermal-knick-40000px-20261011T020352Z",
+   "file": "downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif",
+   "sha256": "a856efbac5e229194da7374c720eb83d5fd2e88568657b0f763a2e6af3d95d90",
+   "dots": 40000,
+   "verdict": "NEGATIVE (resolution-limited) - research-only; do not submit",
+   "evidence_class": "HOLDOUT-DTI",
+   "holdout_dti": 0.002495104638095785,
+   "ci95": [
+    0.0015064297795352602,
+    0.00351135785500254
+   ],
+   "withheld_positive_pixels": 36439,
+   "paired_delta_vs_champion": [
+    -0.001417,
+    -0.00243,
+    -0.000312
+   ],
+   "uniqueness": "PASS on the rank gate; raw 3-px clause trips on dense lattices (excess over random +0.0029)",
+   "validator": "0 problems (all-finite float32, min 0.0, max 1.0, 0 NaN, 0 on catalogue)",
+   "submitted_to_competition": false
+  },
+  {
+   "name": "gems60-knickpoint-lane-c7653-20261011T000000Z",
    "file": "downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
    "sha256": "c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c",
    "dots": 7653,
@@ -31,22 +53,38 @@
    "submitted_to_competition": false
   }
  ],
+ "anchor_owner_scored": {
+  "name": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
+  "file": "downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+  "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "live_score_owner_reported": 0.2778,
+  "dots": 37654,
+  "on_catalogue_dots": 0,
+  "role": "ANCHOR - the only already-scored upload; unchanged"
+ },
  "lane_gate": {
-  "experiment": "E1",
-  "auc_placement_null": 0.22435897435897437,
-  "rule": "stop if AUC<0.55",
-  "result": "NEGATIVE-STOP"
+  "experiments": [
+   "E1 instrument audit",
+   "E2/E3 lane x thermal",
+   "E2b substrate validity"
+  ],
+  "e1_headline": "no local instrument ranks the live board (mass +0.9371; catalogue-truth -0.9021)",
+  "e2e3_headline": "lane x thermal pooled HOLDOUT-DTI 0.002495 [0.001506, 0.003511] on 36,439 withheld positives -> NEGATIVE",
+  "e2b_headline": "Hack exponent b = +0.0264 / -0.0272 vs 1.6-2.0; networks Jaccard 0.2312 -> resolution verdict; fix = 10 m elevation",
+  "slot_gate": "family best promotable holdout DTI 0.190147 - nothing this session came near it; no slot spent"
  },
  "irregularities": [
   "leaderboard top is 0.3774 (2026-10-11), not 0.3195 as the brief says",
   "rules PDF host in brief (docs.nlr.gov) wrong; real host www.nlr.gov, DOI 10.2172/3818146",
   "official sample_submission.tif contains the 60,988-px catalogue pattern despite 'total fault absence' wording",
-  "sandbox egress blocks prd-tnm.s3.amazonaws.com / ScienceBase: 10m/1m raw DEM not fetchable here (source free+official; 716 pinned URLs)",
-  "GitHub API rate limit (60/h unauthenticated) hit; use clones/codeload"
+  "mirrored example_submission.tif is 7,172,775 cells of 1.0 (complement of the label zero-set) - flagged, never used",
+  "sandbox egress blocks prd-tnm.s3.amazonaws.com / ScienceBase: 10m/1m raw DEM not fetchable here; runner path verified HTTP 200",
+  "local instruments cannot rank the live leaderboard (E1 audit + LM 2/6 orderings) - never promote on a local rank alone"
  ],
  "next_steps": [
-  "hypotheses 2-4 (basement-step, seismicity coupling, TDR contacts) run on bands already on disk",
-  "full 10m chi/ksn lane needs one unrestricted run (S3 egress) - pins ready",
-  "selector step: no promotable file this session; champion family remains the live anchor"
+  "G61-1: fetch free 3DEP 10 m (or 1 m) tiles on the Actions runner, rebuild the chi/ksn lane on a valid network, re-run the brief's first test",
+  "G61-5: repair the selection instrument (terrain-balanced off-catalogue sampling), then re-score every registry raster",
+  "Alternative deliverable already measured: sigma=1.85 px scatter-smoothed max-coverage emission (+0.0247, 12/12 paired draws)",
+  "Write the PhD-level explainer page for why the champion reads 0.2778"
  ]
 }

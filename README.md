@@ -6,16 +6,28 @@
 **Live leaderboard top (verified 2026-10-11): 0.3774** · **Group best (owner-reported): 0.2778**
 
 > ## ⚠️ SESSION VERDICT (read first)
-> **The generated submission TIF is a NEGATIVE result: do NOT submit it.**
-> * File: [`docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif`](docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif)
->   (unique — passed the registry gate; validated — 0 problems; portal-safe all-finite container)
-> * Why: the lane's preregistered first test failed — withheld fault segments carry **lower**
->   channel-steepness anomaly than orientation-matched random lines (AUC 0.224 < 0.55 stop rule),
->   and pooled holdout DTI is 0.00214 [0.0018, 0.0025] vs 0.086 for the best comparison arm.
-> * The brief's rule "If not, stop." was applied. Negative results are deliverables.
-> * Site: `docs/index.html` (front page states the verdict at the top) ·
->   [`docs/executive-summary.html`](docs/executive-summary.html) explains the exact submission ritual
->   for any future PROMOTED file, including the fix for the historical
+> **ONE-CLICK DOWNLOAD — the newest unique TIF is a NEGATIVE result: do NOT submit it.**
+> * New file (registry PRIMARY, built this session):
+>   [`docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif`](docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif)
+>   · [`.zip`](docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.zip) ·
+>   `….json` receipt next to it — unique (registry gate PASS), validated (0 problems, all-finite
+>   float32, min 0.0 / max 1.0, 0 NaN, no nodata tag), 40,000 dots, 0 on the catalogue.
+> * Verdict: **NEGATIVE**. Pooled HOLDOUT-DTI **0.002495, 95% CI [0.001506, 0.003511]** on 36,439
+>   withheld positives (evaluator `gems52-pooled-hide-v1`); it loses to the owner-reported 0.2778 champion
+>   control (paired Δ −0.001417 [−0.002430, −0.000312]), to the 0.2600 incumbent, and to a
+>   mass-matched random control (−0.037464); ~76× below the family's hard slot gate (best promotable
+>   holdout DTI 0.190147). E2b measures why: both available 100 m elevation products fail published
+>   drainage-network validity tests (Hack exponent b = +0.026 / −0.027 against 1.6–2.0 for real
+>   networks; channel networks agree at Jaccard 0.231) → a **resolution** verdict, not a detector verdict.
+> * Already-scored fallback (ANCHOR, unchanged):
+>   [`docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif`](docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif)
+>   — owner-reported live **0.2778**, the group best; UNSCORED as bytes by any organiser receipt.
+> * Earlier lane file, kept for the audit trail:
+>   [`docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif`](docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif)
+>   (NEGATIVE, pooled 0.00214 [0.0018, 0.0025]).
+> * Site: `docs/index.html` (first visible thing is the download + this verdict) ·
+>   [`docs/executive-summary.html`](docs/executive-summary.html) explains the exact submission ritual for any
+>   future PROMOTED file, including the fix for the historical
 >   *"Predicted values must be in range [0, 1]"* portal rejection.
 > * **ONE-CLICK status read-out for every file in `docs/downloads/`:** each artefact page prints a
 >   `DOWNLOAD: OK/NO · SUBMIT TO THE COMPETITION: YES/NO` line. The historical portal-rejected
@@ -216,7 +228,9 @@ Go ahead and create a pull request and then merge the pull request onto the main
 
 ---
 
-## What this session did (3 experiments, budget respected)
+## Experiment log (three experiments per session, budget respected)
+
+### Session 2026-10-11a — 60GEMSDOE chi/ksn knickpoint lane (E1, E1b, E2, E3)
 
 | # | experiment | result |
 |---|---|---|
@@ -236,6 +250,49 @@ Go ahead and create a pull request and then merge the pull request onto the main
 * **Validator**: 0 problems — no NaN, values in [0,1], float32, CRS EPSG:32611, shape 3730×3292, transform `(100, 0, 243350, 0, −100, 4508550)` match, 0 mass outside footprint.
 * **Submission name / note**: `gems60-lane-knickpoint-c7653-20261011T000000Z` / "tectono-geomorphic chi/ksn knickpoint lane; 7653 concordant channel dots; E1 negative AUC 0.224; RESEARCH-ONLY, not promoted".
 * **Verdict**: **negative** (do not spend a slot).
+
+**Downloads.** The site renders the *complete* catalogue of every GeoTIFF in `docs/downloads/`, each with
+its sha256 (see `docs/index.html` → "Complete download catalogue"). The audit trail includes, among the
+H33/H32 arm files, `docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif` and its
+`-zeros` twin (the 0.2600 base), plus this session's outputs below. Every one-click link is checked
+against the bytes on disk by `tests/test_site.py`.
+
+### Session 2026-10-11b — GEMS61 thermally-corroborated lane + substrate diagnostic (E1 audit, E2/E3, E2b)
+
+| # | experiment | result |
+|---|---|---|
+| E1 | Instrument audit — 12 live-scored artifacts × 6 truth sets; Spearman of each instrument against the live score | **No local instrument ranks the board.** Emitted mass **+0.9371**; credit/emitted px +0.7343; SGMC-off thinned/balanced 8,000 **+0.4685**; SGMC-off full −0.2797; catalogue-truth **−0.9021**. Independently, the pre-existing LM instrument (`evidence/live_mirror_validation.json`) reproduces only **2/6** known live orderings raw (3/6 calibrated). |
+| E2/E3 | Lane re-run — chi/ksn strike-concordant knickpoints with INGENIOUS thermal corroboration (springs, 2 m probes, paleo travertine) as a positive term; arms `lane_only` vs `lane_x_thermal` at 3k/8k/20k/40k dots; pooled hide-and-recover + canaries + uniqueness + validator | Selection instrument picks `lane_x_thermal_all\|40000` (**0.01787** vs 0.01781 lane-only — thermal corroboration adds ≈nothing). Pooled **HOLDOUT-DTI 0.002495 [0.001506, 0.003511]** on 36,439 withheld positives; loses to every control; canary AUCs 0.5045 / 0.5134 / 0.5045 → **NEGATIVE**. |
+| E2b | Substrate validity — Hack exponent A ∼ L^b and channel-network agreement on two independent 100 m elevation products | **b = +0.0264** (3DEP-10m-reduced) and **−0.0272** (official `det_elev`) against b ≈ 1.6–2.0 for real networks (Hack 1957; Rigon et al. 1996); the two products' channel networks agree at **Jaccard 0.2312**; depression filling raised 31.4% / 17.1% of cells → the lane's negative is a **resolution** verdict. Fix = 10 m (or 1 m) elevation, not a new detector. |
+
+#### Run card — E2/E3 + E2b (`evidence/e62_lane_thermal.json` · `evidence/e62b_substrate.json`)
+
+* **Hypothesis**: faults crossing channels leave knickpoints whose strike alignment across independent
+  drainages survives scarp degradation; thermal evidence (springs, 2 m probes, paleo sinter/travertine)
+  should concentrate the same structures.
+* **Mechanism**: Priority-Flood fill → D8 → χ/k<sub>sn</sub> (θ = 0.45) on the
+  3DEP-10m-reduced 100 m pack → knickpoint detection (4,240 knickpoints, 506,408 channel px) →
+  strike-concordance gating (28,541 eligible px) → thermal splat (σ = 3 px, max-splat, normalise by
+  99.9th pct) → 2-px catalogue ring, 3-px NMS → 40,000 dots.
+* **Named non-fault mimic**: a lithologic resistance contrast along a range front produces the same
+  strike-aligned steepness steps; and the substrate check (E2b) shows the *network itself* is partly an
+  artefact of 100 m sampling plus depression filling.
+* **Holdout**: HOLDOUT-DTI (evaluator `gems52-pooled-hide-v1`, 36,439 withheld positives, 20 km-block
+  bootstrap, 1,000 draws / 161 spatial clusters) = **0.002495, 95% CI [0.001506, 0.003511]**; paired Δ vs champion control
+  −0.001417 [−0.002430, −0.000312]; vs `incumbent_d28` −0.085662; vs mass-matched random
+  −0.037464. Canaries: concordance 0.5045, thermal-off-catalogue 0.5134, lane×thermal 0.5045 (chance).
+* **Registry uniqueness**: max |Pearson| on the union support −0.9507 (companion only); the binding rank
+  gate is satisfied; the raw 3-px clause trips at 0.8437 / 0.7012 on dense lattices but the excess over a
+  mass-matched random control is only +0.0029 / +0.0075 → density, not duplication (IR-61-OVERLAP-01).
+* **Raster sha256**: `a856efbac5e229194da7374c720eb83d5fd2e88568657b0f763a2e6af3d95d90` (75,800 B; zip
+  `9a1dcc97…`).
+* **Validator**: 0 problems — 1 band, float32, EPSG:32611, 3730×3292, transform
+  `(100, 0, 243350, 0, −100, 4508550)` matches, 0 NaN, all values in [0,1], 0 mass outside the footprint,
+  0 dots on the catalogue.
+* **Submission name / note**: `gems61-lane-thermal-knick-40000px-20261011T020352Z` /
+  "chi/ksn knickpoint strike-concordance x INGENIOUS thermal corroboration; 40000 dots; E1-audited selector;
+  UNSCORED" (114 characters).
+* **Verdict**: **negative** — a resolution-limited result, delivered with full evidence. No slot spent.
 
 ## Why the group's 0.2778 champion is what it is (PhD-level answer, from measured bytes)
 
@@ -261,6 +318,11 @@ python scripts/e1_lane_test.py      # lane first test  (~12 min, 1 core)
 python scripts/e1b_distance_profile.py
 python scripts/e2_build.py
 python scripts/e3_validate.py       # pooled holdout + uniqueness + writer + run card
+
+# session 2026-10-11b (GEMS61): instrument audit, thermally-corroborated lane, substrate diagnostic
+python scripts/e61_instrument_audit.py   # ~3 min: 12 live-scored artifacts x 6 truth sets, Spearman table
+python scripts/e62_lane_thermal.py --budgets 3000,8000,20000,40000   # ~2.5 min: E2/E3 arms + writer
+python scripts/e62b_substrate.py         # ~45 s: Hack exponent + network Jaccard on both 100 m products
 ```
 
 Repository layout: `src/gems52/` — shared template (metric/holdout/evaluate_holdout/submission_writer/grid/gates
@@ -277,11 +339,17 @@ lidar-scarp ridge ← `7GEMSDOE/downloads`; dem10-multiphysics ← `12GEMSDOE/do
 1. **No DrivenData auth** → competition rasters come from the hash-pinned owner bridge
    (`data/bridge/manifest.json` pins every sha256; `labels.tif` ≡ `existing_faults.tif`,
    sha `7ba308cc…`). No labels exist for the organisers' hidden set anywhere.
-2. **Sandbox egress** blocks `prd-tnm.s3.amazonaws.com` / ScienceBase → the brief's preferred
-   3DEP 10 m/1 m raw DEM could not be downloaded here. The lane therefore ran on the official 100 m
-   `det_elev` band. The source is free/official/public-domain; 716 tile URLs + sha256 pins exist
-   (`data/dem_links.json` upstream; 706/716 tiles processed in session 7GEMSDOE). A single
-   unrestricted-runner run unlocks the full-resolution lane (hypothesis 5).
+2. **The 100 m substrate is measured-invalid for this lane, and the fix is blocked in-sandbox.**
+   Sandbox egress blocks `prd-tnm.s3.amazonaws.com` / ScienceBase, so neither 10 m nor 1 m raw DEM
+   could be fetched here; E2b then measured *both* available 100 m products failing published
+   network-validity tests (Hack exponent b = +0.0264 and −0.0272 vs 1.6–2.0; their channel
+   networks agree at Jaccard 0.2312; 31.4% / 17.1% of cells raised by filling). The source is
+   free/official/public-domain and the Actions runner path is verified (HTTP 200 receipt,
+   `evidence/probe-egress-receipt.json`); a runner-side fetch of ~700 tiles is the one action that
+   unblocks hypothesis G61-1. Until then **do not re-run any chi/ksn lane on 100 m elevation**.
+   (The three large mirrored feature packs fetched this session — lidar scarp, GeoDAWN radiometrics,
+   GeoDAWN extensions — are deliberately *not* committed (~90 MB); they are sha256-pinned in
+   `registry/data_manifest.json` and re-fetchable from the mirror in ~3 s per blob.)
 3. **Local instruments are weak**: measured champion-vs-holdout rank inversion (above). No local
    score predicts a leaderboard score; only the submission page scores.
 4. **Budget**: session stopped at 3 experiments / < 2 h. No promotion decision was taken — that is
