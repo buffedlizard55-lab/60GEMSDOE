@@ -1,0 +1,52 @@
+{
+ "generated_utc": "2026-10-11T01:10:00Z",
+ "repo": "60GEMSDOE",
+ "session": "2026-10-11 tectono-geomorphic knickpoint lane",
+ "current_official_leaderboard_top": {
+  "score": 0.3774,
+  "participant": "xiaofanhu",
+  "verified": "2026-10-11",
+  "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/"
+ },
+ "group_best_owner_reported": {
+  "score": 0.2778,
+  "file": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
+  "evidence_class": "OWNER-REPORT"
+ },
+ "submissions": [
+  {
+   "name": "gems60-lane-knickpoint-c7653-20261011T000000Z",
+   "file": "downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
+   "sha256": "c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c",
+   "dots": 7653,
+   "verdict": "NEGATIVE - research-only; do not submit",
+   "evidence_class": "HOLDOUT-DTI",
+   "holdout_dti": 0.0021375045131882472,
+   "ci95": [
+    0.0017900288395109047,
+    0.002513410633773401
+   ],
+   "uniqueness": "PASS (max rho 0.0047, max 3px dot-overlap 0.459)",
+   "validator": "0 problems",
+   "submitted_to_competition": false
+  }
+ ],
+ "lane_gate": {
+  "experiment": "E1",
+  "auc_placement_null": 0.22435897435897437,
+  "rule": "stop if AUC<0.55",
+  "result": "NEGATIVE-STOP"
+ },
+ "irregularities": [
+  "leaderboard top is 0.3774 (2026-10-11), not 0.3195 as the brief says",
+  "rules PDF host in brief (docs.nlr.gov) wrong; real host www.nlr.gov, DOI 10.2172/3818146",
+  "official sample_submission.tif contains the 60,988-px catalogue pattern despite 'total fault absence' wording",
+  "sandbox egress blocks prd-tnm.s3.amazonaws.com / ScienceBase: 10m/1m raw DEM not fetchable here (source free+official; 716 pinned URLs)",
+  "GitHub API rate limit (60/h unauthenticated) hit; use clones/codeload"
+ ],
+ "next_steps": [
+  "hypotheses 2-4 (basement-step, seismicity coupling, TDR contacts) run on bands already on disk",
+  "full 10m chi/ksn lane needs one unrestricted run (S3 egress) - pins ready",
+  "selector step: no promotable file this session; champion family remains the live anchor"
+ ]
+}

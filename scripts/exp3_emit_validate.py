@@ -33,8 +33,8 @@ from scipy import ndimage, stats
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from gems60.holdout import build_holdout  # noqa: E402
-from gems60.metric import dti_components, pooled_dti  # noqa: E402
+from gems60chi.holdout import build_holdout  # noqa: E402
+from gems60chi.metric import dti_components, pooled_dti  # noqa: E402
 
 BUDGETS = [500, 1_000, 2_000, 3_000, 4_000, 6_000, 9_000]
 NAME = "gems60-chi-knickpoint-cast-lane-v1"

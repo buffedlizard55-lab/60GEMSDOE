@@ -1,31 +1,57 @@
-"""Official competition metric (Deterministic Tversky Index, DTI).
+# PROVENANCE -- protocol rule 2 ('reuse, don't rebuild').
+#
+# This module is the shared evaluator, copied byte-for-byte from the template repository
+#   buffedlizard55-lab/GEMSDOE52 @ main : src/gems52/metric.py
+#   sha256 3d454119edfcec3cc2a83278c2015d7e41d39d8c1142fca12311409a18ce7d1a
+#   sha256 recorded in registry/source_pins.json, recomputed with hashlib at read time.
+#
+# It is copied rather than reimplemented so that every DTI number printed by THIS repository is
+# computed by the same code that computed the numbers it is compared against. If the shared tool
+# is wrong, fix it once in the template and report it -- never keep a private fork.
+#
+# Verified in this checkout by tests/test_metric.py, which pins:
+#   * the organiser's own worked-example arithmetic TPw=3.00, FPw=1.89, FNw=2.00 -> 0.6026516673
+#     (the competition page prints 0.60);
+#   * FNw == |G| - TPw identically;  DTI = T / (0.2*(T + S - M) + 0.8*|G|);
+#   * an analytic single-pixel case in which DTI is exactly the kernel weight k(d);
+#   * agreement with a loop-for-loop brute-force transcription of the published equations.
+#
+# Published metric (source of truth read 2026-10-11):
+#   https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric
+#
+"""Distance-weighted Tversky index -- literal transcription of the published metric.
 
-Transcribed *literally* from the published definition on the problem-description
-page:
+Source of truth (read 2026-10-06, agent fetch):
+    https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric
 
-    TP_w = sum_{g in G} max_{x : d(x,g) <= R} p(x) * k(d(x,g))
-    FP_w = sum_{x : p(x) > 0}  p(x) * [ 1 - max_{g in G} k(d(x,g)) ]
-    FN_w = sum_{g in G} [ 1 - max_{x : d(x,g) <= R} p(x) * k(d(x,g)) ]
-    k(d) = max(1 - d/R, 0)
-    DTI  = TP_w / (TP_w + alpha*FP_w + beta*FN_w + eps)
+Published definitions, with R = 300 m, alpha = 0.2, beta = 0.8:
 
-with  alpha = 0.2,  beta = 0.8,  R = 300 m.
+    k(d)  = max(1 - d/R, 0)                                   (triangular kernel)
+    TPw   = sum_{g in G} max_{x : d(x,g) <= R} p(x) k(d(x,g))
+    FPw   = sum_{x : p(x) > 0} p(x) [ 1 - max_{g in G} k(d(x,g)) ]
+    FNw   = sum_{g in G} [ 1 - max_{x : d(x,g) <= R} p(x) k(d(x,g)) ]
+    DTI   = TPw / (TPw + alpha*FPw + beta*FNw + eps)
 
-Source (public): https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/
+Algebraic consequences (checked against brute force, not a model of hidden labels):
 
-Implementation notes
---------------------
-* ``R`` is expressed in **pixels** (R_px) because the competition grid is 100 m.
-  The default R_px = 3.0 reproduces R = 300 m exactly on that grid.
-* ``TP_w`` is computed by exact brute force over the integer offsets inside the
-  kernel disc (dx^2+dy^2 <= R_px^2).  For R_px <= 4 this is <= 49 offsets, so it
-  is exact and fast.
-* ``FP_w`` uses the *exact Euclidean* distance transform from the truth set, so
-  ``max_g k(d(x,g))`` is exact everywhere (not only inside the disc).
-* ``tests/test_metric.py`` checks this implementation against a literal
-  brute-force O(len(G) * N) transcription defined in that file.
+    (i)  FNw == |G| - TPw identically, hence with T = TPw, S = sum_x p(x),
+         M = sum_x p(x) max_g k(d(x,g))  and  FPw = S - M:
 
-Nothing here is fitted or tuned; it is the published formula.
+             DTI = T / ( 0.2*(T + S - M) + 0.8*|G| )
+
+    (ii) For general incremental credit c and false-positive increment f, an addition helps iff
+
+             c * (1 - 0.2*DTI) > 0.2*DTI*f.
+
+         Only in the special case of one previously uncovered truth pixel, with c=w and f=1-w,
+         does this reduce to w > 0.2*DTI. Max-cover competition between nearby predictions means
+         c is not generally the nearest-truth kernel weight. Calibration and placement still matter.
+         Uniform scaling of a fixed support is monotone, but that one-parameter argument alone is
+         not a proof of global binary optimality or of optimal expected DTI under uncertain truth.
+
+The organiser's published worked example (TPw 3.00, FPw 1.89, FNw 2.00) evaluates to
+0.6026516673...; the page rounds it to 0.60.  ``tests/test_metric.py`` pins that number so a
+future edit cannot silently change the metric.
 """
 
 from __future__ import annotations
@@ -36,114 +62,119 @@ from scipy import ndimage
 ALPHA = 0.2
 BETA = 0.8
 R_M = 300.0
-EPS = 1e-7
+PIXEL_M = 100.0
+R_PX = R_M / PIXEL_M          # exactly 3.0 px at 100 m
+EPS = 0.0                      # published eps unquantified; empty denominator explicitly returns zero
 
 
-def kernel_offsets(r_px: float) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """Integer (dy, dx, weight) triples with dx^2+dy^2 <= r_px^2."""
-    r = int(np.floor(r_px))
-    dys, dxs, ws = [], [], []
-    for dy in range(-r, r + 1):
-        for dx in range(-r, r + 1):
-            d = float(np.hypot(dx, dy))
-            if d <= r_px:
-                dys.append(dy)
-                dxs.append(dx)
-                ws.append(max(1.0 - d / r_px, 0.0))
-    return np.array(dys), np.array(dxs), np.array(ws, dtype=np.float64)
+def kernel(d_m) -> np.ndarray:
+    """Triangular kernel k(d) = max(1 - d/R, 0), distances in metres."""
+    return np.maximum(1.0 - np.asarray(d_m, dtype=np.float64) / R_M, 0.0)
 
 
-def _shift(a: np.ndarray, dy: int, dx: int, fill: float = 0.0) -> np.ndarray:
-    """Shift ``a`` by (dy, dx) with zero fill (a[y, x] -> out[y+dy, x+dx])."""
-    out = np.full_like(a, fill, dtype=np.float64)
-    h, w = a.shape
-    ys0, ys1 = max(0, dy), min(h, h + dy)
-    xs0, xs1 = max(0, dx), min(w, w + dx)
-    if ys0 >= ys1 or xs0 >= xs1:
-        return out
-    out[ys0:ys1, xs0:xs1] = a[ys0 - dy:ys1 - dy, xs0 - dx:xs1 - dx]
+def _offsets() -> list[tuple[int, int, float]]:
+    """All lattice offsets with |offset| <= R, as (dy, dx, k). Enumerated, never approximated."""
+    out = []
+    for dy in range(-3, 4):
+        for dx in range(-3, 4):
+            d = float(np.hypot(dy, dx))
+            if d <= R_PX + 1e-12:
+                out.append((dy, dx, 1.0 - d / R_PX))
     return out
 
 
-def dti_components(
-    pred: np.ndarray,
-    truth: np.ndarray,
-    r_px: float = 3.0,
-    alpha: float = ALPHA,
-    beta: float = BETA,
-) -> dict:
-    """Return TP_w, FP_w, FN_w, |G| and DTI for a single raster.
+OFFSETS = _offsets()
 
-    Parameters
-    ----------
-    pred : float array
-        Prediction mass in [0, 1] (the submission).
-    truth : bool array
-        Ground-truth fault mask for this scoring unit.
+
+def max_cover(p: np.ndarray, g: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Per-truth-pixel best cover m(g), per-pixel best truth weight q(x), and diagnostics.
+
+    m     = 1-D, in row-major order over the truth pixels: m[i] = max over emitted x within R of
+            p(x)*k(d(x, g_i))                 (used by TPw and FNw)
+    q[x] = max over truth g of k(d(x,g))                       (used by FPw)
+
+    ``m`` is computed by enumerating the exact lattice offsets inside the kernel disc (no
+    interpolation, no separable approximation), which is what makes it a literal transcription.
+    ``q`` is the kernel applied to the exact Euclidean distance transform, i.e.
+    max_g k(d) = k(min_g d) because k is non-increasing.
     """
-    pred = np.asarray(pred, dtype=np.float64)
-    truth = np.asarray(truth, dtype=bool)
-    if pred.shape != truth.shape:
-        raise ValueError(f"shape mismatch: {pred.shape} vs {truth.shape}")
-
-    n_gt = int(truth.sum())
-    if n_gt == 0:
-        return dict(tpw=0.0, fpw=0.0, fnw=0.0, n_gt=0, dti=float("nan"))
-
-    if r_px == int(r_px) and float(r_px) == float(int(r_px)):
-        dys, dxs, ws = kernel_offsets(float(r_px))
-    else:
-        dys, dxs, ws = kernel_offsets(float(r_px))
-
-    # ---- TP_w -------------------------------------------------------------
-    # For every truth pixel g: max over the disc of pred(x) * k(d(x, g)).
-    ty, tx = np.nonzero(truth)
-    best = np.zeros(n_gt, dtype=np.float64)
-    p = pred
-    for dy, dx, w in zip(dys, dxs, ws):
-        # value contributed by source pixel (ty-dy, tx-dx) to truth pixel (ty, tx)
-        sy = ty - dy
-        sx = tx - dx
-        ok = (sy >= 0) & (sy < p.shape[0]) & (sx >= 0) & (sx < p.shape[1])
-        v = np.zeros(n_gt, dtype=np.float64)
-        v[ok] = p[sy[ok], sx[ok]] * w
-        np.maximum(best, v, out=best)
-    tpw = float(best.sum())
-
-    # ---- FP_w -------------------------------------------------------------
-    # max_g k(d(x,g)) = max(1 - D(x)/R, 0) with D the Euclidean distance to the
-    # nearest truth pixel.  Computed exactly via a distance transform.
-    dist = ndimage.distance_transform_edt(~truth)
-    kbar = np.clip(1.0 - dist / float(r_px), 0.0, None)
-    fpw = float((pred * (1.0 - kbar)).sum())
-
-    # ---- FN_w (identity FN_w = |G| - TP_w, asserted here) -----------------
-    fnw = float(n_gt) - tpw
-    if fnw < -1e-6:
-        raise AssertionError("FN_w = |G| - TP_w violated")
-
-    denom = tpw + alpha * fpw + beta * max(fnw, 0.0) + EPS
-    return dict(tpw=tpw, fpw=fpw, fnw=max(fnw, 0.0), n_gt=n_gt, dti=tpw / denom)
+    w = np.where(p > 0, p, 0.0).astype(np.float64)
+    # zero-padded shifts, never np.roll: a wrapped edge would invent cover across the grid
+    wp = np.pad(w, 3, mode="constant", constant_values=0.0)
+    idx = g > 0
+    gy, gx = np.nonzero(idx)
+    m = np.zeros(gy.size, dtype=np.float64)
+    for dy, dx, kk in OFFSETS:
+        # Gather truth coordinates before multiplication: 60k values, not a
+        # 12.28M-cell temporary for every offset. Sign is immaterial to the
+        # symmetric kernel but the zero padding is essential.
+        m = np.maximum(m, wp[gy + 3 - dy, gx + 3 - dx] * kk)
+    ed = ndimage.distance_transform_edt(~idx, sampling=PIXEL_M)
+    q = np.maximum(1.0 - ed / R_M, 0.0)
+    return m, q, ed
 
 
-def dti(pred: np.ndarray, truth: np.ndarray, r_px: float = 3.0) -> float:
-    return dti_components(pred, truth, r_px=r_px)["dti"]
+def dti(p: np.ndarray, g: np.ndarray, alpha: float = ALPHA, beta: float = BETA,
+        eps: float = EPS) -> dict:
+    """Exact DTI of prediction ``p`` against truth mask ``g`` (both 2-D, same grid)."""
+    p = np.asarray(p, dtype=np.float64)
+    g = np.asarray(g)
+    if p.shape != g.shape or p.ndim != 2:
+        raise ValueError(f"2D shape mismatch {p.shape} vs {g.shape}")
+    if not np.isfinite(p).all() or (p < 0).any() or (p > 1).any():
+        raise ValueError("predictions must be finite and within [0,1]")
+    if not np.isfinite([alpha, beta, eps]).all() or alpha < 0 or beta < 0 or eps < 0:
+        raise ValueError("metric coefficients and epsilon must be finite and nonnegative")
+    ng = int((g > 0).sum())
+    if ng == 0:
+        return dict(dti=0.0, tpw=0.0, fpw=float(np.nansum(p)), fnw=0.0, n_truth=0,
+                    mass=float(np.nansum(p)), m_covers=0.0, reduced=None)
+    m, q, _ = max_cover(p, g)
+    tpw = float(m.sum())
+    mass = float(p[p > 0].sum())
+    m_cover = float((p * q)[p > 0].sum())
+    fpw = mass - m_cover
+    fnw = ng - tpw
+    num = tpw
+    den = tpw + alpha * fpw + beta * fnw + eps
+    reduced_den = (1 - beta) * tpw + alpha * (mass - m_cover) + beta * ng + eps
+    reduced = tpw / reduced_den if reduced_den > 0 else 0.0
+    return dict(dti=num / den if den > 0 else 0.0, tpw=tpw, fpw=fpw, fnw=fnw, n_truth=ng,
+                mass=mass, m_covers=m_cover, reduced=float(reduced))
 
 
-def pooled_dti(components: list[dict], alpha: float = ALPHA, beta: float = BETA) -> float:
-    """Pooled DTI: sum the components over scoring units, then form the ratio.
+def dti_bruteforce(p: np.ndarray, g: np.ndarray, alpha: float = ALPHA,
+                   beta: float = BETA) -> float:
+    """Loop-for-loop transcription over the positive sets only. Reference implementation for tests."""
+    pi = np.argwhere(np.asarray(p) > 0)
+    gi = np.argwhere(np.asarray(g) > 0)
+    if len(gi) == 0:
+        return 0.0
+    pv = p[pi[:, 0], pi[:, 1]].astype(np.float64)
+    tpw = 0.0
+    for gxy in gi:
+        if len(pi):
+            d = np.hypot(pi[:, 0] - gxy[0], pi[:, 1] - gxy[1]) * PIXEL_M
+            kk = np.maximum(1.0 - d / R_M, 0.0)
+            best = float(np.max(pv * kk)) if kk.size else 0.0
+            sel = d <= R_M + 1e-9
+            best = float(np.max((pv * kk)[sel])) if sel.any() else 0.0
+        else:
+            best = 0.0
+        tpw += best
+    fpw = 0.0
+    for x in pi:
+        d = np.hypot(gi[:, 0] - x[0], gi[:, 1] - x[1]) * PIXEL_M
+        fpw += float(p[x[0], x[1]]) * (1.0 - (np.max(np.maximum(1.0 - d / R_M, 0.0)) if len(gi) else 0.0))
+    fnw = len(gi) - tpw
+    return tpw / (tpw + alpha * fpw + beta * fnw)
 
-    This is the correct pooling for a global-ratio metric; averaging per-unit
-    DTIs is not (it is not decomposable).
-    """
-    t = sum(c["tpw"] for c in components)
-    f = sum(c["fpw"] for c in components)
-    k = sum(c["n_gt"] for c in components)
-    fn = k - t
-    return t / (t + alpha * f + beta * fn + EPS)
+
+def credit_bar(dti_value: float, alpha: float = ALPHA) -> float:
+    """Realised kernel weight a marginal emitted pixel must beat to raise DTI (see module docstring)."""
+    return alpha * dti_value
 
 
-def marginal_credit_bar(current_dti: float, alpha: float = ALPHA) -> float:
-    """A unit of added mass raises DTI iff its realised kernel credit exceeds
-    alpha * current DTI.  (First-order condition of the metric.)"""
-    return alpha * current_dti
+def bar_to_max_distance_px(bar: float) -> float:
+    """Kernel weight bar -> the largest lattice distance (px) that still clears it, for p = 1."""
+    return float(R_PX * max(0.0, 1.0 - bar))

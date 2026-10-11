@@ -45,10 +45,10 @@ from scipy.spatial import cKDTree
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from gems60.hydro import (bfs_levels, chi_transform, d8_flow_directions,  # noqa: E402
+from gems60chi.hydro import (bfs_levels, chi_transform, d8_flow_directions,  # noqa: E402
                           fill_depressions, flow_accumulation)
-from gems60.holdout import build_holdout  # noqa: E402
-from gems60.knick import channel_mask, channel_step_statistic, extract_profiles  # noqa: E402
+from gems60chi.holdout import build_holdout  # noqa: E402
+from gems60chi.knick import channel_mask, channel_step_statistic, extract_profiles  # noqa: E402
 
 W = 31                  # segmentation window (samples), declared
 A_THRESHOLD_PX = 100    # 1 km2 channel initiation, declared

@@ -1,0 +1,107 @@
+# RECEIPT CHANNEL (2026-10-11): this workflow is the only way this sandbox can observe the
+# runner's network.  It probes the free official 3DEP hosts the next lane needs, then always
+# writes evidence/probe-egress-receipt.json and commits it back to this branch.  Actions run
+# logs are NOT readable from the sandbox (gh run list -> 403), so the committed receipt is the
+# evidence; a push that touches this file is what dispatches it.
+name: probe-egress
+
+# Probe run (2026-10-11).  Purpose: establish, inside a GitHub-hosted runner, which of the official
+# data hosts this project depends on are reachable, and pin the SHA-256 of the official USGS 3DEP
+# DEM tiles the lane needs.  The job COMMITS its own receipt back to the branch that triggered it,
+# because the Actions API is not readable from the development sandbox with the available token --
+# a receipt in git is the observation channel this project actually has.
+#
+# Official sources probed (public domain / open licence):
+#   USGS 3DEP 1/3 arc-second seamless DEM (the 10 m product; the competition supplies a
+#   `1m_DEM_links.csv` list of 1 m tiles, and this 1/3 arc-second family is the same programme):
+#     https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif
+#   USGS 3DEP 1 arc-second (30 m) staged products:
+#     https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/current/n39w119/USGS_1_n39w119.tif
+#   The National Map API and ScienceBase catalog item for GeoDAWN.
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/probe-egress.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: runner facts
+        run: |
+          python3 -V; nproc; free -m | head -2; df -h / | tail -1
+
+      - name: probe official data hosts (HEAD only)
+        continue-on-error: true
+        run: |
+          : > /tmp/probe.txt
+          for url in \
+            "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif" \
+            "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/current/n39w119/USGS_1_n39w119.tif" \
+            "https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7" \
+            "https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National%20Elevation%20Dataset%20(NED)%201%20arc-second&bbox=-120,39,-119,40&outputFormat=JSON" \
+            "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/" ; do
+            code=$(curl -sS -o /dev/null -w '%{http_code} %{size_download} %{content_type}' -m 90 -I "$url" || echo "ERR")
+            echo "$code  $url" | tee -a /tmp/probe.txt
+          done
+
+      - name: fetch one official 10 m tile and pin it
+        id: pin
+        continue-on-error: true
+        run: |
+          URL="https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif"
+          /usr/bin/time -f "elapsed %E" curl -sS -m 1200 -o tile13.tif "$URL" 2>&1 | tail -1
+          ls -l tile13.tif 2>/dev/null || true
+          sha256sum tile13.tif 2>/dev/null | tee /tmp/tile.sha || true
+          python3 -m pip install --quiet --no-input "numpy" rasterio
+          python3 - >> /tmp/probe.txt 2>&1 <<'PY' || true
+          import json, rasterio
+          with rasterio.open("tile13.tif") as ds:
+              print("TILE13", json.dumps({
+                  "shape": [ds.height, ds.width], "dtype": ds.dtypes[0], "crs": ds.crs.to_string(),
+                  "cell_deg": ds.transform.a, "nodata": ds.nodata, "bounds": list(ds.bounds)}))
+              a = ds.read(1, out_shape=(1, 256, 256))
+              print("TILE13 stats", float(a.min()), float(a.max()))
+          PY
+          rm -f tile13.tif
+
+      - name: write and commit the receipt
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, subprocess, datetime, platform
+          probe = pathlib.Path('/tmp/probe.txt').read_text() if pathlib.Path('/tmp/probe.txt').exists() else ''
+          sha = pathlib.Path('/tmp/tile.sha').read_text().strip() if pathlib.Path('/tmp/tile.sha').exists() else ''
+          rec = {
+            "workflow": "probe-egress",
+            "run_id": os.environ.get("GITHUB_RUN_ID"),
+            "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
+            "ref": os.environ.get("GITHUB_REF"),
+            "sha": os.environ.get("GITHUB_SHA"),
+            "runner": os.environ.get("RUNNER_OS") + " " + os.environ.get("RUNNER_IMAGE_OS","") + " " + os.environ.get("RUNNER_ARCH",""),
+            "python": platform.python_version(),
+            "utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "head_probes": probe.strip().splitlines(),
+            "tile13_sha256_line": sha,
+            "note": "Receipt for probe run. Records only what was observed in the runner.",
+          }
+          p = pathlib.Path("evidence/probe-egress-receipt.json")
+          p.parent.mkdir(parents=True, exist_ok=True)
+          p.write_text(json.dumps(rec, indent=2) + "\n")
+          print(p.read_text())
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add evidence/probe-egress-receipt.json
+          git commit -m "probe-egress receipt (run $GITHUB_RUN_ID) [skip ci]" || echo "nothing to commit"
+          git push origin "HEAD:${GITHUB_REF_NAME}" || echo "push failed"

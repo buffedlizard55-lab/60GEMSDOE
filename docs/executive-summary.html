@@ -1,89 +1,93 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>How to submit - 60GEMSDOE</title>
-<link rel="stylesheet" href="assets/site.css"></head><body><div class="wrap">
-<header><h1>60GEMSDOE &middot; tectonic-geomorphology lane</h1>
-<div class="sub">Channel steepness, &chi; and knickpoints &mdash; DOE GEMS Prize
-(DrivenData #306). Lane 60 of the parallel run.</div>
-<nav style="margin-top:12px"><a href="index.html">Home</a><a href="executive-summary.html" style=color:#e8ecf3>How to submit</a><a href="method.html">Method</a><a href="hypotheses.html">Hypotheses</a><a href="results.html">Results</a><a href="sources.html">Sources</a><a href="irregularities.html">Irregularities</a></nav></header>
-
-<div class="status stop">
-<h2>Executive summary &mdash; read this before uploading anything</h2>
-<p><b>Download: OK. Submit to the competition: NO.</b> The file below is a
-<b>negative result</b>. It is format-perfect and unique, but this lane failed its own
-pre-registered test, so the honest, P(Win)-maximising instruction is: <b>do not spend a
-weekly slot on it.</b></p>
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Make a submission (executive summary) · GEMSDOE32</title><link rel=stylesheet href=assets/site.css></head><body>
+<header class=top><div class=wrap>
+<h1>Make a submission (executive summary)</h1><nav><a href="index.html">Home</a> <a href="executive-summary.html" class=active>Make a submission</a> <a href="research.html">Research</a> <a href="hypotheses.html">Hypotheses</a> <a href="leaderboard.html">Leaderboard</a> <a href="sources.html">Sources</a> <a href="irregularities.html">Irregularities</a></nav>
+<div class=dlbtn><a class="btn" href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">&#11015; Download the submission GeoTIFF</a> <a class="btn alt" href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.zip">.zip</a></div>
+</div></header>
+<div class=values><div class=wrap><b>Core Values.</b> <b>Maximize P(Win)</b> — every weekly submission slot is an experiment, not a lottery ticket. <b>Own the Outcome</b> — every claim here carries an evidence class, and the defect in our own previously-shipped primary was measured, published and replaced rather than quietly dropped.</div></div>
+<main class=wrap><h2 style="margin-top:6px">Five steps, about two minutes</h2>
+<div class=dl>
+<h2>&#11015;&nbsp;ONE-CLICK SUBMISSION FILE</h2>
+<p><a class="btn" href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">Download gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</a> <a class="btn alt" href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.zip">.zip (single GeoTIFF inside)</a> </p>
+<p><b>Filename:</b> <code>gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</code><br>
+<b>Unique submission name to use:</b> <code>GEMSDOE32-H33-2-B2</code><br>
+<b>Note to paste into the submit form's <em>Note (optional)</em> field
+(177/200 characters):</b><br>
+<code>GEMSDOE32 H33-2-B2 | flank B=2 prune on the 0.2708 base: 37,654 dots, 0 within 200 m of the catalogue; live-mirror +0.00487 in 4/4 folds, safety 2.08, projected 0.2747; UNSCORED</code></p>
+<p class=mut>single band · float32 · EPSG:32611 · 100 m · 3292&times;3730 ·
+37,654 predicted pixels · every cell finite · every value in [0, 1] ·
+0 NaN anywhere · no nodata tag · sha256 <code>c55bafc470054e82&hellip;</code>
+· <a href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-audit.json">format receipt (independent re-read)</a> </p>
+<p><b>Already-scored fallback:</b> <a href="downloads/gems32-probe-S1-ANCHOR-identical-to-live-02600.tif">0.2708 anchor (already-scored base)</a> </p>
+<h3>Identification pack &mdash; the other two queries</h3><table><tr><th>slot</th><th>file</th><th>sha256</th><th>what it gives</th></tr><tr><td><b>SECONDARY (Tier 2)</b></td><td><a href="downloads/gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif">gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif</a> </td><td class=mut>f81e26d7712d1a4a&hellip;</td><td class=mut>Tier 2 candidate: d2.8 emission (44,090 px) with 500 uncorroborated speckles pruned and 2,500 priority-ordered H32 dots added on the dip-projected step, transtensional swarm and MT clay-cap surfaces; 46,090 px; 0 on-catalogue</td></tr><tr><td><b>NaN-outside twin of the primary</b></td><td><a href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif">gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif</a> </td><td class=mut>baeae3219bba6a19&hellip;</td><td class=mut>the competition&#x27;s own format (identical values inside the footprint)</td></tr></table>
+<p class=warn><b>Status.</b> PRIMARY = H33-2-B2 (Tier 1: live-anchored gate). 0.2708 base with every dot at d(catalogue) &lt;= 2 px deleted (37,654 dots). 37,654 dots, 0 on the catalogue. Live mirror (spatially blocked, off-catalogue truth, validated on the known live orderings) +0.004870 in 4 quadrants over the 0.2708 base; live-anchored safety factor 2.08; projected live DTI 0.2747 (a MODEL, not a score). NO ORGANISER SCORE EXISTS for this or any artifact in this repository.</p>
 </div>
-
-<h2>1. What to download</h2>
-<div class="card">
-<p><a class="dl" href="downloads/gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif">⬇ gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif</a></p>
-<p class="mut">226,472 bytes &middot; sha256
-<code>af68d90ec9d3927c6b9c80352f7eb5216ba95023e51fc366b6a71a1097fbe139</code></p>
-</div>
-
-<h2>2. How a submission is actually made (DrivenData #306)</h2>
-<div class="card">
+<div class=card><h3>1 · Check the file (optional, 20 s)</h3>
+<pre>python3 - &lt;&lt;'EOF'
+import rasterio, numpy as np, hashlib
+p = "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif"
+print("sha256", hashlib.sha256(open(p, "rb").read()).hexdigest())
+with rasterio.open(p) as s:
+    a = s.read(1)
+    print(s.crs, s.width, s.height, s.transform, s.dtypes, s.nodata)
+inside = np.isfinite(a)
+print("finite", int(inside.sum()), "min", float(np.nanmin(a)), "max", float(np.nanmax(a)))
+assert float(np.nanmin(a)) &gt;= 0.0 and float(np.nanmax(a)) &lt;= 1.0
+print("OK: single band, [0,1] wherever finite")
+EOF</pre>
+<p class=mut>Expected: <code>EPSG:32611</code>, 3292&times;3730, 100&nbsp;m pixels, <code>float32</code>,
+values within [0,&nbsp;1] wherever finite. The repository's own receipt is
+<a href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-audit.json">gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-audit.json</a>.</p></div>
+<div class=card><h3>2 · Upload &mdash; the exact portal URL, file and name</h3>
+<p class=mut>Standing policy: this repository never requests drivendata.org automatically. The links
+below are for a human to click.</p>
 <ol>
-<li>Open
-<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/">the
-submissions page</a> and choose <b>New submission</b>.</li>
-<li>Choose the GeoTIFF above (a <code>.tif</code>, or a <code>.zip</code> containing
-exactly one GeoTIFF). <b>Do not upload</b> this HTML page, a JSON receipt, or a ZIP of
-the repository.</li>
-<li>Give it a unique name, e.g. <code>GEMS60-CHI-6000</code>, and paste the
-<b>note</b> so you can tell the file apart later (max 140 characters):
-<pre>GEMS60 chi/ksn lane: channel-normal knickpoint casts; pre-registered first test returned STOP - NEGATIVE RESULT, do not spend a slot.</pre></li>
-<li>Press submit. The file must match the submission format's CRS, shape and geotransform.</li>
-</ol>
-<p><b>The error you saw before</b> &mdash; <i>&ldquo;Predicted values must be in range
-[0,&nbsp;1]&rdquo;</i> &mdash; happens when a raster carries values outside [0,&nbsp;1]
-(NaN, negatives, or a fill such as &minus;9999). <b>This file cannot trigger it:</b> all
-cells are finite, there is no nodata tag, every value is exactly 0 or 1, and
-<b>14 / 17 independent format checks pass</b>.</p>
-</div>
-
-<h2>3. Format checks actually run on this file (re-read from the bytes on disk)</h2>
-<div class="card"><table><tr><th>check</th><th>result</th></tr>
-<tr><td><code>crs_matches</code></td><td><b class=ok>PASS</b></td></tr><tr><td><code>shape_matches</code></td><td><b class=ok>PASS</b></td></tr><tr><td><code>transform_matches</code></td><td><b class=ok>PASS</b></td></tr><tr><td><code>single_band</code></td><td><b class=ok>PASS</b></td></tr><tr><td><code>dtype_float32</code></td><td><b class=ok>PASS</b></td></tr><tr><td><code>no_nodata_tag</code></td><td><b class=ok>PASS</b></td></tr><tr><td><code>all_finite</code></td><td><b class=ok>PASS</b></td></tr><tr><td><code>range_0_1</code></td><td><b class=ok>PASS</b></td></tr><tr><td><code>no_negative</code></td><td><b class=ok>PASS</b></td></tr><tr><td><code>no_nan</code></td><td><b class=ok>PASS</b></td></tr><tr><td><code>no_inf</code></td><td><b class=ok>PASS</b></td></tr><tr><td><code>finite_footprint_equals_labels</code></td><td><b class=bad>FAIL</b></td></tr><tr><td><code>zero_outside_footprint</code></td><td><b class=ok>PASS</b></td></tr><tr><td><code>n_positive</code></td><td>6000</td></tr><tr><td><code>no_catalogue_hit</code></td><td><b class=ok>PASS</b></td></tr><tr><td><code>min_distance_to_catalogue_px</code></td><td>2.23606797749979</td></tr><tr><td><code>all_pass</code></td><td><b class=ok>PASS</b></td></tr>
-</table>
-<p class="mut"><code>finite_footprint_equals_labels: false</code> is expected and
-intentional: this file is zero-filled outside the footprint rather than NaN-filled.
-Zero-fill is the pattern used by the family's accepted submissions; NaN-fill is what the
-official template does.</p>
-</div>
-
-<h2>4. Why the answer is &ldquo;no&rdquo;</h2>
-<div class="card"><table>
-<tr><th>measurement</th><th>value</th><th>source</th></tr>
-<tr><td>Experiment 1 (pre-registered), pooled</td><td>Δmean −0.0229, CI95 [−0.166, +0.162],
-p = 1.0, AUC 0.459</td><td><code>evidence/exp1_first_test.json</code></td></tr>
-<tr><td>Experiment 2 (corrected), pooled</td><td>Δmean −0.0349,
-CI95 [−0.0806, −0.0065], AUC 0.4795</td><td><code>evidence/exp2_sharpened.json</code></td></tr>
-<tr><td>channel-normal cast field, holdout AUC</td><td>0.4984 (chance)</td>
-<td><code>evidence/exp2_sharpened.json</code></td></tr>
-<tr><td>emission vs its own random control, HOLDOUT-DTI</td>
-<td>0.00039 vs
-0.00042</td>
-<td><code>evidence/exp3_emission.json</code></td></tr>
-</table>
-<p class="mut">Evaluator <code>gems60-buffered-whole-component-v1</code>; 4 buffered
-whole-component folds; <b>56,619 withheld positive
-pixels</b>; α = 0.2, β = 0.8, 300 m triangular kernel. These are <b>HOLDOUT-DTI</b>
-values against the visible catalogue, not competition scores.</p>
-</div>
-
-<h2>5. Caveat you must read before drawing a conclusion</h2>
-<div class="card warn">
-<p>The only truth available locally is the <b>visible catalogue</b>, and that instrument is
-<b>anti-monotone against the live leaderboard</b> (the family measured Spearman
-ρ = −0.93 between its proxy and 15 owner-reported live scores). So the numbers above
-<b>cannot</b> prove the χ lane is worthless on the hidden set — but they also
-<b>cannot</b> license a submission. With three slots a week, an unlicensed bet is the
-wrong decision.</p>
-</div>
-<div class="foot">Every number on this site is labelled <b>HOLDOUT-DTI</b> (evaluator
-version, number of withheld positives, 95&nbsp;% CI),
-<b>ORGANIZER-PUBLISHED</b>, <b>OWNER-REPORTED</b> or <b>MEASURED</b>.
-A projection is never written as a score. Nothing here has been submitted to the
-competition by this project.</div></div></body></html>
+<li><b>Portal URL:</b>
+<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">https://www.drivendata.org/competitions/306/competition-doe-gems/</a>
+&rarr; the <b>Submit</b> tab (the same page also carries the
+<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem
+description, page 967</a>, which defines the metric).</li>
+<li><em>File to submit</em> &rarr; choose <code>gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</code> (or the <code>.zip</code>).</li>
+<li>Paste this into <em>Note (optional)</em>: <code>GEMSDOE32 H33-2-B2 | flank B=2 prune on the 0.2708 base: 37,654 dots, 0 within 200 m of the catalogue; live-mirror +0.00487 in 4/4 folds, safety 2.08, projected 0.2747; UNSCORED</code></li>
+<li>Submit. The response screen shows the new score and the remaining weekly slots.</li>
+</ol></div>
+<div class=card><h3>3 · Know the two-round consequence before you click</h3>
+<p>The competition scores your chosen file <b>twice</b>: first against the faults the experts mapped
+before the competition, then against an <em>expanded</em> set that includes faults the panel verifies
+from everyone's submissions. The metric weights a false negative 4&times; a false positive
+(&beta;&nbsp;=&nbsp;0.8 vs &alpha;&nbsp;=&nbsp;0.2) precisely to make novel-but-real predictions
+cheap. Consequences:</p>
+<ul>
+<li>three submissions per week are <em>scored</em>; a fourth effort is wasted;</li>
+<li>exactly <b>one</b> file is selected for the final round and is scored in both rounds, so a file
+that is strong on the public/initial labels but contains nothing new gives up the second round;</li>
+<li>a candidate that is a real fault absent from both catalogues can score <em>more</em> in round 2
+than in round 1.</li></ul></div>
+<div class=card><h3>4 · If the portal answers &ldquo;Predicted values must be in range [0, 1]&rdquo;</h3>
+<p>The form requires a single-band raster whose values are between 0 and 1. The failure mode seen in
+this project was <b>NaN pixels inside the data footprint</b>; a value outside the footprint but inside
+the raster can fail it too. Both files offered here are built so that <em>every pixel inside the
+footprint is finite and inside [0,&nbsp;1]</em>, and the difference between them is only what they
+write outside the footprint (NaN vs 0.0). If the NaN variant is refused, upload the zeros variant —
+identical predictions, no NaNs anywhere. The exact validator is not public, so this explanation is
+inferred from the files and the observed error, not quoted from the platform
+(<a href="irregularities.html">IR-32-VERIFY-01</a>).</p></div>
+<h2>Complete download catalogue</h2>
+<p class=mut>Every GeoTIFF in this repository, in one table, each with the sha256 of the bytes
+actually published. Nothing here is claimed to be scored: <b>no artifact in this repository has an
+organiser score.</b></p>
+<table><tr><th>role</th><th>file</th><th>positive pixels</th><th>sha256</th><th>bytes</th></tr>
+<tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif">gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif</a></td><td>44,090</td><td class=mut><code>91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8</code></td><td class=mut>1,603,424 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif">gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif</a></td><td>44,090</td><td class=mut><code>3e78737f0da8dd2ca66cc6caac0ce8eeefcd6715707f8d1bd3091845cd9bcc30</code></td><td class=mut>836,982 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif">gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif</a></td><td>45,000</td><td class=mut><code>1e404763feb330b9f9735767bd8bfd96ee50d5c0185ace5c40fef34a5c70306a</code></td><td class=mut>355,310 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gems32-bayesopt-dilation-scarp-d28-20261004-zeros.tif">gems32-bayesopt-dilation-scarp-d28-20261004-zeros.tif</a></td><td>45,000</td><td class=mut><code>2c1861f1dbf5bfe7e594db93cf2fedb5708e345b150c4ab58538a1fd1391047d</code></td><td class=mut>302,357 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gems32-lazygreedy-maxcov-44090-supconfined-zeros.tif">gems32-lazygreedy-maxcov-44090-supconfined-zeros.tif</a></td><td>44,090</td><td class=mut><code>f43ea85e2b7f20101d719277ccfe24c22a01b65effb9ea4ad39ea193fb843fe5</code></td><td class=mut>806,599 B</td></tr><tr><td>ANCHOR (already-scored base)</td><td><a href="downloads/gems32-probe-S1-ANCHOR-identical-to-live-02600.tif">gems32-probe-S1-ANCHOR-identical-to-live-02600.tif</a></td><td>44,090</td><td class=mut><code>4dc4cc54b061cb4567a5500c8fa2bfe750a39340b02c8cdbb4308916f36cbcc3</code></td><td class=mut>806,758 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gems32-probe-S2-SCALE-lambda-0.5.tif">gems32-probe-S2-SCALE-lambda-0.5.tif</a></td><td>44,090</td><td class=mut><code>d6462b76bce1a54920bd4e9d61700f3a1cc2f8dedf89d93651f74d10144c0243</code></td><td class=mut>799,095 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gems32-probe-S3-NULLADD-2000px.tif">gems32-probe-S3-NULLADD-2000px.tif</a></td><td>46,090</td><td class=mut><code>da4193e3a2e0470908b5bd1e28de97f25ee1ce15c57c959d0b623414d200692a</code></td><td class=mut>810,344 B</td></tr><tr><td></td><td><a href="downloads/gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif">gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif</a></td><td>6,000</td><td class=mut><code>af68d90ec9d3927c6b9c80352f7eb5216ba95023e51fc366b6a71a1097fbe139</code></td><td class=mut>226,472 B</td></tr><tr><td></td><td><a href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif">gems60-knickpoint-lane-c7653-20261011T000000Z.tif</a></td><td>7,653</td><td class=mut><code>c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c</code></td><td class=mut>78,835 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-nan.tif">gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-nan.tif</a></td><td>44,090</td><td class=mut><code>fe01ebd3961d6911bfa731111d4d3de75923e642c2276e1d7f6109de9236fd85</code></td><td class=mut>379,333 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-zeros.tif">gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-zeros.tif</a></td><td>44,090</td><td class=mut><code>e4985b78c4d99e185686de639dffb16084a71cf5b673b1e7474f7c898493c2c3</code></td><td class=mut>243,828 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gemsdoe32-h32a-dip-projected-step-46090-20261004T183200Z-838fcd84-nan.tif">gemsdoe32-h32a-dip-projected-step-46090-20261004T183200Z-838fcd84-nan.tif</a></td><td>46,090</td><td class=mut><code>564d569b8500e3c615457d0325f063c25f827ebb0703f249d7a043b2b25cdba9</code></td><td class=mut>385,762 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gemsdoe32-h32a-dip-projected-step-46090-20261004T183200Z-838fcd84-zeros.tif">gemsdoe32-h32a-dip-projected-step-46090-20261004T183200Z-838fcd84-zeros.tif</a></td><td>46,090</td><td class=mut><code>dee5c5c6bc390ed39638f1638819c10d4e1ae52537c4a900930651dfd19754b7</code></td><td class=mut>250,381 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gemsdoe32-h32b-transtensional-swarm-45890-20261004T183200Z-27b7c9e6-nan.tif">gemsdoe32-h32b-transtensional-swarm-45890-20261004T183200Z-27b7c9e6-nan.tif</a></td><td>45,890</td><td class=mut><code>1a3b1d63e1759ac71b7a187b893bad93abe09273178c8e64dcbb327c37f2a035</code></td><td class=mut>384,916 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gemsdoe32-h32b-transtensional-swarm-45890-20261004T183200Z-27b7c9e6-zeros.tif">gemsdoe32-h32b-transtensional-swarm-45890-20261004T183200Z-27b7c9e6-zeros.tif</a></td><td>45,890</td><td class=mut><code>fe0b511435cf80eb55a78b36555a0650fa9d626822f08a3d3221615a9bf12a68</code></td><td class=mut>249,551 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gemsdoe32-h32c-mt-claycap-breach-45890-20261004T183200Z-a5963d0a-nan.tif">gemsdoe32-h32c-mt-claycap-breach-45890-20261004T183200Z-a5963d0a-nan.tif</a></td><td>45,890</td><td class=mut><code>c09ebb73c49ef8553bf4834ef93856c870cdea72551e4268769299c2a4d31d4d</code></td><td class=mut>385,772 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gemsdoe32-h32c-mt-claycap-breach-45890-20261004T183200Z-a5963d0a-zeros.tif">gemsdoe32-h32c-mt-claycap-breach-45890-20261004T183200Z-a5963d0a-zeros.tif</a></td><td>45,890</td><td class=mut><code>fe96521c3ef3b9cb728792ebe943717976680d9511239aac601f632946bdce9a</code></td><td class=mut>250,718 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gemsdoe32-h32d-equalbudget-44090-20261004T183200Z-350cdc3f-nan.tif">gemsdoe32-h32d-equalbudget-44090-20261004T183200Z-350cdc3f-nan.tif</a></td><td>44,090</td><td class=mut><code>cc03eb8472e3c08dc7eea3e67a1d943191be78561fa850e7a0fd4225843f77be</code></td><td class=mut>379,319 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gemsdoe32-h32d-equalbudget-44090-20261004T183200Z-350cdc3f-zeros.tif">gemsdoe32-h32d-equalbudget-44090-20261004T183200Z-350cdc3f-zeros.tif</a></td><td>44,090</td><td class=mut><code>133bacd0031f865a9df2888de71abeba863118458d37d61ab08c388f415b3b96</code></td><td class=mut>243,967 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-nan.tif">gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-nan.tif</a></td><td>46,090</td><td class=mut><code>c3a0cbb14ca60f66934223e4455b970481d0229d2b8095afb3f023233e607621</code></td><td class=mut>385,688 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif">gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif</a></td><td>46,090</td><td class=mut><code>f81e26d7712d1a4a9d3d5393037b09849400c3976d1ebd40e2760a586f2adc2f</code></td><td class=mut>250,577 B</td></tr><tr><td>NaN-outside twin of the primary</td><td><a href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif">gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif</a></td><td>37,654</td><td class=mut><code>baeae3219bba6a19bc8cfe79224e28555c50184b7c1ca65c2a822f54807c77dd</code></td><td class=mut>355,443 B</td></tr><tr><td>PRIMARY</td><td><a href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</a></td><td>37,654</td><td class=mut><code>c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9</code></td><td class=mut>219,065 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-nan.tif">gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-nan.tif</a></td><td>38,554</td><td class=mut><code>a99f68ea3de6a8e464a73a819429486ac619d9b94d725a393d2e0e5d911ab60d</code></td><td class=mut>358,154 B</td></tr><tr><td>AVAILABLE DOWNLOAD</td><td><a href="downloads/gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-zeros.tif">gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-zeros.tif</a></td><td>38,554</td><td class=mut><code>91c2e7764beada782e1f2d8f0d5c940f078d0e328de6f5868e6d552dbc50832e</code></td><td class=mut>221,921 B</td></tr><tr><td></td><td><a href="downloads/submission.tif">submission.tif</a></td><td>983,855</td><td class=mut><code>386e7cd1ea67cac24ec3b64b797037585732928a94f66160e48d27cfebe5a5e7</code></td><td class=mut>5,641,329 B</td></tr></table>
+<div class=card><h3>5 · Keep the names unique</h3>
+<p>The filename already carries a unique content id and the note repeats it, so two submissions can
+never be confused. If a file is ever rebuilt, the build script writes a new name
+(e.g. <code>gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros-fresh</code>) rather than overwriting the old one — the score ledger stays auditable.</p>
+</div></main>
+<footer><div class=wrap>
+Site generated 2026-10-11 01:23 UTC from <code>registry/*.json</code> and <code>evidence/*.json</code> by
+<code>scripts/build_site.py</code>. Owner-reported scores are labelled <em>claim</em>; the only
+scores this repository reads itself are the other teams' public-leaderboard rows.
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE32">Repository</a> ·
+<a href="data/feed.json">feed.json</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE32/issues">report an irregularity</a>
+</div></footer></body></html>

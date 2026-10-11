@@ -1,0 +1,21 @@
+{
+  "workflow": "probe-egress",
+  "run_id": "38101183127",
+  "run_attempt": "1",
+  "ref": "refs/heads/main",
+  "sha": "7379b6da49eb61d094f2bb9fef7a86dfff85794c",
+  "runner": "Linux  X64",
+  "python": "3.12.3",
+  "utc": "2026-10-11T01:15:14.923176+00:00",
+  "head_probes": [
+    "200 0 image/tiff  https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif",
+    "200 0 image/tiff  https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/current/n39w119/USGS_1_n39w119.tif",
+    "200 0   https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7",
+    "403 0 application/json  https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National%20Elevation%20Dataset%20(NED)%201%20arc-second&bbox=-120,39,-119,40&outputFormat=JSON",
+    "200 0 text/html; charset=utf-8  https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "TILE13 {\"shape\": [10812, 10812], \"dtype\": \"float32\", \"crs\": \"EPSG:4269\", \"cell_deg\": 9.25925927753796e-05, \"nodata\": -999999.0, \"bounds\": [-119.0005555565931, 37.99944444350717, -117.9994444435057, 39.00055555659458]}",
+    "TILE13 stats 1194.3310546875 3361.272216796875"
+  ],
+  "tile13_sha256_line": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc  tile13.tif",
+  "note": "Receipt for probe run. Records only what was observed in the runner."
+}

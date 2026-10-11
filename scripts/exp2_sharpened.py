@@ -40,11 +40,11 @@ from scipy.spatial import cKDTree
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from gems60.field import cast_field, surface_statistics  # noqa: E402
-from gems60.holdout import build_holdout  # noqa: E402
-from gems60.hydro import (bfs_levels, chi_transform, d8_flow_directions,  # noqa: E402
+from gems60chi.field import cast_field, surface_statistics  # noqa: E402
+from gems60chi.holdout import build_holdout  # noqa: E402
+from gems60chi.hydro import (bfs_levels, chi_transform, d8_flow_directions,  # noqa: E402
                           fill_depressions, flow_accumulation)
-from gems60.knick import channel_mask, extract_profiles  # noqa: E402
+from gems60chi.knick import channel_mask, extract_profiles  # noqa: E402
 
 W_KSN = 7
 GAP = 2

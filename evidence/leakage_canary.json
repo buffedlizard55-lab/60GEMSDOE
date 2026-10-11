@@ -1,0 +1,21 @@
+{
+  "knick_strength": {
+    "auc_vs_off_catalogue_truth": 0.5002890561238293
+  },
+  "ksn_seg": {
+    "auc_vs_off_catalogue_truth": 0.5050826095187098
+  },
+  "coherence": {
+    "auc_vs_off_catalogue_truth": 0.584336535090587
+  },
+  "score": {
+    "auc_vs_off_catalogue_truth": 0.5013614817831903
+  },
+  "|detrended slope|": {
+    "auc_vs_off_catalogue_truth": 0.3142375526949335
+  },
+  "det_elev": {
+    "auc_vs_off_catalogue_truth": 0.29243109183647037
+  },
+  "flagged_gt_0.90": []
+}

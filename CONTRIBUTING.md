@@ -1,16 +1,42 @@
-# Contributing
+# How to work in this repository (read this before touching anything)
 
-1. **Read the brief** in `README.md` §0 before changing anything. It is re-read every session.
-2. **Stay in the lane.** The lane is the single method paragraph; a raster whose
-   rank-correlation with any registry raster exceeds 0.90, or whose dots fall within 3 px
-   of one registry raster's dots for more than 70 % of them, has drifted: log it as a
-   duplicate and stop.
-3. **Label every number** HOLDOUT-DTI (evaluator version, withheld positives, 95 % CI) or
-   ORGANIZER-CONFIRMED (submission-page receipt). A projection is never written as a score.
-   Negative results are deliverables and must be published with their numbers.
-4. **Reuse, don't fork.** Fix a shared tool once and report the fix; never keep a private
-   copy of `metric.py` / `holdout.py`.
-5. **Budget.** Stop after 3 experiments or 2 hours. Promotion to a competition slot is a
-   separate selector step.
-6. Run `PYTHONPATH=src python -m pytest tests -q` and `python scripts/build_site.py`
-   before opening a pull request.
+## The one rule that matters
+
+**No number appears on the site or in the README unless it traces to a file in `registry/` or
+`evidence/`, and no score is described as verified unless it was read from the public leaderboard
+page in this repository.** Owner-reported scores are labelled *claim*. This is the "no
+hallucinations, verify line by line" rule made mechanical.
+
+## Data
+
+All competition rasters are fetched through `scripts/fetch_data.py`, which verifies a SHA-256 from
+`registry/data_manifest.json` and refuses nothing silently. If a digest does not match, the script
+prints FAIL and exits non-zero; **never** relax the digest to make a run pass — investigate and add
+an irregularity entry instead. Large rasters are never committed (`.gitignore`).
+
+## Adding a hypothesis
+
+1. Add an entry to `src/gems32/hypotheses.py` (layers, signature, why-off-catalogue,
+   differs-from-repo, expected gain, cost, data status) and regenerate
+   `registry/hypotheses.json`.
+2. If it needs external data, name the free official source and its licence, and record whether it
+   was actually fetched (`status`: fetched / listed-not-fetched).
+3. Write the protocol into `registry/preregistration.json` **before** the run, then embed the same
+   dict in the run's evidence JSON.
+4. Score it on the blocked holdout at matched mass; append the evaluation to
+   `registry/observations.jsonl` whether or not it wins.
+5. Only `bo.slot_gate` can approve spending one of the three weekly slots, and it must be told the
+   slot cost and the two-round objective.
+
+## Review passes
+
+Every session ends with: (Pass 1) implement + verify; (Pass 2) hunt bugs, wrong assumptions and edge
+cases and fix them; (Pass 3) re-read the owner's brief and verify the deliverable against it,
+including the site rendering. Record what still fails in the irregularity register and in the
+README's limitations section.
+
+## Never
+
+* never automate access to the competition host (`drivendata.org`); the feed workflow skips it;
+* never present the holdout as a score, or a proxy as the objective;
+* never spend a slot on a candidate that has not beaten the incumbent at matched mass.
