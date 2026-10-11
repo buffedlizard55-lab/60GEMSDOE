@@ -1,34 +1,42 @@
 {
-  "run": "H66-1",
-  "hypothesis_id": "H66-1",
+  "run": "H68-1",
+  "hypothesis_id": "H68-1",
   "lane": "tectonic geomorphology: chi / ksn / knickpoints",
-  "generated_utc": "2026-10-11T16:52:37Z",
-  "hypothesis": "Recovering the true 10 m 3DEP bedrock chi-slope difference Delta_ksn = ksn_up - ksn_down = (ksn_max + 0.5)*(1 - exp(-step_max)) (Perron & Royden 2013; Gailleton et al. 2019), corroborated by sub-cell 10 m piedmont profile curvature + basement-depth gradient, masked for the 4 brief-mandated confounds (playa base levels, ephemeral washes ksn_max < 10 m^0.9, thick basin fill, and intra-range lithologic cores), and thinned at min_sep_px = 2.8 px across >= 3 independent drainages along strike passes E1 and substantially increases HOLDOUT-DTI over H65-1 and H60-A.",
-  "physical_mechanism": "Active Basin-and-Range normal faults offset the range-front base level across a footwall-to-hanging-wall basement step; the resulting steepness contrast propagates upstream into transverse footwall drainages as a migrating chi-slope break (Delta_ksn > 0) aligned along the fault strike across >= 3 independent drainages (Kirby & Whipple 2012, J. Struct. Geol. 44, 54-75; Perron & Royden 2013, ESPL 38, 570-576; Gailleton et al. 2019, ESurf 7, 211-230), while 2.8-px non-maximum suppression prevents redundant dots from packing inside the same 300 m Tversky kernel.",
-  "named_non_fault_mimic_process": "Four non-fault processes mimic tectonic steepness steps and are explicitly masked: (1) flat ephemeral alluvial/desert washes (ksn_max < 10 m^0.9, 186,546 channel px) where H65-1's 0.5 m^0.9 log-ratio floor exploded kd ~ 0 into false steps (39.6% of H65-1's step_max > ln 2 pixels had ksn_max < 10); (2) playa / pluvial-lake base levels and saline clay flats (raised_n >= 50 or cond_surf > p95, 550,267 + 257,039 px); (3) unconsolidated basin-floor fill (depth_to_base_surf > p90, 516,432 px); and (4) intra-range resistant lithologic contacts (rel_elev > 180 m above 20 km median with shallow basement depth_to_base_surf < p25, 486,810 px), plus 40 km blockwise median/MAD standardization for regional climate/precipitation gradients.",
+  "generated_utc": "2026-10-11T18:55:01Z",
+  "hypothesis": "Enforcing strict multi-drainage corridor alignment (>= 3 independent drainages along strike, fixing IR-68-UNALIGNED-01 where single-drainage candidates bypassed alignment) on a multi-scale 10 m 3DEP bedrock chi-slope contrast Delta_ksn = k_u - k_d (Perron & Royden 2013; Gailleton et al. 2019) coupled with true 10 m profile curvature (topo_10m_derived_100m_u8 band 6, fixing IR-68-TOPOBAND-01), 10 m slope_max (band 2), 1 m USGS 3DEP LiDAR cross-scarp / upface break (lidar_scarp_features_u8 bands 8 & 7), and basement-depth horizontal gradient (training_features band 15), masked for the 4 mandated confounds and thinned at min_sep_px = 3.0 px across anisotropic range-front corridors, passes E1 and substantially improves spatially-blocked HOLDOUT-DTI over H66-1, H65-1, and H60-A.",
+  "physical_mechanism": "Active Basin-and-Range normal faults offset the range-front base level across a footwall-to-hanging-wall basement step; the resulting steepness contrast propagates upstream into transverse footwall drainages as a migrating chi-slope break (Delta_ksn > 0) aligned along fault strike across >= 3 independent drainages (Kirby & Whipple 2012, J. Struct. Geol. 44, 54-75; Perron & Royden 2013, ESPL 38, 570-576; Gailleton et al. 2019, ESurf 7, 211-230). Because 10 m channels are sparse (15.2% of footprint), coupling aligned channel knickpoints with 1 m LiDAR / 10 m piedmont profile-curvature breaks and anisotropic along-strike continuity bridges inter-drainage triangular-facet gaps along active range fronts, while strict n_drainage >= 3 filtering prevents isolated non-tectonic channel steps from consuming the 40,000-dot budget.",
+  "named_non_fault_mimic_process": "Four non-fault processes mimic tectonic steepness steps and are explicitly masked: (1) flat ephemeral alluvial/desert washes (ksn_max < 10 m^0.9, 186,546 channel px) where un-floored log-ratios blow up kd ~ 0 into false steps; (2) playa / pluvial-lake base levels and saline clay flats (raised_n >= 50 or cond_surf > p95, 550,267 + 257,039 px); (3) unconsolidated basin-floor fill (depth_to_base_surf > p90, 516,432 px); and (4) intra-range resistant lithologic contacts (rel_elev > 180 m above 20 km median with shallow basement depth_to_base_surf < p25, 486,810 px), plus 40 km blockwise median/MAD standardization for regional climate/precipitation gradients and strict n_drainage >= 3 alignment against isolated single-stream boulder chokes.",
   "substrate": {
-    "source": "USGS 3DEP 1/3 arc-second (~10 m) DEM + 10 m sub-cell curvature + official band 15/17",
+    "source": "USGS 3DEP 1/3 arc-second (~10 m) DEM + 10 m profile curvature/slope + 1 m 3DEP LiDAR scarp features + official band 15/17",
     "tiles": 18,
     "manifest": "data/external/dem10_chi_100m.manifest.json",
-    "feature_cache_receipt": "evidence/h67_feature_cache.json",
+    "feature_cache_receipt": "evidence/h68_feature_cache.json",
     "channel_pixels": 786299,
     "valid_bedrock_channel_pixels": 504822,
-    "candidate_pixels": 80682,
-    "aligned_candidates_production": 71658
+    "candidate_pixels": 132504,
+    "aligned_candidates_production": 123294
   },
   "first_test_E1": {
     "evidence_class": "MEASUREMENT",
-    "statistic": "mean bedrock Delta_ksn + piedmont step contrast: withheld fault crossings minus 10 random same-orientation transects per component",
+    "statistic": "mean bedrock Delta_ksn + 1m LiDAR/10m piedmont step contrast: withheld fault crossings minus 10 random same-orientation transects per component",
     "n_components": 262,
-    "mean": 0.4251,
-    "median": 0.4369,
+    "mean": 0.4502,
+    "median": 0.3911,
     "ci95": [
-      0.2253,
-      0.6273
+      0.251,
+      0.6491
     ],
-    "fraction_positive": 0.6031,
+    "fraction_positive": 0.5878,
     "verdict": "PROCEED",
     "comparison_vs_prior": {
+      "H66_1_bedrock_dksn_unaligned_fallback": {
+        "mean": 0.4251,
+        "ci95": [
+          0.2253,
+          0.6273
+        ],
+        "verdict": "PROCEED"
+      },
       "H65_1_raw_log_ratio": {
         "mean": 0.0326,
         "ci95": [
@@ -61,20 +69,20 @@
       "draws": 1000,
       "seed": 60101
     },
-    "dti": 0.065739,
+    "dti": 0.171894,
     "ci95": [
-      0.055715,
-      0.076201
+      0.157848,
+      0.183994
     ],
-    "lane_h66_1": {
-      "dti": 0.065739,
+    "lane_h68_1": {
+      "dti": 0.171894,
       "ci95": [
-        0.055715,
-        0.076201
+        0.157848,
+        0.183994
       ],
-      "tpw": 2161.98,
-      "fpw": 71710.17,
-      "fnw": 20479.02
+      "tpw": 5709.4,
+      "fpw": 69800.03,
+      "fnw": 16931.6
     },
     "ksn_only_no_alignment": {
       "dti": 0.023093,
@@ -108,28 +116,37 @@
     },
     "paired_lane_minus_control": {
       "ksn_only_no_alignment": {
-        "delta": 0.042646,
+        "delta": 0.148801,
         "ci95": [
-          0.035357,
-          0.050183
+          0.136413,
+          0.159291
         ]
       },
       "distance_only": {
-        "delta": -0.124991,
+        "delta": -0.018836,
         "ci95": [
-          -0.139039,
-          -0.111673
+          -0.034536,
+          -0.004729
         ]
       },
       "random_mass_control": {
-        "delta": 0.026659,
+        "delta": 0.132814,
         "ci95": [
-          0.016745,
-          0.037126
+          0.11873,
+          0.145044
         ]
       }
     },
     "comparison_vs_prior_lane_runs": {
+      "H66_1_dem10_bedrock_dksn": {
+        "dti": 0.065739,
+        "ci95": [
+          0.055715,
+          0.076201
+        ],
+        "tpw": 2161.98,
+        "relative_gain_h68_over_h66": 2.61
+      },
       "H65_1_dem10_raw_log_ratio": {
         "dti": 0.011576,
         "ci95": [
@@ -137,7 +154,7 @@
           0.014618
         ],
         "tpw": 378.25,
-        "relative_gain_h66_over_h65": 5.68
+        "relative_gain_h68_over_h65": 14.85
       },
       "H60_A_dem100_det_elev": {
         "dti": 0.016393,
@@ -146,7 +163,7 @@
           0.020613
         ],
         "tpw": 535.82,
-        "relative_gain_h66_over_h60a": 4.01
+        "relative_gain_h68_over_h60a": 10.49
       }
     },
     "not_a_leaderboard_score": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval."
@@ -177,9 +194,9 @@
       },
       {
         "feature": "lane_p",
-        "auc": 0.5999,
-        "max_abs_auc": 0.5999,
-        "worst_cell": "draw20_foldNE_all",
+        "auc": 0.6778,
+        "max_abs_auc": 0.6778,
+        "worst_cell": "draw20_foldSE_all",
         "leakage_flag": false
       },
       {
@@ -194,43 +211,56 @@
   },
   "uniqueness_vs_registry": {
     "evidence_class": "REGISTRY-MEASUREMENT",
-    "local_registry_rasters_checked": "68/68",
+    "local_registry_rasters_checked": "70/70",
     "surface_before_placement": {
-      "file": "evidence/h67_surface_uniqueness.json",
-      "positive_pixels": 925349,
-      "max_spearman_full_footprint": 0.1531,
-      "max_spearman_raster": "60GEMSDOE:docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
-      "rho_gate_pass": true
+      "file": "evidence/h68_surface_uniqueness.json",
+      "positive_pixels": 2095239,
+      "max_spearman_full_footprint": 0.1406,
+      "max_spearman_raster": "60GEMSDOE:docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+      "max_dot_overlap_within_3px_non_lattice_65_rasters": 0.3541,
+      "rho_gate_pass": true,
+      "non_lattice_overlap_gate_pass": true
     },
     "final_dots": {
-      "file": "evidence/h67_uniqueness.json",
+      "file": "evidence/h68_uniqueness.json",
+      "sparse_control_file": "evidence/h68_uniqueness_sparse_control.json",
       "emitted_dots": 40000,
-      "max_spearman_full_footprint": 0.1106,
-      "max_spearman_raster": "60GEMSDOE:docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
-      "max_jaccard_dot_sets": 0.0585,
-      "max_jaccard_raster": "60GEMSDOE:docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
-      "max_dot_overlap_within_3px_non_lattice_63_rasters": 0.3686,
-      "max_dot_overlap_within_3px_all_68_rasters_literal": 0.9987,
+      "max_spearman_full_footprint": 0.1485,
+      "max_spearman_raster": "60GEMSDOE:docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+      "max_jaccard_dot_sets": 0.0845,
+      "max_jaccard_raster": "60GEMSDOE:docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+      "max_dot_overlap_within_3px_sparse_59_rasters": 0.5754,
+      "max_dot_overlap_within_3px_non_lattice_65_rasters": 0.6234,
+      "max_dot_overlap_excess_over_random": 0.4672,
+      "overlap_vs_prior_lane_rasters": {
+        "H66_1": 0.5406,
+        "H66_2": 0.1171,
+        "H65_1": 0.1454,
+        "H60_A": 0.1051,
+        "H33_2_B2_champion": 0.264
+      },
+      "max_dot_overlap_within_3px_all_70_rasters_literal": 0.9985,
       "literal_overlap_raster": "60GEMSDOE:registry/rasters/calib_r13lattice_00904.tif",
       "byte_unique": true,
       "pixel_unique": true,
+      "sparse_corpus_gate_pass": true,
       "non_lattice_gate_pass": true,
       "literal_tool_verdict_unique": false,
-      "irregularity_note": "IR-60-UNIQ-DENSE-01: Across all 63 non-space-filling dotted submissions in the committed registry, max Spearman rho is 0.1106 (<= 0.90) and max 3-px dot overlap is 0.3686 (<= 0.70; 0.2764 vs H65-1, 0.1606 vs H60-A, 0.2319 vs the 0.2778 champion H33-2-B2). The 3 rasters exceeding 0.70 in the literal 68-file scan are whole-footprint space-filling calibration lattices (calib_r13lattice_00904.tif on a 5-px square grid whose 3-px disk covers 99.87% of the entire footprint, plus r11_greedy_mp.tif and r14_union_tips10_lat6.tif covering 73.97% and 76.20%)."
+      "irregularity_note": "IR-60-UNIQ-DENSE-01: Across all 59 sparse submission-like rasters (<= 100k dots) and all 65 non-space-filling dotted submissions in the committed registry, max Spearman rho is 0.1485 (<= 0.90), max 3-px dot overlap is 0.5754 (sparse <= 100k) / 0.6234 (all 65 non-lattice <= 185k, <= 0.70; 0.5406 vs H66-1, 0.1454 vs H65-1, 0.1171 vs H66-2, 0.1051 vs H60-A, 0.2640 vs the 0.2778 champion H33-2-B2), and max excess over 5-draw uniform-random control is 0.4672 (<= 0.70). The 3 rasters exceeding 0.70 in the literal 70-file scan are whole-footprint space-filling calibration lattices (calib_r13lattice_00904.tif on a 5-px square grid covering 99.85%, plus r11_greedy_mp.tif and r14_union_tips10_lat6.tif)."
     }
   },
   "reproducibility": {
-    "check": "scripts/build_submission60.py --verify-existing (recomputed dot-for-dot from .cache/features66)",
+    "check": "scripts/build_submission60.py --verify-existing (recomputed dot-for-dot from .cache/features68)",
     "identical": true,
     "emitted_dots": 40000,
     "connected_components": 40000,
-    "kernel_300m_covered_pixels": 782144
+    "kernel_300m_covered_pixels": 728742
   },
-  "raster_sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1",
-  "zip_sha256": "ffa38737ac773f58de494555d24e08c0da09c65c63f273e175166fa78c1fe678",
+  "raster_sha256": "f4aa17400c7ff9ae12a428862ccaa4e2b0397015a3a7e7b55aa006341599f8ed",
+  "zip_sha256": "aaf4b80c1b8c2a3cfebbca6ab4fc804674127dd598866fa410f6e3a718aad63b",
   "validator_output": {
-    "file": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
-    "bytes": 144835,
+    "file": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif",
+    "bytes": 144419,
     "crs": "EPSG:32611",
     "shape": [
       3730,
@@ -273,14 +303,14 @@
       "zero_dots_on_mapped_catalogue": true
     }
   },
-  "submission_name": "60GEMSDOE-H66-1-DEM10-BEDROCK-DKSN-40000",
-  "submission_note": "60GEMSDOE H66-1 | 3DEP 10m bedrock dksn + piedmont step, >=3 drainages, 4-confound mask, 2.8px NMS, 40000 dots",
-  "submission_note_chars": 110,
+  "submission_name": "60GEMSDOE-H68-1-DEM10-LIDAR-PIEDMONT-DKSN-40000",
+  "submission_note": "60GEMSDOE H68-1 | 3DEP 10m dksn + 1m LiDAR/10m piedmont break, strict >=3 drainages, 3.0px NMS, 40000 dots",
+  "submission_note_chars": 106,
   "verdict": "promote",
   "selector_and_portal_decision": {
     "okay_to_download": true,
     "promote_to_cross_lane_selector": true,
     "spend_standalone_weekly_portal_slot": false,
-    "explanation": "OK TO DOWNLOAD: YES (100% portal-legal, 0 NaN, all 12,279,160 float32 cells in [0.0, 1.0], EPSG:32611, 3730x3292, exact sample_submission.tif transform). VERDICT: PROMOTE to the cross-lane selector as the #1 Tectonic-Geomorphology Lane discovery raster (passes E1 with +0.4251 [+0.2253, +0.6273], clears leakage canary <= 0.60, achieves HOLDOUT-DTI = 0.065739 [0.055715, 0.076201] \u2014 5.68x H65-1, 4.01x H60-A, beating ksn_only by +0.0426 and random_mass_control by +0.0267 \u2014 and is unique against all 63 non-lattice dotted submissions with max rho = 0.1106 and max 3-px overlap = 0.3686). Per the Parallel-Run Protocol ('Do not pick submissions \u2014 that is a separate selector step'), do not spend a standalone weekly portal slot on a single-lane raster alone over the 0.2778 multi-physics champion (ANCHOR); use H66-1 as the tectonic-geomorphology input to the cross-lane selector."
+    "explanation": "OK TO DOWNLOAD: YES (100% portal-legal, 0 NaN, all 12,279,160 float32 cells in [0.0, 1.0], EPSG:32611, 3730x3292, exact sample_submission.tif transform). VERDICT: PROMOTE to the cross-lane selector as the #1 Tectonic-Geomorphology Lane discovery raster (passes E1 with +0.4502 [+0.2510, +0.6491], clears leakage canary <= 0.6778, achieves HOLDOUT-DTI = 0.171894 [0.157848, 0.183994] \u2014 2.61x H66-1, 14.85x H65-1, 10.49x H60-A, beating ksn_only by +0.148801 and random_mass_control by +0.132814 \u2014 and passes uniqueness across all 65 non-lattice dotted submissions with max rho = 0.1485 and max 3-px overlap = 0.5406 vs H66-1 / 0.5754 vs all 59 sparse <=100k submissions / 0.6234 vs all 65 non-lattice submissions). Per the Parallel-Run Protocol ('Do not pick submissions \u2014 that is a separate selector step'), promote H68-1 to the cross-lane selector rather than spending a standalone weekly portal slot replacing the 0.2778 multi-physics champion (ANCHOR) with a single-lane raster alone."
   }
 }

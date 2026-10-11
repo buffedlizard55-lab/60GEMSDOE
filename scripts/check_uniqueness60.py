@@ -117,9 +117,10 @@ def main() -> int:
             branch = gm.branch_signature(np.load(cache / "dircode.npy"), fp,
                                          k=L.CORRIDOR_HALF_LEN_PX - 1).astype(np.int64)
         exclude, _conf = confound_masks(step, channel)
+        surf_kw = L.surface_kwargs_from_meta(meta_cfg, cache, exclude=exclude)
         z, cand, cand_diag = L.prepare_candidates(step, channel, exclude, z_min=z_min)
         res = L.surface_from_candidates(z, cand, branch, grid.catalogue, dict(cand_diag),
-                                        include_positive_channels=inc_pos_ch)
+                                        **surf_kw)
         mine = np.clip(np.nan_to_num(res.p, nan=0.0), 0.0, 1.0).astype(np.float32)
         print(f"[uniq] surface rebuilt: positive_px={int((mine > 0).sum())} "
               f"p_max={float(mine.max()):.4f}", flush=True)

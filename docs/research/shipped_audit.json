@@ -799,6 +799,49 @@
    "dots_on_catalogue": 0
   },
   {
+   "file": "gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif",
+   "bytes": 144419,
+   "sha256": "f4aa17400c7ff9ae12a428862ccaa4e2b0397015a3a7e7b55aa006341599f8ed",
+   "profile": {
+    "crs": "EPSG:32611",
+    "transform": [
+     100.0,
+     0.0,
+     243350.0,
+     0.0,
+     -100.0,
+     4508550.0
+    ],
+    "shape": [
+     3730,
+     3292
+    ],
+    "res": [
+     100.0,
+     100.0
+    ],
+    "dtype": "float32",
+    "count": 1,
+    "nodata": null
+   },
+   "portal_legal": true,
+   "exact_sample_transform": true,
+   "finite_cells": 12279160,
+   "nan_cells": 0,
+   "min": 0.0,
+   "max": 1.0,
+   "range_violations": 0,
+   "positive_px": 40000,
+   "total_mass": 40000.0,
+   "off_h19_5_px": 37753,
+   "off_h19_5_frac": 0.943825,
+   "catalogue_proxy_T": 3260.8133435573322,
+   "catalogue_proxy_F": 37332.0463639826,
+   "credit_per_unit_mass": 0.0815203335889333,
+   "catalogue_proxy_DTI": 0.05729875680953878,
+   "dots_on_catalogue": 0
+  },
+  {
    "file": "gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
    "bytes": 78835,
    "sha256": "c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c",

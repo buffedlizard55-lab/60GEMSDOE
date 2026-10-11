@@ -894,7 +894,116 @@
       "difference_from_existing": "Measures cross-divide \u03c7 disequilibrium at channel heads coupled to outlet steepness steps.",
       "expected_dti_delta": "+0.008 to +0.015 HOLDOUT-DTI",
       "cost": "high"
+    },
+    {
+      "id": "H68-1",
+      "rank": 45,
+      "title": "Strict Multi-Drainage (>= 3 Independent Drainages) 10 m Bedrock \u0394ksn + 1 m LiDAR / 10 m Piedmont Curvature Break + Anisotropic Range-Front Continuity",
+      "status": "VALIDATED \u2014 HOLDOUT-DTI 0.171894 [0.157848, 0.183994] (2.61x H66-1, 14.85x H65-1, 10.49x H60-A); E1 PASS (+0.4502 [+0.2510, +0.6491])",
+      "layers": [
+        "data/external/dem10_chi_100m_i16.tif (band 1 step_max, band 3 ksn_max, band 5 zmean)",
+        "data/external/dem10_chi_100m_u8.tif (band 3 raised_n) + data/external/dem10_chi_100m_sig_i32.tif (band 1 branch_sig)",
+        "data/external/topo_10m_derived_100m_u8.tif (band 6 curv_prof_absmax, band 2 slope_max)",
+        "data/external/lidar_scarp_features_u8.tif (band 8 cross_scarp, band 7 upface, band 12 valid_px)",
+        "data/official/training_features.tif (band 15 depth_to_base_surf, band 17 cond_surf)"
+      ],
+      "mechanism": "Enforces strict multi-drainage alignment (n_drainage >= 3 distinct branch_sig catchments along strike, fixing IR-68-UNALIGNED-01 where single-drainage candidates bypassed alignment) on 10 m 3DEP bedrock chi-slope contrast \u0394ksn = k_u - k_d coupled with true 10 m profile curvature (band 6, fixing IR-68-TOPOBAND-01), 10 m slope_max (band 2), 1 m USGS 3DEP LiDAR cross-scarp / upface break (bands 8 & 7), and basement-depth gradient (band 15). Bridges inter-drainage triangular-facet gaps along active range fronts with an anisotropic along-strike continuity envelope (perp_px = 3.0, par_px = 18.0) and emits 40,000 dots at min_sep_px = 3.0 px.",
+      "why_missing_from_catalogue": "USGS Qfaults and INGENIOUS compilations frequently omit unmapped along-strike extensions, step-over relay ramps, and fan-apron range-front segments between transverse canyons. Even where individual canyons are spaced 0.5-1.5 km apart, the transient \u0394ksn knickpoint wave in >= 3 adjacent footwall canyons plus 1 m LiDAR / 10 m piedmont profile-curvature breaks trace the continuous active range-front structure across inter-canyon facets.",
+      "difference_from_existing": "Fixes two bugs in H66-1: (1) IR-68-UNALIGNED-01 in src/gems60/lane.py where surface_from_candidates wrote s[ys, xs] = np.maximum(s[ys, xs], z[ys, xs]) for all single-drainage candidates before checking aligned = ndr_vals >= 3, causing ~70% of H66-1 dots to spill onto isolated single-drainage channels; and (2) IR-68-TOPOBAND-01 in scripts/build_dem10_cache.py where Band 4 (slope_std) of topo_10m_derived_100m_u8.tif was read instead of Band 6 (curv_prof_absmax), and integrates 1 m LiDAR cross_scarp / upface breaks.",
+      "expected_dti_delta": "+0.1062 HOLDOUT-DTI over H66-1 (measured: 0.171894 vs 0.065739; +0.1603 over H65-1)",
+      "cost": "low (15 s cache build + 152 s 8-cell holdout evaluation)",
+      "evidence": {
+        "class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "withheld_positives_px": 22641,
+        "e1_first_test_mean": 0.45021,
+        "e1_first_test_ci95": [
+          0.250959,
+          0.649111
+        ],
+        "e1_fraction_positive": 0.587786,
+        "holdout_dti_binary_40k": 0.171894,
+        "holdout_dti_ci95": [
+          0.157848,
+          0.183994
+        ],
+        "paired_delta_vs_ksn_only": 0.148801,
+        "paired_delta_vs_ksn_only_ci95": [
+          0.136413,
+          0.159291
+        ],
+        "paired_delta_vs_random": 0.132814,
+        "paired_delta_vs_random_ci95": [
+          0.11873,
+          0.145044
+        ],
+        "artifact": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif",
+        "sha256": "f4aa17400c7ff9ae12a428862ccaa4e2b0397015a3a7e7b55aa006341599f8ed"
+      }
+    },
+    {
+      "id": "H68-2",
+      "rank": 46,
+      "title": "Bi-Directional Dip-Slip + Antithetic/Graben-Bounding Steepness Contrast (max(\u0394ksn_up, 0.7 \u0394ksn_down)) Gated by 10 m Piedmont Break",
+      "status": "PROPOSED \u2014 ranked #2 in Round H68 tectonic-geomorphology slate",
+      "layers": [
+        "data/external/dem10_chi_100m_i16.tif (band 1 step_max, band 2 step_min, band 3 ksn_max)",
+        "data/external/topo_10m_derived_100m_u8.tif (band 6 curv_prof_absmax, band 2 slope_max)",
+        "data/official/training_features.tif (band 15 depth_to_base_surf)"
+      ],
+      "mechanism": "Combines positive upstream steepening \u0394ksn_up = k_u - k_d on footwall-to-hanging-wall crossings with downstream steepening \u0394ksn_down = k_d - k_u restricted strictly to piedmont-break corridors (pied_z > 0.5) to capture antithetic faults and back-tilted graben-margin faults where channels flow from a hanging-wall bench across an up-to-the-basin fault block.",
+      "why_missing_from_catalogue": "Antithetic and intrabasin horst-bounding faults have smaller cumulative throw than master range-front faults and are systematically under-represented in 1:24,000 Quaternary scarps.",
+      "difference_from_existing": "Unlike H66-2 (which took unfloored max(|step_max|, |step_min|) everywhere and failed E1 because un-gated step_min fires on every canyon mouth entering an alluvial fan), H68-2 recovers bedrock \u0394ksn_down and gates it strictly by positive piedmont curvature break.",
+      "expected_dti_delta": "+0.015 to +0.030 HOLDOUT-DTI over H66-1",
+      "cost": "low"
+    },
+    {
+      "id": "H68-3",
+      "rank": 47,
+      "title": "Catchment-Scale Normalized Steepness Gradient (|\u2207ksn| Across 300 m Footwall Envelopes) + Drainage-Area Power-Law Scaling",
+      "status": "PROPOSED \u2014 ranked #3 in Round H68 tectonic-geomorphology slate",
+      "layers": [
+        "data/external/dem10_chi_100m_i16.tif (band 3 ksn_max, band 4 loga_at_max, band 5 zmean)",
+        "data/external/dem10_chi_100m_u8.tif (band 1 chan_n, band 2 knick_n)",
+        "data/official/training_features.tif (band 12 det_elev, band 15 depth_to_base_surf)"
+      ],
+      "mechanism": "Computes the spatial gradient of the 300 m catchment-envelope steepness |\u2207 max_300m(ksn_max)| weighted by log10(A) to locate the continuous boundary between high-ksn uplifting footwall blocks and low-ksn subsiding hanging-wall basins even where individual knickpoints have migrated 200-500 m upstream of the range front.",
+      "why_missing_from_catalogue": "On rapidly incising trunk streams, the discrete knickpoint migrates upstream into the footwall canyon while the fault trace remains at the range-front ksn step boundary.",
+      "difference_from_existing": "Measures the spatial boundary of the 2D catchment ksn field rather than point-wise 110 m in-channel step_max alone.",
+      "expected_dti_delta": "+0.010 to +0.025 HOLDOUT-DTI",
+      "cost": "low"
+    },
+    {
+      "id": "H68-4",
+      "rank": 48,
+      "title": "Radiometric K/Th Hydrothermal-Alteration Gate on Multi-Drainage Knickpoint Corridors",
+      "status": "PROPOSED \u2014 ranked #4 in Round H68 tectonic-geomorphology slate",
+      "layers": [
+        "data/external/dem10_chi_100m_i16.tif (band 1 step_max, band 3 ksn_max)",
+        "data/external/geodawn_rad_u8.tif (potassium, thorium, uranium)",
+        "data/external/geodawn_extensions_u8.tif (K/Th ratio, tilt derivative)"
+      ],
+      "mechanism": "Weights strike-aligned >= 3-drainage bedrock \u0394ksn corridors by airborne gamma-ray potassium-to-thorium (K/Th) anomalies from USGS GeoDAWN to preferentially boost structurally permeable geothermal fault conduits while still masking extreme lithologic radiometric highs (> p95).",
+      "why_missing_from_catalogue": "Geothermally active faults in the Great Basin often express potassium metasomatism (illite/adularia alteration) along range-front relay zones before developing continuous surface scarps.",
+      "difference_from_existing": "Uses GeoDAWN K/Th ratio as a moderate positive corridor corroborator on bedrock knickpoints rather than only as a p95 lithologic exclusion fallback (IR-66-DATA-01).",
+      "expected_dti_delta": "+0.005 to +0.015 HOLDOUT-DTI",
+      "cost": "low"
+    },
+    {
+      "id": "H68-5",
+      "rank": 49,
+      "title": "Cross-Lane Selector Fusion: Champion Flank-Peel Shell (H33-2-B2) + Strict Multi-Drainage 10 m Bedrock \u0394ksn Corridors (H68-1)",
+      "status": "PROPOSED FOR SELECTOR \u2014 cross-lane step outside single-lane run budget",
+      "layers": [
+        "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif (37,654 dots, 0.2778 owner-reported)",
+        "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif (40,000 dots, HOLDOUT-DTI 0.171894)"
+      ],
+      "mechanism": "Replaces the lowest-precision outer-ring flank dots of H33-2-B2 (or supplements its 37,654-dot shell with 2,500-4,000 non-overlapping 3.0-px NMS dots from the top 5% of H68-1 where n_drainage >= 5 and pied_z > 1.0) so that every added dot covers ~18.2 new pixels on unmapped tectonic range fronts without increasing FPw inside the already-saturated 300 m catalogue buffer.",
+      "why_missing_from_catalogue": "Combines the 0.2778 champion's coverage of near-catalogue fault-zone width/splays with H68-1's physically independent 10 m DEM + 1 m LiDAR range-front knickpoint discoveries (73.6% non-overlapping with H33-2-B2).",
+      "difference_from_existing": "Cross-lane selector step combining the #1 multi-physics raster with the #1 strict multi-drainage tectonic-geomorphology raster (0.171894 HOLDOUT-DTI).",
+      "expected_dti_delta": "+0.015 to +0.045 live DTI over 0.2778",
+      "cost": "low (separate selector step per Parallel-Run Protocol Rule 6)"
     }
   ],
-  "updated_utc": "2026-10-11T16:34:53Z"
+  "updated_utc": "2026-10-11T18:56:00Z"
 }

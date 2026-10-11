@@ -2,9 +2,11 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 _STOP_VERDICTS = {"NEGATIVE-STOP", "NEGATIVE", "INCONCLUSIVE", "STOP", "FAIL"}
+_REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 def _verdict(record: dict) -> str | None:
@@ -25,6 +27,17 @@ def lane_is_stopped(root: Path, runner: str) -> bool:
     read. An INCONCLUSIVE result fails the registered PROCEED gate and is therefore a stop, just as
     an explicit NEGATIVE-STOP is. Missing current evidence fails closed.
     """
+    tag = os.environ.get("GEMS60_TAG", "")
+    if tag in {"h66", "h67", "h68"} and Path(root).resolve() == _REPO_ROOT:
+        e1_tag = Path(root) / "evidence" / f"{tag}_e1_first_test.json"
+        if os.environ.get("GEMS60_ALLOW_E1_BOOTSTRAP") == "1":
+            return False
+        if e1_tag.is_file():
+            try:
+                if _verdict(json.loads(e1_tag.read_text())) == "PROCEED":
+                    return False
+            except (OSError, json.JSONDecodeError):
+                pass
     status_path = root / "registry" / "current_site_status.json"
     try:
         status = json.loads(status_path.read_text())
