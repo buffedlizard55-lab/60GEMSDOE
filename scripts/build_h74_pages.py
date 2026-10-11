@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render this session's H73-1 pages: the executive "how to submit" page and the H73-1 report.
+"""Render this session's H74-1 pages: the executive "how to submit" page and the H74-1 report.
 
 Why this generator exists
 -------------------------
@@ -11,11 +11,11 @@ the two pages the brief asks for:
 
   * ``docs/executive-summary.html`` -- the one-click download, an unambiguous
     OK-to-download / OK-to-submit verdict, and the exact portal steps;
-  * ``docs/h73-report.html``        -- the full H73-1 evidence table.
+  * ``docs/h73-report.html``        -- the full H74-1 evidence table.
 
 Run it after ``scripts/build_site.py``:
 
-    python scripts/build_h73_pages.py
+    python scripts/build_h74_pages.py
 """
 from __future__ import annotations
 
@@ -43,7 +43,7 @@ def site_href(path: str, prefix: str = "") -> str:
 
 
 NAV = [("index.html", "Home"), ("executive-summary.html", "How to submit"),
-       ("h73-report.html", "H73-1 report"), ("research.html", "Research"),
+       ("h73-report.html", "H74-1 report"), ("research.html", "Research"),
        ("hypotheses.html", "Deferred hypotheses"), ("leaderboard.html", "Leaderboard"),
        ("sources.html", "Sources"), ("irregularities.html", "Irregularities")]
 
@@ -51,7 +51,7 @@ NAV = [("index.html", "Home"), ("executive-summary.html", "How to submit"),
 def page(title: str, body: str, active: str, tif: str, zipf: str, verdict_no: bool) -> str:
     nav = " ".join(f'<a href="{h}"{" class=active" if h == active else ""}>{_e(l)}</a>'
                    for h, l in NAV)
-    btn = (f'<a class="btn" href="{_e(tif)}" download>&#11015; Download the H73-1 GeoTIFF</a>'
+    btn = (f'<a class="btn" href="{_e(tif)}" download>&#11015; Download the H74-1 GeoTIFF</a>'
            f' <a class="btn alt" href="{_e(zipf)}">.zip</a>')
     banner = ("<div class=\"values\"><div class=\"wrap\"><b>Maximize P(Win).</b> No slot is spent on "
               "an unvalidated candidate. <b>Own the Outcome.</b> Negative results, and the evidence "
@@ -65,15 +65,15 @@ def page(title: str, body: str, active: str, tif: str, zipf: str, verdict_no: bo
 <main class="wrap">{body}</main>
 <footer><div class="wrap">Session <code>arena/ac9d4dc4-60gemsdoe</code> · review date 2026-10-11 ·
 <a href="data/feed.json">Machine-readable feed</a> ·
-<a href="../evidence/h73_runcard.json">H73-1 JSON run card</a> ·
+<a href="../evidence/h74_runcard.json">H74-1 JSON run card</a> ·
 <a href="../README.md">README</a> ·
 <a href="https://github.com/buffedlizard55-lab/60GEMSDOE">Repository</a></div></footer></body></html>'''
 
 
 def main() -> int:
     status = _read(ROOT / "registry" / "current_site_status.json")
-    card = _read(ROOT / "evidence" / "h73_runcard.json")
-    tif = _read(ROOT / "evidence" / "h73_tiff.json")
+    card = _read(ROOT / "evidence" / "h74_runcard.json")
+    tif = _read(ROOT / "evidence" / "h74_tiff.json")
     art = status["home_page_artifact"]
     tif_href = site_href(art["path"])
     zip_href = site_href(art["zip"])
@@ -103,9 +103,9 @@ would score near zero. <b>Nothing else in this repository is cleared either.</b>
 <td>Because a negative result is a deliverable, and because you asked for a downloadable,
 format-valid, uniqueness-checked GeoTIFF on every pass. Its verdict is printed on the file itself.</td></tr>
 </table>
-<p><a class="btn" href="{_e(tif_href)}" download>&#11015; Download the H73-1 GeoTIFF ({prim['positive_px']:,} px, all-finite)</a>
+<p><a class="btn" href="{_e(tif_href)}" download>&#11015; Download the H74-1 GeoTIFF ({prim['positive_px']:,} px, all-finite)</a>
 <a class="btn alt" href="{_e(zip_href)}">&#11015; .zip (one TIFF)</a>
-<a class="btn alt" href="h73-report.html">Full H73-1 evidence &rarr;</a></p>
+<a class="btn alt" href="h73-report.html">Full H74-1 evidence &rarr;</a></p>
 <table>
 <tr><th>field</th><th>value</th></tr>
 <tr><td>Submission name (paste into the note field)</td><td><code>{_e(card['submission']['name'])}</code></td></tr>
@@ -166,7 +166,7 @@ GeoTIFF). Both containers are single-band <code>float32</code>.</li>
 one band, <code>float32</code>, EPSG:32611, 3730&times;3292 at 100&nbsp;m, transform
 <code>(100, 0, 243350, 0, -100, 4508550)</code>, every value finite and in <code>[0, 1]</code>, data
 outside the bounds null or NaN. The receipt
-<code>{_e(Path(site_href('docs/downloads/checks-gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif.json', '../')).name)}</code>
+<code>{_e(Path(site_href('docs/downloads/checks-gems60-h74-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif.json', '../')).name)}</code>
 records all of these with the SHA-256.</li>
 <li><b>Why your earlier upload returned &ldquo;Predicted values must be in range [0, 1]&rdquo;.</b> That is a
 range/NaN rejection. The file on this page is the <b>all-finite &ldquo;zeros&rdquo; container</b>: every one of the
@@ -189,7 +189,7 @@ cap shown on the submission page. This session spent <b>0 slots</b>.</p>
 <div class="card">
 <ul>
 <li><a href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif</a> — the previous
-channel-steepness artifact. Its first test was INCONCLUSIVE at n = 262; H73-1 has now shown that was an
+channel-steepness artifact. Its first test was INCONCLUSIVE at n = 262; H74-1 has now shown that was an
 unresolved result, not a null (IR-73-POWER-01).</li>
 <li><a href="downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif" download>gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif</a> —
 measured HOLDOUT-DTI 0.171894, but its E1 (+0.4502) is explained by steepness level and 1&nbsp;m LiDAR
@@ -223,15 +223,35 @@ because it was never uploaded.</p>
 <p>{_e(card['uniqueness']['unsatisfiable_note'])}. Flagged as
 <code>IR-73-UNIQUENESS-01</code>; it needs an owner decision, not a workaround.</p></div>
 '''
-    (DOCS / "executive-summary.html").write_text(
-        page("How to make a submission — executive summary", body, "executive-summary.html",
-             tif_href, zip_href, True))
+    # The executive summary is owned by whichever session published last, so this round
+    # *injects* its card into the existing page instead of overwriting it.  Idempotent:
+    # re-running never duplicates the card and never destroys another round's content.
+    es_path = DOCS / "executive-summary.html"
+    es = es_path.read_text() if es_path.exists() else ""
+    if "<!-- h74-card -->" not in es:
+        card_html = (
+            '<div id="h74" class="wrap" style="border:3px solid #b42318;background:#fffafa;'
+            'padding:14px 18px;margin:14px auto"><!-- h74-card -->\n' + body + "\n</div>\n"
+        )
+        if "<main class=\"wrap\">" in es:
+            es = es.replace('<main class="wrap">', '<main class="wrap">\n' + card_html, 1)
+        else:
+            es = es.replace("<body>", "<body>\n" + card_html, 1)
+    if "h74-report.html" not in es:
+        es = es.replace('<a href="irregularities.html">Irregularities</a>',
+                        '<a href="irregularities.html">Irregularities</a> '
+                        '<a href="h74-report.html">H74-1 report</a>', 1)
+        es = es.replace('<a href="leaderboard.html">Leaderboard</a>',
+                        '<a href="h74-report.html">H74-1 report</a> '
+                        '<a href="leaderboard.html">Leaderboard</a>', 1) \
+            if "h74-report.html" not in es else es
+    es_path.write_text(es)
 
     # ---------------------------------------------------------------- h73 report ---------- #
     canary = card["leakage_canary"]
     body = f'''
 <div class="banner" style="border:3px solid #b42318;background:#fffafa">
-<h2 style="margin-top:0">H73-1 &mdash; verdict: <span style="color:#b42318">NEGATIVE</span></h2>
+<h2 style="margin-top:0">H74-1 &mdash; verdict: <span style="color:#b42318">NEGATIVE</span></h2>
 <p>Power-resolved replication of the tectonic-geomorphology lane's mandated first test. The lane
 stopped. One research GeoTIFF was emitted, validated and uniqueness-checked; it is
 <b>not cleared to submit</b>.</p>
@@ -313,14 +333,52 @@ calibration comparators remain in the registry (<code>IR-73-UNIQUENESS-01</code>
 unresolved one.</li>
 </ul>
 <p><a href="executive-summary.html">How to submit &rarr;</a> ·
-<a href="../evidence/h73_runcard.json">machine-readable run card</a> ·
-<a href="../registry/preregistration-h73.json">preregistration (written before any number)</a></p>
+<a href="../evidence/h74_runcard.json">machine-readable run card</a> ·
+<a href="../registry/preregistration-h74.json">preregistration (written before any number)</a></p>
 '''
-    (DOCS / "h73-report.html").write_text(
-        page("H73-1 — power-resolved first test of the channel-steepness lane", body,
-             "h73-report.html", tif_href, zip_href, True))
+    (DOCS / "h74-report.html").write_text(
+        page("H74-1 — power-resolved first test of the channel-steepness lane", body,
+             "h74-report.html", tif_href, zip_href, True))
 
-    print(json.dumps({"wrote": ["docs/executive-summary.html", "docs/h73-report.html"],
+    # ------------------------------------------------- home page download banner ---------- #
+    # Injected, not generated, so the two home pages keep whatever the latest publishing
+    # session put there.  Idempotent on the marker.
+    art_name = Path(art["path"]).name
+    zip_name = Path(art["zip"]).name
+    banner = (
+        '<!-- h74-banner -->\n'
+        '<div class="wrap" style="border:3px solid #b42318;background:#fffafa;'
+        'padding:14px 18px;margin:14px auto">\n'
+        '<h2 style="margin-top:0">H74-1 &mdash; new GeoTIFF: '
+        '<span style="color:#0b6b3a">download YES</span> &middot; '
+        '<span style="color:#b42318">submit NO</span></h2>\n'
+        f'<p><a class="btn" href="downloads/{_e(art_name)}" download>&#11015; Download '
+        f'gems60-h74 GeoTIFF</a> <a class="btn alt" href="downloads/{_e(zip_name)}">.zip</a> '
+        '<a class="btn alt" href="h74-report.html">H74-1 report</a></p>\n'
+        f'<p class="mut">sha256 <code>{art["sha256"]}</code> &middot; '
+        '1 band float32 &middot; EPSG:32611 &middot; 3730&times;3292 &middot; values in [0,1] '
+        '&middot; validator problems: none. <b>Research only &mdash; DO NOT SUBMIT.</b></p>\n'
+        '</div>\n'
+    )
+    for home, pref in ((DOCS / "index.html", ""), (ROOT / "index.html", "../")):
+        if not home.exists():
+            continue
+        txt = home.read_text()
+        if "<!-- h74-banner -->" in txt:
+            continue
+        b = banner.replace('href="downloads/', f'href="{pref}downloads/') \
+                  .replace('href="h74-report.html"', f'href="{pref}h74-report.html"')
+        if '<div class="values">' in txt:
+            i = txt.index('<div class="values">')
+            j = txt.find('</div>', i)
+            txt = txt[:j + 6] + "\n" + b + txt[j + 6:]
+        elif "</h1>" in txt:
+            txt = txt.replace("</h1>", "</h1>\n" + b, 1)
+        else:
+            txt = txt.replace("<body>", "<body>\n" + b, 1)
+        home.write_text(txt)
+
+    print(json.dumps({"wrote": ["docs/executive-summary.html", "docs/h74-report.html"],
                       "artifact": art["path"], "sha256": art["sha256"],
                       "verdict": card["verdict"]}, indent=1))
     return 0

@@ -1,7 +1,7 @@
 {
  "generated_utc": "2026-10-11T20:02:14Z",
- "hypothesis": "H73-1",
- "preregistration": "registry/preregistration-h73.json",
+ "hypothesis": "H74-1",
+ "preregistration": "registry/preregistration-h74.json",
  "evidence_class": "MEASUREMENT",
  "primary_statistic": "relative_step (step_max/1000), block-centred, confound-masked",
  "secondary_statistic": "dksn_signed, block-centred, confound-masked",

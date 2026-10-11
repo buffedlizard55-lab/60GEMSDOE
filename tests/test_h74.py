@@ -1,4 +1,4 @@
-"""Lock the H73-1 evidence contract.
+"""Lock the H74-1 evidence contract.
 
 These assertions pin the run card the parallel-run protocol requires (rule 5) and the numbers this
 session measured, so a later session cannot silently rewrite them.  Every number asserted here is
@@ -18,19 +18,19 @@ def _j(rel: str):
     return json.loads((ROOT / rel).read_text())
 
 
-CARD = _j("evidence/h73_runcard.json")
-E1 = _j("evidence/h73_e1_first_test.json")
-E1B = _j("evidence/h73_e1b_offcatalogue.json")
-TIFF = _j("evidence/h73_tiff.json")
-UNI = _j("evidence/h73_uniqueness.json")
-HOLD = _j("evidence/h73_holdout.json")
-PRE = _j("registry/preregistration-h73.json")
+CARD = _j("evidence/h74_runcard.json")
+E1 = _j("evidence/h74_e1_first_test.json")
+E1B = _j("evidence/h74_e1b_offcatalogue.json")
+TIFF = _j("evidence/h74_tiff.json")
+UNI = _j("evidence/h74_uniqueness.json")
+HOLD = _j("evidence/h74_holdout.json")
+PRE = _j("registry/preregistration-h74.json")
 
 
 def test_preregistration_predates_the_evidence_it_governs():
-    pre_mtime = (ROOT / "registry" / "preregistration-h73.json").stat().st_mtime
-    for rel in ("evidence/h73_e1_first_test.json", "evidence/h73_e1b_offcatalogue.json",
-                "evidence/h73_holdout.json", "evidence/h73_runcard.json"):
+    pre_mtime = (ROOT / "registry" / "preregistration-h74.json").stat().st_mtime
+    for rel in ("evidence/h74_e1_first_test.json", "evidence/h74_e1b_offcatalogue.json",
+                "evidence/h74_holdout.json", "evidence/h74_runcard.json"):
         assert pre_mtime <= (ROOT / rel).stat().st_mtime, f"preregistration is newer than {rel}"
     # the endpoint and the gate must be fixed in the preregistration, not chosen afterwards
     assert PRE["e1_gating_first_test"]["gate"].startswith("PROCEED iff")
@@ -64,7 +64,7 @@ def test_gating_first_test_is_the_lane_question_and_did_not_proceed():
     assert p["fraction_positive"] < 0.5
     # the secondary passed, and the diagnostic says why: level, not step
     assert s["verdict"] == "PROCEED"
-    d = E1["arms"] and _j("evidence/h73_secondary_diagnostic_logksn.json")["summary"]
+    d = E1["arms"] and _j("evidence/h74_secondary_diagnostic_logksn.json")["summary"]
     assert d["verdict"] == "PROCEED", "the steepness-level control must reproduce the secondary signal"
     assert d["mean"] > 0.5 * s["mean"], "the level control must explain a large share of the secondary"
 
@@ -87,7 +87,7 @@ def test_holdout_is_classed_and_below_the_random_control():
 
 
 def test_leakage_canary_is_clean():
-    can = _j("evidence/h73_leakage_canary.json")
+    can = _j("evidence/h74_leakage_canary.json")
     assert can, "the canary must have run"
     for name, row in can.items():
         assert row["max_abs_auc"] <= 0.90, f"{name} trips the 0.90 leakage gate"

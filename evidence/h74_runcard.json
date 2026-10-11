@@ -1,10 +1,10 @@
 {
  "schema": 1,
- "hypothesis_id": "H73-1",
+ "hypothesis_id": "H74-1",
  "session": "arena/ac9d4dc4-60gemsdoe",
  "generated_utc": "2026-10-11T20:35:00Z",
  "lane": "tectonic geomorphology - channel steepness and knickpoints (chi / ksn), not scarp shape",
- "preregistration": "registry/preregistration-h73.json",
+ "preregistration": "registry/preregistration-h74.json",
  "hypothesis": "Channels crossing a withheld fault segment carry a larger chi-normalised steepness step (relative ksn step) than random lines of the same orientation, once the lane brief's four confounds (playa base levels, ephemeral washes, lithology, climate gradient) are masked; and knickpoints corroborated by >= 3 independent first-order drainages along a common strike therefore locate faults the catalogue omits.",
  "mechanism": "Stream power: ksn = (U/K)^(1/n), so a step in rock uplift rate U across an active normal fault produces a RELATIVE (ratio) step in ksn at the crossing and upstream of it (Kirby & Whipple 2012, doi:10.1016/j.jsg.2012.07.009). The chi transform puts channels of different drainage area on one axis so those ratios are comparable between drainages (Perron & Royden 2013, doi:10.1002/esp.3302); the committed 10 m reduction segments the chi-z profile per Gailleton et al. (2019), doi:10.5194/esurf-7-211-2019.",
  "named_non_fault_process_that_could_mimic_it": "Steepness LEVEL, not steepness STEP. Mapped faults sit preferentially on range fronts, where channels are steep. Any statistic carrying the ksn level (absolute dksn, piedmont curvature, slope) inherits that. MEASURED: a statistic containing no step information at all - block-centred log(ksn) - scores +0.1946 [+0.1695, +0.2195] on the same first test (n=1823), which is larger than half the secondary arm's effect. Dipping resistant-over-weak lithology, debris-flow reaches and orographic discharge gradients are the other named mimics; the first two are masked, the third is block-detrended.",
@@ -206,13 +206,13 @@
   "satisfiable_comparators": 103
  },
  "raster": {
-  "path": "docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif",
+  "path": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif",
   "sha256": "aed3c9bd1902ee440cd5fdf975a0c646ae332588a65a08d2ddd43334ca80b60d",
   "bytes": 174507,
   "positive_px": 8811,
-  "zip": "docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.zip",
+  "zip": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.zip",
   "zip_sha256": "620c21928d4abd99027ad7e5dd4eba4da8ed37f961c0cf2c082188c19de7cb28",
-  "variant_nan_outside": "docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-nan.tif"
+  "variant_nan_outside": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T201814Z-35930766-nan.tif"
  },
  "validator_output": {
   "bands": 1,
@@ -236,8 +236,8 @@
   "problems": []
  },
  "submission": {
-  "name": "60GEMSDOE-H73-1-chi-knick-corridor",
-  "note": "H73-1 chi/ksn knickpoint corridors, >=3 independent drainages; first test NULL; RESEARCH ONLY - DO NOT SUBMIT",
+  "name": "60GEMSDOE-H74-1-chi-knick-corridor",
+  "note": "H74-1 chi/ksn knickpoint corridors, >=3 independent drainages; first test NULL; RESEARCH ONLY - DO NOT SUBMIT",
   "note_chars": 109,
   "download_ok_for_research": true,
   "submit_to_competition": false,
@@ -264,17 +264,17 @@
  },
  "submission_slots_spent": 0,
  "evidence_files": [
-  "evidence/h73_e1_first_test.json",
-  "evidence/h73_e1b_offcatalogue.json",
-  "evidence/h73_emission.json",
-  "evidence/h73_feature_cache.json",
-  "evidence/h73_holdout.json",
-  "evidence/h73_leakage_canary.json",
-  "evidence/h73_secondary_confound_diagnostic.json",
-  "evidence/h73_secondary_diagnostic_logksn.json",
-  "evidence/h73_tiff.json",
-  "evidence/h73_uniqueness.json",
-  "evidence/h73_uniqueness_satisfiable.json"
+  "evidence/h74_e1_first_test.json",
+  "evidence/h74_e1b_offcatalogue.json",
+  "evidence/h74_emission.json",
+  "evidence/h74_feature_cache.json",
+  "evidence/h74_holdout.json",
+  "evidence/h74_leakage_canary.json",
+  "evidence/h74_secondary_confound_diagnostic.json",
+  "evidence/h74_secondary_diagnostic_logksn.json",
+  "evidence/h74_tiff.json",
+  "evidence/h74_uniqueness.json",
+  "evidence/h74_uniqueness_satisfiable.json"
  ],
  "key_numbers_are": "HOLDOUT-DTI: measured here on the shared hide-and-recover evaluator, not a leaderboard score. 0.2778 / 0.4133 are ORGANIZER/LEADERBOARD figures from the public board and are never written as ours."
 }

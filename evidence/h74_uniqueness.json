@@ -1,6 +1,6 @@
 {
  "generated_utc": "2026-10-11T20:30:00Z",
- "hypothesis": "H73-1",
+ "hypothesis": "H74-1",
  "rule": "more than 70% of OUR dots within 3 px of one registry raster's dots => duplicate lane",
  "limits": {
   "dot_overlap": 0.7,

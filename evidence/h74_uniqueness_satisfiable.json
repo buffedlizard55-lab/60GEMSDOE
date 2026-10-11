@@ -26,20 +26,20 @@
  ],
  "satisfiable_comparators": 105,
  "worst_among_satisfiable": {
-  "path": "docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-nan.tif",
+  "path": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T201814Z-35930766-nan.tif",
   "n_dots": 8811,
   "footprint_covered_by_3px_dilation": 0.0039699088879397715,
   "our_dots_within_3px": 1.0
  },
  "worst5_among_satisfiable": [
   {
-   "path": "docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-nan.tif",
+   "path": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T201814Z-35930766-nan.tif",
    "n_dots": 8811,
    "footprint_covered_by_3px_dilation": 0.0039699088879397715,
    "our_dots_within_3px": 1.0
   },
   {
-   "path": "docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif",
+   "path": "docs/downloads/gems60-h74-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif",
    "n_dots": 8811,
    "footprint_covered_by_3px_dilation": 0.0039699088879397715,
    "our_dots_within_3px": 1.0

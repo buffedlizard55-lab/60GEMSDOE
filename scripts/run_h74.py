@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""H73-1 -- power-resolved replication of the tectonic-geomorphology lane's mandated first test.
+"""H74-1 -- power-resolved replication of the tectonic-geomorphology lane's mandated first test.
 
 Protocol position
 -----------------
@@ -19,9 +19,9 @@ about 0.047 for the measured component std of 0.39 -- while the pooled point est
 positive and stable across three independent statistics (+0.0326, +0.0404, +0.0326).  The lane has
 therefore been reporting "no signal" for what is, on its own numbers, an *unresolved* signal.
 
-H73-1 changes only the DESIGN -- more withheld segments (hide_frac 0.50, seeds 20/21/22) and more
+H74-1 changes only the DESIGN -- more withheld segments (hide_frac 0.50, seeds 20/21/22) and more
 control transects per component (100 instead of 10) -- never the statistic.  The endpoint and the
-gate are fixed in ``registry/preregistration-h73.json``, which was written before any number in
+gate are fixed in ``registry/preregistration-h74.json``, which was written before any number in
 this session existed.
 
 Order of operations (a receipt is written after every stage, so a crash leaves evidence)
@@ -133,7 +133,7 @@ def _jsonable(o):
 # stage 0 -- preregistration must predate this process
 # ============================================================================================== #
 def stage0_preregistration() -> dict:
-    p = ROOT / "registry" / "preregistration-h73.json"
+    p = ROOT / "registry" / "preregistration-h74.json"
     pre = json.loads(p.read_text())
     mtime = p.stat().st_mtime
     ok = mtime < T0
@@ -203,7 +203,7 @@ def stage2_cache(grid: Grid, cache_dir: Path) -> dict:
     #   quantity that is comparable between channels of different size, which is the whole point of
     #   the chi normalisation, and it is the statistic H65-1 / H66-6 / H70-1 measured.
     # SECONDARY: the absolute up-down difference dksn_signed, preregistered first and kept for
-    #   completeness (see the amendment recorded in registry/preregistration-h73.json).
+    #   completeness (see the amendment recorded in registry/preregistration-h74.json).
     ku = np.maximum(ksn_max, 0.0)
     kd = np.maximum(0.0, (ku + 0.5) * np.exp(-np.clip(step_max, -2.3, 2.3)) - 0.5)
     dksn = np.where(channel0, np.log1p(np.maximum(ku - kd, 0.0)) - np.log1p(np.maximum(kd - ku, 0.0)),
@@ -238,13 +238,13 @@ def stage2_cache(grid: Grid, cache_dir: Path) -> dict:
                 step_std=float(np.nanstd(step[channel])),
                 step_abs_mean=float(np.nanmean(step_abs[channel])),
                 step_abs_std=float(np.nanstd(step_abs[channel])))
-    rec = dict(stage="cache", evidence_class="DATA-MEASUREMENT", hypothesis="H73-1",
+    rec = dict(stage="cache", evidence_class="DATA-MEASUREMENT", hypothesis="H74-1",
                inputs=[dict(path=k, sha256=v) for k, v in PINS.items()],
                dem10_manifest="data/external/dem10_chi_100m.manifest.json",
                primary_statistic="relative_step (step_max/1000), block-centred, confound-masked",
                secondary_statistic="dksn_signed, block-centred, confound-masked",
                files=files, diagnostics=diag)
-    write_json(ROOT / "evidence" / "h73_feature_cache.json", rec)
+    write_json(ROOT / "evidence" / "h74_feature_cache.json", rec)
     log(f"stage2: channel={diag['channel_px']} confound={diag['confound_px']} "
         f"step_std={diag['step_std']:.4f}")
     return rec
@@ -766,8 +766,8 @@ def uniqueness(pred: np.ndarray, footprint: np.ndarray, limit_overlap: float = 0
 # stage 10 -- write the GeoTIFF and validate it literally
 # ============================================================================================== #
 STAMP = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
-SUBMISSION_NAME = "60GEMSDOE-H73-1-chi-knick-corridor"
-NOTE = ("H73-1 chi/ksn knickpoint corridors, >=3 independent drainages; first test NULL; "
+SUBMISSION_NAME = "60GEMSDOE-H74-1-chi-knick-corridor"
+NOTE = ("H74-1 chi/ksn knickpoint corridors, >=3 independent drainages; first test NULL; "
         "RESEARCH ONLY - DO NOT SUBMIT")
 
 
@@ -783,7 +783,7 @@ def write_tiff(pred: np.ndarray, grid: Grid, out_dir: Path, n_dots: int) -> dict
     nanv = np.where(grid.footprint, p, np.nan).astype(np.float32)
 
     h8 = hashlib.sha256(zeros.tobytes()).hexdigest()[:8]
-    base = f"gems60-h73-chi-knick-corridor-{n_dots}px-{STAMP}-{h8}"
+    base = f"gems60-h74-chi-knick-corridor-{n_dots}px-{STAMP}-{h8}"
     zpath = out_dir / f"{base}-zeros.tif"
     npath = out_dir / f"{base}-nan.tif"
 
@@ -837,7 +837,7 @@ def write_tiff(pred: np.ndarray, grid: Grid, out_dir: Path, n_dots: int) -> dict
                         problems=problems)
 
     rec = dict(generated_utc=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-               hypothesis="H73-1", submission_name=SUBMISSION_NAME, note=NOTE,
+               hypothesis="H74-1", submission_name=SUBMISSION_NAME, note=NOTE,
                note_chars=len(NOTE),
                primary=audit(zpath), variant_nan_outside=audit(npath),
                zip=dict(path=str(zipp.relative_to(ROOT)), bytes=zipp.stat().st_size,
@@ -855,7 +855,7 @@ def main() -> int:
     ap.add_argument("--stage", default="all",
                     choices=("prereg", "inputs", "cache", "e1", "e1b", "canary", "surface",
                              "holdout", "emit", "all"))
-    ap.add_argument("--cache", default=str(ROOT / ".cache" / "features73"))
+    ap.add_argument("--cache", default=str(ROOT / ".cache" / "features74"))
     args = ap.parse_args()
     cache_dir = Path(args.cache)
 
@@ -888,7 +888,7 @@ def main() -> int:
                                      n_transects=N_TRANSECTS, tag="E1", field="step")
         gate = arms["step"]["summary"]["verdict"]
         rec = dict(generated_utc=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-                   hypothesis="H73-1", preregistration="registry/preregistration-h73.json",
+                   hypothesis="H74-1", preregistration="registry/preregistration-h74.json",
                    evidence_class="MEASUREMENT",
                    primary_statistic="relative_step (step_max/1000), block-centred, confound-masked",
                    secondary_statistic="dksn_signed, block-centred, confound-masked",
@@ -897,7 +897,7 @@ def main() -> int:
                                n_cells=arms["step"]["components"]),
                    arms=arms, gate_G1_verdict=gate,
                    rows=res_primary["rows"])
-        write_json(ROOT / "evidence" / "h73_e1_first_test.json", rec)
+        write_json(ROOT / "evidence" / "h74_e1_first_test.json", rec)
         log(f"E1 gate: {gate}")
     if args.stage == "e1":
         return 0
@@ -913,10 +913,10 @@ def main() -> int:
                              field="step")
         summ = paired_bootstrap(res["rows"])
         rec = dict(generated_utc=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-                   hypothesis="H73-1", evidence_class="MEASUREMENT", gating=False,
+                   hypothesis="H74-1", evidence_class="MEASUREMENT", gating=False,
                    population="SGMC faults >= 300 m from the catalogue",
                    population_px=int(pop.sum()), summary=summ, rows=res["rows"])
-        write_json(ROOT / "evidence" / "h73_e1b_offcatalogue.json", rec)
+        write_json(ROOT / "evidence" / "h74_e1b_offcatalogue.json", rec)
         log(f"E1b: {summ['verdict']} mean={summ['mean']:.4f} ci95={summ['ci95']} n={summ['n_components']}")
     if args.stage == "e1b":
         return 0
@@ -934,7 +934,7 @@ def main() -> int:
 
     if args.stage in ("canary", "all"):
         rec = leakage_canary(grid, cache, surf)
-        write_json(ROOT / "evidence" / "h73_leakage_canary.json", rec)
+        write_json(ROOT / "evidence" / "h74_leakage_canary.json", rec)
         log("stage5 canary: " + ", ".join(f"{k}={v['max_abs_auc']:.3f}" for k, v in rec.items()))
     if args.stage == "canary":
         return 0
@@ -960,8 +960,8 @@ def main() -> int:
                                     random_mass_control_dti=evr["pooled_dti"])
             log(f"  spacing {sp}: dots={n} pooled_dti={ev['pooled_dti']:.6f} "
                 f"random_control={evr['pooled_dti']:.6f}")
-        write_json(ROOT / "evidence" / "h73_holdout.json",
-                   dict(hypothesis="H73-1", evaluator="gems57-pooled-hide-v2",
+        write_json(ROOT / "evidence" / "h74_holdout.json",
+                   dict(hypothesis="H74-1", evaluator="gems57-pooled-hide-v2",
                         hide_frac=HIDE_FRAC, seeds=list(SEEDS), ladder=ladders))
     if args.stage == "holdout":
         return 0
@@ -970,18 +970,18 @@ def main() -> int:
         dots = nms_dots(surf, grid.footprint & ~grid.catalogue, PRIMARY_SPACING)
         pred = np.zeros(grid.shape, dtype=np.float32)
         pred[dots] = 1.0
-        write_json(ROOT / "evidence" / "h73_emission.json",
+        write_json(ROOT / "evidence" / "h74_emission.json",
                    dict(dots=int(dots.sum()), spacing_px=PRIMARY_SPACING,
                         support_px=int((surf > 0).sum()),
                         on_catalogue=int((dots & grid.catalogue).sum()),
                         outside_footprint=int((dots & ~grid.footprint).sum())))
         np.save(cache_dir / "prediction.npy", pred)
         uni = uniqueness(pred, grid.footprint)
-        write_json(ROOT / "evidence" / "h73_uniqueness.json", uni)
+        write_json(ROOT / "evidence" / "h74_uniqueness.json", uni)
         log(f"stage9: uniqueness {uni['verdict']} overlap={uni['max_our_dots_within_3px_of_registry']:.4f} "
             f"|rho|max={uni['max_abs_spearman']:.4f}")
         rec = write_tiff(pred, grid, ROOT / "docs" / "downloads", int(dots.sum()))
-        write_json(ROOT / "evidence" / "h73_tiff.json", rec)
+        write_json(ROOT / "evidence" / "h74_tiff.json", rec)
         log(f"stage10: wrote {rec['primary']['path']} problems={rec['primary']['problems']}")
     return 0
 
