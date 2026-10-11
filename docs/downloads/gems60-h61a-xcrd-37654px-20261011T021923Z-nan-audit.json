@@ -1,0 +1,46 @@
+{
+ "filename": "gems60-h61a-xcrd-37654px-20261011T021923Z-nan.tif",
+ "size_bytes": 1560705,
+ "sha256": "8cbd52542e7bb8ea4949497d4f1b40f2f7936167f87d841f9242fe29f85e1383",
+ "mode": "nan",
+ "crs": "EPSG:32611",
+ "transform": [
+  100.0,
+  0.0,
+  243350.0,
+  0.0,
+  -100.0,
+  4508550.0
+ ],
+ "shape": [
+  3730,
+  3292
+ ],
+ "dtype": "float32",
+ "nodata": null,
+ "nodata_repr": "nan",
+ "emitted_positive_pixels": 37654,
+ "footprint_fraction": 0.007287,
+ "on_catalogue_positive_pixels": 0,
+ "in_footprint_finite_pixels": 5167373,
+ "in_footprint_min": 0.0,
+ "in_footprint_max": 1.0,
+ "full_grid_finite_pixels": 5167373,
+ "checks": {
+  "single_band": true,
+  "dtype_float32": true,
+  "dimensions_3730x3292": true,
+  "crs_epsg_32611": true,
+  "in_footprint_all_finite": true,
+  "in_footprint_zero_nan": true,
+  "in_footprint_zero_inf": true,
+  "in_footprint_zero_sentinel": true,
+  "in_footprint_range_0_1": true,
+  "outside_footprint_compliant": true,
+  "zero_on_catalogue_leakage": true,
+  "validator_range_0_1_guaranteed": true
+ },
+ "all_checks_passed": true,
+ "artifact": "gems60-h61a-xcrd-37654px-20261011T021923Z-nan.tif",
+ "audited_utc": "2026-10-11T02:42:00Z"
+}

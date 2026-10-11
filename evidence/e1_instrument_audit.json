@@ -1,0 +1,89 @@
+{
+ "schema": 1,
+ "population": "off-catalogue SGMC faults (>300 m from catalogue)",
+ "n_truth_px": 62703,
+ "rows": [
+  {
+   "candidate": "H33-2-B2 champion",
+   "live_dti": 0.2778,
+   "file": "registry/rasters/dotted_b2_prune_02778.tif",
+   "mass": 37654,
+   "tp_w_offcat": 2466.4227816039497,
+   "offcat_coverage": 0.03933500441133518,
+   "sgmc_raw_dti": 0.042750667004152136,
+   "sgmc_prevalence_cal": 0.02822957661246888,
+   "offcat_excess_vs_random": 0.015020328127027402,
+   "frac_within_300m_of_catalogue": 0.057656557072289796
+  },
+  {
+   "candidate": "H27-4-R1-SOLO",
+   "live_dti": 0.2708,
+   "file": "registry/rasters/dotted_d2_8_02708.tif",
+   "mass": 40199,
+   "tp_w_offcat": 2531.5150543020245,
+   "offcat_coverage": 0.04037310901076543,
+   "sgmc_raw_dti": 0.04349517809124096,
+   "sgmc_prevalence_cal": 0.02816393074412805,
+   "offcat_excess_vs_random": 0.014415025621141792,
+   "frac_within_300m_of_catalogue": 0.11731635115301375
+  },
+  {
+   "candidate": "TIP-STEPOVER-R30",
+   "live_dti": 0.2632,
+   "file": "registry/rasters/tip_stepover_r30_02632.tif",
+   "mass": 41865,
+   "tp_w_offcat": 2560.898174356599,
+   "offcat_coverage": 0.04084171689323635,
+   "sgmc_raw_dti": 0.04374956307391081,
+   "sgmc_prevalence_cal": 0.02797839926438062,
+   "offcat_excess_vs_random": 0.01380783144567314,
+   "frac_within_300m_of_catalogue": 0.14389107846649946
+  },
+  {
+   "candidate": "D2.8",
+   "live_dti": 0.26,
+   "file": "registry/rasters/dotted_d2_8_02600.tif",
+   "mass": 44090,
+   "tp_w_offcat": 2555.161478484158,
+   "offcat_coverage": 0.04075022691871454,
+   "sgmc_raw_dti": 0.04332221345538786,
+   "sgmc_prevalence_cal": 0.02726090253576055,
+   "offcat_excess_vs_random": 0.012279571015619786,
+   "frac_within_300m_of_catalogue": 0.19521433431617147
+  },
+  {
+   "candidate": "Hedge-v2",
+   "live_dti": 0.1563,
+   "file": "registry/rasters/hedge_v2_01563.tif",
+   "mass": 227507,
+   "tp_w_offcat": 8876.164198328153,
+   "offcat_coverage": 0.14155884404778327,
+   "sgmc_raw_dti": 0.09278498448031704,
+   "sgmc_prevalence_cal": 0.03228010266629324,
+   "offcat_excess_vs_random": -0.005351419334965163,
+   "frac_within_300m_of_catalogue": 0.4037106550567675
+  },
+  {
+   "candidate": "LATTICE-S5",
+   "live_dti": 0.0904,
+   "file": "registry/rasters/r13_lattice_s5_00904.tif",
+   "mass": 206895,
+   "tp_w_offcat": 8386.992449263302,
+   "offcat_coverage": 0.13375743503920548,
+   "sgmc_raw_dti": 0.09161966552033618,
+   "sgmc_prevalence_cal": 0.032941127771251084,
+   "offcat_excess_vs_random": 0.0001571548606890405,
+   "frac_within_300m_of_catalogue": 0.08583581043524494
+  }
+ ],
+ "spearman_vs_live": {
+  "mass": -0.9428571428571428,
+  "tp_w_offcat": -0.8857142857142857,
+  "offcat_coverage": -0.8857142857142857,
+  "sgmc_raw_dti": -0.7714285714285715,
+  "sgmc_prevalence_cal": -0.42857142857142855,
+  "offcat_excess_vs_random": 0.9428571428571428,
+  "frac_within_300m_of_catalogue": -0.42857142857142855
+ },
+ "n_live_points": 6
+}

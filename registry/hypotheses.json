@@ -446,7 +446,101 @@
    "cost": "high",
    "data_status": "the official link table is mirrored in a sibling repository (sha256 8804dbff8754...); the tiles themselves were NOT obtained and their obtainability from this sandbox is unverified",
    "status": "registered; data obtainability unverified; no slot requested"
+  },
+  {
+   "id": "H62-D",
+   "rank": 26,
+   "slate": "H62-H64 (2026-10-11, session arena/7573c1e8)",
+   "slate_rank": 1,
+   "title": "Catalogue flank peel ring 3: extend the only live-verified emission rule",
+   "layers": [
+    "the nested chain A 44,090 (0.2600) -> B 40,199 (0.2708) -> C 37,654 (0.2778), verified pixel-exact",
+    "distance-to-catalogue on the pinned grid"
+   ],
+   "signature": "dots survive only beyond one kernel radius of the visible catalogue",
+   "why_off_catalogue": "each removal gained a MEASURED +2.78e-6 and +2.75e-6 per dot; hidden truth excludes the catalogue",
+   "differs_from_repo": "states the rule behind the ladder and extends it; D3 is 94 % of its parent's cells (|rho| 0.974) so it trips the uniqueness gate",
+   "expected_dti": "+0.0060 -> 0.2838 (MODEL from two owner-reported deltas)",
+   "cost": "zero",
+   "data_status": "evidence/e4_ring_peel.json",
+   "status": "BUILT; highest modelled expectation, NOT unique - do not submit as a novel artifact"
+  },
+  {
+   "id": "H61-A",
+   "rank": 27,
+   "slate": "H62-H64 (2026-10-11, session arena/7573c1e8)",
+   "slate_rank": 2,
+   "title": "Cross-channel residual detector (XCRD): 30-channel classifier for off-catalogue fault locality",
+   "layers": [
+    "19 physics bands minus deq/ieq n100a15",
+    "9-band 3DEP topographic pack",
+    "4-band GeoDAWN radiometrics K/Th/U/TC",
+    "SGMC faults (DOI 10.5066/P1A3DQZK) as positivity proxy"
+   ],
+   "signature": "gradient boosting over 30 channels; positives = SGMC faults >300 m off-catalogue; negatives stratified by distance decile",
+   "why_off_catalogue": "positives are ground the catalogue lacks; distance-to-catalogue is excluded from the features",
+   "differs_from_repo": "trained on the off-catalogue population itself and emitted out-of-fold; prior detectors are ridge filters on 1-2 channels",
+   "expected_dti": "screen 2.46 vs champion 1.62 at equal mass; held-out AUC 0.73-0.80; independent scarp screen NEGATIVE (0.48x)",
+   "cost": "~10 min per 4-fold fit on 2 cores",
+   "data_status": "evidence/e2_xcrd.json, evidence/e2b_xcrd_screen.json",
+   "status": "BUILT, UNIQUE (max |rho| 0.024); OK to download, slot NOT CLEARED"
+  },
+  {
+   "id": "H63-A",
+   "rank": 28,
+   "slate": "H62-H64 (2026-10-11, session arena/7573c1e8)",
+   "slate_rank": 3,
+   "title": "Scarp x structure co-locality: mapped structure WITH surface rupture, not in the catalogue",
+   "layers": [
+    "SGMC off-catalogue kernel",
+    "h52 LiDAR scarp kernel (validation channel)",
+    ">=350 m catalogue exclusion"
+   ],
+   "signature": "rank lattice positions by the two max-normalised kernels; the tube intersection is the physical claim",
+   "why_off_catalogue": "defined by two independent off-catalogue channels; the catalogue only supplies an exclusion zone",
+   "differs_from_repo": "no registry artifact combines structural mapping with rupture evidence as a co-locality",
+   "expected_dti": "screen A 13.4 / screen B 3.73 at 8,128 dots (mass-limited)",
+   "cost": "low",
+   "data_status": "evidence/e5_scarp_structure.json",
+   "status": "BUILT PARTIALLY (8,128 dots); not cleared"
+  },
+  {
+   "id": "H62-A",
+   "rank": 29,
+   "slate": "H62-H64 (2026-10-11, session arena/7573c1e8)",
+   "slate_rank": 4,
+   "title": "State-survey structural locality: emit on SGMC traces absent from the USGS Quaternary catalogue",
+   "layers": [
+    "USGS SGMC derived faults (sha 643cbe99...)",
+    ">=350 m catalogue exclusion"
+   ],
+   "signature": "dots sit exactly on off-catalogue SGMC traces (screen A 14.5)",
+   "why_off_catalogue": "the traces are by construction absent from the catalogue",
+   "differs_from_repo": "isolates the trace population that r13_lattice_s5 contains inside 206,895 dots (live 0.0904)",
+   "expected_dti": "REJECTED: 0.46x random on the independent LiDAR scarp screen (traces themselves 0.68x; catalogue 1.53x)",
+   "cost": "low",
+   "data_status": "evidence/e3_sgmc_locality.json",
+   "status": "REJECTED - do not submit"
+  },
+  {
+   "id": "H64-A",
+   "rank": 30,
+   "slate": "H62-H64 (2026-10-11, session arena/7573c1e8)",
+   "slate_rank": 5,
+   "title": "Three-slot identification experiment: anchor + lambda=0.5 rescale + null-add measures T, K and F exactly",
+   "layers": [
+    "best scored emission",
+    "its lambda=0.5 rescale",
+    "null-add dots at the belief floor far from the catalogue"
+   ],
+   "signature": "1/DTI(lambda) = alpha + alpha(F/T) + (beta K/T)(1/lambda) is linear, so three returns invert exactly",
+   "why_off_catalogue": "null-add dots are >300 m from every catalogue pixel so the masking rule cannot move the number",
+   "differs_from_repo": "no DTI gain by construction; it is the only action that replaces every projection here with a measurement",
+   "expected_dti": "none directly; both probes score below the anchor and only the best submission counts",
+   "cost": "two submission slots, zero compute",
+   "data_status": "algebra verified; never executed",
+   "status": "PROPOSED - highest information value, operator decision required"
   }
  ],
- "updated_utc": "2026-10-11T02:20:00Z"
+ "updated_utc": "2026-10-11T03:00:00Z"
 }

@@ -1,0 +1,77 @@
+{
+  "schema": "e5-scarp-structure/1",
+  "budget": 37654,
+  "screen_a": "SGMC off-catalogue 300 m triangular kernel, mean at dots / footprint mean",
+  "screen_b": "LiDAR scarp (h_gate12>=200) 300 m kernel, mean at dots / footprint mean",
+  "live_ladder": {
+    "H33-2-B2 champion": {
+      "live": 0.2778,
+      "mass": 37654,
+      "ratio_a": 1.6177,
+      "ratio_b": 2.0457
+    },
+    "H27-4-R1-SOLO": {
+      "live": 0.2708,
+      "mass": 40199,
+      "ratio_a": 1.5553,
+      "ratio_b": 2.0593
+    },
+    "TIP-STEPOVER-R30": {
+      "live": 0.2632,
+      "mass": 41865,
+      "ratio_a": 1.5108,
+      "ratio_b": 2.0593
+    },
+    "D2.8": {
+      "live": 0.26,
+      "mass": 44090,
+      "ratio_a": 1.4313,
+      "ratio_b": 2.0861
+    },
+    "Hedge-v2": {
+      "live": 0.1563,
+      "mass": 227507,
+      "ratio_a": 0.9636,
+      "ratio_b": 1.501
+    },
+    "LATTICE-S5": {
+      "live": 0.0904,
+      "mass": 206895,
+      "ratio_a": 1.0012,
+      "ratio_b": 0.9868
+    }
+  },
+  "arms": {
+    "combined": {
+      "mass": 8128,
+      "ratio_a": 13.4493,
+      "ratio_b": 3.7304,
+      "frac_within_300m_of_catalogue": 0.0
+    },
+    "scarp_only": {
+      "mass": 37654,
+      "ratio_a": 0.6764,
+      "ratio_b": 6.4493,
+      "frac_within_300m_of_catalogue": 0.0
+    },
+    "sgmc_only": {
+      "mass": 37654,
+      "ratio_a": 14.4772,
+      "ratio_b": 0.6972,
+      "frac_within_300m_of_catalogue": 0.0
+    }
+  },
+  "best": {
+    "arm": "combined",
+    "combined_screen": 17.1797
+  },
+  "uniqueness": {
+    "max_abs_spearman": 0.045897109027918354,
+    "worst_peer": "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+    "max_within_3px_frac": 0.999138779527559,
+    "worst_peer_3px": "r13_lattice_s5_00904.tif",
+    "n_registry_rasters": 35,
+    "pass_spearman_gate": true,
+    "pass_within_3px_rule": false
+  }
+}

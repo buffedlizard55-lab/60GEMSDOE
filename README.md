@@ -52,6 +52,29 @@
 
 ---
 
+> ## ⚠️ SESSION VERDICT 2026-10-11 (H61–H63) — ONE-CLICK DOWNLOAD AND WHAT IT MEANS
+> **Download: [docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z.tif](docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z.tif)**
+> ([zip](docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z.zip) · [audit](docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-audit.json) ·
+> [receipt](docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.json) · [write-up](docs/research/h61-h63-session-20261011.md)).**
+> This is the ONE-CLICK artifact of session H61–H63 and it is **unique**: max |Spearman| **0.024** against all
+> 35 registry rasters, worst within-3-px share 46 % (the brief's stop rule is 70 %).
+>
+> **Is it OK to submit?** — *Download: YES. Slot: NOT CLEARED.* No local instrument can certify that it beats
+> the owner-reported **0.2778**; the repository's catalogue hide-and-recover gate scores every off-catalogue
+> emission **exactly 0 by construction** (`evidence/e6_blocked_gate.json`). It is an explicit, bounded-downside
+> bet — only the best submission counts, so a losing probe cannot cost standing.
+>
+> **Why:** on the one *mass-normalised* screen that reproduces the owner-reported ladder (Spearman +0.94) it
+> sits at **2.46** where the champion sits at 1.62, at identical 37,654-dot mass (held-out AUC 0.73–0.80).
+> **Counter-evidence, printed next to it:** the independent LiDAR scarp screen is negative (0.48×).
+> Do **not** submit a copy of any prior artifact (e.g. `dotted_b2_prune_02778`,
+> `gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan`); the ring-peel continuation D3 has the highest
+> modelled expectation but trips the uniqueness gate (|rho| 0.974) and is **not** the headline download.
+> Values applied: **Maximize P(Win)** · **Own the Outcome**. Portal-safety: float32, all values finite in
+> [0, 1], zeros outside the footprint — the container that cannot trip the historical
+> *"Predicted values must be in range [0, 1]"* rejection. The parallel 2026-10-11b GEMS61 lane keeps its own
+> NEGATIVE verdict.
+
 ## Standing brief (verbatim — read every session before working)
 
 <details open><summary><b>The prompt this project runs on</b></summary>
