@@ -1,9 +1,42 @@
-# Large official rasters are NOT committed; restore them with scripts/fetch_inputs.sh from the
-# integrity-pinned mirrors (see registry/source_pins.json and docs/data.html).
-data/*.tif
-data/*.zip
-# runtime scratch
-.cache/
+# Python & build artifacts
 __pycache__/
-*.pyc
+*.py[cod]
+.venv/
+venv/
 .pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+.cache/
+
+# Large competition rasters and regenerable numpy caches are restored via
+# bash scripts/download_competition_data.sh and python scripts/prepare_data.py
+data/*
+!data/.gitkeep
+!data/README.md
+!data/restore_receipt.json
+!data/prepared_manifest.json
+!data/holdout_surrogate_log.json
+!data/holdout_surrogate_log.csv
+
+*.npy
+*.npz
+*.partial
+*.assembling
+
+# Keep audited submission deliverables and verification sidecars in docs/downloads/
+!docs/downloads/*.tif
+!docs/downloads/*.zip
+!docs/downloads/*.json
+
+# OS / Editor
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Lane 1 (chi/ksn knickpoint strike traces): the public-domain USGS 3DEP 10 m product, mean-reduced
+# to the competition's 100 m grid, is committed so the lane is reproducible without network access.
+!data/external/
+!data/external/*.tif
+!data/external/*.json

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary — 60GEMSDOE</title>
+<style>
+ body{margin:0;font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#111;background:#fff}
+ main{max-width:900px;margin:0 auto;padding:28px 20px 90px}
+ h1{font-size:1.55rem;margin:.2em 0 .1em}
+ h2{font-size:1.16rem;margin:1.7em 0 .4em;border-bottom:1px solid #d8d8d8;padding-bottom:.25em}
+ h3{font-size:1rem;margin:1.1em 0 .3em}
+ .sub{color:#555;margin:0 0 16px}
+ code{background:#f2f2f2;padding:1px 4px;border-radius:4px;font-size:.87em;word-break:break-word}
+ table{border-collapse:collapse;width:100%;font-size:.9rem;margin:.5em 0}
+ th,td{border:1px solid #d8d8d8;padding:6px 8px;text-align:left;vertical-align:top}
+ th{background:#f4f4f4}
+ .box{border:1px solid #d8d8d8;border-left:4px solid #111;background:#fafafa;padding:12px 16px;border-radius:6px;margin:1em 0}
+ .warn{border-left-color:#a4161a;background:#fbeaea}
+ .lab{font-weight:700;font-size:.8rem;letter-spacing:.03em;text-transform:uppercase;color:#555}
+ ul{margin:.3em 0 .6em 1.1em} li{margin:.2em 0}
+</style>
+</head>
+<body>
+<main>
+
+<h1>Executive summary</h1>
+<p class="sub">DrivenData competition 306 — DOE GEMS geothermal exploration. Lane: tectonic geomorphology (χ, normalised channel steepness, knickpoint strike alignment). Run date 2026-10-11. <a href="index.html">← download page</a></p>
+
+<div class="box warn">
+<p><span class="lab">Bottom line</span><br>
+This run is a <strong>negative</strong>. The candidate GeoTIFF is validated, unique and reproducible, but the lane's evidence failed its own pre-registered gate, and that failure is the deliverable: it is worth more than a submission slot spent on a map whose skill against faults outside the catalogue is <em>below</em> a uniform-random map of the same mass.</p>
+</div>
+
+<h2>1. How a submission is made (and how to tell whether it is OK)</h2>
+<ol>
+  <li>On the DrivenData competition site, open the submission page for <em>GEMS — Geothermal Exploration</em> and use its file upload control. The competition site is login-walled; the form was described by the operator and could not be re-verified in this sandbox (no authentication).</li>
+  <li>Upload the <strong>single-band GeoTIFF</strong> (<code>.tif</code>, or a <code>.zip</code> containing exactly one GeoTIFF). Required geometry, verified from the competition's own statement: <strong>EPSG:32611</strong>, <strong>100 m</strong> pixels, the <strong>same bounds/CRS/geotransform as the training rasters</strong>, values <strong>float32 in [0,1]</strong> (predicted fault probability), and pixels outside the footprint <strong>null or NaN</strong>.</li>
+  <li>Give it a <strong>unique name</strong> and a short note (≤140 characters), e.g. <code>kinematic trace x chi-steepness; 3770px; NEGATIVE first test</code>.</li>
+  <li>Before spending the slot, check the file three ways: open it with <code>rasterio</code> and confirm band count/dtype/CRS/transform match the sample submission; confirm <code>nanmin &gt;= 0</code> and <code>nanmax &lt;= 1</code> on the finite pixels (a prior download in this family was rejected with <em>“Predicted values must be in range [0, 1]”</em>, which is exactly the failure that this check prevents); and confirm the file is not a near-copy of an already-scored raster (see §5).</li>
+</ol>
+<p>The exact validator output for the candidate file is in <a href="submission/run_card.json">run_card.json → raster</a>: all six literal checks pass, including <code>passes_portal_range_test: true</code>.</p>
+
+<h2>2. The official metric, and what it means</h2>
+<p><span class="lab">Organizer-confirmed</span> (competition metric page, fetched 2026-10-11): ground truth <code>g</code> on the 100 m grid, prediction <code>p∈[0,1]</code>, kernel <code>k(d) = max(1 − d/R, 0)</code> with <code>R = 300 m</code>:</p>
+<ul>
+<li><code>TP<sub>w</sub> = Σ<sub>g∈G</sub> max<sub>x: d(x,g) ≤ R</sub> p(x)·k(d(x,g))</code></li>
+<li><code>FP<sub>w</sub> = Σ<sub>x: p(x)&gt;0</sub> p(x)·[1 − max<sub>g∈G</sub> k(d(x,g))]</code></li>
+<li><code>FN<sub>w</sub> = Σ<sub>g∈G</sub> [1 − max<sub>x: d(x,g) ≤ R</sub> p(x)·k(d(x,g))]</code></li>
+<li><code>DTI = TP<sub>w</sub> / (TP<sub>w</sub> + α·FP<sub>w</sub> + β·FN<sub>w</sub> + ε)</code>, with <code>α = 0.2</code>, <code>β = 0.8</code>. Organizer's worked example: <code>TP<sub>w</sub>=3.00, FP<sub>w</sub>=1.89, FN<sub>w</sub>=2.00 → 0.60</code>.</li>
+</ul>
+<p>Because <code>FN<sub>w</sub> = |G| − TP<sub>w</sub></code> exactly (each ground-truth pixel contributes at most 1), the score is a function of three numbers only:</p>
+<p style="text-align:center"><code>DTI = T / (T + 0.2·FP + 0.8·FN)</code>, with <code>FP = S − M</code>, <code>FN = |G| − T</code></p>
+<p>where <code>T</code> = matched truth mass, <code>S</code> = your total emitted mass, <code>M</code> = the part of <code>S</code> that lies inside some truth pixel's 300 m kernel, <code>|G|</code> = number of hidden truth pixels. Three consequences govern every submission:</p>
+<ul>
+<li><strong>Missed faults dominate.</strong> Each uncovered ground-truth pixel costs 0.8 while each perfectly covered one adds 1.0 — the net marginal value of converting a miss into a hit is ~0.2·(1−DTI), i.e. about 0.14 at DTI≈0.3.</li>
+<li><strong>Mass is a tax.</strong> Every emitted pixel that is not inside a truth kernel pays 0.2·p. At DTI ≈ 0.28 the tax per unit mass (0.2·DTI ≈ 0.056) is small <em>relative to</em> a hit, so extra mass is worth placing only where the chance of being within 300 m of an unseen fault exceeds ~5.6%.</li>
+<li><strong>Radius beats precision.</strong> Anything within 300 m of a truth pixel earns partial credit; a fault map is scored by proximity, not by pixel overlap. This is why dot maps win here and why "dotted" files dominate the family's leaderboard entries.</li>
+</ul>
+
+<h2>3. Why <code>h33-h33-2-b2-…-zeros</code> scored 0.2778 — the algebra of one leaderboard point</h2>
+<p><span class="lab">Measured here, from the file itself</span> (sha256 <code>c55bafc4…</code>, byte-identical to the pin in the sibling registry):</p>
+<table>
+<tr><th>Quantity</th><th>Value</th><th>How it was obtained</th></tr>
+<tr><td>Values in the raster</td><td><code>{0, 1}</code> only</td><td>read with rasterio</td></tr>
+<tr><td>Emitted mass <code>S</code></td><td>37,654 px (= 376 km² of "fault")</td><td>direct count</td></tr>
+<tr><td>Distance to the supplied catalogue</td><td>min 223.6 m; <strong>0 px</strong> within 200 m</td><td>exact Euclidean distance transform of the catalogue</td></tr>
+<tr><td>Relation to a previously scored map</td><td>strict subset of the 44,090-cell <code>d2_8</code> map (44,090 → 37,654 = the 100–200 m ring deleted)</td><td>100% of its dots lie inside that map</td></tr>
+<tr><td>Score on the public board</td><td>0.2778 (owner-published / PUBLIC-BOARD)</td><td>leaderboard, captured 2026-10-10</td></tr>
+</table>
+<p>Inverting the metric with three independent published estimates of the hidden truth size (|G| = 12,367 / 14,088.7 / 14,333.8; owner-published board calibrations) and the family's own matched-mass estimate <code>M ≈ 277.9</code>:</p>
+<table>
+<tr><th>|G| (unknown truths)</th><th>implied <code>T</code> at 0.2778</th><th>implied recall</th><th>implied <code>T</code> to reach the board max 0.3774</th></tr>
+<tr><td>12,367</td><td>5,109</td><td>41.3%</td><td>7,090 (57.3%)</td></tr>
+<tr><td>14,088.7</td><td>5,514</td><td>39.1%</td><td>7,652 (54.3%)</td></tr>
+<tr><td>14,333.8</td><td>5,572</td><td>38.9%</td><td>7,732 (53.9%)</td></tr>
+</table>
+<p>Three readings follow, and they are the answer to "why 0.2778":</p>
+<ol>
+<li><strong>It is a mass-precision point, not a physical achievement.</strong> With <code>S = 37,654</code> and <code>T ≈ 5.5k</code>, 99.3% of the emitted mass (≈37,376 px) sits outside every hidden fault's 300 m kernel and is pure 0.2-weight penalty. The score is carried by the minority of dots that happen to fall within 300 m of an unseen fault. Nothing in the number identifies <em>which</em> physical idea produced the dots: the sibling repositories' inversion of 13 board-calibrated submissions fit every candidate physical basis with zero weight difference (LOO MAE ≈ 0.020, ρ ≈ 0.94) — the leaderboard cannot distinguish the physics, only the mass/recall trade-off.</li>
+<li><strong>Its placement rule was "avoid the catalogue, then spread".</strong> The file is a strict subset of a larger dotted map, and the only edit between them was deleting the 100–200 m ring around the known faults — 6,436 cells that earned nothing. That deletion is measurable in the score and is the clearest actionable lever in the whole family's history.</li>
+<li><strong>It is far from the metric's optimum at its own recall.</strong> Holding <code>T</code> fixed and shrinking the mass to 6,000 px gives DTI ≈ 0.40–0.42. Mass, not recall, is the binding constraint at 37.7k dots. Conversely the board maximum 0.3774 back-solves to <code>T ≈ 7.1–7.7k</code> (54–57% recall) <em>at the same mass</em>, so the top of the board is earning ~40% more matched truth mass, not a different kind of map.</li>
+</ol>
+<p><span class="lab">Independent corroboration (measured here)</span> — the champion raster scored on this repository's held-out off-catalogue instrument (14,089 SGMC fault pixels ≥300 m from the supplied catalogue, thinned to the published prevalence):</p>
+<table>
+<tr><th>Map, same instrument</th><th>Emitted mass</th><th>Matched truth mass <code>T</code></th><th>HOLDOUT-DTI</th></tr>
+<tr><td>h33-2-b2 (champion, 0.2778 on the board)</td><td>37,654</td><td>1,280</td><td><strong>0.0681</strong></td></tr>
+<tr><td>uniform-random dots, <em>same mass</em></td><td>37,654</td><td>920</td><td>0.0489</td></tr>
+<tr><td>uniform-random dots, mass needed to match the champion</td><td>~90,000</td><td>—</td><td>≈0.068</td></tr>
+<tr><td>this lane's negative candidate</td><td>3,770</td><td>77</td><td>0.0064 (vs random 0.0081 at the same mass)</td></tr>
+</table>
+<p>So the champion <em>does</em> carry real, modest fault-finding skill on faults outside the catalogue: it needs 2.4× less mass than a random map to reach the same held-out score (+39% matched mass at equal budget). But that skill is a 40% enrichment in <code>T</code>, not a qualitative detector — which is exactly what a 0.28 on a 0.38-max board looks like.</p>
+<p><span class="lab">Is something higher achievable?</span> Yes, and the target is quantified: (i) <strong>recall</strong> — the board's best (0.3774) needs ~54–57% of hidden truths within 300 m, versus the champion's ~39%; that is +0.10 of DTI earned the hard way, by finding faults the catalogue misses; (ii) <strong>mass discipline</strong> — the same recall at 6,000 px of mass is worth ~+0.13. Nothing in the metric forbids a much higher score: a hypothetical map that covered every hidden fault with no unmatched mass would score near 1.0. The practical ceiling is set by how many of the hidden faults any method can place within 300 m, and the present frontier (0.3774) is nowhere near the metric's limit.</p>
+
+<h2>4. What this run found, with numbers and labels</h2>
+<table>
+<tr><th>Quantity</th><th>Value</th><th>Label</th></tr>
+<tr><td>Mandated first test — channels crossing withheld catalogue segments vs orientation-matched random lines through the <em>same</em> pixels (whole-segment 5-fold, 3 px buffer)</td><td>4/5 folds positive; 1/5 with 95% bootstrap CI above zero; mean of fold means +0.35</td><td>HOLDOUT-DTI (segment-level paired lines; the pre-registered rule required ≥4/5 positive <em>and</em> ≥2 folds with CI&nbsp;&gt;&nbsp;0 → <strong>fail</strong>)</td></tr>
+<tr><td>Off-catalogue instrument, matched budget 12,000 dots</td><td>lane 0.0108 vs random 0.0268 vs gate-free steepness 0.0144</td><td>HOLDOUT-DTI, 14,089 withheld positives</td></tr>
+<tr><td>Budget curve 1,000→48,000 dots</td><td>lane beats the uniform-random null at <strong>1 of 9</strong> budgets (only 1,000)</td><td>HOLDOUT-DTI</td></tr>
+<tr><td>Submitted raster vs the same off-catalogue truth</td><td>0.0064, truth-side bootstrap 95% CI [0.0053, 0.0074] (lower bound: emission-side terms held fixed)</td><td>HOLDOUT-DTI</td></tr>
+<tr><td>Leakage canary — single-feature AUC vs off-catalogue truth</td><td>max 0.58 (coherence); score 0.50; nothing &gt; 0.90</td><td>HOLDOUT-DTI</td></tr>
+<tr><td>Uniqueness vs 35 registry rasters</td><td>worst naive 3 px overlap 83.1% — but a <em>random</em> dot set of the same size also achieves 83.7% (excess −0.7%); max |Spearman| 0.0025</td><td>control computed in the selector step; the literal "&gt;70% overlap ⇒ stop" rule is unsatisfiable on this registry and is therefore reported with its control, never waived silently</td></tr>
+<tr><td>Substrate diagnostics (routing sanity)</td><td>acc max 1.65 M px; 31% of cells raised by depression filling; per-cell A-vs-L exponent ≈ 0.03 (a real network gives ≈1.5–1.7)</td><td>diagnostic, not a score</td></tr>
+<tr><td>Instrument-bias diagnostic — AUC of plain topography against the off-catalogue truth</td><td>local relief 0.896; slope p90 0.895; absolute elevation 0.875</td><td>HOLDOUT-DTI-based; <strong>this is the caveat on the negative</strong>: the thinned off-catalogue population sits in low-relief, high-elevation ground, so any relief-based detector is handicapped by construction</td></tr>
+</table>
+
+<h2>5. Why the verdict is "negative" rather than "promising"</h2>
+<ul>
+<li>The lane's whole claim is <em>localisation</em>: the traces should be where unseen faults are. At matched mass the trace field is <em>worse</em> than random at 8 of 9 budgets, and its published holdout DTI (0.0064) is below the null (0.0081). A detector that is beaten by a coin is not promotable, and the protocol forbids spending a submission slot on it.</li>
+<li>The pre-registered first test also failed, on both substrates. Its per-fold signs are consistently positive (4/5 and 5/5 folds in the two runs), so the honest summary is "weak positive effect in the expected direction, not established", not "no effect shown".</li>
+<li>The uniqueness and leakage checks both pass, so the negative is <em>not</em> an artefact of duplication or of a shortcut: the field genuinely carries no information about the off-catalogue truth (and the canary shows it is not secretly reading the labels).</li>
+<li>The instrument-bias diagnostic says the off-catalogue population used here is anti-correlated with relief. That does not rescue the lane, but it does mean the next experiment must fix the <em>instrument</em> before the hypothesis is declared dead.</li>
+</ul>
+
+<h2>6. What must be true before the next submission slot is spent</h2>
+<ol>
+  <li><strong>Instrument first.</strong> Re-thin the off-catalogue population within relief deciles (preserve the real fault/relief joint distribution instead of spreading the sample into basins), then re-score every candidate raster in the registry against the corrected instrument. Until the null is credible, no lane's numbers mean anything.</li>
+  <li><strong>Real 10 m DEM.</strong> The free, public 3DEP products are reachable from a GitHub Actions runner (the workflow in this repository probes three of them and commits a receipt); the sandbox itself has no network path to <code>prd-tnm.s3.amazonaws.com</code>. χ/ksn at 100 m cannot resolve first-order channels, which is the most likely cause of the routing diagnostics above.</li>
+  <li><strong>A detector that beats the null on the corrected instrument</strong> at matched mass, with the pre-registered bench being the best promotable holdout DTI in the family's own record (0.190147 on its folds), before any board slot is used.</li>
+  <li><strong>Mass discipline.</strong> Whatever the detector, the emission policy should be set by the metric's own marginal rule at the measured DTI, and every file should be checked for the 100–200 m ring deletion that the champion's history shows is free money.</li>
+</ol>
+
+<p class="meta">Labels used on this page: <strong>HOLDOUT-DTI</strong> = this repository's own instrument on withheld truth, with the count of withheld positives and an interval; <strong>PUBLIC-BOARD / owner-published</strong> = the leaderboard and sibling repositories' published evidence (not organizer receipts); every inversion shown is computed here from the published file and the published pins.</p>
+
+</main>
+</body>
+</html>

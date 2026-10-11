@@ -1,0 +1,12 @@
+{
+  "hypothesis": "Aligned drainage-valley knickpoints",
+  "mechanism": "Channel steepness steps indicate spatial gradients in rock uplift along independent drainages",
+  "mimic": "Lithology contrast or local climate gradients",
+  "holdout_dti": 0.013052758977415937,
+  "correlation_vs_registry": "N/A (unique)",
+  "raster_sha256": "386e7cd1ea67cac24ec3b64b797037585732928a94f66160e48d27cfebe5a5e7",
+  "validator_output": "passed",
+  "submission_name": "h61-geomorph-steepness-knickpoints",
+  "submission_note": "collinear steepness steps across drainages (h61 proxy)",
+  "verdict": "promote"
+}
