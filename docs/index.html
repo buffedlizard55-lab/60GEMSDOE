@@ -2,32 +2,29 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>60GEMSDOE — current status and evidence · 60GEMSDOE</title><link rel="stylesheet" href="assets/site.css"></head><body>
 <!-- H67-STATUS:BEGIN -->
-<div class=wrap style="border:3px solid #067647;background:#f6fef9;padding:12px 16px;margin:8px auto">
-<h2 style="margin:0 0 6px">&#9989; READ THIS FIRST (2026-10-11, session H66-1 / H67-1 &mdash; <code>arena/7085de4f-60gemsdoe</code>): Validated 10 m Bedrock &Delta;k<sub>sn</sub> GeoTIFF &amp; Submission Decision</h2>
-<table>
-<tr><th>Artifact</th><th>One-click download &amp; receipts</th><th>OK to download &amp; submit?</th></tr>
-<tr><td><b>Validated Tectonic-Geomorphology Deliverable (H66-1 / H67-1)</b><br><code>gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif</code><br>
-<span style="color:#5b7183">40,000 dots (2.8 px NMS) &middot; 0 on catalogue &middot; sha256 <code>cde6b57be8aaac9b&hellip;</code></span></td>
-<td><a class=btn href="downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif" download>&#11015; .tif (145 KB)</a>
-<a class="btn alt" href="downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.zip" download>.zip</a>
-<a href="downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros-runcard.json">run card</a>
-<a href="downloads/checks-gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif.json">checks</a></td>
-<td style="color:#067647"><b>DOWNLOAD: YES (100% portal-legal [0, 1] float32, 0 NaN).</b><br>
-<b>VERDICT: PROMOTE TO CROSS-LANE SELECTOR</b> (<code>verdict: "promote"</code>).<br>
-Mandated First Test E1: <b>+0.4251</b> (95% CI [+0.2253, +0.6273], 262 withheld components, 60.3% positive) &rarr; <b>PROCEED</b>.<br>
-Pooled <b>HOLDOUT-DTI = 0.065739</b> (95% CI [0.055715, 0.076201], <code>gems57-pooled-hide-v2</code>, 22,641 withheld positives) &mdash; <b>5.68&times; H65-1</b> (0.011576) and <b>4.01&times; H60-A</b> (0.016389), beating <code>ksn_only</code> by <b>+0.042646</b> and <code>random_mass_control</code> by <b>+0.026659</b>.<br>
-<span style="color:#344054">Per Parallel-Run Protocol, promote to the cross-lane selector rather than spending a standalone weekly portal slot replacing the 0.2778 multi-physics champion alone.</span></td></tr>
-<tr><td><b>Group Champion (Anchor, 0.2778 owner-reported)</b><br><code>gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</code></td>
-<td><a class="btn alt" href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif" download>&#11015; .tif</a></td>
-<td><b>DOWNLOAD: YES.</b> Already live-scored at <b>0.2778</b> (owner-reported; no organizer receipt ties bytes to score).</td></tr>
-</table>
-<p style="margin:6px 0 0"><b>Portal format safety (<code>&ldquo;Predicted values must be in range [0, 1]&rdquo;</code> fix):</b>
-<code>gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif</code> is single-band <code>float32</code>, <code>EPSG:32611</code>, <code>3730&times;3292</code>,
-<b>0 NaN, 0 Inf, min 0.0, max 1.0, nodata=None, exact sample transform</b>.
-Portal name: <code>60GEMSDOE-H66-1-DEM10-BEDROCK-DKSN-40000</code> &middot;
-Portal note (110/140 chars): <code>60GEMSDOE H66-1 | 3DEP 10m bedrock dksn + piedmont step, &gt;=3 drainages, 4-confound mask, 2.8px NMS, 40000 dots</code>.</p>
+<div class="wrap current-stop-notice" style="border:3px solid #b42318;background:#fffafa;padding:12px 16px;margin:8px auto">
+<h2>STOP — DOWNLOAD FOR RESEARCH ONLY; DO NOT SUBMIT</h2>
+<p>The channel-steepness / χ / knickpoint lane is stopped by its registered first test.
+The historical H66-1/H67-1 result has a positive catalogue <b>HOLDOUT-DTI</b>
+(0.065739, 95% CI [0.055715, 0.076201],
+22,641 withheld positives,
+gems57-pooled-hide-v2), but this is <b>not</b> a live score
+and does not override the lane STOP. Moreover, its final dots overlap a registry raster by
+99.9% within 3 px,
+above the literal 70% uniqueness ceiling. Excluding dense lattices after the fact is
+not an exemption. Historical “promote” metadata is superseded: <b>verdict NEGATIVE</b>.
+The claimed 0.2778 for H33 remains <b>owner-reported, not ORGANIZER-CONFIRMED</b>
+for the exact raster bytes; the public leaderboard has no file-level attribution.</p>
+<p><a class="btn" href="downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif" download>Download existing H66-1 TIFF — research only</a>
+<a href="downloads/checks-gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif.json">Local format checks</a> ·
+<a href="executive-summary.html">How to submit a future cleared TIFF</a> ·
+<a href="research/2026-10-11-lane-stop-audit.md">Audit and candidate hypotheses</a>.
+Single-band float32 with finite [0,1] values on the local sample grid passed
+preflight, <em>not</em> organizer acceptance. <b>No new file or submission slot is authorized.</b></p>
 </div>
 <!-- H67-STATUS:END -->
+
+
 
 <!-- H66-STATUS:BEGIN -->
 <div class=wrap style="border:3px solid #b42318;background:#fffafa;padding:12px 16px;margin:8px auto">
@@ -53,14 +50,13 @@ It is research evidence, not a candidate.</td></tr>
 Uploading it again spends a slot and repeats a known number.</td></tr>
 <tr><td><b>Registry primary</b><br><code>gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif</code></td>
 <td><a class="btn alt" href="downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif" download>&#11015; .tif</a></td>
-<td><b>NOT CLEARED</b> for a slot by any local instrument. Unique and portal-safe; a bounded-downside bet.</td></tr>
+<td><b>NOT CLEARED</b> for a slot by any local instrument. NOT CLEARED: format and sparse-only comparison do not override the lane STOP or literal registry overlap. DO NOT SUBMIT.</td></tr>
 </table>
 <p style="margin:6px 0 0"><b>Bottom line: this session cleared no file for a submission slot.</b>
 Format is not the issue &mdash; the H66 file is single-band float32, EPSG:32611, 3730&times;3292,
-<b>0 NaN, min 0.0, max 1.0, no nodata tag, 0 dots on the mapped catalogue</b>, so the portal error
-<i>&ldquo;Predicted values must be in range [0, 1]&rdquo;</i> cannot come from it. The issue is skill:
+<b>0 NaN, min 0.0, max 1.0, no nodata tag, 0 dots on the mapped catalogue</b>, so the known local range test passes; organizer acceptance has not been established. The issue is skill:
 the tectonic-geomorphology lane measures <i>below</i> random dots on the only local truth set that
-contains off-catalogue faults. If you upload it anyway for research, use the name
+contains off-catalogue faults. For recordkeeping only (NOT an invitation to upload), the historical name was
 <code>60GEMSDOE-H66-2-KNICK-BOTHLIMBS-37654</code> and the note
 <code>H66-2 chi/ksn both-limb steepness steps, &gt;=3 drainages, 37654 dots off-catalogue; E1 off-cat -0.086 STOP: NEGATIVE, research only</code> (129/140 characters).
 Full write-up: <a href="h66-report.html">h66-report.html</a> &middot;

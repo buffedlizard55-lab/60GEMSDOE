@@ -65,6 +65,18 @@ def build(root: Path = ROOT) -> dict:
     if active_status:
         feed["active_site_status"] = active_status
 
+    # A dated audit supersedes historical positive cards without erasing their evidence.
+    stop_audit = _read_json(docs / "h68-runcard.json")
+    if stop_audit:
+        feed["current_lane_decision"] = {
+            "verdict": stop_audit["verdict"],
+            "submit_to_competition": stop_audit["okay_to_submit"],
+            "new_tiff_generated": stop_audit["new_tiff_generated"],
+            "research_raster_sha256": stop_audit["existing_research_raster_sha256"],
+            "report": stop_audit["report"],
+            "note": "Snapshot of this repository; NOT a live DrivenData score feed.",
+        }
+
     hyp = _read_json(reg / "hypotheses.json", {"hypotheses": []})
     feed["hypotheses"] = hyp["hypotheses"]
 

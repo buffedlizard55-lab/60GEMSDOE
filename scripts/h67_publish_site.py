@@ -28,34 +28,37 @@ def esc(x) -> str:
 
 
 def board(prefix: str, rc: dict) -> str:
-    e1 = rc["first_test_E1"]
-    hd = rc["holdout_dti"]
-    pd = hd["paired_lane_minus_control"]
+    """Fail closed: historical positive holdout never overrules a STOP or literal overlap.
+
+    The >70% co-location rule includes dense registry rasters: it does not contain
+    an exception for calibration lattices. Format checks are not portal receipts.
+    """
+    status = json.loads((ROOT / "registry/current_site_status.json").read_text())
+    if status.get("status") != "STOP":
+        raise ValueError("Status changed: review lane gate before publishing")
+    uniq = rc["uniqueness_vs_registry"]["final_dots"]
+    if uniq["max_dot_overlap_within_3px_all_68_rasters_literal"] <= 0.70:
+        raise ValueError("Uniqueness evidence changed: review before publishing")
     return f"""{B}
-<div class=wrap style="border:3px solid #067647;background:#f6fef9;padding:12px 16px;margin:8px auto">
-<h2 style="margin:0 0 6px">&#9989; READ THIS FIRST (2026-10-11, session H66-1 / H67-1 &mdash; <code>arena/7085de4f-60gemsdoe</code>): Validated 10 m Bedrock &Delta;k<sub>sn</sub> GeoTIFF &amp; Submission Decision</h2>
-<table>
-<tr><th>Artifact</th><th>One-click download &amp; receipts</th><th>OK to download &amp; submit?</th></tr>
-<tr><td><b>Validated Tectonic-Geomorphology Deliverable (H66-1 / H67-1)</b><br><code>{esc(TIF)}</code><br>
-<span style="color:#5b7183">40,000 dots (2.8 px NMS) &middot; 0 on catalogue &middot; sha256 <code>{esc(rc['raster_sha256'][:16])}&hellip;</code></span></td>
-<td><a class=btn href="{prefix}downloads/{esc(TIF)}" download>&#11015; .tif (145 KB)</a>
-<a class="btn alt" href="{prefix}downloads/{esc(ZIP)}" download>.zip</a>
-<a href="{prefix}downloads/{esc(CARD)}">run card</a>
-<a href="{prefix}downloads/{esc(CHECKS)}">checks</a></td>
-<td style="color:#067647"><b>DOWNLOAD: YES (100% portal-legal [0, 1] float32, 0 NaN).</b><br>
-<b>VERDICT: PROMOTE TO CROSS-LANE SELECTOR</b> (<code>verdict: "promote"</code>).<br>
-Mandated First Test E1: <b>{e1['mean']:+.4f}</b> (95% CI [{e1['ci95'][0]:+.4f}, {e1['ci95'][1]:+.4f}], {e1['n_components']} withheld components, 60.3% positive) &rarr; <b>PROCEED</b>.<br>
-Pooled <b>HOLDOUT-DTI = {hd['dti']:.6f}</b> (95% CI [{hd['ci95'][0]:.6f}, {hd['ci95'][1]:.6f}], <code>{esc(hd['evaluator_version'])}</code>, {hd['withheld_positive_pixels']:,} withheld positives) &mdash; <b>5.68&times; H65-1</b> (0.011576) and <b>4.01&times; H60-A</b> (0.016389), beating <code>ksn_only</code> by <b>{pd['ksn_only_no_alignment']['delta']:+.6f}</b> and <code>random_mass_control</code> by <b>{pd['random_mass_control']['delta']:+.6f}</b>.<br>
-<span style="color:#344054">Per Parallel-Run Protocol, promote to the cross-lane selector rather than spending a standalone weekly portal slot replacing the 0.2778 multi-physics champion alone.</span></td></tr>
-<tr><td><b>Group Champion (Anchor, 0.2778 owner-reported)</b><br><code>{CHAMP}</code></td>
-<td><a class="btn alt" href="{prefix}downloads/{CHAMP}" download>&#11015; .tif</a></td>
-<td><b>DOWNLOAD: YES.</b> Already live-scored at <b>0.2778</b> (owner-reported; no organizer receipt ties bytes to score).</td></tr>
-</table>
-<p style="margin:6px 0 0"><b>Portal format safety (<code>&ldquo;Predicted values must be in range [0, 1]&rdquo;</code> fix):</b>
-<code>{esc(TIF)}</code> is single-band <code>float32</code>, <code>EPSG:32611</code>, <code>3730&times;3292</code>,
-<b>0 NaN, 0 Inf, min 0.0, max 1.0, nodata=None, exact sample transform</b>.
-Portal name: <code>{esc(rc['submission_name'])}</code> &middot;
-Portal note ({rc['submission_note_chars']}/140 chars): <code>{esc(rc['submission_note'])}</code>.</p>
+<div class="wrap current-stop-notice" style="border:3px solid #b42318;background:#fffafa;padding:12px 16px;margin:8px auto">
+<h2>STOP — DOWNLOAD FOR RESEARCH ONLY; DO NOT SUBMIT</h2>
+<p>The channel-steepness / χ / knickpoint lane is stopped by its registered first test.
+The historical H66-1/H67-1 result has a positive catalogue <b>HOLDOUT-DTI</b>
+({rc['holdout_dti']['dti']:.6f}, 95% CI {rc['holdout_dti']['ci95']},
+{rc['holdout_dti']['withheld_positive_pixels']:,} withheld positives,
+{esc(rc['holdout_dti']['evaluator_version'])}), but this is <b>not</b> a live score
+and does not override the lane STOP. Moreover, its final dots overlap a registry raster by
+{uniq['max_dot_overlap_within_3px_all_68_rasters_literal']:.1%} within 3 px,
+above the literal 70% uniqueness ceiling. Excluding dense lattices after the fact is
+not an exemption. Historical “promote” metadata is superseded: <b>verdict NEGATIVE</b>.
+The claimed 0.2778 for H33 remains <b>owner-reported, not ORGANIZER-CONFIRMED</b>
+for the exact raster bytes; the public leaderboard has no file-level attribution.</p>
+<p><a class="btn" href="{prefix}downloads/{esc(TIF)}" download>Download existing H66-1 TIFF — research only</a>
+<a href="{prefix}downloads/{esc(CHECKS)}">Local format checks</a> ·
+<a href="{prefix}executive-summary.html">How to submit a future cleared TIFF</a> ·
+<a href="{prefix}research/2026-10-11-lane-stop-audit.md">Audit and candidate hypotheses</a>.
+Single-band float32 with finite [0,1] values on the local sample grid passed
+preflight, <em>not</em> organizer acceptance. <b>No new file or submission slot is authorized.</b></p>
 </div>
 {E}
 """
@@ -80,7 +83,7 @@ def main() -> int:
         inject(p, board("", rc))
     for p in (ROOT / "index.html", ROOT / "executive-summary.html"):
         inject(p, board("docs/", rc))
-    print("Published H67-STATUS board into docs/{index,executive-summary}.html and root {index,executive-summary}.html")
+    print("Published fail-closed research-only H67 status; no new TIFF or submission slot")
     return 0
 
 

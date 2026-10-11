@@ -183,6 +183,11 @@ file remains an audit example, not a recommendation.</p>'''
 <li><b>Artifact filename id:</b> <code>{_e(art['artifact_filename_id'])}</code>.</li>
 <li><b>Note ({art['note_chars']} characters):</b> <code>{_e(art['note'])}</code>.</li>
 <li><b>SHA-256:</b> <code>{art['sha256']}</code>.</li></ul>
+<h2>How to submit a future <em>cleared</em> file (not one of these research TIFFs)</h2>
+<ol><li>First require the first-test, leakage, full registry uniqueness, and spatially blocked holdout gates to pass; a separate selector must approve a weekly slot. <strong>None is approved now.</strong></li>
+<li>Download the selected <code>.tif</code> from its own run-card link (or a ZIP containing exactly one TIFF). Verify its SHA-256 and use the shared writer/validator: one <code>float32</code> band, exact sample CRS/shape/transform, no NaN/Inf anywhere, every value in [0,1], no nodata tag.</li>
+<li>On the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/">DrivenData submissions page</a>, sign in with your own account, choose <em>New submission</em>, choose that exact file, and paste the run-card's unique name and ≤140-character note into the available fields. Do not upload a research-only artifact to test the portal.</li>
+<li>Submit only after the selector approves the slot; preserve the organizer receipt, score and file hash together. Until then, a local PASS says only that the TIFF passes <em>local</em> format checks.</li></ol>
 <h2>Local format receipt is not an organizer receipt</h2>
 <p>The local validator reports single-band float32, EPSG:32611, 3292×3730 on the 100 m grid, values in [0,1],
 no NaN/Inf, and 40,000 positive cells; it lists no problems. That does <b>not</b> prove that DrivenData accepted

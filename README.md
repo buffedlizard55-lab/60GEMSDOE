@@ -6,46 +6,27 @@
 **Official public leaderboard (manual read 2026-10-11): #1 xiaofanhu 0.4133 · #8 DARD 0.3195 · #23 extradr19 0.2778** · **H33 group claim (owner-reported): 0.2778, not organizer-confirmed**
 
 <!-- H67-STATUS:BEGIN -->
-<!-- H66-STATUS:BEGIN -->
-> ## 🚦 READ THIS FIRST (2026-10-11, session H66): the newest unique TIF and whether you may submit it
->
-> | file | download | submit to the portal? |
-> |---|---|---|
-> | **Newest unique TIF, generated this session (H66-2)** `gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif` | [⬇ .tif](docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif) · [.zip](docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.zip) · [run card](docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros-runcard.json) | ❌ **NO — verdict NEGATIVE.** DOWNLOAD: OK. Pre-registered first test against *off-catalogue* faults: **-0.0860 [-0.1372, -0.0220]** (86 segments) → **STOP**. INSTRUMENT-DTI 0.00913 vs mass-matched random 0.07253 (paired -0.06339, 0% of 1,000 draws positive) on 62,703 off-catalogue SGMC fault pixels. |
-> | Group champion, already scored 0.2778 | [⬇ .tif](docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif) | already live-scored (owner report); re-uploading repeats a known number |
-> | Registry primary `gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif` | [⬇ .tif](docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif) | ⚠️ NOT CLEARED by any local instrument |
->
-> **This session cleared no file for a submission slot.** The H66 file is portal-safe
-> (float32, [0, 1], 0 NaN, no nodata tag, 0 dots on the catalogue), so the historical
-> *“Predicted values must be in range [0, 1]”* rejection cannot come from it. Name
-> `60GEMSDOE-H66-2-KNICK-BOTHLIMBS-37654`, note `H66-2 chi/ksn both-limb steepness steps, >=3 drainages, 37654 dots off-catalogue; E1 off-cat -0.086 STOP: NEGATIVE, research only` (129/140).
-> **What changed this session:** the repository's own instrument audit
-> (`evidence/e61_instrument_audit.json`) measures the catalogue hide-and-recover — the gate every
-> knickpoint-lane run used — at **Spearman −0.9021 against the live board** (n = 12). H66 therefore
-> re-ran the lane's mandated first test against the only local truth set that contains
-> *off-catalogue* faults, and the lane failed there too. Details: [`docs/h66-report.html`](docs/h66-report.html).
-<!-- H66-STATUS:END -->
-
-> ## 🚦 READ THIS FIRST (2026-10-11, Round H66/H67 — Session `arena/7085de4f-60gemsdoe`): Is the Generated TIF OK to Download and Submit?
->
-> | Role | One-Click Download & Receipts | SHA-256 & Format Validation | OK to Download? | OK to Submit to Competition? |
-> |---|---|---|---|---|
-> | **PRIMARY (New H66-1 / H67-1 Tectonic-Geomorphology Lane Deliverable)** | [⬇ **`gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif`**](docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif) · [`.zip`](docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.zip) · [run card](docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros-runcard.json) · [format receipt](docs/downloads/checks-gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif.json) | `cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1` (`144,835 B`, `float32`, `EPSG:32611`, `3730×3292`, `40,000` dots, `0` on catalogue, all `12,279,160` cells finite in `[0.0, 1.0]`, `0 NaN`, `nodata=None`) | ✅ **YES — 100% Portal-Legal** (immune to `"Predicted values must be in range [0, 1]"`) | ✅ **PROMOTE TO CROSS-LANE SELECTOR** (`verdict: "promote"` as #1 Tectonic-Geomorphology Lane raster: **E1 `PROCEED` `+0.4251 [+0.2253, +0.6273]`**; **`HOLDOUT-DTI = 0.065739 [0.055715, 0.076201]`** = **5.68× H65-1** and **4.01× H60-A**, beating `ksn_only` by `+0.0426` and `random_mass_control` by `+0.0267`). ⚠️ **Do NOT spend a standalone weekly portal slot** replacing the `0.2778` multi-physics champion (`ANCHOR` below) without the cross-lane selector step. |
-> | **ANCHOR (Group Champion, `0.2778` `ORGANIZER-CONFIRMED` owner-reported)** | [⬇ **`gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif`**](docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif) | `c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9` (`219,065 B`, `37,654` dots, `0` within 200 m of catalogue, all `12,279,160` cells finite in `[0.0, 1.0]`, `0 NaN`) | ✅ **YES — 100% Portal-Legal** | ℹ️ **Already Scored (`0.2778`)** — keep as the baseline multi-physics reference; re-uploading repeats a known score. |
-> | **Prior 10 m Run (H65-1, Superseded)** | [⬇ `gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif`](docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif) | `0728d1193d9ee9f3...` (`40,000` dots packed in `4,645` contiguous bricks) | ✅ **YES** (audit trail) | ❌ **NO — NEGATIVE** (`E1 = +0.0326 [-0.0144, +0.0790]` `INCONCLUSIVE`; `HOLDOUT-DTI = 0.011576 < random 0.039080`; superseded by **H66-1**). |
->
-> **Submission Metadata for `H66-1` (if selected by the cross-lane selector or uploaded for tectonic-geomorphology evaluation)**:
-> - **File**: [`docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif`](docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif)
-> - **Submission Name**: `60GEMSDOE-H66-1-DEM10-BEDROCK-DKSN-40000`
-> - **Submission Note (`110 <= 140` chars)**: `60GEMSDOE H66-1 | 3DEP 10m bedrock dksn + piedmont step, >=3 drainages, 4-confound mask, 2.8px NMS, 40000 dots`
-> - **Executive Summary & Portal Ritual**: [`docs/executive-summary.html`](docs/executive-summary.html) · [`docs/index.html`](docs/index.html) · [`submission_card.json`](submission_card.json) · [`evidence/h67_runcard.json`](evidence/h67_runcard.json)
+> ## ⛔ CURRENT SUBMISSION DECISION — STOP (2026-10-11)
+> **No newly generated or historically shipped TIFF in this lane is cleared for a competition slot.**
+> The registered H65-1 test is INCONCLUSIVE (STOP), H66-2 failed the off-catalogue first test,
+> and H66-1/H67-1 exceeds the literal 70% final-dot registry overlap gate (99.87% against a calibration lattice).
+> [One-click download: existing H66-1 TIFF for research only](docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif)
+> · [Local format receipt](docs/downloads/checks-gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif.json)
+> · [Current submission instructions](docs/executive-summary.html).
+> **DOWNLOAD: YES (research); SUBMIT: NO. DO NOT SUBMIT.** Local finite `[0,1]` checks are
+> not organizer acceptance or evidence of fault-detection skill. No new TIFF or slot was created in this audit.
+> The 0.2778 H33-to-file association is **owner-reported, not ORGANIZER-CONFIRMED**;
+> the public participant score does not authenticate a particular TIFF.
+> [Full evidence and deferred hypotheses](docs/research/2026-10-11-lane-stop-audit.md).
 <!-- H67-STATUS:END -->
 
 ---
 
-## Round H66 (`arena/7085de4f-60gemsdoe`, 2026-10-11) — Native 10 m 3DEP Bedrock $\Delta k_{sn}$ + Piedmont/Basement-Step + 4-Confound Mask + 300 m Kernel NMS
+## ARCHIVE: historical H66 assertions (not current recommendations) — Round H66 (`arena/7085de4f-60gemsdoe`, 2026-10-11) — Native 10 m 3DEP Bedrock $\Delta k_{sn}$ + Piedmont/Basement-Step + 4-Confound Mask + 300 m Kernel NMS
 
-### 1. Why `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` Scored `0.2778` (`ORGANIZER-CONFIRMED`, owner-reported) and Whether/How a Higher Score Is Achievable
+> ⚠️ **Archival analysis only.** Claims about hidden truth, live deltas, and why an exact file received a score are not independently verifiable without an organizer file-level receipt. Local scores are not competition scores. The literal 70% overlap gate and registered STOP supersede any historical PROMOTE label below.
+
+### 1. Hypothesized explanation for the OWNER-REPORTED `0.2778` (file-to-score link unverified): `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` (`OWNER-REPORTED / UNVERIFIED`) and Whether/How a Higher Score Is Achievable
 
 #### 1.1 Exact Metric Algebra and Why `h33-2-b2` Reached `0.2778`
 On the official problem description ([page 967](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/)), the Distance-Tolerant IoU (Tversky index with $\alpha = 0.2$, $\beta = 0.8$, and linear radial kernel $k(d) = \max(1 - d / 300\text{ m}, 0)$ on a 100 m EPSG:32611 grid) is:
@@ -53,9 +34,9 @@ $$\mathrm{TP}_w = \sum_{g \in G} \max_{x} p(x)\,k(d(x, g)), \qquad \mathrm{FP}_w
 $$\mathrm{DTI} = \frac{\mathrm{TP}_w}{\mathrm{TP}_w + 0.2\,\mathrm{FP}_w + 0.8\,\mathrm{FN}_w + \varepsilon}$$
 Because $\mathrm{FN}_w = |G| - \mathrm{TP}_w$ identically, writing $T = \mathrm{TP}_w$, $S = \sum_x p(x)$ (total emitted mass), and $M = \sum_x p(x)\max_{g \in G} k(d(x, g))$ (self-credit of emitted pixels) reduces the exact denominator to:
 $$D = 0.2\,(T + S - M) + 0.8\,|G|, \qquad \mathrm{DTI} = \frac{T}{0.2\,(T + S - M) + 0.8\,|G|}$$
-From this exact identity, three structural laws explain why `gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif` (`37,654` unit dots) achieved the highest owner-reported score (`0.2778` `ORGANIZER-CONFIRMED`, owner-reported):
-1. **Binary Poisson-Disk Thinning at $d \ge 2.8\text{ px}$ Beats Dense Surfaces (`0.1922 -> 0.2600`)**: Because $\mathrm{TP}_w$ takes the **maximum** over $x$ inside each 300 m ($3\text{ px}$) kernel disc while $\mathrm{FP}_w$ **sums** over every emitted pixel $x$, a dense ridge/ribbon (such as solid H19-5 with `121,131` pixels, `0.1922` `ORGANIZER-CONFIRMED` owner-reported) pays the $0.2\,\mathrm{FP}_w$ tax on ~3 redundant pixels per kernel without raising $\mathrm{TP}_w$. Thinning to a $d \ge 2.8\text{ px}$ Poisson-disk dot pack (`44,090` / `40,199` dots, `0.2600` `ORGANIZER-CONFIRMED` owner-reported) covers `780,640` footprint pixels within 300 m (`20.73` kernel-covered pixels per dot) while cutting false-positive mass by $64\%$.
-2. **Exact Two-Point Live Inversion (`0.2600 -> 0.2708`) and the $B = 2$ Catalogue-Flank Prune (`0.2708 -> 0.2778`)**: Comparing the unpruned D2.8 base (`40,199` dots, `0.2600` `ORGANIZER-CONFIRMED` owner-reported) against its $B = 1$ (100 m) catalogue-flank prune (`36,308` dots, `0.2708` `ORGANIZER-CONFIRMED` owner-reported, removing `3,891` dots within 100 m of `existing_faults.tif`) recovers the live hidden-set parameters (`src/gems32/live_anchor.py`, `evidence/h33_validation.json`):
+From this exact identity, three structural laws explain why `gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif` (`37,654` unit dots) achieved the highest owner-reported score (`0.2778` `OWNER-REPORTED / UNVERIFIED`):
+1. **Binary Poisson-Disk Thinning at $d \ge 2.8\text{ px}$ Beats Dense Surfaces (`0.1922 -> 0.2600`)**: Because $\mathrm{TP}_w$ takes the **maximum** over $x$ inside each 300 m ($3\text{ px}$) kernel disc while $\mathrm{FP}_w$ **sums** over every emitted pixel $x$, a dense ridge/ribbon (such as solid H19-5 with `121,131` pixels, `0.1922` `OWNER-REPORTED / UNVERIFIED`) pays the $0.2\,\mathrm{FP}_w$ tax on ~3 redundant pixels per kernel without raising $\mathrm{TP}_w$. Thinning to a $d \ge 2.8\text{ px}$ Poisson-disk dot pack (`44,090` / `40,199` dots, `0.2600` `OWNER-REPORTED / UNVERIFIED`) covers `780,640` footprint pixels within 300 m (`20.73` kernel-covered pixels per dot) while cutting false-positive mass by $64\%$.
+2. **Exact Two-Point Live Inversion (`0.2600 -> 0.2708`) and the $B = 2$ Catalogue-Flank Prune (`0.2708 -> 0.2778`)**: Comparing the unpruned D2.8 base (`40,199` dots, `0.2600` `OWNER-REPORTED / UNVERIFIED`) against its $B = 1$ (100 m) catalogue-flank prune (`36,308` dots, `0.2708` `OWNER-REPORTED / UNVERIFIED`, removing `3,891` dots within 100 m of `existing_faults.tif`) recovers the live hidden-set parameters (`src/gems32/live_anchor.py`, `evidence/h33_validation.json`):
    $$\mathrm{TP}_w \approx 5,073.3, \qquad D \approx 18,734.4, \qquad |G|_{\text{hidden}} \approx 12,226\text{ px}, \qquad \tau_{\text{live}} = \frac{\alpha\,\mathrm{DTI}}{1 - \alpha\,\mathrm{DTI}} \approx 0.0542$$
    Because the organizer scoring mask excludes the published USGS/INGENIOUS catalogue (`existing_faults.tif`) and its immediate rasterization halo, dots at distance $100 < d \le 200\text{ m}$ ($B = 2$) sit inside the dead zone of known faults and earn near-zero incremental hidden-fault credit while paying the full $0.2$ false-positive tax. Pruning the $B = 2$ (200 m) ring (`H33-2-B2`, removing `2,545` further dots down to `37,654` dots at safety factor `2.08 >= 2.0`, positive in `4/4` spatial quadrants) raised the owner-reported live score from `0.2708` to **`0.2778`** (`+0.0070` live gain). Pruning to $B = 3$ (`35,483` dots) dropped safety to `1.27 < 2.0` because true branch/splay junctions begin at 250–300 m from mapped traces.
 3. **Why a Higher Score (`> 0.2778` toward `0.3262–0.4133`) Is Achievable — and How**:
