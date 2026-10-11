@@ -76,8 +76,15 @@ def auc(score, truth, domain) -> float:
     return float((r[t].sum() - n_pos * (n_pos + 1) / 2.0) / (n_pos * n_neg))
 
 
+def load_meta() -> dict:
+    p = CACHE / "meta.json"
+    if p.is_file():
+        return json.loads(p.read_text())
+    return {}
+
+
 def confound_masks(step, channel) -> tuple[np.ndarray, dict]:
-    """Declared lithology / base-level confound masks (band 15, band 17, fill raise)."""
+    """Declared lithology / base-level / ephemeral-wash confound masks."""
     playa = load("playa")
     with rasterio.open(ROOT / "data/official/training_features.tif") as src:
         depth = src.read(15).astype(np.float32).astype(np.float64)
@@ -91,8 +98,17 @@ def confound_masks(step, channel) -> tuple[np.ndarray, dict]:
     conductive = fp & np.isfinite(cond) & (cond > c_thr)
     exclude = playa | basin_fill | conductive
     diag = dict(playa_px=int(playa.sum()), basin_fill_px=int(basin_fill.sum()),
-                conductive_px=int(conductive.sum()), excluded_px=int(exclude.sum()),
-                depth_to_base_p90_m=d_thr, cond_surf_p95=c_thr,
+                conductive_px=int(conductive.sum()),
+                depth_to_base_p90_m=d_thr, cond_surf_p95=c_thr)
+    if (CACHE / "ephemeral_wash.npy").is_file():
+        eph = load("ephemeral_wash").astype(bool)
+        exclude = exclude | eph
+        diag["ephemeral_wash_px"] = int(eph.sum())
+    if (CACHE / "litho_core.npy").is_file():
+        lith = load("litho_core").astype(bool)
+        exclude = exclude | lith
+        diag["litho_core_px"] = int(lith.sum())
+    diag.update(excluded_px=int(exclude.sum()),
                 channel_excluded_px=int((channel & exclude).sum()),
                 channel_px=int(channel.sum()))
     return exclude, diag
@@ -313,9 +329,14 @@ def run(args) -> int:
     acc = load("acc").astype(np.float64)
     exclude, conf_diag = confound_masks(step, channel)
     mark(f"confounds {conf_diag}")
+    meta_cfg = load_meta()
+    z_min = float(meta_cfg.get("z_min", L.Z_MIN))
+    min_sep_px = float(meta_cfg.get("min_sep_px", 0.0))
+    inc_pos_ch = bool(meta_cfg.get("include_positive_channels", False))
 
     z, cand, cand_diag = L.prepare_candidates(step, channel, exclude,
-                                              block_px=L.BLOCK_PX, z_min=L.Z_MIN)
+                                              block_px=L.BLOCK_PX, z_min=z_min)
+    cand_diag.update(min_sep_px=min_sep_px, include_positive_channels=inc_pos_ch)
     mark(f"candidates {cand_diag}")
 
     truth_by_cell = {k: v for k, v in ctx.hidden_by_cell.items()}
@@ -367,10 +388,11 @@ def run(args) -> int:
         budget = max(200, int(round(DENSITY * n_allowed)))
         budgets[cell.key] = dict(allowed=n_allowed, budget=budget)
         res = L.surface_from_candidates(z, cand, terminal, vis, dict(cand_diag),
-                                        max_candidates=args.max_candidates)
+                                        max_candidates=args.max_candidates,
+                                        include_positive_channels=inc_pos_ch)
         p = res.p[bb].astype(np.float64)
         diag_cells.append(dict(cell=cell.key, **res.diagnostics))
-        dots = L.top_k_dots(p, allowed, budget).astype(np.float32)
+        dots = L.top_k_dots(p, allowed, budget, min_sep_px=min_sep_px).astype(np.float32)
 
         d = ndi.distance_transform_edt(~vis_crop)
         p_dist = np.exp(-d / 3.0)

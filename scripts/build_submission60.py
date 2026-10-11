@@ -134,16 +134,23 @@ def main() -> int:
           f"independence=branch_signature(k={L.CORRIDOR_HALF_LEN_PX - 1}) ") +
          f"distinct={int(np.unique(branch[channel]).size)}")
     exclude, conf = confound_masks(step, channel)
-    z, cand, cand_diag = L.prepare_candidates(step, channel, exclude)
+    from run_lane60 import load_meta
+    meta_cfg = load_meta()
+    z_min = float(meta_cfg.get("z_min", L.Z_MIN))
+    min_sep_px = float(meta_cfg.get("min_sep_px", 0.0))
+    inc_pos_ch = bool(meta_cfg.get("include_positive_channels", False))
+    z, cand, cand_diag = L.prepare_candidates(step, channel, exclude, z_min=z_min)
+    cand_diag.update(min_sep_px=min_sep_px, include_positive_channels=inc_pos_ch)
     mark(f"candidates={cand_diag}")
 
     res = L.surface_from_candidates(z, cand, branch, cat, dict(cand_diag),
-                                    max_candidates=a.max_candidates)
+                                    max_candidates=a.max_candidates,
+                                    include_positive_channels=inc_pos_ch)
     del z, cand
     mark(f"surface {res.diagnostics}")
 
     allowed = L.allowed_production(fp, cat, L.CATALOGUE_BUFFER_PX)
-    dots = L.top_k_dots(res.p, allowed, a.budget)
+    dots = L.top_k_dots(res.p, allowed, a.budget, min_sep_px=min_sep_px)
     n_dots = int(dots.sum())
     mark(f"dots={n_dots} allowed={int(allowed.sum())} on_catalogue={int((dots & cat).sum())}")
     if n_dots == 0:
@@ -194,7 +201,9 @@ def main() -> int:
             note=note, name=name, catalogue=cat,
             metadata=dict(lane="tectonic-geomorphology", hypothesis=a.hypothesis,
                           substrate=a.substrate,
-                          parameters=dict(budget=a.budget, z_min=L.Z_MIN,
+                          parameters=dict(budget=a.budget, z_min=z_min,
+                                          min_sep_px=min_sep_px,
+                                          include_positive_channels=inc_pos_ch,
                                           n_drainage_min=L.N_DRAINAGE_MIN,
                                           corridor_half_len_px=L.CORRIDOR_HALF_LEN_PX,
                                           corridor_half_width_px=L.CORRIDOR_HALF_WIDTH_PX,

@@ -1,0 +1,126 @@
+{
+  "evidence_class": "DATA-MEASUREMENT",
+  "hypothesis": "H66-1",
+  "generated_utc": "2026-10-11T16:21:39Z",
+  "source_manifest": {
+    "run_id": "38115164310",
+    "files": {
+      "dem10_chi_100m_i16.tif": {
+        "bytes": 12777098,
+        "sha256": "8897ba9c30ef1cd7ad5f23c16c6dfd7bb070e7e757f36fd9486eb45edfd973a5"
+      },
+      "dem10_chi_100m_sig_i32.tif": {
+        "bytes": 2804587,
+        "sha256": "0ba7816bc082b8a71ebcb26596b5e330abb63231be94abad4e447eb316ffb95c"
+      },
+      "dem10_chi_100m_u8.tif": {
+        "bytes": 2061484,
+        "sha256": "e8830ba6f0bb99f525266b1b3a483b0722d25cd4758c2bbccc6e7f54eb6b1b6a"
+      }
+    },
+    "tiles": 18,
+    "blocks_ok": 25,
+    "blocks_total": 36
+  },
+  "rule": "H66-1 bedrock delta-ksn + piedmont/basement-step + 4-confound masks",
+  "meta": {
+    "mode": "h66",
+    "z_min": 1.0,
+    "min_sep_px": 2.8,
+    "include_positive_channels": true
+  },
+  "diagnostics": {
+    "mode": "h66",
+    "footprint_px": 5167373,
+    "channel_px": 786299,
+    "channel_frac_of_footprint": 0.1521661006472728,
+    "playa_px": 550267,
+    "ephemeral_wash_px": 186546,
+    "litho_core_px": 486810,
+    "step_p50": 0.5151193408397773,
+    "step_p95": 2.9818043807066994,
+    "frac_step_positive": 0.6040819077729973,
+    "ksn_p50": 23.0,
+    "ksn_p95": 86.0,
+    "knick_px": 91907,
+    "distinct_branches": 491728,
+    "footprint_px_with_valid_dem": 5167373
+  },
+  "files": [
+    {
+      "name": "step",
+      "dtype": "float32",
+      "sha256": "56e50444b588eaeaf743ee0d407d65e2af185b1fad1b0cea9148740af989c376"
+    },
+    {
+      "name": "channel",
+      "dtype": "bool",
+      "sha256": "ab97d4aa7f4bb5fd0702a854b40d452c3ffc321374dbf733ec823a7130ae4463"
+    },
+    {
+      "name": "ksn",
+      "dtype": "float32",
+      "sha256": "8a9d88bc332cfae33eb42e5ca932d77113f766296e8f0a247822a6716e7a1e03"
+    },
+    {
+      "name": "acc",
+      "dtype": "float32",
+      "sha256": "91a43cd4cf8457c635d999bb859767edab014be3fc4ca82137cb459f65b3ac63"
+    },
+    {
+      "name": "playa",
+      "dtype": "bool",
+      "sha256": "7c2e612327227edb6544b3e6cda84023945de4ecd734f707f11dc45fc1fad837"
+    },
+    {
+      "name": "branch_sig",
+      "dtype": "int64",
+      "sha256": "760b53ad939005fea0d918285a4936f4a02768112dceb2d9af0eef80dc02b72a"
+    },
+    {
+      "name": "footprint",
+      "dtype": "bool",
+      "sha256": "c446094771775c00802862e9ec58846fd1b278b4e608303e68811a2404dfd246"
+    },
+    {
+      "name": "catalogue",
+      "dtype": "bool",
+      "sha256": "d77fa88ad58d0a268b736b3c1d6a8939fd237d5955369944bd2b299194b2555d"
+    },
+    {
+      "name": "step_min",
+      "dtype": "float32",
+      "sha256": "b326a2bac3bcfced334a91d897bc2e3c1542c6644224c9f92faef9c257cb4f92"
+    },
+    {
+      "name": "knick_n",
+      "dtype": "int16",
+      "sha256": "c20e78d4d2c6684ca92f9ab6be887be642f6a0dad8b30272201d2e0d23475316"
+    },
+    {
+      "name": "zmean",
+      "dtype": "float32",
+      "sha256": "f57a226c91ce8c538b1799f891f85adcfd9d161e35f50449204df6c7854f6550"
+    },
+    {
+      "name": "ephemeral_wash",
+      "dtype": "bool",
+      "sha256": "a679236e319726e09b81971a50bce7c2b6edd34080292924a3c81c88204daee3"
+    },
+    {
+      "name": "litho_core",
+      "dtype": "bool",
+      "sha256": "22c50796f89c91fbb5fa451f80a8f74aff380c55b9b6132ee0822c78e3628e17"
+    },
+    {
+      "name": "dksn_signed",
+      "dtype": "float32",
+      "sha256": "680e4210b49185d49d3dbf3030f7b5bff06693c086b2611188bbe61c4716d658"
+    },
+    {
+      "name": "pied_z",
+      "dtype": "float32",
+      "sha256": "a086c32c2d69ba0a60e9dd90df9665e94f84032a7759516eee27fc51fc3fc4b3"
+    }
+  ]
+}

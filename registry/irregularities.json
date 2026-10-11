@@ -261,6 +261,30 @@
    "status": "open (protocol amendment needed)",
    "statement": "The literal uniqueness gate 'more than 70% of dots within 3 px of one registry raster = duplicate' is uninformative against dense lattice rasters: H62-1 scored 83.1% vs r13_lattice_s5, and a matched uniform-random set of the same size scored 83.7% (H62-1 excess-over-random -0.0059, evidence/h62_uniqueness_excess_control.json). The family selector already uses excess-over-random; the shared protocol text should adopt that form. Preregistered gates are not retroactively passed: H62-1 remains G4-FAIL in the record.",
    "evidence": "evidence/h62_uniqueness.json; evidence/h62_uniqueness_excess_control.json; registry/preregistration-h62.json"
+  },
+  {
+   "id": "IR-66-DKSN-01",
+   "severity": "high",
+   "status": "fixed in H66-1 (2026-10-11)",
+   "statement": "H65-1 failed E1 on the native 10 m 3DEP DEM (+0.0326 [-0.0144, +0.0790], INCONCLUSIVE) because src/gems65/dem10.py computed step_max = log((ku + 0.5)/(kd + 0.5)) with floor 0.5 m^0.9 across all A >= 0.2 km^2 D8 paths. Because ksn_max has p25 = 10 m^0.9, flat ephemeral desert washes where kd ~ 0 produced large log-ratios (39.6% of all step_max > ln 2 pixels had ksn_max < 10 m^0.9, yielding only 1.085x top-7% 300 m catalogue enrichment).",
+   "evidence": "evidence/h65_diagnostics.json; evidence/h66_feature_cache.json; evidence/h66_e1_first_test.json",
+   "mitigation": "scripts/build_dem10_cache.py (--mode h66) recovers the true chi-slope difference Delta_ksn = (ksn_max + 0.5)*(1 - exp(-step_max)) (Perron & Royden 2013; Gailleton et al. 2019) and masks ephemeral washes (ksn_max < 10 m^0.9) and intra-range lithologic cores, flipping E1 on the same 262 withheld components to +0.4251 [+0.2253, +0.6273] (PROCEED)."
+  },
+  {
+   "id": "IR-66-BRICK-01",
+   "severity": "high",
+   "status": "fixed in H66-1 (2026-10-11)",
+   "statement": "src/gems60/lane.py top_k_dots had no minimum-separation (NMS) parameter while stamp_corridors stamped flat 13x5 (65-pixel) rectangular blocks around each aligned candidate. Consequently, H65-1's 40,000 emitted pixels were packed into only 4,645 contiguous rectangular bricks (covering 219,627 pixels within 300 m, or 5.49 covered px/dot vs 20.73 covered px/dot for the 0.2778 champion), wasting 4x the false-positive tax inside the same 300 m Tversky kernel.",
+   "evidence": "src/gems60/lane.py; evidence/h65_holdout.json vs evidence/h66_holdout.json",
+   "mitigation": "Added optional spatial-hash non-maximum suppression (min_sep_px = 2.8) to top_k_dots in src/gems60/lane.py. H66-1 emits 40,000 separated dots (40,000 connected components covering 782,144 pixels within 300 m, 19.55 covered px/dot), raising pooled HOLDOUT-DTI 5.68x from 0.011576 to 0.065739 [0.055715, 0.076201]."
+  },
+  {
+   "id": "IR-66-H63-TRANSFORM-01",
+   "severity": "medium",
+   "status": "fixed in audit_shipped.py and submission_card.json (2026-10-11)",
+   "statement": "docs/downloads/gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif was written with training_features.tif's x0 = 243349.965575182 transform (3.4 cm float drift, IR-57-TRANS-01) instead of sample_submission.tif's 243350.0, and root submission_card.json pointed to H63-A with an uncomputed 'projected' holdout_dti and a 36,000-dot vs 42000px filename mismatch (IR-65-H63-01).",
+   "evidence": "docs/research/shipped_audit.json; submission_card.json",
+   "mitigation": "Replaced root submission_card.json with the fully measured H66-1 Run Card (exact sample_submission.tif transform 243350.0, 40,000 dots, measured HOLDOUT-DTI 0.065739) and updated scripts/audit_shipped.py to record exact_sample_transform alongside sub-pixel atol=0.05 portal legality."
   }
  ]
 }

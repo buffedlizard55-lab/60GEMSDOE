@@ -780,9 +780,17 @@ def main() -> int:
             if page_path.name in pages:
                 continue
             text = page_path.read_text()
-            if _primary_name in text:
-                continue
             import re as _re
+            text = _re.sub(
+                r'<div class=dlbtn style="margin:10px 0;padding:10px 14px;border:2px solid #b45309;[^"]*">'
+                r'<b>Registry primary[^<]*</b>.*?</div>\n?',
+                "",
+                text,
+                flags=_re.DOTALL,
+            )
+            if _primary_name in text:
+                page_path.write_text(text)
+                continue
             new_text, n = _re.subn(r'(<body[^>]*>\s*)', lambda m: m.group(1) + banner, text, count=1)
             if n:
                 page_path.write_text(new_text)

@@ -713,7 +713,86 @@
    "cost": "high",
    "data_status": "USGS 3DEP 10 m - verified obtainable",
    "status": "PROPOSED"
+  },
+  {
+   "id": "H66-1",
+   "rank": 36,
+   "slate": "H66 (2026-10-11, session arena/7085de4f) - native 10 m bedrock Delta-ksn + piedmont/basement-step + 4-confound mask + 2.8-px NMS",
+   "slate_rank": 1,
+   "title": "Native 10 m 3DEP Bedrock Chi-Slope Difference (Delta_ksn = ksn_up - ksn_down) + Piedmont/Basement-Step Corroboration + 4-Confound Mask + 2.8-px NMS",
+   "layers": [
+    "data/external/dem10_chi_100m_i16.tif (10 m 3DEP step_max, ksn_max, zmean)",
+    "data/external/dem10_chi_100m_u8.tif (raised_n playa mask, chan_n)",
+    "data/external/dem10_chi_100m_sig_i32.tif (500 m downstream branch_sig)",
+    "data/external/topo_10m_derived_100m_u8.tif (band 4 curv_prof_absmax)",
+    "data/official/training_features.tif (band 15 depth_to_base_surf, band 17 cond_surf)",
+    "data/official/existing_faults.tif (visible fault strike and 300 m exclusion buffer)"
+   ],
+   "signature": "Recover true 10 m upstream/downstream steepness difference Delta_ksn = (ksn_max + 0.5)*(1 - exp(-step_max)) (Perron & Royden 2013; Gailleton et al. 2019), reinforce with sub-cell 10 m profile curvature + basement-depth gradient at range-front piedmont junctions, mask 4 confounds (playa base levels raised_n>=50 | cond_surf>p95, ephemeral washes ksn_max<10 m^0.9, thick basin fill depth_to_base_surf>p90, intra-range lithologic cores rel_elev>180 m & depth_to_base_surf<p25), standardize in 40 km climate blocks, keep >=3 independent drainages aligned in 1.2 km x 0.5 km strike corridors, and thin with 2.8-px 300 m kernel NMS.",
+   "why_off_catalogue": "Active normal faults whose surface scarps were planed off by Holocene fan progradation or pluvial wave action still preserve bedrock footwall-to-hanging-wall steepness steps (Delta_ksn > 0) and basement-depth gradients across adjacent transverse drainages (Kirby & Whipple 2012; Wallace 1977).",
+   "differs_from_repo": "Fixes two fatal flaws in H65-1: (1) H65-1 used log((ku+0.5)/(kd+0.5)) with floor 0.5 m^0.9 so 39.6% of step_max > ln 2 pixels were flat ephemeral desert washes (ksn_max < 10) where kd ~ 0 exploded the ratio; (2) H65-1 used un-thinned top_k_dots which packed 40,000 dots into 4,645 contiguous 13x5 corridor bricks (5.49 covered px/dot vs 19.55 covered px/dot with 2.8-px NMS).",
+   "expected_dti": "MEASURED: E1 = +0.4251 [+0.2253, +0.6273] (262 withheld components, PROCEED); HOLDOUT-DTI = 0.065739 [0.055715, 0.076201] (gems57-pooled-hide-v2, 22,641 withheld positives) = 5.68x H65-1 (0.011576) and 4.01x H60-A (0.016389), beating ksn_only (+0.0426) and random_mass_control (+0.0267).",
+   "cost": "low (~50 LOC in shared scripts/build_dem10_cache.py, src/gems60/lane.py, scripts/run_lane60.py; ~3 min wall)",
+   "data_status": "all inputs committed and SHA-256 verified in data/external/ and data/official/",
+   "status": "VALIDATED & PROMOTED TO CROSS-LANE SELECTOR (gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif, sha256 cde6b57be8aaac9b...)"
+  },
+  {
+   "id": "H66-2",
+   "rank": 37,
+   "slate": "H66 (2026-10-11, session arena/7085de4f) - native 10 m bedrock Delta-ksn + piedmont/basement-step + 4-confound mask + 2.8-px NMS",
+   "slate_rank": 2,
+   "title": "1 m USGS 3DEP LiDAR Scarp Height/Curvature (lidar_scarp_features_u8.tif) x 10 m Chi-Knickpoint Piedmont Coincidence",
+   "layers": [
+    "data/external/lidar_scarp_features_u8.tif (bands 1-4: 1 m LiDAR scarp height, max slope, profile curvature, planform coherence)",
+    "data/external/dem10_chi_100m_i16.tif (10 m bedrock Delta_ksn)",
+    "data/external/dem10_chi_100m_sig_i32.tif (branch_sig)"
+   ],
+   "signature": "Multiplicative gate requiring a strike-aligned 10 m bedrock Delta_ksn step inside the footwall drainage within 600 m upslope of a 1 m LiDAR alluvial-fan scarp crest (band 1 scarp height > p85 & band 4 planform coherence > p80).",
+   "why_off_catalogue": "Catches low-slip (<0.2 mm/yr) Late Quaternary piedmont scarps cutting mid-to-late Holocene alluvial fans (like the 2020 Mw 6.5 Monte Cristo Range rupture zone) that were never aerial-photo mapped in USGS QFaults.",
+   "differs_from_repo": "Prior LiDAR scarp arms (H32 bayesopt-dilation-scarp) used 1 m scarp curvature across the whole fan without requiring upstream footwall drainage Delta_ksn corroboration, firing on pluvial Lake Lahontan/Bonneville shorelines.",
+   "expected_dti": "UNVALIDATED; moderate-high (+0.008 to +0.015 HOLDOUT-DTI over H66-1 inside the 88% LiDAR-covered footprint)",
+   "cost": "medium (requires fallback imputation across the 12% eastern footprint lacking 1 m LiDAR)",
+   "data_status": "committed and SHA-256 verified in data/external/lidar_scarp_features_u8.tif",
+   "status": "PROPOSED (Rank 2 in H66 slate)"
+  },
+  {
+   "id": "H66-3",
+   "rank": 38,
+   "slate": "H66 (2026-10-11, session arena/7085de4f) - native 10 m bedrock Delta-ksn + piedmont/basement-step + 4-confound mask + 2.8-px NMS",
+   "slate_rank": 3,
+   "title": "Cross-Divide Chi Asymmetry (Willett et al. 2014) + Hanging-Wall Thermal Spring / 2 m Probe Corroboration",
+   "layers": [
+    "data/external/dem10_chi_100m_i16.tif (zmean, ksn_max, log10_area)",
+    "data/external/gdr_wellspring_in_footprint.csv (INGENIOUS thermal wells and springs)",
+    "data/external/2m_temperature_probe_INGENIOUS_regional_data.zip (shallow 2 m thermal probes)"
+   ],
+   "signature": "Pair opposing headwater channel tips across range-crest divides, compute cross-divide chi/steepness contrast pointing toward the steeper footwall flank, and weight range-front corridors within 3 km of positive thermal anomalies.",
+   "why_off_catalogue": "Blind geothermal faults that have not ruptured the ground surface in the late Holocene still drive footwall block tilting (divide migration) and convective hydrothermal upflow along range-front step-overs.",
+   "differs_from_repo": "GEMS61 combined 100 m knickpoints with thermal distance; H66-3 combines 10 m footwall divide-asymmetry polarity with thermal upflow.",
+   "expected_dti": "UNVALIDATED; moderate (+0.004 to +0.010 HOLDOUT-DTI on hydrothermal blind-fault segments)",
+   "cost": "medium-high (requires cross-divide headwater pairing across 3DEP 10 m catchments)",
+   "data_status": "committed in data/external/",
+   "status": "PROPOSED (Rank 3 in H66 slate)"
+  },
+  {
+   "id": "H66-4",
+   "rank": 39,
+   "slate": "H66 (2026-10-11, session arena/7085de4f) - native 10 m bedrock Delta-ksn + piedmont/basement-step + 4-confound mask + 2.8-px NMS",
+   "slate_rank": 4,
+   "title": "Walker Lane Strike-Slip / Relay-Ramp Drainage Deflection + Radiometric/SGMC Lithologic Contact Veto",
+   "layers": [
+    "data/external/dem10_chi_100m_sig_i32.tif (10 m drainage network azimuths)",
+    "data/external/geodawn_rad_u8.tif (GeoDAWN K, eU, eTh airborne radiometrics)",
+    "data/external/sgmc_faults_100m.tif (USGS SGMC bedrock structure)"
+   ],
+   "signature": "Detect systematic >35-deg drainage-azimuth deflections aligned across >=3 adjacent transverse streams where Delta_ksn > 0 AND airborne radiometric gradient |grad(K, eU, eTh)| is below p75 (vetoing lithologic contacts).",
+   "why_off_catalogue": "Transtensional Walker Lane and Carson Domain faults accommodate slip via oblique shutter ridges and relay ramps that deflect channels laterally with muted vertical scarps.",
+   "differs_from_repo": "First hypothesis to pair 10 m drainage-azimuth deflection with an explicit GeoDAWN airborne radiometric lithologic-contact veto.",
+   "expected_dti": "UNVALIDATED; low-moderate (+0.003 to +0.008 HOLDOUT-DTI in SW Walker Lane domain)",
+   "cost": "high (requires 10 m drainage-azimuth deflection extraction)",
+   "data_status": "radiometrics and SGMC committed in data/external/",
+   "status": "PROPOSED (Rank 4 in H66 slate)"
   }
  ],
- "updated_utc": "2026-10-11T05:16:19Z"
+ "updated_utc": "2026-10-11T16:35:00Z"
 }

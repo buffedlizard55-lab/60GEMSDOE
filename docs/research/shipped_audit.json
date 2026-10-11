@@ -51,6 +51,7 @@
     "nodata": NaN
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 5167373,
    "nan_cells": 7111787,
    "min": 0.0,
@@ -93,6 +94,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
@@ -135,6 +137,7 @@
     "nodata": NaN
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 5167373,
    "nan_cells": 7111787,
    "min": 0.0,
@@ -177,6 +180,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
@@ -219,6 +223,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
@@ -261,6 +266,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
@@ -303,6 +309,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
@@ -345,6 +352,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
@@ -358,6 +366,178 @@
    "catalogue_proxy_F": 42135.21887627244,
    "credit_per_unit_mass": 0.20609238744415817,
    "catalogue_proxy_DTI": 0.16067739322163288,
+   "dots_on_catalogue": 0
+  },
+  {
+   "file": "gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif",
+   "bytes": 226472,
+   "sha256": "af68d90ec9d3927c6b9c80352f7eb5216ba95023e51fc366b6a71a1097fbe139",
+   "profile": {
+    "crs": "EPSG:32611",
+    "transform": [
+     100.0,
+     0.0,
+     243350.0,
+     0.0,
+     -100.0,
+     4508550.0
+    ],
+    "shape": [
+     3730,
+     3292
+    ],
+    "res": [
+     100.0,
+     100.0
+    ],
+    "dtype": "float32",
+    "count": 1,
+    "nodata": null
+   },
+   "portal_legal": true,
+   "exact_sample_transform": true,
+   "finite_cells": 12279160,
+   "nan_cells": 0,
+   "min": 0.0,
+   "max": 1.0,
+   "range_violations": 0,
+   "positive_px": 6000,
+   "total_mass": 6000.0,
+   "off_h19_5_px": 5949,
+   "off_h19_5_frac": 0.9915,
+   "catalogue_proxy_T": 20.48301766603643,
+   "catalogue_proxy_F": 5983.352934278748,
+   "credit_per_unit_mass": 0.0034138362776727385,
+   "catalogue_proxy_DTI": 0.0004097327351455477,
+   "dots_on_catalogue": 0
+  },
+  {
+   "file": "gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204-zeros.tif",
+   "bytes": 111604,
+   "sha256": "e9dbbb64e1d52b3b2786df53b79699af098222f4a99d9dcc73e658de15ca88cc",
+   "profile": {
+    "crs": "EPSG:32611",
+    "transform": [
+     100.0,
+     0.0,
+     243350.0,
+     0.0,
+     -100.0,
+     4508550.0
+    ],
+    "shape": [
+     3730,
+     3292
+    ],
+    "res": [
+     100.0,
+     100.0
+    ],
+    "dtype": "float32",
+    "count": 1,
+    "nodata": null
+   },
+   "portal_legal": true,
+   "exact_sample_transform": true,
+   "finite_cells": 12279160,
+   "nan_cells": 0,
+   "min": 0.0,
+   "max": 1.0,
+   "range_violations": 0,
+   "positive_px": 40000,
+   "total_mass": 40000.0,
+   "off_h19_5_px": 39360,
+   "off_h19_5_frac": 0.984,
+   "catalogue_proxy_T": 146.25348386635017,
+   "catalogue_proxy_F": 39860.45160434088,
+   "credit_per_unit_mass": 0.0036563370966587543,
+   "catalogue_proxy_DTI": 0.002575259733997569,
+   "dots_on_catalogue": 0
+  },
+  {
+   "file": "gems60-h61a-xcrd-37654px-20261011T021923Z-nan.tif",
+   "bytes": 1560705,
+   "sha256": "8cbd52542e7bb8ea4949497d4f1b40f2f7936167f87d841f9242fe29f85e1383",
+   "profile": {
+    "crs": "EPSG:32611",
+    "transform": [
+     100.0,
+     0.0,
+     243350.0,
+     0.0,
+     -100.0,
+     4508550.0
+    ],
+    "shape": [
+     3730,
+     3292
+    ],
+    "res": [
+     100.0,
+     100.0
+    ],
+    "dtype": "float32",
+    "count": 1,
+    "nodata": NaN
+   },
+   "portal_legal": true,
+   "exact_sample_transform": true,
+   "finite_cells": 5167373,
+   "nan_cells": 7111787,
+   "min": 0.0,
+   "max": 1.0,
+   "range_violations": 0,
+   "positive_px": 37654,
+   "total_mass": 37654.0,
+   "off_h19_5_px": 36248,
+   "off_h19_5_frac": 0.9626600095607373,
+   "catalogue_proxy_T": 0.0,
+   "catalogue_proxy_F": 37654.0,
+   "credit_per_unit_mass": 0.0,
+   "catalogue_proxy_DTI": 0.0,
+   "dots_on_catalogue": 0
+  },
+  {
+   "file": "gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
+   "bytes": 127363,
+   "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
+   "profile": {
+    "crs": "EPSG:32611",
+    "transform": [
+     100.0,
+     0.0,
+     243350.0,
+     0.0,
+     -100.0,
+     4508550.0
+    ],
+    "shape": [
+     3730,
+     3292
+    ],
+    "res": [
+     100.0,
+     100.0
+    ],
+    "dtype": "float32",
+    "count": 1,
+    "nodata": null
+   },
+   "portal_legal": true,
+   "exact_sample_transform": true,
+   "finite_cells": 12279160,
+   "nan_cells": 0,
+   "min": 0.0,
+   "max": 1.0,
+   "range_violations": 0,
+   "positive_px": 37654,
+   "total_mass": 37654.0,
+   "off_h19_5_px": 36248,
+   "off_h19_5_frac": 0.9626600095607373,
+   "catalogue_proxy_T": 0.0,
+   "catalogue_proxy_F": 37654.0,
+   "credit_per_unit_mass": 0.0,
+   "catalogue_proxy_DTI": 0.0,
    "dots_on_catalogue": 0
   },
   {
@@ -387,6 +567,7 @@
     "nodata": NaN
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 5167373,
    "nan_cells": 7111787,
    "min": 0.0,
@@ -429,6 +610,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
@@ -442,6 +624,135 @@
    "catalogue_proxy_F": 47630.9358944219,
    "credit_per_unit_mass": 0.009713512446407902,
    "catalogue_proxy_DTI": 0.007982364310292934,
+   "dots_on_catalogue": 0
+  },
+  {
+   "file": "gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif",
+   "bytes": 101295,
+   "sha256": "2b859cf93be06cf4e5a4fe2f66ef2561e2ad5a516e0059705b8131d753dff589",
+   "profile": {
+    "crs": "EPSG:32611",
+    "transform": [
+     100.0,
+     0.0,
+     243349.965575182,
+     0.0,
+     -100.0,
+     4508550.0
+    ],
+    "shape": [
+     3730,
+     3292
+    ],
+    "res": [
+     100.0,
+     100.0
+    ],
+    "dtype": "float32",
+    "count": 1,
+    "nodata": null
+   },
+   "portal_legal": true,
+   "exact_sample_transform": false,
+   "finite_cells": 12279160,
+   "nan_cells": 0,
+   "min": 0.0,
+   "max": 1.0,
+   "range_violations": 0,
+   "positive_px": 36000,
+   "total_mass": 36000.0,
+   "off_h19_5_px": 35360,
+   "off_h19_5_frac": 0.9822222222222222,
+   "catalogue_proxy_T": 140.35993029849766,
+   "catalogue_proxy_F": 35866.797254965306,
+   "credit_per_unit_mass": 0.003898886952736046,
+   "catalogue_proxy_DTI": 0.0025067929856213643,
+   "dots_on_catalogue": 0
+  },
+  {
+   "file": "gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+   "bytes": 104586,
+   "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
+   "profile": {
+    "crs": "EPSG:32611",
+    "transform": [
+     100.0,
+     0.0,
+     243350.0,
+     0.0,
+     -100.0,
+     4508550.0
+    ],
+    "shape": [
+     3730,
+     3292
+    ],
+    "res": [
+     100.0,
+     100.0
+    ],
+    "dtype": "float32",
+    "count": 1,
+    "nodata": null
+   },
+   "portal_legal": true,
+   "exact_sample_transform": true,
+   "finite_cells": 12279160,
+   "nan_cells": 0,
+   "min": 0.0,
+   "max": 1.0,
+   "range_violations": 0,
+   "positive_px": 40000,
+   "total_mass": 40000.0,
+   "off_h19_5_px": 39638,
+   "off_h19_5_frac": 0.99095,
+   "catalogue_proxy_T": 145.48955184384994,
+   "catalogue_proxy_F": 39855.72104662447,
+   "credit_per_unit_mass": 0.0036372387960962485,
+   "catalogue_proxy_DTI": 0.002561857841600237,
+   "dots_on_catalogue": 0
+  },
+  {
+   "file": "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+   "bytes": 144835,
+   "sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1",
+   "profile": {
+    "crs": "EPSG:32611",
+    "transform": [
+     100.0,
+     0.0,
+     243350.0,
+     0.0,
+     -100.0,
+     4508550.0
+    ],
+    "shape": [
+     3730,
+     3292
+    ],
+    "res": [
+     100.0,
+     100.0
+    ],
+    "dtype": "float32",
+    "count": 1,
+    "nodata": null
+   },
+   "portal_legal": true,
+   "exact_sample_transform": true,
+   "finite_cells": 12279160,
+   "nan_cells": 0,
+   "min": 0.0,
+   "max": 1.0,
+   "range_violations": 0,
+   "positive_px": 40000,
+   "total_mass": 40000.0,
+   "off_h19_5_px": 38288,
+   "off_h19_5_frac": 0.9572,
+   "catalogue_proxy_T": 821.4685889451935,
+   "catalogue_proxy_F": 39374.8302074785,
+   "credit_per_unit_mass": 0.020536714723629838,
+   "catalogue_proxy_DTI": 0.014454927100121926,
    "dots_on_catalogue": 0
   },
   {
@@ -471,6 +782,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
@@ -484,6 +796,49 @@
    "catalogue_proxy_F": 7567.4712633554145,
    "credit_per_unit_mass": 0.01579266863021911,
    "catalogue_proxy_DTI": 0.002401469029214279,
+   "dots_on_catalogue": 0
+  },
+  {
+   "file": "gems61-lane-thermal-knick-40000px-20261011T020352Z.tif",
+   "bytes": 75800,
+   "sha256": "a856efbac5e229194da7374c720eb83d5fd2e88568657b0f763a2e6af3d95d90",
+   "profile": {
+    "crs": "EPSG:32611",
+    "transform": [
+     100.0,
+     0.0,
+     243350.0,
+     0.0,
+     -100.0,
+     4508550.0
+    ],
+    "shape": [
+     3730,
+     3292
+    ],
+    "res": [
+     100.0,
+     100.0
+    ],
+    "dtype": "float32",
+    "count": 1,
+    "nodata": null
+   },
+   "portal_legal": true,
+   "exact_sample_transform": true,
+   "finite_cells": 12279160,
+   "nan_cells": 0,
+   "min": 0.0,
+   "max": 1.0,
+   "range_violations": 0,
+   "positive_px": 40000,
+   "total_mass": 40000.0,
+   "off_h19_5_px": 39116,
+   "off_h19_5_frac": 0.9779,
+   "catalogue_proxy_T": 260.36497092012235,
+   "catalogue_proxy_F": 39789.77622505267,
+   "credit_per_unit_mass": 0.006509124273003058,
+   "catalogue_proxy_DTI": 0.004583855773475668,
    "dots_on_catalogue": 0
   },
   {
@@ -513,6 +868,7 @@
     "nodata": NaN
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 5167373,
    "nan_cells": 7111787,
    "min": 0.0,
@@ -555,6 +911,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
@@ -597,6 +954,7 @@
     "nodata": NaN
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 5167373,
    "nan_cells": 7111787,
    "min": 0.0,
@@ -639,6 +997,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
@@ -681,6 +1040,7 @@
     "nodata": NaN
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 5167373,
    "nan_cells": 7111787,
    "min": 0.0,
@@ -723,6 +1083,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
@@ -765,6 +1126,7 @@
     "nodata": NaN
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 5167373,
    "nan_cells": 7111787,
    "min": 0.0,
@@ -807,6 +1169,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
@@ -849,6 +1212,7 @@
     "nodata": NaN
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 5167373,
    "nan_cells": 7111787,
    "min": 0.0,
@@ -891,6 +1255,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
@@ -933,6 +1298,7 @@
     "nodata": NaN
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 5167373,
    "nan_cells": 7111787,
    "min": 0.0,
@@ -975,6 +1341,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
@@ -1017,6 +1384,7 @@
     "nodata": NaN
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 5167373,
    "nan_cells": 7111787,
    "min": 0.0,
@@ -1059,6 +1427,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
@@ -1101,6 +1470,7 @@
     "nodata": NaN
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 5167373,
    "nan_cells": 7111787,
    "min": 0.0,
@@ -1143,6 +1513,7 @@
     "nodata": null
    },
    "portal_legal": true,
+   "exact_sample_transform": true,
    "finite_cells": 12279160,
    "nan_cells": 0,
    "min": 0.0,
