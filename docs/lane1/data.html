@@ -71,7 +71,7 @@
  <td>Per-tile GeoTIFFs of the same product, e.g. <code>USGS_13_n39w119.tif</code></td>
  <td><a href="https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif">…/13/TIFF/current/n39w119/…</a> · discovery: <a href="https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National%20Elevation%20Dataset%20(NED)%201%20arc-second&amp;bbox=-120,39,-119,40&amp;outputFormat=JSON">TNM API</a></td>
  <td>pins for n38w118…n40w119 published in the sibling <code>12GEMSDOE/evidence/dem10-fetch.json</code></td>
- <td class="s-warn">egress pending (see note)</td></tr>
+ <td class="s-ok">verified 2026-10-11 by Actions run 38100992879: HTTP 200, image/tiff, 10,812×10,812 float32; the runner downloaded the tile and its sha256 <code>b7fe301c…</code> matches the pin independently published in the sibling <code>12GEMSDOE/evidence/dem10-fetch.json</code> — receipt: <code>evidence/probe-egress-receipt.json</code></td></tr>
 <tr>
  <td>Derived SGMC fault raster</td>
  <td>USGS State Geologic Map Compilation quaternary structures, 100 m raster — the <em>validation</em> population, never an input to the emitted field</td>
@@ -117,7 +117,7 @@
 <ul>
 <li>Every input is re-hashed at run time (<code>hashlib</code>) and compared against the pin in <code>registry/source_pins.json</code>; the run aborts with exit code 2 on any mismatch. No hash in this repository is quoted from memory.</li>
 <li>The competition rasters were also checked band-by-band against the sibling registry's <code>data_manifest.json</code> (byte counts and SHA-256), which is how the mirror provenance above is stated.</li>
-<li>Network note: this sandbox has no route to <code>prd-tnm.s3.amazonaws.com</code>; a GitHub Actions workflow in this repository (egress probe) performs the HEAD/GET checks from a runner and commits a receipt, which is the mechanism the next session should use to fetch the 10 m DEM directly.</li>
+<li>Network note: this sandbox has no route to <code>prd-tnm.s3.amazonaws.com</code>; a GitHub Actions workflow in this repository performs the HEAD/GET checks from a runner and commits a receipt — <strong>done</strong>: run 38100992879 returned HTTP 200 for both the 10 m (Elevation/13) and 30 m (Elevation/1) tile URLs and downloaded a 10 m tile whose sha256 equals the independently published pin. The next session can therefore fetch the real DEM through the runner.</li>
 </ul>
 
 <p class="sub">All "s-ok" pins above were computed in this repository and are reproducible with <code>python scripts/run_lane.py</code>, which refuses to run if any input differs.</p>

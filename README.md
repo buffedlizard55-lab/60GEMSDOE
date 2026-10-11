@@ -937,7 +937,11 @@ holds the 35 comparator rasters used by the uniqueness stop rule.
    Until that exists, no "no skill" verdict in the family record is trustworthy — including this one.
 2. **Real 10 m DEM** (hypothesis #2): fetch through the Actions runner and commit a decimated grid;
    the 100 m substrate cannot resolve first-order channels (31% of cells raised by depression filling,
-   per-cell A-vs-L exponent ≈0.03).
+   per-cell A-vs-L exponent ≈0.03). **The egress lane is verified**: Actions run 38100992879 returned
+   HTTP 200 for `Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif` (10 m) and
+   `Elevation/1/...` (30 m) and downloaded a tile whose sha256 `b7fe301c…` matches the pin published
+   independently in the sibling `12GEMSDOE/evidence/dem10-fetch.json`; see
+   `evidence/probe-egress-receipt.json`.
 3. **Emission policy**: the marginal rule at the *measured* DTI, plus the 100–200 m ring deletion.
 4. **Not obtained:** `1m_DEM_links.csv` and the portal's own data downloads (login-walled). Irregularity
    flagged for the operator: the mirrored `sample_submission.tif` contains 60,988 pixels equal to 1 on
