@@ -49,23 +49,47 @@ def publish_readme() -> str:
     lead = PATCH["readme_lead"]
     if not lead.lstrip().startswith(MARK):
         lead = MARK + "\n" + lead
+    # 1) a row in the shared ONE-CLICK table at the very top, so this round's verdict is
+    #    visible without scrolling past the other rounds
+    row = PATCH.get("readme_table_row")
+    if row and "H74-1**" not in txt:
+        lines = txt.split("\n")
+        try:
+            k = next(i for i, ln in enumerate(lines) if ln.startswith("## ONE-CLICK downloads"))
+        except StopIteration:
+            k = None
+        if k is not None:
+            j = k
+            while j < len(lines) and not lines[j].startswith("|"):
+                j += 1
+            last = j
+            while last < len(lines) and lines[last].startswith("|"):
+                last += 1
+            lines[last:last] = [row.rstrip("\n")]
+            txt = "\n".join(lines)
+
+    # 2) the detail section, placed so it never displaces another round's hero
     anchor = PATCH.get("readme_anchor_after")
+    before = PATCH.get("readme_anchor_before")
     if anchor and anchor in txt:
-        # insert immediately after that round's lead block: at the next top-level heading
         i = txt.index(anchor)
         nxt = re.search(r"\n## ", txt[i + len(anchor):])
         pos = i + len(anchor) + (nxt.start() if nxt else 0)
         if nxt is None:
             pos = len(txt)
         txt = txt[:pos] + "\n" + lead + "\n" + txt[pos:]
-        how = f"after {anchor}"
+        how = f"after the {anchor} block"
+    elif before and before in txt:
+        pos = txt.index(before)
+        txt = txt[:pos] + lead + "\n" + txt[pos:]
+        how = f"before {before!r}"
     else:
         m = re.search(r"\n## ", txt)
         pos = m.start() if m else len(txt)
         txt = txt[:pos] + "\n" + lead + "\n" + txt[pos:]
         how = "at the top of the body"
     p.write_text(txt)
-    return f"README: h74-lead inserted {how} ({len(lead)} chars)"
+    return f"README: H74-1 row + detail section inserted {how} ({len(lead)} chars)"
 
 
 # ----------------------------------------------------------------------------- registries ------ #

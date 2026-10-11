@@ -11,7 +11,7 @@ the two pages the brief asks for:
 
   * ``docs/executive-summary.html`` -- the one-click download, an unambiguous
     OK-to-download / OK-to-submit verdict, and the exact portal steps;
-  * ``docs/h73-report.html``        -- the full H74-1 evidence table.
+  * ``docs/h74-report.html``        -- the full H74-1 evidence table.
 
 Run it after ``scripts/build_site.py``:
 
@@ -20,6 +20,7 @@ Run it after ``scripts/build_site.py``:
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -107,7 +108,7 @@ format-valid, uniqueness-checked GeoTIFF on every pass. Its verdict is printed o
 </table>
 <p><a class="btn" href="{_e(tif_href)}" download>&#11015; Download the H74-1 GeoTIFF ({prim['positive_px']:,} px, all-finite)</a>
 <a class="btn alt" href="{_e(zip_href)}">&#11015; .zip (one TIFF)</a>
-<a class="btn alt" href="h73-report.html">Full H74-1 evidence &rarr;</a></p>
+<a class="btn alt" href="h74-report.html">Full H74-1 evidence &rarr;</a></p>
 <table>
 <tr><th>field</th><th>value</th></tr>
 <tr><td>Submission name (paste into the note field)</td><td><code>{_e(card['submission']['name'])}</code></td></tr>
@@ -230,11 +231,17 @@ because it was never uploaded.</p>
     # re-running never duplicates the card and never destroys another round's content.
     es_path = DOCS / "executive-summary.html"
     es = es_path.read_text() if es_path.exists() else ""
-    if "<!-- h74-card -->" not in es:
-        card_html = (
-            '<div id="h74" class="wrap" style="border:3px solid #b42318;background:#fffafa;'
-            'padding:14px 18px;margin:14px auto"><!-- h74-card -->\n' + body + "\n</div>\n"
-        )
+    card_html = (
+        '<div id="h74" class="wrap" style="border:3px solid #b42318;background:#fffafa;'
+        'padding:14px 18px;margin:14px auto"><!-- h74-card -->\n' + body + "\n<!-- /h74-card --></div>\n"
+    )
+    if "<!-- h74-card -->" in es:
+        # Already published: replace the previous card in place, so the page always carries
+        # the current numbers and links instead of accumulating stale ones.
+        es = re.sub(r"<!-- h74-card -->.*?<!-- /h74-card --></div>\n?",
+                    lambda _m: "<!-- h74-card -->\n" + body + "\n<!-- /h74-card --></div>\n",
+                    es, count=1, flags=re.S)
+    else:
         if "<main class=\"wrap\">" in es:
             es = es.replace('<main class="wrap">', '<main class="wrap">\n' + card_html, 1)
         else:
