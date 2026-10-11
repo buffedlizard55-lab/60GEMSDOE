@@ -321,11 +321,11 @@ has power; it is not a lane feature and it is not promoted.</p>
 <tr><td><code>unique</code> (literal, fail-closed)</td><td><strong>{esc(uniq.get('unique'))}</strong></td><td>&mdash;</td><td><code>stop_required = {esc(uniq.get('stop_required'))}</code></td></tr>
 <tr><td colspan="4"><strong>Same gate on the continuous SURFACE before dot placement</strong>
 ({esc(usurf.get('registry_rasters_checked'))}/{esc(usurf.get('registry_rasters_expected'))} rasters,
-{esc(usurf.get('positive_pixels'))} positive cells): worst &rho;
+{esc(usurf.get('my_dots'))} positive cells): worst &rho;
 {num(usurf.get('worst_spearman_full_footprint'), 5)} &middot; worst forward overlap
 {num(usurf.get('worst_dot_overlap'), 5)} &middot; worst Jaccard
-{num(usurf.get('worst_jaccard'), 5)} &middot; firings {esc(usurf.get('duplicate_count'))}
-&middot; <code>unique = {esc(usurf.get('unique_literal'))}</code></td></tr></table>
+{num(usurf.get('worst_jaccard_dot_sets'), 5)} &middot; firings {esc(usurf.get('duplicate_count'))}
+&middot; <code>unique = {esc(usurf.get('unique'))}</code></td></tr></table>
 <p class="h60a-warn">The literal overlap gate fires because dense universal-support priors in the
 family corpus (support = the whole footprint, 5,167,373 cells, or the whole grid, 12,279,160 cells)
 contain <em>any</em> non-empty candidate &mdash; IR-60-GATE-01, the same structural finding the other
@@ -479,9 +479,9 @@ forward-overlap gate fires on {esc(uniq.get('duplicate_count'))} dense universal
   universal-support priors (worst {num(uniq.get('worst_dot_overlap'), 3)}) → logged as a duplicate,
   `unique_literal = false`, `stop_required = true` (IR-60-GATE-01). The same gate was then run on the
   **continuous surface before dot placement** (protocol rule 1 requires both): 655/655 rasters,
-  {esc((usurf.get('positive_pixels')))} positive cells, worst ρ
+  {esc(usurf.get('my_dots'))} positive cells, worst ρ
   **{num(usurf.get('worst_spearman_full_footprint'), 5)}**, worst Jaccard
-  {num(usurf.get('worst_jaccard'), 5)}, same {esc(usurf.get('duplicate_count'))} dense-prior overlap
+  {num(usurf.get('worst_jaccard_dot_sets'), 5)}, same {esc(usurf.get('duplicate_count'))} dense-prior overlap
   firings → `evidence/h60a_uniqueness_surface.json`.
 * **Format**: 15/15 local checks pass, every cell finite and in `[0, 1]` (zeros mode, never NaN — the
   fix for the portal's *"Predicted values must be in range [0, 1]"*), EPSG:32611, 3730 × 3292,
