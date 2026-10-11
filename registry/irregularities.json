@@ -368,6 +368,12 @@
       "title": "H63-A GeoTIFF (gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif) has a drifted affine transform origin (243349.9656 vs 243350.0) and fails sample-grid alignment",
       "statement": "In addition to the uncomputed/projected holdout_dti and 36,000-vs-42,000 dot mismatch documented in IR-65-H63-01, direct inspection of docs/downloads/gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif reveals that its affine geotransform origin is (243349.965575182, 4670136.453840564) instead of sample_submission.tif's (243350.0, 4670136.453999999). scripts/audit_shipped.py did not previously check affine transform equality against sample_submission.tif.",
       "mitigation": "Updated scripts/audit_shipped.py to verify np.allclose(tuple(prof['transform'])[:6], tuple(tpl_prof['transform'])[:6], atol=0.05) and record exact_sample_transform in docs/downloads/submissions_manifest.json."
+    },
+    {
+      "id": "IR-60-PROMOTION-CONFLICT",
+      "severity": "high",
+      "statement": "H67 PROMOTE banners and cards contradicted authoritative STOP and a raw 3px overlap of 0.998675; a dense-raster exclusion silently relaxed the literal 0.70 limit.",
+      "mitigation": "Published verdict corrected to negative; shared renderer suppresses old banners while stopped; selector uses raw overlap; H67 publishers now STOP-guarded. See docs/research/submission-status-review.md."
     }
   ]
 }

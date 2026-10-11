@@ -78,6 +78,9 @@ def inject(path: Path, block: str) -> None:
 
 
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "historical H67 promotion publisher"):
+        return 2
     rc = json.loads((ROOT / "evidence/h67_runcard.json").read_text())
     for p in (DOCS / "index.html", DOCS / "executive-summary.html"):
         inject(p, board("", rc))

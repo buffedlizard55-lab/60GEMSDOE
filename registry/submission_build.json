@@ -285,7 +285,7 @@
   }
  },
  "approved_for_weekly_slot": false,
- "promoted": true,
+ "promoted": false,
  "superseded_primaries": [
   {
    "name": "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros",
@@ -302,5 +302,6 @@
    "verdict": "NEGATIVE - deliverable negative result; do not spend a submission slot (brief: never submit anything that has not beaten the family's best promotable holdout)",
    "status_line": "PRIMARY = this session's GEMS61 thermally-corroborated knickpoint-lane file. ITS VERDICT IS NEGATIVE: it is unique, format-valid, leakage-free and fully documented, but it is NOT recommended for a weekly slot. Measured: pooled HOLDOUT-DTI (evaluator gems52-pooled-hide-v1, 36,439 withheld positives, 20 km-block bootstrap, 1,000 draws / 161 clusters) = 0.002495, 95% CI [0.001506, 0.003511]; paired d"
   }
- ]
+ ],
+ "decision_erratum": "2026-10-11: literal H67 uniqueness failed. Historical build only; DO NOT SUBMIT. See evidence/h67_uniqueness.json."
 }

@@ -22,6 +22,8 @@ def test_historical_green_board_cannot_reappear():
     for page in (ROOT / 'docs/index.html', ROOT / 'docs/executive-summary.html',
                  ROOT / 'index.html', ROOT / 'executive-summary.html'):
         page_text = page.read_text()
-        current = page_text.split('<!-- H67-STATUS:BEGIN -->', 1)[1].split('<!-- H67-STATUS:END -->', 1)[0]
-        assert 'DO NOT SUBMIT' in current and 'verdict NEGATIVE' in current
-        assert 'PROMOTE TO CROSS-LANE SELECTOR' not in current
+        # The current renderer now removes all historical marker boards on STOP.
+        # The archival board function above still must be safe when inspected alone.
+        assert 'DO NOT SUBMIT' in page_text
+        assert 'STOP' in page_text
+        assert 'PROMOTE TO CROSS-LANE SELECTOR' not in page_text
