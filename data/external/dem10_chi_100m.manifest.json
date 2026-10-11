@@ -1,12 +1,12 @@
 {
  "evidence_class": "DATA-MEASUREMENT",
  "hypothesis": "H65-1 (executes H62-5): tectonic-geomorphology lane at native 3DEP 10 m",
- "generated_utc": "2026-10-11T05:07:15Z",
+ "generated_utc": "2026-10-11T05:37:43Z",
  "workflow": "dem10-chi",
- "run_id": "38113556275",
+ "run_id": "38115164310",
  "run_attempt": "1",
- "ref": "refs/heads/arena/96ecd67e-60gemsdoe",
- "commit": "ee10a2d26f56d505ae64ed89ae4679b2f3b72792",
+ "ref": "refs/heads/main",
+ "commit": "156e7486b5b22c34bf9d7b8d90a714545d63f15a",
  "source": {
   "product": "USGS 3DEP 1/3 arc-second DEM (current 1x1 degree tiles)",
   "license": "public domain (USGS)",
@@ -148,7 +148,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:50Z",
+   "started_utc": "2026-10-11T05:33:47Z",
    "core_rows": [
     0,
     622
@@ -169,7 +169,7 @@
      "ok": true,
      "bytes": 375913234,
      "sha256": "f5bee4fbfe291b0eaf181d4b36aa32766b6ab62b9a0cb83420f22fea73580c41",
-     "seconds": 14.7
+     "seconds": 11.5
     },
     {
      "tile": "n41w121",
@@ -177,7 +177,7 @@
      "ok": true,
      "bytes": 389991601,
      "sha256": "fd5bb85cd29d16e3ada06771f5bcafaaf141f2be8aa4a12fb09e5604a6857c5e",
-     "seconds": 15.8
+     "seconds": 10.4
     }
    ],
    "dem_finite_frac": 1.0,
@@ -211,7 +211,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 56.6
+   "seconds": 51.8
   },
   {
    "block": [
@@ -223,7 +223,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:48Z",
+   "started_utc": "2026-10-11T05:33:46Z",
    "core_rows": [
     0,
     622
@@ -244,7 +244,7 @@
      "ok": true,
      "bytes": 386798261,
      "sha256": "5029c65f574c5c5241f1862336e8911d39c8faab1e037b9ba0b4d2fafe0fce0c",
-     "seconds": 10.9
+     "seconds": 16.1
     },
     {
      "tile": "n41w120",
@@ -252,7 +252,7 @@
      "ok": true,
      "bytes": 375913234,
      "sha256": "f5bee4fbfe291b0eaf181d4b36aa32766b6ab62b9a0cb83420f22fea73580c41",
-     "seconds": 5.9
+     "seconds": 8.1
     }
    ],
    "dem_finite_frac": 1.0,
@@ -286,7 +286,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 37.0
+   "seconds": 51.2
   },
   {
    "block": [
@@ -298,7 +298,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:53Z",
+   "started_utc": "2026-10-11T05:33:45Z",
    "core_rows": [
     0,
     622
@@ -319,7 +319,7 @@
      "ok": true,
      "bytes": 393630308,
      "sha256": "2b503a935cf4016cb4b675b3e739bf9bd0df8d4fc5c49b6cf8d4381740523048",
-     "seconds": 8.8
+     "seconds": 9.8
     },
     {
      "tile": "n41w119",
@@ -327,7 +327,7 @@
      "ok": true,
      "bytes": 386798261,
      "sha256": "5029c65f574c5c5241f1862336e8911d39c8faab1e037b9ba0b4d2fafe0fce0c",
-     "seconds": 7.5
+     "seconds": 7.2
     }
    ],
    "dem_finite_frac": 1.0,
@@ -361,7 +361,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 49.0
+   "seconds": 45.2
   },
   {
    "block": [
@@ -373,7 +373,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:50Z",
+   "started_utc": "2026-10-11T05:33:47Z",
    "core_rows": [
     0,
     622
@@ -394,7 +394,7 @@
      "ok": true,
      "bytes": 393630308,
      "sha256": "2b503a935cf4016cb4b675b3e739bf9bd0df8d4fc5c49b6cf8d4381740523048",
-     "seconds": 11.5
+     "seconds": 7.2
     },
     {
      "tile": "n41w119",
@@ -402,7 +402,7 @@
      "ok": true,
      "bytes": 386798261,
      "sha256": "5029c65f574c5c5241f1862336e8911d39c8faab1e037b9ba0b4d2fafe0fce0c",
-     "seconds": 9.9
+     "seconds": 5.1
     }
    ],
    "dem_finite_frac": 1.0,
@@ -436,7 +436,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 53.9
+   "seconds": 43.0
   },
   {
    "block": [
@@ -448,7 +448,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:51Z",
+   "started_utc": "2026-10-11T05:33:47Z",
    "core_rows": [
     0,
     622
@@ -469,7 +469,7 @@
      "ok": true,
      "bytes": 400243874,
      "sha256": "7e2dcd6fb40f66bc166fea34724f5a7eb6071ea371b303448cdf5afc8fa2c067",
-     "seconds": 11.8
+     "seconds": 12.7
     },
     {
      "tile": "n41w118",
@@ -477,7 +477,7 @@
      "ok": true,
      "bytes": 393630308,
      "sha256": "2b503a935cf4016cb4b675b3e739bf9bd0df8d4fc5c49b6cf8d4381740523048",
-     "seconds": 23.1
+     "seconds": 9.9
     }
    ],
    "dem_finite_frac": 1.0,
@@ -511,7 +511,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 66.1
+   "seconds": 54.0
   },
   {
    "block": [
@@ -523,7 +523,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:51Z",
+   "started_utc": "2026-10-11T05:33:53Z",
    "core_rows": [
     0,
     622
@@ -543,7 +543,7 @@
      "ok": true,
      "bytes": 400243874,
      "sha256": "7e2dcd6fb40f66bc166fea34724f5a7eb6071ea371b303448cdf5afc8fa2c067",
-     "seconds": 11.9
+     "seconds": 10.0
     }
    ],
    "dem_finite_frac": 1.0,
@@ -577,7 +577,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 47.7
+   "seconds": 44.6
   },
   {
    "block": [
@@ -589,7 +589,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:48Z",
+   "started_utc": "2026-10-11T05:33:46Z",
    "core_rows": [
     622,
     1244
@@ -612,7 +612,7 @@
      "ok": true,
      "bytes": 402039220,
      "sha256": "59a6df67e342b5b0c7166ab5a07b8bed6f9774a868a14badacd2c3d7dc185b3a",
-     "seconds": 11.3
+     "seconds": 15.0
     },
     {
      "tile": "n40w121",
@@ -620,7 +620,7 @@
      "ok": true,
      "bytes": 426141596,
      "sha256": "1ef8c81e8528aacbbb7a3eb5733d225dad81422af04d1f330576e6d6ac9af957",
-     "seconds": 13.0
+     "seconds": 13.6
     },
     {
      "tile": "n41w120",
@@ -628,7 +628,7 @@
      "ok": true,
      "bytes": 375913234,
      "sha256": "f5bee4fbfe291b0eaf181d4b36aa32766b6ab62b9a0cb83420f22fea73580c41",
-     "seconds": 6.9
+     "seconds": 10.6
     },
     {
      "tile": "n41w121",
@@ -636,7 +636,7 @@
      "ok": true,
      "bytes": 389991601,
      "sha256": "fd5bb85cd29d16e3ada06771f5bcafaaf141f2be8aa4a12fb09e5604a6857c5e",
-     "seconds": 9.9
+     "seconds": 13.6
     }
    ],
    "dem_finite_frac": 1.0,
@@ -670,7 +670,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 64.9
+   "seconds": 80.5
   },
   {
    "block": [
@@ -682,7 +682,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:51Z",
+   "started_utc": "2026-10-11T05:33:46Z",
    "core_rows": [
     622,
     1244
@@ -705,7 +705,7 @@
      "ok": true,
      "bytes": 378567782,
      "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
-     "seconds": 10.9
+     "seconds": 12.4
     },
     {
      "tile": "n40w120",
@@ -713,7 +713,7 @@
      "ok": true,
      "bytes": 402039220,
      "sha256": "59a6df67e342b5b0c7166ab5a07b8bed6f9774a868a14badacd2c3d7dc185b3a",
-     "seconds": 9.3
+     "seconds": 10.3
     },
     {
      "tile": "n41w119",
@@ -721,7 +721,7 @@
      "ok": true,
      "bytes": 386798261,
      "sha256": "5029c65f574c5c5241f1862336e8911d39c8faab1e037b9ba0b4d2fafe0fce0c",
-     "seconds": 4.5
+     "seconds": 9.5
     },
     {
      "tile": "n41w120",
@@ -729,7 +729,7 @@
      "ok": true,
      "bytes": 375913234,
      "sha256": "f5bee4fbfe291b0eaf181d4b36aa32766b6ab62b9a0cb83420f22fea73580c41",
-     "seconds": 4.6
+     "seconds": 9.2
     }
    ],
    "dem_finite_frac": 1.0,
@@ -763,7 +763,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 57.8
+   "seconds": 72.6
   },
   {
    "block": [
@@ -775,7 +775,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:51Z",
+   "started_utc": "2026-10-11T05:33:47Z",
    "core_rows": [
     622,
     1244
@@ -798,7 +798,7 @@
      "ok": true,
      "bytes": 397926937,
      "sha256": "f2d1d2419b5a8ef7c43fcab6af5c67f1c2ae84259d0c7cf184f9f42f80d16d46",
-     "seconds": 11.5
+     "seconds": 8.7
     },
     {
      "tile": "n40w119",
@@ -806,7 +806,7 @@
      "ok": true,
      "bytes": 378567782,
      "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
-     "seconds": 9.4
+     "seconds": 4.2
     },
     {
      "tile": "n41w118",
@@ -814,7 +814,7 @@
      "ok": true,
      "bytes": 393630308,
      "sha256": "2b503a935cf4016cb4b675b3e739bf9bd0df8d4fc5c49b6cf8d4381740523048",
-     "seconds": 9.9
+     "seconds": 4.3
     },
     {
      "tile": "n41w119",
@@ -822,7 +822,7 @@
      "ok": true,
      "bytes": 386798261,
      "sha256": "5029c65f574c5c5241f1862336e8911d39c8faab1e037b9ba0b4d2fafe0fce0c",
-     "seconds": 10.1
+     "seconds": 4.3
     }
    ],
    "dem_finite_frac": 1.0,
@@ -856,7 +856,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 72.3
+   "seconds": 51.4
   },
   {
    "block": [
@@ -868,7 +868,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:50Z",
+   "started_utc": "2026-10-11T05:33:48Z",
    "core_rows": [
     622,
     1244
@@ -891,7 +891,7 @@
      "ok": true,
      "bytes": 397926937,
      "sha256": "f2d1d2419b5a8ef7c43fcab6af5c67f1c2ae84259d0c7cf184f9f42f80d16d46",
-     "seconds": 12.1
+     "seconds": 8.7
     },
     {
      "tile": "n40w119",
@@ -899,7 +899,7 @@
      "ok": true,
      "bytes": 378567782,
      "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
-     "seconds": 7.1
+     "seconds": 4.6
     },
     {
      "tile": "n41w118",
@@ -907,7 +907,7 @@
      "ok": true,
      "bytes": 393630308,
      "sha256": "2b503a935cf4016cb4b675b3e739bf9bd0df8d4fc5c49b6cf8d4381740523048",
-     "seconds": 5.1
+     "seconds": 4.3
     },
     {
      "tile": "n41w119",
@@ -915,7 +915,7 @@
      "ok": true,
      "bytes": 386798261,
      "sha256": "5029c65f574c5c5241f1862336e8911d39c8faab1e037b9ba0b4d2fafe0fce0c",
-     "seconds": 4.9
+     "seconds": 4.2
     }
    ],
    "dem_finite_frac": 1.0,
@@ -949,7 +949,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 62.9
+   "seconds": 51.1
   },
   {
    "block": [
@@ -961,7 +961,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:51Z",
+   "started_utc": "2026-10-11T05:33:43Z",
    "core_rows": [
     622,
     1244
@@ -984,7 +984,7 @@
      "ok": true,
      "bytes": 382017624,
      "sha256": "e35f343e8d23081364b4083c2b4d27d9e6b1a4d9af8d4ab96b98436841f0b50e",
-     "seconds": 6.2
+     "seconds": 10.7
     },
     {
      "tile": "n40w118",
@@ -1000,7 +1000,7 @@
      "ok": true,
      "bytes": 400243874,
      "sha256": "7e2dcd6fb40f66bc166fea34724f5a7eb6071ea371b303448cdf5afc8fa2c067",
-     "seconds": 5.0
+     "seconds": 5.9
     },
     {
      "tile": "n41w118",
@@ -1008,7 +1008,7 @@
      "ok": true,
      "bytes": 393630308,
      "sha256": "2b503a935cf4016cb4b675b3e739bf9bd0df8d4fc5c49b6cf8d4381740523048",
-     "seconds": 5.2
+     "seconds": 4.8
     }
    ],
    "dem_finite_frac": 1.0,
@@ -1042,7 +1042,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 52.2
+   "seconds": 49.0
   },
   {
    "block": [
@@ -1054,7 +1054,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:46Z",
+   "started_utc": "2026-10-11T05:33:47Z",
    "core_rows": [
     622,
     1244
@@ -1075,7 +1075,7 @@
      "ok": true,
      "bytes": 382017624,
      "sha256": "e35f343e8d23081364b4083c2b4d27d9e6b1a4d9af8d4ab96b98436841f0b50e",
-     "seconds": 11.2
+     "seconds": 9.5
     },
     {
      "tile": "n41w117",
@@ -1083,7 +1083,7 @@
      "ok": true,
      "bytes": 400243874,
      "sha256": "7e2dcd6fb40f66bc166fea34724f5a7eb6071ea371b303448cdf5afc8fa2c067",
-     "seconds": 5.8
+     "seconds": 9.9
     }
    ],
    "dem_finite_frac": 1.0,
@@ -1117,7 +1117,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 37.7
+   "seconds": 49.9
   },
   {
    "block": [
@@ -1129,7 +1129,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:04:24Z",
+   "started_utc": "2026-10-11T05:34:11Z",
    "core_rows": [
     1244,
     1866
@@ -1152,7 +1152,7 @@
      "ok": true,
      "bytes": 418930984,
      "sha256": "2d658942861cc01b820587e325ad4873ee8a993e77bc51eccca52b775e7a590c",
-     "seconds": 12.1
+     "seconds": 4.6
     },
     {
      "tile": "n39w121",
@@ -1160,7 +1160,7 @@
      "ok": true,
      "bytes": 463509513,
      "sha256": "c55c467399cf91fa43d2956b66bd7c2e22e7fb8cd0dad03bf256f1ba93191844",
-     "seconds": 17.0
+     "seconds": 11.1
     },
     {
      "tile": "n40w120",
@@ -1168,7 +1168,7 @@
      "ok": true,
      "bytes": 402039220,
      "sha256": "59a6df67e342b5b0c7166ab5a07b8bed6f9774a868a14badacd2c3d7dc185b3a",
-     "seconds": 13.0
+     "seconds": 6.1
     },
     {
      "tile": "n40w121",
@@ -1176,7 +1176,7 @@
      "ok": true,
      "bytes": 426141596,
      "sha256": "1ef8c81e8528aacbbb7a3eb5733d225dad81422af04d1f330576e6d6ac9af957",
-     "seconds": 13.1
+     "seconds": 10.2
     }
    ],
    "dem_finite_frac": 1.0,
@@ -1210,7 +1210,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 86.6
+   "seconds": 66.8
   },
   {
    "block": [
@@ -1222,7 +1222,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:51Z",
+   "started_utc": "2026-10-11T05:34:13Z",
    "core_rows": [
     1244,
     1866
@@ -1245,7 +1245,7 @@
      "ok": true,
      "bytes": 401998969,
      "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
-     "seconds": 12.3
+     "seconds": 5.5
     },
     {
      "tile": "n39w120",
@@ -1253,7 +1253,7 @@
      "ok": true,
      "bytes": 418930984,
      "sha256": "2d658942861cc01b820587e325ad4873ee8a993e77bc51eccca52b775e7a590c",
-     "seconds": 12.4
+     "seconds": 4.6
     },
     {
      "tile": "n40w119",
@@ -1261,7 +1261,7 @@
      "ok": true,
      "bytes": 378567782,
      "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
-     "seconds": 6.4
+     "seconds": 4.1
     },
     {
      "tile": "n40w120",
@@ -1269,7 +1269,7 @@
      "ok": true,
      "bytes": 402039220,
      "sha256": "59a6df67e342b5b0c7166ab5a07b8bed6f9774a868a14badacd2c3d7dc185b3a",
-     "seconds": 10.0
+     "seconds": 5.1
     }
    ],
    "dem_finite_frac": 1.0,
@@ -1303,7 +1303,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 71.7
+   "seconds": 50.1
   },
   {
    "block": [
@@ -1315,7 +1315,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:50Z",
+   "started_utc": "2026-10-11T05:34:16Z",
    "core_rows": [
     1244,
     1866
@@ -1338,7 +1338,7 @@
      "ok": true,
      "bytes": 391985657,
      "sha256": "01a5b4bdc759d2fdb610cba1f4cd3db2482af13b29eaca186f7bb37862081b0f",
-     "seconds": 10.2
+     "seconds": 9.8
     },
     {
      "tile": "n39w119",
@@ -1346,7 +1346,7 @@
      "ok": true,
      "bytes": 401998969,
      "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
-     "seconds": 9.5
+     "seconds": 4.4
     },
     {
      "tile": "n40w118",
@@ -1354,7 +1354,7 @@
      "ok": true,
      "bytes": 397926937,
      "sha256": "f2d1d2419b5a8ef7c43fcab6af5c67f1c2ae84259d0c7cf184f9f42f80d16d46",
-     "seconds": 10.0
+     "seconds": 4.3
     },
     {
      "tile": "n40w119",
@@ -1362,7 +1362,7 @@
      "ok": true,
      "bytes": 378567782,
      "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
-     "seconds": 9.9
+     "seconds": 4.1
     }
    ],
    "dem_finite_frac": 1.0,
@@ -1396,7 +1396,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 69.9
+   "seconds": 49.8
   },
   {
    "block": [
@@ -1408,7 +1408,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:48Z",
+   "started_utc": "2026-10-11T05:33:47Z",
    "core_rows": [
     1244,
     1866
@@ -1431,7 +1431,7 @@
      "ok": true,
      "bytes": 391985657,
      "sha256": "01a5b4bdc759d2fdb610cba1f4cd3db2482af13b29eaca186f7bb37862081b0f",
-     "seconds": 11.0
+     "seconds": 10.5
     },
     {
      "tile": "n39w119",
@@ -1439,7 +1439,7 @@
      "ok": true,
      "bytes": 401998969,
      "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
-     "seconds": 19.6
+     "seconds": 6.7
     },
     {
      "tile": "n40w118",
@@ -1447,7 +1447,7 @@
      "ok": true,
      "bytes": 397926937,
      "sha256": "f2d1d2419b5a8ef7c43fcab6af5c67f1c2ae84259d0c7cf184f9f42f80d16d46",
-     "seconds": 9.2
+     "seconds": 4.9
     },
     {
      "tile": "n40w119",
@@ -1455,7 +1455,7 @@
      "ok": true,
      "bytes": 378567782,
      "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
-     "seconds": 6.1
+     "seconds": 4.7
     }
    ],
    "dem_finite_frac": 1.0,
@@ -1489,7 +1489,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 76.5
+   "seconds": 58.7
   },
   {
    "block": [
@@ -1501,7 +1501,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:48Z",
+   "started_utc": "2026-10-11T05:33:50Z",
    "core_rows": [
     1244,
     1866
@@ -1523,7 +1523,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:52Z",
+   "started_utc": "2026-10-11T05:33:48Z",
    "core_rows": [
     1244,
     1866
@@ -1545,7 +1545,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:04:14Z",
+   "started_utc": "2026-10-11T05:33:44Z",
    "core_rows": [
     1866,
     2488
@@ -1567,7 +1567,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:03:54Z",
+   "started_utc": "2026-10-11T05:33:47Z",
    "core_rows": [
     1866,
     2488
@@ -1590,7 +1590,7 @@
      "ok": true,
      "bytes": 401998969,
      "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
-     "seconds": 9.5
+     "seconds": 12.5
     },
     {
      "tile": "n39w120",
@@ -1598,7 +1598,7 @@
      "ok": true,
      "bytes": 418930984,
      "sha256": "2d658942861cc01b820587e325ad4873ee8a993e77bc51eccca52b775e7a590c",
-     "seconds": 12.5
+     "seconds": 13.7
     },
     {
      "tile": "n40w119",
@@ -1606,7 +1606,7 @@
      "ok": true,
      "bytes": 378567782,
      "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
-     "seconds": 6.7
+     "seconds": 9.2
     },
     {
      "tile": "n40w120",
@@ -1614,7 +1614,7 @@
      "ok": true,
      "bytes": 402039220,
      "sha256": "59a6df67e342b5b0c7166ab5a07b8bed6f9774a868a14badacd2c3d7dc185b3a",
-     "seconds": 9.7
+     "seconds": 10.4
     }
    ],
    "dem_finite_frac": 1.0,
@@ -1648,7 +1648,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 71.0
+   "seconds": 78.3
   },
   {
    "block": [
@@ -1660,7 +1660,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:04:39Z",
+   "started_utc": "2026-10-11T05:34:26Z",
    "core_rows": [
     1866,
     2488
@@ -1683,7 +1683,7 @@
      "ok": true,
      "bytes": 391985657,
      "sha256": "01a5b4bdc759d2fdb610cba1f4cd3db2482af13b29eaca186f7bb37862081b0f",
-     "seconds": 10.0
+     "seconds": 8.2
     },
     {
      "tile": "n39w119",
@@ -1691,7 +1691,7 @@
      "ok": true,
      "bytes": 401998969,
      "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
-     "seconds": 9.1
+     "seconds": 6.7
     },
     {
      "tile": "n40w118",
@@ -1699,7 +1699,7 @@
      "ok": true,
      "bytes": 397926937,
      "sha256": "f2d1d2419b5a8ef7c43fcab6af5c67f1c2ae84259d0c7cf184f9f42f80d16d46",
-     "seconds": 6.0
+     "seconds": 7.0
     },
     {
      "tile": "n40w119",
@@ -1707,7 +1707,7 @@
      "ok": true,
      "bytes": 378567782,
      "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
-     "seconds": 4.6
+     "seconds": 19.1
     }
    ],
    "dem_finite_frac": 1.0,
@@ -1741,7 +1741,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 61.8
+   "seconds": 69.2
   },
   {
    "block": [
@@ -1753,7 +1753,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:04:48Z",
+   "started_utc": "2026-10-11T05:34:39Z",
    "core_rows": [
     1866,
     2488
@@ -1776,7 +1776,7 @@
      "ok": true,
      "bytes": 391985657,
      "sha256": "01a5b4bdc759d2fdb610cba1f4cd3db2482af13b29eaca186f7bb37862081b0f",
-     "seconds": 9.4
+     "seconds": 7.0
     },
     {
      "tile": "n39w119",
@@ -1784,7 +1784,7 @@
      "ok": true,
      "bytes": 401998969,
      "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
-     "seconds": 8.5
+     "seconds": 5.6
     },
     {
      "tile": "n40w118",
@@ -1792,7 +1792,7 @@
      "ok": true,
      "bytes": 397926937,
      "sha256": "f2d1d2419b5a8ef7c43fcab6af5c67f1c2ae84259d0c7cf184f9f42f80d16d46",
-     "seconds": 7.9
+     "seconds": 5.1
     },
     {
      "tile": "n40w119",
@@ -1800,7 +1800,7 @@
      "ok": true,
      "bytes": 378567782,
      "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
-     "seconds": 6.8
+     "seconds": 4.9
     }
    ],
    "dem_finite_frac": 1.0,
@@ -1834,7 +1834,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 64.2
+   "seconds": 58.7
   },
   {
    "block": [
@@ -1846,7 +1846,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:05:07Z",
+   "started_utc": "2026-10-11T05:34:43Z",
    "core_rows": [
     1866,
     2488
@@ -1868,7 +1868,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:05:07Z",
+   "started_utc": "2026-10-11T05:34:53Z",
    "core_rows": [
     1866,
     2488
@@ -1890,7 +1890,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:05:06Z",
+   "started_utc": "2026-10-11T05:34:59Z",
    "core_rows": [
     2488,
     3110
@@ -1912,7 +1912,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:05:12Z",
+   "started_utc": "2026-10-11T05:35:00Z",
    "core_rows": [
     2488,
     3110
@@ -1934,7 +1934,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:05:13Z",
+   "started_utc": "2026-10-11T05:35:02Z",
    "core_rows": [
     2488,
     3110
@@ -1957,7 +1957,7 @@
      "ok": true,
      "bytes": 409708514,
      "sha256": "21e4616b410d787b6faee8f60fefbc7969fdb2d26a300ae0cce9703e40077192",
-     "seconds": 11.6
+     "seconds": 4.6
     },
     {
      "tile": "n38w119",
@@ -1965,7 +1965,7 @@
      "ok": true,
      "bytes": 416350584,
      "sha256": "d1a22cfe538179c65fa221f70c0cd7ba4403d087450dd3bb463ee50fb69fa97c",
-     "seconds": 11.8
+     "seconds": 10.2
     },
     {
      "tile": "n39w118",
@@ -1973,7 +1973,7 @@
      "ok": true,
      "bytes": 391985657,
      "sha256": "01a5b4bdc759d2fdb610cba1f4cd3db2482af13b29eaca186f7bb37862081b0f",
-     "seconds": 9.3
+     "seconds": 6.7
     },
     {
      "tile": "n39w119",
@@ -1981,7 +1981,7 @@
      "ok": true,
      "bytes": 401998969,
      "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
-     "seconds": 9.9
+     "seconds": 6.3
     }
    ],
    "dem_finite_frac": 1.0,
@@ -2015,7 +2015,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 72.9
+   "seconds": 59.1
   },
   {
    "block": [
@@ -2027,7 +2027,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:05:16Z",
+   "started_utc": "2026-10-11T05:34:55Z",
    "core_rows": [
     2488,
     3110
@@ -2050,7 +2050,7 @@
      "ok": true,
      "bytes": 409708514,
      "sha256": "21e4616b410d787b6faee8f60fefbc7969fdb2d26a300ae0cce9703e40077192",
-     "seconds": 8.2
+     "seconds": 10.8
     },
     {
      "tile": "n38w119",
@@ -2058,7 +2058,7 @@
      "ok": true,
      "bytes": 416350584,
      "sha256": "d1a22cfe538179c65fa221f70c0cd7ba4403d087450dd3bb463ee50fb69fa97c",
-     "seconds": 11.8
+     "seconds": 10.3
     },
     {
      "tile": "n39w118",
@@ -2066,7 +2066,7 @@
      "ok": true,
      "bytes": 391985657,
      "sha256": "01a5b4bdc759d2fdb610cba1f4cd3db2482af13b29eaca186f7bb37862081b0f",
-     "seconds": 9.3
+     "seconds": 75.9
     },
     {
      "tile": "n39w119",
@@ -2074,7 +2074,7 @@
      "ok": true,
      "bytes": 401998969,
      "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
-     "seconds": 9.9
+     "seconds": 10.3
     }
    ],
    "dem_finite_frac": 1.0,
@@ -2108,7 +2108,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 68.0
+   "seconds": 128.6
   },
   {
    "block": [
@@ -2120,7 +2120,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:05:15Z",
+   "started_utc": "2026-10-11T05:35:03Z",
    "core_rows": [
     2488,
     3110
@@ -2143,7 +2143,7 @@
      "ok": true,
      "bytes": 376521889,
      "sha256": "088f6f89d56226e99cedd3316add89c94d90f08aa5c0ef076d49b2c129b37e23",
-     "seconds": 14.9
+     "seconds": 10.3
     },
     {
      "tile": "n38w118",
@@ -2151,7 +2151,7 @@
      "ok": true,
      "bytes": 409708514,
      "sha256": "21e4616b410d787b6faee8f60fefbc7969fdb2d26a300ae0cce9703e40077192",
-     "seconds": 10.1
+     "seconds": 5.8
     },
     {
      "tile": "n39w117",
@@ -2159,7 +2159,7 @@
      "ok": true,
      "bytes": 392299201,
      "sha256": "27b2eb3b55f457a0b3a299576b6747a8ca4f7ec4e415180f9bf3c07ba9158449",
-     "seconds": 15.1
+     "seconds": 9.8
     },
     {
      "tile": "n39w118",
@@ -2167,7 +2167,7 @@
      "ok": true,
      "bytes": 391985657,
      "sha256": "01a5b4bdc759d2fdb610cba1f4cd3db2482af13b29eaca186f7bb37862081b0f",
-     "seconds": 11.1
+     "seconds": 6.0
     }
    ],
    "dem_finite_frac": 1.0,
@@ -2201,7 +2201,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 80.9
+   "seconds": 65.2
   },
   {
    "block": [
@@ -2213,7 +2213,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:05:19Z",
+   "started_utc": "2026-10-11T05:35:05Z",
    "core_rows": [
     2488,
     3110
@@ -2235,7 +2235,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:05:19Z",
+   "started_utc": "2026-10-11T05:35:04Z",
    "core_rows": [
     3110,
     3730
@@ -2257,7 +2257,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:05:23Z",
+   "started_utc": "2026-10-11T05:35:03Z",
    "core_rows": [
     3110,
     3730
@@ -2279,7 +2279,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:05:24Z",
+   "started_utc": "2026-10-11T05:35:05Z",
    "core_rows": [
     3110,
     3730
@@ -2308,7 +2308,7 @@
      "ok": true,
      "bytes": 416350584,
      "sha256": "d1a22cfe538179c65fa221f70c0cd7ba4403d087450dd3bb463ee50fb69fa97c",
-     "seconds": 9.7
+     "seconds": 10.1
     }
    ],
    "dem_finite_frac": 1.0,
@@ -2342,7 +2342,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 49.2
+   "seconds": 50.5
   },
   {
    "block": [
@@ -2354,7 +2354,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:05:22Z",
+   "started_utc": "2026-10-11T05:35:11Z",
    "core_rows": [
     3110,
     3730
@@ -2375,7 +2375,7 @@
      "ok": true,
      "bytes": 409708514,
      "sha256": "21e4616b410d787b6faee8f60fefbc7969fdb2d26a300ae0cce9703e40077192",
-     "seconds": 6.9
+     "seconds": 4.5
     },
     {
      "tile": "n38w119",
@@ -2383,7 +2383,7 @@
      "ok": true,
      "bytes": 416350584,
      "sha256": "d1a22cfe538179c65fa221f70c0cd7ba4403d087450dd3bb463ee50fb69fa97c",
-     "seconds": 7.2
+     "seconds": 4.6
     }
    ],
    "dem_finite_frac": 1.0,
@@ -2417,7 +2417,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 34.1
+   "seconds": 41.1
   },
   {
    "block": [
@@ -2429,7 +2429,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:05:25Z",
+   "started_utc": "2026-10-11T05:35:12Z",
    "core_rows": [
     3110,
     3730
@@ -2450,7 +2450,7 @@
      "ok": true,
      "bytes": 376521889,
      "sha256": "088f6f89d56226e99cedd3316add89c94d90f08aa5c0ef076d49b2c129b37e23",
-     "seconds": 7.1
+     "seconds": 59.9
     },
     {
      "tile": "n38w118",
@@ -2458,7 +2458,7 @@
      "ok": true,
      "bytes": 409708514,
      "sha256": "21e4616b410d787b6faee8f60fefbc7969fdb2d26a300ae0cce9703e40077192",
-     "seconds": 6.8
+     "seconds": 11.7
     }
    ],
    "dem_finite_frac": 1.0,
@@ -2492,7 +2492,7 @@
     "resampling": "bilinear"
    },
    "status": "ok",
-   "seconds": 35.6
+   "seconds": 102.4
   },
   {
    "block": [
@@ -2504,7 +2504,7 @@
     6
    ],
    "halo_px100": 80,
-   "started_utc": "2026-10-11T05:05:29Z",
+   "started_utc": "2026-10-11T05:35:22Z",
    "core_rows": [
     3110,
     3730
