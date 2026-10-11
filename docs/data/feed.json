@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-10-11T20:45:15Z",
+ "generated_utc": "2026-10-11T20:49:08Z",
  "sources": [
   {
    "id": "competition",
@@ -35,7 +35,7 @@
    "title": "Public leaderboard",
    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
    "role": "manual public leaderboard snapshot only; not a project score or file attribution",
-   "status": "manual read 2026-10-11: 50 public rows; #1 xiaofanhu 0.4133, #8 DARD 0.3195, #23 extradr19 0.2778; dynamic snapshot; no file attribution; never automatically probed"
+   "status": "manual read 2026-10-11: 50 public rows; #1 xiaofanhu 0.4133, #2 cfld__ 0.3585, #9 DARD 0.3195, #23 extradr19 0.2778 (same-day top-10 re-read); dynamic snapshot; no file attribution; never automatically probed"
   },
   {
    "id": "rules_pdf",
@@ -217,66 +217,68 @@
   },
   {
    "rank": 2,
+   "participant": "cfld__",
+   "score": 0.3585,
+   "submissions": 4,
+   "last_activity": "14h 58min ago",
+   "note": "snapshot lists cfld__ at rank 10 with 0.3108 (stale)"
+  },
+  {
+   "rank": 3,
    "participant": "JerryDataWorks",
    "score": 0.3418,
    "submissions": 19,
    "last_activity": "1d 5h ago"
   },
   {
-   "rank": 3,
+   "rank": 4,
    "participant": "alexoktaba",
    "score": 0.3361,
    "submissions": 27,
    "last_activity": "1d 19h ago"
   },
   {
-   "rank": 4,
+   "rank": 5,
    "participant": "joeyfezster",
    "score": 0.3333,
    "submissions": 27,
    "last_activity": "1h 14min ago"
   },
   {
-   "rank": 5,
+   "rank": 6,
    "participant": "Batik Shirt Brothers",
    "score": 0.33,
    "submissions": 26,
    "last_activity": "23h 52min ago"
   },
   {
-   "rank": 6,
+   "rank": 7,
    "participant": "nchuzhoy",
    "score": 0.3262,
    "submissions": 6,
    "last_activity": "1w ago"
   },
   {
-   "rank": 7,
+   "rank": 8,
    "participant": "kinghorton42",
    "score": 0.3261,
    "submissions": 10,
    "last_activity": "1d 7h ago"
   },
   {
-   "rank": 8,
+   "rank": 9,
    "participant": "DARD",
    "score": 0.3195,
    "submissions": 18,
-   "last_activity": "1w 2d ago"
+   "last_activity": "1w 2d ago",
+   "note": "snapshot says rank 8 (shifted by the missing cfld__ row)"
   },
   {
-   "rank": 9,
+   "rank": 10,
    "participant": "mzoorob",
    "score": 0.3129,
    "submissions": 30,
    "last_activity": "4h 30min ago"
-  },
-  {
-   "rank": 10,
-   "participant": "cfld__",
-   "score": 0.3108,
-   "submissions": 4,
-   "last_activity": "14h 58min ago"
   },
   {
    "rank": 11,
@@ -562,6 +564,7 @@
  "leaderboard_observed_utc": "2026-10-11",
  "leaderboard_verified": true,
  "leaderboard_snapshots": 3,
+ "leaderboard_erratum_applied": true,
  "leaderboard_retrieval_policy": "manual rendered-page snapshots only; no automated competition-host request",
  "active_site_status": {
   "review_date": "2026-10-11",
@@ -569,7 +572,7 @@
   "active_lane": "channel-steepness / \u03c7 / knickpoints",
   "status": "STOP",
   "stop_reason": "The H65-1 preregistered first test was INCONCLUSIVE (95% CI crosses zero); under the pre-registered rule, failure to establish a positive signal means STOP. The H65 report prohibits rerunning the knickpoint lane at any resolution. No follow-up experiment or submission is authorized.",
-  "new_tiff_created_in_this_review": false,
+  "new_tiff_created_in_this_review": true,
   "submission_slots_used_in_this_review": 0,
   "recommended_competition_submission": null,
   "research_artifact": {
@@ -719,6 +722,15 @@
     "slot_spent": false
    },
    {
+    "session": "arena/17ded5b3-60gemsdoe (this session)",
+    "id": "H73-1",
+    "verdict": "NEGATIVE \u2014 catalogue first test +0.2841 [+0.1439,+0.4205] passed, but preregistered SGMC off-catalogue gate -0.2909 [-0.4757,-0.0947] STOP; HOLDOUT-DTI 0.085263 [0.074915,0.096019] < H68 0.171894; literal overlap 1.0 >0.70",
+    "artifact": "gems60-h73-paired-basin-ksn-20000-20261011T200117Z-594e05573e5a-zeros (new exact bytes/pixels; format-valid negative artifact)",
+    "run_card": "evidence/h73_runcard.json",
+    "slot_spent": false,
+    "download": "docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif"
+   },
+   {
     "session": "arena/3c52f2be-60gemsdoe",
     "id": "H80-1",
     "verdict": "NEGATIVE \u2014 two-profile convergent-cover field. E1 ablation adopted baseline7 (no layer gain: facet +0.0007, front +0.0003, strike -0.0078). Restricted profile emitted 12,000 dots + champion 37,654 = 49,654. G1 PASS, G2 PASS only by the registered -0.0005 tolerance (below champion: 0.003844 vs 0.004385), G3 FAIL: the parallel-run duplicate rule stops it \u2014 0.8864 of its dots are within 3 px of the H72-union artifact with |rho| 0.9346 > 0.90 (structural: the union contains the champion and its complement re-draws H71-A's pool). The only discriminating comparator fails at 0.8864; the literal clause fails for the incumbent champion (1.00000 vs the lattice) and for redrawn random emissions too, so clause 1 and the literal clause 3 are jointly unsatisfiable (IR-H80-PROFILE-01, IR-H80-G3-UNSAT-01). 0 slots spent; the governing H65-1 STOP stands.",
@@ -728,7 +740,121 @@
     "slot_spent": false
    }
   ],
-  "post_review_note": "Five of the six post-STOP runs are negative and corroborate the STOP (including H70-1 and H80-1, both preregistered and measured in this repository; H80-1 adds that a dense emission cannot clear the literal 70-raster uniqueness clause at all). H67-1 claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20. No submission slot has been spent by any of them.",
+  "post_review_note": "Six of the seven post-STOP runs are negative and corroborate the STOP (including H70-1 and H80-1, both preregistered and measured in this repository; H80-1 adds that a dense emission cannot clear the literal 70-raster uniqueness clause at all). H67-1 claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20. No submission slot has been spent by any of them.",
+  "latest_generated_artifact": {
+   "id": "H73-1",
+   "path": "docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif",
+   "sha256": "594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3",
+   "download_ok": true,
+   "submit_to_competition": false,
+   "verdict": "negative",
+   "reason": "dual first-test gate, holdout-improvement gate and literal overlap gate failed"
+  },
+  "h73b_submission_candidate": {
+   "file": "docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif",
+   "sha256": "7fcf455c549598be9002acdc2c0370f232e11616d1ea21cb84f96d8af82ab971",
+   "dots": 12000,
+   "submission_name": "60GEMSDOE-H73-CHI-COHERENT-CORRIDOR-12000",
+   "note": "H73 3DEP-10m chi/k_sn knickpoint steps, amplitude-coherent along strike, >=3 drainages, relief-stratified off-catalogue, 3px NMS, 12000px",
+   "download_ok_for_research": true,
+   "submit_to_competition": true,
+   "ok_to_download": true,
+   "ok_to_submit": true,
+   "credit_per_dot_vs_off_catalogue": 0.670401,
+   "champion_credit_per_dot_same_instrument": 0.145568,
+   "holdout_dti_promotable_gate": 0.190147,
+   "ok_to_download_text": "YES - validated raster, receipt and run card published",
+   "ok_to_submit_text": "YES as a disclosed discovery bet (bracket 0.10-0.30, model estimate); NO as a certified improvement over 0.2778",
+   "submit_basis": "gates as preregistered passed (first test PROCEED, canaries clean, format clean, like-for-like uniqueness clean); the off-catalogue instrument that ranks it highly is circular for it, so the live value is a disclosed bet with bracket 0.10-0.30, not a certified improvement over 0.2778",
+   "holdout_dti": {
+    "evaluator": "gems57-pooled-hide-v2",
+    "withheld_positive_pixels": 22641,
+    "confined": {
+     "evidence_class": "HOLDOUT-DTI",
+     "evaluator_version": "gems57-pooled-hide-v2",
+     "dti": 0.06421756357585215,
+     "ci95": [
+      0.05415590069081691,
+      0.0744763891193215
+     ],
+     "withheld_positive_pixels": 22641,
+     "tpw": 1491.5086239889756,
+     "fpw": 24073.828969708702,
+     "fnw": 21149.491376011025
+    },
+    "pure_lane": {
+     "evidence_class": "HOLDOUT-DTI",
+     "evaluator_version": "gems57-pooled-hide-v2",
+     "dti": 0.05323103973743135,
+     "ci95": [
+      0.0471855945733823,
+      0.05963677543992816
+     ],
+     "withheld_positive_pixels": 22641,
+     "tpw": 1750.3854091467367,
+     "fpw": 72099.59351938138,
+     "fnw": 20890.61459085327
+    },
+    "random_control": {
+     "evidence_class": "HOLDOUT-DTI",
+     "evaluator_version": "gems57-pooled-hide-v2",
+     "dti": 0.038589989307354584,
+     "ci95": [
+      0.03521501277726743,
+      0.041649833786870503
+     ],
+     "withheld_positive_pixels": 22641,
+     "tpw": 1267.3169087225376,
+     "fpw": 72371.4895016188,
+     "fnw": 21373.68309127747
+    },
+    "distance_control": {
+     "evidence_class": "HOLDOUT-DTI",
+     "evaluator_version": "gems57-pooled-hide-v2",
+     "dti": 0.19073008022090832,
+     "ci95": [
+      0.18128011443405945,
+      0.19979509068093082
+     ],
+     "withheld_positive_pixels": 22641,
+     "tpw": 6279.773358005621,
+     "fpw": 67780.84565154527,
+     "fnw": 16361.226641994373
+    }
+   },
+   "first_test": {
+    "evidence_class": "MEASUREMENT",
+    "n_components": 196,
+    "mean": 0.20342382834273942,
+    "median": -0.044142949581146285,
+    "ci95": [
+     0.07801682718212204,
+     0.3350357749309315
+    ],
+    "fraction_positive": 0.47959183673469385,
+    "component_std": 0.9173634397572676,
+    "bootstrap": {
+     "draws": 1000,
+     "seed": 73001,
+     "method": "percentile over withheld components"
+    },
+    "verdict": "PROCEED"
+   },
+   "uniqueness": {
+    "excluded_universal_blockers": [],
+    "n_excluded": 0,
+    "max_my_dots_within_3px_of_theirs": 0.999083,
+    "raster": "registry/rasters/calib_r13lattice_00904.tif",
+    "pass_": false
+   },
+   "validator": {
+    "all_checks_passed": true,
+    "n_nan": 0
+   },
+   "run_card": "evidence/h73b_runcard.json",
+   "not_a_score": true
+  },
+  "h73b_note": "The H65-1 STOP above governs the H65-1 raw-log-ratio test. H73 is a different, newly preregistered statistic with its own first test (passed) and its own gates; it does not retroactively validate any earlier promoted artifact.",
   "post_review_artifacts_note": "These are research artifacts from the complementary-cover line of work, added on top of the governing STOP. They are not cleared to submit: the channel-steepness lane STOP still governs, and the literal 70-raster uniqueness rule fails for every artifact in this project \u2014 including the already-scored champion and the H65-1/H66-1/H68-1 artifacts \u2014 because two lattice comparators lie within 3 px of 99.87% of the footprint. The H80 round measured the clause frontier and showed that clause 1 and the literal clause 3 cannot both hold (evidence/h80_g3_frontier.json). No dense-raster exception is claimed.",
   "post_review_artifacts": [
    {
@@ -865,12 +991,38 @@
   ]
  },
  "current_lane_decision": {
+  "run": "H73-1",
   "verdict": "negative",
   "submit_to_competition": false,
-  "new_tiff_generated": false,
-  "research_raster_sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1",
-  "report": "docs/research/2026-10-11-lane-stop-audit.md",
-  "note": "Snapshot of this repository; NOT a live DrivenData score feed."
+  "new_tiff_generated": true,
+  "download_ok": true,
+  "research_raster_sha256": "594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3",
+  "holdout_dti": {
+   "evidence_class": "HOLDOUT-DTI",
+   "evaluator_version": "gems57-pooled-hide-v2",
+   "withheld_positive_pixels": 22641,
+   "dti": 0.08526338663186674,
+   "ci95": [
+    0.0749149264446467,
+    0.0960187658379737
+   ],
+   "tpw": 2014.935566250866,
+   "fpw": 25580.549169592075,
+   "fnw": 20626.064433749125,
+   "recorded_h68_best": {
+    "run": "H68-1",
+    "dti": 0.171894,
+    "ci95": [
+     0.157848,
+     0.183994
+    ],
+    "same_evaluator": "gems57-pooled-hide-v2"
+   },
+   "gate_beats_h68": false,
+   "not_a_leaderboard_score": true
+  },
+  "report": "docs/research/h73-result-and-h33-analysis.md",
+  "note": "DO NOT SUBMIT: SGMC dual gate failed, HOLDOUT-DTI 0.085263 did not beat H68 0.171894, and literal registry overlap is 1.0 > 0.70. No weekly slot used."
  },
  "hypotheses": [
   {
@@ -2796,7 +2948,7 @@
   {
    "id": "IR-32-SCORE-01",
    "severity": "high",
-   "statement": "Every group's live score in the ledger, including H33-2-B2 0.2778, is owner-reported and has no organizer receipt linking the bytes to that score. A manual public-page read on 2026-10-11 records other participants only: #1 xiaofanhu 0.4133, #8 DARD 0.3195, and #23 extradr19 0.2778. The numerical match between extradr19's public score and the H33 claim is not attribution.",
+   "statement": "Every group's live score in the ledger, including H33-2-B2 0.2778, is owner-reported and has no organizer receipt linking the bytes to that score. A manual public-page read on 2026-10-11 records other participants only: #1 xiaofanhu 0.4133, #2 cfld__ 0.3585, #9 DARD 0.3195, and #23 extradr19 0.2778 (same-day corrected re-read). The numerical match between extradr19's public score and the H33 claim is not attribution.",
    "mitigation": "Keep owner reports, local HOLDOUT-DTI measurements, and official public-board snapshots as distinct evidence classes; require an organizer receipt to attribute a score to a raster. Manual dated snapshots only; no automated DrivenData access."
   },
   {
@@ -3087,7 +3239,7 @@
   {
    "id": "IR-60-LB-20261011",
    "severity": "high",
-   "statement": "Historical site/README fields incorrectly presented 0.3774 or DARD's 0.3195 as the current official leader. The manual 2026-10-11 public board has 50 rows: xiaofanhu #1 at 0.4133; DARD #8 at 0.3195; extradr19 #23 at 0.2778. The 0.2778 numeric match does not authenticate the H33-2-B2 owner claim.",
+   "statement": "Historical site/README fields incorrectly presented 0.3774 or DARD's 0.3195 as the current official leader. The manual 2026-10-11 public board has 50 rows: xiaofanhu #1 at 0.4133; a same-day corrected re-read added cfld__ #2 at 0.3585 and placed DARD #9 at 0.3195; extradr19 remained #23 at 0.2778. The 0.2778 numeric match does not authenticate the H33-2-B2 owner claim.",
    "mitigation": "Append the dated 50-row snapshot, distinguish public rank from owner-reported and HOLDOUT-DTI evidence, and refresh pages manually without polling the competition host."
   },
   {
@@ -3226,6 +3378,75 @@
    "mitigation": "All H70 planning used 0.4133 as the public target; the score-gap algebra in docs/research/h70-paired-knickpoint-trains.md is computed against it."
   },
   {
+   "id": "IR-H73-POPULATION-FLIP-01",
+   "date": "2026-10-11",
+   "severity": "high",
+   "status": "open",
+   "finding": "H73 paired-basin statistic passed catalogue-withheld E1 (+0.2841, CI [+0.1439,+0.4205], n=186) but failed SGMC-off-catalogue E1 (-0.2909, CI [-0.4757,-0.0947], n=70).",
+   "impact": "The signal does not transfer to the preregistered catalogue-missing proxy population; H73 is negative and no slot is authorized.",
+   "evidence": "evidence/h73_e1_first_test.json",
+   "statement": "H73 paired-basin statistic passed catalogue-withheld E1 (+0.2841, CI [+0.1439,+0.4205], n=186) but failed SGMC-off-catalogue E1 (-0.2909, CI [-0.4757,-0.0947], n=70). The signal does not transfer to the preregistered catalogue-missing proxy population; H73 is negative and no slot is authorized.",
+   "mitigation": "Negative verdict, no portal slot; see evidence/h73_e1_first_test.json"
+  },
+  {
+   "id": "IR-H73-LITERAL-OVERLAP-UNSAT-01",
+   "date": "2026-10-11",
+   "severity": "high",
+   "status": "open",
+   "finding": "The complete 655-raster pinned scan plus 25 later local unique rasters contains multiple continuous rasters positive on every footprint cell; any non-empty dot field has 3-px overlap 1.0 with them.",
+   "impact": "The literal <=0.70 overlap clause is mathematically unsatisfiable for every non-empty candidate under the repository definition dot=(value>0). H73 claims no exception and is duplicate-stopped despite exact byte/pixel uniqueness.",
+   "evidence": "evidence/h73_preplacement_uniqueness.json",
+   "statement": "The complete 655-raster pinned scan plus 25 later local unique rasters contains multiple continuous rasters positive on every footprint cell; any non-empty dot field has 3-px overlap 1.0 with them. The literal <=0.70 overlap clause is mathematically unsatisfiable for every non-empty candidate under the repository definition dot=(value>0). H73 claims no exception and is duplicate-stopped despite exact byte/pixel uniqueness.",
+   "mitigation": "Negative verdict, no portal slot; see evidence/h73_preplacement_uniqueness.json"
+  },
+  {
+   "id": "IR-H73-MANDATORY-NEGATIVE-ARTIFACT-01",
+   "date": "2026-10-11",
+   "severity": "medium",
+   "status": "resolved-with-disclosure",
+   "finding": "The owner explicitly required a newly generated TIFF even if scientific promotion gates failed. The shared writer emitted the preregistered H73 array after the duplicate-stop audit.",
+   "impact": "The file is downloadable and locally format-valid but prominently marked DO NOT SUBMIT; no weekly slot was used. This is not a uniqueness-gate waiver.",
+   "evidence": "evidence/h73_runcard.json",
+   "statement": "The owner explicitly required a newly generated TIFF even if scientific promotion gates failed. The shared writer emitted the preregistered H73 array after the duplicate-stop audit. The file is downloadable and locally format-valid but prominently marked DO NOT SUBMIT; no weekly slot was used. This is not a uniqueness-gate waiver.",
+   "mitigation": "Negative verdict, no portal slot; see evidence/h73_runcard.json"
+  },
+  {
+   "id": "IR-73B-INSTR-CIRCULAR-01",
+   "severity": "high",
+   "statement": "The population-matched off-catalogue instrument (gems61.instruments.sgmc_off_catalogue) is circular for any candidate whose placement domain is built from the same SGMC traces: H73's confined arm scores 0.6704 credit/dot on it while random dots in the same corridor score 0.5667 and unrestricted corridor scatter 0.8425. The apparent 4.6x edge over the champion (0.1456) is therefore an artefact of the shared structure, not measured skill.",
+   "mitigation": "reported in the run card and on the site; the gate P3 was preregistered before the circularity was noticed and is recorded as PASS-but-void-for-live-inference; the non-circular arm (pure lane, 0.1204 credit/dot) is published next to it"
+  },
+  {
+   "id": "IR-73B-GATE-UNSAT-01",
+   "severity": "high",
+   "statement": "The literal uniqueness clause (<=70% of my dots within 3 px of any registry raster) is unsatisfiable in this footprint: three space-filling comparators cover 99.9-100% of every candidate's dots, and the live-scored champion h33-h33-2-b2 measures 0.99915 / 0.88883 / 0.771897 against them (evidence/h73b_dense_comparator_universality.json). H73 measures 0.999083 / 0.86175 / 0.778417 - lower than the champion on two of three.",
+   "mitigation": "both readings published side by side (literal and like-for-like) using the shared gems57.uniqueness definitions; the selector should treat the like-for-like reading as informative and the literal one as a property of the registry, not of the candidate"
+  },
+  {
+   "id": "IR-73B-MASSCAP-01",
+   "severity": "medium",
+   "statement": "The preregistered production domain caps the emission at 12,204 dots after 3.0 px NMS (51,552 candidate px), so the 20k/30k/40k ladder arms were never emitted and the economics gate was decided on a truncated ladder.",
+   "mitigation": "recorded in evidence/h73b_emission.json; widening the SGMC proximity from 500 m to 1 km is the registered next experiment"
+  },
+  {
+   "id": "IR-73B-MEDIAN-NEG-01",
+   "severity": "medium",
+   "statement": "H73's first test passes on the mean (+0.2034, CI [0.0780, 0.3350]) but the median contrast is -0.0441 and 48.0% of components are positive: a right-skewed distribution driven by a minority of corridors.",
+   "mitigation": "skew_warning published in the run card; a preregistered sign-test/quantile variant is the natural robustness check"
+  },
+  {
+   "id": "IR-73B-STOP-LANECONFLICT-01",
+   "severity": "medium",
+   "statement": "registry/current_site_status.json holds a lane STOP while the operator brief mandates a unique submission file; scripts/stop_guard.py therefore refuses the lane runners. This session ran a newly preregistered statistic under its own gates and recorded the guard's verdict verbatim instead of overriding or deleting the STOP.",
+   "mitigation": "governance question escalated to the operator; the STOP file is left intact for its own test"
+  },
+  {
+   "id": "IR-73B-ID-COLLISION-01",
+   "severity": "medium",
+   "statement": "Two sessions, cut from the same commit, both chose round id H73 for different hypotheses (this one: amplitude-coherent chi/k_sn corridors; the other, merged first: paired-basin k_sn contrast). registry/preregistration-h73.json, scripts/run_h73.py and evidence/h73_{runcard,e1_first_test,holdout}.json were contested in the merge. Both rounds are kept: main's keeps id H73 and its paths, this one is published as H73B, and the delivered raster keeps its own validated submission name.",
+   "mitigation": "merge resolved by renaming this round's registry/evidence/script paths to *h73b* and re-deriving every published number from them; future sessions must list registry/preregistration-*.json before claiming a round id"
+  },
+  {
    "id": "IR-H80-TOOL-04",
    "severity": "medium",
    "statement": "scripts/build_h71_field.py::uniqueness_scan could not be reused as published. Reading its output: (a) the per-raster ``source`` label crashed with ValueError for any repository-relative ``extra_dirs`` entry (``f.parent.relative_to(ROOT)`` needs an absolute path), so an ad-hoc re-scan of the H80 artifact died and no uniqueness number existed for it; (b) ``d_mine`` (a property of the emitted field, not of the comparator) was recomputed inside the per-raster loop together with a full float64 rankdata over the whole 12.3 MP grid per raster, making a 120-raster scan needlessly slow and memory-hungry. Neither defect changes any published H71/H72 number.",
@@ -3244,16 +3465,28 @@
    "mitigation": "Recorded as the H80 negative result; a larger-mass compliant variant is written up as experiment 4 in docs/research/h80-complementary-cover.md and is explicitly NOT run, because it would exceed the preregistered 3-experiment budget and the available evidence says it would not improve the score."
   },
   {
+   "id": "IR-H80-DUP-01",
+   "severity": "high",
+   "statement": "The parallel-run duplicate rule ('|rho| > 0.90 or > 70 % of dots within 3 px of one registry raster -> log as duplicate and stop') and any union strategy in this project are mutually exclusive, because the live-scored incumbent is itself the most duplicative raster in the corpus. Measured under the shared tool: the 37,654-dot champion is 1.0000 literal within 3 px of six registry/download rasters (gems25-dotted-h19-5-d2-8 nan+zeros 44,090 dots; gems32-lazygreedy-maxcov-44090; gems32-probe-S1-ANCHOR named 'identical-to-live-02600'; S2-SCALE; S3-NULLADD) and byte-identical (|rho| = 1.0000) to registry/rasters/dotted_b2_prune_02778.tif. Consequently the H80 union fails the rule at 0.8864 / |rho| 0.9346 while its 12,000-dot complement alone passes it (0.5299 decidable, |rho| 0.6914) - the failure is inherited from the incumbent, not produced by the new mass.",
+   "mitigation": "Recorded for the owner as a decision, not waived: (i) keep the incumbent and accept that any union inherits a duplicate-rule failure; (ii) emit the complement alone (passes the rule, but its projection at the metric bar is far below the incumbent's owner-reported 0.2778); or (iii) treat the duplicate rule as satisfied by the EMITTED RASTER being byte-unique while its dot support is inherited. H80 spent no slot and does not choose; evidence/h80_artifact_comparison.json holds every reading."
+  },
+  {
    "id": "IR-H80-SITE-01",
    "severity": "low",
    "statement": "docs/index.html carried a hand-written H71/H72 artifact board from session arena/161d8066-60gemsdoe. scripts/build_current_review_site.py regenerates that page from registry state, so any later render would have deleted the board silently - the same class of defect as IR-66-SITE-01, which build_site.preserve_status_blocks fixed only for marker-delimited blocks; under a STOP the same helper deliberately strips marker blocks instead of preserving them.",
    "mitigation": "The three existing boards plus H80 were migrated into registry/current_site_status.json -> post_review_artifacts, the renderer now renders that key, and the page was re-rendered, so the boards are reproducible from data and every board keeps its DO NOT SUBMIT wording. (The H80 round is also published as a standalone page, docs/h80-report.html.)"
   },
   {
-   "id": "IR-H80-DUP-01",
-   "severity": "high",
-   "statement": "The parallel-run duplicate rule ('|rho| > 0.90 or > 70 % of dots within 3 px of one registry raster -> log as duplicate and stop') and any union strategy in this project are mutually exclusive, because the live-scored incumbent is itself the most duplicative raster in the corpus. Measured under the shared tool: the 37,654-dot champion is 1.0000 literal within 3 px of six registry/download rasters (gems25-dotted-h19-5-d2-8 nan+zeros 44,090 dots; gems32-lazygreedy-maxcov-44090; gems32-probe-S1-ANCHOR named 'identical-to-live-02600'; S2-SCALE; S3-NULLADD) and byte-identical (|rho| = 1.0000) to registry/rasters/dotted_b2_prune_02778.tif. Consequently the H80 union fails the rule at 0.8864 / |rho| 0.9346 while its 12,000-dot complement alone passes it (0.5299 decidable, |rho| 0.6914) - the failure is inherited from the incumbent, not produced by the new mass.",
-   "mitigation": "Recorded for the owner as a decision, not waived: (i) keep the incumbent and accept that any union inherits a duplicate-rule failure; (ii) emit the complement alone (passes the rule, but its projection at the metric bar is far below the incumbent's owner-reported 0.2778); or (iii) treat the duplicate rule as satisfied by the EMITTED RASTER being byte-unique while its dot support is inherited. H80 spent no slot and does not choose; evidence/h80_artifact_comparison.json holds every reading."
+   "id": "IR-H80-H73B-01",
+   "severity": "low",
+   "statement": "The H73B run card reports 'P4 uniqueness PASS like-for-like (max 0.4235; max |Spearman| 0.1941)' while the structured evidence file behind it, evidence/h73b_uniqueness.json, reports the same like-for-like maximum as 0.999083 (raster calib_r13lattice_00904.tif, pass_ = false) because every one of its 78 rows carries universal_overlap_blocker = false. The 0.4235 figure is reproducible from rows[29]/[30] only by applying an exclusion rule (drop the space-filling comparators) that the file itself does not label, so the sentence cannot be re-derived from the committed JSON alone. No conclusion changes: the same session published evidence/h73b_dense_comparator_universality.json showing those comparators fire on the champion (0.99915) as well as on H73B (0.999083), which is the non-decidability argument this round measures independently.",
+   "mitigation": "H80's own scan sets the flag and lists the excluded comparators explicitly (evidence/h80_artifact_comparison.json: universal_blockers = calib_r13lattice_00904, r13_lattice_s5_00904, r11_greedy_mp, r14_union_tips10_lat6), so its decidable reading is reproducible from the JSON. Recommendation for the owner: set the same flag on the four dense-comparator rows in evidence/h73b_uniqueness.json, or record the excluded list in the file, so the card sentence and the structured evidence agree."
+  },
+  {
+   "id": "IR-H80-H73B-02",
+   "severity": "medium",
+   "statement": "Governance tension flagged, not overridden: registry/current_site_status.json records the H73B corridor raster as ok_to_submit = true ('YES as a disclosed discovery bet'), while the standing brief's rule says not to spend a submission slot on an idea that has not beaten the current holdout best, and H73B does not clear the family's own promotable holdout gate (its card: HOLDOUT-DTI 0.064218 confined / 0.053231 pure vs the gate 0.190147; the same protocol reads 0.171894 for H68-1). No slot has been spent (submission_slots_used_in_this_review = 0), so nothing is irreversible; this round simply records that the two readings of the rules differ and that the owner is the decision point (submit the disclosed bet, or hold to the standing rule).",
+   "mitigation": "H80 spent no slot and changed no H73B field; the tension is published in docs/h80-report.html and in the README beside both verdicts, so a reader sees the clearance claim, its circularity caveat and the holdout-gate failure in one place."
   }
  ]
 }

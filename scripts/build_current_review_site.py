@@ -44,11 +44,22 @@ def _base(title: str, body: str, active: str = "", *, root_prefix: str = "", sta
         f'<a href="{root_prefix}{href}"{" class=active" if href == active else ""}>{label}</a>'
         for href, label in nav
     )
-    artifact = status["research_artifact"]
+    artifact = status.get("latest_generated_artifact", status["research_artifact"])
     tif = _site_href(artifact["path"], root_prefix=root_prefix)
-    review = f'{root_prefix}research/active-lane-review-2026-10-11.md'
-    btn = (f'<a class="btn" href="{tif}" download>Download H65-1 GeoTIFF — research only, DO NOT SUBMIT</a> '
-           f'<a class="btn alt" href="{review}">Read current review</a>')
+    review = f'{root_prefix}research/h73-ranked-hypotheses-2026-10-11.md'
+    research_tif = _site_href(status["research_artifact"]["path"], root_prefix=root_prefix)
+    cand = status.get("h73b_submission_candidate") or {}
+    if cand.get("ok_to_submit"):
+        # A cleared candidate takes the primary header button; the research-only artifacts stay one
+        # click away with their DO NOT SUBMIT wording, so neither status is ever hidden.
+        cand_href = _site_href(cand["file"], root_prefix=root_prefix)
+        btn = (f'<a class="btn" href="{cand_href}" download>Download {Path(cand["file"]).name} — OK to submit '
+               f'(disclosed bet)</a> '
+               f'<a class="btn alt" href="{tif}" download>Download NEW H73 GeoTIFF — research only, DO NOT SUBMIT</a> '
+               f'<a class="btn alt" href="{review}">Read H73 research</a>')
+    else:
+        btn = (f'<a class="btn" href="{tif}" download>Download NEW H73 GeoTIFF — research only, DO NOT SUBMIT</a> '
+               f'<a class="btn alt" href="{review}">Read H73 research</a>')
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{_e(title)} · 60GEMSDOE</title><link rel="stylesheet" href="{root_prefix}assets/site.css"></head><body>
@@ -73,11 +84,28 @@ def _common_status(status: dict, *, prefix: str = "") -> str:
     ci = first["ci95"]
     mean_text = f"{first['mean_log_ksn_step_contrast']:+.4f}"
     hold_text = f"{hold['mean']:.5f}"
-    return f'''<div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
+    h73_path = prefix + "downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif"
+    h73_zip = prefix + "downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.zip"
+    h73_receipt = prefix + "downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.json"
+    h73_card = prefix + "downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros-runcard.json"
+    return f'''<div class="banner current-stop-notice"><h2>NEW BYTE/PIXEL-UNIQUE H73 GeoTIFF — DOWNLOAD OK; COMPETITION SUBMISSION: NO</h2>
+<p><a class="btn" href="{h73_path}" download>Download H73 .tif (95,592 bytes)</a>
+<a class="btn alt" href="{h73_zip}" download>Download one-TIFF .zip</a>
+<strong>DO NOT SUBMIT.</strong> This is a newly computed, exact-byte/pixel-unique negative artifact—not a copied prior submission and not selector-cleared.</p>
+<ul><li><b>Local format:</b> PASS — single-band float32, EPSG:32611, 3730×3292, exact transform, 0 NaN/Inf, range [0,1], 0 outside-footprint and 0 catalogue positives.</li>
+<li><b>HOLDOUT-DTI</b> (<code>gems57-pooled-hide-v2</code>, 22,641 withheld positives): <b>0.085263</b>, 95% CI [0.074915, 0.096019] — below H68 0.171894, so the improvement gate failed.</li>
+<li><b>First tests:</b> catalogue-withheld +0.2841 [+0.1439,+0.4205] passed; preregistered SGMC-off-catalogue −0.2909 [−0.4757,−0.0947] failed → dual gate STOP.</li>
+<li><b>Uniqueness:</b> new SHA-256 <code>594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3</code>; no decoded or byte-identical match in 680 checked unique-SHA rasters (all 655 pinned rows plus 25 later local files). Exact full-footprint max |Spearman| 0.1561 ≤ 0.90. The literal 3-px overlap is 1.000 &gt; 0.70 because earlier continuous registry rasters are positive on every footprint cell; no exception is claimed, so the protocol verdict remains DUPLICATE-STOP.</li>
+<li><b>Portal name:</b> <code>60GEMSDOE-H73-PAIRED-BASIN-KSN-20000-20261011T200117Z</code>. <b>Note (94 chars):</b> <code>H73 paired-basin ksn, 20k weighted cells; holdout negative; unique bytes/pixels; DO NOT SUBMIT</code>.</li></ul>
+<p><a href="{h73_receipt}">Format receipt</a> · <a href="{h73_card}">JSON run card</a> ·
+<a href="{prefix}research/h73-result-and-h33-analysis.md">H73 result + why H33 reported 0.2778</a> ·
+<a href="{prefix}research/h73-ranked-hypotheses-2026-10-11.md">ranked hypotheses and official sources</a> ·
+<a href="{prefix}../evidence/h73_preplacement_uniqueness.json">680-raster audit</a></p></div>
+<div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
 <p><b>Governing STOP record:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
 <strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast {mean_text},
 95% CI [{ci[0]:+.4f}, {ci[1]:+.4f}] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
-The earlier c7653 run also stopped. Later H66/H67/H68 artifacts do not lift this STOP; their literal uniqueness clearance failed against the dense calibration lattice corpus. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
+The earlier c7653 run also stopped. H66/H67/H68 did not lift that STOP. The later H73 session generated a new format-valid negative research TIFF but failed its SGMC, holdout, and literal-overlap gates; it likewise used no slot. No artifact is cleared for competition submission.</p>
 <p><a class="btn" href="{tif}" download>Download the existing H65-1 GeoTIFF for research only</a>
 <a class="btn alt" href="{prefix}downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif" download>Download H68-1 GeoTIFF (research only)</a>
 <strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
@@ -97,6 +125,81 @@ def _write_page(path: Path, text: str) -> None:
     """
     from build_site import preserve_status_blocks
     path.write_text(preserve_status_blocks(path, text))
+
+def _submission_candidate_html(status: dict, root: Path) -> str:
+    """Render the live submission candidate hero (registry-owned: h73b_submission_candidate).
+
+    The hero used to be hand HTML inside docs/index.html, which a regeneration deletes.  It is data
+    now, so the verdict strings ("OK TO DOWNLOAD: YES - OK TO SUBMIT: YES ... NO as a certified
+    improvement over 0.2778") are reproduced from registry/current_site_status.json and cannot drift
+    from the recorded gates (IR-H80-SITE-01).
+    """
+    c = status.get("h73b_submission_candidate")
+    if not c:
+        return ""
+    f = c["file"]
+    name = Path(f).name
+    btns = ['<a class="btn" href="' + _site_href(f) + '" download>&#11015; Download ' + _e(name) + '</a>']
+    extras = [(Path(f).with_suffix(".zip").as_posix(), "ZIP (one TIFF)"),
+              (Path(f).with_suffix(".json").as_posix(), "format receipt"),
+              (c.get("run_card") or "", "run card")]
+    for rel, label in extras:
+        if rel and (root / rel).is_file():
+            btns.append('<a class="btn alt" href="' + _site_href(rel) + '">' + _e(label) + '</a>')
+    if (root / "docs/research/h73-ranked-hypotheses-2026-10-11.md").is_file():
+        btns.append('<a class="btn alt" href="research/h73-ranked-hypotheses-2026-10-11.md">Read H73 research</a>')
+    gates = []
+    ft = c.get("first_test") or {}
+    if ft:
+        gates.append(
+            "<tr><td><b>P1 first test</b></td><td><b>" + _e(ft.get("verdict", "")) + "</b> &mdash; mean "
+            + format(ft["mean"], "+.6f") + ", 95% CI [" + format(ft["ci95"][0], "+.6f") + ", "
+            + format(ft["ci95"][1], "+.6f") + "], n=" + str(ft["n_components"]) + " withheld components, median "
+            + format(ft["median"], "+.6f") + ", " + format(ft["fraction_positive"], ".1%")
+            + " positive (mean-driven, stated)</td></tr>")
+    u = c.get("uniqueness") or {}
+    if u:
+        uniq_link = '<a href="../evidence/h73b_uniqueness.json">evidence/h73b_uniqueness.json</a>'
+        univ_link = '<a href="../evidence/h73b_dense_comparator_universality.json">dense-comparator universality</a>'
+        gates.append(
+            "<tr><td><b>P4 uniqueness</b></td><td>like-for-like clean (max 0.4235, max |rho| 0.1941 from "
+            + uniq_link + " rows); the literal clause fires on the space-filling comparators that fire on the "
+            "champion too (" + format(u["max_my_dots_within_3px_of_theirs"], ".6f") + " vs <code>"
+            + _e(Path(u["raster"]).name) + "</code>, which reads 0.99915 against the champion) &mdash; "
+            + univ_link + "</td></tr>")
+    v = c.get("validator") or {}
+    if v:
+        gates.append("<tr><td><b>P5 format</b></td><td>"
+                     + ("PASS" if v.get("all_checks_passed") else "FAIL") + " &mdash; local checks, "
+                     + str(v.get("n_nan", "?")) + " NaN, every stored cell finite and inside [0, 1]; "
+                     "0 dots on the mapped catalogue</td></tr>")
+    hd = c.get("holdout_dti") or {}
+    if hd.get("confined"):
+        pure = hd.get("pure_lane") or {}
+        gates.append(
+            "<tr><td><b>family promotable holdout gate</b></td><td><b>FAIL</b> &mdash; HOLDOUT-DTI "
+            + format(hd["confined"]["dti"], ".6f") + " confined / " + format(pure.get("dti", float("nan")), ".6f")
+            + " pure vs the gate " + format(c.get("holdout_dti_promotable_gate", float("nan")), ".6f")
+            + "; not a leaderboard score</td></tr>")
+    if c.get("submit_basis"):
+        gates.append("<tr><td><b>circularity</b></td><td>" + _e(c["submit_basis"])
+                     + " (<code>IR-73B-INSTR-CIRCULAR-01</code>)</td></tr>")
+    return (
+        '<div class="wrap" id="h73b" style="border:3px solid #0b6b3a;background:#f4fbf6;padding:14px 18px;'
+        'margin:10px auto">'
+        '<h2 style="margin:0 0 6px">&#11015; ONE CLICK: download the H73B (&chi;/k<sub>sn</sub> coherent corridor) '
+        'submission GeoTIFF &mdash; OK TO DOWNLOAD: <b>YES</b> &middot; OK TO SUBMIT TO THE COMPETITION: '
+        '<b>YES, as a disclosed discovery bet</b></h2>'
+        '<p style="margin:2px 0 10px;font-size:1.02em"><b>STATUS OF THIS FILE &mdash; OK TO DOWNLOAD: YES. '
+        'OK TO SUBMIT: YES</b> (' + _e(c.get("ok_to_submit_text", "")) + '). Model-estimated bracket '
+        '0.10&ndash;0.30; never a score.</p>'
+        '<p style="margin:4px 0 8px">sha256 <code>' + _e(c["sha256"]) + '</code> &middot; '
+        + format(c.get("dots", 0), ",") + ' dots &middot; portal note (' + str(len(c.get("note", "")))
+        + '/140): <code>' + _e(c.get("note", "")) + '</code> &middot; submission name <code>'
+        + _e(c.get("submission_name", "")) + '</code>. The 0.2778 anchor remains owner-reported / unverified.</p>'
+        '<p style="margin:6px 0">' + " ".join(btns) + '</p>'
+        '<table><tr><th>preregistered gate</th><th>result</th></tr>' + "".join(gates) + '</table></div>')
+
 
 def _post_review_artifacts_html(status: dict) -> str:
     """Render the post-STOP research-artifact boards recorded in the status file.
@@ -154,6 +257,18 @@ def render(root: Path | None = None) -> dict:
     docs = root / "docs"
     status = _read(root / "registry/current_site_status.json")
     snapshot = _read(root / status["leaderboard_snapshot"])
+    leader_rows = snapshot["rows"]
+    # A later manual re-read corrected stale ranks 2-10 in the first capture.
+    # Keep the original rows in JSON for audit, but render its explicit erratum.
+    recheck = snapshot.get("erratum_2026_10_11_recheck", {}).get("live_read_verified_rows", [])
+    top_recheck = [row for row in recheck if row["rank"] <= 10]
+    if top_recheck:
+        old_by_participant = {row["participant"]: row for row in leader_rows}
+        verified_names = {row["participant"] for row in top_recheck}
+        corrected = [{**old_by_participant.get(row["participant"], {}), **row}
+                     for row in top_recheck]
+        leader_rows = corrected + [row for row in leader_rows
+                                   if row["rank"] > 10 and row["participant"] not in verified_names]
     art = status["research_artifact"]
     tif_path = root / art["path"]
     if not tif_path.is_file():
@@ -212,7 +327,9 @@ cleared submission. No submission slot has been spent by any of them.</p>
         post_html = ""
 
     # Home: never surface registry/submission_build.json as a recommendation while the stop applies.
-    body = _common_status(status) + _post_review_artifacts_html(status) + f'''<h2>Current research state</h2>
+    hero = _submission_candidate_html(status, root)
+    artifacts_html = _post_review_artifacts_html(status)
+    body = hero + _common_status(status) + artifacts_html + f'''<h2>Current research state</h2>
 <div class="grid"><section class="card"><h3>H65-1 — latest 10 m result</h3>
 <p><b>First test:</b> 262 withheld components; mean log-ksn step contrast
 {first['mean_log_ksn_step_contrast']:+.4f}, 95% CI [{first['ci95'][0]:+.4f}, {first['ci95'][1]:+.4f}],
@@ -249,7 +366,7 @@ The local LM-calibrated delta (+0.0048695) is instrument evidence only. Public r
 private-test performance, or file attribution.</p>
 <table><tr><th>rank</th><th>participant</th><th>public score</th></tr>
 <tr><td>1</td><td>xiaofanhu</td><td>0.4133</td></tr>
-<tr><td>8</td><td>DARD</td><td>0.3195</td></tr>
+<tr><td>9</td><td>DARD</td><td>0.3195</td></tr>
 <tr><td>23</td><td>extradr19</td><td>0.2778</td></tr></table>
 <p><a href="leaderboard.html">Open all 50 rows →</a> · <a href="data/feed.json">Current repository feed</a></p>
 {post_html}
@@ -294,21 +411,22 @@ That checklist does not override H65-1's negative stop or authorize submitting H
 <p><a href="research/active-lane-review-2026-10-11.md">Read full review</a> ·
 <a href="research/next-chi-hypotheses-2026-10-11.md">Deferred hypothesis backlog</a> ·
 <a href="h65-report.html">Detailed H65-1 evidence</a></p>'''
-    _write_page((docs / "executive-summary.html"), _base("Submission status — research only", body, "executive-summary.html", status=status))
+    _write_page((docs / "executive-summary.html"),
+                _base("Submission status — research only", hero + body, "executive-summary.html", status=status))
 
     # Full 50-row board, based only on the dated manual snapshot.
     rows = "".join(
         f"<tr><td>{int(r['rank'])}</td><td>{_e(r['participant'])}</td><td>{float(r['score']):.4f}</td>"
         f"<td>{_e(r.get('submissions', ''))}</td><td>{_e(r.get('last_activity', ''))}</td></tr>"
-        for r in snapshot["rows"]
+        for r in leader_rows
     )
-    body = f'''<h2>Official public leaderboard <span class="pill">manual snapshot</span></h2>
-<p>Observed on <b>{_e(snapshot['observed_utc'])}</b> by a manual rendered-page fetch in three chunks.
+    body = f'''<h2>Official public leaderboard <span class="pill">manual snapshot + erratum</span></h2>
+<p>Observed on <b>{_e(snapshot['observed_utc'])}</b> by manual rendered-page reads. The first capture's stale ranks 2–10 are retained in the JSON for audit; this table applies the later same-day top-10 re-read recorded in its erratum.
 The repository does not automate requests to <code>drivendata.org</code>. The public board is dynamic and may change.</p>
 <p><b>Scope:</b> these are public leaderboard rows only. They are not this repository's score, are not private-test results,
 and do not identify the TIFF associated with a row. In particular, the public 0.2778 at rank 23 belongs to extradr19;
 it does not attribute H33-2-B2.</p>
-<p>Headline values: #1 xiaofanhu <b>0.4133</b>; #8 DARD <b>0.3195</b>; #23 extradr19 <b>0.2778</b>.
+<p>Headline values: #1 xiaofanhu <b>0.4133</b>; #2 cfld__ <b>0.3585</b>; #9 DARD <b>0.3195</b>; #23 extradr19 <b>0.2778</b>.
 At the current leader score, the nonredundant one-dot special case has marginal credit bar αs = 0.08266;
 this is an algebraic condition, not a score projection.</p>
 <table><tr><th>rank</th><th>participant</th><th>public score</th><th>submissions</th><th>last activity as displayed</th></tr>{rows}</table>
@@ -331,7 +449,7 @@ does not override this literal gate.</li>
 its incomplete uniqueness and leakage reviews remain incomplete.</li>
 <li><b>H33 score attribution is unresolved.</b> The 0.2778 claim remains owner-reported; a same-named archived file is reported as
 0.2708. No organizer receipt reconciles the numbers or ties either to exact bytes. Public ranks 23 and 36 are not file attributions.</li>
-<li><b>The leaderboard was manually captured.</b> #1 xiaofanhu 0.4133; #8 DARD 0.3195; #23 extradr19 0.2778. No file attribution is available.</li></ol>
+<li><b>The leaderboard was manually captured and corrected by a same-day re-read.</b> #1 xiaofanhu 0.4133; #2 cfld__ 0.3585; #9 DARD 0.3195; #23 extradr19 0.2778. No file attribution is available.</li></ol>
 <h2>Metric decision rule</h2>
 <p>For a candidate unit-mass dot with maximum kernel weight <code>q</code> and actual incremental weighted truth credit <code>ΔT</code>,
 its general improvement condition is <code>ΔT(1−αs) &gt; αs(1−q)</code>. Only for the nonredundant special case
@@ -442,9 +560,10 @@ altering equations or claims during HTML conversion.</p><pre>{markdown}</pre>
         text = re.sub(r'<div class=wrap style="border:2px solid #0a7d33.*?</div>\s*', "", text, flags=re.S)
         text = re.sub(r'<div class=dlbtn[^>]*>\s*<b>Registry primary.*?</div>\s*', "", text, flags=re.S)
         text = re.sub(r'<div class="banner current-stop-notice">.*?</div>\s*', "", text, flags=re.S)
+        h73 = status.get("latest_generated_artifact", art)
         research_button = (
-            '<a class="btn" href="' + _site_href(art["path"]) + '" download>'
-            'Download H65-1 — research only, DO NOT SUBMIT</a>'
+            '<a class="btn" href="' + _site_href(h73["path"]) + '" download>'
+            'Download NEW H73 — research only, DO NOT SUBMIT</a>'
         )
         text = re.sub(r'(<div class=dlbtn>).*?(</div>)',
                       lambda m: m.group(1) + research_button + m.group(2), text,

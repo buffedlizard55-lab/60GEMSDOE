@@ -1,55 +1,125 @@
 # 60GEMSDOE — channel steepness / χ / knickpoints
 
-## ONE-CLICK download — the newest candidate, and whether you may submit it
+## ONE-CLICK downloads — what each file is, and whether you may submit it
 
-**Read this first.** Two files exist for two different purposes:
+| file | verdict in one line | evidence |
+|---|---|---|
+| **H73B** `gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif` (12,000 dots, sha256 `7fcf455c549598be…`) | **OK TO DOWNLOAD: YES · OK TO SUBMIT: YES** — as a disclosed discovery bet; **NO as a certified improvement over 0.2778** | [`.tif`](docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif) · [`.zip`](docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.zip) · [receipt](docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.json) · [run card](evidence/h73b_runcard.json) — gates and the instrument-circularity warning in the next section |
+| **H80** `gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif` (49,654 dots = champion + 12,000 new, sha256 `ad25643354857a10…`) | OK TO DOWNLOAD: YES (research only) · **NOT OK to submit — `DO NOT SUBMIT`** (duplicate rule |ρ| 0.9346; registered holdout 0.0005 below the incumbent) | [`.tif`](docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif) · [`.zip`](docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.zip) · [receipt](docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.json) · [run card](evidence/h80_runcard.json) · [report](docs/h80-report.html) — three measured reasons in the H80 section |
+| **H73-1** `gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif` (20,000 dots) | research only — **`DO NOT SUBMIT`** (its preregistered gates failed) | [run card](evidence/h73_runcard.json) |
+| **H65-1** `gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif` | research only — **`DO NOT SUBMIT`** (governing lane STOP) | [executive summary](docs/executive-summary.html) |
 
-| file | what it is | OK to download? | OK to submit? |
-|---|---|---|---|
-| **[`gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif`](docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif)** — [`.zip`](docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.zip) · [format receipt](docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.json) · [run card](evidence/h80_runcard.json) · [report](docs/h80-report.html) | **newest candidate** (round H80, 2026-10-11): the live-scored 0.2778 champion (37,654 dots) **plus 12,000 new complementary-cover dots** = 49,654 dots, `sha256 ad25643354857a10…` | **YES — research only** | **NOT OK to submit** — `DO NOT SUBMIT` (see the verdict box) |
-| [H65-1 GeoTIFF](docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif) | the governing negative-result artifact (lane STOP) | YES — research only | **NOT OK to submit** — `DO NOT SUBMIT` |
+<!-- h73b-lead -->
+## Round H73B (2026-10-11, session `arena/7f9ca816-60gemsdoe`) - a UNIQUE TIF exists, verdict in one line
 
-**Verdict written out, not implied (three independent measurements say NO):**
-1. **The parallel-run duplicate rule stops it — and the failure is inherited, not produced.** Measured on the emitted
-   artifact: **88.64 % of its dots lie within 3 px of the H72-union artifact's dots and its rank correlation with that
-   raster is |ρ| = 0.9346 > 0.90** (standing protocol: *ρ > 0.90 or > 70 % within 3 px of one registry raster → log as
-   duplicate and stop*). The reason is the incumbent, not the new mass: the union contains the champion (37,654 of its
-   49,654 dots), and the champion is itself **1.0000 within 3 px of six earlier rasters** (`gems25-dotted-h19-5-d2-8`
-   nan/zeros, `gems32-lazygreedy-maxcov-44090`, `gems32-probe-S1-ANCHOR` — the name says *identical-to-live-02600*,
-   S2-SCALE, S3-NULLADD) and **byte-identical to `registry/rasters/dotted_b2_prune_02778.tif`** (|ρ| = 1.0000).
-   The **12,000 new dots alone pass** the same test: 0.5299 like-for-like (limit 0.70) and |ρ| 0.6914 (limit 0.90).
-   So this row is not lane drift; it is a quantified bind for the owner (**IR-H80-DUP-01**): keep the live-scored mass
-   and inherit a duplicate-rule failure, or drop it and project far below 0.2778 (the complement alone projects to
-   0.053 at the metric bar / 0.096 at transfer 0.10 / 0.239 at 0.25). This session spent no slot and did not choose.
+**OK TO DOWNLOAD: YES · OK TO SUBMIT: YES** as a disclosed discovery bet; **OK TO SUBMIT AS A CERTIFIED IMPROVEMENT OVER 0.2778: NO.**
+[downarrow `docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif`](docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif) - [zip](docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.zip) -
+[format receipt](docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.json) - [JSON run card](evidence/h73b_runcard.json) - sha256 `7fcf455c549598be9002acdc2c0370f232e11616d1ea21cb84f96d8af82ab971`.
+Portal Note (137/140): `H73 3DEP-10m chi/k_sn knickpoint steps, amplitude-coherent along strike, >=3 drainages, relief-stratified off-catalogue, 3px NMS, 12000px`.
+
+| preregistered gate (`registry/preregistration-h73b.json`, written before any number existed) | result |
+|---|---|
+| **P1 first test** | PROCEED |
+| **P2 leakage canary** | PASS |
+| **P3 emission economics** | PASS as preregistered, but VOID for live inference (IR-73B-INSTR-CIRCULAR-01) |
+| **P4 uniqueness** | PASS like-for-like (max 0.4235; max |Spearman| 0.1941); literal clause fires only on space-filling comparators that also fire on the champion |
+| **P5 format** | PASS (15/15 local checks; 0 NaN; all cells in [0,1]; 0 dots on the catalogue) |
+| **family promotable holdout gate** | FAIL (0.064218 confined / 0.053231 pure vs 0.190147) |
+| first test detail | mean +0.203424, CI [0.078017, 0.335036], n=196 withheld components; median -0.044143, 48.0 % positive (mean-driven - stated) |
+| HOLDOUT-DTI | 0.064218 confined / 0.053231 pure vs random 0.038590 and distance-only control 0.190730; family promotable gate 0.190147 NOT met. Not a leaderboard score |
+| circularity | the off-catalogue instrument that ranks this file high uses as truth the same SGMC structure the file is confined to; stripped of that prior the lane field alone is below the champion. See `evidence/h73b_controls.json` and IR-73B-INSTR-CIRCULAR-01 |
+
+## Round H80 (2026-10-11, session `arena/3c52f2be-60gemsdoe`) — complementary-cover union: NEGATIVE, and the duplicate-rule bind
+
+**This session emitted one new artifact and clears nothing.** Preregistered in
+[`registry/preregistration-h80.json`](registry/preregistration-h80.json) before any number existed; two profiles were
+run — a **broad** profile that is measured but *not* emitted (the operator's clause-1 duplicate rule flags its union as
+a duplicate of `r11_greedy_mp`), and a **restricted** profile that is:
+
+[`docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif`](docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif)
+· [`.zip`](docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.zip) ·
+[format receipt](docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.json) ·
+[run card](evidence/h80_runcard.json) · [report](docs/h80-report.html) ·
+[full analysis](docs/research/h80-complementary-cover.md) ·
+[clause frontier](evidence/h80_g3_frontier.json) · [comparison](evidence/h80_artifact_comparison.json) —
+= the live-scored 0.2778 champion (37,654 dots) plus **12,000 new dots** = 49,654 dots, sha256 `ad25643354857a10…`,
+values in [0, 1], 0 NaN, zip holds exactly that TIFF. **OK TO DOWNLOAD: YES (research only) · NOT OK to submit —
+`DO NOT SUBMIT`.**
+
+Three independent measurements say no:
+
+1. **The parallel-run duplicate rule stops it, and the failure is inherited.** 88.64 % of its dots lie within 3 px of
+   the H72-union artifact and |ρ| = 0.9346 > 0.90 (rule: ρ > 0.90 or > 70 % within 3 px of one registry raster → log
+   as duplicate and stop). The cause is the incumbent: the union contains the champion, and the champion is itself
+   **1.0000 within 3 px of six earlier rasters** (`gems25-dotted-h19-5-d2-8` nan/zeros, `gems32-lazygreedy-maxcov-44090`,
+   `gems32-probe-S1-ANCHOR` — the name says *identical-to-live-02600*, S2-SCALE, S3-NULLADD) and **byte-identical to
+   `registry/rasters/dotted_b2_prune_02778.tif`**. The **12,000 new dots alone pass** the same test: 0.5299
+   like-for-like (limit 0.70) and |ρ| 0.6914 (limit 0.90) — and they overlap H73B by only 0.1074.
 2. **It does not beat the current best on the registered holdout.** `gems57-pooled-hide-v2` (22,641 withheld
-   positives): union **0.003844** vs incumbent **0.004385** → **−0.000541 [−0.00064, −0.000457]**, inside the
-   preregistered −0.002 tolerance but a loss, not a gain. Standing rule: no slot on an idea that has not beaten the
-   current holdout best. (H72's smaller union was −0.000288; the *only* arm that ever improved this holdout was the
-   broad-profile union that the operator's clause-1 duplicate rule forbids.)
-3. **The literal uniqueness clause is unsatisfiable, for this file and for the incumbent alike.** The comparator
-   `calib_r13lattice_00904.tif` has dots within 3 px of **99.87 % of the footprint**, so any dense raster is "within
-   3 px" of it — measured: this union 0.9984, the incumbent champion **0.99915**, a redrawn mass-matched random
-   emission 0.99871. Four comparators are of that kind (`calib_r13lattice_00904`, `r13_lattice_s5_00904`,
-   `r11_greedy_mp` at 0.7397 coverage, `r14_union_tips10_lat6` at 0.7620). Against *decidable* comparators the like-for-like
-   worst is 0.8864 (the same-family H72 union); against the champion-independent corpus it is 0.7623.
+   positives): union **0.003844** vs incumbent **0.004385** → **−0.000541 [−0.00064, −0.000457]** — inside the
+   preregistered −0.002 tolerance but a loss.
+3. **The literal uniqueness clause is unsatisfiable for it and for the incumbent alike.** `calib_r13lattice_00904.tif`
+   has dots within 3 px of 99.87 % of the footprint (union 0.9984, champion 0.99915, redrawn random 0.99871).
 
-**What the file is good for:** it carries the best *public-proxy* evidence this project has produced — its added mass
-scores **0.5864 credit/dot versus 0.1074 for five mass-matched random controls** (5.5×; union − champion
-**+0.05321**, 95 % CI [0.04921, 0.05721] on the SGMC off-catalogue instrument) — while the honest reading of the
-outcome is that **nothing in this repository is competition-cleared today**. The complementary-cover family is
-exhausted in the precise sense that further increments are duplicates by the protocol's own measurement, and the only
-non-duplicate direction (the broad profile to 85,654 dots) is itself a duplicate of `r11_greedy_mp` and was therefore
-never emitted. Evidence:
-[`evidence/h80_artifact_comparison.json`](evidence/h80_artifact_comparison.json) ·
-[`evidence/h80_g3_frontier.json`](evidence/h80_g3_frontier.json) · [run card](evidence/h80_runcard.json).
+**What it is good for:** the added mass scores **0.5864 credit/dot vs 0.1074 for five mass-matched random controls**
+(5.5×; union − champion **+0.05321 [0.04921, 0.05721]** on the SGMC off-catalogue instrument) — the best public-proxy
+evidence this project has produced — while P4/literal uniqueness and the registered holdout both refuse certification.
+**The owner bind (IR-H80-DUP-01):** keep the live-scored mass and inherit a duplicate-rule failure, or drop it and
+project below 0.2778 (the complement alone: 0.053 at the metric bar / 0.096 at transfer 0.10 / 0.239 at 0.25). This
+session spent no slot and did not choose. **What would change the verdict:** a candidate that beats the registered
+holdout best *and* clears the duplicate test against decidable comparators. Evidence for the clause frontier:
+`evidence/h80_g3_frontier.json` (like-for-like limit crossed only at 24,000–30,000 added dots; restricted pool holds
+91,370 under 2.8-px NMS).
 
-**What would change the verdict:** a candidate that *beats* the registered holdout best (not merely ties within
-tolerance) **and** clears the duplicate test against decidable comparators — or an explicit owner decision to select on
-the population-matched instrument instead of the catalogue holdout. Neither happened in this round.
 
-[Download the H68-1 GeoTIFF (`gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif`)](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif) · [`.zip`](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.zip) · [H68-1 run card](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros-runcard.json) · [H68-1 format checks](docs/downloads/checks-gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif.json)
-— **OK TO DOWNLOAD FOR RESEARCH: YES (`float32` in `[0, 1]`, `0 NaN`, `40,000` dots at `3.0 px` NMS, `sha256: f4aa17400c7ff9ae12a428862ccaa4e2b0397015a3a7e7b55aa006341599f8ed`) · OK TO SUBMIT TO COMPETITION: NO (`DO NOT SUBMIT`; `verdict: "negative"` under the governing H65-1 lane STOP and literal 70-raster lattice overlap `0.9985 > 0.70`)**.
-- **H68-1 diagnostic `HOLDOUT-DTI` (`gems57-pooled-hide-v2`, `22,641` withheld positives):** **`0.171894`**, 95% CI **`[0.157848, 0.183994]`** (**`2.61×` H66-1**, **`14.85×` H65-1**, **`10.49×` H60-A**; paired `+0.148801` over `ksn_only` and `+0.132814` over `random_mass_control`), after fixing `IR-68-UNALIGNED-01` (where ~70% of H66-1 dots spilled onto un-aligned single-drainage candidates with `ndr_vals < 3`) and `IR-68-TOPOBAND-01` (reading true 10 m profile curvature band 6 + 1 m LiDAR scarp bands 7–8; E1 `+0.4502 [+0.2510, +0.6491]`). Across all 65 non-lattice rasters max 3-px dot overlap is `0.6234 <= 0.70` (`0.5406` vs H66-1, `0.2640` vs H33-2-B2), and max Spearman `|rho| = 0.1485 <= 0.90`.
+Method, controls, and the next ranked hypotheses (H74 spring lineations, H75 split-map instrument, H76 basement
+magnetics, H77/H78 blocked offline): [docs/research/h73b-knickpoint-corridor-2026-10-11.md](docs/research/h73b-knickpoint-corridor-2026-10-11.md)
+and [knowledge/04](knowledge/04_h73b_knickpoint_corridor_and_instrument_circularity.md). No weekly slot spent by this session.
+
+**Round-id note.** This round was developed as "H73" on the session branch; main meanwhile received a different,
+independently preregistered H73 (paired-basin k_sn contrast). Both are kept - the corridor round is published here
+as **H73B**, and the delivered raster keeps the submission name `60GEMSDOE-H73-CHI-COHERENT-CORRIDOR-12000`
+because its bytes, note and receipt were validated under that name.
+
+**Merged.** PR #26 → `main` at `24e3957` (2026-10-11); CI `tests` and `mirrors` green in 56 s and the GitHub Pages
+build succeeded, so the hero above is live on the published site. The site's primary nav Download button now points at
+the H73B file ("OK to submit"), with the sibling `gems60-h73-paired-basin-ksn-20000-...-zeros.tif` kept as a separate
+button labelled "research only, DO NOT SUBMIT"; both artifacts appear in `docs/downloads/submissions_manifest.json`
+(40 rows) with their own verdicts.
+
+## NEW one-click H73 GeoTIFF — download OK; **DO NOT SUBMIT**
+
+A **newly computed** H73 GeoTIFF was generated in this session; it is not a copy or rename of an earlier raster.
+It is exact-byte and decoded-pixel unique across the complete 655-raster pinned index plus 25 later local unique-SHA rasters.
+It passes every local portal-format check, but its scientific/overlap gates failed, so **no competition submission is cleared**.
+
+**[Download the NEW H73 `.tif`](docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif)** ·
+[one-TIFF `.zip`](docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.zip) ·
+[format receipt](docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.json) ·
+[JSON run card](docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros-runcard.json)
+
+- **OK to download:** **YES**.
+- **OK to submit to DrivenData:** **NO — NOT OK to submit; DO NOT SUBMIT**. H73 is a negative research deliverable; no weekly slot was used.
+- **Format:** PASS — one `float32` band; EPSG:32611; 3730×3292; exact sample transform; all 12,279,160 values finite and in `[0,1]`; 0 outside-footprint positives; 0 mapped-catalogue positives.
+- **SHA-256:** `594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3` (95,592 bytes).
+- **HOLDOUT-DTI** (`gems57-pooled-hide-v2`, 22,641 withheld positives): **0.085263**, 95% CI **[0.074915, 0.096019]**; this did not beat H68's recorded 0.171894.
+- **First test:** catalogue-withheld contrast **+0.2841 [+0.1439,+0.4205]**, `n=186`, PROCEED; the preregistered SGMC-off-catalogue gate was **−0.2909 [−0.4757,−0.0947]**, `n=70`, STOP.
+- **Uniqueness:** no byte-identical or decoded-identical raster among 680 checked; exact full-footprint max `|Spearman|=0.1561 <= 0.90`. Literal 3-px overlap is **1.0 > 0.70** because multiple earlier continuous registry rasters are positive on every footprint cell. No lattice/dense-field exception is claimed; protocol verdict is DUPLICATE-STOP.
+- **Portal name (record only; not approved):** `60GEMSDOE-H73-PAIRED-BASIN-KSN-20000-20261011T200117Z`.
+- **Note (94 chars):** `H73 paired-basin ksn, 20k weighted cells; holdout negative; unique bytes/pixels; DO NOT SUBMIT`.
+
+[Ranked hypotheses and official sources](docs/research/h73-ranked-hypotheses-2026-10-11.md) ·
+[H73 result and evidence-qualified H33/0.2778 analysis](docs/research/h73-result-and-h33-analysis.md) ·
+[Complete 680-raster audit](evidence/h73_preplacement_uniqueness.json) ·
+[Executive summary](docs/executive-summary.html) · [Site](docs/index.html)
+
+### Historical H68 comparator (research only)
+
+[Download H68-1](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif) · [run card](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros-runcard.json).
+H68-1 `HOLDOUT-DTI` was `0.171894 [0.157848,0.183994]`; it also remains **DO NOT SUBMIT**.
+On the same evaluator its distance-only control was stronger at `0.190730 [0.181999,0.199647]`; H73 was preregistered against that stricter benchmark as well.
+
+### Prior H65 governing review (historical context)
 
 [Executive summary](docs/executive-summary.html) · [Site](docs/index.html) ·
 [Review and limitations](docs/research/submission-status-review.md) ·
@@ -183,7 +253,7 @@ Historical repository-page leaderboard figure (not current official board):
 
 0.3774	[https://buffedlizard55-lab.github.io/GEMSDOE/docs/index.html](https://buffedlizard55-lab.github.io/GEMSDOE/docs/index.html)
 
-**Dated erratum (2026-10-11):** this 0.3774 value is a historical repository-page figure, not the current official public leaderboard. The manual official-page read is #1 xiaofanhu 0.4133; DARD 0.3195 is rank 8. See [`registry/leaderboard_snapshot_2026-10-11.json`](registry/leaderboard_snapshot_2026-10-11.json).
+**Dated erratum (2026-10-11):** this 0.3774 value is a historical repository-page figure, not the current official public leaderboard. The manual official-page read is #1 xiaofanhu 0.4133; DARD 0.3195 is rank 9 (corrected by the same-day leaderboard re-read). See [`registry/leaderboard_snapshot_2026-10-11.json`](registry/leaderboard_snapshot_2026-10-11.json).
 
 [The full per-repository score ledger (GEMSDOE … 62GEMSDOE), dated public-board rows, and provenance distinctions are maintained in `docs/score-ledger.csv`; the official leaderboard link https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/, and the resource links: https://github.com/drivendataorg/gems-prize-reference-solution ; https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and ; https://gbcge.org/current-projects/ingenious/ ; https://epsg.io/32611 ; https://en.wikipedia.org/wiki/Tversky_index ]
 
@@ -201,7 +271,7 @@ We have a good understanding of how our hypothesis, methodology, calculations, a
 
 0.3195	is the highest score right now so we need to design a new strategy, research, testing, analyzing, and generating submission system than the current website.  It should be unique, take unique approaches to generating a submission that can score higher than 0.3195.
 
-**Dated erratum (2026-10-11):** the preceding 0.3195 statement is historical. The current manually read public leader is 0.4133 (xiaofanhu); 0.3195 (DARD) is rank 8. Public rows are not project scores or file attribution.
+**Dated erratum (2026-10-11):** the preceding 0.3195 statement is historical. The current manually read public leader is 0.4133 (xiaofanhu); 0.3195 (DARD) is rank 9 on the live board (same-day corrected re-read 2026-10-11). Public rows are not project scores or file attribution.
 
 Put this prompt into the repo readme and read it everytime we work on the project as a starting point to make sure we are building what we are aiming for and have a strong base to continue building and improving on making something useful for everyday use.  It should solve the problem of having to manually check everything ourselves and having an up to date current feed.
 

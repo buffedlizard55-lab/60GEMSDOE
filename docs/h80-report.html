@@ -2,11 +2,24 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>H80 convergent-cover emission — run report · 60GEMSDOE</title><link rel="stylesheet" href="assets/site.css"></head>
 <body>
+<div class="banner current-stop-notice"><h2>NEW BYTE/PIXEL-UNIQUE H73 GeoTIFF — DOWNLOAD OK; COMPETITION SUBMISSION: NO</h2>
+<p><a class="btn" href="downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif" download>Download H73 .tif (95,592 bytes)</a>
+<a class="btn alt" href="downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.zip" download>Download one-TIFF .zip</a>
+<strong>DO NOT SUBMIT.</strong> This is a newly computed, exact-byte/pixel-unique negative artifact—not a copied prior submission and not selector-cleared.</p>
+<ul><li><b>Local format:</b> PASS — single-band float32, EPSG:32611, 3730×3292, exact transform, 0 NaN/Inf, range [0,1], 0 outside-footprint and 0 catalogue positives.</li>
+<li><b>HOLDOUT-DTI</b> (<code>gems57-pooled-hide-v2</code>, 22,641 withheld positives): <b>0.085263</b>, 95% CI [0.074915, 0.096019] — below H68 0.171894, so the improvement gate failed.</li>
+<li><b>First tests:</b> catalogue-withheld +0.2841 [+0.1439,+0.4205] passed; preregistered SGMC-off-catalogue −0.2909 [−0.4757,−0.0947] failed → dual gate STOP.</li>
+<li><b>Uniqueness:</b> new SHA-256 <code>594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3</code>; no decoded or byte-identical match in 680 checked unique-SHA rasters (all 655 pinned rows plus 25 later local files). Exact full-footprint max |Spearman| 0.1561 ≤ 0.90. The literal 3-px overlap is 1.000 &gt; 0.70 because earlier continuous registry rasters are positive on every footprint cell; no exception is claimed, so the protocol verdict remains DUPLICATE-STOP.</li>
+<li><b>Portal name:</b> <code>60GEMSDOE-H73-PAIRED-BASIN-KSN-20000-20261011T200117Z</code>. <b>Note (94 chars):</b> <code>H73 paired-basin ksn, 20k weighted cells; holdout negative; unique bytes/pixels; DO NOT SUBMIT</code>.</li></ul>
+<p><a href="downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.json">Format receipt</a> · <a href="downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros-runcard.json">JSON run card</a> ·
+<a href="research/h73-result-and-h33-analysis.md">H73 result + why H33 reported 0.2778</a> ·
+<a href="research/h73-ranked-hypotheses-2026-10-11.md">ranked hypotheses and official sources</a> ·
+<a href="../evidence/h73_preplacement_uniqueness.json">680-raster audit</a></p></div>
 <div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
 <p><b>Governing STOP record:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
 <strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast +0.0326,
 95% CI [-0.0144, +0.0790] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
-The earlier c7653 run also stopped. Later H66/H67/H68 artifacts do not lift this STOP; their literal uniqueness clearance failed against the dense calibration lattice corpus. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
+The earlier c7653 run also stopped. H66/H67/H68 did not lift that STOP. The later H73 session generated a new format-valid negative research TIFF but failed its SGMC, holdout, and literal-overlap gates; it likewise used no slot. No artifact is cleared for competition submission.</p>
 <p><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download the existing H65-1 GeoTIFF for research only</a>
 <a class="btn alt" href="downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif" download>Download H68-1 GeoTIFF (research only)</a>
 <strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
@@ -16,7 +29,7 @@ The earlier c7653 run also stopped. Later H66/H67/H68 artifacts do not lift this
 <a href="../evidence/h65_runcard.json">final JSON run card</a> · <a href="../registry/leaderboard_snapshot_2026-10-11.json">manual 50-row public-board snapshot</a></p></div><header class="top"><div class="wrap"><h1>H80 run report — convergent-cover complement field (NEGATIVE)</h1>
 <nav><a href="index.html">Home</a> <a href="executive-summary.html">Submission status</a> <a href="research.html">Research</a>
 <a href="irregularities.html">Irregularities</a></nav>
-<div class=dlbtn><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download H65-1 — research only, DO NOT SUBMIT</a></div>
+<div class=dlbtn><a class="btn" href="downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif" download>Download NEW H73 — research only, DO NOT SUBMIT</a></div>
 </div></header>
 <main class="wrap">
 <div class="banner" style="border:3px solid #b42318;background:#fffafa"><h2>Verdict: NEGATIVE — DOWNLOAD for research: YES · SUBMIT: <b>NO — DO NOT SUBMIT</b></h2>

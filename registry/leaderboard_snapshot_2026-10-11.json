@@ -357,5 +357,70 @@
       "submissions": 13,
       "last_activity": "1d 4h ago"
     }
-  ]
+  ],
+  "erratum_2026_10_11_recheck": {
+    "status": "Snapshot rows 2-10 do NOT match the live official board re-read in Round H73 (session arena/970ed663). Rows are retained unedited for audit.",
+    "live_read_verified_rows": [
+      {
+        "rank": 1,
+        "participant": "xiaofanhu",
+        "score": 0.4133
+      },
+      {
+        "rank": 2,
+        "participant": "cfld__",
+        "score": 0.3585,
+        "note": "snapshot lists cfld__ at rank 10 with 0.3108 (stale)"
+      },
+      {
+        "rank": 3,
+        "participant": "JerryDataWorks",
+        "score": 0.3418
+      },
+      {
+        "rank": 4,
+        "participant": "alexoktaba",
+        "score": 0.3361
+      },
+      {
+        "rank": 5,
+        "participant": "joeyfezster",
+        "score": 0.3333
+      },
+      {
+        "rank": 6,
+        "participant": "Batik Shirt Brothers",
+        "score": 0.33
+      },
+      {
+        "rank": 7,
+        "participant": "nchuzhoy",
+        "score": 0.3262
+      },
+      {
+        "rank": 8,
+        "participant": "kinghorton42",
+        "score": 0.3261
+      },
+      {
+        "rank": 9,
+        "participant": "DARD",
+        "score": 0.3195,
+        "note": "snapshot says rank 8 (shifted by the missing cfld__ row)"
+      },
+      {
+        "rank": 10,
+        "participant": "mzoorob",
+        "score": 0.3129
+      },
+      {
+        "rank": 23,
+        "participant": "extradr19",
+        "score": 0.2778,
+        "note": "matches snapshot rank 23"
+      }
+    ],
+    "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+    "method": "Fetched the rendered leaderboard page (chunks 0 and 1 of 3) on 2026-10-11; rows beyond rank 24 were not re-verified."
+  }
 }

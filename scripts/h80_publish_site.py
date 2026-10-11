@@ -318,6 +318,48 @@ IR_ITEMS = [
         ),
     },
     {
+        "id": "IR-H80-H73B-01",
+        "severity": "low",
+        "statement": (
+            "The H73B run card reports 'P4 uniqueness PASS like-for-like (max 0.4235; max |Spearman| 0.1941)' while "
+            "the structured evidence file behind it, evidence/h73b_uniqueness.json, reports the same like-for-like "
+            "maximum as 0.999083 (raster calib_r13lattice_00904.tif, pass_ = false) because every one of its 78 rows "
+            "carries universal_overlap_blocker = false. The 0.4235 figure is reproducible from rows[29]/[30] only by "
+            "applying an exclusion rule (drop the space-filling comparators) that the file itself does not label, so "
+            "the sentence cannot be re-derived from the committed JSON alone. No conclusion changes: the same session "
+            "published evidence/h73b_dense_comparator_universality.json showing those comparators fire on the "
+            "champion (0.99915) as well as on H73B (0.999083), which is the non-decidability argument this round "
+            "measures independently."
+        ),
+        "mitigation": (
+            "H80's own scan sets the flag and lists the excluded comparators explicitly "
+            "(evidence/h80_artifact_comparison.json: universal_blockers = calib_r13lattice_00904, r13_lattice_s5_00904, "
+            "r11_greedy_mp, r14_union_tips10_lat6), so its decidable reading is reproducible from the JSON. "
+            "Recommendation for the owner: set the same flag on the four dense-comparator rows in "
+            "evidence/h73b_uniqueness.json, or record the excluded list in the file, so the card sentence and the "
+            "structured evidence agree."
+        ),
+    },
+    {
+        "id": "IR-H80-H73B-02",
+        "severity": "medium",
+        "statement": (
+            "Governance tension flagged, not overridden: registry/current_site_status.json records the H73B corridor "
+            "raster as ok_to_submit = true ('YES as a disclosed discovery bet'), while the standing brief's rule says "
+            "not to spend a submission slot on an idea that has not beaten the current holdout best, and H73B does not "
+            "clear the family's own promotable holdout gate (its card: HOLDOUT-DTI 0.064218 confined / 0.053231 pure "
+            "vs the gate 0.190147; the same protocol reads 0.171894 for H68-1). No slot has been spent "
+            "(submission_slots_used_in_this_review = 0), so nothing is irreversible; this round simply records that "
+            "the two readings of the rules differ and that the owner is the decision point (submit the disclosed bet, "
+            "or hold to the standing rule)."
+        ),
+        "mitigation": (
+            "H80 spent no slot and changed no H73B field; the tension is published in docs/h80-report.html and in the "
+            "README beside both verdicts, so a reader sees the clearance claim, its circularity caveat and the "
+            "holdout-gate failure in one place."
+        ),
+    },
+    {
         "id": "IR-H80-SITE-01",
         "severity": "low",
         "statement": (

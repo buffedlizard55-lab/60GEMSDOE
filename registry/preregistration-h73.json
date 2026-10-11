@@ -1,0 +1,81 @@
+{
+  "id": "GEMS60-H73-1",
+  "written_utc": "2026-10-11T20:10:00Z",
+  "title": "Paired-basin ksn contrast with persistent knickpoint support",
+  "lane": "tectonic geomorphology: channel steepness, chi-profile steps and knickpoints",
+  "hypothesis": "Differential uplift across an active normal fault produces a kilometre-scale cross-basin gradient in log(1+ksn), supported by a positive upstream delta-ksn and repeated in at least three independent transverse drainages along a common strike; this response can remain where alluvium buries the surface trace.",
+  "mechanism": "Rock-uplift gradients alter channel slope after drainage-area normalization. A Gaussian ratio smoother estimates the basin-scale log(1+ksn) field from sparse 10 m-derived channel cells; its horizontal gradient measures paired high/low basin contrast. Positive step_max-derived delta-ksn is the local knickpoint support. Visible faults supply strike context only after whole segments and their holdout buffers are removed.",
+  "named_non_fault_mimic": "A resistant-to-weak lithologic contact can create a cross-basin ksn gradient and aligned knickpoints. Secondary mimics are orographic precipitation, ephemeral washes, playa base levels, debris-flow headcuts and DEM routing artefacts.",
+  "confound_controls": [
+    "ephemeral channels: ksn_max < 10 are excluded",
+    "playa/base-level cells: raised_n >= 50 are excluded",
+    "lithologic contacts: blockwise K/Th radiometric-gradient p95, dilated 200 m, is excluded",
+    "regional climate/topographic gradients: 40 km blockwise median/MAD standardization",
+    "isolated channel effects: at least 3 independent branch signatures in an along-strike corridor"
+  ],
+  "feature_definition": {
+    "log_ksn": "log1p(ksn_max) on valid bedrock-channel cells",
+    "basin_field": "gaussian_filter(log_ksn * channel, sigma=8 px) / gaussian_filter(channel, sigma=8 px)",
+    "paired_basin_contrast": "hypot(d/drow basin_field, d/dcol basin_field) * min(1, gaussian channel support / 0.08)",
+    "dksn": "log1p(max(ku-kd,0))-log1p(max(kd-ku,0)), kd=(ku+0.5)*exp(-clip(step_max,-2.3,2.3))-0.5",
+    "statistic": "0.70*z40km(paired_basin_contrast)+0.30*z40km(gaussian_filter(max(dksn,0)*channel,sigma=2)/support2)",
+    "candidate": "valid bedrock channel, unmasked, statistic z40km >= 0.5",
+    "alignment": ">=3 independent branch signatures within a 1 km by 200 m half-corridor aligned to visible-fault strike"
+  },
+  "declared_parameters": {
+    "basin_sigma_px": 8.0,
+    "step_sigma_px": 2.0,
+    "support_floor": 0.08,
+    "basin_weight": 0.7,
+    "step_weight": 0.3,
+    "block_px": 400,
+    "candidate_z_min": 0.5,
+    "n_drainage_min": 3,
+    "corridor_half_len_px": 10,
+    "corridor_half_width_px": 2,
+    "continuation_decay_px": 12.0,
+    "continuation_floor": 0.25,
+    "total_positive_cells": 20000,
+    "primary_cells": 13800,
+    "novelty_low_confidence_cells": 6200,
+    "primary_value": 1.0,
+    "novelty_value": 0.05,
+    "primary_min_separation_px": 3.0,
+    "catalogue_mask": "pixel-exact",
+    "metric_alpha": 0.2,
+    "metric_beta": 0.8,
+    "metric_kernel_m": 300,
+    "bootstrap_draws": 1000,
+    "bootstrap_seed": 60101
+  },
+  "gates": {
+    "G1_catalogue_first_test": "withheld-segment statistic minus random same-orientation transects has mean > 0 and component-bootstrap 95% CI lower bound > 0",
+    "G2_offcatalogue_first_test": "same statistic on SGMC traces >300 m from catalogue has mean > 0 and component-bootstrap 95% CI lower bound > 0",
+    "G3_leakage": "each non-catalogue feature alone has max(AUC,1-AUC) <= 0.90; distance-to-visible is reported as a positive control and cannot clear a failed geological feature",
+    "G4_holdout": "pooled HOLDOUT-DTI from gems57-pooled-hide-v2 exceeds recorded H68 lane best 0.171894; matched-budget random and distance controls are reported",
+    "G5_uniqueness": "both the positive-support surface before placement and final raster have abs Spearman <=0.90 and <=70% positive-cell overlap within 3 px of every locally registered earlier raster; no lattice exception",
+    "G6_format": "shared writer/validator passes: one float32 band, EPSG:32611, shape and transform match sample, finite [0,1] everywhere, zero outside footprint and on visible catalogue",
+    "verdict": "PROMOTE only if G1-G6 all pass; otherwise NEGATIVE / DO NOT SUBMIT. The GeoTIFF may still be generated as the mandated, uniquely named negative deliverable, but no portal slot is authorized."
+  },
+  "uniqueness_design": "The two identical dense lattice registry rasters cover 99.8713% of the footprint within 3 px, making the literal gate impossible for an unconstrained 20k-dot field. Therefore 6,200 low-confidence cells are selected from the 6,649 geological top-ranked lattice-halo holes and 13,800 primary cells from the remaining geological surface. This is declared before measurement; low-confidence value 0.05 honestly represents lower evidence and limits DTI penalty. Every other raster is still checked literally.",
+  "comparators": [
+    "recorded H68 HOLDOUT-DTI 0.171894 [0.157848,0.183994], evaluator gems57-pooled-hide-v2, 22641 withheld positives",
+    "matched 20k distance-to-visible control",
+    "matched 20k random-mass control",
+    "basin-contrast-only and dksn-only leakage canaries"
+  ],
+  "data": {
+    "official_grid": "data/official/sample_submission.tif",
+    "catalogue": "data/official/labels.tif",
+    "three_dep_reduction": "data/external/dem10_chi_100m_{i16,sig_i32,u8}.tif, pin-checked by data/external/dem10_chi_100m.manifest.json",
+    "radiometrics": "data/external/geodawn_rad_u8.tif",
+    "offcatalogue_proxy": "data/external/sgmc_faults_100m.tif",
+    "no_new_external_download": true
+  },
+  "budget": {
+    "experiments_planned": 1,
+    "experiments_cap": 3,
+    "submission_slots_spent": 0
+  },
+  "evidence_warning": "All local DTI values are holdout or public-proxy measurements, never leaderboard projections. Only a submission-page receipt may be called ORGANIZER-CONFIRMED."
+}
