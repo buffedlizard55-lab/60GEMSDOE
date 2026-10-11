@@ -1,0 +1,69 @@
+{
+  "evidence_class": "INSTRUMENT",
+  "run": "h73-controls",
+  "n_truth": 62226,
+  "mass": 12000,
+  "arms": {
+    "lane_ranked_12000": {
+      "dti": 0.151384,
+      "tpw": 8044.808,
+      "fpw": 8759.867,
+      "fnw": 54181.192,
+      "n_truth": 62226,
+      "mass": 12000.0,
+      "emitted_px": 12000,
+      "credit_per_px": 0.670401,
+      "dots": 12000
+    },
+    "random_within_pool": {
+      "dti": 0.128757,
+      "tpw": 6800.99,
+      "fpw": 8396.084,
+      "fnw": 55425.01,
+      "n_truth": 62226,
+      "mass": 12000.0,
+      "emitted_px": 12000,
+      "credit_per_px": 0.566749,
+      "dots": 12000
+    },
+    "random_within_footprint": {
+      "dti": 0.024623,
+      "tpw": 1288.221,
+      "fpw": 11392.907,
+      "fnw": 60937.779,
+      "n_truth": 62226,
+      "mass": 11857.0,
+      "emitted_px": 11857,
+      "credit_per_px": 0.108646,
+      "dots": 12000
+    },
+    "sgmc_off_random_within_5px_corridor": {
+      "dti": 0.189435,
+      "tpw": 10110.175,
+      "fpw": 7837.147,
+      "fnw": 52115.825,
+      "n_truth": 62226,
+      "mass": 12000.0,
+      "emitted_px": 12000,
+      "credit_per_px": 0.842515,
+      "dots": 12000
+    }
+  },
+  "champion_reference": {
+    "dti": 0.094626,
+    "tpw": 5481.229,
+    "fpw": 35240.6,
+    "fnw": 56744.771,
+    "n_truth": 62226,
+    "mass": 37654.0,
+    "emitted_px": 37654,
+    "credit_per_px": 0.145568,
+    "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "dots": 37654
+  },
+  "decomposition": {
+    "lane_increment": 0.10365200000000008,
+    "domain_increment": 0.4581029999999999
+  },
+  "meaning": "lane_increment = value of the chi/k_sn amplitude-coherent ranking over chance WITHIN the same off-catalogue domain; domain_increment = value of the domain itself. Both are reported; only the sum is compared with the champion."
+}

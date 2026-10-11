@@ -1,0 +1,108 @@
+{
+  "evidence_class": "INSTRUMENT",
+  "run": "h73",
+  "instrument": "population-matched off-catalogue truth: USGS SGMC traces >300 m from the given catalogue (gems61.instruments.sgmc_off_catalogue, buffer 3 px)",
+  "n_truth_px": 62226,
+  "preregistered_rule": "select the LARGEST ladder mass whose credit per dot is >= the champion's measured credit per dot on this same instrument",
+  "champion_bar": 0.145568,
+  "arms": {
+    "lane_h73_6000": {
+      "dti": 0.083242,
+      "tpw": 4287.122,
+      "fpw": 4318.189,
+      "fnw": 57938.878,
+      "n_truth": 62226,
+      "mass": 6000.0,
+      "emitted_px": 6000,
+      "credit_per_px": 0.71452,
+      "pool_nms_max": 12204,
+      "relief_share_by_stratum": {
+        "0": {
+          "emitted_share": 0.0342,
+          "footprint_share": 0.1966
+        },
+        "1": {
+          "emitted_share": 0.104,
+          "footprint_share": 0.1934
+        },
+        "2": {
+          "emitted_share": 0.331,
+          "footprint_share": 0.2097
+        },
+        "3": {
+          "emitted_share": 0.361,
+          "footprint_share": 0.198
+        },
+        "4": {
+          "emitted_share": 0.1698,
+          "footprint_share": 0.2022
+        }
+      }
+    },
+    "lane_h73_12000": {
+      "dti": 0.151384,
+      "tpw": 8044.808,
+      "fpw": 8759.867,
+      "fnw": 54181.192,
+      "n_truth": 62226,
+      "mass": 12000.0,
+      "emitted_px": 12000,
+      "credit_per_px": 0.670401,
+      "pool_nms_max": 12204,
+      "relief_share_by_stratum": {
+        "0": {
+          "emitted_share": 0.0327,
+          "footprint_share": 0.1966
+        },
+        "1": {
+          "emitted_share": 0.1126,
+          "footprint_share": 0.1934
+        },
+        "2": {
+          "emitted_share": 0.3413,
+          "footprint_share": 0.2097
+        },
+        "3": {
+          "emitted_share": 0.3528,
+          "footprint_share": 0.198
+        },
+        "4": {
+          "emitted_share": 0.1607,
+          "footprint_share": 0.2022
+        }
+      }
+    }
+  },
+  "champion": {
+    "dti": 0.094626,
+    "tpw": 5481.229,
+    "fpw": 35240.6,
+    "fnw": 56744.771,
+    "n_truth": 62226,
+    "mass": 37654.0,
+    "emitted_px": 37654,
+    "credit_per_px": 0.145568,
+    "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "dots": 37654
+  },
+  "random_mass_control": {
+    "dti": 0.131403,
+    "tpw": 6947.254,
+    "fpw": 8498.503,
+    "fnw": 55278.746,
+    "n_truth": 62226,
+    "mass": 12204.0,
+    "emitted_px": 12204,
+    "credit_per_px": 0.56926
+  },
+  "chosen_arm": "lane_h73_12000",
+  "pool": {
+    "production_px": 51552,
+    "catalogue_buffer_px": 2.0,
+    "sgmc_near_px": 5.0,
+    "min_sep_px": 3.0,
+    "footprint_relief_strata": 5,
+    "confound_note": "the corridor field already excludes playa/wash-masked cells? see stage B diag"
+  },
+  "note": "INSTRUMENT numbers are proxies, never organizer scores"
+}

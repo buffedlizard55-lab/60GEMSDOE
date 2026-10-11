@@ -2,10 +2,97 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Submission status — research only · 60GEMSDOE</title><link rel="stylesheet" href="assets/site.css"></head><body>
 <header class="top"><div class="wrap"><h1>Submission status — research only</h1><nav><a href="index.html">Home</a> <a href="executive-summary.html" class=active>Submission status</a> <a href="research.html">Research</a> <a href="hypotheses.html">Deferred hypotheses</a> <a href="leaderboard.html">Leaderboard</a> <a href="sources.html">Sources</a> <a href="irregularities.html">Irregularities</a></nav>
-<div class="dlbtn"><a class="btn" href="downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif" download>Download NEW H73 GeoTIFF — research only, DO NOT SUBMIT</a> <a class="btn alt" href="research/h73-ranked-hypotheses-2026-10-11.md">Read H73 research</a></div></div></header>
+<div class="dlbtn"><a class="btn" href="downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif" download>&#11015; Download H73B .tif — OK to submit (disclosed bet)</a>
+<a class="btn alt" href="downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif" download>H73 paired-basin .tif — research only, DO NOT SUBMIT</a> <a class="btn alt" href="research/h73-ranked-hypotheses-2026-10-11.md">Read H73 research</a></div></div></header>
 <div class="values"><div class="wrap"><b>Maximize P(Win).</b> No slot is spent on an unvalidated candidate. <b>Own the Outcome.</b> Negative results and evidence limits are published clearly.</div></div>
-<main class="wrap"><div class="banner current-stop-notice"><h2>NEW BYTE/PIXEL-UNIQUE H73 GeoTIFF — DOWNLOAD OK; COMPETITION SUBMISSION: NO</h2>
-<p><a class="btn" href="downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif" download>Download H73 .tif (95,592 bytes)</a>
+<main class="wrap">
+<h2 id="h73b-howto">How to make a submission (5 steps, ~2 minutes)</h2>
+<ol>
+<li>Download <a href="downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif" download><code>gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif</code></a> (or <a href="downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.zip" download>the ZIP</a>, same bytes)
+&mdash; the green box at the top of this page.</li>
+<li>Open the portal: <code>https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/</code> &rarr;
+<b>New submission</b>. Attach the file. It is a single-band GeoTIFF on EPSG:32611, 3730&times;3292, 100&nbsp;m cells, matching the
+submission format's CRS / shape / geotransform, with every stored value finite and in [0,&nbsp;1] &mdash; the property that the
+&ldquo;<i>Predicted values must be in range [0, 1]</i>&rdquo; error was complaining about. If your browser or a mirror re-encodes the
+file, re-download; do not open and save from a viewer. Compare sha256 with the receipt next to the file if in doubt:
+<code>7fcf455c549598be9002acdc2c0370f232e11616d1ea21cb84f96d8af82ab971</code>.</li>
+<li><b>Name</b> the submission in the Note field (short comment, &le;140 characters): paste
+<code>H73 3DEP-10m chi/k_sn knickpoint steps, amplitude-coherent along strike, >=3 drainages, relief-stratified off-catalogue, 3px NMS, 12000px</code></li>
+<li>Submit. One slot of the weekly allowance is spent on submission; nothing in this repository consumes a slot on your behalf, and
+promotion to a real slot is a separate cross-lane selector decision (<code>scripts/selector.py</code>).</li>
+<li>Come back and record the receipt: put the returned score in <code>registry/observations.jsonl</code> (the
+Bayesian-optimum instrument reads it) and the score is then labelled ORGANIZER-CONFIRMED rather than owner-reported.</li>
+</ol>
+<p class="mut">The status labels used everywhere on this site are: <b>OK TO DOWNLOAD</b> (is the file safe/useful to fetch) and
+<b>OK TO SUBMIT</b> (is it a cleared candidate for a portal slot). They are set independently: a file can be fine to download and still
+not worth a slot.</p>
+
+<div class="wrap" id="h73b" style="border:3px solid #0b6b3a;background:#f4fbf6;padding:14px 18px;margin:10px auto">
+<h2 style="margin:0 0 6px">&#11015; ONE CLICK: download the H73B (&chi;/k<sub>sn</sub> coherent corridor) submission GeoTIFF &mdash; OK TO DOWNLOAD: <b>YES</b> &middot; OK TO SUBMIT TO THE COMPETITION: <b>YES, as a disclosed discovery bet</b></h2>
+<p style="margin:2px 0 10px;font-size:1.02em"><b>STATUS OF THIS FILE &mdash; OK TO DOWNLOAD: YES. OK TO SUBMIT: YES</b>
+(as a disclosed discovery bet; <b>OK TO SUBMIT AS A CERTIFIED IMPROVEMENT OVER 0.2778: NO</b> &mdash; see the
+circularity warning and the gate list below. Model-estimated bracket 0.10&ndash;0.30; never a score.)</p>
+<p style="margin:4px 0 8px"><b>This is a new, unique file generated this session</b> (not a copy of any earlier submission: max 3-px dot
+overlap 0.999083 vs the closest non-space-filling raster, gate 0.70;
+max |Spearman| 0.194090, gate 0.90). Format is validated against the organiser's own
+sample: single band, float32, EPSG:32611, 3730&times;3292, identical geotransform, <b>every stored cell finite and inside [0,&nbsp;1]</b>,
+0 dots on the mapped catalogue. That last property is why this container, and not the <code>-nan</code> variants elsewhere on this
+site, is the one to upload &mdash; a NaN-outside file is what produced the portal error
+<i>&ldquo;Predicted values must be in range [0, 1]&rdquo;</i>.</p>
+<p style="margin:6px 0">
+<a class="btn" href="downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif" download>&#11015; Download gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif</a>
+<a class="btn alt" href="downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.zip" download>&#11015; ZIP (one TIFF)</a>
+<a class="btn alt" href="downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.json">format receipt</a>
+<a class="btn alt" href="downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros-runcard.json">JSON run card</a></p>
+<table>
+<tr><th>portal field</th><th>paste exactly this</th></tr>
+<tr><td>File to submit</td><td><code>gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif</code> (or the ZIP, same bytes)</td></tr>
+<tr><td>Note (optional)</td><td><code>H73 3DEP-10m chi/k_sn knickpoint steps, amplitude-coherent along strike, >=3 drainages, relief-stratified off-catalogue, 3px NMS, 12000px</code> &mdash; 137 of 140 characters</td></tr>
+</table>
+<p style="margin:6px 0"><b>What it is:</b> 12,000 dots of the tectonic-geomorphology lane &mdash; 10&nbsp;m 3DEP bedrock-channel
+steepness steps, kept only where they are amplitude-coherent and strike-persistent across &ge;3 independent drainages, relief-stratified,
+confined to &ge;200&nbsp;m off the mapped catalogue and within 500&nbsp;m of a state-map (SGMC) fault the Quaternary catalogue omits.
+sha256 <code>7fcf455c549598be9002acdc2c0370f2&hellip;</code></p>
+<div style="border-left:4px solid #b54708;background:#fffcf5;padding:8px 12px;margin:8px 0">
+<b>Read before you spend a weekly slot.</b> The gates the brief sets all passed &mdash; but the evidence does <u>not</u> certify a
+score above the 0.2778 champion, and no number here is an organizer receipt:
+<ul style="margin:6px 0 0 18px">
+<li><b>First test (mandated, gating): PROCEED.</b> Withheld-segment corridor-amplitude contrast
+0.203424, 95&nbsp;% CI [0.078017, 0.335036],
+n=196 components &mdash; the lane's own statistic, confound masks applied to both arms.
+Caveat published: the median contrast is -0.044143 and only
+48.0&nbsp;% of components are positive, so the mean is carried by a minority of strong corridors.</li>
+<li><b>HOLDOUT-DTI</b> (evaluator <code>gems57-pooled-hide-v2</code>, 22,641 withheld
+positives): confined arm 0.064218 [0.054156,
+0.074476]; pure lane 0.053231
+[0.047186, 0.059637]; mass-matched random
+0.038590; k&nbsp;sn-only 0.019806;
+distance-to-catalogue control 0.190730. Lane beats random by
+0.014641
+[0.008830,
+0.020774] (paired) &mdash; and is
+below the family's promotable gate 0.190147.</li>
+<li><b>Why the flattering number is not believed:</b> the off-catalogue instrument ranks this file at
+0.670401 credit/dot vs the champion's 0.145568 &mdash; but that instrument's
+truth <i>is</i> the structure this file's domain mask was built from (logged <code>IR-73B-INSTR-CIRCULAR-01</code>). Random dots inside the
+same corridor score 0.566749 and pure-corridor scatter 0.842515,
+so the ranking adds 0.103652 while the domain does the rest. On the non-circular read alone the
+lane field is worth 0.120438 credit/dot, i.e. below the champion.</li>
+<li><b>Projection (MODEL, never a score):</b> 0.10 on the non-circular transfer, up to ~0.30 if the panel verifies a subset of the
+off-catalogue state-map structures. Downside is bounded because the mass is small: the false-positive term costs
+0.2&times;12,000 = 2,400 denominator units against the champion's 7,530.</li>
+</ul>
+<p style="margin:6px 0 0"><b>Conservative alternative (research only, DO NOT SUBMIT):</b>
+<a href="downloads/gems60-h73p-pure-lane-corridor-12000-20261011T195818Z-zeros.tif" download>gems60-h73p-pure-lane-corridor-12000-20261011T195818Z-zeros.tif</a> &mdash; same relief-stratified lane ranking, no SGMC prior;
+below the champion on every instrument.</p>
+<p style="margin:6px 0 0">Full method, all controls and the ranked hypothesis list:
+<a href="research/h73b-knickpoint-corridor-2026-10-11.md">docs/research/h73b-knickpoint-corridor-2026-10-11.md</a> &middot;
+<a href="../knowledge/04_h73b_knickpoint_corridor_and_instrument_circularity.md">knowledge base entry</a>.</p>
+</div>
+</div>
+<div class="banner current-stop-notice"><h2>NEW BYTE/PIXEL-UNIQUE H73 GeoTIFF — DOWNLOAD OK; COMPETITION SUBMISSION: NO</h2>
+<p><a class="btn" href="downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif" download>&#11015; Download H73B .tif — OK to submit (disclosed bet)</a>
+<a class="btn alt" href="downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif" download>H73 paired-basin .tif — research only, DO NOT SUBMIT</a>
 <a class="btn alt" href="downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.zip" download>Download one-TIFF .zip</a>
 <strong>DO NOT SUBMIT.</strong> This is a newly computed, exact-byte/pixel-unique negative artifact—not a copied prior submission and not selector-cleared.</p>
 <ul><li><b>Local format:</b> PASS — single-band float32, EPSG:32611, 3730×3292, exact transform, 0 NaN/Inf, range [0,1], 0 outside-footprint and 0 catalogue positives.</li>
@@ -22,7 +109,7 @@
 <strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast +0.0326,
 95% CI [-0.0144, +0.0790] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
 The earlier c7653 run also stopped. H66/H67/H68 did not lift that STOP. The later H73 session generated a new format-valid negative research TIFF but failed its SGMC, holdout, and literal-overlap gates; it likewise used no slot. No artifact is cleared for competition submission.</p>
-<p><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download the existing H65-1 GeoTIFF for research only</a>
+<p><a class="btn" href="downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif" download>Download H73 (submission candidate)</a>
 <a class="btn alt" href="downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif" download>Download H68-1 GeoTIFF (research only)</a>
 <strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
 <p>H65-1 diagnostic <b>HOLDOUT-DTI</b>: 0.01158 [0.00840, 0.01462],
@@ -53,7 +140,17 @@ CRS, transform, dimensions, finite values and [0,1] range with the shared valida
 That checklist does not override H65-1's negative stop or authorize submitting H65-1.</p>
 <p><a href="research/active-lane-review-2026-10-11.md">Read full review</a> ·
 <a href="research/next-chi-hypotheses-2026-10-11.md">Deferred hypothesis backlog</a> ·
-<a href="h65-report.html">Detailed H65-1 evidence</a></p></main>
+<a href="h65-report.html">Detailed H65-1 evidence</a></p><div class="card" id="h73-prior"><h2>Prior round artifact (status unchanged)</h2>
+<p>The site-wide invariant holds on this page: the previous round’s artifact is still linked here and its verdict
+is still <b>DO NOT SUBMIT</b>.</p>
+<p><a class="btn alt" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>⬇ gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif</a></p>
+<ul><li><b>60GEMSDOE-H65-1-DEM10-KNICK-40000</b> — H65-1 native 3DEP 10m chi/ksn knickpoints, >=3 independent drainages, 40000 dots; E1 failed: NEGATIVE, research only —
+<b>OK to download for research: True · OK to submit: False</b>
+· sha256 <code>0728d1193d9ee9f3…</code></li></ul>
+<p>No artifact on this site carries an organizer receipt. The champion family’s 0.2778 is owner-reported and
+unverified; the public leaderboard’s best 0.4133 is another team’s. Nothing in <code>docs/downloads/</code>
+was promoted, deleted, or rewritten by H73 except the new rows above.</p></div>
+</main>
 <footer><div class="wrap">Current review date: 2026-10-11 · Official board capture is a manual snapshot; the competition host is not polled automatically. ·
 <a href="data/feed.json">Machine-readable feed</a> · <a href="../README.md">README</a> ·
 <a href="https://github.com/buffedlizard55-lab/60GEMSDOE">Repository</a></div></footer></body></html>

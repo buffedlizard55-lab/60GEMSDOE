@@ -1,0 +1,24 @@
+{
+  "registry/rasters/calib_r13lattice_00904.tif": {
+    "champion_h33_2_b2": 0.99915,
+    "H65_1": 0.998825,
+    "H68_1": 0.9985,
+    "H72_union": 0.998763,
+    "H73_mine_12000": 0.999083
+  },
+  "registry/rasters/r11_greedy_mp.tif": {
+    "champion_h33_2_b2": 0.88883,
+    "H65_1": 0.57355,
+    "H68_1": 0.87795,
+    "H72_union": 0.766665,
+    "H73_mine_12000": 0.86175
+  },
+  "registry/rasters/r14_union_tips10_lat6.tif": {
+    "champion_h33_2_b2": 0.771897,
+    "H65_1": 0.758175,
+    "H68_1": 0.813125,
+    "H72_union": 0.665804,
+    "H73_mine_12000": 0.778417
+  },
+  "note": "forward 3-px overlap of each artifact's dots against each dense comparator; measured 2026-10-11 session arena/7f9ca816"
+}

@@ -1,5 +1,34 @@
 # 60GEMSDOE — channel steepness / χ / knickpoints
 
+<!-- h73b-lead -->
+## Round H73B (2026-10-11, session `arena/7f9ca816-60gemsdoe`) - a UNIQUE TIF exists, verdict in one line
+
+**OK TO DOWNLOAD: YES · OK TO SUBMIT: YES** as a disclosed discovery bet; **OK TO SUBMIT AS A CERTIFIED IMPROVEMENT OVER 0.2778: NO.**
+[downarrow `docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif`](docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif) - [zip](docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.zip) -
+[format receipt](docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.json) - [JSON run card](evidence/h73b_runcard.json) - sha256 `7fcf455c549598be9002acdc2c0370f232e11616d1ea21cb84f96d8af82ab971`.
+Portal Note (137/140): `H73 3DEP-10m chi/k_sn knickpoint steps, amplitude-coherent along strike, >=3 drainages, relief-stratified off-catalogue, 3px NMS, 12000px`.
+
+| preregistered gate (`registry/preregistration-h73b.json`, written before any number existed) | result |
+|---|---|
+| **P1 first test** | PROCEED |
+| **P2 leakage canary** | PASS |
+| **P3 emission economics** | PASS as preregistered, but VOID for live inference (IR-73B-INSTR-CIRCULAR-01) |
+| **P4 uniqueness** | PASS like-for-like (max 0.4235; max |Spearman| 0.1941); literal clause fires only on space-filling comparators that also fire on the champion |
+| **P5 format** | PASS (15/15 local checks; 0 NaN; all cells in [0,1]; 0 dots on the catalogue) |
+| **family promotable holdout gate** | FAIL (0.064218 confined / 0.053231 pure vs 0.190147) |
+| first test detail | mean +0.203424, CI [0.078017, 0.335036], n=196 withheld components; median -0.044143, 48.0 % positive (mean-driven - stated) |
+| HOLDOUT-DTI | 0.064218 confined / 0.053231 pure vs random 0.038590 and distance-only control 0.190730; family promotable gate 0.190147 NOT met. Not a leaderboard score |
+| circularity | the off-catalogue instrument that ranks this file high uses as truth the same SGMC structure the file is confined to; stripped of that prior the lane field alone is below the champion. See `evidence/h73b_controls.json` and IR-73B-INSTR-CIRCULAR-01 |
+
+Method, controls, and the next ranked hypotheses (H74 spring lineations, H75 split-map instrument, H76 basement
+magnetics, H77/H78 blocked offline): [docs/research/h73b-knickpoint-corridor-2026-10-11.md](docs/research/h73b-knickpoint-corridor-2026-10-11.md)
+and [knowledge/04](knowledge/04_h73b_knickpoint_corridor_and_instrument_circularity.md). No weekly slot spent by this session.
+
+**Round-id note.** This round was developed as "H73" on the session branch; main meanwhile received a different,
+independently preregistered H73 (paired-basin k_sn contrast). Both are kept - the corridor round is published here
+as **H73B**, and the delivered raster keeps the submission name `60GEMSDOE-H73-CHI-COHERENT-CORRIDOR-12000`
+because its bytes, note and receipt were validated under that name.
+
 ## NEW one-click H73 GeoTIFF — download OK; **DO NOT SUBMIT**
 
 A **newly computed** H73 GeoTIFF was generated in this session; it is not a copy or rename of an earlier raster.

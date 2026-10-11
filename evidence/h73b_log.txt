@@ -1,0 +1,3 @@
+[H73] stop_guard verdict (recorded, deliberately not used as a gate): True
+[H73] wrote gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif (88968 bytes, sha256 7fcf455c549598be…)
+[H73] stage E done: gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif

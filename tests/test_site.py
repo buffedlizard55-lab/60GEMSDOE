@@ -198,3 +198,39 @@ def test_stop_guard_fails_closed_when_status_is_missing(tmp_path, capsys):
     (tmp_path / "registry").mkdir()
     assert _load_stop_guard().lane_is_stopped(tmp_path, "test E1 runner") is True
     assert "cannot read authoritative lane status" in capsys.readouterr().out
+
+
+def test_h73b_hero_states_a_verdict_for_every_file_and_discloses_the_circularity():
+    """A downloadable file must ship with an explicit, machine-checkable verdict.
+
+    The 2026-10-11 review found the site could describe a real artifact without ever saying whether it was safe to
+    download or submit, and could quote a flattering instrument without saying that the instrument graded the
+    candidate on the same structure the candidate was confined to. Both are locked down here.
+    """
+    card = STATUS["h73b_submission_candidate"]
+    assert card["ok_to_download"] is True and card["ok_to_submit"] is True
+    assert "circular" in card["submit_basis"]
+    assert "NO as a certified improvement" in card["ok_to_submit_text"]
+    assert "not certified better" in (ROOT / "evidence" / "h73b_runcard.json").read_text().lower()
+    assert card["validator"]["all_checks_passed"] is True and card["validator"]["n_nan"] == 0
+    assert STATUS["status"] == "STOP"  # the prior round's verdict is never silently rewritten
+    for page_name in ("index.html", "executive-summary.html"):
+        html = (SITE / page_name).read_text()
+        assert 'id="h73b"' in html, f"{page_name} lost the H73 hero"
+        assert Path(card["file"]).name in html, f"{page_name} does not link the H73 file"
+        assert "OK TO DOWNLOAD: YES" in html and "OK TO SUBMIT: YES" in html
+        assert "circular" in html.lower(), f"{page_name} hides the instrument circularity"
+        assert "owner-reported/unverified" in html or "owner-reported" in html
+    readme = (ROOT / "README.md").read_text()
+    assert "OK TO DOWNLOAD: YES \u00b7 OK TO SUBMIT: YES" in readme
+    assert "OK TO SUBMIT: NO" not in readme.split("Round H73B")[0]
+    receipt = json.loads((SITE / "downloads" / Path(card["file"]).with_suffix(".json").name).read_text())
+    assert receipt["sha256"] == card["sha256"]
+    pure = json.loads((ROOT / "evidence" / "h73b_purelane_package.json").read_text())
+    assert pure["proxy"] is True and pure["instrument_sgmc_off"]["credit_per_px"] < card["credit_per_dot_vs_off_catalogue"]
+    rows = json.loads((SITE / "downloads" / "submissions_manifest.json").read_text())["submissions"]
+    by_file = {r["file"]: r for r in rows}
+    assert by_file[Path(card["file"]).name]["ok_to_submit"] is True
+    assert by_file[pure["artifact"]]["ok_to_submit"] is False and by_file[pure["artifact"]]["ok_to_download"] is True
+    assert (ROOT / "evidence" / "h73b_dense_comparator_universality.json").is_file()
+    assert "IR-73B-INSTR-CIRCULAR-01" in (ROOT / "registry" / "irregularities.json").read_text()

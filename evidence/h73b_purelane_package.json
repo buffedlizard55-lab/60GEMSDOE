@@ -1,0 +1,21 @@
+{
+  "artifact": "gems60-h73p-pure-lane-corridor-12000-20261011T195818Z-zeros.tif",
+  "sha256": "5418f82f6ecee8c95e3ed6cb813faf17cb09de040db3e5e0368954fa2265b7a7",
+  "bytes": 89546,
+  "dots": 12000,
+  "proxy": true,
+  "validator_checks_all_ok": true,
+  "instrument_sgmc_off": {
+    "dti": 0.027605,
+    "tpw": 1445.26,
+    "fpw": 11427.014,
+    "fnw": 60780.74,
+    "n_truth": 62226,
+    "mass": 12000.0,
+    "emitted_px": 12000,
+    "credit_per_px": 0.120438
+  },
+  "note": "H73-pure 3DEP-10m chi/k_sn corridor amplitude only, no SGMC prior, relief-stratified, 12000px",
+  "note_chars": 93,
+  "zip_sha256": "f2fd93a8d2ae587ef2fa4ee16806cb447b347825e06cc6f9514ed8b5e0a603c9"
+}
