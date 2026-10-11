@@ -118,6 +118,39 @@ def render(root: Path | None = None) -> dict:
     leak = status["leakage_review"]
     h33 = status["h33_claim"]
     previous = status["previous_run_c7653"]
+    post_runs = status.get("post_review_runs") or []
+
+    # Runs recorded in other sessions after the STOP review. Rendered factually:
+    # negative results corroborate the stop; any positive claim is shown as a
+    # claim, with its irregularity flag, never as an endorsement.
+    if post_runs:
+        rows = []
+        for r in post_runs:
+            flagged = "CONTRADICT" in r["verdict"].upper()
+            badge = ("⚠️ <b>claimed positive — contradicted this STOP file</b>; "
+                     "flagged IR-H66C-STOPCONFLICT-01 and promotion reversed by PRs #19/#20"
+                     if flagged else "corroborates the STOP")
+            card = (f'<a href="{_site_href(r["run_card"])}">run card</a>'
+                    if r.get("run_card") else "")
+            dl = (f' · <a href="{_site_href(r["download"])}" download>⬇ TIF</a>'
+                  if r.get("download") else "")
+            rows.append(
+                f"<tr><td>{_e(r['session'])}</td><td>{_e(r['id'])}</td>"
+                f"<td>{_e(r['verdict'])}</td><td>{_e(r['artifact'])} {dl} {card}</td>"
+                f"<td>{badge}</td></tr>")
+        post_html = f'''<h2>Lane runs recorded after this review (other sessions, same day)</h2>
+<div class="card"><p>Three more tectonic-geomorphology runs were recorded on 2026-10-11 after the
+review above. Two are <b>negative and corroborate the STOP</b>; one <b>claimed a pass
+and promote</b> while the stop file was in force — it was flagged as
+<code>IR-H66C-STOPCONFLICT-01</code> and its promotion was <b>reversed</b> by session
+<code>arena/a856d257</code> (PRs #19/#20), so it remains a research artifact, not a
+cleared submission. No submission slot has been spent by any of them.</p>
+<table><tr><th>session</th><th>id</th><th>result (as recorded by that session)</th><th>artifact</th><th>relation to STOP</th></tr>
+{''.join(rows)}
+</table></div>
+'''
+    else:
+        post_html = ""
 
     # Home: never surface registry/submission_build.json as a recommendation while the stop applies.
     body = _common_status(status) + f'''<h2>Current research state</h2>
@@ -160,6 +193,7 @@ private-test performance, or file attribution.</p>
 <tr><td>8</td><td>DARD</td><td>0.3195</td></tr>
 <tr><td>23</td><td>extradr19</td><td>0.2778</td></tr></table>
 <p><a href="leaderboard.html">Open all 50 rows →</a> · <a href="data/feed.json">Current repository feed</a></p>
+{post_html}
 <h2>Research paths</h2><ul>
 <li><a href="research/active-lane-review-2026-10-11.md">Executive review, H65-1 / c7653 results, H33 evidence limits and citations</a></li>
 <li><a href="research/next-chi-hypotheses-2026-10-11.md">Four ranked hypotheses — explicitly UNTESTED / DEFERRED; no experiment authorized</a></li>

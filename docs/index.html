@@ -54,6 +54,17 @@ private-test performance, or file attribution.</p>
 <tr><td>8</td><td>DARD</td><td>0.3195</td></tr>
 <tr><td>23</td><td>extradr19</td><td>0.2778</td></tr></table>
 <p><a href="leaderboard.html">Open all 50 rows →</a> · <a href="data/feed.json">Current repository feed</a></p>
+<h2>Lane runs recorded after this review (other sessions, same day)</h2>
+<div class="card"><p>Three more tectonic-geomorphology runs were recorded on 2026-10-11 after the
+review above. Two are <b>negative and corroborate the STOP</b>; one <b>claimed a pass
+and promote</b> while the stop file was in force — it was flagged as
+<code>IR-H66C-STOPCONFLICT-01</code> and its promotion was <b>reversed</b> by session
+<code>arena/a856d257</code> (PRs #19/#20), so it remains a research artifact, not a
+cleared submission. No submission slot has been spent by any of them.</p>
+<table><tr><th>session</th><th>id</th><th>result (as recorded by that session)</th><th>artifact</th><th>relation to STOP</th></tr>
+<tr><td>arena/970443fc-60gemsdoe (PR #16)</td><td>H66-1/H66-2</td><td>NEGATIVE — E1 off-catalogue -0.0860 [-0.1372, -0.0220] -&gt; STOP; INSTRUMENT-DTI 0.00913 vs random 0.07253</td><td>gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros  · <a href="downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif" download>⬇ TIF</a> <a href="downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros-runcard.json">run card</a></td><td>corroborates the STOP</td></tr><tr><td>arena/b219bfe1-60gemsdoe (PR #18, this session)</td><td>H66-6</td><td>NEGATIVE — masked E1 +0.0404 [-0.0029, +0.0871] INCONCLUSIVE -&gt; STOP; HOLDOUT-DTI 0.00960 vs random 0.03908 (paired -0.02948)</td><td>gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros  · <a href="downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif" download>⬇ TIF</a> <a href="../evidence/h66c_runcard.json">run card</a></td><td>corroborates the STOP</td></tr><tr><td>arena/7085de4f-60gemsdoe (PR #17)</td><td>H67-1</td><td>claimed PASS/PROMOTE - E1 +0.4251 [+0.2253, +0.6273]; HOLDOUT-DTI 0.065739 [0.055715, 0.076201]. Contradicted the STOP file (flagged IR-H66C-STOPCONFLICT-01 by session arena/b219bfe1); promotion REVERSED (promoted=False) and STOP enforced by session arena/a856d257 (PRs #19/#20). Remains a research artifact, not a cleared submission.</td><td>gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros  · <a href="downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif" download>⬇ TIF</a> <a href="../evidence/h67_runcard.json">run card</a></td><td>⚠️ <b>claimed positive — contradicted this STOP file</b>; flagged IR-H66C-STOPCONFLICT-01 and promotion reversed by PRs #19/#20</td></tr>
+</table></div>
+
 <h2>Research paths</h2><ul>
 <li><a href="research/active-lane-review-2026-10-11.md">Executive review, H65-1 / c7653 results, H33 evidence limits and citations</a></li>
 <li><a href="research/next-chi-hypotheses-2026-10-11.md">Four ranked hypotheses — explicitly UNTESTED / DEFERRED; no experiment authorized</a></li>

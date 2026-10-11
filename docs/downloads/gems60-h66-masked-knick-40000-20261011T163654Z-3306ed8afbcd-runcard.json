@@ -1,0 +1,232 @@
+{
+ "run": "H66-6", "renumbered_from": "H66-1 (session arena/970443fc claimed the id first; IR-H66C-TIMING-01)",
+ "registry_hypothesis": "H62-5 (true-10 m chi/ksn concordance), H66-1 masked variant",
+ "lane": "tectonic geomorphology: chi / ksn / knickpoints",
+ "generated_utc": "2026-10-11T16:44:00Z",
+ "preregistration": {
+  "file": "evidence/h66c_e1_first_test.json (stop rule) + run_lane60.py H66-1 arms (same session, preregistered before the first test ran)",
+  "preregistered_utc": "2026-10-11T15:58:00Z"
+ },
+ "hypothesis": "If the H65-1 knickpoint signal was inflated by the brief's named confounds (playa/pluvial shoreline, basin fill, conductive ground-water discharge, ephemeral low-area channels), then applying those confound masks to the statistic itself should change the first-test verdict; the masked statistic's withheld-crossing contrast still carries no fault signal (E1 stays INCONCLUSIVE) and the pooled holdout DTI stays far below the mass-matched random control.",
+ "mechanism": "A fault offsets base level; the steepness contrast propagates upstream as a knickpoint (Kirby & Whipple 2012, J. Struct. Geol. 44, 54-75; Perron & Royden 2013, ESPL 38, 570-576; Gailleton et al. 2019, ESurf 7, 211-230). H66-1 additionally masks, from the channel-cell population entering the statistic, cells on playa, in basin fill, on high-conductance surface (ground-water discharge mimic), and in ephemeral channels (A < 1e6 m2), per the lane brief's mandated confound list.",
+ "mimicking_non_fault_process": "The brief's named mimics, now MEASURED as masks: playa/pluvial shorelines (550,267 px), basin fill (516,432 px), conductive surface (257,039 px), ephemeral channels (317,451 px of the 786,299 channel px; 386,327 channel px excluded total). With all four masked, the masked first-test mean moved only from +0.0326 (H65-1, 262 comps) to +0.0404 (239 comps) and the CI still straddles zero: the confounds did not create the (non-)signal.",
+ "substrate": {
+  "source": "USGS 3DEP 1/3 arc-second (~10 m) DEM, current 1x1-degree tiles (public domain) - H65-1 reduction, sha-pinned",
+  "url_pattern": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/<tile>/USGS_13_<tile>.tif",
+  "feature_cache": ".cache/features65 (rebuilt this session from the sha-pinned 10 m TIFs; all 11 arrays match the pinned manifest)",
+  "manifest": "data/external/dem10_chi_100m.manifest.json"
+ },
+ "confound_masks_px": {
+  "evidence_class": "MEASUREMENT",
+  "playa": 550267,
+  "basin_fill": 516432,
+  "conductive": 257039,
+  "ephemeral": 317451,
+  "channel_excluded": 386327,
+  "channel_total": 786299,
+  "excluded_total": 1399516,
+  "a_min_m2": 1000000.0,
+  "note": "masks applied to the statistic (masks_applied_to_statistic=true), not just to the emitted dots"
+ },
+ "first_test_E1": {
+  "evidence_class": "MEASUREMENT",
+  "statistic": "mean log-ksn step contrast, withheld-crossing channels minus same-orientation random lines, confound masks applied to the statistic",
+  "masks_applied_to_statistic": true,
+  "mean": 0.04039842808701666,
+  "ci95": [
+   -0.002870678727197792,
+   0.08710208994789784
+  ],
+  "median": -0.004214679975479613,
+  "n_components": 239,
+  "skipped_components": 81,
+  "fraction_positive": 0.4895397489539749,
+  "verdict": "INCONCLUSIVE",
+  "arms": {
+   "T_no_basement_step": {
+    "evidence_class": "MEASUREMENT",
+    "n_components": 174,
+    "mean": 0.0029678024377174958,
+    "ci95": [
+     -0.040415324465084695,
+     0.05060360704061481
+    ],
+    "verdict": "INCONCLUSIVE"
+   },
+   "L_on_basement_step": {
+    "evidence_class": "MEASUREMENT",
+    "n_components": 14,
+    "mean": 0.06957234976651457,
+    "ci95": [
+     -0.12416896047447255,
+     0.29792759877913993
+    ],
+    "verdict": "INCONCLUSIVE (underpowered, n=14)"
+   }
+  },
+  "rule": "brief: 'if not, stop' -> INCONCLUSIVE fails the preregistered PROCEED gate -> STOP; the full masked lane is emitted as the research artifact (emission rule)",
+  "file": "evidence/h66c_e1_first_test.json"
+ },
+ "holdout_dti": {
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator_version": "gems57-pooled-hide-v2",
+  "n_withheld_positives": 22641,
+  "alpha": 0.2,
+  "beta": 0.8,
+  "kernel_m": 300.0,
+  "bootstrap": {
+   "method": "paired physical spatial-cluster percentile",
+   "clusters": 159,
+   "draws": 1000,
+   "seed": 60101
+  },
+  "lane": {
+   "dti": 0.009598840531222471,
+   "ci95": [
+    0.006540940977949029,
+    0.013074468339030563
+   ]
+  },
+  "ksn_only_control": {
+   "dti": 0.020000330272770532,
+   "ci95": [
+    0.015987081101515387,
+    0.024420352069865904
+   ]
+  },
+  "random_mass_control": {
+   "dti": 0.03908023346196293,
+   "ci95": [
+    0.03567772377036994,
+    0.04231026849449676
+   ]
+  },
+  "distance_only_control": {
+   "dti": 0.19073008022090832,
+   "ci95": [
+    0.1819994346977787,
+    0.19964658277767058
+   ]
+  },
+  "paired_lane_minus_control": {
+   "ksn_only_no_alignment": {
+    "delta": -0.01040148974154806,
+    "ci95": [
+     -0.015656016336189852,
+     -0.005590196934869137
+    ]
+   },
+   "distance_only": {
+    "delta": -0.18113123968968584,
+    "ci95": [
+     -0.1902560454200415,
+     -0.17262148234584962
+    ]
+   },
+   "random_mass_control": {
+    "delta": -0.02948139293074046,
+    "ci95": [
+     -0.033908555811680334,
+     -0.024882575820705445
+    ]
+   }
+  },
+  "slot_gate": "lane 0.00960 << family best promotable 0.190147 (distance_only); SUBMIT: NO",
+  "not_a_leaderboard_score": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval.",
+  "file": "evidence/h66c_holdout.json"
+ },
+ "leakage_canary": {
+  "rule": "max(AUC,1-AUC) > 0.90 is leakage until proven otherwise",
+  "rows": [
+   {
+    "feature": "knickpoint_step",
+    "auc": 0.4830170893322345,
+    "max_abs_auc": 0.5169829106677655,
+    "leakage_flag": false
+   },
+   {
+    "feature": "ksn",
+    "auc": 0.513448177110241,
+    "max_abs_auc": 0.513448177110241,
+    "leakage_flag": false
+   },
+   {
+    "feature": "drainage_area",
+    "auc": 0.482090188218305,
+    "max_abs_auc": 0.5179098117816949,
+    "leakage_flag": false
+   },
+   {
+    "feature": "lane_p",
+    "auc": 0.4875107745872715,
+    "max_abs_auc": 0.5124892254127285,
+    "leakage_flag": false
+   },
+   {
+    "feature": "dist_to_visible",
+    "auc": 0.9243383423012624,
+    "max_abs_auc": 0.9243383423012624,
+    "leakage_flag": true
+   }
+  ],
+  "reading": "every lane feature <= 0.518 (no leakage); dist_to_visible 0.924 is the deliberate positive control (distance to the visible catalogue), flagged as designed, and is not a lane input"
+ },
+ "uniqueness_vs_registry": {
+  "evidence_class": "REGISTRY-MEASUREMENT",
+  "registry_rasters_checked": "651/655",
+  "surface_max_abs_spearman_full_footprint": 0.038232,
+  "surface_max_abs_spearman_raster": "GEMSDOE48:docs/downloads/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-unassigned-mtheta.tif",
+  "final_dots_max_abs_spearman_full_footprint": 0.029923283200001843,
+  "final_dots_max_abs_spearman_raster": "GEMSDOE48:docs/downloads/diagnostics/gemsdoe48-h56b-mtheta-126ca59c2801.tif",
+  "final_dots_max_dot_overlap_within_3px": 1.0,
+  "final_dots_max_dot_overlap_raster": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+  "final_dots_max_jaccard_dot_sets": 0.01115646653786371,
+  "final_dots_max_jaccard_raster": "GEMSDOE48:docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif",
+  "byte_unique": true,
+  "pixel_unique": true,
+  "tool_verdict_unique": false,
+  "limits": {
+   "rho": 0.9,
+   "overlap": 0.7
+  },
+  "surface_file": "evidence/h66c_uniqueness_surface.json",
+  "final_dots_file": "evidence/h66c_uniqueness_dots.json",
+  "scope_note": "651/655 registry rasters fetched; the 4 missing are the known 55GEMSDOE blobs (IR-60-CORPUS-01). Both the lane surface and the final 40,000 dots were checked, per the lane rule.",
+  "overlap_gate_reading": "the literal 3-px overlap clause fires on 58 rasters, all dense (>= 192,231 dots; worst case 5,167,373 = near-full-footprint rasters); 58/58 of them also fire for 5 uniform-random 40,000-dot sets (max excess over random +0.0012, median 0.0), so the firing measures the prior's support density, not copying (IR-60-GATE-01). Post-hoc diagnostic: the tool verdict stays unique=false.",
+  "overlap_control_file": "evidence/h66c_overlap_control_dots.json"
+ },
+ "reproducibility": {
+  "check": "scripts/build_submission60.py --verify-existing (recompute the masked lane from the sha-pinned cache)",
+  "log": [
+   "[C] verify-existing identical=True shipped_nonzero=40000 recomputed_nonzero=40000 (11.7s)",
+   "[C] format ok=True problems=[] nonzero=40000 (12.3s)"
+  ],
+  "identical": true,
+  "irregularity": "IR-H66-BUILD-01: the first build (dot digest 66c49029b6cb, TIF sha 958c176d...) produced 12 dots (of 40,000) that differ from a fresh recompute, and that process was OOM-killed (exit 137) in its built-in final-dot audit. Three independent fresh recomputes are bit-identical to each other and to the shipped file (digest 3306ed8afbcd); the cause of the first build's deviation was not identified. The superseded TIF is kept at /tmp only and is NOT the artifact."
+ },
+ "artifact": {
+  "file": "docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif",
+  "sha256": "56f9f89ec97c265e6b9e75031c94441ca80688f556040fe20c5ab18105082ef8",
+  "bytes": 96075,
+  "validator_ok": true,
+  "validator_problems": [],
+  "emitted_positive_pixels": 40000,
+  "on_catalogue_positive_pixels": 0,
+  "min": 0.0,
+  "max": 1.0,
+  "n_nan": 0,
+  "zip": "docs/downloads/gems60-h66-masked-knick-40000.zip"
+ },
+ "submission_name": "gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd",
+ "note": "H66-1 10m chi/ksn knickpoints, confound masks (ephemeral/playa/basin-fill/conductive), 40k dots; E1 INCONCLUSIVE -> NEGATIVE, research only",
+ "note_chars": 139,
+ "verdict": "NEGATIVE",
+ "submit": "NO - research artifact only; do not spend a slot (lane 0.00960 HOLDOUT-DTI << family best promotable 0.190147)",
+ "lane_status": "6th consecutive negative run of the knickpoint lane; the lane method is now fully exhausted - every named confound is masked in the statistic itself, the first test still fails, and the holdout is below the mass-matched random control.",
+ "shared_tool_fixes": [
+  "scripts/run_lane60.py + scripts/build_submission60.py: H66-1 confound-mask extension (playa / basin-fill p90 depth_to_base / conductive p95 / ephemeral A<1e6 m2), applied to the statistic when --include-ephemeral, plus preregistered arm split (T = crossing cells on a continuous basement surface; L = cells on a depth_to_base_surf step)",
+  "scripts/check_uniqueness60.py: --include-ephemeral / --arm for the surface rebuild mirror",
+  "scripts/h65_overlap_control.py: --candidate/--rows/--out CLI (same matched-random control protocol, reusable per session)",
+  "scripts/refresh_feed.py: save the raw leaderboard page next to the parsed snapshot (untested this session - flagged)"
+ ]
+}
