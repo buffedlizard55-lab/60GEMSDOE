@@ -86,6 +86,17 @@ The earlier c7653 run also stopped. No follow-up experiment is authorized; this 
 <a href="{card}">final JSON run card</a> · <a href="{snapshot}">manual 50-row public-board snapshot</a></p></div>'''
 
 
+def _write_page(path: Path, text: str) -> None:
+    """Write a rendered page, re-inserting any marker-delimited status boards it carried.
+
+    Parallel lane sessions publish ``<!-- X-STATUS:BEGIN/END -->`` boards into the shared
+    pages.  Without this the current-review renderer deletes every other session's
+    read-out, which is the same defect ``build_site.preserve_status_blocks`` fixes for the
+    normal rendering path (IR-66-SITE-01).  Single implementation, imported, not forked.
+    """
+    from build_site import preserve_status_blocks
+    path.write_text(preserve_status_blocks(path, text))
+
 def render(root: Path | None = None) -> dict:
     root = root or Path(__file__).resolve().parents[1]
     docs = root / "docs"
@@ -159,7 +170,7 @@ H65-1 passed local format/range checks but is <b>not submit-cleared</b>. For any
 use the shared writer and validator to check the official grid, CRS, transform, dimensions, finite values and [0,1] range.
 This informational checklist does not authorize an experiment or upload. The historical <code>gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan</code>
 file remains an audit example, not a recommendation.</p>'''
-    (docs / "index.html").write_text(_base("60GEMSDOE — current status and evidence", body, "index.html", status=status))
+    _write_page((docs / "index.html"), _base("60GEMSDOE — current status and evidence", body, "index.html", status=status))
 
     # Submission/executive page: disclose why the correct file is research-only and distinguish
     # format validity from organizer acceptance and uniqueness clearance.
@@ -183,7 +194,7 @@ That checklist does not override H65-1's negative stop or authorize submitting H
 <p><a href="research/active-lane-review-2026-10-11.md">Read full review</a> ·
 <a href="research/next-chi-hypotheses-2026-10-11.md">Deferred hypothesis backlog</a> ·
 <a href="h65-report.html">Detailed H65-1 evidence</a></p>'''
-    (docs / "executive-summary.html").write_text(_base("Submission status — research only", body, "executive-summary.html", status=status))
+    _write_page((docs / "executive-summary.html"), _base("Submission status — research only", body, "executive-summary.html", status=status))
 
     # Full 50-row board, based only on the dated manual snapshot.
     rows = "".join(
@@ -204,7 +215,7 @@ this is an algebraic condition, not a score projection.</p>
 <p>Machine-readable provenance: <a href="../{_e(status['leaderboard_snapshot'])}">dated JSON snapshot</a> ·
 <a href="../registry/leaderboard_history.jsonl">snapshot history</a> · <a href="score-ledger.csv">score ledger</a> ·
 <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">official public board</a>.</p>'''
-    (docs / "leaderboard.html").write_text(_base("Public leaderboard — 2026-10-11 manual snapshot", body, "leaderboard.html", status=status))
+    _write_page((docs / "leaderboard.html"), _base("Public leaderboard — 2026-10-11 manual snapshot", body, "leaderboard.html", status=status))
 
     body = _common_status(status) + f'''<h2>Executive findings</h2>
 <ol><li><b>H65-1 is the latest run and stops.</b> The first-test mean was {first['mean_log_ksn_step_contrast']:+.5f}
@@ -233,7 +244,7 @@ false-mass term in score inversion, not the general single-dot cutoff. Full deri
 <li>Gailleton et al. (2019), <a href="https://doi.org/10.5194/esurf-7-211-2019">reproducible knickpoint segmentation</a>.</li>
 <li>Barnes et al. (2014), <a href="https://doi.org/10.1016/j.cageo.2013.04.024">Priority-Flood</a>; Wobus et al. (2006), <a href="https://doi.org/10.1130/2006.2398(04)">tectonics from topography: procedures, promise and pitfalls</a>.</li></ul>
 <p>Full evidence, trusted-source links and caveats: <a href="research/active-lane-review-2026-10-11.md">dated active-lane review</a>.</p>'''
-    (docs / "research.html").write_text(_base("Research review — metric, evidence and stop status", body, "research.html", status=status))
+    _write_page((docs / "research.html"), _base("Research review — metric, evidence and stop status", body, "research.html", status=status))
 
     hypothesis_rows = [
         (1, "Paired-basin ksn contrast across fault blocks", "High potential; very uncertain", "High", "Differential rock uplift expressed as a drainage-scale normalized-steepness contrast; SGMC lithology, runoff and outlet matching required."),
@@ -255,7 +266,7 @@ novelty, mimics, data status and validation gates:
 <a href="https://mrdata.usgs.gov/geology/state/">USGS SGMC</a> ·
 <a href="https://prism.oregonstate.edu/">PRISM</a> ·
 <a href="https://www.usgs.gov/3d-hydrography-program">USGS 3DHP</a>.</p>'''
-    (docs / "hypotheses.html").write_text(_base("Untested hypotheses — explicitly deferred", body, "hypotheses.html", status=status))
+    _write_page((docs / "hypotheses.html"), _base("Untested hypotheses — explicitly deferred", body, "hypotheses.html", status=status))
 
     # Focused source/provenance pages replace stale generated leaderboard assertions while retaining
     # the repository's dated registries and manual-review links.
@@ -272,7 +283,7 @@ requirements for any separately authorized research. USGS says legacy NHD is ret
 <p><a href="h65-report.html">H65-1 processing and source record</a> ·
 <a href="research/active-lane-review-2026-10-11.md">Full source-linked review</a> ·
 <a href="research/next-chi-hypotheses-2026-10-11.md">Deferred hypothesis data requirements</a>.</p>'''
-    (docs / "sources.html").write_text(_base("Trusted sources and data status", body, "sources.html", status=status))
+    _write_page((docs / "sources.html"), _base("Trusted sources and data status", body, "sources.html", status=status))
 
     body = _common_status(status) + f'''<h2>Current irregularities / review limits</h2>
 <table><tr><th>Issue</th><th>Status and consequence</th></tr>
@@ -285,7 +296,26 @@ requirements for any separately authorized research. USGS says legacy NHD is ret
 <tr><td>Automated leaderboard fetch (fixed 2026-10-11)</td><td>The scheduled refresh preserves manual board snapshots and probes only non-competition sources; it makes no request to the DrivenData host. See <code>IR-60-LB-AUTO-20261011</code>.</td></tr>
 </table><p>The historical irregularity register remains at <a href="../registry/irregularities.json">registry/irregularities.json</a>; older entries are preserved as historical records. This page highlights only the current decision-relevant items.</p>
 <p><a href="research/active-lane-review-2026-10-11.md">Full explanation and evidence links</a>.</p>'''
-    (docs / "irregularities.html").write_text(_base("Current irregularities and evidence limits", body, "irregularities.html", status=status))
+    # The curated table above is hand-written, so a finding registered by a parallel session
+    # can be invisible on the site even when it invalidates an instrument this page cites.
+    # Render every high-severity register entry that the curated rows do not already name,
+    # from the registry itself rather than from a second hand-written list (IR-66-SITE-01).
+    try:
+        _reg = _read(root / "registry/irregularities.json").get("items", [])
+    except (OSError, json.JSONDecodeError):
+        _reg = []
+    _extra = "".join(
+        f'<tr><td><code>{_e(it.get("id", ""))}</code></td>'
+        f'<td>{_e(it.get("statement", ""))}<br><i>Mitigation:</i> {_e(it.get("mitigation", ""))}</td></tr>'
+        for it in _reg
+        if str(it.get("severity", "")).lower() == "high" and it.get("id") not in body)
+    if _extra:
+        body = body.replace(
+            "<p>The historical irregularity register remains",
+            f"<h2>Also registered at high severity (rendered from the registry)</h2>"
+            f"<table><tr><th>Issue</th><th>Statement and mitigation</th></tr>{_extra}</table>"
+            f"<p>The historical irregularity register remains", 1)
+    _write_page((docs / "irregularities.html"), _base("Current irregularities and evidence limits", body, "irregularities.html", status=status))
 
     # Replace rendered score-ceiling text with the corrected research note.
     ceiling = root / "docs/research/score-ceiling-analysis.md"
@@ -296,7 +326,7 @@ requirements for any separately authorized research. USGS says legacy NHD is ret
 altering equations or claims during HTML conversion.</p><pre>{markdown}</pre>
 <p><a href="research/score-ceiling-analysis.md">Open the Markdown source</a> ·
 <a href="research/active-lane-review-2026-10-11.md">active-lane review</a></p>'''
-        (docs / "score-ceiling.html").write_text(_base("Score-ceiling analysis — corrected algebra", body, status=status))
+        _write_page((docs / "score-ceiling.html"), _base("Score-ceiling analysis — corrected algebra", body, status=status))
 
     # Keep a visible current status on remaining historical reports, but remove any stale injected
     # H61/registry-primary recommendation banner before inserting the latest H65-1 notice.
@@ -318,7 +348,7 @@ altering equations or claims during HTML conversion.</p><pre>{markdown}</pre>
                       count=1, flags=re.S)
         notice_with_class = notice.replace('<div class="banner current-stop-notice">', '<div class="banner current-stop-notice">', 1)
         text = re.sub(r'(<body[^>]*>\s*)', lambda m: m.group(1) + notice_with_class, text, count=1)
-        page.write_text(text)
+        _write_page(page, text)
 
     # GitHub Pages publishes the repository root; keep root landing/stubs aligned with STOP.
     root_status = _common_status(status, prefix="docs/")
@@ -327,7 +357,7 @@ altering equations or claims during HTML conversion.</p><pre>{markdown}</pre>
 <meta http-equiv="refresh" content="0; url=docs/index.html"></head><body><main class="wrap">
 <h1>60GEMSDOE — current status: STOP</h1>{root_status}
 <p><a href="docs/index.html">Open the current evidence site →</a></p></main></body></html>'''
-    (root / "index.html").write_text(root_index)
+    _write_page((root / "index.html"), root_index)
     for page in sorted(root.glob("*.html")):
         if page.name == "index.html":
             continue
@@ -337,7 +367,7 @@ altering equations or claims during HTML conversion.</p><pre>{markdown}</pre>
 <meta http-equiv="refresh" content="0; url=docs/{_e(target)}"></head><body><main class="wrap">
 <h1>Current status: STOP</h1>{_common_status(status, prefix="docs/")}
 <p><a href="docs/{_e(target)}">Open current page →</a> · <a href="docs/index.html">Home</a></p></main></body></html>'''
-        (root / page.name).write_text(root_html)
+        _write_page((root / page.name), root_html)
 
     return {"status": status["status"], "run": status["active_run"], "artifact": art["path"], "leaderboard_rows": len(snapshot["rows"]), "pages_updated": True}
 

@@ -76,25 +76,97 @@ def auc(score, truth, domain) -> float:
     return float((r[t].sum() - n_pos * (n_pos + 1) / 2.0) / (n_pos * n_neg))
 
 
+STEP_STATISTIC = os.environ.get("GEMS60_STEP_STATISTIC", "upstream").lower()
+
+
+def load_step() -> np.ndarray:
+    """The lane's steepness-step statistic, selected once for every consumer.
+
+    ``upstream`` (default) is ``log((ksn_up + f)/(ksn_down + f))`` at its most
+    positive extreme: the footwall reach above a fault crossing.  This is what
+    H60-A and H65-1 declared, so the default reproduces both exactly.
+
+    ``abs`` takes whichever limb of the same two-segment statistic is larger,
+    ``max(step_max, -step_min)``.  Rationale (H66-2): H65's own diagnostics
+    (``evidence/h65_diagnostics.json``) put the off-catalogue targets *lower* in the
+    local relief than the catalogue, i.e. in alluvial hanging-wall ground where the
+    upstream-steepening limb is weak and the recorded base-level step shows up in
+    the downstream limb instead (Crosby & Whipple 2006, JGR 111 F03014,
+    doi:10.1029/2005JF000406, on knickpoint migration leaving a lower limb).
+
+    One implementation, one environment variable, no private fork: ``run_lane60``,
+    ``build_submission60``, ``check_uniqueness60`` and ``run_h66`` all call this.
+    """
+    s = load("step").astype(np.float64)
+    if STEP_STATISTIC == "upstream":
+        return s
+    if STEP_STATISTIC == "abs":
+        sm = load("step_min").astype(np.float64)
+        both = np.isfinite(s) & np.isfinite(sm)
+        return np.where(both, np.maximum(s, -sm), np.nan)
+    raise SystemExit(f"GEMS60_STEP_STATISTIC must be 'upstream' or 'abs', got {STEP_STATISTIC!r}")
+
+
+TRAINING_FEATURES = ROOT / "data/official/training_features.tif"
+GEODAWN_RAD = ROOT / "data/external/geodawn_rad_u8.tif"
+
+
 def confound_masks(step, channel) -> tuple[np.ndarray, dict]:
-    """Declared lithology / base-level confound masks (band 15, band 17, fill raise)."""
+    """Declared lithology / base-level confound masks.
+
+    Two paths, chosen by what the machine actually has; the choice is recorded in
+    the diagnostics so no receipt is ambiguous about which mask was used.
+
+    * **Preferred (H60-A / H65-1 defaults):** ``training_features.tif`` band 15
+      (``depth_to_base_surf``) above its 90th footprint percentile = thick cover,
+      and band 17 (``cond_surf``) above its 95th = clay-rich / evaporitic.
+      Reproduces H60-A and H65-1 byte-for-byte whenever that raster is present.
+    * **Substitute (shared-tool fix, 2026-10-11, session arena/970443fc):** the
+      419 MB feature stack cannot live in git (GitHub 100 MB blob limit) and is
+      absent from an egress-restricted sandbox.  Failing closed here made the whole
+      lane unrunnable, so the pinned GeoDAWN airborne-radiometric pack supplies the
+      lithology mask instead: K (band 1) or Th (band 2) above the 95th footprint
+      percentile = clay-rich / alluvial cover.  Radiometric K and Th are the
+      standard lithologic discriminators for exactly this survey
+      (https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and).
+      Recorded as irregularity IR-66-DATA-01; ``lithology_source`` names the path used.
+    """
     playa = load("playa")
-    with rasterio.open(ROOT / "data/official/training_features.tif") as src:
-        depth = src.read(15).astype(np.float32).astype(np.float64)
-        cond = src.read(17).astype(np.float32).astype(np.float64)
     fp = load("footprint")
-    depth[~np.isfinite(depth) | (np.abs(depth) > 1e30)] = np.nan
-    cond[~np.isfinite(cond) | (np.abs(cond) > 1e30)] = np.nan
-    d_thr = float(np.nanpercentile(depth[fp], 90))
-    c_thr = float(np.nanpercentile(cond[fp], 95))
-    basin_fill = fp & np.isfinite(depth) & (depth > d_thr)
-    conductive = fp & np.isfinite(cond) & (cond > c_thr)
+    if TRAINING_FEATURES.is_file():
+        with rasterio.open(TRAINING_FEATURES) as src:
+            depth = src.read(15).astype(np.float32).astype(np.float64)
+            cond = src.read(17).astype(np.float32).astype(np.float64)
+        depth[~np.isfinite(depth) | (np.abs(depth) > 1e30)] = np.nan
+        cond[~np.isfinite(cond) | (np.abs(cond) > 1e30)] = np.nan
+        d_thr = float(np.nanpercentile(depth[fp], 90))
+        c_thr = float(np.nanpercentile(cond[fp], 95))
+        basin_fill = fp & np.isfinite(depth) & (depth > d_thr)
+        conductive = fp & np.isfinite(cond) & (cond > c_thr)
+        source = "training_features.tif band15 p90 + band17 p95"
+        extra = dict(depth_to_base_p90_m=d_thr, cond_surf_p95=c_thr)
+    elif GEODAWN_RAD.is_file():
+        with rasterio.open(GEODAWN_RAD) as src:
+            k = src.read(1).astype(np.float64)
+            th = src.read(2).astype(np.float64)
+        k = np.where(k > 0, k, np.nan)      # 0 is the pack's nodata code
+        th = np.where(th > 0, th, np.nan)
+        k_thr = float(np.nanpercentile(k[fp], 95))
+        th_thr = float(np.nanpercentile(th[fp], 95))
+        conductive = fp & np.isfinite(k) & (k > k_thr)
+        basin_fill = fp & np.isfinite(th) & (th > th_thr)
+        source = ("SUBSTITUTE geodawn_rad_u8.tif K p95 + Th p95 "
+                  "(training_features.tif absent; IR-66-DATA-01)")
+        extra = dict(rad_K_p95=k_thr, rad_Th_p95=th_thr)
+    else:
+        raise SystemExit("confound masks unavailable: neither "
+                         f"{TRAINING_FEATURES.name} nor {GEODAWN_RAD.name} is present")
     exclude = playa | basin_fill | conductive
     diag = dict(playa_px=int(playa.sum()), basin_fill_px=int(basin_fill.sum()),
                 conductive_px=int(conductive.sum()), excluded_px=int(exclude.sum()),
-                depth_to_base_p90_m=d_thr, cond_surf_p95=c_thr,
+                lithology_source=source,
                 channel_excluded_px=int((channel & exclude).sum()),
-                channel_px=int(channel.sum()))
+                channel_px=int(channel.sum()), **extra)
     return exclude, diag
 
 
@@ -295,7 +367,7 @@ def run(args) -> int:
     ctx = HO.build_holdout(grid)
     mark(f"holdout cells={len(ctx.cells)}")
 
-    step = load("step").astype(np.float64)
+    step = load_step()
     channel = load("channel")
     if (CACHE / "branch_sig.npy").is_file():
         # substrate supplies its own branch signature (H65-1: the 10 m network's cell 500 m

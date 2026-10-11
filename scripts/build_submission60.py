@@ -36,7 +36,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from gems57 import grid as G57                     # noqa: E402
 from gems57 import gates, submission_writer, uniqueness as U   # noqa: E402
 from gems60 import lane as L                       # noqa: E402
-from run_lane60 import confound_masks, load        # noqa: E402
+from run_lane60 import confound_masks, load, load_step  # noqa: E402
 
 CACHE = ROOT / ".cache" / os.environ.get("GEMS60_FEATURE_CACHE", "features60")
 # Substrate-agnostic driver (shared-tool change 2026-10-11, session arena/96ecd67e, H65-1):
@@ -46,6 +46,7 @@ CACHE = ROOT / ".cache" / os.environ.get("GEMS60_FEATURE_CACHE", "features60")
 TAG = os.environ.get("GEMS60_TAG", "h60a")
 REGISTRY_CACHE = ROOT / ".cache" / "registry"
 EVID = ROOT / "evidence"
+from run_lane60 import STEP_STATISTIC  # noqa: E402  (selected once, in the shared helper)
 OUT_DIR = ROOT / "downloads"
 SCREEN_CELLS = 400_000
 EXACT_RHO_TRIGGER = 0.70
@@ -125,7 +126,7 @@ def main() -> int:
 
     grid = G57.load_grid()
     fp, cat = grid.footprint, grid.catalogue
-    step = load("step").astype(np.float32).astype(np.float64)
+    step = load_step()
     channel = load("channel")
     from gems60 import geomorph as gm
     if (CACHE / "branch_sig.npy").is_file():
@@ -196,7 +197,7 @@ def main() -> int:
             path, pred, ROOT / "data/official/sample_submission.tif", fp,
             note=note, name=name, catalogue=cat,
             metadata=dict(lane="tectonic-geomorphology", hypothesis=a.hypothesis,
-                          substrate=a.substrate,
+                          substrate=a.substrate, step_statistic=STEP_STATISTIC,
                           parameters=dict(budget=a.budget, z_min=L.Z_MIN,
                                           n_drainage_min=L.N_DRAINAGE_MIN,
                                           corridor_half_len_px=L.CORRIDOR_HALF_LEN_PX,

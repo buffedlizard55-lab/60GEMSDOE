@@ -1,6 +1,48 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>60GEMSDOE — STOP / research-only artifact</title><link rel="stylesheet" href="docs/assets/site.css">
-<meta http-equiv="refresh" content="0; url=docs/index.html"></head><body><main class="wrap">
+<meta http-equiv="refresh" content="0; url=docs/index.html"></head><body>
+<!-- H66-STATUS:BEGIN -->
+<div class=wrap style="border:3px solid #b42318;background:#fffafa;padding:12px 16px;margin:8px auto">
+<h2 style="margin:0 0 6px">&#128680; READ THIS FIRST (2026-10-11, session H66) &mdash; the newest unique TIF and whether you may submit it</h2>
+<table>
+<tr><th>file</th><th>download</th><th>submit to the portal?</th></tr>
+<tr><td><b>Newest unique TIF (generated this session, H66-2)</b><br><code>gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif</code><br>
+<span style="color:#5b7183">37,654 dots &middot; sha256 <code>66f93c821cf7b8f9&hellip;</code></span></td>
+<td><a class=btn href="docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif" download>&#11015; .tif</a>
+<a class="btn alt" href="docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.zip" download>.zip</a>
+<a href="docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros-runcard.json">run card</a>
+<a href="docs/downloads/checks-gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif.json">checks</a></td>
+<td style="color:#b42318"><b>DOWNLOAD: OK &middot; SUBMIT: NO.</b> Verdict <b>NEGATIVE</b>.
+The pre-registered first test against <i>off-catalogue</i> faults returned
+-0.0860 (95&nbsp;% CI [-0.1372, -0.0220], 86 segments)
+&rarr; <b>STOP</b>. On the off-catalogue instrument the lane scores
+INSTRUMENT-DTI 0.00913 against a mass-matched random control's 0.07253
+(paired -0.06339, CI [-0.06720, -0.05927], 0&nbsp;% of 1,000 draws positive).
+It is research evidence, not a candidate.</td></tr>
+<tr><td><b>Group champion, already scored</b><br><code>gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</code></td>
+<td><a class="btn alt" href="docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif" download>&#11015; .tif</a></td>
+<td>Already scored: owner-reported live <b>0.2778</b> (no organizer receipt exists for these bytes).
+Uploading it again spends a slot and repeats a known number.</td></tr>
+<tr><td><b>Registry primary</b><br><code>gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif</code></td>
+<td><a class="btn alt" href="docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif" download>&#11015; .tif</a></td>
+<td><b>NOT CLEARED</b> for a slot by any local instrument. Unique and portal-safe; a bounded-downside bet.</td></tr>
+</table>
+<p style="margin:6px 0 0"><b>Bottom line: this session cleared no file for a submission slot.</b>
+Format is not the issue &mdash; the H66 file is single-band float32, EPSG:32611, 3730&times;3292,
+<b>0 NaN, min 0.0, max 1.0, no nodata tag, 0 dots on the mapped catalogue</b>, so the portal error
+<i>&ldquo;Predicted values must be in range [0, 1]&rdquo;</i> cannot come from it. The issue is skill:
+the tectonic-geomorphology lane measures <i>below</i> random dots on the only local truth set that
+contains off-catalogue faults. If you upload it anyway for research, use the name
+<code>60GEMSDOE-H66-2-KNICK-BOTHLIMBS-37654</code> and the note
+<code>H66-2 chi/ksn both-limb steepness steps, &gt;=3 drainages, 37654 dots off-catalogue; E1 off-cat -0.086 STOP: NEGATIVE, research only</code> (129/140 characters).
+Full write-up: <a href="docs/h66-report.html">docs/h66-report.html</a> &middot;
+run card <a href="docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros-runcard.json">JSON</a>.
+The previous sessions' boards follow below and are unchanged.
+Public leaderboard top as last recorded in this repository: <b>0.4133</b>
+(<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a>; not re-readable from this sandbox &mdash; see IR-66-LB-01).</p>
+</div>
+<!-- H66-STATUS:END -->
+<main class="wrap">
 <h1>60GEMSDOE — current status: STOP</h1><div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
 <p><b>Latest run:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
 <strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast +0.0326,

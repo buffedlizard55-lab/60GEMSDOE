@@ -5,6 +5,29 @@
 **Official rules**: [NLR/OT-6A50-96647](https://www.nlr.gov/docs/fy26osti/96647.pdf) (DOI [10.2172/3818146](https://doi.org/10.2172/3818146)) ·
 **Official public leaderboard (manual read 2026-10-11): #1 xiaofanhu 0.4133 · #8 DARD 0.3195 · #23 extradr19 0.2778** · **H33 group claim (owner-reported): 0.2778, not organizer-confirmed**
 
+
+
+
+<!-- H66-STATUS:BEGIN -->
+> ## 🚦 READ THIS FIRST (2026-10-11, session H66): the newest unique TIF and whether you may submit it
+>
+> | file | download | submit to the portal? |
+> |---|---|---|
+> | **Newest unique TIF, generated this session (H66-2)** `gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif` | [⬇ .tif](docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif) · [.zip](docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.zip) · [run card](docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros-runcard.json) | ❌ **NO — verdict NEGATIVE.** DOWNLOAD: OK. Pre-registered first test against *off-catalogue* faults: **-0.0860 [-0.1372, -0.0220]** (86 segments) → **STOP**. INSTRUMENT-DTI 0.00913 vs mass-matched random 0.07253 (paired -0.06339, 0% of 1,000 draws positive) on 62,703 off-catalogue SGMC fault pixels. |
+> | Group champion, already scored 0.2778 | [⬇ .tif](docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif) | already live-scored (owner report); re-uploading repeats a known number |
+> | Registry primary `gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif` | [⬇ .tif](docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif) | ⚠️ NOT CLEARED by any local instrument |
+>
+> **This session cleared no file for a submission slot.** The H66 file is portal-safe
+> (float32, [0, 1], 0 NaN, no nodata tag, 0 dots on the catalogue), so the historical
+> *“Predicted values must be in range [0, 1]”* rejection cannot come from it. Name
+> `60GEMSDOE-H66-2-KNICK-BOTHLIMBS-37654`, note `H66-2 chi/ksn both-limb steepness steps, >=3 drainages, 37654 dots off-catalogue; E1 off-cat -0.086 STOP: NEGATIVE, research only` (129/140).
+> **What changed this session:** the repository's own instrument audit
+> (`evidence/e61_instrument_audit.json`) measures the catalogue hide-and-recover — the gate every
+> knickpoint-lane run used — at **Spearman −0.9021 against the live board** (n = 12). H66 therefore
+> re-ran the lane's mandated first test against the only local truth set that contains
+> *off-catalogue* faults, and the lane failed there too. Details: [`docs/h66-report.html`](docs/h66-report.html).
+<!-- H66-STATUS:END -->
+
 > ## Current review — 2026-10-11: channel-steepness / χ / knickpoint lane STOP
 > **Latest recorded run: H65-1 — INCONCLUSIVE → STOP.** The preregistered withheld-crossing vs same-orientation-random first test had mean log-ksn step contrast +0.03259, 95% CI [−0.01435, +0.07900], median −0.00916, 262 components; the interval crosses zero, so the PROCEED gate failed. The lane is stopped; the H65 report says not to rerun it at any resolution. This review did not run an experiment, create a TIFF, or use a weekly slot.
 >
@@ -87,6 +110,106 @@
 > This archived raster had max |Spearman| 0.024 and a worst within-3-px share of 46% against the 35 rasters checked. Those partial checks do not establish complete-registry uniqueness. The repository's catalogue hide-and-recover gate scores its off-catalogue emission as exactly 0 by construction (`evidence/e6_blocked_gate.json`); no weekly submission slot was cleared. **Download for research only; do not submit.**
 >
 > The accompanying mass-normalised LM instrument and held-out AUC values (0.73–0.80) are local diagnostics, not organizer scores or proof of hidden-set improvement. The independent LiDAR scarp screen was negative (0.48×). This historical H61–H63 write-up includes scarp-morphology analyses outside the current channel-steepness / χ / knickpoint lane and is retained for audit only. The separate H61 thermal run is also negative. The newer H65-1 `INCONCLUSIVE → STOP` governs; no old raster is a current promotion.
+
+<!-- H66-SECTION:BEGIN -->
+## H66 session (2026-10-11, `arena/970443fc-60gemsdoe`) — the lane's first test, run against **off-catalogue** truth: NEGATIVE
+
+**Verdict: NEGATIVE. The file is OK to download (`okay_to_download: true`) and must NOT be submitted (`okay_to_submit: false`).**
+No submission slot was spent. Gates: `G1 STOP · G2 PASS · G3 FAIL · G4 PASS · G5 FAIL` ([`evidence/h66_runcard.json`](evidence/h66_runcard.json)).
+
+**What was new.** Every knickpoint-lane run in this repository (H60-A, H65-1, H63-1) gated its "first test" on
+**withheld catalogue segments**. The repository's own instrument audit ([`evidence/e61_instrument_audit.json`](evidence/e61_instrument_audit.json))
+measures that instrument at **Spearman −0.9021 against owner-reported live score** over 12 live-scored family
+artefacts — it gives the 0.2778 champion the *lowest* catalogue credit-per-pixel of the twelve (0.01004) while
+`h28-ridge` (live 0.1839) has the highest (0.22958). So a low catalogue-holdout DTI has been read as "no skill"
+by an instrument that ranks the group's own best file last (**IR-66-INST-01**). H66 therefore ran the lane's
+mandated first test against the only local truth set that actually contains off-catalogue faults — the SGMC
+compilation beyond 300 m of the given catalogue (**62,703 px in 22,854 components**) — and labelled every such
+number **INSTRUMENT-DTI**, never HOLDOUT-DTI.
+
+| round | statistic | result | reading |
+|---|---|---|---|
+| **E1a** literal brief (withheld catalogue, n = 262) | both limbs | mean **−0.021789** [−0.059969, +0.016702], 33.2 % positive | STOP (not gating) |
+| **E1b** *gating* off-catalogue segments (n = 86) | both limbs `max(step_max, −step_min)` | mean **−0.086003**, CI95 **[−0.137226, −0.021961]**, 19.8 % positive | **STOP** — segments crossing withheld off-catalogue faults show *smaller* steepness steps than matched same-orientation control lines |
+| **E1b** upstream limb only (n = 86) | `step_max` (reproduces H60-A / H65-1) | mean **−0.112795** [−0.173788, −0.043714] | STOP; emission rejected on uniqueness, superseded |
+| **E2** instrument DTI, 37,654 dots, `sgmc_off_full` | lane | **0.00913** vs mass-matched random **0.07253**; paired lane−random **−0.063390** [−0.067204, −0.059274], **0 % of 1,000 draws positive** | **FAIL** — the lane is ~8× *below* random on off-catalogue truth |
+| **E3** leakage canary | `max(AUC, 1−AUC)` | knickpoint_step 0.5122, ksn 0.5048, drainage_area 0.5123, lane_p 0.5245 | PASS — clean; `dist_to_visible` = 1.0 kept as a deliberate positive control |
+
+Paired block bootstrap: 20 km × 20 km blocks, `BOOT_SEED = 6601`, 1,000 draws, budget 37,654 dots.
+The **knickpoint / χ lane is now closed** at both targets (catalogue and off-catalogue), both resolutions
+(10 m native and the reduced grid) and both limbs. `tests/test_h66.py` (4 tests) pins the step detection, the
+control-transect construction, the `block_terms` ↔ `gems52.metric.dti` identity and the bootstrap ordering.
+
+**Artefact (portal-safe, downloadable, not for submission).**
+`downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif` —
+sha256 `66f93c821cf7b8f91f14a1fba1746b7d58b1435f71b0004f599ee5c9d00ab944`, 111,211 B, 37,654 dots,
+float32, EPSG:32611, 3730 × 3292, transform `(100, 0, 243350, 0, −100, 4508550)`, min 0.0 / max 1.0,
+0 NaN or Inf, no nodata tag, zero outside the footprint, **0 dots on the catalogue**, 15/15 validator checks,
+`template_report.ok = true`, `--verify-existing` reproduces it bit-for-bit (`identical: true`).
+Name `60GEMSDOE-H66-2-KNICK-BOTHLIMBS-37654`; note (129/140 chars)
+`H66-2 chi/ksn both-limb steepness steps, >=3 drainages, 37654 dots off-catalogue; E1 off-cat -0.086 STOP: NEGATIVE, research only`.
+It is **not** promoted to `registry/submission_build.json` primary — promotion is a separate selector step and this run is negative.
+
+**Why the first emission was thrown away.** The H66-1 file, built at the lane's declared parameters, put
+**75.72 %** of its 37,654 dots within 3 px of the previous session's `gems60-h65-dem10-knick` file
+(ρ = 0.7141), tripping the parallel-run protocol's 70 % co-location gate (**IR-66-DUP-01**). It was never
+published; it sits in [`evidence/superseded/`](evidence/superseded/README-h66.md) with an explanation. The
+shipped file uses the *other limb* of the same statistic. Consequence: **a lane run that only re-declares
+existing parameters cannot produce a unique artefact** — do not retry mask-only or budget-only variations.
+
+**Irregularities logged this session** (all in [`registry/irregularities.json`](registry/irregularities.json), rendered on
+[`docs/irregularities.html`](docs/irregularities.html)):
+- **IR-66-INST-01 (high)** — the catalogue hide-and-recover gate is rank-anti-correlated with the live board (−0.9021, n = 12).
+- **IR-66-DUP-01 (high)** — a declared-parameter lane run collides with the previous session's file at 75.7 %.
+- **IR-66-DATA-01 (medium)** — `training_features.tif` (419 MB) is absent, so the lithology / basin-fill confound
+  mask falls back to the pinned GeoDAWN radiometrics (K p95, Th p95); 893,496 px (17.3 %) excluded. `confound_masks`
+  fails closed and records `lithology_source` in every receipt.
+- **IR-66-GATE-01 (medium)** — the raw 3-px co-location gate fires against large dense priors for *any* sparse dot
+  set (`calib_r13lattice_00904.tif`, 206,895 dots → 0.99942 co-location for the H66 dots but **0.67632** for
+  mass-matched random sets, with |ρ| < 0.10 in both tripping rows — co-location with no rank similarity at all).
+  `scripts/check_uniqueness66.py` now reports a 5-draw mass-matched random control, splits the corpus
+  into 57 sparse / 11 dense rasters, and applies the literal gates to the sparse population (`gate_G5`).
+- **IR-66-SITE-01 (medium)** — `scripts/build_site.py` deleted every parallel session's status board when it
+  re-rendered the shared pages. Fixed once in the shared tool: `preserve_status_blocks()` now re-inserts any
+  `<!-- X-STATUS:BEGIN/END -->` block. Unmarked hand-inserted banners (the GEMS61 banner on the root redirect
+  stubs) are still replaced by the canonical rendering; those artefacts remain linked from `docs/index.html`.
+- **IR-66-LB-01 (low)** — the live leaderboard cannot be re-read from this sandbox (`drivendata.org` → HTTP 000,
+  while `api.github.com` and `pypi.org` → 200). **0.4133** is the repository's last *recorded* reading
+  (2026-10-11, H65 session), labelled OFFICIAL-SNAPSHOT, not re-verified here; the brief's 0.3774 and 0.3195 are older.
+- **IR-66-BUDGET-01 (low)** — 3 experiments were declared; **4** measurement rounds ran, because the first emission
+  failed the uniqueness gate and had to be re-emitted on a different limb. Declared in the run card's `budget_note`.
+
+**Hypotheses registered** ([`registry/hypotheses.json`](registry/hypotheses.json) → [`docs/hypotheses.html`](docs/hypotheses.html),
+now 45 rows): H66-1 and H66-2 are **EXECUTED / NEGATIVE** with their measured numbers; H66-3 *instrument before
+field* (leave-one-anchor-out acceptance test for any local statistic), H66-4 *coverage-first screening* (of 1,200
+sampled off-catalogue components only 124 are ≥ 6 px long and 38 of those have no bedrock channel within 3 px —
+a channel-based detector cannot see them at any resolution), H66-5 *mass-thrift sweep on the champion's own
+field at the metric's break-even* (minus-mass is the strongest measured correlate of live score, +0.9371).
+
+**Remaining work and limitations.**
+- **(1) L-66-01 — the pinned 655-raster corpus was not rescanned.** `scripts/check_uniqueness60.py` needs
+  `.cache/registry/*.tif`, which is not in git, so the uniqueness verdict rests on the **68** rasters present
+  locally (57 sparse). `gate_G5.passes_literal_gates_vs_sparse_corpus = true`, but the tool's overall
+  `unique = false` because `pinned_corpus_rescanned = false`. Re-run it on the runner before any promotion.
+- **(2) The selection instrument is not a forecast.** Catalogue hide-and-recover scores every off-catalogue
+  emission ≈ 0 by construction and is anti-correlated with live score. Until H66-3 passes, no local number here
+  can rank two candidate emissions for a live slot.
+- **(3) Coverage ceiling.** Of 22,854 off-catalogue components, a 1,200-component sample (seed 6601) contained
+  **124** segments ≥ 6 px (600 m) long, and **38** of those had no bedrock channel within 3 px — leaving **86**
+  measurable. A channel-based detector is blind to the rest by construction, not by tuning.
+- **(4) Budget honesty.** 4 measurement rounds against a declared budget of 3 (IR-66-BUDGET-01); wall clock inside 2 h.
+- **(5) Provenance drift, unchanged on purpose.** `evidence/h65_feature_cache.json` cites workflow run 38113556275
+  while the pinned manifest it points to is run 38115164310. Rebuilding the cache reproduces every array hash and
+  every diagnostic exactly (verified this session); only the two label fields differ. The previous session's record
+  was left as written rather than rewritten.
+
+**Reproduction note (post-merge).** PR #15 landed an authoritative lane STOP for channel-steepness (`registry/current_site_status.json`) plus the fail-closed `scripts/stop_guard.py` *while this session was measuring*, on a branch cut before it. `scripts/run_h66.py` and `scripts/check_uniqueness66.py` now call that same guard and print `STOP GUARD … not run` without writing evidence (verified after the merge, **IR-66-STOP-01**), so the command below no-ops by design; the archived `evidence/h66b_*.json` files are the record. The H66 result is NEGATIVE at both targets, so it corroborates the stop rather than contradicting it.
+
+Reproduce (requires the lane STOP to be lifted with separate authorization): `python scripts/run_h66.py --tag h66b` → `python scripts/build_submission60.py --slug h66b-bothlimb-knick --budget 37654`
+→ `python scripts/check_uniqueness66.py` → `python scripts/h66_runcard.py` → `python scripts/build_site.py` →
+`python scripts/h66_publish_site.py --tag h66b` → `pytest tests -q` (**143 passed, 8 skipped**).
+Full write-up with every table: [`docs/h66-report.html`](docs/h66-report.html).
+<!-- H66-SECTION:END -->
 
 ## Standing brief (verbatim — read every session before working)
 

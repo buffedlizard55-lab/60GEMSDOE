@@ -1,0 +1,727 @@
+{
+  "experiment": "H66-1 E1/E2",
+  "generated_utc": "2026-10-11T16:00:29Z",
+  "preregistration": "registry/preregistration-h66.json",
+  "evidence_class": "INSTRUMENT-DTI (public proxy truth; NOT HOLDOUT-DTI, NOT ORGANIZER-CONFIRMED)",
+  "truth_sets": {
+    "sgmc_off_full": 62703,
+    "sgmc_off_thin8000": 8000,
+    "sgmc_off_balanced8000": 8000,
+    "catalogue_full": 60988
+  },
+  "instrument_provenance": "evidence/e61_instrument_audit.json spearman_vs_live",
+  "confounds": {
+    "playa_px": 550267,
+    "basin_fill_px": 258104,
+    "conductive_px": 251815,
+    "excluded_px": 893496,
+    "lithology_source": "SUBSTITUTE geodawn_rad_u8.tif K p95 + Th p95 (training_features.tif absent; IR-66-DATA-01)",
+    "channel_excluded_px": 55677,
+    "channel_px": 786299,
+    "rad_K_p95": 208.0,
+    "rad_Th_p95": 208.0
+  },
+  "candidates": {
+    "channel_pixels": 786299,
+    "valid_channel_pixels": 730622,
+    "candidate_pixels": 43131,
+    "z_min": 1.5,
+    "block_px": 400
+  },
+  "surface": {
+    "channel_pixels": 786299,
+    "valid_channel_pixels": 730622,
+    "candidate_pixels": 43131,
+    "z_min": 1.5,
+    "block_px": 400,
+    "n_drainage_min": 3,
+    "corridor_half_len_px": 6,
+    "corridor_half_width_px": 2,
+    "trace_decay": 0.5,
+    "regional_modal_strike_deg": 25.0,
+    "candidate_pixels_scanned": 43131,
+    "aligned_candidates": 38512,
+    "n_drainage_p50": 5.0,
+    "n_drainage_p90": 10.0,
+    "n_drainage_max": 23,
+    "trace_pixels": 373624,
+    "trace_only_pixels": 333590,
+    "positive_pixels": 376721,
+    "p_max": 1.0
+  },
+  "budget": 37654,
+  "allowed_px": 4862825,
+  "e1a_literal_brief": {
+    "evidence_class": "MEASUREMENT",
+    "n_components": 262,
+    "mean": 0.03259120937549255,
+    "median": -0.009159043588752754,
+    "ci95": [
+      -0.011968108692189403,
+      0.07681497242566876
+    ],
+    "fraction_positive": 0.4732824427480916,
+    "component_std": 0.3896411606225118,
+    "bootstrap": {
+      "draws": 1000,
+      "seed": 6601,
+      "method": "percentile over withheld components"
+    },
+    "verdict": "INCONCLUSIVE"
+  },
+  "e1b_off_catalogue": {
+    "evidence_class": "MEASUREMENT",
+    "n_components": 86,
+    "mean": -0.11279532763092709,
+    "median": -0.14965110858859854,
+    "ci95": [
+      -0.17378766968562168,
+      -0.04371438930881813
+    ],
+    "fraction_positive": 0.26744186046511625,
+    "component_std": 0.31152118623286845,
+    "bootstrap": {
+      "draws": 1000,
+      "seed": 6601,
+      "method": "percentile over withheld components"
+    },
+    "verdict": "STOP"
+  },
+  "gate_G1": "STOP",
+  "canary": [
+    {
+      "feature": "knickpoint_step",
+      "auc_offcat": 0.4864869173937048,
+      "auc_catalogue_full_footprint": 0.5008045806457398,
+      "max_abs_auc": 0.5135130826062952,
+      "leakage_flag": false
+    },
+    {
+      "feature": "ksn",
+      "auc_offcat": 0.4951703259359482,
+      "auc_catalogue_full_footprint": 0.50372867071689,
+      "max_abs_auc": 0.5048296740640519,
+      "leakage_flag": false
+    },
+    {
+      "feature": "drainage_area",
+      "auc_offcat": 0.4877448067754615,
+      "auc_catalogue_full_footprint": 0.4995484046299737,
+      "max_abs_auc": 0.5122551932245385,
+      "leakage_flag": false
+    },
+    {
+      "feature": "lane_p",
+      "auc_offcat": 0.47645942978490413,
+      "auc_catalogue_full_footprint": 0.5081785266410169,
+      "max_abs_auc": 0.5235405702150959,
+      "leakage_flag": false
+    },
+    {
+      "feature": "dist_to_visible",
+      "auc_offcat": 0.5279549460791481,
+      "auc_catalogue_full_footprint": 1.0,
+      "max_abs_auc": 1.0,
+      "leakage_flag": true
+    }
+  ],
+  "canary_rule": "max(AUC,1-AUC) > 0.90 is leakage until proven otherwise",
+  "instrument": {
+    "sgmc_off_full": {
+      "n_truth": 62703,
+      "per_arm": {
+        "lane": {
+          "dti": 0.006304,
+          "tpw": 363.619,
+          "fpw": 37231.822,
+          "fnw": 62339.381,
+          "n_truth": 62703,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.009657
+        },
+        "ksn_only_no_alignment": {
+          "dti": 0.064562,
+          "tpw": 3718.142,
+          "fpw": 33421.879,
+          "fnw": 58984.858,
+          "n_truth": 62703,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.098745
+        },
+        "distance_only": {
+          "dti": 0.028896,
+          "tpw": 1668.79,
+          "fpw": 36274.837,
+          "fnw": 61034.21,
+          "n_truth": 62703,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.044319
+        },
+        "random_mass_control": {
+          "dti": 0.072525,
+          "tpw": 4222.384,
+          "fpw": 36063.158,
+          "fnw": 58480.616,
+          "n_truth": 62703,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.112136
+        },
+        "champion_02778_owner_report": {
+          "dti": 0.09606,
+          "tpw": 5602.257,
+          "fpw": 35187.577,
+          "fnw": 57100.743,
+          "n_truth": 62703,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.148783
+        }
+      },
+      "bootstrap": {
+        "per_arm": {
+          "lane": {
+            "mean": 0.006332348257508896,
+            "median": 0.006287445878328674,
+            "ci95": [
+              0.004574812249221261,
+              0.008346380008538611
+            ]
+          },
+          "ksn_only_no_alignment": {
+            "mean": 0.06431692210684509,
+            "median": 0.06421883487224997,
+            "ci95": [
+              0.052783251794486334,
+              0.07582452903343832
+            ]
+          },
+          "distance_only": {
+            "mean": 0.028882054351175662,
+            "median": 0.02880109427350104,
+            "ci95": [
+              0.02445529704402024,
+              0.0336606556179215
+            ]
+          },
+          "random_mass_control": {
+            "mean": 0.07256814362983695,
+            "median": 0.07263111465515923,
+            "ci95": [
+              0.06882832236806855,
+              0.07597110551263443
+            ]
+          },
+          "champion_02778_owner_report": {
+            "mean": 0.09587379004102488,
+            "median": 0.09583045107075713,
+            "ci95": [
+              0.08564963916006778,
+              0.10635314581719568
+            ]
+          }
+        },
+        "paired": {
+          "lane_minus_ksn_only_no_alignment": {
+            "mean": -0.057984573849336175,
+            "ci95": [
+              -0.06968449338290933,
+              -0.046658658165085576
+            ],
+            "fraction_positive": 0.0
+          },
+          "lane_minus_distance_only": {
+            "mean": -0.022549706093666765,
+            "ci95": [
+              -0.026747681744806802,
+              -0.018686773337367936
+            ],
+            "fraction_positive": 0.0
+          },
+          "lane_minus_random_mass_control": {
+            "mean": -0.06623579537232806,
+            "ci95": [
+              -0.07000728795432994,
+              -0.061946474076112194
+            ],
+            "fraction_positive": 0.0
+          },
+          "lane_minus_champion_02778_owner_report": {
+            "mean": -0.08954144178351597,
+            "ci95": [
+              -0.10025208162925527,
+              -0.07945366349580958
+            ],
+            "fraction_positive": 0.0
+          }
+        },
+        "bootstrap": {
+          "method": "paired 20 km spatial-block percentile",
+          "block_px": 200,
+          "n_blocks": 323,
+          "draws": 1000,
+          "seed": 6601
+        }
+      }
+    },
+    "sgmc_off_thin8000": {
+      "n_truth": 8000,
+      "per_arm": {
+        "lane": {
+          "dti": 0.003724,
+          "tpw": 51.831,
+          "fpw": 37534.496,
+          "fnw": 7948.169,
+          "n_truth": 8000,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.001376
+        },
+        "ksn_only_no_alignment": {
+          "dti": 0.033953,
+          "tpw": 467.533,
+          "fpw": 36382.479,
+          "fnw": 7532.467,
+          "n_truth": 8000,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.012417
+        },
+        "distance_only": {
+          "dti": 0.014798,
+          "tpw": 205.933,
+          "fpw": 37374.717,
+          "fnw": 7794.067,
+          "n_truth": 8000,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.005469
+        },
+        "random_mass_control": {
+          "dti": 0.037491,
+          "tpw": 522.657,
+          "fpw": 37182.594,
+          "fnw": 7477.343,
+          "n_truth": 8000,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.013881
+        },
+        "champion_02778_owner_report": {
+          "dti": 0.052951,
+          "tpw": 737.699,
+          "fpw": 36920.599,
+          "fnw": 7262.301,
+          "n_truth": 8000,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.019592
+        }
+      },
+      "bootstrap": {
+        "per_arm": {
+          "lane": {
+            "mean": 0.0037525947492001036,
+            "median": 0.003676031300987444,
+            "ci95": [
+              0.0024235976760612976,
+              0.005371289855886339
+            ]
+          },
+          "ksn_only_no_alignment": {
+            "mean": 0.033852736926579814,
+            "median": 0.03389964872287157,
+            "ci95": [
+              0.028888881607213687,
+              0.03870771783206918
+            ]
+          },
+          "distance_only": {
+            "mean": 0.014789043096861808,
+            "median": 0.014752440161416091,
+            "ci95": [
+              0.012459171267604895,
+              0.017264325042167714
+            ]
+          },
+          "random_mass_control": {
+            "mean": 0.03755371941219278,
+            "median": 0.03745325889032367,
+            "ci95": [
+              0.03343944811482213,
+              0.04165547285253486
+            ]
+          },
+          "champion_02778_owner_report": {
+            "mean": 0.05292085871305343,
+            "median": 0.052873971903321715,
+            "ci95": [
+              0.04627773627914844,
+              0.0606321463189995
+            ]
+          }
+        },
+        "paired": {
+          "lane_minus_ksn_only_no_alignment": {
+            "mean": -0.030100142177379705,
+            "ci95": [
+              -0.03509777905053666,
+              -0.02491302497572684
+            ],
+            "fraction_positive": 0.0
+          },
+          "lane_minus_distance_only": {
+            "mean": -0.011036448347661706,
+            "ci95": [
+              -0.013627493686854333,
+              -0.008441069686192605
+            ],
+            "fraction_positive": 0.0
+          },
+          "lane_minus_random_mass_control": {
+            "mean": -0.03380112466299268,
+            "ci95": [
+              -0.037941437945274444,
+              -0.029572894454793608
+            ],
+            "fraction_positive": 0.0
+          },
+          "lane_minus_champion_02778_owner_report": {
+            "mean": -0.04916826396385332,
+            "ci95": [
+              -0.05688621496245577,
+              -0.04196945668751402
+            ],
+            "fraction_positive": 0.0
+          }
+        },
+        "bootstrap": {
+          "method": "paired 20 km spatial-block percentile",
+          "block_px": 200,
+          "n_blocks": 323,
+          "draws": 1000,
+          "seed": 6601
+        }
+      }
+    },
+    "sgmc_off_balanced8000": {
+      "n_truth": 8000,
+      "per_arm": {
+        "lane": {
+          "dti": 0.003274,
+          "tpw": 45.572,
+          "fpw": 37541.973,
+          "fnw": 7954.428,
+          "n_truth": 8000,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.00121
+        },
+        "ksn_only_no_alignment": {
+          "dti": 0.034854,
+          "tpw": 479.911,
+          "fpw": 36366.444,
+          "fnw": 7520.089,
+          "n_truth": 8000,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.012745
+        },
+        "distance_only": {
+          "dti": 0.0161,
+          "tpw": 224.013,
+          "fpw": 37346.857,
+          "fnw": 7775.987,
+          "n_truth": 8000,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.005949
+        },
+        "random_mass_control": {
+          "dti": 0.038149,
+          "tpw": 531.932,
+          "fpw": 37185.257,
+          "fnw": 7468.068,
+          "n_truth": 8000,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.014127
+        },
+        "champion_02778_owner_report": {
+          "dti": 0.051462,
+          "tpw": 716.894,
+          "fpw": 36935.805,
+          "fnw": 7283.106,
+          "n_truth": 8000,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.019039
+        }
+      },
+      "bootstrap": {
+        "per_arm": {
+          "lane": {
+            "mean": 0.0032988679974392658,
+            "median": 0.0032893331451405664,
+            "ci95": [
+              0.0023115674327700286,
+              0.0045011928597615035
+            ]
+          },
+          "ksn_only_no_alignment": {
+            "mean": 0.03465615130385477,
+            "median": 0.034716180040549015,
+            "ci95": [
+              0.029191883414889944,
+              0.03986739050740057
+            ]
+          },
+          "distance_only": {
+            "mean": 0.016088806761282493,
+            "median": 0.016076078401654502,
+            "ci95": [
+              0.013904209767472982,
+              0.01843607916166037
+            ]
+          },
+          "random_mass_control": {
+            "mean": 0.0381563691936723,
+            "median": 0.038139454265484304,
+            "ci95": [
+              0.034078112829864636,
+              0.042379180809562794
+            ]
+          },
+          "champion_02778_owner_report": {
+            "mean": 0.05147124606198096,
+            "median": 0.05148111783920524,
+            "ci95": [
+              0.04512918674780618,
+              0.05824711505989412
+            ]
+          }
+        },
+        "paired": {
+          "lane_minus_ksn_only_no_alignment": {
+            "mean": -0.0313572833064155,
+            "ci95": [
+              -0.0367917922488965,
+              -0.025736469467638967
+            ],
+            "fraction_positive": 0.0
+          },
+          "lane_minus_distance_only": {
+            "mean": -0.012789938763843227,
+            "ci95": [
+              -0.015162521627859792,
+              -0.010629827311242575
+            ],
+            "fraction_positive": 0.0
+          },
+          "lane_minus_random_mass_control": {
+            "mean": -0.03485750119623303,
+            "ci95": [
+              -0.039208912095279776,
+              -0.030606015913868235
+            ],
+            "fraction_positive": 0.0
+          },
+          "lane_minus_champion_02778_owner_report": {
+            "mean": -0.04817237806454171,
+            "ci95": [
+              -0.05467407541037703,
+              -0.0418423581140314
+            ],
+            "fraction_positive": 0.0
+          }
+        },
+        "bootstrap": {
+          "method": "paired 20 km spatial-block percentile",
+          "block_px": 200,
+          "n_blocks": 323,
+          "draws": 1000,
+          "seed": 6601
+        }
+      }
+    },
+    "catalogue_full": {
+      "n_truth": 60988,
+      "per_arm": {
+        "lane": {
+          "dti": 0.002755,
+          "tpw": 155.192,
+          "fpw": 37502.471,
+          "fnw": 60832.808,
+          "n_truth": 60988,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.004122
+        },
+        "ksn_only_no_alignment": {
+          "dti": 0.004058,
+          "tpw": 228.554,
+          "fpw": 37445.652,
+          "fnw": 60759.446,
+          "n_truth": 60988,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.00607
+        },
+        "distance_only": {
+          "dti": 0.147712,
+          "tpw": 8280.684,
+          "fpw": 28065.635,
+          "fnw": 52707.316,
+          "n_truth": 60988,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.219915
+        },
+        "random_mass_control": {
+          "dti": 0.003346,
+          "tpw": 188.505,
+          "fpw": 37515.542,
+          "fnw": 60799.495,
+          "n_truth": 60988,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.005006
+        },
+        "champion_02778_owner_report": {
+          "dti": 0.006709,
+          "tpw": 378.0,
+          "fpw": 37376.062,
+          "fnw": 60610.0,
+          "n_truth": 60988,
+          "mass": 37654.0,
+          "emitted_px": 37654,
+          "credit_per_px": 0.010039
+        }
+      },
+      "bootstrap": {
+        "per_arm": {
+          "lane": {
+            "mean": 0.0027557448021378944,
+            "median": 0.0027316119209287656,
+            "ci95": [
+              0.002130328401097543,
+              0.003560069468411056
+            ]
+          },
+          "ksn_only_no_alignment": {
+            "mean": 0.004054870802030649,
+            "median": 0.0040418169170108355,
+            "ci95": [
+              0.0033236893172571,
+              0.004825877885652875
+            ]
+          },
+          "distance_only": {
+            "mean": 0.14776534180018802,
+            "median": 0.14776511636808465,
+            "ci95": [
+              0.1435942942654335,
+              0.15155999130624984
+            ]
+          },
+          "random_mass_control": {
+            "mean": 0.0033432173218914717,
+            "median": 0.0033416050310618034,
+            "ci95": [
+              0.0030511705266527585,
+              0.0036479035384635503
+            ]
+          },
+          "champion_02778_owner_report": {
+            "mean": 0.006706736713525366,
+            "median": 0.006708446173967031,
+            "ci95": [
+              0.005974962410378834,
+              0.0074559037797656495
+            ]
+          }
+        },
+        "paired": {
+          "lane_minus_ksn_only_no_alignment": {
+            "mean": -0.0012991259998927553,
+            "ci95": [
+              -0.0022698366356065035,
+              -0.00023984820826328265
+            ],
+            "fraction_positive": 0.005
+          },
+          "lane_minus_distance_only": {
+            "mean": -0.14500959699805013,
+            "ci95": [
+              -0.14865396952635468,
+              -0.14088918366278938
+            ],
+            "fraction_positive": 0.0
+          },
+          "lane_minus_random_mass_control": {
+            "mean": -0.0005874725197535773,
+            "ci95": [
+              -0.0013069486512204335,
+              0.0002990538810803047
+            ],
+            "fraction_positive": 0.079
+          },
+          "lane_minus_champion_02778_owner_report": {
+            "mean": -0.0039509919113874725,
+            "ci95": [
+              -0.004925081092948266,
+              -0.0028916579081597403
+            ],
+            "fraction_positive": 0.0
+          }
+        },
+        "bootstrap": {
+          "method": "paired 20 km spatial-block percentile",
+          "block_px": 200,
+          "n_blocks": 323,
+          "draws": 1000,
+          "seed": 6601
+        }
+      }
+    }
+  },
+  "gate_G3": {
+    "reference": "sgmc_off_full lane_minus_random_mass_control",
+    "mean": -0.06623579537232806,
+    "ci95": [
+      -0.07000728795432994,
+      -0.061946474076112194
+    ],
+    "fraction_positive": 0.0,
+    "verdict": "FAIL"
+  },
+  "log": [
+    "[H66] grid 3730x3292 footprint=5,167,373 catalogue=60,988 (0.2s)",
+    "[H66] independence = substrate branch_sig (native 10 m network) (0.5s)",
+    "[H66] confounds {'playa_px': 550267, 'basin_fill_px': 258104, 'conductive_px': 251815, 'excluded_px': 893496, 'lithology_source': 'SUBSTITUTE geodawn_rad_u8.tif K p95 + Th p95 (training_features.tif absent; IR-66-DATA-01)', 'channel_excluded_px': 55677, 'channel_px': 786299, 'rad_K_p95': 208.0, 'rad_Th_p95': 208.0} (1.0s)",
+    "[H66] holdout cells=16 (21.7s)",
+    "[H66] E1a (literal brief, NOT gating) {'evidence_class': 'MEASUREMENT', 'n_components': 262, 'mean': 0.03259120937549255, 'median': -0.009159043588752754, 'ci95': [-0.011968108692189403, 0.07681497242566876], 'fraction_positive': 0.4732824427480916, 'component_std': 0.3896411606225118, 'bootstrap': {'draws': 1000, 'seed': 6601, 'method': 'percentile over withheld components'}, 'verdict': 'INCONCLUSIVE'} (66.9s)",
+    "[H66] SGMC 83,593 px | off-catalogue (>300 m) 62,703 px (67.1s)",
+    "[H66] E1b (GATING) {'evidence_class': 'MEASUREMENT', 'n_components': 86, 'mean': -0.11279532763092709, 'median': -0.14965110858859854, 'ci95': [-0.17378766968562168, -0.04371438930881813], 'fraction_positive': 0.26744186046511625, 'component_std': 0.31152118623286845, 'bootstrap': {'draws': 1000, 'seed': 6601, 'method': 'percentile over withheld components'}, 'verdict': 'STOP'} -> G1 STOP (109.4s)",
+    "[H66] candidates {'channel_pixels': 786299, 'valid_channel_pixels': 730622, 'candidate_pixels': 43131, 'z_min': 1.5, 'block_px': 400} (109.7s)",
+    "[H66] surface {'channel_pixels': 786299, 'valid_channel_pixels': 730622, 'candidate_pixels': 43131, 'z_min': 1.5, 'block_px': 400, 'n_drainage_min': 3, 'corridor_half_len_px': 6, 'corridor_half_width_px': 2, 'trace_decay': 0.5, 'regional_modal_strike_deg': 25.0, 'candidate_pixels_scanned': 43131, 'aligned_candidates': 38512, 'n_drainage_p50': 5.0, 'n_drainage_p90': 10.0, 'n_drainage_max': 23, 'trace_pixels': 373624, 'trace_only_pixels': 333590, 'positive_pixels': 376721, 'p_max': 1.0} (115.2s)",
+    "[H66] allowed=4,862,825 (115.4s)",
+    "[H66] arm lane                             dots=37,654 on_catalogue=0 (119.2s)",
+    "[H66] arm ksn_only_no_alignment            dots=37,654 on_catalogue=0 (119.3s)",
+    "[H66] arm distance_only                    dots=37,654 on_catalogue=0 (119.3s)",
+    "[H66] arm random_mass_control              dots=37,654 on_catalogue=0 (119.3s)",
+    "[H66] arm champion_02778_owner_report      dots=37,654 on_catalogue=0 (119.3s)",
+    "[H66] canary {\"knickpoint_step\": 0.5135, \"ksn\": 0.5048, \"drainage_area\": 0.5123, \"lane_p\": 0.5235, \"dist_to_visible\": 1.0} (122.6s)",
+    "[H66] truth sgmc_off_full          n= 62,703 lane=0.00630 ksn_only_no_alignment=0.06456 distance_only=0.02890 random_mass_control=0.07253 champion_02778_owner_report=0.09606 (137.6s)",
+    "[H66]    lane-random paired {'mean': -0.06623579537232806, 'ci95': [-0.07000728795432994, -0.061946474076112194], 'fraction_positive': 0.0} (137.6s)",
+    "[H66] truth sgmc_off_thin8000      n=  8,000 lane=0.00372 ksn_only_no_alignment=0.03395 distance_only=0.01480 random_mass_control=0.03749 champion_02778_owner_report=0.05295 (150.2s)",
+    "[H66]    lane-random paired {'mean': -0.03380112466299268, 'ci95': [-0.037941437945274444, -0.029572894454793608], 'fraction_positive': 0.0} (150.2s)",
+    "[H66] truth sgmc_off_balanced8000  n=  8,000 lane=0.00327 ksn_only_no_alignment=0.03485 distance_only=0.01610 random_mass_control=0.03815 champion_02778_owner_report=0.05146 (162.3s)",
+    "[H66]    lane-random paired {'mean': -0.03485750119623303, 'ci95': [-0.039208912095279776, -0.030606015913868235], 'fraction_positive': 0.0} (162.3s)",
+    "[H66] truth catalogue_full         n= 60,988 lane=0.00276 ksn_only_no_alignment=0.00406 distance_only=0.14771 random_mass_control=0.00335 champion_02778_owner_report=0.00671 (175.7s)",
+    "[H66]    lane-random paired {'mean': -0.0005874725197535773, 'ci95': [-0.0013069486512204335, 0.0002990538810803047], 'fraction_positive': 0.079} (175.7s)"
+  ]
+}
