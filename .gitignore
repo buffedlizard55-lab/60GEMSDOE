@@ -56,3 +56,8 @@ out/
 data/raw/
 registry/cache/
 *.download
+
+# --- H61-H63 session (2026-10-11) ---
+# work/ holds regenerable numpy caches (already ignored via *.npy). labels.tif is a byte copy of
+# the tracked data/bridge/existing_faults.tif, so it is not committed twice.
+work/labels.tif

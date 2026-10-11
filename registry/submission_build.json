@@ -267,5 +267,19 @@
  },
  "verdict": "OK TO DOWNLOAD. Slot decision: NOT CLEARED by any local gate (the repository's catalogue hide-and-recover holdout scores every off-catalogue emission exactly 0 by construction; evidence/e6_blocked_gate.json). Submit only as an explicit bet.",
  "approved_for_weekly_slot": false,
- "promoted": false
+ "promoted": false,
+ "file_nan_twin": {
+  "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-nan.tif",
+  "sha256": "8cbd52542e7bb8ea4949497d4f1b40f2f7936167f87d841f9242fe29f85e1383",
+  "bytes": 1560705,
+  "note": "identical finite values inside the footprint; NaN outside, nodata=nan declared"
+ },
+ "audit_receipts": [
+  "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-audit.json",
+  "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros-audit.json",
+  "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.json"
+ ],
+ "session": "2026-10-11 H61-H63",
+ "run_card": "evidence/run_card_h61_20261011.json",
+ "writeup": "docs/research/h61-h63-session-20261011.md"
 }
