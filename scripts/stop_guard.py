@@ -2,11 +2,9 @@
 from __future__ import annotations
 
 import json
-import os
 from pathlib import Path
 
 _STOP_VERDICTS = {"NEGATIVE-STOP", "NEGATIVE", "INCONCLUSIVE", "STOP", "FAIL"}
-_REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 def _verdict(record: dict) -> str | None:
@@ -27,22 +25,15 @@ def lane_is_stopped(root: Path, runner: str) -> bool:
     read. An INCONCLUSIVE result fails the registered PROCEED gate and is therefore a stop, just as
     an explicit NEGATIVE-STOP is. Missing current evidence fails closed.
     """
-    tag = os.environ.get("GEMS60_TAG", "")
-    if tag in {"h66", "h67", "h68"} and Path(root).resolve() == _REPO_ROOT:
-        e1_tag = Path(root) / "evidence" / f"{tag}_e1_first_test.json"
-        if os.environ.get("GEMS60_ALLOW_E1_BOOTSTRAP") == "1":
-            return False
-        if e1_tag.is_file():
-            try:
-                if _verdict(json.loads(e1_tag.read_text())) == "PROCEED":
-                    return False
-            except (OSError, json.JSONDecodeError):
-                pass
     status_path = root / "registry" / "current_site_status.json"
     try:
         status = json.loads(status_path.read_text())
     except (OSError, json.JSONDecodeError) as exc:
         print(f"STOP GUARD: {runner} not run — cannot read authoritative lane status ({exc}).")
+        return True
+
+    if not isinstance(status, dict):
+        print(f"STOP GUARD: {runner} not run — lane status must be an object.")
         return True
 
     if "channel-steepness" not in status.get("active_lane", ""):
@@ -55,10 +46,17 @@ def lane_is_stopped(root: Path, runner: str) -> bool:
         return True
 
     latest = status.get("latest_first_test") or {}
+    if not isinstance(latest, dict):
+        print(f"STOP GUARD: {runner} not run — latest first test must be an object.")
+        return True
     latest_decision = str(latest.get("decision", "")).upper()
     latest_result = str(latest.get("result", "")).upper()
     if "STOP" in latest_decision or latest_result in _STOP_VERDICTS:
         print(f"STOP GUARD: {runner} not run — latest recorded first test is {latest_result or latest_decision}; the PROCEED gate failed.")
+        return True
+
+    if latest_result != "PROCEED" or not latest.get("evidence"):
+        print(f"STOP GUARD: {runner} not run — affirmative first-test evidence is missing.")
         return True
 
     paths: list[Path] = []
@@ -87,7 +85,13 @@ def lane_is_stopped(root: Path, runner: str) -> bool:
             print(f"STOP GUARD: {runner} not run — recorded first-test evidence is unreadable ({path}: {exc}).")
             return True
 
+        if not isinstance(record, dict):
+            print(f"STOP GUARD: {runner} not run — first-test evidence must be an object.")
+            return True
         verdict = _verdict(record)
+        if latest_evidence and path == root / str(latest_evidence) and verdict != "PROCEED":
+            print(f"STOP GUARD: {runner} not run — latest evidence is {verdict}, not PROCEED; STOP applies.")
+            return True
         if verdict in _STOP_VERDICTS:
             detail = "INCONCLUSIVE fails the preregistered PROCEED gate" if verdict == "INCONCLUSIVE" else f"recorded verdict is {verdict}"
             print(f"STOP GUARD: {runner} not run — {path.relative_to(root)}: {detail}; STOP applies.")

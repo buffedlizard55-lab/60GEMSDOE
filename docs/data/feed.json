@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-10-11T18:59:06Z",
+ "generated_utc": "2026-10-11T19:12:09Z",
  "sources": [
   {
    "id": "competition",
@@ -672,7 +672,54 @@
   },
   "report": "docs/research/active-lane-review-2026-10-11.md",
   "hypothesis_backlog": "docs/research/next-chi-hypotheses-2026-10-11.md",
-  "final_run_card": "evidence/h65_runcard.json"
+  "final_run_card": "evidence/h65_runcard.json",
+  "post_review_runs": [
+   {
+    "session": "arena/970443fc-60gemsdoe (PR #16)",
+    "id": "H66-1/H66-2",
+    "verdict": "NEGATIVE \u2014 E1 off-catalogue -0.0860 [-0.1372, -0.0220] -> STOP; INSTRUMENT-DTI 0.00913 vs random 0.07253",
+    "artifact": "gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros",
+    "run_card": "docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros-runcard.json",
+    "slot_spent": false,
+    "download": "docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif"
+   },
+   {
+    "session": "arena/b219bfe1-60gemsdoe (PR #18, this session)",
+    "id": "H66-6",
+    "verdict": "NEGATIVE \u2014 masked E1 +0.0404 [-0.0029, +0.0871] INCONCLUSIVE -> STOP; HOLDOUT-DTI 0.00960 vs random 0.03908 (paired -0.02948)",
+    "artifact": "gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros",
+    "run_card": "evidence/h66c_runcard.json",
+    "slot_spent": false,
+    "download": "docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif"
+   },
+   {
+    "session": "arena/7085de4f-60gemsdoe (PR #17)",
+    "id": "H67-1",
+    "verdict": "claimed PASS/PROMOTE - E1 +0.4251 [+0.2253, +0.6273]; HOLDOUT-DTI 0.065739 [0.055715, 0.076201]. Contradicted the STOP file (flagged IR-H66C-STOPCONFLICT-01 by session arena/b219bfe1); promotion REVERSED (promoted=False) and STOP enforced by session arena/a856d257 (PRs #19/#20). Remains a research artifact, not a cleared submission.",
+    "artifact": "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros",
+    "run_card": "evidence/h67_runcard.json",
+    "slot_spent": false,
+    "download": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif"
+   },
+   {
+    "session": "arena/b34e68ab-60gemsdoe (PR #22, this session)",
+    "id": "H68-1",
+    "verdict": "NEGATIVE (under governing lane STOP & literal 70-raster lattice overlap 0.9985 > 0.70) \u2014 fixes IR-68-UNALIGNED-01 & IR-68-TOPOBAND-01: E1 +0.4502 [+0.2510, +0.6491]; HOLDOUT-DTI 0.171894 [0.157848, 0.183994] (2.61x H66-1, 14.85x H65-1, 10.49x H60-A); max non-lattice 3-px overlap 0.6234 <= 0.70 (0.5406 vs H66-1). OK to download for research; DO NOT SUBMIT.",
+    "artifact": "gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros",
+    "run_card": "evidence/h68_runcard.json",
+    "slot_spent": false,
+    "download": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif"
+   }
+  ],
+  "post_review_note": "Two of the three post-STOP runs are negative and corroborate the STOP; the third (H67-1) claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20 before this session's merge. No submission slot has been spent."
+ },
+ "current_lane_decision": {
+  "verdict": "negative",
+  "submit_to_competition": false,
+  "new_tiff_generated": false,
+  "research_raster_sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1",
+  "report": "docs/research/2026-10-11-lane-stop-audit.md",
+  "note": "Snapshot of this repository; NOT a live DrivenData score feed."
  },
  "hypotheses": [
   {
@@ -1300,7 +1347,7 @@
    "expected_dti": "RANK 5 by cost-adjusted expectation: unknown ceiling, possibly high, but implementation is high-cost and the data is unreachable from this sandbox",
    "cost": "high: ~716 tiles; requires an egress-capable runner",
    "data_status": "SOURCE NAMED + PINS EXIST, OBTAINABILITY PARTIAL: https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif (USGS 3DEP, public domain; 716 URLs + sha256 pins upstream data/dem_links.json; egress probe evidence/probe-egress-receipt.json shows HTTP 200 from a GitHub Actions runner, but THIS sandbox cannot reach the host - measured, see docs/irregularities.html)",
-   "status": "EXECUTED 2026-10-11 as H65-1 (session arena/96ecd67e): NEGATIVE. Native 3DEP 10 m on 18 pinned 1x1-degree tiles (not ~716: that count is for 1 m tiles); first test INCONCLUSIVE +0.0326 [-0.0144, +0.0790] -> STOP; HOLDOUT-DTI 0.01158 [0.0084, 0.0146] vs random 0.03908. evidence/h65_runcard.json"
+   "status": "EXECUTED 2026-10-11 as H65-1 (session arena/96ecd67e): NEGATIVE. Native 3DEP 10 m on 18 pinned 1x1-degree tiles (not ~716: that count is for 1 m tiles); first test INCONCLUSIVE +0.0326 [-0.0144, +0.0790] -> STOP; HOLDOUT-DTI 0.01158 [0.0084, 0.0146] vs random 0.03908. evidence/h65_runcard.json  |  2026-10-11 H66-6 (session arena/b219bfe1): the masked variant (brief's four named confounds masked in the statistic) is ALSO NEGATIVE - the lane is exhausted at both resolutions and with/without confound masking."
   },
   {
    "id": "H65-1",
@@ -1317,7 +1364,7 @@
    "expected_dti": "MEASURED: HOLDOUT-DTI 0.01158 [0.0084, 0.0146] (gems57-pooled-hide-v2, 22,641 withheld positives) < random 0.03908",
    "cost": "done (Actions run 38113556275, ~4 min wall)",
    "data_status": "obtained and pinned",
-   "status": "NEGATIVE: first test INCONCLUSIVE -> STOP; resolution was NOT the cause (E1 at 100 m +0.1089 vs 10 m +0.0326)"
+   "status": "NEGATIVE: first test INCONCLUSIVE -> STOP; resolution was NOT the cause (E1 at 100 m +0.1089 vs 10 m +0.0326)  |  Superseded as the lane's newest artifact by H66-2 (both-limb) and H66-6 (masked), both also NEGATIVE; retained as research artifact."
   },
   {
    "id": "H65-2",
@@ -1571,10 +1618,35 @@
    "cost": "high"
   },
   {
+   "id": "H66-6",
+   "rank": 46,
+   "slate": "H66c (2026-10-11, session arena/b219bfe1) - masked variant of the 10 m lane (renumbered from H66-1 to avoid the id collision with session arena/970443fc's H66-1..H66-5)",
+   "slate_rank": 0,
+   "title": "Masked 10 m chi/ksn strike-concordant knickpoints (H62-5 with the brief's four named confounds masked in the statistic)",
+   "layers": [
+    "H65-1 sha-pinned USGS 3DEP 10 m reduction (.cache/features65)",
+    "confound layers: playa (cache), basin fill (depth_to_base > p90), conductive surface (cond > p95), ephemeral (A < 1e6 m2) from data/official/training_features.tif bands 15/17 + channel mask"
+   ],
+   "signature": "same H65-1 statistic (blockwise z-scored dz/dchi two-segment step, >=3 independent drainages in strike corridors), but candidates crossing masked confound cells are excluded from the statistic itself, not just from the emitted dots; preregistered arms T (crossing on continuous basement) and L (crossing on a depth-to-basement step)",
+   "why_off_catalogue": "tests whether H65-1's negative was confound inflation; if masking changes nothing, the knickpoint method is exhausted",
+   "differs_from_repo": "first run with the brief's named confounds masked inside the statistic (H65-1 masked none of them in the statistic); independent of H66-1..H66-5 (session arena/970443fc) and of H67 (session arena/7085de4f)",
+   "expected_dti": "MEASURED: HOLDOUT-DTI 0.00960 [0.00654, 0.01307] (gems57-pooled-hide-v2, 22,641 withheld positives) < random 0.03908; masked E1 +0.0404 [-0.0029, +0.0871] INCONCLUSIVE -> STOP",
+   "cost": "done (this session, ~2 min wall on cached features; ran 16:01-16:11 UTC, predating the parallel STOP registration)",
+   "status": "EXECUTED 2026-10-11 (session arena/b219bfe1): NEGATIVE. Masked first test INCONCLUSIVE (+0.0404, 239 comps) -> preregistered stop; pooled HOLDOUT-DTI 0.00960 below mass-matched random 0.03908 (paired -0.02948, CI excludes 0). Corroborates the parallel STOP registration (registry/current_site_status.json); the lane is exhausted. evidence/h66c_runcard.json",
+   "evidence": [
+    "evidence/h66c_e1_first_test.json",
+    "evidence/h66c_holdout.json",
+    "evidence/h66c_uniqueness_surface.json",
+    "evidence/h66c_uniqueness_dots.json",
+    "evidence/h66c_overlap_control_dots.json",
+    "evidence/h66c_runcard.json"
+   ]
+  },
+  {
    "id": "H68-1",
-   "rank": 45,
+   "rank": 46,
    "title": "Strict Multi-Drainage (>= 3 Independent Drainages) 10 m Bedrock \u0394ksn + 1 m LiDAR / 10 m Piedmont Curvature Break + Anisotropic Range-Front Continuity",
-   "status": "VALIDATED \u2014 HOLDOUT-DTI 0.171894 [0.157848, 0.183994] (2.61x H66-1, 14.85x H65-1, 10.49x H60-A); E1 PASS (+0.4502 [+0.2510, +0.6491])",
+   "status": "MEASURED \u2014 HOLDOUT-DTI 0.171894 [0.157848, 0.183994] (2.61x H66-1, 14.85x H65-1, 10.49x H60-A); E1 +0.4502 [+0.2510, +0.6491]; verdict NEGATIVE under governing lane STOP & literal 70-raster lattice overlap",
    "layers": [
     "data/external/dem10_chi_100m_i16.tif (band 1 step_max, band 3 ksn_max, band 5 zmean)",
     "data/external/dem10_chi_100m_u8.tif (band 3 raised_n) + data/external/dem10_chi_100m_sig_i32.tif (band 1 branch_sig)",
@@ -1618,31 +1690,31 @@
   },
   {
    "id": "H68-2",
-   "rank": 46,
+   "rank": 47,
    "title": "Bi-Directional Dip-Slip + Antithetic/Graben-Bounding Steepness Contrast (max(\u0394ksn_up, 0.7 \u0394ksn_down)) Gated by 10 m Piedmont Break",
-   "status": "PROPOSED \u2014 ranked #2 in Round H68 tectonic-geomorphology slate",
+   "status": "PROPOSED \u2014 ranked #2 in Round H68 tectonic-geomorphology slate (deferred under lane STOP)",
    "layers": [
     "data/external/dem10_chi_100m_i16.tif (band 1 step_max, band 2 step_min, band 3 ksn_max)",
     "data/external/topo_10m_derived_100m_u8.tif (band 6 curv_prof_absmax, band 2 slope_max)",
     "data/official/training_features.tif (band 15 depth_to_base_surf)"
    ],
-   "mechanism": "Combines positive upstream steepening \u0394ksn_up = k_u - k_d on footwall-to-hanging-wall crossings with downstream steepening \u0394ksn_down = k_d - k_u restricted strictly to piedmont-break corridors (pied_z > 0.5) to capture antithetic faults and back-tilted graben-margin faults where channels flow from a hanging-wall bench across an up-to-the-basin fault block.",
+   "mechanism": "Combines positive upstream steepening \u0394ksn_up = k_u - k_d on footwall-to-hanging-wall crossings with downstream steepening \u0394ksn_down = k_d - k_u restricted strictly to piedmont-break corridors (pied_z > 0.5) to capture antithetic faults and back-tilted graben-margin faults.",
    "why_missing_from_catalogue": "Antithetic and intrabasin horst-bounding faults have smaller cumulative throw than master range-front faults and are systematically under-represented in 1:24,000 Quaternary scarps.",
-   "difference_from_existing": "Unlike H66-2 (which took unfloored max(|step_max|, |step_min|) everywhere and failed E1 because un-gated step_min fires on every canyon mouth entering an alluvial fan), H68-2 recovers bedrock \u0394ksn_down and gates it strictly by positive piedmont curvature break.",
+   "difference_from_existing": "Unlike H66-2 (which took unfloored max(|step_max|, |step_min|) everywhere and failed E1), H68-2 recovers bedrock \u0394ksn_down and gates it strictly by positive piedmont curvature break.",
    "expected_dti_delta": "+0.015 to +0.030 HOLDOUT-DTI over H66-1",
    "cost": "low"
   },
   {
    "id": "H68-3",
-   "rank": 47,
+   "rank": 48,
    "title": "Catchment-Scale Normalized Steepness Gradient (|\u2207ksn| Across 300 m Footwall Envelopes) + Drainage-Area Power-Law Scaling",
-   "status": "PROPOSED \u2014 ranked #3 in Round H68 tectonic-geomorphology slate",
+   "status": "PROPOSED \u2014 ranked #3 in Round H68 tectonic-geomorphology slate (deferred under lane STOP)",
    "layers": [
     "data/external/dem10_chi_100m_i16.tif (band 3 ksn_max, band 4 loga_at_max, band 5 zmean)",
     "data/external/dem10_chi_100m_u8.tif (band 1 chan_n, band 2 knick_n)",
     "data/official/training_features.tif (band 12 det_elev, band 15 depth_to_base_surf)"
    ],
-   "mechanism": "Computes the spatial gradient of the 300 m catchment-envelope steepness |\u2207 max_300m(ksn_max)| weighted by log10(A) to locate the continuous boundary between high-ksn uplifting footwall blocks and low-ksn subsiding hanging-wall basins even where individual knickpoints have migrated 200-500 m upstream of the range front.",
+   "mechanism": "Computes the spatial gradient of the 300 m catchment-envelope steepness |\u2207 max_300m(ksn_max)| weighted by log10(A) to locate the continuous boundary between high-ksn uplifting footwall blocks and low-ksn subsiding hanging-wall basins.",
    "why_missing_from_catalogue": "On rapidly incising trunk streams, the discrete knickpoint migrates upstream into the footwall canyon while the fault trace remains at the range-front ksn step boundary.",
    "difference_from_existing": "Measures the spatial boundary of the 2D catchment ksn field rather than point-wise 110 m in-channel step_max alone.",
    "expected_dti_delta": "+0.010 to +0.025 HOLDOUT-DTI",
@@ -1650,9 +1722,9 @@
   },
   {
    "id": "H68-4",
-   "rank": 48,
+   "rank": 49,
    "title": "Radiometric K/Th Hydrothermal-Alteration Gate on Multi-Drainage Knickpoint Corridors",
-   "status": "PROPOSED \u2014 ranked #4 in Round H68 tectonic-geomorphology slate",
+   "status": "PROPOSED \u2014 ranked #4 in Round H68 tectonic-geomorphology slate (deferred under lane STOP)",
    "layers": [
     "data/external/dem10_chi_100m_i16.tif (band 1 step_max, band 3 ksn_max)",
     "data/external/geodawn_rad_u8.tif (potassium, thorium, uranium)",
@@ -1663,21 +1735,6 @@
    "difference_from_existing": "Uses GeoDAWN K/Th ratio as a moderate positive corridor corroborator on bedrock knickpoints rather than only as a p95 lithologic exclusion fallback (IR-66-DATA-01).",
    "expected_dti_delta": "+0.005 to +0.015 HOLDOUT-DTI",
    "cost": "low"
-  },
-  {
-   "id": "H68-5",
-   "rank": 49,
-   "title": "Cross-Lane Selector Fusion: Champion Flank-Peel Shell (H33-2-B2) + Strict Multi-Drainage 10 m Bedrock \u0394ksn Corridors (H68-1)",
-   "status": "PROPOSED FOR SELECTOR \u2014 cross-lane step outside single-lane run budget",
-   "layers": [
-    "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif (37,654 dots, 0.2778 owner-reported)",
-    "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif (40,000 dots, HOLDOUT-DTI 0.171894)"
-   ],
-   "mechanism": "Replaces the lowest-precision outer-ring flank dots of H33-2-B2 (or supplements its 37,654-dot shell with 2,500-4,000 non-overlapping 3.0-px NMS dots from the top 5% of H68-1 where n_drainage >= 5 and pied_z > 1.0) so that every added dot covers ~18.2 new pixels on unmapped tectonic range fronts without increasing FPw inside the already-saturated 300 m catalogue buffer.",
-   "why_missing_from_catalogue": "Combines the 0.2778 champion's coverage of near-catalogue fault-zone width/splays with H68-1's physically independent 10 m DEM + 1 m LiDAR range-front knickpoint discoveries (73.6% non-overlapping with H33-2-B2).",
-   "difference_from_existing": "Cross-lane selector step combining the #1 multi-physics raster with the #1 strict multi-drainage tectonic-geomorphology raster (0.171894 HOLDOUT-DTI).",
-   "expected_dti_delta": "+0.015 to +0.045 live DTI over 0.2778",
-   "cost": "low (separate selector step per Parallel-Run Protocol Rule 6)"
   }
  ],
  "claims": [
@@ -1966,6 +2023,26 @@
     "bytes": 221921,
     "positive_px": 38554,
     "note": "kept for the audit trail; see docs/research/ for its status"
+   },
+   {
+    "name": "gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros",
+    "tif": "docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif",
+    "zip": "docs/downloads/gems60-h66-masked-knick-40000.zip",
+    "sha256": "56f9f89ec97c265e6b9e75031c94441ca80688f556040fe20c5ab18105082ef8",
+    "hypothesis": "H66-6",
+    "session": "arena/b219bfe1-60gemsdoe",
+    "run_card": "evidence/h66c_runcard.json",
+    "role": "NEGATIVE research artifact (session arena/b219bfe1); NOT the PRIMARY; do not use for a submission slot",
+    "ok_to_download": true,
+    "ok_to_submit": false
+   },
+   {
+    "role": "RESEARCH ARTIFACT (H68-1, NEGATIVE under literal lattice overlap / lane STOP)",
+    "path": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif",
+    "sha256": "f4aa17400c7ff9ae12a428862ccaa4e2b0397015a3a7e7b55aa006341599f8ed",
+    "bytes": 146064,
+    "positive_px": 40000,
+    "note": "H68-1 strict >=3-drainage 10m bedrock dksn + 1m LiDAR/10m piedmont break (40,000 dots at 3.0px NMS); E1 +0.4502, HOLDOUT-DTI 0.171894 (2.61x H66-1, 14.85x H65-1); research download only, DO NOT SUBMIT"
    }
   ],
   "rule": "E2/E3: strike-concordant knickpoints (chi/ksn on the 3DEP-10m-reduced 100 m pack) x INGENIOUS thermal corroboration (springs, 2 m probes, paleo travertine), 3-px NMS, 2-px catalogue ring, 40,000-dot budget chosen as the in-sample maximum of the audited selection instrument; the emission rule is unchanged from the audited selector",
@@ -2007,7 +2084,7 @@
    }
   },
   "approved_for_weekly_slot": false,
-  "promoted": true,
+  "promoted": false,
   "superseded_primaries": [
    {
     "name": "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros",
@@ -2024,7 +2101,9 @@
     "verdict": "NEGATIVE - deliverable negative result; do not spend a submission slot (brief: never submit anything that has not beaten the family's best promotable holdout)",
     "status_line": "PRIMARY = this session's GEMS61 thermally-corroborated knickpoint-lane file. ITS VERDICT IS NEGATIVE: it is unique, format-valid, leakage-free and fully documented, but it is NOT recommended for a weekly slot. Measured: pooled HOLDOUT-DTI (evaluator gems52-pooled-hide-v1, 36,439 withheld positives, 20 km-block bootstrap, 1,000 draws / 161 clusters) = 0.002495, 95% CI [0.001506, 0.003511]; paired d"
    }
-  ]
+  ],
+  "decision_erratum": "2026-10-11: literal H67 uniqueness failed. Historical build only; DO NOT SUBMIT. See evidence/h67_uniqueness.json.",
+  "post_review_note": "2026-10-11 post-STOP runs: H66-2 (arena/970443fc) NEGATIVE; H66-6 (arena/b219bfe1, this session) NEGATIVE; H67-1 (arena/7085de4f) claimed PASS/PROMOTE, contradicting the STOP file - flagged IR-H66C-STOPCONFLICT-01, and the promotion was REVERSED (promoted=False) by session arena/a856d257 (PRs #19/#20). STOP remains in force; no slot spent by any of them."
  },
  "holdout": {
   "preregistration": "GEMSDOE32-PREREG-1",
@@ -2918,6 +2997,36 @@
    "title": "H63-A GeoTIFF (gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif) has a drifted affine transform origin (243349.9656 vs 243350.0) and fails sample-grid alignment",
    "statement": "In addition to the uncomputed/projected holdout_dti and 36,000-vs-42,000 dot mismatch documented in IR-65-H63-01, direct inspection of docs/downloads/gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif reveals that its affine geotransform origin is (243349.965575182, 4670136.453840564) instead of sample_submission.tif's (243350.0, 4670136.453999999). scripts/audit_shipped.py did not previously check affine transform equality against sample_submission.tif.",
    "mitigation": "Updated scripts/audit_shipped.py to verify np.allclose(tuple(prof['transform'])[:6], tuple(tpl_prof['transform'])[:6], atol=0.05) and record exact_sample_transform in docs/downloads/submissions_manifest.json."
+  },
+  {
+   "id": "IR-60-PROMOTION-CONFLICT",
+   "severity": "high",
+   "statement": "H67 PROMOTE banners and cards contradicted authoritative STOP and a raw 3px overlap of 0.998675; a dense-raster exclusion silently relaxed the literal 0.70 limit.",
+   "mitigation": "Published verdict corrected to negative; shared renderer suppresses old banners while stopped; selector uses raw overlap; H67 publishers now STOP-guarded. See docs/research/submission-status-review.md."
+  },
+  {
+   "id": "IR-H66-BUILD-01",
+   "severity": "medium",
+   "statement": "The first H66-6 build (dot digest 66c49029b6cb, TIF sha 958c176d...) produced 12 of 40,000 dots that differ from a fresh recompute, and that process was OOM-killed (exit 137) in its built-in final-dot uniqueness audit. Three independent fresh recomputes (z, candidates, p, dots all hash-compared) are bit-identical to each other and to the shipped file (digest 3306ed8afbcd; --verify-existing identical=True). The cause of the first build's deviation was not identified.",
+   "mitigation": "The superseded TIF is not the artifact and is not in the repository; the shipped file is verified dot-for-dot (--verify-existing identical=True), re-audited standalone (evidence/h66c_uniqueness_dots.json), and the final-dot audit is always run as a separate process (the in-build audit OOMs)."
+  },
+  {
+   "id": "IR-H66-NOTE-01",
+   "severity": "low",
+   "statement": "build_submission60.py truncates over-long portal notes to 140 chars with a '...' suffix but its format validator does not check note length at all; the <=140-char ritual limit is enforced nowhere in the pipeline. The first H66-6 build embedded a 141-char note that was silently truncated mid-word.",
+   "mitigation": "count note chars before building; the H66-6 shipped note is 139 chars (verified in the receipt and the run card)"
+  },
+  {
+   "id": "IR-H66C-TIMING-01",
+   "severity": "medium",
+   "statement": "Two parallel sessions both self-identified as 'H66' on 2026-10-11 and this session's run (16:01-16:11 UTC) predates the parallel STOP registration in registry/current_site_status.json (review dated 16:34 UTC, PRs #15/#16) which states 'no follow-up experiment or submission is authorized'. The run was executed under this session's user-assigned lane brief (autonomous, no manual input) before the STOP file existed in this repository; its NEGATIVE result corroborates the STOP rather than contradicting it. The id collision (both sessions using H66-1) was resolved by renumbering this session's hypothesis to H66-6 and its evidence files to evidence/h66c_*; the other session keeps h66_*/h66b_*. No data value changed; only identity labels were renumbered.",
+   "mitigation": "registry/hypotheses.json carries the renumbering note in the H66-6 entry; the stop guard (scripts/stop_guard.py, adopted from the parallel merge) now blocks all lane runners, so no further lane runs can happen without explicit re-authorization."
+  },
+  {
+   "id": "IR-H66C-STOPCONFLICT-01",
+   "severity": "resolved",
+   "statement": "On main after PR #17 (session arena/7085de4f, 2026-10-11 ~16:24 UTC): hypothesis H67-1 (bedrock-subtracted delta-ksn step) is recorded as VALIDATED with E1 PASS +0.4251 [+0.2253, +0.6273] (262 comps), HOLDOUT-DTI 0.065739 [0.055715, 0.076201], verdict 'promote', and registry/submission_build.json carries promoted=True and PRIMARY = that artifact. This contradicts (a) registry/current_site_status.json (status STOP, review 16:34 UTC, 'no follow-up experiment or submission is authorized'), (b) scripts/stop_guard.py, which fails closed on that same status, and (c) the H66 review's finding that every 2026-10-11 knickpoint round was negative. Either the STOP registration is stale/wrong, or the H67-1 run was unauthorized and/or its numbers are wrong; this session has not independently re-derived them. Discovered while merging this session's work (PR #18).",
+   "mitigation": "RESOLVED 2026-10-11 by session arena/a856d257 (PRs #19/#20, merged before this merge): registry/submission_build.json promotion was reversed (promoted False), the stop guard was extended to fail closed, and the audited research-only pages were regenerated. The STOP registration stands; H67-1's artifact remains a research download, not a cleared submission. This session (PR #18) had flagged the contradiction first (IR text preserved as the record)."
   },
   {
    "id": "IR-68-UNALIGNED-01",

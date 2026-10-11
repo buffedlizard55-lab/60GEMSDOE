@@ -244,6 +244,26 @@
    "bytes": 221921,
    "positive_px": 38554,
    "note": "kept for the audit trail; see docs/research/ for its status"
+  },
+  {
+   "name": "gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros",
+   "tif": "docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif",
+   "zip": "docs/downloads/gems60-h66-masked-knick-40000.zip",
+   "sha256": "56f9f89ec97c265e6b9e75031c94441ca80688f556040fe20c5ab18105082ef8",
+   "hypothesis": "H66-6",
+   "session": "arena/b219bfe1-60gemsdoe",
+   "run_card": "evidence/h66c_runcard.json",
+   "role": "NEGATIVE research artifact (session arena/b219bfe1); NOT the PRIMARY; do not use for a submission slot",
+   "ok_to_download": true,
+   "ok_to_submit": false
+  },
+  {
+   "role": "RESEARCH ARTIFACT (H68-1, NEGATIVE under literal lattice overlap / lane STOP)",
+   "path": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif",
+   "sha256": "f4aa17400c7ff9ae12a428862ccaa4e2b0397015a3a7e7b55aa006341599f8ed",
+   "bytes": 146064,
+   "positive_px": 40000,
+   "note": "H68-1 strict >=3-drainage 10m bedrock dksn + 1m LiDAR/10m piedmont break (40,000 dots at 3.0px NMS); E1 +0.4502, HOLDOUT-DTI 0.171894 (2.61x H66-1, 14.85x H65-1); research download only, DO NOT SUBMIT"
   }
  ],
  "rule": "E2/E3: strike-concordant knickpoints (chi/ksn on the 3DEP-10m-reduced 100 m pack) x INGENIOUS thermal corroboration (springs, 2 m probes, paleo travertine), 3-px NMS, 2-px catalogue ring, 40,000-dot budget chosen as the in-sample maximum of the audited selection instrument; the emission rule is unchanged from the audited selector",
@@ -285,7 +305,7 @@
   }
  },
  "approved_for_weekly_slot": false,
- "promoted": true,
+ "promoted": false,
  "superseded_primaries": [
   {
    "name": "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros",
@@ -302,5 +322,7 @@
    "verdict": "NEGATIVE - deliverable negative result; do not spend a submission slot (brief: never submit anything that has not beaten the family's best promotable holdout)",
    "status_line": "PRIMARY = this session's GEMS61 thermally-corroborated knickpoint-lane file. ITS VERDICT IS NEGATIVE: it is unique, format-valid, leakage-free and fully documented, but it is NOT recommended for a weekly slot. Measured: pooled HOLDOUT-DTI (evaluator gems52-pooled-hide-v1, 36,439 withheld positives, 20 km-block bootstrap, 1,000 draws / 161 clusters) = 0.002495, 95% CI [0.001506, 0.003511]; paired d"
   }
- ]
+ ],
+ "decision_erratum": "2026-10-11: literal H67 uniqueness failed. Historical build only; DO NOT SUBMIT. See evidence/h67_uniqueness.json.",
+ "post_review_note": "2026-10-11 post-STOP runs: H66-2 (arena/970443fc) NEGATIVE; H66-6 (arena/b219bfe1, this session) NEGATIVE; H67-1 (arena/7085de4f) claimed PASS/PROMOTE, contradicting the STOP file - flagged IR-H66C-STOPCONFLICT-01, and the promotion was REVERSED (promoted=False) by session arena/a856d257 (PRs #19/#20). STOP remains in force; no slot spent by any of them."
 }

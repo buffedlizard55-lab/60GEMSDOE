@@ -1,27 +1,15 @@
 #!/usr/bin/env python3
-"""Publish the H68-1 (strict >=3-drainage 10 m bedrock Delta-ksn + 1 m LiDAR / 10 m piedmont break) status board into the shared site.
-
-Inserts an idempotent ``<!-- H68-STATUS:BEGIN -->...<!-- H68-STATUS:END -->`` block at the top of
-``docs/index.html``, ``docs/executive-summary.html``, ``index.html``, and ``executive-summary.html``
-while preserving all other sessions' marker-delimited status blocks and the review invariants
-tested by ``tests/test_site.py``.
-"""
+"""Publish the H68-1 status board into the shared site when authorized; fails closed on STOP."""
 from __future__ import annotations
 
 import html
 import json
-import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DOCS = ROOT / "docs"
 B, E = "<!-- H68-STATUS:BEGIN -->", "<!-- H68-STATUS:END -->"
 TIF = "gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif"
-ZIP = TIF.replace(".tif", ".zip")
-CARD = TIF.replace(".tif", "-runcard.json")
 CHECKS = f"checks-{TIF}.json"
-TIF66 = "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif"
-CHAMP = "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif"
 
 
 def esc(x) -> str:
@@ -29,66 +17,32 @@ def esc(x) -> str:
 
 
 def board(prefix: str, rc: dict) -> str:
-    e1 = rc["first_test_E1"]
-    hd = rc["holdout_dti"]
-    pd = hd["paired_lane_minus_control"]
+    status = json.loads((ROOT / "registry/current_site_status.json").read_text())
+    if status.get("status") != "STOP":
+        raise ValueError("Status changed: review lane gate before publishing")
+    uniq = rc["uniqueness_vs_registry"]["final_dots"]
     return f"""{B}
-<div class=wrap style="border:3px solid #067647;background:#f6fef9;padding:12px 16px;margin:8px auto">
-<h2 style="margin:0 0 6px">&#9989; READ THIS FIRST (2026-10-11, session H68-1 &mdash; <code>arena/b34e68ab-60gemsdoe</code>): Strict Multi-Drainage 10 m Bedrock &Delta;k<sub>sn</sub> + 1 m LiDAR / 10 m Piedmont GeoTIFF &amp; Submission Decision</h2>
-<table>
-<tr><th>Artifact</th><th>One-click download &amp; receipts</th><th>OK to download &amp; submit?</th></tr>
-<tr><td><b>Validated Tectonic-Geomorphology Deliverable (H68-1, Primary)</b><br><code>{esc(TIF)}</code><br>
-<span style="color:#5b7183">40,000 dots (3.0 px NMS, strict &ge;3 drainages) &middot; 0 on catalogue &middot; sha256 <code>{esc(rc['raster_sha256'][:16])}&hellip;</code></span></td>
-<td><a class=btn href="{prefix}downloads/{esc(TIF)}" download>&#11015; .tif (146 KB)</a>
-<a class="btn alt" href="{prefix}downloads/{esc(ZIP)}" download>.zip</a>
-<a href="{prefix}downloads/{esc(CARD)}">run card</a>
-<a href="{prefix}downloads/{esc(CHECKS)}">checks</a></td>
-<td style="color:#067647"><b>OK TO DOWNLOAD: YES (100% portal-legal [0, 1] float32, 0 NaN).</b><br>
-<b>OK TO SUBMIT / VERDICT: PROMOTE TO CROSS-LANE SELECTOR</b> (<code>verdict: "promote"</code>).<br>
-Mandated First Test E1: <b>{e1['mean']:+.4f}</b> (95% CI [{e1['ci95'][0]:+.4f}, {e1['ci95'][1]:+.4f}], {e1['n_components']} withheld components, 58.8% positive) &rarr; <b>PROCEED</b>.<br>
-Pooled <b>HOLDOUT-DTI = {hd['dti']:.6f}</b> (95% CI [{hd['ci95'][0]:.6f}, {hd['ci95'][1]:.6f}], <code>{esc(hd['evaluator_version'])}</code>, {hd['withheld_positive_pixels']:,} withheld positives) &mdash; <b>2.61&times; H66-1</b> (0.065739), <b>14.85&times; H65-1</b> (0.011576), and <b>10.49&times; H60-A</b> (0.016389), beating <code>ksn_only</code> by <b>{pd['ksn_only_no_alignment']['delta']:+.6f}</b> and <code>random_mass_control</code> by <b>{pd['random_mass_control']['delta']:+.6f}</b>.<br>
-Uniqueness: max Spearman |&rho;| = <b>0.1485 &le; 0.90</b>; max 3-px dot overlap = <b>0.5406 vs H66-1</b>, <b>0.5754 vs all 59 sparse (&le;100k) submissions</b>, <b>0.6234 vs all 65 non-lattice submissions (&le; 0.70)</b>.<br>
-<span style="color:#344054">Per Parallel-Run Protocol Rule 6, promote to the cross-lane selector rather than spending a standalone weekly portal slot replacing the 0.2778 multi-physics champion alone (100% portal-ready if you choose to upload this standalone lane directly).</span></td></tr>
-<tr><td><b>Prior Tectonic-Geomorphology Deliverable (H66-1, Superseded)</b><br><code>{esc(TIF66)}</code></td>
-<td><a class="btn alt" href="{prefix}downloads/{esc(TIF66)}" download>&#11015; .tif (145 KB)</a></td>
-<td><b>OK TO DOWNLOAD: YES.</b> Superseded by H68-1 after fixing <code>IR-68-UNALIGNED-01</code> &amp; <code>IR-68-TOPOBAND-01</code> (<b>HOLDOUT-DTI = 0.065739</b> &rarr; <b>0.171894</b>).</td></tr>
-<tr><td><b>Group Champion (Anchor, 0.2778 owner-reported)</b><br><code>{CHAMP}</code></td>
-<td><a class="btn alt" href="{prefix}downloads/{CHAMP}" download>&#11015; .tif</a></td>
-<td><b>OK TO DOWNLOAD: YES.</b> Already live-scored at <b>0.2778</b> (owner-reported; no organizer receipt ties bytes to score).</td></tr>
-</table>
-<p style="margin:6px 0 0"><b>Portal format safety (<code>&ldquo;Predicted values must be in range [0, 1]&rdquo;</code> fix):</b>
-<code>{esc(TIF)}</code> is single-band <code>float32</code>, <code>EPSG:32611</code>, <code>3730&times;3292</code>,
-<b>0 NaN, 0 Inf, min 0.0, max 1.0, nodata=None, exact sample transform</b>.
-Portal name: <code>{esc(rc['submission_name'])}</code> &middot;
-Portal note ({rc['submission_note_chars']}/140 chars): <code>{esc(rc['submission_note'])}</code>.</p>
+<div class="wrap current-stop-notice" style="border:3px solid #b42318;background:#fffafa;padding:12px 16px;margin:8px auto">
+<h2>STOP — DOWNLOAD FOR RESEARCH ONLY; DO NOT SUBMIT (H68-1)</h2>
+<p><b>H68-1 artifact:</b> <code>{esc(TIF)}</code> (40,000 dots at 3.0 px NMS, strict &ge;3 drainages).
+<b>OK to download for research: YES. OK to submit to competition: NO (DO NOT SUBMIT; verdict NEGATIVE).</b>
+Measured catalogue <b>HOLDOUT-DTI = {rc['holdout_dti']['dti']:.6f}</b> (95% CI {rc['holdout_dti']['ci95']},
+{rc['holdout_dti']['withheld_positive_pixels']:,} withheld positives, <code>{esc(rc['holdout_dti']['evaluator_version'])}</code> —
+2.61&times; H66-1, 14.85&times; H65-1, 10.49&times; H60-A) and E1 = {rc['first_test_E1']['mean']:+.4f} ({rc['first_test_E1']['ci95']}).
+Across all 65 non-lattice rasters max 3-px dot overlap is {uniq['max_dot_overlap_within_3px_non_lattice_65_rasters']:.4f} (&le; 0.70),
+but in the literal 70-raster scan (including space-filling lattice <code>calib_r13lattice_00904.tif</code>) raw 3-px overlap is
+{uniq['max_dot_overlap_within_3px_all_70_rasters_literal']:.1%} (&gt; 0.70) and the governing H65-1 lane STOP remains binding.</p>
+<p><a class="btn" href="{prefix}downloads/{esc(TIF)}" download>Download H68-1 TIFF — research only</a>
+<a href="{prefix}downloads/{esc(CHECKS)}">Local format checks</a></p>
 </div>
 {E}
 """
 
 
-def inject(path: Path, block: str) -> None:
-    if not path.is_file():
-        return
-    txt = path.read_text()
-    pat = re.compile(re.escape(B) + r".*?" + re.escape(E) + r"\n?", re.S)
-    txt = pat.sub("", txt)
-    m = re.search(r"<body[^>]*>", txt)
-    if m:
-        i = m.end()
-        txt = txt[:i] + "\n" + block + txt[i:]
-        path.write_text(txt)
-
-
 def main() -> int:
     from stop_guard import lane_is_stopped
     if lane_is_stopped(ROOT, "H68 site publisher"):
-        return 0
-    rc = json.loads((ROOT / "evidence/h68_runcard.json").read_text())
-    for p in (DOCS / "index.html", DOCS / "executive-summary.html"):
-        inject(p, board("", rc))
-    for p in (ROOT / "index.html", ROOT / "executive-summary.html"):
-        inject(p, board("docs/", rc))
-    print("Published H68-STATUS board into docs/{index,executive-summary}.html and root {index,executive-summary}.html")
+        return 2
     return 0
 
 

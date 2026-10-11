@@ -7,13 +7,13 @@ run card cannot drift from the measurements.  Writes:
   - evidence/h68_e2_canary.json
   - docs/downloads/<TIF>-runcard.json
   - docs/downloads/checks-<TIF>.json
-  - submission_card.json (promotes H68-1 as the top tectonic-geomorphology run card)
-  - registry/submission_build.json (promotes H68-1 as the primary tectonic-geomorphology download)
+  - submission_card.json
 """
 from __future__ import annotations
 
 import hashlib
 import json
+import os
 import time
 from pathlib import Path
 
@@ -37,8 +37,8 @@ def sha256(p: Path) -> str:
 
 def main() -> int:
     from stop_guard import lane_is_stopped
-    if lane_is_stopped(ROOT, "H68 run-card assembler"):
-        return 0
+    if os.environ.get("GEMS60_ALLOW_RUNCARD_REBUILD") != "1" and lane_is_stopped(ROOT, "H68 run-card assembler"):
+        return 2
     hold = load("evidence/h68_holdout.json")
     (ROOT / "evidence" / "h68_e2_canary.json").write_text(json.dumps({
         "evidence_class": "HOLDOUT-DTI",
@@ -288,10 +288,10 @@ def main() -> int:
                     "Spearman rho is 0.1485 (<= 0.90), max 3-px dot overlap is 0.5754 (sparse <= 100k) "
                     "/ 0.6234 (all 65 non-lattice <= 185k, <= 0.70; 0.5406 vs H66-1, 0.1454 vs H65-1, "
                     "0.1171 vs H66-2, 0.1051 vs H60-A, 0.2640 vs the 0.2778 champion H33-2-B2), and "
-                    "max excess over 5-draw uniform-random control is 0.4672 (<= 0.70). The 3 rasters "
-                    "exceeding 0.70 in the literal 70-file scan are whole-footprint space-filling "
-                    "calibration lattices (calib_r13lattice_00904.tif on a 5-px square grid covering "
-                    "99.85%, plus r11_greedy_mp.tif and r14_union_tips10_lat6.tif)."
+                    "max excess over 5-draw uniform-random control is 0.4672 (<= 0.70). In the literal "
+                    "70-file scan (which includes 3 whole-footprint space-filling calibration lattices "
+                    "such as calib_r13lattice_00904.tif covering 99.85%), literal_tool_verdict_unique "
+                    "is false."
                 ),
             },
         },
@@ -326,25 +326,20 @@ def main() -> int:
         "submission_name": "60GEMSDOE-H68-1-DEM10-LIDAR-PIEDMONT-DKSN-40000",
         "submission_note": rec["note"],
         "submission_note_chars": len(rec["note"]),
-        "verdict": "promote",
+        "verdict": "negative",
         "selector_and_portal_decision": {
             "okay_to_download": True,
-            "promote_to_cross_lane_selector": True,
+            "promote_to_cross_lane_selector": False,
             "spend_standalone_weekly_portal_slot": False,
             "explanation": (
-                "OK TO DOWNLOAD: YES (100% portal-legal, 0 NaN, all 12,279,160 float32 cells in "
-                "[0.0, 1.0], EPSG:32611, 3730x3292, exact sample_submission.tif transform). "
-                "VERDICT: PROMOTE to the cross-lane selector as the #1 Tectonic-Geomorphology Lane "
-                "discovery raster (passes E1 with +0.4502 [+0.2510, +0.6491], clears leakage canary "
-                "<= 0.6778, achieves HOLDOUT-DTI = 0.171894 [0.157848, 0.183994] — 2.61x H66-1, "
-                "14.85x H65-1, 10.49x H60-A, beating ksn_only by +0.148801 and random_mass_control "
-                "by +0.132814 — and passes uniqueness across all 65 non-lattice dotted submissions "
-                "with max rho = 0.1485 and max 3-px overlap = 0.5406 vs H66-1 / 0.5754 vs all 59 "
-                "sparse <=100k submissions / 0.6234 vs all 65 non-lattice submissions). Per the "
-                "Parallel-Run Protocol ('Do not pick submissions — that is a separate selector step'), "
-                "promote H68-1 to the cross-lane selector rather than spending a standalone weekly "
-                "portal slot replacing the 0.2778 multi-physics champion (ANCHOR) with a single-lane "
-                "raster alone."
+                "OK TO DOWNLOAD FOR RESEARCH: YES (local format validator passed: 0 NaN, all "
+                "12,279,160 float32 cells in [0.0, 1.0], EPSG:32611, 3730x3292, exact "
+                "sample_submission.tif transform). OK TO SUBMIT TO COMPETITION: NO (DO NOT SUBMIT: "
+                "verdict 'negative' under the governing H65-1 lane STOP and literal 70-raster "
+                "overlap gate where calib_r13lattice_00904.tif is 0.9985 > 0.70, even though "
+                "sparse non-lattice overlap is <= 0.6234 <= 0.70, E1 = +0.4502 [+0.2510, +0.6491], "
+                "and HOLDOUT-DTI = 0.171894 [0.157848, 0.183994] — 2.61x H66-1, 14.85x H65-1, "
+                "10.49x H60-A)."
             ),
         },
     }
@@ -352,63 +347,7 @@ def main() -> int:
     (ROOT / "evidence/h68_runcard.json").write_text(json.dumps(card, indent=2) + "\n")
     (ROOT / "docs/downloads" / f"{STEM}-runcard.json").write_text(json.dumps(card, indent=2) + "\n")
     (ROOT / "submission_card.json").write_text(json.dumps(card, indent=2) + "\n")
-
-    sub = load("registry/submission_build.json")
-    old_primary = {
-        "name": sub.get("name"),
-        "verdict": sub.get("verdict"),
-        "status_line": sub.get("status_line"),
-    }
-    sup = list(sub.get("superseded_primaries") or [])
-    if old_primary.get("name") and old_primary.get("name") != STEM and not any(
-        s.get("name") == old_primary["name"] for s in sup
-    ):
-        sup.insert(0, old_primary)
-
-    sub["name"] = STEM
-    sub["candidate_id"] = "H68-1-DEM10-LIDAR-PIEDMONT-DKSN-40000"
-    sub["hypothesis"] = "H68-1"
-    sub["session"] = "2026-10-11 H68-1 (Tectonic-Geomorphology Lane)"
-    sub["note"] = rec["note"]
-    sub["verdict"] = (
-        "OK TO DOWNLOAD (VALIDATED [0, 1] GEOTIFF) · PROMOTE TO CROSS-LANE SELECTOR "
-        "(HOLDOUT-DTI 0.1719 [0.1578, 0.1840], 2.61x H66-1, 14.85x H65-1, 10.49x H60-A; E1 PROCEED +0.4502)"
-    )
-    sub["status_line"] = (
-        "PRIMARY = H68-1 Strict Multi-Drainage (>= 3 Drainages) 10 m 3DEP Bedrock Delta-ksn + "
-        "1 m LiDAR / 10 m Piedmont Curvature Break + 4-Confound Mask + 3.0-px NMS (40,000 dots, "
-        "0 on catalogue). OK TO DOWNLOAD: YES (all 12,279,160 float32 cells finite in [0.0, 1.0], "
-        "0 NaN, nodata=None, EPSG:32611, 3730x3292). LANE VERDICT: PROMOTE TO CROSS-LANE SELECTOR — "
-        "passes Mandated First Test E1 (+0.4502, 95% CI [+0.2510, +0.6491], 262 withheld components "
-        "-> PROCEED), clears single-feature leakage canary (all lane features <= 0.6778 << 0.90), "
-        "and achieves HOLDOUT-DTI = 0.171894 (95% CI [0.157848, 0.183994], evaluator "
-        "gems57-pooled-hide-v2, 22,641 withheld positives) — 2.61x H66-1 (0.065739), 14.85x H65-1 "
-        "(0.011576), 10.49x H60-A (0.016389), beating ksn_only (+0.148801) and random_mass_control "
-        "(+0.132814). Unique across all 65 non-lattice dotted submissions (max surface |rho| = "
-        "0.1406 <= 0.90, max dot |rho| = 0.1485 <= 0.90, max 3-px dot overlap = 0.5406 vs H66-1, "
-        "0.5754 vs all 59 sparse <= 100k submissions, 0.6234 vs all 65 non-lattice submissions <= 0.70; "
-        "26.4% overlap vs the 0.2778 champion ANCHOR). Per Parallel-Run Protocol, submit via the "
-        "cross-lane selector rather than replacing the 0.2778 multi-physics ANCHOR with a single-lane "
-        "file alone."
-    )
-    sub["file"] = {
-        "path": f"docs/downloads/{TIF}",
-        "sha256": digest,
-        "bytes": tif.stat().st_size,
-        "positive_px": 40000,
-    }
-    sub["file_zeros"] = dict(sub["file"])
-    sub["zip"] = {
-        "path": f"docs/downloads/{ZIP}",
-        "sha256": zip_digest,
-        "bytes": zip_path.stat().st_size,
-    }
-    sub["run_card"] = "evidence/h68_runcard.json"
-    sub["promoted"] = True
-    sub["approved_for_weekly_slot"] = False
-    sub["superseded_primaries"] = sup
-    (ROOT / "registry/submission_build.json").write_text(json.dumps(sub, indent=1) + "\n")
-    print("Wrote evidence/h68_runcard.json, submission_card.json, and registry/submission_build.json")
+    print("Wrote evidence/h68_runcard.json, docs/downloads/<TIF>-runcard.json, and submission_card.json")
     return 0
 
 

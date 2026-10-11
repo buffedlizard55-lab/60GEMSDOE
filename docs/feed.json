@@ -1,7 +1,7 @@
 {
   "generated_utc": "2026-10-11T05:23:57Z",
   "repo": "60GEMSDOE",
-  "session": "2026-10-11 manual review: H65-1 INCONCLUSIVE -> STOP; no rerun at any resolution, no new TIFF or slot in this review. c7653 is an earlier NEGATIVE-STOP. H61/H62/H63 and H65-2..H65-5 proposals are historical/deferred only.",
+  "session": "2026-10-11 lane stop audit: research TIFF download only; no new TIFF or slot; historical H67 positive card superseded by literal uniqueness failure",
   "current_official_leaderboard_top": {
     "rank": 1,
     "score": 0.4133,
@@ -387,5 +387,13 @@
     "report": "docs/research/active-lane-review-2026-10-11.md",
     "hypothesis_backlog": "docs/research/next-chi-hypotheses-2026-10-11.md",
     "final_run_card": "evidence/h65_runcard.json"
+  },
+  "current_lane_decision": {
+    "verdict": "negative",
+    "submit_to_competition": false,
+    "new_tiff_generated": false,
+    "research_raster_sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1",
+    "report": "docs/research/2026-10-11-lane-stop-audit.md",
+    "note": "Snapshot of this repository; NOT a live DrivenData score feed."
   }
 }

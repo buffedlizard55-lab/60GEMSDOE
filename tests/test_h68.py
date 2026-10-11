@@ -20,7 +20,7 @@ def test_h68_geotiff_portal_legality_and_sha256():
     runcard = json.loads((ROOT / "evidence/h68_runcard.json").read_text())
     assert card == runcard
     assert card["run"] == "H68-1"
-    assert card["verdict"] == "promote"
+    assert card["verdict"] == "negative"
     assert len(card["submission_note"]) <= 140
     sha = hashlib.sha256(tif_path.read_bytes()).hexdigest()
     assert sha == card["raster_sha256"]
@@ -75,5 +75,5 @@ def test_h68_e1_canary_holdout_and_uniqueness_receipts():
 def test_h68_status_banners_present_on_readme_and_pages():
     for rel in ("README.md", "index.html", "executive-summary.html", "docs/index.html", "docs/executive-summary.html"):
         txt = (ROOT / rel).read_text()
-        assert "<!-- H68-STATUS:BEGIN -->" in txt and "<!-- H68-STATUS:END -->" in txt, f"{rel} missing H68 status block"
         assert TIF_NAME in txt, f"{rel} missing H68 TIF link"
+        assert "DO NOT SUBMIT" in txt, f"{rel} missing DO NOT SUBMIT notice"
