@@ -189,6 +189,7 @@ access was verified this session from the runner.
 - **IR-65-CIT-01:** the citation errors listed above.
 - **IR-65-CACHE-01:** the untracked `.cache/features65` on disk stopped matching its recorded sha256 after the run (cause not identified). It was rebuilt from the pinned TIFs, all 11 arrays match, and the shipped TIF reproduces dot-for-dot.
 - **IR-65-REG-01:** H62-5 estimated "~716 tiles". 18 1° tiles of the 1/3″ product are enough.
+- **IR-65-H63-01:** the H63-1 session, merged in parallel (PR #13), names its file `...-42000px-...` but it holds **36,000** dots (counted). It also gives "100 m DEM resolution" as the root cause of its negative result. H65-1 refutes that: the same lane at native 10 m is still negative.
 - **IR-65-EXEC-01:** the executive summary labelled the h33-2-b2 link "0.2708 anchor", but that file is the owner-reported 0.2778 emission.
 
 **Remaining work and limitations:**
