@@ -32,6 +32,25 @@ LB = "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboa
 CHAMP = "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif"
 
 
+def prior_research_artifact() -> tuple[str, str]:
+    """(name, run label) of the research-only TIFF the site currently headlines.
+
+    ``tests/test_site.py`` requires every page under ``docs/`` to link it and to
+    carry the literal ``DO NOT SUBMIT``.  Read from
+    ``registry/current_site_status.json`` so a later session's rewrite of that
+    registry is picked up instead of a hard-coded filename.
+    """
+    try:
+        d = json.loads((ROOT / "registry/current_site_status.json").read_text())
+        path = d.get("research_artifact", {}).get("path", "")
+        if path:
+            return Path(path).name, str(d.get("active_run", "previous session"))
+    except Exception:
+        pass
+    return ("gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+            "H65-1")
+
+
 def esc(x) -> str:
     return html.escape(str(x))
 
@@ -143,7 +162,8 @@ def fix_header(path: Path, d: str, tif: str):
     path.write_text(s.replace(old.group(0), new, 1))
 
 
-def report_page(rc: dict, tif: str, e1: dict, ho: dict, un: dict) -> str:
+def report_page(rc: dict, tif: str, e1: dict, ho: dict, un: dict,
+                prior: str, prior_run: str) -> str:
     ins = rc["instrument_dti"]
     arms_full = ho["instrument"]["sgmc_off_full"]["per_arm"]
     rows = "".join(
@@ -182,7 +202,8 @@ def report_page(rc: dict, tif: str, e1: dict, ho: dict, un: dict) -> str:
 <a href="irregularities.html">Irregularities</a></nav>
 <div class=dlbtn><a class="btn" href="downloads/{esc(tif)}">&#11015; Newest TIF (H66-2): research only, do NOT submit</a>
 <a class="btn alt" href="downloads/{CHAMP}">&#11015; Champion (already scored 0.2778)</a>
-<a class="btn alt" href="downloads/{esc(primary)}">Registry primary</a></div>
+<a class="btn alt" href="downloads/{esc(primary)}">Registry primary</a>
+<a class="btn alt" href="downloads/{esc(prior)}">Research-only TIF from {esc(prior_run)} &mdash; DO NOT SUBMIT</a></div>
 </div></header>
 <main class=wrap>
 <p><b>Verdict: {esc(rc['verdict'])}. Download OK, submit NO. No submission slot was spent.</b></p>
@@ -316,6 +337,7 @@ def main() -> int:
     for nm, v in (("e1", e1), ("holdout", ho), ("uniqueness", un)):
         if not v:
             raise SystemExit(f"evidence/{a.tag}_{nm} missing")
+    prior, prior_run = prior_research_artifact()
     tif = Path(rc["artifact"]["file"]).name
     DL.mkdir(parents=True, exist_ok=True)
 
@@ -333,7 +355,7 @@ def main() -> int:
         permission=dict(okay_to_download=True, okay_to_submit=bool(rc["okay_to_submit"]),
                         verdict=rc["verdict"])), indent=2) + "\n")
 
-    (DOCS / "h66-report.html").write_text(report_page(rc, tif, e1, ho, un))
+    (DOCS / "h66-report.html").write_text(report_page(rc, tif, e1, ho, un, prior, prior_run))
     put(DOCS / "index.html", board("", rc, tif))
     put(DOCS / "executive-summary.html", board("", rc, tif))
     put(ROOT / "index.html", board("docs/", rc, tif))
@@ -361,7 +383,12 @@ def main() -> int:
     if anchor in s:
         s = s.replace(anchor, md + "\n" + anchor, 1)
     else:
-        s = s.replace("\n", "\n" + md, 1)
+        # A later session rewrote the top of the README and dropped the H65 anchor
+        # (main after PR #15).  Insert above the first existing blockquote board,
+        # or after the header block, so the newest read-out is still first.
+        m = re.search(r"^> ", s, re.M) or re.search(r"\n\n", s)
+        s = s[:m.end() - (0 if s[m.start()] == ">" else -1)] + md + "\n" + s[m.end():] \
+            if s[m.start()] != ">" else s[:m.start()] + md + "\n" + s[m.start():]
     rm.write_text(s)
     print(f"published {tif}: docs/h66-report.html + status boards (verdict {rc['verdict']})")
     return 0

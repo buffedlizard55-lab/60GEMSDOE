@@ -54,6 +54,9 @@ def write(path, bands, dtype, nodata, names):
 
 
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "H65 10 m DEM feature merge"):
+        return 0
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--blocks", default="blocks")
     ap.add_argument("--out", default="data/external")

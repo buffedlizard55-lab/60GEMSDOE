@@ -26,8 +26,17 @@
  .vals{background:#fff8e6;border-bottom:1px solid #e8d9a8;font-size:14px}
  .vals .wrap{padding-top:8px;padding-bottom:8px}
 </style></head><body>
-<div class=dlbtn style="margin:10px 0;padding:10px 14px;border:2px solid #b45309;border-radius:10px;background:#fffbeb"><b>Registry primary (verdict: NEGATIVE - deliverable negative result; do not spend a submission slot (brief: never submit anything that has not beaten the family&#x27;s best promotable holdout)):</b> <a href="downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif">gems61-lane-thermal-knick-40000px-20261011T020352Z.tif</a> <a href="downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.zip">.zip</a></div>
-<header class="top"><div class="wrap">
+<div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
+<p><b>Latest run:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
+<strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast +0.0326,
+95% CI [-0.0144, +0.0790] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
+The earlier c7653 run also stopped. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
+<p><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download the existing H65-1 GeoTIFF for research only</a>
+<strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
+<p>H65-1 diagnostic <b>HOLDOUT-DTI</b>: 0.01158 [0.00840, 0.01462],
+22,641 withheld positives (`gems57-pooled-hide-v2`); not a leaderboard score.
+<a href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.json">Local format receipt</a> · <a href="research/active-lane-review-2026-10-11.md">Full review</a> ·
+<a href="../evidence/h65_runcard.json">final JSON run card</a> · <a href="../registry/leaderboard_snapshot_2026-10-11.json">manual 50-row public-board snapshot</a></p></div><header class="top"><div class="wrap">
 <h1>Lane report — chi/ksn knickpoint strike traces</h1>
 <p>Session <code>arena/16fc977d-60gemsdoe</code> · second, independent run of the tectonic-geomorphology lane of the
 <strong>DOE GEMS Prize</strong> (DrivenData #306) · dashboard 2026-10-11</p>
@@ -50,14 +59,12 @@ labelled research-only rather than quietly shipped as a submission.</div></div>
      sha256 <code>af68d90ec9d3927c6b9c80352f7eb5216ba95023e51fc366b6a71a1097fbe139</code> · 226,472&nbsp;B</td>
  <td><a class="btn" href="downloads/gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif">⬇ Download the lane GeoTIFF</a>
      <a class="btn alt" href="downloads/checks-gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif.json">validation receipt</a></td>
- <td><b>NO.</b> Format-valid (15/15 checks PASS) and unique, but the lane's own pre-registered go/no-go test returned
+ <td><b>NO.</b> Format-valid (15/15 local checks PASS); only 170/696 registry rasters were compared, so full-registry uniqueness is not established. The lane's own pre-registered go/no-go test returned
      <b>STOP</b>. Keep it as a research artefact. Download is fine; submission is not recommended.</td></tr>
 <tr>
- <td>Registry primary (<code>registry/submission_build.json</code>) — the historical
-     0.2778 champion (owner-reported), retained as the reference mask</td>
- <td><a class="btn alt" href="downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif">⬇ <code>…-h33-2-b2-…-zeros.tif</code></a></td>
- <td>Not a recommendation from this session — this run's verdict on <em>all</em> candidates is <b>negative</b>; the family
-     selector owns promotion, and 0 of 3 weekly slots have been used.</td></tr>
+ <td>Historical registry-primary reference shown by this archived report. The linked bytes are the H61A XCRD artifact, not a verified H33-2-B2 file; no organizer receipt ties a score to it.</td>
+ <td><a class="btn alt" href="downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif">⬇ <code>gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif</code></a></td>
+ <td><b>Research only; do not submit.</b> This is not a current recommendation. The current c7653 E1 NEGATIVE-STOP governs.</td></tr>
 </table>
 <p class="mut">Rule applied: <em>“First test: do channels crossing withheld segments show larger steepness steps than random
 lines of the same orientation? If not, stop.”</em> It did not. Negative results are deliverables.</p>
@@ -92,8 +99,8 @@ one implementation.</p>
     <td><span class="pill bad">STOP</span></td></tr>
 <tr><td>3</td><td>Emission of the ranked knickpoint-cast field, format validation, registry uniqueness</td>
     <td>Support 136,547&nbsp;px → 6,082 off-catalogue peaks → <b>6,000 dots</b>;
-        <b>15/15</b> format checks PASS; <b>unique</b> (worst ρ&nbsp;=&nbsp;<b>−0.0152</b>, worst 3-px forward overlap
-        <b>0.000</b> over 170 obtainable registry rasters);
+        <b>15/15</b> local format checks PASS; among 170 of 696 registry rasters, worst ρ&nbsp;=&nbsp;<b>−0.0152</b>
+        and worst 3-px forward overlap <b>0.000</b>; this partial screen does not establish full-registry uniqueness;
         <span class="mut">HOLDOUT-DTI 0.00039 vs matched random-on-support control 0.00042 and random-in-footprint 0.01294
         (evaluator gems60-exp3-v1, 56,619 withheld positives; point estimates, no CI — the field is indistinguishable from
         its own random control)</span></td>
@@ -124,13 +131,11 @@ IR-60-08 below for why that matters.</p>
 <h2>4. Irregularities flagged for manual review (IR-60-01 … IR-60-08)</h2>
 <table>
 <tr><th>id</th><th>Finding</th><th>Effect on the work</th></tr>
-<tr><td>IR-60-01</td><td>The brief cites 0.3195 as the top score; the organizer-published board has <b>0.3774</b> at rank 1
-    and 0.3195 at rank 8.</td><td>The target of “beat the leader” is 0.3774, not 0.3195.</td></tr>
+<tr><td>IR-60-01</td><td>This archived report's board read showed 0.3774 at rank 1 and 0.3195 at rank 8; the manual 2026-10-11 snapshot now shows xiaofanhu #1 at 0.4133 and DARD #8 at 0.3195.</td><td>The old target is historical; public scores are not project scores or file attribution. See the current manual snapshot.</td></tr>
 <tr><td>IR-60-02</td><td>The lane needs a 3DEP 10&nbsp;m DEM; <code>prd-tnm.s3.amazonaws.com</code> returns <b>HTTP 000</b>
     from this sandbox, so the lane ran at 100&nbsp;m.</td><td>Named as the most likely cause of the negative verdict; the
     fetcher probes and refuses to claim success it did not get.</td></tr>
-<tr><td>IR-60-03</td><td>The 0.2778 champion is <b>owner-reported</b>; the GEMSDOE32 repository itself states no organizer
-    score exists for it.</td><td>Every mention is labelled owner-reported; never written as a score here.</td></tr>
+<tr><td>IR-60-03</td><td>The current H33-2-B2 0.2778 is owner-reported/unverified; this archived report separately says a same-named file was 0.2708. No receipt reconciles either value or links it to these bytes.</td><td>Do not attribute public rank-23 0.2778 (extradr19) or rank-36 0.2708 (smrtdoog5) to a project raster. See <code>IR-60-H33-SCORE-20261011</code>.</td></tr>
 <tr><td>IR-60-04</td><td>The official 19-band stack carries only <b>detrended</b> elevation.</td><td>A χ transform is
     undefined on it; absolute elevation had to come from the GeoDAWN DEM.</td></tr>
 <tr><td>IR-60-05</td><td>The inherited “off-catalogue by &gt;2&nbsp;px” emission rule is degenerate on a catalogue-truth
@@ -145,17 +150,10 @@ IR-60-08 below for why that matters.</p>
     shipping; the writer now always takes the grid from <code>data/labels.tif</code>.</td></tr>
 </table>
 
-<h2>5. The 0.2778 question, answered (PhD-level, from the family's measured bytes)</h2>
-<p><code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros</code> is the owner-reported 0.2708 raster with <b>2,545 dots deleted
-and none added</b>, every removed dot 1.4–2.0&nbsp;px from the mapped catalogue
-(<code>equals_base_pruned_at_2px: true</code>, 57GEMSDOE <code>evidence/session6_mechanism_and_witness.json</code>).
-The organizer metric reduces to</p>
-<p style="text-align:center"><b>1/DTI = α + α·(F/T) + β·(|G|/T)</b>, &nbsp; α = 0.2, β = 0.8,</p>
-<p>so at fixed mass a unit of emission pays only if its realised kernel credit beats α·DTI ≈ 0.052 — i.e. within about
-284&nbsp;m of a hidden truth pixel. Pruning near-catalogue dots raises the <em>average</em> credit of what remains, but it
-cannot raise <em>total</em> retained credit much past the theoretical ceiling of ≈0.78 set by kernel coverage. Beating
-0.3195 or 0.3774 therefore requires the retained credit <b>T to rise ≈ +45&nbsp;% at fixed mass</b>: a
-<em>detector</em> problem (finding hidden fault pixels), not a pruning problem.</p>
+<h2>5. Historical H33 score attribution — unresolved</h2>
+<p>This archived report calls <code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros</code> an owner-reported 0.2708 raster and records <b>2,545 dots deleted and none added</b>, with each removed dot 1.4–2.0&nbsp;px from the mapped catalogue. The current H33-2-B2 owner claim elsewhere in this repository is 0.2778. No organizer receipt links either value to exact bytes or establishes that these records describe the same artifact; the public-board numeric matches are not file attributions (<code>IR-60-H33-SCORE-20261011</code>). This is a mechanism record, not score authentication. The metric can be written as</p>
+<p style="text-align:center"><b>1/DTI = α + α·(F/T) + β·(|G|/T)</b>, &nbsp; α = 0.2, β = 0.8.</p>
+<p>For a new unit-mass dot with maximum kernel weight <i>q</i> and actual marginal weighted truth credit ΔT after maxima are recomputed, the score improves exactly when <b>ΔT(1−αs) &gt; αs(1−q)</b>, where <i>s</i> is the current DTI. Only in the special nonredundant one-truth-dot case ΔT = q = k does this reduce to <b>k &gt; αs</b>. For illustrative historical values s = 0.2600–0.2778, αs = 0.052–0.0556, corresponding to roughly 283–284&nbsp;m under the 300&nbsp;m triangular kernel; the reported scores themselves remain unverified. This is not the general cutoff. The old comparison to 0.3195/0.3774 and the ≈45% retained-credit calculation are historical, assumption-dependent estimates, not projections or current board context; the manual 2026-10-11 public leader is 0.4133 and public rows are not project-file attributions. See the <a href="research/active-lane-review-2026-10-11.md">current derivation and evidence limits</a>.</p>
 <p>Consistency check with the live ladder: on the 57GEMSDOE site the catalogue-truth holdout ranks placements
 <em>anti-monotonically</em> against the live ladder (ρ = −0.928), which is exactly what the ceiling arithmetic predicts —
 better catalogue coverage is not the same as better hidden-fault coverage. This run therefore never quotes an
@@ -190,9 +188,9 @@ off-catalogue curve as a score.</p>
     <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">official rules PDF (NLR/OT-6A50-96647)</a>.</li>
 <li><b>Reference solution</b>: <a href="https://github.com/drivendataorg/gems-prize-reference-solution">drivendataorg/gems-prize-reference-solution</a>
     (author: Prof. John Lipor) — catalogued in <code>registry/sources.json</code>.</li>
-<li><b>Lane literature</b>: <a href="https://doi.org/10.1029/2011JF002187">Kirby &amp; Whipple (2012)</a> ·
-    <a href="https://doi.org/10.1002/esp.3385">Perron &amp; Royden (2013, ESPL)</a> ·
-    <a href="https://doi.org/10.5194/esurf-7-661-2019">Gailleton et al. (2019, ESurf)</a>.</li>
+<li><b>Lane literature</b>: <a href="https://doi.org/10.1016/j/jsg.2012.07.009">Kirby &amp; Whipple (2012, JSG 44, 54–75)</a> ·
+    <a href="https://doi.org/10.1002/esp.3302">Perron &amp; Royden (2013, ESPL 38, 570–576)</a> ·
+    <a href="https://doi.org/10.5194/esurf-7-211-2019">Gailleton et al. (2019, ESurf 7, 211–230)</a>.</li>
 <li><b>Data</b>: <a href="https://github.com/jklinck/geothermal_research/tree/main/GeoDAWN_tiffs/22103_area2_tiffs">GeoDAWN
     DEM 22103_dem_a2.tif</a> (49,531,304 B, sha256 <code>d32762a3…</code>, EPSG:32611, 100&nbsp;m) ·
     <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS

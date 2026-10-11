@@ -1,6 +1,10 @@
 # Source register and verification notes
 
-**Reviewed:** 2026-10-03 (UTC date; pages read in this session). “Verified” below means that the named page's text was retrieved and checked for the stated claim. It does not mean that a private dataset, linked archive, hidden label, score receipt, or external raster binary was downloaded or authenticated.
+**Initial review:** 2026-10-03. “Verified” below means that the named page's text was retrieved and checked for the stated claim. It does not mean that a private dataset, linked archive, hidden label, score receipt, or external raster binary was downloaded or authenticated.
+
+### Current public-board addendum — 2026-10-11
+
+A manual rendered-page read of the [official DrivenData leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) captured 50 rows: #1 xiaofanhu 0.4133, #8 DARD 0.3195, and #23 extradr19 0.2778. This is a dated public snapshot, not a project score or file attribution. The 0.2778 match to the H33-2-B2 owner claim is numerical coincidence unless an organizer receipt proves otherwise. See [`registry/leaderboard_snapshot_2026-10-11.json`](../registry/leaderboard_snapshot_2026-10-11.json) and [`docs/score-ledger.csv`](score-ledger.csv). Automated refreshes explicitly skip `drivendata.org`; only non-competition sources are health-probed.
 
 ## Primary competition sources
 

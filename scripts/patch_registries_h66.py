@@ -146,6 +146,22 @@ IRREGULARITIES = [
                    "on a different limb of the same statistic.",
          mitigation="declared in evidence/h66_runcard.json under budget_note rather than absorbed "
                     "silently; wall-clock was inside the 2-hour limit."),
+    dict(id="IR-66-STOP-01", severity="high",
+         statement="PR #15 (session arena/6429039c-60gemsdoe) installed an authoritative lane STOP "
+                   "for channel-steepness (registry/current_site_status.json, active_run H65-1, "
+                   "'No follow-up experiment or submission is authorized') plus a fail-closed "
+                   "scripts/stop_guard.py that blocks run_lane60.py and check_uniqueness60.py. It "
+                   "landed on main WHILE this session was measuring, on a branch cut before it, so "
+                   "H66's four measurement rounds ran the stopped lane with no guard in the tree. "
+                   "Two parallel sessions reached opposite process conclusions in the same lane on "
+                   "the same day.",
+         mitigation="the H66 result is NEGATIVE at both targets (catalogue and off-catalogue), so it "
+                    "corroborates the stop instead of contradicting it and the stop stays in force. "
+                    "scripts/run_h66.py and scripts/check_uniqueness66.py now call the same "
+                    "lane_is_stopped guard; both were executed after the merge and printed 'STOP "
+                    "GUARD ... not run' while writing no evidence (verified). The archived "
+                    "evidence/h66b_*.json files are the record; the reproduction command in README "
+                    "now no-ops by design and must not be forced without separate authorization."),
     dict(id="IR-66-SITE-01", severity="medium",
          statement="scripts/build_site.py re-renders docs/index.html, docs/executive-summary.html "
                    "and the nine root redirect stubs from the registry, and until this session it "
@@ -154,10 +170,12 @@ IRREGULARITIES = [
                    "each other's 'is this file OK to submit?' read-outs. Unmarked hand-inserted "
                    "banners are still replaced: the GEMS61 banner on the root redirect stubs was "
                    "lost when this session regenerated the site.",
-         mitigation="build_site.py now carries preserve_status_blocks(), which re-inserts any "
-                    "<!-- X-STATUS:BEGIN/END --> block a page already carried, so regeneration is "
-                    "safe for every publisher that uses the marker convention (h65, h66, "
-                    "build_site60). Both artifacts named in the lost banner remain in "
+         mitigation="build_site.py now carries preserve_status_blocks(), and "
+                    "build_current_review_site.py (the 'active stop review' renderer added by PR #15, "
+                    "which deletes the boards just the same) imports that one implementation for all "
+                    "11 of its page writes, so regeneration is safe for every publisher that uses the "
+                    "marker convention. Verified: after the merge, build_site.py in stop-review mode "
+                    "leaves the H65 and H66 boards in place. Both artifacts named in the lost banner remain in "
                     "docs/downloads/ and are linked from docs/index.html. Any future insertion "
                     "into a generated page must use the marker convention."),
     dict(id="IR-66-GATE-01", severity="medium",

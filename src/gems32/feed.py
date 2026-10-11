@@ -1,12 +1,13 @@
 """The site's machine-readable feed.
 
 Everything the site shows that can change -- build state, hypotheses, the holdout summary, the
-leaderboard snapshot, source health -- is assembled here, so the published page is always a
-rendering of the repository rather than something a human retyped.
+leaderboard snapshot, source health -- is assembled here, so the published page is a rendering of
+the repository rather than something a human retyped. Non-competition sources may be health-probed;
+DrivenData leaderboard snapshots are manual only and this module never requests that host.
 
 Score discipline: an owner-reported number is stored with ``"kind": "owner_report"`` and is never
-rendered next to a verified number without that label; leaderboard rows carry ``verified: true``
-only when they were read from the public page in the same run that stored them.
+rendered next to a verified number without that label; a leaderboard row is a dated public-page
+observation, not a project score or file attribution.
 """
 from __future__ import annotations
 
@@ -57,6 +58,12 @@ def build(root: Path = ROOT) -> dict:
     feed["leaderboard_observed_utc"] = rows[-1].get("observed_utc") if rows else None
     feed["leaderboard_verified"] = bool(rows and rows[-1].get("verified"))
     feed["leaderboard_snapshots"] = len(rows)
+    feed["leaderboard_retrieval_policy"] = "manual rendered-page snapshots only; no automated competition-host request"
+    # Current operating status is intentionally separate from registry/submission_build.json:
+    # a historic primary must not override a later preregistered stop verdict.
+    active_status = _read_json(reg / "current_site_status.json")
+    if active_status:
+        feed["active_site_status"] = active_status
 
     hyp = _read_json(reg / "hypotheses.json", {"hypotheses": []})
     feed["hypotheses"] = hyp["hypotheses"]
@@ -66,11 +73,15 @@ def build(root: Path = ROOT) -> dict:
 
     sub = _read_json(reg / "submission_build.json")
     if sub:
-        feed["submission"] = sub
         f = sub.get("file", {})
         fp = root / f.get("path", "")
         f["sha256"] = f.get("sha256") or (sha256(fp) if fp.is_file() else None)
         f["bytes"] = f.get("bytes") or (fp.stat().st_size if fp.is_file() else None)
+        if active_status and active_status.get("status") == "STOP" and not active_status.get("recommended_competition_submission"):
+            feed["submission"] = None
+            feed["historical_registry_submission_build"] = sub
+        else:
+            feed["submission"] = sub
     hold = _read_json(root / "evidence" / "holdout_run1.json")
     if hold:
         def _arms(f):

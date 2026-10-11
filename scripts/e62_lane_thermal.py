@@ -162,6 +162,9 @@ def thermal_field(shape, transform, valid) -> tuple[np.ndarray, dict]:
 
 # ------------------------------------------------------------------------------------------------
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "E62 thermal lane runner"):
+        return 0
     ap = argparse.ArgumentParser()
     ap.add_argument("--budgets", default="3000,5000,8000,12000,20000,37654")
     ap.add_argument("--out", default="submission")

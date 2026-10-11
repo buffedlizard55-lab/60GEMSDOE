@@ -76,6 +76,9 @@ def rho(a, b, mask=None, idx=None):
 
 
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "channel-lane uniqueness audit (H60A/H65)"):
+        return 0
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--candidate", type=Path, default=None)
     ap.add_argument("--out", default=str(ROOT / "evidence" / "h60a_uniqueness.json"))

@@ -41,6 +41,9 @@ def sha256(p: Path) -> str:
 
 
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "H65 DEM10 feature-cache builder"):
+        return 0
     man = json.loads((EXT / "dem10_chi_100m.manifest.json").read_text())
     for name, meta in man["files"].items():
         got = sha256(EXT / name)

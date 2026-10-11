@@ -97,6 +97,14 @@ def corpus() -> list[dict]:
 
 
 def main() -> int:
+    # Fail-closed: main carries an authoritative lane STOP for channel-steepness
+    # (registry/current_site_status.json) enforced by scripts/stop_guard.py, which
+    # landed on main in PR #15 while this session was measuring.  Adopt the shared
+    # guard rather than fork around it (IR-66-STOP-01): this runner measures the
+    # same lane, so it must not run while the lane is stopped.
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "H66 off-catalogue lane uniqueness audit"):
+        return 0
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--candidate", type=Path, required=True)
     ap.add_argument("--out", default=str(ROOT / "evidence" / "h66_uniqueness.json"))

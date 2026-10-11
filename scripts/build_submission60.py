@@ -99,6 +99,9 @@ def spearman_screen(a: np.ndarray, b: np.ndarray, idx: np.ndarray) -> float:
 
 
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "channel-lane submission builder (H60A/H65)"):
+        return 0
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--budget", type=int, default=40_000)
     ap.add_argument("--max-candidates", type=int, default=120_000)

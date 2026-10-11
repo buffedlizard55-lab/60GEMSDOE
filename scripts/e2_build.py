@@ -96,6 +96,9 @@ def rasterize(field, cat, valid, k=K_DOTS, ring_px=CAT_RING_PX, min_sep=MIN_SEP_
 
 
 def main():
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "E2 raster-builder"):
+        return 0
     import rasterio
     det, slope_band, cat, valid = load_inputs()
     with rasterio.open(ROOT / "data" / "training_features.tif") as ds:

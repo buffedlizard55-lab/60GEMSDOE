@@ -660,7 +660,7 @@
    "expected_dti": "UNVALIDATED; best of the slate because H65-1's step support is only 1.04-1.19x enriched near mapped faults, while junctions are where mapped faults are",
    "cost": "medium: one new reduction band in scripts/dem10_block.py + one runner run (~4 min)",
    "data_status": "USGS 3DEP 10 m - verified obtainable 2026-10-11 (18 tiles, n39w119 sha256 b7fe301c... matches the independent probe pin)",
-   "status": "PROPOSED - first experiment of the next session"
+   "status": "DEFERRED / NOT AUTHORIZED after H65-1 INCONCLUSIVE→STOP; H65-1 report prohibits rerunning the knickpoint lane at any resolution. Historical proposal only; no experiment, TIFF, or slot."
   },
   {
    "id": "H65-3",
@@ -678,7 +678,7 @@
    "expected_dti": "UNVALIDATED; moderate",
    "cost": "medium-high (valley-width extraction at 10 m)",
    "data_status": "USGS 3DEP 10 m - verified obtainable",
-   "status": "PROPOSED"
+   "status": "DEFERRED / NOT AUTHORIZED after H65-1 INCONCLUSIVE→STOP; H65-1 report prohibits rerunning the knickpoint lane at any resolution. Historical proposal only; no experiment, TIFF, or slot."
   },
   {
    "id": "H65-4",
@@ -695,7 +695,7 @@
    "expected_dti": "UNVALIDATED; low-moderate (coarse localisation, ~km)",
    "cost": "high (global chi datum across blocks)",
    "data_status": "USGS 3DEP 10 m - verified obtainable",
-   "status": "PROPOSED"
+   "status": "DEFERRED / NOT AUTHORIZED after H65-1 INCONCLUSIVE→STOP; H65-1 report prohibits rerunning the knickpoint lane at any resolution. Historical proposal only; no experiment, TIFF, or slot."
   },
   {
    "id": "H65-5",
@@ -712,7 +712,7 @@
    "expected_dti": "UNVALIDATED; low (H65-1 shows 10 m knickpoint support barely enriched near faults)",
    "cost": "high",
    "data_status": "USGS 3DEP 10 m - verified obtainable",
-   "status": "PROPOSED"
+   "status": "DEFERRED / NOT AUTHORIZED after H65-1 INCONCLUSIVE→STOP; H65-1 report prohibits rerunning the knickpoint lane at any resolution. Historical proposal only; no experiment, TIFF, or slot."
   },
   {
    "id": "H66-1",
@@ -806,5 +806,5 @@
    "status": "PROPOSED"
   }
  ],
- "updated_utc": "2026-10-11T16:23:50Z"
+ "updated_utc": "2026-10-11T16:34:53Z"
 }

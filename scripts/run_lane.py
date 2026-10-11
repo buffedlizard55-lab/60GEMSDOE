@@ -51,6 +51,9 @@ def log(msg: str, t0: float) -> None:
 
 
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "legacy channel-steepness lane runner"):
+        return 0
     ap = argparse.ArgumentParser()
     ap.add_argument("--data-dir", required=True)
     ap.add_argument("--out-dir", default=str(ROOT / "submission"))
