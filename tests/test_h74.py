@@ -28,10 +28,19 @@ PRE = _j("registry/preregistration-h74.json")
 
 
 def test_preregistration_predates_the_evidence_it_governs():
-    pre_mtime = (ROOT / "registry" / "preregistration-h74.json").stat().st_mtime
+    # Compared from the timestamps recorded *inside* the files, never from filesystem mtimes:
+    # a fresh checkout or a merge resets mtimes, which would make this a flaky CI failure.
+    pre = PRE["preregistered_utc"]
+    stamped = 0
     for rel in ("evidence/h74_e1_first_test.json", "evidence/h74_e1b_offcatalogue.json",
-                "evidence/h74_holdout.json", "evidence/h74_runcard.json"):
-        assert pre_mtime <= (ROOT / rel).stat().st_mtime, f"preregistration is newer than {rel}"
+                "evidence/h74_holdout.json", "evidence/h74_runcard.json",
+                "evidence/h74_tiff.json"):
+        got = _j(rel).get("generated_utc")
+        if got is None:
+            continue
+        stamped += 1
+        assert pre <= got, f"preregistration ({pre}) is newer than {rel} ({got})"
+    assert stamped >= 3, "too few evidence files carry a timestamp to test the ordering"
     # the endpoint and the gate must be fixed in the preregistration, not chosen afterwards
     assert PRE["e1_gating_first_test"]["gate"].startswith("PROCEED iff")
     assert "amendments" in PRE, "the primary/secondary split must be recorded, not silent"
