@@ -1,0 +1,161 @@
+{
+ "schema": "gems60.run-card.v1",
+ "generated_utc": "2026-10-11T01:16:24.084819Z",
+ "lane": "tectonic-geomorphology: channel steepness and knickpoints (Kirby & Whipple 2012; Perron & Royden 2013; Gailleton et al. 2019)",
+ "hypothesis": "Bedrock-channel steepness and knickpoints record spatial gradients in rock uplift, so a base-level step left by an active fault is still present in the channel profile after the surface scarp has degraded and buried. Knickpoint crossings that align across several independent drainages along a common strike therefore locate faults - including ones the USGS/INGENIOUS catalogue omits.",
+ "mechanism": "Chi transform puts channels on a comparable footing; in chi-space the profile slope is the normalised steepness ksn = (U/K)^(1/n). A fault crossing a channel produces a break in the chi-profile; the crossing is projected along the local channel NORMAL and reinforced where independent drainages share a strike, which is the operational form of 'align across several independent drainages'.",
+ "named_non_fault_process_that_could_mimic_it": "Two, both named in the brief and both measured here. (1) Internal-drainage / playa base levels: a playa sets base level by evaporation, so it manufactures base-level steps with no tectonic cause. Measured: the priority-flood fill raises 899,623 cells (17.4 % of the valid grid) - the Great Basin's closed basins. (2) Lithologic (erodibility) contrast: ksn ~ (U/K)^(1/n), so a rock-type change with no uplift change mimics a fault. Not masked in this run; listed as hypothesis 5.",
+ "pre_registered_first_test": {
+  "question": "do channels crossing withheld segments show larger steepness steps than random lines of the same orientation?",
+  "experiment_1": {
+   "verdict": "STOP",
+   "evaluator_version": "gems60-exp1-v1",
+   "withheld_positive_pixels": 56619,
+   "n_crossing": 9488,
+   "n_control": 45967,
+   "delta_mean": -0.022946168933475286,
+   "ci95_delta": [
+    -0.16572629205138067,
+    0.16221502157755552
+   ],
+   "p_one_sided": 1.0,
+   "leakage_canary_auc": 0.45922686533659984,
+   "defect_found": "window 31 samples = 3.1 km, ~10x the base-level step under test; control was an unrelated translated line"
+  },
+  "experiment_2_corrected": {
+   "verdict": "STOP",
+   "withheld_positive_pixels": 56619,
+   "n_crossing": 17117,
+   "n_control": 102702,
+   "delta_mean": -0.03485839220855588,
+   "ci95_delta": [
+    -0.08056582623216794,
+    -0.006490355172688651
+   ],
+   "auc": 0.47945804189688124,
+   "p_one_sided": 1.0
+  }
+ },
+ "holdout_dti": {
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator_version": "gems60-exp3-v1",
+  "withheld_positive_pixels": 56619,
+  "value_at_chosen_budget": 0.0003867765292039581,
+  "ci_note": "the pooled block bootstrap was run for the arm contrasts of experiments 1 and 2 (reported there with 95 % CIs); the emission curve in experiment 3 is reported point-wise against matched random controls, not as a CI, because the field is indistinguishable from its own random control",
+  "matched_random_controls": {
+   "random_on_offcatalogue_support": 0.0004231810426433035,
+   "random_in_footprint": 0.012942459129751028
+  }
+ },
+ "leakage_canary": {
+  "max_feature_auc": 0.47945804189688124,
+  "note": "all surfaces are derived from the DEM only; no label information enters any feature; no flag"
+ },
+ "registry_check": {
+  "evidence_class": "REGISTRY-MEASUREMENT",
+  "rasters_expected": 696,
+  "rasters_checked": 170,
+  "scope_note": "Checked against every registry raster obtainable in this sandbox. Un-fetched entries are a stated scope limitation, never a claim of absence.",
+  "thresholds": {
+   "rho": 0.9,
+   "forward_overlap": 0.7
+  },
+  "worst_spearman_full_footprint": -0.01521393919147074,
+  "worst_spearman_submission": "/tmp/study/gr/GeoDAWN_tiffs/22103_area2_tiffs/22103_dem_a2.tif",
+  "worst_forward_overlap": 0.0,
+  "worst_forward_overlap_submission": null,
+  "unique": true
+ },
+ "raster": {
+  "file": "gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif",
+  "sha256": "af68d90ec9d3927c6b9c80352f7eb5216ba95023e51fc366b6a71a1097fbe139",
+  "bytes": 226472,
+  "n_positive_dots": 6000,
+  "crs": "EPSG:32611",
+  "shape": [
+   3730,
+   3292
+  ],
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "band": 1,
+  "dtype": "float32",
+  "nodata_tag": null
+ },
+ "validator_output": {
+  "crs_matches": true,
+  "shape_matches": true,
+  "transform_matches": true,
+  "single_band": true,
+  "dtype_float32": true,
+  "no_nodata_tag": true,
+  "all_finite": true,
+  "range_0_1": true,
+  "no_negative": true,
+  "no_nan": true,
+  "no_inf": true,
+  "finite_footprint_equals_labels": false,
+  "zero_outside_footprint": true,
+  "n_positive": 6000,
+  "no_catalogue_hit": true,
+  "min_distance_to_catalogue_px": 2.23606797749979,
+  "all_pass": true
+ },
+ "submission_name": "GEMS60-CHI-6000",
+ "submission_note": "GEMS60 chi/ksn lane: channel-normal knickpoint casts; pre-registered first test returned STOP - NEGATIVE RESULT, do not spend a slot.",
+ "verdict": "negative",
+ "okay_to_submit": false,
+ "why_not": "the lane's own pre-registered go/no-go test returned STOP under two independently parameterised detectors, and the emission scores at or below a matched random control on the only holdout available; spending one of three weekly slots on it would not maximise P(win)",
+ "unblocker": {
+  "named": "10 m 3DEP DEM",
+  "official_source": "https://apps.nationalmap.gov/downloader/",
+  "host": "https://prd-tnm.s3.amazonaws.com",
+  "reachability_here": "000",
+  "fetcher": "scripts/fetch_3dep_10m.sh (probes, refuses to claim success it did not get)"
+ },
+ "budget": {
+  "experiments_run": 3,
+  "experiments_allowed": 3,
+  "slots_used": 0
+ },
+ "irregularities": [
+  {
+   "id": "IR-60-01",
+   "finding": "brief says the highest score is 0.3195; organizer-published board has 0.3774 at rank 1 and 0.3195 at rank 8"
+  },
+  {
+   "id": "IR-60-02",
+   "finding": "the lane requires a 3DEP 10 m DEM; prd-tnm.s3.amazonaws.com returns HTTP 000 here, so the lane ran at 100 m - named as the likely cause of the negative verdict"
+  },
+  {
+   "id": "IR-60-03",
+   "finding": "h33-h33-2-b2's 0.2778 is OWNER-REPORTED; GEMSDOE32's own README states no organizer score exists for it"
+  },
+  {
+   "id": "IR-60-04",
+   "finding": "the official 19-band stack carries only DETRENDED elevation; a chi transform is undefined on it"
+  },
+  {
+   "id": "IR-60-05",
+   "finding": "the inherited 'off-catalogue by >2 px' emission rule is degenerate on a catalogue-truth holdout; reported, not tuned away"
+  },
+  {
+   "id": "IR-60-06",
+   "finding": "uniqueness could be checked against 170 obtainable registry rasters, not all 696 listed family-wide; stated scope limitation"
+  },
+  {
+   "id": "IR-60-07",
+   "finding": "two bugs found by brute-force verification and fixed before any scientific number: D8 flow into nodata cells; CSR gather mixing coordinate systems"
+  },
+  {
+   "id": "IR-60-08",
+   "finding": "the GeoDAWN DEM x-origin is 243349.965575182 vs the official 243350.0; caught by verify_submission.py before shipping; the writer now takes CRS/shape/transform from labels.tif"
+  }
+ ]
+}
