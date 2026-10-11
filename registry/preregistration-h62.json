@@ -1,0 +1,67 @@
+{
+ "id": "60H62-PREREG-1",
+ "written_utc": "2026-10-11T01:54:30Z",
+ "written_before_results": true,
+ "hypothesis_id": "H62-1",
+ "statement": "Do conjunctive buried-contrast steps (min of percentile-ranked |grad depth_to_base_surf| and |grad iso_grav_anom|, low-relief arm) place emission on off-catalogue fault pixels better than a uniform-random emission of identical mass under identical masks, on the repository's two preregistered instruments?",
+ "field": {
+  "inputs": ["training_features.tif band 15 depth_to_base_surf", "training_features.tif band 13 iso_grav_anom", "topo_10m_derived_100m_u8.tif band 1 slope_p90", "topo_10m_derived_100m_u8.tif band 5 relief_local"],
+  "construction": [
+   "masked reads; sentinel nodata (-3.4028235e38) -> NaN; NaN inside footprint replaced by footprint median before gradients, invalid restored after",
+   "g_depth = |Sobel depth_to_base_surf| per px; g_grav = |Sobel iso_grav_anom| per px",
+   "g_depth, g_grav -> percentile ranks over footprint cells only, in [0,1]",
+   "conj = min(r_depth, r_grav)  (soft AND: both fields must be locally extreme)",
+   "gate = (slope_p90 <= 8 deg) AND (relief_local <= 25 m), thresholds fixed a priori from the topo pack's own p0.5-p99.5 ranges (41.82 deg, 80.54 m), label-free",
+   "primary arm field_h62 = conj * gate; ablation arm field_h62_ungated = conj"
+  ],
+  "label_free": true
+ },
+ "masks": {
+  "footprint": "sample_submission.tif footprint, pixel-exact",
+  "catalogue_ring_m": 200,
+  "striped_rows": "gems60.surface.detect_striped_rows on streamed 19-band row means (z >= 4 in >= 2 bands)",
+  "note": "no playa mask: H62-1 targets under-cover steps including basin interiors, and the off-catalogue instrument's maximal-separation thinning deliberately spreads truth into basin floors; masking playas would delete potential true positives. This is a documented deviation from run_lane.py's confound list."
+ },
+ "instruments": {
+  "spatially_blocked_hideout": {
+   "evaluator": "gems52.evaluate_holdout VERSION gems52-pooled-hide-v1",
+   "mode": "hide", "n_folds": 4, "buffer_px": 4, "prevalence": 0.002, "seed": 20261011,
+   "block_side_px": 200, "bootstrap_draws": 2000,
+   "truth": "catalogue hide-and-recover: whole components withheld, visible catalogue masked pixel-exactly at scoring"
+  },
+  "off_catalogue": {
+   "population": "SGMC fault pixels >= 300 m from the catalogue, maximal-separation thinned to the |G| mid pin 14088.7 (same pins as run_lane.py)",
+   "min_dist_m": 300, "target_px": 14088.7, "seed": 0,
+   "use": "budget choice ONLY (the instrument is prevalence-corrected, per src/gems60/holdout.py docstring) + the beats-random contrast"
+  }
+ },
+ "arms": {
+  "h62_candidate": "final emission raster (fixed), primary arm unless barred by the canary",
+  "random_matched": "uniform-random raster, same mass, same masks, seed 777",
+  "field_topk_canary": "raw field re-emitted per fold via gems52.holdout.emit_topk at the candidate's budget (label-free upper bound)",
+  "champion": "registry/rasters/dotted_b2_prune_02778.tif as-is (owner-reported live 0.2778; context only - different mass)",
+  "d28": "registry/rasters/dotted_d2_8_02600.tif as-is (owner-reported live 0.2600; context only - different mass)",
+  "h274r1": "registry/rasters/dotted_d2_8_02708.tif as-is (owner-reported live 0.2708; context only - different mass)",
+  "h16topo": "data/scored/gems16-h16-1-...-nan.tif as-is (owner-reported live 0.1855; context only - different mass)"
+ },
+ "budget_ladder_px": [1000, 2000, 4000, 8000, 12000, 16000, 24000, 32000, 48000],
+ "budget_rule": "emission budget = argmax of the ELIGIBLE primary arm's off-catalogue DTI over the ladder (preregistered instrument use: budget choice)",
+ "canary": {
+  "features": ["g_depth", "g_grav", "conj", "gate_slope", "gate_relief", "field_h62", "field_h62_ungated", "det_elev", "abs_det_elev_slope", "dem_mean"],
+  "rule": "rank AUC vs the off-catalogue truth; any input with AUC > 0.90 is flagged; if the PRIMARY arm's field AUC > 0.90 the primary arm is BARRED and the ungated ablation arm becomes the candidate (preregistered fallback); if both > 0.90 the experiment stops NEGATIVE",
+  "threshold": 0.90
+ },
+ "gates": {
+  "G0_surface_uniqueness": "before placement: max |Spearman(field, registry raster)| <= 0.90 over a footprint subsample (>=400k cells) for every registry raster; FAIL => duplicate, stop",
+  "G1_canary": "candidate arm field AUC vs off-catalogue truth <= 0.90 (see canary rule)",
+  "G2_beats_random": "on the spatially blocked hideout, candidate pooled HOLDOUT-DTI > random_matched pooled HOLDOUT-DTI AND paired difference positive in >= 3 of 4 folds; on the off-catalogue instrument at the emission budget, candidate DTI > matched-random DTI",
+  "G3_beats_holdout_best": "candidate pooled HOLDOUT-DTI strictly greater than EVERY comparable arm in the pooled summary (the family's promotable bench 0.190147 lives on a DIFFERENT instrument and is cited, not compared)",
+  "G4_dots_uniqueness": "after placement: <= 70% of candidate dots within 3 px of ANY registry raster's dots AND max |Spearman| <= 0.90",
+  "verdict_rule": "PROMOTE (as a candidate for the separate selector step; this script never spends a slot) iff G0 and G1 and G2 and G3 and G4 all pass; otherwise NEGATIVE with the failing gates named. Negative results are deliverables."
+ },
+ "honesty": {
+  "evidence_class": "HOLDOUT-DTI (evaluator version + withheld positives + 95% CI reported with every number)",
+  "instruments_cannot_measure": "the hidden test set; no local number is written as a leaderboard score",
+  "anchored_arms_note": "anchor arms are scored as-is with their own mass; they are context, not matched-budget controls"
+ }
+}

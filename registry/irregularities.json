@@ -223,6 +223,20 @@
    "statement": "All four label-free H33 surfaces score BELOW a uniform-random control on the catalogue-hidden instrument at 44,090 px (H33-A 0.01874, H33-B 0.02177, H33-C 0.02407, H33-D 0.00394, union 0.02006, random 0.03438), while H33-B scores 0.09072 on the off-catalogue SGMC instrument against the incumbent's 0.06059. The catalogue-hidden instrument therefore has no power to rank hypotheses whose purpose is to find faults the catalogue lacks.",
    "evidence": "evidence/h33_holdout.json; evidence/h33_candidates.json.",
    "mitigation": "the sign disagreement is reported as the session's central finding; promotion stays gated on the identification experiment (measuring T, K and F live) rather than on this instrument."
+  },
+  {
+   "id": "IR-32-H62-01",
+   "severity": "medium",
+   "status": "fixed (2026-10-11)",
+   "statement": "Three shared-tool CI blind spots made the full suite un-runnable on a fresh clone: requirements.txt omitted numba (tests/test_lane_core.py import error), scripts/e3_validate.py read a private sandbox path /home/user/registry_rasters instead of registry/rasters, and scripts/run_lane.py ignored the manifest's external/ destination for derived_sgmc_faults_100m_u8.tif. Additionally tests/test_gems32.py pinned verified_files_count == 22 while registry/data_manifest.json lists 23 (the assertion only ever ran via skip on CI). All four fixed in the shared template, never as private forks.",
+   "evidence": "requirements.txt; scripts/e3_validate.py; scripts/run_lane.py; tests/test_gems32.py; full suite 104 passed 0 failed on 2026-10-11"
+  },
+  {
+   "id": "IR-32-H62-02",
+   "severity": "medium",
+   "status": "open (protocol amendment needed)",
+   "statement": "The literal uniqueness gate 'more than 70% of dots within 3 px of one registry raster = duplicate' is uninformative against dense lattice rasters: H62-1 scored 83.1% vs r13_lattice_s5, and a matched uniform-random set of the same size scored 83.7% (H62-1 excess-over-random -0.0059, evidence/h62_uniqueness_excess_control.json). The family selector already uses excess-over-random; the shared protocol text should adopt that form. Preregistered gates are not retroactively passed: H62-1 remains G4-FAIL in the record.",
+   "evidence": "evidence/h62_uniqueness.json; evidence/h62_uniqueness_excess_control.json; registry/preregistration-h62.json"
   }
  ]
 }

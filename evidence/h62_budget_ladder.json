@@ -1,0 +1,81 @@
+{
+  "arm": "h62_primary",
+  "ladder": [
+    {
+      "budget": 1000,
+      "lane_dti": 9.714606290849023e-05,
+      "random_dti": 0.0024225283036477833,
+      "lane_minus_random": -0.002325382240739293,
+      "lane_mass": 1000.0,
+      "random_mass": 1000.0
+    },
+    {
+      "budget": 2000,
+      "lane_dti": 0.000291719089884572,
+      "random_dti": 0.004172781970429069,
+      "lane_minus_random": -0.003881062880544497,
+      "lane_mass": 2000.0,
+      "random_mass": 2000.0
+    },
+    {
+      "budget": 4000,
+      "lane_dti": 0.0008826355922284776,
+      "random_dti": 0.008216001113874468,
+      "lane_minus_random": -0.00733336552164599,
+      "lane_mass": 4000.0,
+      "random_mass": 4000.0
+    },
+    {
+      "budget": 8000,
+      "lane_dti": 0.0027690050500262984,
+      "random_dti": 0.016748172454357203,
+      "lane_minus_random": -0.013979167404330905,
+      "lane_mass": 8000.0,
+      "random_mass": 8000.0
+    },
+    {
+      "budget": 12000,
+      "lane_dti": 0.0038512278476478643,
+      "random_dti": 0.022925230446059427,
+      "lane_minus_random": -0.019074002598411563,
+      "lane_mass": 12000.0,
+      "random_mass": 12000.0
+    },
+    {
+      "budget": 16000,
+      "lane_dti": 0.0041568249861279605,
+      "random_dti": 0.029942661469032628,
+      "lane_minus_random": -0.025785836482904667,
+      "lane_mass": 16000.0,
+      "random_mass": 16000.0
+    },
+    {
+      "budget": 24000,
+      "lane_dti": 0.005745491927757701,
+      "random_dti": 0.03875513312867134,
+      "lane_minus_random": -0.03300964120091364,
+      "lane_mass": 24000.0,
+      "random_mass": 24000.0
+    },
+    {
+      "budget": 32000,
+      "lane_dti": 0.007266345562554148,
+      "random_dti": 0.04690547052268686,
+      "lane_minus_random": -0.03963912496013271,
+      "lane_mass": 32000.0,
+      "random_mass": 32000.0
+    },
+    {
+      "budget": 48000,
+      "lane_dti": 0.011723596567631299,
+      "random_dti": 0.05676258317889944,
+      "lane_minus_random": -0.04503898661126814,
+      "lane_mass": 48000.0,
+      "random_mass": 48000.0
+    }
+  ],
+  "argmax_budget": 48000,
+  "argmax_dti": 0.011723596567631299,
+  "budgets_beating_random": 0,
+  "n_budgets": 9
+}

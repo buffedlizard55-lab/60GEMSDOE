@@ -1,7 +1,7 @@
 {
- "generated_utc": "2026-10-11T01:10:00Z",
+ "generated_utc": "2026-10-11T02:15:00Z",
  "repo": "60GEMSDOE",
- "session": "2026-10-11 tectono-geomorphic knickpoint lane",
+ "session": "2026-10-11 session 2: H62-1 preregistered validation (plus earlier knickpoint-lane run)",
  "current_official_leaderboard_top": {
   "score": 0.3774,
   "participant": "xiaofanhu",
@@ -14,6 +14,22 @@
   "evidence_class": "OWNER-REPORT"
  },
  "submissions": [
+  {
+   "name": "h62-1-undercover-step-48000px-20261011T020550Z",
+   "file": "downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif",
+   "sha256": "b8d29b2f445ccc9746af53e0716e22b866bb5747297cf81aa2ab973660af6857",
+   "dots": 48000,
+   "verdict": "NEGATIVE - research-only; do not submit (failed gates G2, G3, G4)",
+   "evidence_class": "HOLDOUT-DTI",
+   "evaluator_version": "gems52-pooled-hide-v1",
+   "holdout_dti": 0.0042028353060120215,
+   "ci95": [0.0032113908162253145, 0.005281897645342627],
+   "withheld_positive_pixels": 36414,
+   "prereg": "registry/preregistration-h62.json (written before computation)",
+   "uniqueness": "G0 surface PASS (max |rho| 0.0995); G4 raw FAIL (83.1% <=3px of r13_lattice, excess-over-random -0.0059, rank |rho| 0.0156)",
+   "validator": "0 problems (receipt: docs/downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.json)",
+   "submitted_to_competition": false
+  },
   {
    "name": "gems60-lane-knickpoint-c7653-20261011T000000Z",
    "file": "downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
@@ -32,21 +48,37 @@
   }
  ],
  "lane_gate": {
-  "experiment": "E1",
+  "experiment": "E1 (knickpoint lane, earlier run)",
   "auc_placement_null": 0.22435897435897437,
   "rule": "stop if AUC<0.55",
   "result": "NEGATIVE-STOP"
+ },
+ "h62_gate": {
+  "experiment": "E1 (H62-1, this run)",
+  "prereg": "60H62-PREREG-1",
+  "gates": {
+   "G0_surface_uniqueness": "PASS (max |rho| 0.0995 <= 0.90)",
+   "G1_leakage_canary": "PASS (field AUC 0.4537; no feature > 0.90)",
+   "G2_beats_random": "FAIL (hideout 4/4 folds OK; off-catalogue 0/9 budget rungs)",
+   "G3_beats_holdout_best": "FAIL (0.00420 vs d28 0.08623)",
+   "G4_dots_uniqueness_raw": "FAIL (83.1% <=3px of r13_lattice vs gate 70%; excess-over-random -0.0059; |rho| 0.0156)"
+  },
+  "result": "NEGATIVE - no slot spent"
  },
  "irregularities": [
   "leaderboard top is 0.3774 (2026-10-11), not 0.3195 as the brief says",
   "rules PDF host in brief (docs.nlr.gov) wrong; real host www.nlr.gov, DOI 10.2172/3818146",
   "official sample_submission.tif contains the 60,988-px catalogue pattern despite 'total fault absence' wording",
   "sandbox egress blocks prd-tnm.s3.amazonaws.com / ScienceBase: 10m/1m raw DEM not fetchable here (source free+official; 716 pinned URLs)",
-  "GitHub API rate limit (60/h unauthenticated) hit; use clones/codeload"
+  "requirements.txt was missing numba (CI could not collect tests/test_lane_core.py) - fixed in this run",
+  "scripts/e3_validate.py pointed at a private sandbox path /home/user/registry_rasters - fixed to registry/rasters in this run",
+  "scripts/run_lane.py did not accept the manifest's external/ destination for derived_sgmc_faults_100m_u8.tif - fixed in this run",
+  "the raw 70% dot-overlap gate is uninformative against dense lattice registry rasters (matched random also scores 83.7%); family selector already uses excess-over-random - protocol text should adopt the excess form"
  ],
  "next_steps": [
-  "hypotheses 2-4 (basement-step, seismicity coupling, TDR contacts) run on bands already on disk",
-  "full 10m chi/ksn lane needs one unrestricted run (S3 egress) - pins ready",
+  "H62-2 (alteration-front Th/K edges) - bands on disk, next candidate to preregister",
+  "H62-3 (warm-spring corridor chaining, GDR CSV on disk) and H62-4 (playa-margin rings)",
+  "H62-5 full 10m chi/ksn lane needs one unrestricted run (S3 egress) - pins + Actions receipt ready",
   "selector step: no promotable file this session; champion family remains the live anchor"
  ]
 }

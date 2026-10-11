@@ -33,8 +33,53 @@ footer{color:var(--mut);font-size:13px;margin:26px 0}
 <p style="margin:10px 0 0;padding:10px 14px;border-left:4px solid #a4161a;background:#fbeaea"><strong>Parallel lane — Lane 1 (χ / normalised channel steepness, knickpoint strike traces):</strong> <a href="lane1/index.html">download page and verdict</a> (NEGATIVE, 2026-10-11) · <a href="lane1/executive-summary.html">executive summary</a> · <a href="lane1/data.html">data table</a> · <a href="lane1/hypotheses.html">ranked hypotheses</a></p>
 <p class="mut">DOE GEMS Prize (DrivenData #306) · session 2026-10-11 · lane: channel steepness &amp; knickpoints (Kirby &amp; Whipple 2012; Perron &amp; Royden 2013)</p>
 
+<!-- ===================== SESSION 2 (H62-1): the file generated THIS session ===================== -->
 <div class="banner">
-<h2>⚠️ VERDICT: NEGATIVE — DO NOT SUBMIT THIS FILE TO THE COMPETITION</h2>
+<h2>⚠️ VERDICT (2026-10-11, hypothesis H62-1): NEGATIVE — DO NOT SUBMIT THIS FILE</h2>
+<p><b>Answer to “is it OK to download and submit the TIF generated this session?”: NO.</b>
+H62-1 (under-cover basement-step × gravity-step concordance) was preregistered before computation
+(<code>registry/preregistration-h62.json</code>) and validated on the spatially-blocked holdout.
+It failed 3 of its 5 preregistered gates:</p>
+<table>
+<tr><th>gate</th><th>result</th><th>number (HOLDOUT-DTI, evaluator <code>gems52-pooled-hide-v1</code>)</th></tr>
+<tr><td>G0 surface uniqueness (pre-placement)</td><td style="color:var(--ok)">PASS</td><td>max |Spearman| 0.0995 vs 35 registry rasters (gate 0.90)</td></tr>
+<tr><td>G1 leakage canary</td><td style="color:var(--ok)">PASS</td><td>field AUC vs off-catalogue truth 0.4537; no feature &gt; 0.90</td></tr>
+<tr><td>G2 beats random</td><td style="color:var(--bad)">FAIL</td><td>hideout half OK (0.0042 vs 0.0020, 4/4 folds); off-catalogue instrument <b>0/9 budget rungs</b> (0.0117 vs 0.0567 at 48,000 px)</td></tr>
+<tr><td>G3 beats holdout best</td><td style="color:var(--bad)">FAIL</td><td>0.00420 [0.00321, 0.00528] vs best arm d28 0.08623 (36,414 withheld positives, 2,000 paired draws)</td></tr>
+<tr><td>G4 dots uniqueness (raw, preregistered)</td><td style="color:var(--bad)">FAIL</td><td>83.1% of dots ≤3 px from <code>r13_lattice_s5</code> (gate 70%) — but excess over matched random is −0.0059 and |Spearman| is 0.0156, so this is a dense-lattice artifact, not a duplicate (diagnostic <code>evidence/h62_uniqueness_excess_control.json</code>, post-hoc, does not pass G4)</td></tr>
+</table>
+<p>Per the brief (“do not spend a submission slot on an idea that hasn't beaten the current holdout
+best”), <b>no slot is spent; the file is published as a NEGATIVE-result artifact</b> (negative
+results are deliverables). The earlier knickpoint-lane run of the same day remains below — also
+NEGATIVE.</p>
+</div>
+
+<div class="dl">
+<h2>📦 ONE-CLICK submission download — file generated THIS session (2026-10-11, H62-1)</h2>
+<p>Validated all-finite <code>{0,1}</code> float32 GeoTIFF — portal-safe (0 NaN anywhere, values in
+[0,1], EPSG:32611, 3730×3292 @ 100 m, exact official transform), 48,000 dots. <b>The note to paste
+if the selector ever promotes it is printed under the buttons; this session's verdict is
+NEGATIVE, so do not upload it now.</b></p>
+<p>
+<a class="btn" href="downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif" download>⬇ gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif</a>
+<a class="btn ghost" href="downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.zip" download>⬇ .zip (same tif inside)</a>
+<a class="btn ghost" href="downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.json">receipt JSON</a>
+<a class="btn ghost" href="downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-nan.tif" download>NaN-outside diagnostic twin</a>
+</p>
+<p class="mut">sha256 <code>b8d29b2f445ccc9746af53e0716e22b866bb5747297cf81aa2ab973660af6857</code> ·
+validator: 0 problems (receipt JSON carries the literal checks) · submission name
+<code>h62-1-undercover-step-48000px-20261011T020550Z</code> · note (99 chars):<br>
+<code>H62-1 buried basement-step x gravity-step; 48000 dots; HOLDOUT-DTI 0.0042; NEGATIVE - do not submit</code><br>
+Full run card: <a href="h62_runcard.json">docs/h62_runcard.json</a> ·
+preregistration: <code>registry/preregistration-h62.json</code> · validation bundle:
+<code>evidence/h62_validation.json</code> · reference file used by the tests and the 0.2600
+owner-report: <code>gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan</code></p>
+</div>
+
+<!-- ===================== SESSION 2 (H62-1): end ===================== -->
+
+<div class="banner">
+<h2>⚠️ EARLIER RUN (same day): knickpoint lane — NEGATIVE, DO NOT SUBMIT THIS FILE EITHER</h2>
 <p><b>Answer to “is it OK to download and submit this TIF?”: NO.</b> The lane's preregistered
 first test failed (E1: withheld fault segments carry <i>lower</i> channel-steepness anomaly than
 orientation-matched random lines; AUC&nbsp;=&nbsp;<b>0.224</b> &lt; 0.55 stop rule), and the pooled

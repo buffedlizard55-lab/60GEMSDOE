@@ -49,8 +49,17 @@ def test_dti_exact_matches_bruteforce():
 def test_data_restore_and_sentinel_sanitization_manifests():
     _require_inputs("training_features.tif")
     restore = json.loads((ROOT / "data" / "restore_receipt.json").read_text())
-    assert restore["verified_files_count"] == 22
-    assert all(f["status"] == "present" for f in restore["files"])
+    # BUGFIX 2026-10-11: this pinned == 22 while registry/data_manifest.json lists 23 entries, so
+    # the assertion only ever "passed" via the _require_inputs skip on machines without data (CI),
+    # and it also broke on a fresh restore ("restored" vs "present").  The receipt is now checked
+    # against the manifest itself: every manifest entry verified, no extras.
+    manifest = json.loads((ROOT / "registry" / "data_manifest.json").read_text())
+    manifest_ids = {f["id"] for f in manifest["files"]}
+    receipt_ids = {f["id"] for f in restore["files"]}
+    assert restore["verified_files_count"] == len(manifest["files"])
+    assert receipt_ids == manifest_ids, (manifest_ids - receipt_ids, receipt_ids - manifest_ids)
+    assert all(f["status"] in ("present", "restored") for f in restore["files"])
+    assert all(f.get("sha256") for f in restore["files"])
 
     prep = json.loads((ROOT / "data" / "prepared_manifest.json").read_text())
     assert prep["grid"]["epsg"] == 32611

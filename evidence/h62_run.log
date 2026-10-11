@@ -1,0 +1,35 @@
+[    0.0s] prereg read back: 60H62-PREREG-1 sha f3091e5fe21f55e4
+[    1.3s] grid (3730, 3292) footprint 5167373 catalogue 60988 sgmc 83593
+[   76.8s] cube streamed; band descriptions: ["mag_anom - Magnetic anomaly - deviation from expected Earth's magnetic field", 'rtp - Reduced to pole magnetic data - magnetic anomaly corrected for latitude effects', 'tmi_hg - Total magnetic intensity horizontal gradient - rate of change in horizontal direction', 'geod_2ndinv - Geodetic second invariant - measure of strain rate tensor magnitude', 'iso_grav_anom_slope - Isostatic gravity anomaly slope - gradient of gravity after isostatic correction', 'tc - Tilt angle or total curvature - magnetic field derivative for edge detection', 'geod_shearrate - Geodetic shear rate - rate of angular deformation from GPS/InSAR', 'geod_dilaterate - Geodetic dilatation rate - rate of volumetric strain (expansion/contraction)', 'tmi_vg - Total magnetic intensity vertical gradient - rate of change in vertical direction', 'deq_n100a15 - Distance to earthquake (n=100km radius, a=15° azimuth parameters)', 'iso_grav_anom_vg - Isostatic gravity anomaly vertical gradient - vertical rate of change', 'det_elev - Detrended elevation - topography with regional trends removed', 'iso_grav_anom - Isostatic gravity anomaly - gravity after compensating for topographic mass', 'tmi - Total magnetic intensity - total strength of magnetic field', 'depth_to_base_surf - Depth to basement surface - thickness of sedimentary cover', 'ieq_n100a15 - Earthquake intensity or density (n=100km radius, a=15° parameters)', 'cond_surf - Conductivity surface - electrical conductivity of subsurface', 'iso_grav_anom_hg - Isostatic gravity anomaly horizontal gradient - horizontal rate of change', 'det_elev_slope - Detrended elevation slope - gradient of elevation after detrending']
+[   80.3s] fields built: primary>0 2818011 ungated>0 5164312 gate px 2819636
+[   80.3s] striped rows flagged: 56
+[   81.4s] allowed px: 4851116 (ring 200.0 m + 56 striped rows removed)
+[   82.5s] off-catalogue truth: 14089 px (raw 63121)
+[   90.2s] G0 surface uniqueness: max|rho| = 0.0995 -> PASS
+[  136.5s] canary: primary AUC 0.4537 ungated 0.7448 flagged [] -> arm h62_primary
+[  176.4s] budget ladder argmax: 48000 px @ DTI 0.0117 (beats random at 0/9 rungs)
+[  178.2s] final emission: 48000 dots @ spacing 14.22 px
+[  205.8s] folds: [(0, 10358), (1, 10349), (2, 10356), (3, 5351)]
+[  287.1s] wrote gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif sha b8d29b2f445ccc97 (114694 B)
+{
+ "verdict": "NEGATIVE",
+ "failed_gates": [
+  "G2_beats_random",
+  "G3_beats_holdout_best",
+  "G4_dots_uniqueness"
+ ],
+ "chosen_budget": 48000,
+ "dots": 48000,
+ "holdout_dti": 0.0042028353060120215,
+ "holdout_ci95": [
+  0.0032113908162253145,
+  0.005281897645342627
+ ],
+ "best_other": [
+  "d28",
+  0.08623051953519958
+ ],
+ "sha256": "b8d29b2f445ccc9746af53e0716e22b866bb5747297cf81aa2ab973660af6857",
+ "file": "gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif",
+ "note": "H62-1 buried basement-step x gravity-step; 48000 dots; HOLDOUT-DTI 0.0042; NEGATIVE - do not submit"
+}

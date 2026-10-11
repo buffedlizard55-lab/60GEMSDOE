@@ -348,7 +348,93 @@
     "deq_autocorr_3km": 0.8408
    },
    "verdict": "NAMED SOURCE, obtainability NOT verified from this environment; ranked and NOT proposed as ready, per the brief's rule for externally-dependent candidates."
+  },
+  {
+   "id": "H62-1",
+   "rank": 1,
+   "title": "Under-cover basement-step x gravity-step concordance: a conjunctive buried-contrast detector (low-relief arm + ungated ablation)",
+   "layers": [
+    "official cube band 15 depth_to_base_surf (sha 4371c82e...)",
+    "official cube band 13 iso_grav_anom (gradient computed here, per-px)",
+    "topo pack bands slope_p90 / relief_local (low-relief gate: slope_p90 <= 8 deg AND relief_local <= 25 m)",
+    "official cube band 19 det_elev_slope (reported as canary only)"
+   ],
+   "signature": "conj = min(pctile_rank(|grad depth_to_base_surf|), pctile_rank(|grad iso_grav_anom|)) over the footprint; primary arm multiplies conj by the low-relief gate (surface quiescence); emission = hex-lattice top-k with 3 px minimum separation, >= 200 m from the catalogue",
+   "why_off_catalogue": "a buried fault offsets the cover-basement contact and the density contrast across it without any surface scarp; the USGS/INGENIOUS catalogue is a surficial map (scarps + lineaments), so covered steps are systematically absent from it while remaining in the SGMC off-catalogue population the board scores",
+   "differs_from_repo": "H61-1 registered single-field basement-step ridge extraction but was never built (registry status: registered; NOT validated); nothing in this repo multiplies an independent gravity-gradient corroboration into the step field with a min() conjunction, and no arm has run a two-field product under a preregistered relief gate",
+   "expected_dti": "RANK 1 by expected DTI: the only candidate whose predicted placement (basin floors / low relief) matches the measured instrument bias (off-catalogue truth carries AUC 0.90 for local relief, 0.90 for slope p90 - knowledge/02 + evidence); conjunctive corroboration should cut the false-positive mass of a single-field ridge ( EXPECTED, not a score )",
+   "cost": "low: four on-disk bands, one Sobel, two rank transforms, NMS emit; minutes on this sandbox",
+   "data_status": "ON DISK and sha-pinned: registry/data_manifest.json training_features 4371c82e3b83..., data/external/topo_10m_derived_100m_u8.manifest.json (USGS 3DEP-derived, public domain)",
+   "status": "registered 2026-10-11; TOP candidate; preregistered in registry/preregistration-h62.json BEFORE computation; validated this session - see evidence/h62_validation.json"
+  },
+  {
+   "id": "H62-2",
+   "rank": 2,
+   "title": "Hydrothermal alteration-front contacts: Th/K ratio edges coincident with hillshade lineaments, gated to bedrock outcrop",
+   "layers": [
+    "external geodawn_extensions_u8 band ThK (Th/K, USGS GeoDAWN DOI 10.5066/P93LGLVQ)",
+    "external geodawn_rad_u8 bands K, Th (absolute levels for ratio sanity)",
+    "topo pack band hs_lineament (hillshade lineament intensity)",
+    "topo pack relief_local / slope_p90 (OUTCROP gate - high relief, opposite sign to H62-1)"
+   ],
+   "signature": "edge field on the Th/K ratio gradient (K leached, Th immobile along hydrothermal conduits) multiplied by hs_lineament intensity, emitted only where relief shows bedrock outcrop; 3 px NMS, catalogue ring held out",
+   "why_off_catalogue": "hydrothermal alteration follows permeable fault conduits in range outcrops where the fault itself may be buried under talus or never mapped; a ratio anomaly is fluid evidence, not scarp evidence, so it can sit off the surficial catalogue",
+   "differs_from_repo": "the prose candidate #2 on docs/hypotheses.html was never implemented and is not in this registry; GEMSDOE46 r11f/r12 fused radiometrics WITH scarp detections (scarp-first), whereas this is scarp-free and ratio-edge-first; no registry arm uses the precomputed ThK band",
+   "expected_dti": "RANK 2: sharp physical edges + official high-resolution radiometrics, but placement is in range outcrops (high relief) which the measured instrument bias disfavours - partially offsetting its physical case ( EXPECTED, not a score )",
+   "cost": "medium: ratio quantisation noise needs care; all bands already on disk",
+   "data_status": "ON DISK and sha-pinned: external/geodawn_rad_u8.tif c22420f7..., external/geodawn_extensions_u8.tif a35a9c6d... (derived from the official USGS GeoDAWN release, DOI 10.5066/P93LGLVQ)",
+   "status": "registered 2026-10-11; not tested this session (budget: 3 experiments)"
+  },
+  {
+   "id": "H62-3",
+   "rank": 3,
+   "title": "Warm-spring corridor chaining: straight corridor segments supported by >= 3 independent spring clusters",
+   "layers": [
+    "external gdr_wellspring_in_footprint.csv (27,092 rows, temp_c + geothermometer columns)",
+    "topo pack hs_lineament / relief_local (corridor must coincide with a topographic lineament)",
+    "official cube band 16 ieq_n100a15 as an optional corroboration filter only"
+   ],
+   "signature": "cluster springs to ~2 km groups, chain groups whose centroids are collinear within 3 px along a common bearing, require >= 3 clusters per corridor AND lineament coincidence; emit mid-corridor dots at 3 px NMS",
+   "why_off_catalogue": "springs discharge along permeable fault zones; H33-1 measured that 15/53 high-temperature sites lie > 3 km from any mapped trace, so spring geometry carries off-catalogue signal even when chemistry-as-removal was too expensive per dot",
+   "differs_from_repo": "H33-1 used spring chemistry only as a REMOVAL prior (falsified as addition); H18-5 (16GEMSDOE) registered thermal-anchor linking and was never built; no arm in this repo has chained spring LOCATIONS into positive corridor emission",
+   "expected_dti": "RANK 3: sharp, cheap, and physically direct for geothermal plumbing, but the cluster-collinearity step may yield few corridors and springs also cluster on known faults that the ring already excludes ( EXPECTED, not a score )",
+   "cost": "low: one CSV + clustering + collinearity + lineament mask",
+   "data_status": "ON DISK and sha-pinned: external/gdr_wellspring_in_footprint.csv 122718e6... (Geothermal Data Repository submission 1391, official, CC BY 4.0, DOI 10.15121/1881483)",
+   "status": "registered 2026-10-11; not tested this session (budget: 3 experiments)"
+  },
+  {
+   "id": "H62-4",
+   "rank": 4,
+   "title": "Playa-margin annular fault rings: closed gravity/conductivity rims around basin-fill depressions",
+   "layers": [
+    "official cube band 13 iso_grav_anom and band 17 cond_surf (rim contrast)",
+    "topo pack dem_mean + relief_local (closed low-relief depression outline)",
+    "official cube band 15 depth_to_base_surf (basin-fill thickness rim)"
+   ],
+   "signature": "closed-contour (ring) extraction around playa/closed-basin outlines where gravity or conductivity shows an annular step; ring arcs are emitted as NMS dots, interior playa pixels excluded",
+   "why_off_catalogue": "playa-margin ring and peripheral faults are buried under evaporites and Quaternary fill; surficial mapping misses them, and several Great Basin geothermal fields sit on such marginal structures",
+   "differs_from_repo": "every registered detector is LINEAR (lineaments, chains, corridors, traces); closed-ring geometry appears nowhere in this repo or the registry; the lane currently MASKS playas as a confound rather than targeting their margins",
+   "expected_dti": "RANK 4: genuinely novel geometry and potentially high credit per dot (few rings), but sample size is small and ring-to-truth coincidence is speculative ( EXPECTED, not a score )",
+   "cost": "low: contour tracing on three on-disk bands",
+   "data_status": "ON DISK and sha-pinned (same cube + topo pack as H62-1)",
+   "status": "registered 2026-10-11; not tested this session (budget: 3 experiments)"
+  },
+  {
+   "id": "H62-5",
+   "rank": 5,
+   "title": "True-10 m chi/ksn concordance - the tectonic-geomorphology lane done at the resolution it requires",
+   "layers": [
+    "USGS 3DEP 10 m DEM tiles (Elevation/13/TIFF/current/..., official, public domain) - NOT on disk here",
+    "competition 100 m grid for output resampling"
+   ],
+   "signature": "priority-flood fill -> D8 -> chi/ksn (theta = 0.45) at 10 m; per-link dz/dchi segmentation; one knickpoint per first-order basin; strike chaining from >= 3 independent basins (Gailleton-style segmentation), output dots on the 100 m grid",
+   "why_off_catalogue": "base-level steps persist in channel profiles after scarps degrade or bury (Kirby & Whipple 2012; Perron & Royden 2013); the 100 m substrate cannot resolve first-order channels (measured: 31% of cells raised by filling, A-vs-L exponent 0.03), so the lane failed at the wrong resolution rather than on the physics",
+   "differs_from_repo": "this session and run 1/2 of the lane measured the NEGATIVE only on the 100 m substrate; the registered parent H60-5 has never run; nothing in the repo executes at 10 m",
+   "expected_dti": "RANK 5 by cost-adjusted expectation: unknown ceiling, possibly high, but implementation is high-cost and the data is unreachable from this sandbox",
+   "cost": "high: ~716 tiles; requires an egress-capable runner",
+   "data_status": "SOURCE NAMED + PINS EXIST, OBTAINABILITY PARTIAL: https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif (USGS 3DEP, public domain; 716 URLs + sha256 pins upstream data/dem_links.json; egress probe evidence/probe-egress-receipt.json shows HTTP 200 from a GitHub Actions runner, but THIS sandbox cannot reach the host - measured, see docs/irregularities.html)",
+   "status": "registered 2026-10-11; BLOCKED from this environment (named source checked: free + official; reachability verified only off-sandbox)"
   }
  ],
- "updated_utc": "2026-10-04T14:30:19Z"
+ "updated_utc": "2026-10-11T01:54:30Z"
 }

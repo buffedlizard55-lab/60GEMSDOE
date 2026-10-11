@@ -1,0 +1,8 @@
+{
+  "prereg": "registry/preregistration-h62.json",
+  "sha256": "f3091e5fe21f55e49f2b8369d6f0ed1fb6e5e84c1e2844bc6bdc687a02aa833a",
+  "id": "60H62-PREREG-1",
+  "written_utc": "2026-10-11T01:54:30Z",
+  "read_back_utc": "20261011T020550Z",
+  "assertion": "this receipt was written by run_h62.py before any field was computed"
+}

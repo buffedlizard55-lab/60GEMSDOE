@@ -27,11 +27,21 @@ a{color:#1f6feb}
 <h1>Executive summary — exactly how to submit</h1>
 
 <div class="banner">
-<h2>First: this session's generated file must NOT be submitted (negative verdict).</h2>
-<p>The knickpoint-lane raster on the <a href="index.html">front page</a> is a validated, unique,
-portal-safe GeoTIFF — but it failed its preregistered lane test and scored 0.00214 on our pooled
-holdout against 0.086 for the best comparison arm. Submitting it would burn one of the three
-weekly slots for no upside. It is published so the negative result is auditable and reusable.</p>
+<h2>First: this session's generated files must NOT be submitted (both verdicts negative).</h2>
+<p>The H62-1 raster (<a href="index.html">front page</a>, generated 2026-10-11) is validated, unique
+and portal-safe, but it failed 3 of its 5 preregistered gates — HOLDOUT-DTI 0.00420
+[0.00321, 0.00528] against 0.08623 for the best arm (36,414 withheld positives, evaluator
+<code>gems52-pooled-hide-v1</code>). The earlier knickpoint-lane raster of the same day is also
+negative (0.00214 on the pooled evaluator). Submitting either would burn one of the weekly slots
+for no upside. Both are published so the negative results are auditable and reusable.</p>
+</div>
+
+<div class="card">
+<h3>Downloads (the files this page is about, plus the registry primary)</h3>
+<p>⬇ <a href="downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif" download><b>this session's H62-1 raster (NEGATIVE — research only)</b></a> ·
+⬇ <a href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif" download><b>registry primary — gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</b></a>
+(the group's live-scored champion, owner-reported 0.2778) ·
+⬇ <a href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif" download>knickpoint-lane raster (NEGATIVE — research only)</a></p>
 </div>
 
 <div class="card">
@@ -41,7 +51,9 @@ weekly slots for no upside. It is published so the negative result is auditable 
 <li>Open <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/">the submission form</a> (New submission).</li>
 <li><b>File to submit:</b> choose the downloaded <code>.tif</code>.</li>
 <li><b>Note (optional but required by our protocol):</b> paste the note printed on the front page —
-this session's would be:
+this session's would be (verdict NEGATIVE, so only after a future selector promotion):
+<pre>H62-1 buried basement-step x gravity-step; 48000 dots; HOLDOUT-DTI 0.0042; NEGATIVE - do not submit</pre>
+the earlier knickpoint run's note was:
 <pre>tectono-geomorphic chi/ksn knickpoint lane; 7653 concordant channel dots; E1 negative AUC 0.224; RESEARCH-ONLY, not promoted</pre></li>
 <li>Click <b>Create submission</b>. The public score (DW-Tversky) appears after scoring.</li>
 <li>Record the score on the site feed and in <code>evidence/</code> (ORGANIZER-CONFIRMED class) — a projection is never written as a score.</li>
