@@ -1,0 +1,312 @@
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>H65-1 native 10 m knickpoint lane (NEGATIVE) · 60GEMSDOE</title><link rel=stylesheet href=assets/site.css></head><body>
+<header class=top><div class=wrap><h1>H65-1: native 3DEP 10 m knickpoint lane</h1><nav><a href="index.html">Home</a> <a href="executive-summary.html">Make a submission</a> <a href="research.html">Research</a> <a href="hypotheses.html">Hypotheses</a> <a href="leaderboard.html">Leaderboard</a> <a href="sources.html">Sources</a> <a href="irregularities.html">Irregularities</a> <a href="h65-report.html" class=active>H65 report</a></nav>
+<div class=dlbtn><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>&#11015; gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif (research only: do NOT submit)</a> <a class="btn alt" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros-runcard.json">run card JSON</a></div>
+</div></header>
+<main class=wrap>
+<p class=warn><b>Verdict: NEGATIVE. Do not submit.</b> sha256 <code>0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e</code> · validator ok=True, problems=[] · 40,000 dots · values in [0, 1], 0 NaN.</p>
+<p>Other files: the registry primary <a href="downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif">gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif</a> (earlier session) is NOT CLEARED for a slot. The group champion <a href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">h33-2-b2</a> is already scored (owner-reported 0.2778).</p>
+<h2>H65-1 session (2026-10-11) — native 3DEP 10 m knickpoint lane, NEGATIVE</h2>
+<p>Session <code>arena/96ecd67e-60gemsdoe</code>. It executes registry hypothesis <strong>H62-5</strong>, which says the knickpoint lane
+failed only because it ran at 100 m. The test ran the same lane on native 10 m elevation data.
+Preregistration: <code>evidence/preregistration_h65.json</code> (git author time 05:05:26Z, written before any 10 m
+number existed). Run card: <a href="https://github.com/buffedlizard55-lab/60GEMSDOE/blob/main/evidence/h65_runcard.json"><code>evidence/h65_runcard.json</code></a>. Every number below is
+read from an evidence file by <code>scripts/h65_runcard.py</code>.</p>
+<p><strong>Verdict: NEGATIVE. SUBMIT: NO. 0 slots spent.</strong></p>
+<table>
+<thead>
+<tr>
+<th>step</th>
+<th>what was done</th>
+<th>result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data</td>
+<td>USGS 3DEP 1/3 arc-second DEM, 18 current 1°×1° tiles, downloaded <strong>on a GitHub Actions runner</strong> (the sandbox cannot reach the bucket). Each tile is sha256-pinned in <code>data/external/dem10_chi_100m.manifest.json</code>. <code>n39w119</code> matches the independent probe-egress pin.</td>
+<td>25/36 blocks hold footprint; footprint 100 % covered (<a href="https://github.com/buffedlizard55-lab/60GEMSDOE/actions/runs/38113556275">run 38113556275</a>, <code>.github/workflows/dem10-chi.yml</code>)</td>
+</tr>
+<tr>
+<td>10 m pipeline</td>
+<td><code>src/gems65/dem10.py</code>: priority-flood fill, D8, χ with true diagonal length, θ = 0.45, A_ch = 2×10⁵ m², 500 m two-segment dz/dχ step, inflow-aware edge masking, reduced to the 100 m grid. 6 unit tests.</td>
+<td>786,299 channel px (15.2 % of footprint); 91,907 knickpoint px</td>
+</tr>
+<tr>
+<td>E1 first test (MEASUREMENT): do channels crossing withheld segments show larger steps than random same-orientation lines?</td>
+<td>unchanged <code>run_e1</code>, 262 withheld components, 1,000-draw bootstrap</td>
+<td><strong>+0.0326 log-ksn, 95 % CI [−0.0144, +0.0790]</strong>, median −0.0092, 47.3 % positive → <strong>INCONCLUSIVE → STOP</strong> (the brief says "if not, stop")</td>
+</tr>
+<tr>
+<td>E3 HOLDOUT-DTI (diagnostic after the stop; evaluator <code>gems57-pooled-hide-v2</code>, 22,641 withheld positives, 159-cluster paired bootstrap, 1,000 draws)</td>
+<td>lane vs three controls at equal mass</td>
+<td>lane <strong>0.01158 [0.00840, 0.01462]</strong>; ksn-only 0.01928; random 0.03908; distance-only 0.19073. Lane minus random <strong>−0.0275 [−0.0320, −0.0229]</strong></td>
+</tr>
+<tr>
+<td>Leakage canary</td>
+<td>AUC of each feature vs withheld truth</td>
+<td>lane features ≤ 0.518, so no leakage. <code>dist_to_visible</code> 0.924 is the deliberate positive control.</td>
+</tr>
+<tr>
+<td>Uniqueness</td>
+<td><code>scripts/check_uniqueness60.py</code>, 651/655 registry rasters (4 = the known missing 55GEMSDOE blobs, IR-60-CORPUS-01)</td>
+<td>worst ρ <strong>0.0282</strong>, worst Jaccard 0.0128, byte- and pixel-unique. The literal 3-px gate fires on 58 dense priors (≥ 192,231 dots each). 5 random 40,000-dot sets fire on all 58 too (max excess +0.0012), so this is IR-60-GATE-01, not copying. The tool verdict stays <code>unique=false</code>.</td>
+</tr>
+<tr>
+<td>Format</td>
+<td><code>build_submission60.py</code> validator</td>
+<td><strong>ok = True, problems = []</strong>, 40,000 dots, 0 NaN, min 0, max 1, 0 dots on the catalogue. Reproduced dot-for-dot by <code>--verify-existing</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What the result means.</strong> At 100 m the same lane passed E1 (H60-A: +0.1089 [0.0586, 0.1569]). At 10 m it
+does not, and its HOLDOUT-DTI drops from 0.01639 to 0.01158. So <strong>resolution was not what held the lane back.</strong>
+The 100 m "signal" was most likely smoothing of range-front slope breaks, not channel knickpoints. A
+descriptive check (<code>evidence/h65_diagnostics.json</code>) agrees:
+- Within 300 m of the catalogue, 10 m steps ≥ ln 2 are only <strong>1.19×</strong> over-represented relative to the footprint, and knickpoints only <strong>1.04×</strong>.
+- Step-bearing channels sit lower in the local relief (median −16 m against a 20 km median) than the catalogue (+7 m).</p>
+<p>The mimicking non-fault processes dominate: lithologic contacts, transient knickpoints that have migrated
+away from their source, channel-head transitions near A_ch, and playa or pluvial base levels.
+<strong>Do not rerun the knickpoint lane at any resolution.</strong></p>
+<p><strong>Why the group's 0.2778 champion scores what it does, and whether we can beat it.</strong> The official metric is
+verified on <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">page 967</a>: a
+distance-weighted Tversky index, α = 0.2 (FP), β = 0.8 (FN), triangular kernel with R = 300 m. With β four times α,
+a sparse dot that lands within 300 m of a hidden fault earns credit on several truth pixels and pays at most
+0.2 of its own mass. The champion (<code>h33-2-b2</code>, re-measured this session) is built that way:
+- 37,654 binary dots, 0 NaN;
+- <strong>no dot closer than 223.6 m to a mapped fault</strong>; median distance 1,965 m; only 5.8 % within 300 m.</p>
+<p>So it spends its whole budget off the catalogue, where the hidden faults are (the test faults are by definition
+<em>not</em> in the USGS database), and its 0.2708 → 0.2778 gain came from deleting catalogue-adjacent mass that could
+never earn credit. To beat it we need new information about where unmapped faults are. Local cleanup is not
+enough: the public top is now <strong>0.4133</strong> (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a>,
+checked 2026-10-11), which is +49 % over 0.2778. Every knickpoint-lane run in this repository that reached a holdout
+comparison scored at or below a mass-matched random control: the chi-cast lane (0.00039 vs 0.00042), GEMS61
+(paired difference vs random −0.0375), H60-A (0.01639 vs 0.03908) and H65-1 (0.01158 vs 0.03908). The first run stopped at its
+first test (AUC 0.224). So this lane cannot provide that information.</p>
+<p><strong>New hypotheses (ranked; <code>registry/hypotheses.json</code> H65-2 to H65-5; none validated, because the 3-experiment
+budget was used up):</strong>
+1. <strong>H65-2, mountain-front piedmont junction at 10 m</strong>, weighted by front sinuosity (Bull &amp; McFadden 1977). Range-bounding faults sit at the hillslope/fan slope break even where scarps are buried. It reuses the committed 10 m runner, so the cost is one new band plus about 4 min on a runner. <strong>It is the first experiment for the next session, and it must pass the blocked holdout before any slot is used.</strong>
+2. <strong>H65-3, fan-apex alignment plus fan-head trenching.</strong> Uses channel confinement, not steepness.
+3. <strong>H65-4, divide asymmetry of tilted blocks</strong> (χ across divides: <a href="https://doi.org/10.1126/science.1248765">Willett et al. 2014</a>; <a href="https://doi.org/10.1016/j.epsl.2018.04.026">Forte &amp; Whipple 2018</a>).
+4. <strong>H65-5, knickpoint recurrence in χ</strong> (<a href="https://doi.org/10.1016/j.geomorph.2005.08.023">Crosby &amp; Whipple 2006</a>). Ranked low because of this session's 1.04× support enrichment.</p>
+<p>Free official data for all four: USGS 3DEP 10 m (<a href="https://www.usgs.gov/3d-elevation-program">3DEP</a>;
+tiles at <code>https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/</code>). It is public domain, and
+access was verified this session from the runner.</p>
+<p><strong>Shared-tool fixes (each made once, reported here):</strong>
+- <code>src/gems52/lane_hydro.py</code> <code>_chi</code>: diagonal D8 steps now use √2·cell.
+- <code>run_lane60.py</code> / <code>build_submission60.py</code>: the <code>GEMS60_FEATURE_CACHE</code> / <code>GEMS60_TAG</code> environment variables, optional <code>branch_sig.npy</code>, and <code>--hypothesis/--note/--substrate</code>. The defaults reproduce H60-A.
+- <code>build_submission60.py</code>: <code>--skip-uniqueness</code> no longer falls through to a full rescan.
+- <code>check_uniqueness60.py --surface</code> now honours the cache env var.
+- <strong>Citations corrected after checking the publisher records:</strong>
+  - Kirby &amp; Whipple 2012 is <em>J. Struct. Geol.</em> 44:54–75 (<a href="https://doi.org/10.1016/j.jsg.2012.07.009">doi</a>), not "JGR 117 F04002/F01024".
+  - Perron &amp; Royden 2013 is <em>ESPL</em> 38:570–576 (<a href="https://doi.org/10.1002/esp.3302">doi</a>).
+  - Gailleton et al. 2019 is <em>ESurf</em> 7:211–230 (<a href="https://doi.org/10.5194/esurf-7-211-2019">doi</a>).
+  - Royden &amp; Perron 2013 is <em>JGR-ES</em> 118:497–518 (<a href="https://doi.org/10.1002/jgrf.20031">doi</a>).
+  - Barnes et al. 2014 is <em>C&amp;G</em> 62:117–127 (<a href="https://doi.org/10.1016/j.cageo.2013.04.024">doi</a>).</p>
+<p><strong>Irregularities flagged this session:</strong>
+- <strong>IR-65-LB-01:</strong> the brief and earlier pages give the leaderboard top as 0.3774 (the brief also mentions 0.3195). On 2026-10-11 the live board shows 0.4133 at #1; 0.3195 is #8.
+- <strong>IR-65-CIT-01:</strong> the citation errors listed above.
+- <strong>IR-65-CACHE-01:</strong> the untracked <code>.cache/features65</code> on disk stopped matching its recorded sha256 after the run (cause not identified). It was rebuilt from the pinned TIFs, all 11 arrays match, and the shipped TIF reproduces dot-for-dot.
+- <strong>IR-65-REG-01:</strong> H62-5 estimated "~716 tiles". 18 1° tiles of the 1/3″ product are enough.
+- <strong>IR-65-H63-01:</strong> the H63-1 session, merged in parallel (PR #13), names its file <code>...-42000px-...</code> but it holds <strong>36,000</strong> dots (counted). It also gives "100 m DEM resolution" as the root cause of its negative result. H65-1 refutes that: the same lane at native 10 m is still negative.
+- <strong>IR-65-EXEC-01:</strong> the executive summary labelled the h33-2-b2 link "0.2708 anchor", but that file is the owner-reported 0.2778 emission.</p>
+<p><strong>Remaining work and limitations:</strong>
+- (1) Run H65-2 on the runner and gate it on the blocked holdout.
+- (2) The holdout truth is the visible catalogue, while the leaderboard truth is new faults. Local DTI is a screen, not a forecast (16GEMSDOE measured ρ = +0.17 between the two).
+- (3) χ on the runner is block-local (80 px halo), so global-datum χ (needed by H65-4/H65-5) is not built.
+- (4) Uniqueness covered 651/655 rasters.
+- (5) The 10 m step product is reduced to 100 m by its maximum. Other reductions were not tried, because the prereg fixed one.</p>
+<h2>Run card (verbatim)</h2>
+<pre style="white-space:pre-wrap;font-size:12px">{
+ "run": "H65-1",
+ "registry_hypothesis": "H62-5 (true-10 m chi/ksn concordance)",
+ "lane": "tectonic geomorphology: chi / ksn / knickpoints",
+ "generated_utc": "2026-10-11T05:27:23Z",
+ "preregistration": {
+  "file": "evidence/preregistration_h65.json",
+  "preregistered_utc": "2026-10-11T05:05:26Z"
+ },
+ "hypothesis": "Channel-steepness steps (dz/dchi two-segment step, 10 m 3DEP) that recur at the same strike across >= 3 independent drainages mark faults, and channels crossing withheld fault segments show larger steps than random same-orientation lines.",
+ "mechanism": "A fault offsets base level; the steepness contrast propagates upstream as a knickpoint (Kirby &amp; Whipple 2012, J. Struct. Geol. 44, 54-75; Perron &amp; Royden 2013, ESPL 38, 570-576; Gailleton et al. 2019, ESurf 7, 211-230) and persists after the scarp degrades.",
+ "mimicking_non_fault_process": "Lithologic contacts (resistant-over-weak bedrock), migrating transient knickpoints detached from their source, channel heads / colluvial-fluvial transitions near the A_ch=2e5 m^2 threshold, and playa/pluvial-shoreline base levels. MEASURED: the lane's support is barely enriched near mapped faults (share within 300 m / share of footprint = 1.19 for steps >= ln2, 1.04 for knickpoints), and step-defined channels sit lower in the local relief (median -16 m vs a 20 km median) than the catalogue (median +7 m), so the steps are dominated by these non-fault processes.",
+ "substrate": {
+  "source": "USGS 3DEP 1/3 arc-second (~10 m) DEM, current 1x1-degree tiles (public domain)",
+  "url_pattern": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/&lt;tile>/USGS_13_&lt;tile>.tif",
+  "tiles": 18,
+  "tile_sha256_pins": "data/external/dem10_chi_100m.manifest.json source.tiles",
+  "blocks_ok": "25/36 (the rest contain no footprint)",
+  "footprint_px_covered": "5167373/5167373",
+  "github_actions_run": "https://github.com/buffedlizard55-lab/60GEMSDOE/actions/runs/38113556275",
+  "manifest": "data/external/dem10_chi_100m.manifest.json"
+ },
+ "first_test_E1": {
+  "evidence_class": "MEASUREMENT",
+  "statistic": "mean log-ksn step contrast, withheld-crossing channels minus same-orientation random lines",
+  "mean": 0.0326,
+  "ci95": [
+   -0.0144,
+   0.079
+  ],
+  "median": -0.0092,
+  "n_components": 262,
+  "fraction_positive": 0.473,
+  "verdict": "INCONCLUSIVE",
+  "rule": "brief: 'if not, stop' -> INCONCLUSIVE fails the preregistered PROCEED gate -> STOP"
+ },
+ "holdout_dti": {
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator_version": "gems57-pooled-hide-v2",
+  "n_withheld_positives": 22641,
+  "alpha": 0.2,
+  "beta": 0.8,
+  "kernel_m": 300.0,
+  "bootstrap": {
+   "method": "paired physical spatial-cluster percentile",
+   "clusters": 159,
+   "draws": 1000,
+   "seed": 60101
+  },
+  "lane": {
+   "dti": 0.01158,
+   "ci95": [
+    0.0084,
+    0.01462
+   ]
+  },
+  "ksn_only_control": {
+   "dti": 0.01928,
+   "ci95": [
+    0.01532,
+    0.02314
+   ]
+  },
+  "random_mass_control": {
+   "dti": 0.03908,
+   "ci95": [
+    0.03568,
+    0.04231
+   ]
+  },
+  "distance_only_control": {
+   "dti": 0.19073,
+   "ci95": [
+    0.182,
+    0.19965
+   ]
+  },
+  "paired_lane_minus_control": {
+   "ksn_only_no_alignment": {
+    "delta": -0.00771,
+    "ci95": [
+     -0.01215,
+     -0.00324
+    ]
+   },
+   "distance_only": {
+    "delta": -0.17915,
+    "ci95": [
+     -0.18853,
+     -0.17027
+    ]
+   },
+   "random_mass_control": {
+    "delta": -0.0275,
+    "ci95": [
+     -0.03203,
+     -0.02286
+    ]
+   }
+  },
+  "not_a_leaderboard_score": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval."
+ },
+ "leakage_canary": {
+  "rule": "max(AUC,1-AUC) > 0.90 is leakage until proven otherwise",
+  "rows": [
+   {
+    "feature": "knickpoint_step",
+    "auc": 0.483,
+    "max_abs_auc": 0.517,
+    "leakage_flag": false
+   },
+   {
+    "feature": "ksn",
+    "auc": 0.5134,
+    "max_abs_auc": 0.5134,
+    "leakage_flag": false
+   },
+   {
+    "feature": "drainage_area",
+    "auc": 0.4821,
+    "max_abs_auc": 0.5179,
+    "leakage_flag": false
+   },
+   {
+    "feature": "lane_p",
+    "auc": 0.4833,
+    "max_abs_auc": 0.5167,
+    "leakage_flag": false
+   },
+   {
+    "feature": "dist_to_visible",
+    "auc": 0.9243,
+    "max_abs_auc": 0.9243,
+    "leakage_flag": true
+   }
+  ],
+  "reading": "every lane feature &lt;= 0.518 (no leakage); dist_to_visible 0.924 is the deliberate positive control (distance to the visible catalogue), flagged as designed, and is not a lane input"
+ },
+ "uniqueness_vs_registry": {
+  "evidence_class": "REGISTRY-MEASUREMENT",
+  "registry_rasters_checked": "651/655",
+  "max_abs_spearman_full_footprint": 0.0282,
+  "max_abs_spearman_raster": "GEMSDOE48:docs/downloads/diagnostics/gemsdoe48-h48-1-unassigned_dempster_mTheta.tif",
+  "max_dot_overlap_within_3px": 1.0,
+  "max_dot_overlap_raster": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+  "max_jaccard_dot_sets": 0.0128,
+  "max_jaccard_raster": "GEMSDOE48:docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif",
+  "byte_unique": true,
+  "pixel_unique": true,
+  "tool_verdict_unique": false,
+  "limits": {
+   "rho": 0.9,
+   "overlap": 0.7
+  },
+  "file": "evidence/h65_uniqueness.json",
+  "scope_note": "651/655 registry rasters fetched; the 4 missing are the known 55GEMSDOE blobs (IR-60-CORPUS-01)",
+  "overlap_gate_reading": "the literal 3-px overlap clause fires on 58 rasters, all dense (>= 192231 dots); 58/58 of them also fire for 5 uniform-random 40,000-dot sets (max excess over random +0.0012), so the firing measures the prior's support density, not copying (IR-60-GATE-01). Post-hoc diagnostic: the tool verdict stays unique=false.",
+  "overlap_control_file": "evidence/h65_overlap_control.json"
+ },
+ "reproducibility": {
+  "check": "scripts/build_submission60.py --verify-existing (recompute the lane from the sha-pinned cache)",
+  "log": [
+   "[C] verify-existing identical=True shipped_nonzero=40000 recomputed_nonzero=40000 (12.1s)"
+  ],
+  "identical": true,
+  "irregularity": "IR-65-CACHE-01: the local .cache/features65 found on disk after the run did not match its recorded sha256 (step finite px 787,225 vs 786,299; cause not identified; .cache is untracked scratch). Rebuilt from the sha-pinned TIFs -> all 11 arrays match evidence/h65_feature_cache.json, the shipped TIF reproduces dot-for-dot, and the diagnostics were re-run on the verified cache."
+ },
+ "artifact": {
+  "file": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+  "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
+  "bytes": 104586,
+  "validator_ok": true,
+  "validator_problems": [],
+  "emitted_positive_pixels": 40000,
+  "min": 0.0,
+  "max": 1.0,
+  "n_nan": 0
+ },
+ "submission_name": "60GEMSDOE-H65-1-DEM10-KNICK-40000",
+ "note": "H65-1 native 3DEP 10m chi/ksn knickpoints, >=3 independent drainages, 40000 dots; E1 failed: NEGATIVE, research only",
+ "note_chars": 116,
+ "verdict": "NEGATIVE",
+ "submit": "NO - research artifact only; do not spend a slot",
+ "shared_tool_fixes": [
+  "src/gems52/lane_hydro.py _chi: diagonal D8 steps now use sqrt(2)*cell length (was cell length)",
+  "scripts/run_lane60.py + scripts/build_submission60.py: GEMS60_FEATURE_CACHE / GEMS60_TAG env vars, optional branch_sig.npy, --hypothesis/--note/--substrate (defaults reproduce H60-A byte-for-byte)",
+  "scripts/check_uniqueness60.py: --surface honours GEMS60_FEATURE_CACHE and branch_sig.npy",
+  "citations corrected in src/gems60/geomorph.py, src/gems52/lane_hydro.py, src/gems52/lane_channels.py, scripts/build_site60.py, docs/lane-knick-corridor-report.html (Kirby &amp; Whipple 2012 is J. Struct. Geol. 44:54-75, not JGR F04002; Perron &amp; Royden 2013 is ESPL 38:570-576; Gailleton 2019 is ESurf 7:211-230; Royden &amp; Perron 2013 is JGR-ES 118:497-518; Barnes 2014 is C&amp;G 62:117-127)"
+ ]
+}</pre>
+<p class=mut>Generated from the README H65 section and evidence/h65_runcard.json.</p>
+</main></body></html>

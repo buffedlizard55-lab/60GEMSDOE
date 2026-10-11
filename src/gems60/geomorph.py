@@ -4,23 +4,24 @@ Lane scope (parallel-run protocol rule 1)
 ----------------------------------------
 This module implements **channel steepness and knickpoints**, not scarp shape,
 not fault-zone damage anatomy, not magnetic/radiometric edge detection.  The
-physical argument is the one reviewed by Kirby & Whipple (2012, *JGR* 117,
-F04002, "Expression of active tectonics in eroding landscapes"): where rock
+physical argument is the one reviewed by Kirby & Whipple (2012, *J. Struct. Geol.* 44,
+54-75, doi:10.1016/j.jsg.2012.07.009, "Expression of active tectonics in erosional landscapes"): where rock
 uplift rate rises across an active normal fault, bedrock channels that cross it
 develop (i) a **knickpoint** at the crossing and (ii) **elevated normalized
 steepness** (``ksn``) upstream of it, so the *along-channel gradient of ksn* is
 a proxy for the spatial gradient in rock-uplift rate.  Perron & Royden (2013,
-*ESPL* 40, 703-716) give the ``chi`` transform that puts channels with different
-drainage areas on one comparable axis, and Royden & Perron (2013, *ESPL* 40,
-1043-1058) the sliding-window ``ksn`` estimator; Gailleton et al. (2019,
-*Earth Surface Dynamics* 7, 647-668) show that knickpoint detection is a
+*ESPL* 38(6), 570-576, doi:10.1002/esp.3302) give the ``chi`` transform that puts channels with different
+drainage areas on one comparable axis, and Royden & Perron (2013, *J. Geophys. Res. Earth Surf.* 118,
+497-518, doi:10.1002/jgrf.20031) give analytical solutions for transient profiles and migrating knickpoints
+(the sliding-window ``ksn`` estimator below is this module's own, not taken from that paper); Gailleton et al. (2019,
+*Earth Surface Dynamics* 7(1), 211-230, doi:10.5194/esurf-7-211-2019) show that knickpoint detection is a
 segmentation problem on ``z(chi)`` and that reproducibility requires a declared
 window/threshold rather than an eyeball.
 
 What is implemented here, and what is approximated
 --------------------------------------------------
 * exact priority-flood depression filling (Barnes, Lehman & Mulla 2014,
-  *Computers & Geosciences* 62, 124-138) restricted to the scored footprint,
+  *Computers & Geosciences* 62, 117-127, doi:10.1016/j.cageo.2013.04.024) restricted to the scored footprint,
 * exact D8 steepest-descent routing and exact topological-order upslope area,
 * exact ``chi`` by upstream accumulation of ``ds*(A0/A)^theta`` (Perron & Royden
   2013, eq. 6) with ``theta_ref`` and ``A0`` declared as parameters,

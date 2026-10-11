@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -37,7 +38,12 @@ from gems57 import gates, submission_writer, uniqueness as U   # noqa: E402
 from gems60 import lane as L                       # noqa: E402
 from run_lane60 import confound_masks, load        # noqa: E402
 
-CACHE = ROOT / ".cache" / "features60"
+CACHE = ROOT / ".cache" / os.environ.get("GEMS60_FEATURE_CACHE", "features60")
+# Substrate-agnostic driver (shared-tool change 2026-10-11, session arena/96ecd67e, H65-1):
+# GEMS60_FEATURE_CACHE selects the feature cache (default: the 100 m det_elev cache of H60-A;
+# H65-1 points it at the native-3DEP-10 m reduction) and GEMS60_TAG prefixes every evidence
+# file, so a new substrate never overwrites the H60-A record.  Defaults reproduce H60-A exactly.
+TAG = os.environ.get("GEMS60_TAG", "h60a")
 REGISTRY_CACHE = ROOT / ".cache" / "registry"
 EVID = ROOT / "evidence"
 OUT_DIR = ROOT / "downloads"
@@ -96,6 +102,9 @@ def main() -> int:
     ap.add_argument("--budget", type=int, default=40_000)
     ap.add_argument("--max-candidates", type=int, default=120_000)
     ap.add_argument("--slug", default="h60a-knick-corridor")
+    ap.add_argument("--hypothesis", default="H60-A")
+    ap.add_argument("--note", default=None, help="<=140-char portal note (default: the H60-A note)")
+    ap.add_argument("--substrate", default="det_elev band 12, 100 m")
     ap.add_argument("--skip-uniqueness", action="store_true",
                     help="use scripts/check_uniqueness60.py instead; if "
                          "evidence/h60a_uniqueness.json exists it is merged into the receipt")
@@ -116,9 +125,13 @@ def main() -> int:
     step = load("step").astype(np.float32).astype(np.float64)
     channel = load("channel")
     from gems60 import geomorph as gm
-    branch = gm.branch_signature(load("dircode"), load("footprint"),
-                                 k=L.CORRIDOR_HALF_LEN_PX - 1).astype(np.int64)
-    mark(f"independence=branch_signature(k={L.CORRIDOR_HALF_LEN_PX - 1}) "
+    if (CACHE / "branch_sig.npy").is_file():
+        branch = load("branch_sig").astype(np.int64)
+    else:
+        branch = gm.branch_signature(load("dircode"), load("footprint"),
+                                     k=L.CORRIDOR_HALF_LEN_PX - 1).astype(np.int64)
+    mark(("independence=substrate branch_sig " if (CACHE / "branch_sig.npy").is_file() else
+          f"independence=branch_signature(k={L.CORRIDOR_HALF_LEN_PX - 1}) ") +
          f"distinct={int(np.unique(branch[channel]).size)}")
     exclude, conf = confound_masks(step, channel)
     z, cand, cand_diag = L.prepare_candidates(step, channel, exclude)
@@ -171,14 +184,16 @@ def main() -> int:
         name = f"gems60-{a.slug}-{a.budget}-{stamp}-{digest}"
         OUT_DIR.mkdir(parents=True, exist_ok=True)
         path = OUT_DIR / f"{name}-zeros.tif"
-        note = (f"60GEMSDOE H60-A knickpoint-corridor | chi/ksn on det_elev, >=3 independent "
-                f"drainages, {n_dots} dots off-catalogue")
+        note = a.note.format(n_dots=n_dots) if a.note else (
+            f"60GEMSDOE H60-A knickpoint-corridor | chi/ksn on det_elev, >=3 independent "
+            f"drainages, {n_dots} dots off-catalogue")
         if len(note) > 140:
             note = note[:137] + "..."
         receipt = submission_writer.write_submission(
             path, pred, ROOT / "data/official/sample_submission.tif", fp,
             note=note, name=name, catalogue=cat,
-            metadata=dict(lane="tectonic-geomorphology", hypothesis="H60-A",
+            metadata=dict(lane="tectonic-geomorphology", hypothesis=a.hypothesis,
+                          substrate=a.substrate,
                           parameters=dict(budget=a.budget, z_min=L.Z_MIN,
                                           n_drainage_min=L.N_DRAINAGE_MIN,
                                           corridor_half_len_px=L.CORRIDOR_HALF_LEN_PX,
@@ -205,7 +220,7 @@ def main() -> int:
     if a.skip_uniqueness:
         # the standalone auditor (scripts/check_uniqueness60.py) owns the scan; merge
         # its receipt so the build receipt stays the single place the run card reads
-        standalone = EVID / "h60a_uniqueness.json"
+        standalone = EVID / f"{TAG}_uniqueness.json"
         if standalone.is_file():
             uniq = json.loads(standalone.read_text())
             uniq["merged_from"] = str(standalone.relative_to(ROOT))
@@ -214,7 +229,9 @@ def main() -> int:
                  f"worst_rho={uniq.get('worst_spearman_full_footprint')} "
                  f"worst_overlap={uniq.get('worst_dot_overlap')}")
         else:
-            mark("WARNING: --skip-uniqueness and no evidence/h60a_uniqueness.json yet")
+            mark(f"WARNING: --skip-uniqueness and no evidence/{TAG}_uniqueness.json yet")
+            uniq = dict(unique=None, pending=True,
+                        note=f"run scripts/check_uniqueness60.py, then re-run with --verify-existing")
     if uniq is None:
         index = json.loads((EVID / "registry_full_index.json").read_text())
         rows_index = index["rasters"]
@@ -301,7 +318,7 @@ def main() -> int:
         uniq["scope"]["equivalence_rows"] = equivalence
         uniq["missing_rows"] = missing
         uniq["rows_top20"] = sorted(rows, key=lambda r: -(r["spearman_full_footprint"] or -9))[:20]
-        (EVID / "h60a_uniqueness.json").write_text(json.dumps(uniq, indent=2, allow_nan=False) + "\n")
+        (EVID / f"{TAG}_uniqueness.json").write_text(json.dumps(uniq, indent=2, allow_nan=False) + "\n")
         mark(f"uniqueness unique={uniq['unique']} worst_rho={uniq['worst_spearman_full_footprint']} "
              f"worst_overlap={uniq['worst_dot_overlap']} duplicates={uniq['duplicate_count']} "
              f"sparse_worst_rho={worst_sparse_rho} sparse_worst_overlap={worst_sparse_ov}")
@@ -314,8 +331,8 @@ def main() -> int:
                permission=dict(okay_to_download=True,
                                okay_to_submit=None,
                                reason="filled by the run card after the gates are read"))
-    (EVID / "h60a_submission_build.json").write_text(json.dumps(out, indent=2, allow_nan=False) + "\n")
-    mark(f"wrote evidence/h60a_submission_build.json")
+    (EVID / f"{TAG}_submission_build.json").write_text(json.dumps(out, indent=2, allow_nan=False) + "\n")
+    mark(f"wrote evidence/{TAG}_submission_build.json")
     return 0
 
 

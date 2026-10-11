@@ -1,0 +1,165 @@
+{
+  "file": "gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+  "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
+  "bytes": 104586,
+  "submission_name": "gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b",
+  "note": "H65-1 native 3DEP 10m chi/ksn knickpoints, >=3 independent drainages, 40000 dots; E1 failed: NEGATIVE, research only",
+  "note_chars": 116,
+  "validator": {
+    "file": "/home/user/60GEMSDOE/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+    "bytes": 104586,
+    "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0032575519289821386,
+    "emitted_positive_pixels": 40000,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 40000,
+    "footprint_fraction": 0.007740877231041769
+  },
+  "template_report": {
+    "path": "/home/user/60GEMSDOE/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+    "bytes": 104586,
+    "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "ref_bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "blocksize": [
+      256,
+      256
+    ],
+    "fixture_grid": false,
+    "has_validity_mask": false,
+    "nan_pixels": 0,
+    "infinity_pixels": 0,
+    "n_nan": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0032575519289821386,
+    "n_nonzero": 40000,
+    "mass": 40000.0,
+    "mass_outside_footprint": 0,
+    "problems": [],
+    "ok": true,
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+  },
+  "zip_file": "gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.zip",
+  "zip_sha256": "7d0707d50056d14a67e06e3831353ffb9d401824e3e0180626342a2f049d12b3",
+  "approved_for_weekly_slot": false,
+  "promoted": false,
+  "submission_slots_used": 0,
+  "status": "locally validated within separately recorded inventory scope; not organizer acceptance or slot approval",
+  "metadata": {
+    "lane": "tectonic-geomorphology",
+    "hypothesis": "H65-1",
+    "substrate": "USGS 3DEP 1/3 arc-second (10 m) DEM, run 38113556275, reduced to 100 m",
+    "parameters": {
+      "budget": 40000,
+      "z_min": 1.5,
+      "n_drainage_min": 3,
+      "corridor_half_len_px": 6,
+      "corridor_half_width_px": 2,
+      "theta_ref": 0.45,
+      "a_min_cells": 20,
+      "window_cells": 5
+    },
+    "surface_diagnostics": {
+      "channel_pixels": 786299,
+      "valid_channel_pixels": 669859,
+      "candidate_pixels": 39417,
+      "z_min": 1.5,
+      "block_px": 400,
+      "n_drainage_min": 3,
+      "corridor_half_len_px": 6,
+      "corridor_half_width_px": 2,
+      "trace_decay": 0.5,
+      "regional_modal_strike_deg": 25.0,
+      "candidate_pixels_scanned": 39417,
+      "aligned_candidates": 35242,
+      "n_drainage_p50": 5.0,
+      "n_drainage_p90": 10.0,
+      "n_drainage_max": 25,
+      "trace_pixels": 340582,
+      "trace_only_pixels": 303924,
+      "positive_pixels": 343341,
+      "p_max": 1.0
+    },
+    "confounds": {
+      "playa_px": 550267,
+      "basin_fill_px": 516432,
+      "conductive_px": 257039,
+      "excluded_px": 1129629,
+      "depth_to_base_p90_m": 1279.3229614257814,
+      "cond_surf_p95": 3.9114627838134766,
+      "channel_excluded_px": 116440,
+      "channel_px": 786299
+    }
+  }
+}

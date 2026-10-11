@@ -1,0 +1,2520 @@
+{
+ "evidence_class": "DATA-MEASUREMENT",
+ "hypothesis": "H65-1 (executes H62-5): tectonic-geomorphology lane at native 3DEP 10 m",
+ "generated_utc": "2026-10-11T05:07:15Z",
+ "workflow": "dem10-chi",
+ "run_id": "38113556275",
+ "run_attempt": "1",
+ "ref": "refs/heads/arena/96ecd67e-60gemsdoe",
+ "commit": "ee10a2d26f56d505ae64ed89ae4679b2f3b72792",
+ "source": {
+  "product": "USGS 3DEP 1/3 arc-second DEM (current 1x1 degree tiles)",
+  "license": "public domain (USGS)",
+  "landing": "https://www.usgs.gov/3d-elevation-program",
+  "bucket": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/",
+  "tiles": {
+   "n38w117": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w117/USGS_13_n38w117.tif",
+    "bytes": 376521889,
+    "sha256": "088f6f89d56226e99cedd3316add89c94d90f08aa5c0ef076d49b2c129b37e23"
+   },
+   "n38w118": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w118/USGS_13_n38w118.tif",
+    "bytes": 409708514,
+    "sha256": "21e4616b410d787b6faee8f60fefbc7969fdb2d26a300ae0cce9703e40077192"
+   },
+   "n38w119": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w119/USGS_13_n38w119.tif",
+    "bytes": 416350584,
+    "sha256": "d1a22cfe538179c65fa221f70c0cd7ba4403d087450dd3bb463ee50fb69fa97c"
+   },
+   "n39w117": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w117/USGS_13_n39w117.tif",
+    "bytes": 392299201,
+    "sha256": "27b2eb3b55f457a0b3a299576b6747a8ca4f7ec4e415180f9bf3c07ba9158449"
+   },
+   "n39w118": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w118/USGS_13_n39w118.tif",
+    "bytes": 391985657,
+    "sha256": "01a5b4bdc759d2fdb610cba1f4cd3db2482af13b29eaca186f7bb37862081b0f"
+   },
+   "n39w119": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif",
+    "bytes": 401998969,
+    "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc"
+   },
+   "n39w120": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w120/USGS_13_n39w120.tif",
+    "bytes": 418930984,
+    "sha256": "2d658942861cc01b820587e325ad4873ee8a993e77bc51eccca52b775e7a590c"
+   },
+   "n39w121": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w121/USGS_13_n39w121.tif",
+    "bytes": 463509513,
+    "sha256": "c55c467399cf91fa43d2956b66bd7c2e22e7fb8cd0dad03bf256f1ba93191844"
+   },
+   "n40w117": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w117/USGS_13_n40w117.tif",
+    "bytes": 382017624,
+    "sha256": "e35f343e8d23081364b4083c2b4d27d9e6b1a4d9af8d4ab96b98436841f0b50e"
+   },
+   "n40w118": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w118/USGS_13_n40w118.tif",
+    "bytes": 397926937,
+    "sha256": "f2d1d2419b5a8ef7c43fcab6af5c67f1c2ae84259d0c7cf184f9f42f80d16d46"
+   },
+   "n40w119": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w119/USGS_13_n40w119.tif",
+    "bytes": 378567782,
+    "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1"
+   },
+   "n40w120": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w120/USGS_13_n40w120.tif",
+    "bytes": 402039220,
+    "sha256": "59a6df67e342b5b0c7166ab5a07b8bed6f9774a868a14badacd2c3d7dc185b3a"
+   },
+   "n40w121": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w121/USGS_13_n40w121.tif",
+    "bytes": 426141596,
+    "sha256": "1ef8c81e8528aacbbb7a3eb5733d225dad81422af04d1f330576e6d6ac9af957"
+   },
+   "n41w117": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w117/USGS_13_n41w117.tif",
+    "bytes": 400243874,
+    "sha256": "7e2dcd6fb40f66bc166fea34724f5a7eb6071ea371b303448cdf5afc8fa2c067"
+   },
+   "n41w118": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w118/USGS_13_n41w118.tif",
+    "bytes": 393630308,
+    "sha256": "2b503a935cf4016cb4b675b3e739bf9bd0df8d4fc5c49b6cf8d4381740523048"
+   },
+   "n41w119": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w119/USGS_13_n41w119.tif",
+    "bytes": 386798261,
+    "sha256": "5029c65f574c5c5241f1862336e8911d39c8faab1e037b9ba0b4d2fafe0fce0c"
+   },
+   "n41w120": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w120/USGS_13_n41w120.tif",
+    "bytes": 375913234,
+    "sha256": "f5bee4fbfe291b0eaf181d4b36aa32766b6ab62b9a0cb83420f22fea73580c41"
+   },
+   "n41w121": {
+    "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w121/USGS_13_n41w121.tif",
+    "bytes": 389991601,
+    "sha256": "fd5bb85cd29d16e3ada06771f5bcafaaf141f2be8aa4a12fb09e5604a6857c5e"
+   }
+  }
+ },
+ "grid": {
+  "height": 3730,
+  "width": 3292,
+  "crs": "EPSG:32611",
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ]
+ },
+ "blocks_ok": 25,
+ "blocks_total": 36,
+ "footprint_px": 5167373,
+ "footprint_px_covered": 5167373,
+ "footprint_px_with_step": 786299,
+ "files": {
+  "dem10_chi_100m_i16.tif": {
+   "bytes": 12777098,
+   "sha256": "8897ba9c30ef1cd7ad5f23c16c6dfd7bb070e7e757f36fd9486eb45edfd973a5"
+  },
+  "dem10_chi_100m_sig_i32.tif": {
+   "bytes": 2804587,
+   "sha256": "0ba7816bc082b8a71ebcb26596b5e330abb63231be94abad4e447eb316ffb95c"
+  },
+  "dem10_chi_100m_u8.tif": {
+   "bytes": 2061484,
+   "sha256": "e8830ba6f0bb99f525266b1b3a483b0722d25cd4758c2bbccc6e7f54eb6b1b6a"
+  }
+ },
+ "block_receipts": [
+  {
+   "block": [
+    0,
+    0
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:50Z",
+   "core_rows": [
+    0,
+    622
+   ],
+   "core_cols": [
+    0,
+    549
+   ],
+   "footprint_px": 148464,
+   "tiles_needed": [
+    "n41w120",
+    "n41w121"
+   ],
+   "tiles": [
+    {
+     "tile": "n41w120",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w120/USGS_13_n41w120.tif",
+     "ok": true,
+     "bytes": 375913234,
+     "sha256": "f5bee4fbfe291b0eaf181d4b36aa32766b6ab62b9a0cb83420f22fea73580c41",
+     "seconds": 14.7
+    },
+    {
+     "tile": "n41w121",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w121/USGS_13_n41w121.tif",
+     "ok": true,
+     "bytes": 389991601,
+     "sha256": "fd5bb85cd29d16e3ada06771f5bcafaaf141f2be8aa4a12fb09e5604a6857c5e",
+     "seconds": 15.8
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1147.759765625,
+    2596.699951171875
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 10416667,
+    "channel": 720195,
+    "channel_core": 386174,
+    "channel_core_ok": 377341,
+    "contaminated_core_channel": 8833,
+    "step_defined_core": 250313,
+    "max_acc_cells": 31158047.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 56.6
+  },
+  {
+   "block": [
+    0,
+    1
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:48Z",
+   "core_rows": [
+    0,
+    622
+   ],
+   "core_cols": [
+    549,
+    1098
+   ],
+   "footprint_px": 337184,
+   "tiles_needed": [
+    "n41w119",
+    "n41w120"
+   ],
+   "tiles": [
+    {
+     "tile": "n41w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w119/USGS_13_n41w119.tif",
+     "ok": true,
+     "bytes": 386798261,
+     "sha256": "5029c65f574c5c5241f1862336e8911d39c8faab1e037b9ba0b4d2fafe0fce0c",
+     "seconds": 10.9
+    },
+    {
+     "tile": "n41w120",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w120/USGS_13_n41w120.tif",
+     "ok": true,
+     "bytes": 375913234,
+     "sha256": "f5bee4fbfe291b0eaf181d4b36aa32766b6ab62b9a0cb83420f22fea73580c41",
+     "seconds": 5.9
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1147.759765625,
+    2596.699951171875
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 4637351,
+    "channel": 908579,
+    "channel_core": 542105,
+    "channel_core_ok": 539543,
+    "contaminated_core_channel": 2562,
+    "step_defined_core": 376110,
+    "max_acc_cells": 25280004.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 37.0
+  },
+  {
+   "block": [
+    0,
+    2
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:53Z",
+   "core_rows": [
+    0,
+    622
+   ],
+   "core_cols": [
+    1098,
+    1647
+   ],
+   "footprint_px": 341470,
+   "tiles_needed": [
+    "n41w118",
+    "n41w119"
+   ],
+   "tiles": [
+    {
+     "tile": "n41w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w118/USGS_13_n41w118.tif",
+     "ok": true,
+     "bytes": 393630308,
+     "sha256": "2b503a935cf4016cb4b675b3e739bf9bd0df8d4fc5c49b6cf8d4381740523048",
+     "seconds": 8.8
+    },
+    {
+     "tile": "n41w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w119/USGS_13_n41w119.tif",
+     "ok": true,
+     "bytes": 386798261,
+     "sha256": "5029c65f574c5c5241f1862336e8911d39c8faab1e037b9ba0b4d2fafe0fce0c",
+     "seconds": 7.5
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1191.12646484375,
+    2996.869140625
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 696847,
+    "channel": 1013430,
+    "channel_core": 605669,
+    "channel_core_ok": 594738,
+    "contaminated_core_channel": 10931,
+    "step_defined_core": 405218,
+    "max_acc_cells": 22795652.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 49.0
+  },
+  {
+   "block": [
+    0,
+    3
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:50Z",
+   "core_rows": [
+    0,
+    622
+   ],
+   "core_cols": [
+    1647,
+    2196
+   ],
+   "footprint_px": 341478,
+   "tiles_needed": [
+    "n41w118",
+    "n41w119"
+   ],
+   "tiles": [
+    {
+     "tile": "n41w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w118/USGS_13_n41w118.tif",
+     "ok": true,
+     "bytes": 393630308,
+     "sha256": "2b503a935cf4016cb4b675b3e739bf9bd0df8d4fc5c49b6cf8d4381740523048",
+     "seconds": 11.5
+    },
+    {
+     "tile": "n41w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w119/USGS_13_n41w119.tif",
+     "ok": true,
+     "bytes": 386798261,
+     "sha256": "5029c65f574c5c5241f1862336e8911d39c8faab1e037b9ba0b4d2fafe0fce0c",
+     "seconds": 9.9
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1122.4241943359375,
+    2996.971435546875
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 2426112,
+    "channel": 1012435,
+    "channel_core": 632504,
+    "channel_core_ok": 623700,
+    "contaminated_core_channel": 8804,
+    "step_defined_core": 445998,
+    "max_acc_cells": 16242484.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 53.9
+  },
+  {
+   "block": [
+    0,
+    4
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:51Z",
+   "core_rows": [
+    0,
+    622
+   ],
+   "core_cols": [
+    2196,
+    2745
+   ],
+   "footprint_px": 340076,
+   "tiles_needed": [
+    "n41w117",
+    "n41w118"
+   ],
+   "tiles": [
+    {
+     "tile": "n41w117",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w117/USGS_13_n41w117.tif",
+     "ok": true,
+     "bytes": 400243874,
+     "sha256": "7e2dcd6fb40f66bc166fea34724f5a7eb6071ea371b303448cdf5afc8fa2c067",
+     "seconds": 11.8
+    },
+    {
+     "tile": "n41w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w118/USGS_13_n41w118.tif",
+     "ok": true,
+     "bytes": 393630308,
+     "sha256": "2b503a935cf4016cb4b675b3e739bf9bd0df8d4fc5c49b6cf8d4381740523048",
+     "seconds": 23.1
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1148.1005859375,
+    2978.432373046875
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 2079688,
+    "channel": 993324,
+    "channel_core": 636503,
+    "channel_core_ok": 620063,
+    "contaminated_core_channel": 16440,
+    "step_defined_core": 438479,
+    "max_acc_cells": 35851727.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 66.1
+  },
+  {
+   "block": [
+    0,
+    5
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:51Z",
+   "core_rows": [
+    0,
+    622
+   ],
+   "core_cols": [
+    2745,
+    3292
+   ],
+   "footprint_px": 339438,
+   "tiles_needed": [
+    "n41w117"
+   ],
+   "tiles": [
+    {
+     "tile": "n41w117",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w117/USGS_13_n41w117.tif",
+     "ok": true,
+     "bytes": 400243874,
+     "sha256": "7e2dcd6fb40f66bc166fea34724f5a7eb6071ea371b303448cdf5afc8fa2c067",
+     "seconds": 11.9
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1148.109375,
+    2946.020263671875
+   ],
+   "diagnostics": {
+    "cells": 55287400,
+    "valid": 55287400,
+    "raised": 258001,
+    "channel": 996890,
+    "channel_core": 626675,
+    "channel_core_ok": 599297,
+    "contaminated_core_channel": 27378,
+    "step_defined_core": 418817,
+    "max_acc_cells": 43265397.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 47.7
+  },
+  {
+   "block": [
+    1,
+    0
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:48Z",
+   "core_rows": [
+    622,
+    1244
+   ],
+   "core_cols": [
+    0,
+    549
+   ],
+   "footprint_px": 222661,
+   "tiles_needed": [
+    "n40w120",
+    "n40w121",
+    "n41w120",
+    "n41w121"
+   ],
+   "tiles": [
+    {
+     "tile": "n40w120",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w120/USGS_13_n40w120.tif",
+     "ok": true,
+     "bytes": 402039220,
+     "sha256": "59a6df67e342b5b0c7166ab5a07b8bed6f9774a868a14badacd2c3d7dc185b3a",
+     "seconds": 11.3
+    },
+    {
+     "tile": "n40w121",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w121/USGS_13_n40w121.tif",
+     "ok": true,
+     "bytes": 426141596,
+     "sha256": "1ef8c81e8528aacbbb7a3eb5733d225dad81422af04d1f330576e6d6ac9af957",
+     "seconds": 13.0
+    },
+    {
+     "tile": "n41w120",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w120/USGS_13_n41w120.tif",
+     "ok": true,
+     "bytes": 375913234,
+     "sha256": "f5bee4fbfe291b0eaf181d4b36aa32766b6ab62b9a0cb83420f22fea73580c41",
+     "seconds": 6.9
+    },
+    {
+     "tile": "n41w121",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w121/USGS_13_n41w121.tif",
+     "ok": true,
+     "bytes": 389991601,
+     "sha256": "fd5bb85cd29d16e3ada06771f5bcafaaf141f2be8aa4a12fb09e5604a6857c5e",
+     "seconds": 9.9
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1147.759765625,
+    2658.521484375
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 7022488,
+    "channel": 748700,
+    "channel_core": 426684,
+    "channel_core_ok": 424508,
+    "contaminated_core_channel": 2176,
+    "step_defined_core": 274170,
+    "max_acc_cells": 34461127.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 64.9
+  },
+  {
+   "block": [
+    1,
+    1
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:51Z",
+   "core_rows": [
+    622,
+    1244
+   ],
+   "core_cols": [
+    549,
+    1098
+   ],
+   "footprint_px": 341477,
+   "tiles_needed": [
+    "n40w119",
+    "n40w120",
+    "n41w119",
+    "n41w120"
+   ],
+   "tiles": [
+    {
+     "tile": "n40w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w119/USGS_13_n40w119.tif",
+     "ok": true,
+     "bytes": 378567782,
+     "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
+     "seconds": 10.9
+    },
+    {
+     "tile": "n40w120",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w120/USGS_13_n40w120.tif",
+     "ok": true,
+     "bytes": 402039220,
+     "sha256": "59a6df67e342b5b0c7166ab5a07b8bed6f9774a868a14badacd2c3d7dc185b3a",
+     "seconds": 9.3
+    },
+    {
+     "tile": "n41w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w119/USGS_13_n41w119.tif",
+     "ok": true,
+     "bytes": 386798261,
+     "sha256": "5029c65f574c5c5241f1862336e8911d39c8faab1e037b9ba0b4d2fafe0fce0c",
+     "seconds": 4.5
+    },
+    {
+     "tile": "n41w120",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w120/USGS_13_n41w120.tif",
+     "ok": true,
+     "bytes": 375913234,
+     "sha256": "f5bee4fbfe291b0eaf181d4b36aa32766b6ab62b9a0cb83420f22fea73580c41",
+     "seconds": 4.6
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1147.759765625,
+    2494.154296875
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 1555824,
+    "channel": 937351,
+    "channel_core": 587838,
+    "channel_core_ok": 576995,
+    "contaminated_core_channel": 10843,
+    "step_defined_core": 390059,
+    "max_acc_cells": 23679541.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 57.8
+  },
+  {
+   "block": [
+    1,
+    2
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:51Z",
+   "core_rows": [
+    622,
+    1244
+   ],
+   "core_cols": [
+    1098,
+    1647
+   ],
+   "footprint_px": 340803,
+   "tiles_needed": [
+    "n40w118",
+    "n40w119",
+    "n41w118",
+    "n41w119"
+   ],
+   "tiles": [
+    {
+     "tile": "n40w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w118/USGS_13_n40w118.tif",
+     "ok": true,
+     "bytes": 397926937,
+     "sha256": "f2d1d2419b5a8ef7c43fcab6af5c67f1c2ae84259d0c7cf184f9f42f80d16d46",
+     "seconds": 11.5
+    },
+    {
+     "tile": "n40w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w119/USGS_13_n40w119.tif",
+     "ok": true,
+     "bytes": 378567782,
+     "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
+     "seconds": 9.4
+    },
+    {
+     "tile": "n41w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w118/USGS_13_n41w118.tif",
+     "ok": true,
+     "bytes": 393630308,
+     "sha256": "2b503a935cf4016cb4b675b3e739bf9bd0df8d4fc5c49b6cf8d4381740523048",
+     "seconds": 9.9
+    },
+    {
+     "tile": "n41w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w119/USGS_13_n41w119.tif",
+     "ok": true,
+     "bytes": 386798261,
+     "sha256": "5029c65f574c5c5241f1862336e8911d39c8faab1e037b9ba0b4d2fafe0fce0c",
+     "seconds": 10.1
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1030.1300048828125,
+    2676.621826171875
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 9021169,
+    "channel": 887853,
+    "channel_core": 510117,
+    "channel_core_ok": 489244,
+    "contaminated_core_channel": 20873,
+    "step_defined_core": 327548,
+    "max_acc_cells": 29013187.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 72.3
+  },
+  {
+   "block": [
+    1,
+    3
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:50Z",
+   "core_rows": [
+    622,
+    1244
+   ],
+   "core_cols": [
+    1647,
+    2196
+   ],
+   "footprint_px": 122794,
+   "tiles_needed": [
+    "n40w118",
+    "n40w119",
+    "n41w118",
+    "n41w119"
+   ],
+   "tiles": [
+    {
+     "tile": "n40w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w118/USGS_13_n40w118.tif",
+     "ok": true,
+     "bytes": 397926937,
+     "sha256": "f2d1d2419b5a8ef7c43fcab6af5c67f1c2ae84259d0c7cf184f9f42f80d16d46",
+     "seconds": 12.1
+    },
+    {
+     "tile": "n40w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w119/USGS_13_n40w119.tif",
+     "ok": true,
+     "bytes": 378567782,
+     "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
+     "seconds": 7.1
+    },
+    {
+     "tile": "n41w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w118/USGS_13_n41w118.tif",
+     "ok": true,
+     "bytes": 393630308,
+     "sha256": "2b503a935cf4016cb4b675b3e739bf9bd0df8d4fc5c49b6cf8d4381740523048",
+     "seconds": 5.1
+    },
+    {
+     "tile": "n41w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w119/USGS_13_n41w119.tif",
+     "ok": true,
+     "bytes": 386798261,
+     "sha256": "5029c65f574c5c5241f1862336e8911d39c8faab1e037b9ba0b4d2fafe0fce0c",
+     "seconds": 4.9
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1030.1300048828125,
+    3035.867919921875
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 9856603,
+    "channel": 833891,
+    "channel_core": 480353,
+    "channel_core_ok": 476508,
+    "contaminated_core_channel": 3845,
+    "step_defined_core": 334407,
+    "max_acc_cells": 30308461.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 62.9
+  },
+  {
+   "block": [
+    1,
+    4
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:51Z",
+   "core_rows": [
+    622,
+    1244
+   ],
+   "core_cols": [
+    2196,
+    2745
+   ],
+   "footprint_px": 83315,
+   "tiles_needed": [
+    "n40w117",
+    "n40w118",
+    "n41w117",
+    "n41w118"
+   ],
+   "tiles": [
+    {
+     "tile": "n40w117",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w117/USGS_13_n40w117.tif",
+     "ok": true,
+     "bytes": 382017624,
+     "sha256": "e35f343e8d23081364b4083c2b4d27d9e6b1a4d9af8d4ab96b98436841f0b50e",
+     "seconds": 6.2
+    },
+    {
+     "tile": "n40w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w118/USGS_13_n40w118.tif",
+     "ok": true,
+     "bytes": 397926937,
+     "sha256": "f2d1d2419b5a8ef7c43fcab6af5c67f1c2ae84259d0c7cf184f9f42f80d16d46",
+     "seconds": 4.8
+    },
+    {
+     "tile": "n41w117",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w117/USGS_13_n41w117.tif",
+     "ok": true,
+     "bytes": 400243874,
+     "sha256": "7e2dcd6fb40f66bc166fea34724f5a7eb6071ea371b303448cdf5afc8fa2c067",
+     "seconds": 5.0
+    },
+    {
+     "tile": "n41w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w118/USGS_13_n41w118.tif",
+     "ok": true,
+     "bytes": 393630308,
+     "sha256": "2b503a935cf4016cb4b675b3e739bf9bd0df8d4fc5c49b6cf8d4381740523048",
+     "seconds": 5.2
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1192.8428955078125,
+    3105.48388671875
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 46770,
+    "channel": 973817,
+    "channel_core": 607597,
+    "channel_core_ok": 590638,
+    "contaminated_core_channel": 16959,
+    "step_defined_core": 415860,
+    "max_acc_cells": 27843195.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 52.2
+  },
+  {
+   "block": [
+    1,
+    5
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:46Z",
+   "core_rows": [
+    622,
+    1244
+   ],
+   "core_cols": [
+    2745,
+    3292
+   ],
+   "footprint_px": 83363,
+   "tiles_needed": [
+    "n40w117",
+    "n41w117"
+   ],
+   "tiles": [
+    {
+     "tile": "n40w117",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w117/USGS_13_n40w117.tif",
+     "ok": true,
+     "bytes": 382017624,
+     "sha256": "e35f343e8d23081364b4083c2b4d27d9e6b1a4d9af8d4ab96b98436841f0b50e",
+     "seconds": 11.2
+    },
+    {
+     "tile": "n41w117",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n41w117/USGS_13_n41w117.tif",
+     "ok": true,
+     "bytes": 400243874,
+     "sha256": "7e2dcd6fb40f66bc166fea34724f5a7eb6071ea371b303448cdf5afc8fa2c067",
+     "seconds": 5.8
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1250.768310546875,
+    3088.38916015625
+   ],
+   "diagnostics": {
+    "cells": 55287400,
+    "valid": 55287400,
+    "raised": 5693465,
+    "channel": 862403,
+    "channel_core": 502265,
+    "channel_core_ok": 498231,
+    "contaminated_core_channel": 4034,
+    "step_defined_core": 353679,
+    "max_acc_cells": 18727675.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 37.7
+  },
+  {
+   "block": [
+    2,
+    0
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:04:24Z",
+   "core_rows": [
+    1244,
+    1866
+   ],
+   "core_cols": [
+    0,
+    549
+   ],
+   "footprint_px": 78679,
+   "tiles_needed": [
+    "n39w120",
+    "n39w121",
+    "n40w120",
+    "n40w121"
+   ],
+   "tiles": [
+    {
+     "tile": "n39w120",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w120/USGS_13_n39w120.tif",
+     "ok": true,
+     "bytes": 418930984,
+     "sha256": "2d658942861cc01b820587e325ad4873ee8a993e77bc51eccca52b775e7a590c",
+     "seconds": 12.1
+    },
+    {
+     "tile": "n39w121",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w121/USGS_13_n39w121.tif",
+     "ok": true,
+     "bytes": 463509513,
+     "sha256": "c55c467399cf91fa43d2956b66bd7c2e22e7fb8cd0dad03bf256f1ba93191844",
+     "seconds": 17.0
+    },
+    {
+     "tile": "n40w120",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w120/USGS_13_n40w120.tif",
+     "ok": true,
+     "bytes": 402039220,
+     "sha256": "59a6df67e342b5b0c7166ab5a07b8bed6f9774a868a14badacd2c3d7dc185b3a",
+     "seconds": 13.0
+    },
+    {
+     "tile": "n40w121",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w121/USGS_13_n40w121.tif",
+     "ok": true,
+     "bytes": 426141596,
+     "sha256": "1ef8c81e8528aacbbb7a3eb5733d225dad81422af04d1f330576e6d6ac9af957",
+     "seconds": 13.1
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1226.98876953125,
+    3283.00439453125
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 844217,
+    "channel": 906267,
+    "channel_core": 514494,
+    "channel_core_ok": 501081,
+    "contaminated_core_channel": 13413,
+    "step_defined_core": 320323,
+    "max_acc_cells": 20705096.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 86.6
+  },
+  {
+   "block": [
+    2,
+    1
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:51Z",
+   "core_rows": [
+    1244,
+    1866
+   ],
+   "core_cols": [
+    549,
+    1098
+   ],
+   "footprint_px": 313019,
+   "tiles_needed": [
+    "n39w119",
+    "n39w120",
+    "n40w119",
+    "n40w120"
+   ],
+   "tiles": [
+    {
+     "tile": "n39w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif",
+     "ok": true,
+     "bytes": 401998969,
+     "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
+     "seconds": 12.3
+    },
+    {
+     "tile": "n39w120",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w120/USGS_13_n39w120.tif",
+     "ok": true,
+     "bytes": 418930984,
+     "sha256": "2d658942861cc01b820587e325ad4873ee8a993e77bc51eccca52b775e7a590c",
+     "seconds": 12.4
+    },
+    {
+     "tile": "n40w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w119/USGS_13_n40w119.tif",
+     "ok": true,
+     "bytes": 378567782,
+     "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
+     "seconds": 6.4
+    },
+    {
+     "tile": "n40w120",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w120/USGS_13_n40w120.tif",
+     "ok": true,
+     "bytes": 402039220,
+     "sha256": "59a6df67e342b5b0c7166ab5a07b8bed6f9774a868a14badacd2c3d7dc185b3a",
+     "seconds": 10.0
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1182.2388916015625,
+    2216.184814453125
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 3471983,
+    "channel": 858635,
+    "channel_core": 537825,
+    "channel_core_ok": 517065,
+    "contaminated_core_channel": 20760,
+    "step_defined_core": 331223,
+    "max_acc_cells": 18476647.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 71.7
+  },
+  {
+   "block": [
+    2,
+    2
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:50Z",
+   "core_rows": [
+    1244,
+    1866
+   ],
+   "core_cols": [
+    1098,
+    1647
+   ],
+   "footprint_px": 327932,
+   "tiles_needed": [
+    "n39w118",
+    "n39w119",
+    "n40w118",
+    "n40w119"
+   ],
+   "tiles": [
+    {
+     "tile": "n39w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w118/USGS_13_n39w118.tif",
+     "ok": true,
+     "bytes": 391985657,
+     "sha256": "01a5b4bdc759d2fdb610cba1f4cd3db2482af13b29eaca186f7bb37862081b0f",
+     "seconds": 10.2
+    },
+    {
+     "tile": "n39w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif",
+     "ok": true,
+     "bytes": 401998969,
+     "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
+     "seconds": 9.5
+    },
+    {
+     "tile": "n40w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w118/USGS_13_n40w118.tif",
+     "ok": true,
+     "bytes": 397926937,
+     "sha256": "f2d1d2419b5a8ef7c43fcab6af5c67f1c2ae84259d0c7cf184f9f42f80d16d46",
+     "seconds": 10.0
+    },
+    {
+     "tile": "n40w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w119/USGS_13_n40w119.tif",
+     "ok": true,
+     "bytes": 378567782,
+     "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
+     "seconds": 9.9
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1047.589111328125,
+    2676.6259765625
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 3727206,
+    "channel": 928993,
+    "channel_core": 576913,
+    "channel_core_ok": 566104,
+    "contaminated_core_channel": 10809,
+    "step_defined_core": 388455,
+    "max_acc_cells": 15720331.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 69.9
+  },
+  {
+   "block": [
+    2,
+    3
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:48Z",
+   "core_rows": [
+    1244,
+    1866
+   ],
+   "core_cols": [
+    1647,
+    2196
+   ],
+   "footprint_px": 54226,
+   "tiles_needed": [
+    "n39w118",
+    "n39w119",
+    "n40w118",
+    "n40w119"
+   ],
+   "tiles": [
+    {
+     "tile": "n39w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w118/USGS_13_n39w118.tif",
+     "ok": true,
+     "bytes": 391985657,
+     "sha256": "01a5b4bdc759d2fdb610cba1f4cd3db2482af13b29eaca186f7bb37862081b0f",
+     "seconds": 11.0
+    },
+    {
+     "tile": "n39w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif",
+     "ok": true,
+     "bytes": 401998969,
+     "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
+     "seconds": 19.6
+    },
+    {
+     "tile": "n40w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w118/USGS_13_n40w118.tif",
+     "ok": true,
+     "bytes": 397926937,
+     "sha256": "f2d1d2419b5a8ef7c43fcab6af5c67f1c2ae84259d0c7cf184f9f42f80d16d46",
+     "seconds": 9.2
+    },
+    {
+     "tile": "n40w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w119/USGS_13_n40w119.tif",
+     "ok": true,
+     "bytes": 378567782,
+     "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
+     "seconds": 6.1
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1047.5762939453125,
+    3142.1767578125
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 4323233,
+    "channel": 905928,
+    "channel_core": 519339,
+    "channel_core_ok": 519018,
+    "contaminated_core_channel": 321,
+    "step_defined_core": 358240,
+    "max_acc_cells": 23670429.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 76.5
+  },
+  {
+   "block": [
+    2,
+    4
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:48Z",
+   "core_rows": [
+    1244,
+    1866
+   ],
+   "core_cols": [
+    2196,
+    2745
+   ],
+   "footprint_px": 0,
+   "status": "skipped: no footprint pixel in the core"
+  },
+  {
+   "block": [
+    2,
+    5
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:52Z",
+   "core_rows": [
+    1244,
+    1866
+   ],
+   "core_cols": [
+    2745,
+    3292
+   ],
+   "footprint_px": 0,
+   "status": "skipped: no footprint pixel in the core"
+  },
+  {
+   "block": [
+    3,
+    0
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:04:14Z",
+   "core_rows": [
+    1866,
+    2488
+   ],
+   "core_cols": [
+    0,
+    549
+   ],
+   "footprint_px": 0,
+   "status": "skipped: no footprint pixel in the core"
+  },
+  {
+   "block": [
+    3,
+    1
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:03:54Z",
+   "core_rows": [
+    1866,
+    2488
+   ],
+   "core_cols": [
+    549,
+    1098
+   ],
+   "footprint_px": 54419,
+   "tiles_needed": [
+    "n39w119",
+    "n39w120",
+    "n40w119",
+    "n40w120"
+   ],
+   "tiles": [
+    {
+     "tile": "n39w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif",
+     "ok": true,
+     "bytes": 401998969,
+     "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
+     "seconds": 9.5
+    },
+    {
+     "tile": "n39w120",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w120/USGS_13_n39w120.tif",
+     "ok": true,
+     "bytes": 418930984,
+     "sha256": "2d658942861cc01b820587e325ad4873ee8a993e77bc51eccca52b775e7a590c",
+     "seconds": 12.5
+    },
+    {
+     "tile": "n40w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w119/USGS_13_n40w119.tif",
+     "ok": true,
+     "bytes": 378567782,
+     "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
+     "seconds": 6.7
+    },
+    {
+     "tile": "n40w120",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w120/USGS_13_n40w120.tif",
+     "ok": true,
+     "bytes": 402039220,
+     "sha256": "59a6df67e342b5b0c7166ab5a07b8bed6f9774a868a14badacd2c3d7dc185b3a",
+     "seconds": 9.7
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1194.3310546875,
+    3557.2412109375
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 5196965,
+    "channel": 834512,
+    "channel_core": 521276,
+    "channel_core_ok": 507963,
+    "contaminated_core_channel": 13313,
+    "step_defined_core": 343081,
+    "max_acc_cells": 24355260.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 71.0
+  },
+  {
+   "block": [
+    3,
+    2
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:04:39Z",
+   "core_rows": [
+    1866,
+    2488
+   ],
+   "core_cols": [
+    1098,
+    1647
+   ],
+   "footprint_px": 341065,
+   "tiles_needed": [
+    "n39w118",
+    "n39w119",
+    "n40w118",
+    "n40w119"
+   ],
+   "tiles": [
+    {
+     "tile": "n39w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w118/USGS_13_n39w118.tif",
+     "ok": true,
+     "bytes": 391985657,
+     "sha256": "01a5b4bdc759d2fdb610cba1f4cd3db2482af13b29eaca186f7bb37862081b0f",
+     "seconds": 10.0
+    },
+    {
+     "tile": "n39w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif",
+     "ok": true,
+     "bytes": 401998969,
+     "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
+     "seconds": 9.1
+    },
+    {
+     "tile": "n40w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w118/USGS_13_n40w118.tif",
+     "ok": true,
+     "bytes": 397926937,
+     "sha256": "f2d1d2419b5a8ef7c43fcab6af5c67f1c2ae84259d0c7cf184f9f42f80d16d46",
+     "seconds": 6.0
+    },
+    {
+     "tile": "n40w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w119/USGS_13_n40w119.tif",
+     "ok": true,
+     "bytes": 378567782,
+     "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
+     "seconds": 4.6
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1194.3310546875,
+    3277.0029296875
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 8952982,
+    "channel": 811881,
+    "channel_core": 485787,
+    "channel_core_ok": 475586,
+    "contaminated_core_channel": 10201,
+    "step_defined_core": 320942,
+    "max_acc_cells": 24515420.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 61.8
+  },
+  {
+   "block": [
+    3,
+    3
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:04:48Z",
+   "core_rows": [
+    1866,
+    2488
+   ],
+   "core_cols": [
+    1647,
+    2196
+   ],
+   "footprint_px": 153698,
+   "tiles_needed": [
+    "n39w118",
+    "n39w119",
+    "n40w118",
+    "n40w119"
+   ],
+   "tiles": [
+    {
+     "tile": "n39w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w118/USGS_13_n39w118.tif",
+     "ok": true,
+     "bytes": 391985657,
+     "sha256": "01a5b4bdc759d2fdb610cba1f4cd3db2482af13b29eaca186f7bb37862081b0f",
+     "seconds": 9.4
+    },
+    {
+     "tile": "n39w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif",
+     "ok": true,
+     "bytes": 401998969,
+     "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
+     "seconds": 8.5
+    },
+    {
+     "tile": "n40w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w118/USGS_13_n40w118.tif",
+     "ok": true,
+     "bytes": 397926937,
+     "sha256": "f2d1d2419b5a8ef7c43fcab6af5c67f1c2ae84259d0c7cf184f9f42f80d16d46",
+     "seconds": 7.9
+    },
+    {
+     "tile": "n40w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n40w119/USGS_13_n40w119.tif",
+     "ok": true,
+     "bytes": 378567782,
+     "sha256": "e3b69524af737688d74ca01f06fd3de994bf6d8d5b11fe599e211d5dfe4f91c1",
+     "seconds": 6.8
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1301.8114013671875,
+    3586.71044921875
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 28914,
+    "channel": 1032294,
+    "channel_core": 644350,
+    "channel_core_ok": 633537,
+    "contaminated_core_channel": 10813,
+    "step_defined_core": 450636,
+    "max_acc_cells": 15233830.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 64.2
+  },
+  {
+   "block": [
+    3,
+    4
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:05:07Z",
+   "core_rows": [
+    1866,
+    2488
+   ],
+   "core_cols": [
+    2196,
+    2745
+   ],
+   "footprint_px": 0,
+   "status": "skipped: no footprint pixel in the core"
+  },
+  {
+   "block": [
+    3,
+    5
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:05:07Z",
+   "core_rows": [
+    1866,
+    2488
+   ],
+   "core_cols": [
+    2745,
+    3292
+   ],
+   "footprint_px": 0,
+   "status": "skipped: no footprint pixel in the core"
+  },
+  {
+   "block": [
+    4,
+    0
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:05:06Z",
+   "core_rows": [
+    2488,
+    3110
+   ],
+   "core_cols": [
+    0,
+    549
+   ],
+   "footprint_px": 0,
+   "status": "skipped: no footprint pixel in the core"
+  },
+  {
+   "block": [
+    4,
+    1
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:05:12Z",
+   "core_rows": [
+    2488,
+    3110
+   ],
+   "core_cols": [
+    549,
+    1098
+   ],
+   "footprint_px": 0,
+   "status": "skipped: no footprint pixel in the core"
+  },
+  {
+   "block": [
+    4,
+    2
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:05:13Z",
+   "core_rows": [
+    2488,
+    3110
+   ],
+   "core_cols": [
+    1098,
+    1647
+   ],
+   "footprint_px": 120892,
+   "tiles_needed": [
+    "n38w118",
+    "n38w119",
+    "n39w118",
+    "n39w119"
+   ],
+   "tiles": [
+    {
+     "tile": "n38w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w118/USGS_13_n38w118.tif",
+     "ok": true,
+     "bytes": 409708514,
+     "sha256": "21e4616b410d787b6faee8f60fefbc7969fdb2d26a300ae0cce9703e40077192",
+     "seconds": 11.6
+    },
+    {
+     "tile": "n38w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w119/USGS_13_n38w119.tif",
+     "ok": true,
+     "bytes": 416350584,
+     "sha256": "d1a22cfe538179c65fa221f70c0cd7ba4403d087450dd3bb463ee50fb69fa97c",
+     "seconds": 11.8
+    },
+    {
+     "tile": "n39w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w118/USGS_13_n39w118.tif",
+     "ok": true,
+     "bytes": 391985657,
+     "sha256": "01a5b4bdc759d2fdb610cba1f4cd3db2482af13b29eaca186f7bb37862081b0f",
+     "seconds": 9.3
+    },
+    {
+     "tile": "n39w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif",
+     "ok": true,
+     "bytes": 401998969,
+     "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
+     "seconds": 9.9
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1264.0367431640625,
+    4002.1435546875
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 5446825,
+    "channel": 809594,
+    "channel_core": 459262,
+    "channel_core_ok": 456065,
+    "contaminated_core_channel": 3197,
+    "step_defined_core": 298906,
+    "max_acc_cells": 24695265.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 72.9
+  },
+  {
+   "block": [
+    4,
+    3
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:05:16Z",
+   "core_rows": [
+    2488,
+    3110
+   ],
+   "core_cols": [
+    1647,
+    2196
+   ],
+   "footprint_px": 313950,
+   "tiles_needed": [
+    "n38w118",
+    "n38w119",
+    "n39w118",
+    "n39w119"
+   ],
+   "tiles": [
+    {
+     "tile": "n38w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w118/USGS_13_n38w118.tif",
+     "ok": true,
+     "bytes": 409708514,
+     "sha256": "21e4616b410d787b6faee8f60fefbc7969fdb2d26a300ae0cce9703e40077192",
+     "seconds": 8.2
+    },
+    {
+     "tile": "n38w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w119/USGS_13_n38w119.tif",
+     "ok": true,
+     "bytes": 416350584,
+     "sha256": "d1a22cfe538179c65fa221f70c0cd7ba4403d087450dd3bb463ee50fb69fa97c",
+     "seconds": 11.8
+    },
+    {
+     "tile": "n39w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w118/USGS_13_n39w118.tif",
+     "ok": true,
+     "bytes": 391985657,
+     "sha256": "01a5b4bdc759d2fdb610cba1f4cd3db2482af13b29eaca186f7bb37862081b0f",
+     "seconds": 9.3
+    },
+    {
+     "tile": "n39w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif",
+     "ok": true,
+     "bytes": 401998969,
+     "sha256": "b7fe301c8cdc70babbe84339afe09fef6247c6ac21b3315387d58955dba116bc",
+     "seconds": 9.9
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1332.314208984375,
+    2797.777099609375
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 10762365,
+    "channel": 856598,
+    "channel_core": 473169,
+    "channel_core_ok": 464392,
+    "contaminated_core_channel": 8777,
+    "step_defined_core": 321642,
+    "max_acc_cells": 42096362.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 68.0
+  },
+  {
+   "block": [
+    4,
+    4
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:05:15Z",
+   "core_rows": [
+    2488,
+    3110
+   ],
+   "core_cols": [
+    2196,
+    2745
+   ],
+   "footprint_px": 7621,
+   "tiles_needed": [
+    "n38w117",
+    "n38w118",
+    "n39w117",
+    "n39w118"
+   ],
+   "tiles": [
+    {
+     "tile": "n38w117",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w117/USGS_13_n38w117.tif",
+     "ok": true,
+     "bytes": 376521889,
+     "sha256": "088f6f89d56226e99cedd3316add89c94d90f08aa5c0ef076d49b2c129b37e23",
+     "seconds": 14.9
+    },
+    {
+     "tile": "n38w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w118/USGS_13_n38w118.tif",
+     "ok": true,
+     "bytes": 409708514,
+     "sha256": "21e4616b410d787b6faee8f60fefbc7969fdb2d26a300ae0cce9703e40077192",
+     "seconds": 10.1
+    },
+    {
+     "tile": "n39w117",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w117/USGS_13_n39w117.tif",
+     "ok": true,
+     "bytes": 392299201,
+     "sha256": "27b2eb3b55f457a0b3a299576b6747a8ca4f7ec4e415180f9bf3c07ba9158449",
+     "seconds": 15.1
+    },
+    {
+     "tile": "n39w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w118/USGS_13_n39w118.tif",
+     "ok": true,
+     "bytes": 391985657,
+     "sha256": "01a5b4bdc759d2fdb610cba1f4cd3db2482af13b29eaca186f7bb37862081b0f",
+     "seconds": 11.1
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1397.51025390625,
+    2849.47607421875
+   ],
+   "diagnostics": {
+    "cells": 55443800,
+    "valid": 55443800,
+    "raised": 47930,
+    "channel": 1120779,
+    "channel_core": 724061,
+    "channel_core_ok": 712249,
+    "contaminated_core_channel": 11812,
+    "step_defined_core": 527879,
+    "max_acc_cells": 23157345.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 80.9
+  },
+  {
+   "block": [
+    4,
+    5
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:05:19Z",
+   "core_rows": [
+    2488,
+    3110
+   ],
+   "core_cols": [
+    2745,
+    3292
+   ],
+   "footprint_px": 0,
+   "status": "skipped: no footprint pixel in the core"
+  },
+  {
+   "block": [
+    5,
+    0
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:05:19Z",
+   "core_rows": [
+    3110,
+    3730
+   ],
+   "core_cols": [
+    0,
+    549
+   ],
+   "footprint_px": 0,
+   "status": "skipped: no footprint pixel in the core"
+  },
+  {
+   "block": [
+    5,
+    1
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:05:23Z",
+   "core_rows": [
+    3110,
+    3730
+   ],
+   "core_cols": [
+    549,
+    1098
+   ],
+   "footprint_px": 0,
+   "status": "skipped: no footprint pixel in the core"
+  },
+  {
+   "block": [
+    5,
+    2
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:05:24Z",
+   "core_rows": [
+    3110,
+    3730
+   ],
+   "core_cols": [
+    1098,
+    1647
+   ],
+   "footprint_px": 48336,
+   "tiles_needed": [
+    "n38w118",
+    "n38w119"
+   ],
+   "tiles": [
+    {
+     "tile": "n38w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w118/USGS_13_n38w118.tif",
+     "ok": true,
+     "bytes": 409708514,
+     "sha256": "21e4616b410d787b6faee8f60fefbc7969fdb2d26a300ae0cce9703e40077192",
+     "seconds": 9.8
+    },
+    {
+     "tile": "n38w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w119/USGS_13_n38w119.tif",
+     "ok": true,
+     "bytes": 416350584,
+     "sha256": "d1a22cfe538179c65fa221f70c0cd7ba4403d087450dd3bb463ee50fb69fa97c",
+     "seconds": 9.7
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1213.316650390625,
+    4340.86865234375
+   ],
+   "diagnostics": {
+    "cells": 55302000,
+    "valid": 55302000,
+    "raised": 252757,
+    "channel": 930972,
+    "channel_core": 572662,
+    "channel_core_ok": 556097,
+    "contaminated_core_channel": 16565,
+    "step_defined_core": 383691,
+    "max_acc_cells": 29856186.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 49.2
+  },
+  {
+   "block": [
+    5,
+    3
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:05:22Z",
+   "core_rows": [
+    3110,
+    3730
+   ],
+   "core_cols": [
+    1647,
+    2196
+   ],
+   "footprint_px": 283743,
+   "tiles_needed": [
+    "n38w118",
+    "n38w119"
+   ],
+   "tiles": [
+    {
+     "tile": "n38w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w118/USGS_13_n38w118.tif",
+     "ok": true,
+     "bytes": 409708514,
+     "sha256": "21e4616b410d787b6faee8f60fefbc7969fdb2d26a300ae0cce9703e40077192",
+     "seconds": 6.9
+    },
+    {
+     "tile": "n38w119",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w119/USGS_13_n38w119.tif",
+     "ok": true,
+     "bytes": 416350584,
+     "sha256": "d1a22cfe538179c65fa221f70c0cd7ba4403d087450dd3bb463ee50fb69fa97c",
+     "seconds": 7.2
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1052.86328125,
+    3225.96728515625
+   ],
+   "diagnostics": {
+    "cells": 55302000,
+    "valid": 55302000,
+    "raised": 5567760,
+    "channel": 925519,
+    "channel_core": 523260,
+    "channel_core_ok": 512027,
+    "contaminated_core_channel": 11233,
+    "step_defined_core": 351670,
+    "max_acc_cells": 19444924.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 34.1
+  },
+  {
+   "block": [
+    5,
+    4
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:05:25Z",
+   "core_rows": [
+    3110,
+    3730
+   ],
+   "core_cols": [
+    2196,
+    2745
+   ],
+   "footprint_px": 27270,
+   "tiles_needed": [
+    "n38w117",
+    "n38w118"
+   ],
+   "tiles": [
+    {
+     "tile": "n38w117",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w117/USGS_13_n38w117.tif",
+     "ok": true,
+     "bytes": 376521889,
+     "sha256": "088f6f89d56226e99cedd3316add89c94d90f08aa5c0ef076d49b2c129b37e23",
+     "seconds": 7.1
+    },
+    {
+     "tile": "n38w118",
+     "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w118/USGS_13_n38w118.tif",
+     "ok": true,
+     "bytes": 409708514,
+     "sha256": "21e4616b410d787b6faee8f60fefbc7969fdb2d26a300ae0cce9703e40077192",
+     "seconds": 6.8
+    }
+   ],
+   "dem_finite_frac": 1.0,
+   "dem_min_max": [
+    1232.753173828125,
+    2550.78564453125
+   ],
+   "diagnostics": {
+    "cells": 55302000,
+    "valid": 55302000,
+    "raised": 6472898,
+    "channel": 896853,
+    "channel_core": 552403,
+    "channel_core_ok": 542103,
+    "contaminated_core_channel": 10300,
+    "step_defined_core": 387705,
+    "max_acc_cells": 26330827.0,
+    "nwin": 50
+   },
+   "parameters": {
+    "theta": 0.45,
+    "a0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_floor_ksn": 0.5,
+    "step_winsor": 2.302585092994046,
+    "knick_min": 0.6931471805599453,
+    "fill_raise_m": 1.0,
+    "sig_steps_m": 500.0,
+    "fine_cell_m": 10.0,
+    "resampling": "bilinear"
+   },
+   "status": "ok",
+   "seconds": 35.6
+  },
+  {
+   "block": [
+    5,
+    5
+   ],
+   "tiling": [
+    6,
+    6
+   ],
+   "halo_px100": 80,
+   "started_utc": "2026-10-11T05:05:29Z",
+   "core_rows": [
+    3110,
+    3730
+   ],
+   "core_cols": [
+    2745,
+    3292
+   ],
+   "footprint_px": 0,
+   "status": "skipped: no footprint pixel in the core"
+  }
+ ]
+}

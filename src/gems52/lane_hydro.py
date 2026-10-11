@@ -14,10 +14,10 @@ Implements, on the official 100 m competition grid (EPSG:32611):
 
 Everything is deterministic. No labels are used anywhere in this module.
 
-References (verified 2026-10-11):
-  - Perron & Royden, Earth Surf. Process. Landforms 38(1):94-102 (2013).
-  - Kirby & Whipple, J. Geophys. Res. 117:F01024 (2012) - ksn / theta review.
-  - Barnes, Lehman & Mulla, Comput. Geosci. 62:117-127 (2014) - Priority-Flood.
+References (re-verified 2026-10-11, session arena/96ecd67e; two citations corrected):
+  - Perron & Royden, Earth Surf. Process. Landforms 38(6):570-576 (2013), doi:10.1002/esp.3302.
+  - Kirby & Whipple, J. Struct. Geol. 44:54-75 (2012), doi:10.1016/j.jsg.2012.07.009 - ksn / theta review.
+  - Barnes, Lehman & Mulla, Comput. Geosci. 62:117-127 (2014), doi:10.1016/j.cageo.2013.04.024 - Priority-Flood.
 """
 from __future__ import annotations
 
@@ -141,21 +141,33 @@ def _accumulate(parent: np.ndarray, order: np.ndarray):
 
 @njit(cache=True)
 def _chi(parent: np.ndarray, order: np.ndarray, acc: np.ndarray,
-         theta: float, a0_m2: float, cell_m: float):
+         theta: float, a0_m2: float, cell_m: float, width: int = 0):
     """chi = integral of (A0/A)^theta dx' downstream (fused single pass).
 
     order is ascending filled z: the parent (strictly lower) is always
     final before any of its upstream neighbours is reached.
+
+    Shared-tool fix (2026-10-11, session arena/96ecd67e, H65): ``dx'`` is the
+    true length of the D8 step into the parent -- ``cell_m * sqrt(2)`` for a
+    diagonal step -- when the grid ``width`` is supplied.  The previous form
+    used ``cell_m`` for every step, under-stating chi by up to 29 % on
+    diagonal reaches.  ``width = 0`` keeps the legacy behaviour for callers
+    that do not pass it.
     """
     N = parent.shape[0]
     chi = np.zeros(N, dtype=np.float64)
     cell2 = cell_m * cell_m
+    diag = cell_m * np.sqrt(2.0)
     for t in range(order.shape[0]):
         i = order[t]
         p = parent[i]
         if p >= 0:
             a_m2 = acc[i] * cell2
-            chi[i] = chi[p] + cell_m * ((a0_m2 / a_m2) ** theta)
+            ds = cell_m
+            if width > 0:
+                if (i // width) != (p // width) and (i % width) != (p % width):
+                    ds = diag
+            chi[i] = chi[p] + ds * ((a0_m2 / a_m2) ** theta)
     return chi
 
 
@@ -166,7 +178,7 @@ def hydro_stack(z: np.ndarray, valid: np.ndarray, cell_m: float = 100.0,
     vbool = np.ascontiguousarray(valid.astype(np.bool_))
     filled, parent, order = _priority_flood_full(z64, vbool)
     acc = _accumulate(parent, order)
-    chi = _chi(parent, order, acc, float(theta), float(a0_m2), float(cell_m))
+    chi = _chi(parent, order, acc, float(theta), float(a0_m2), float(cell_m), int(z.shape[1]))
 
     H, W = z.shape
     N = H * W

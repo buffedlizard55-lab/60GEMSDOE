@@ -4,7 +4,7 @@ The lane's observable (brief, this session): bedrock-channel steepness steps and
 knickpoints record spatial gradients in rock uplift, including across active
 normal faults (Kirby & Whipple 2012, JGR 117:F01024). The chi transform puts
 channels of different sizes on a comparable footing (Perron & Royden 2013,
-ESPL 38:94-102). Scarps degrade and bury, but channel profiles keep recording
+ESPL 38:570-576). Scarps degrade and bury, but channel profiles keep recording
 base-level steps.
 
 All features in this module are LABEL-FREE: they never touch labels.tif /
