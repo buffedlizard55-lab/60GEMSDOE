@@ -135,6 +135,15 @@
    "run_card": "evidence/h67_runcard.json",
    "slot_spent": false,
    "download": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif"
+  },
+  {
+   "session": "arena/b34e68ab-60gemsdoe (PR #22, this session)",
+   "id": "H68-1",
+   "verdict": "NEGATIVE (under governing lane STOP & literal 70-raster lattice overlap 0.9985 > 0.70) \u2014 fixes IR-68-UNALIGNED-01 & IR-68-TOPOBAND-01: E1 +0.4502 [+0.2510, +0.6491]; HOLDOUT-DTI 0.171894 [0.157848, 0.183994] (2.61x H66-1, 14.85x H65-1, 10.49x H60-A); max non-lattice 3-px overlap 0.6234 <= 0.70 (0.5406 vs H66-1). OK to download for research; DO NOT SUBMIT.",
+   "artifact": "gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros",
+   "run_card": "evidence/h68_runcard.json",
+   "slot_spent": false,
+   "download": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif"
   }
  ],
  "post_review_note": "Two of the three post-STOP runs are negative and corroborate the STOP; the third (H67-1) claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20 before this session's merge. No submission slot has been spent."

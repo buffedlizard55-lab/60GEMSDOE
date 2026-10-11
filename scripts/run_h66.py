@@ -102,11 +102,17 @@ def run_e1_offcat(step, channel, fp, offcat, cat, max_components=MAX_COMPONENTS,
         pick = rng.choice(pool[0].size, POOL_CAP, replace=False)
         pool = (pool[0][pick], pool[1][pick])
     lab, n = ndi.label(offcat)
+    objs = ndi.find_objects(lab)
     cids = np.arange(1, n + 1)
     if cids.size > max_components:
         cids = np.sort(rng.choice(cids, max_components, replace=False))
     for cid in cids:
-        ys, xs = np.nonzero(lab == cid)
+        sl = objs[int(cid) - 1]
+        if sl is None:
+            continue
+        sub_y, sub_x = np.nonzero(lab[sl] == cid)
+        ys = sub_y + sl[0].start
+        xs = sub_x + sl[1].start
         if ys.size < MIN_SEGMENT_PX:
             continue
         az, length = RL.component_orientation((ys, xs))

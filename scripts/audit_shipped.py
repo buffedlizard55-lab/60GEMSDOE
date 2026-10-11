@@ -43,9 +43,10 @@ def _first_existing(*names: str) -> Path | None:
     return None
 
 
-TPL = _first_existing("data/raw/sample_submission.tif", "data/bridge/sample_submission.tif",
-                      "data/sample_submission.tif")
-LAB = _first_existing("data/raw/labels.tif", "data/bridge/labels.tif", "data/labels.tif")
+TPL = _first_existing("data/official/sample_submission.tif", "data/raw/sample_submission.tif",
+                      "data/bridge/sample_submission.tif", "data/sample_submission.tif")
+LAB = _first_existing("data/official/labels.tif", "data/raw/labels.tif",
+                      "data/bridge/labels.tif", "data/labels.tif")
 DOWN = ROOT / "docs" / "downloads"
 
 # belief fields an artifact can be packed from, for the off-support measure (legacy data/raw layout
@@ -53,6 +54,7 @@ DOWN = ROOT / "docs" / "downloads"
 FIELDS = {
     "h19_5": _first_existing(
         "data/raw/h19_5.tif",
+        "data/official/scored/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
         "data/scored/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
     ),
 }

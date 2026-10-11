@@ -69,3 +69,18 @@ These are validation requirements, **not** permission to continue H65-1/c7653, r
 - [USGS 3DHP](https://www.usgs.gov/3d-hydrography-program) · [hydrography downloads/services](https://www.usgs.gov/national-hydrography/access-national-hydrography-products) — current hydrography program and product access; stream-permanence coverage must be checked.
 - [USGS NHD status](https://www.usgs.gov/national-hydrography/national-hydrography-dataset) — NHD retired 2023; still available but no longer maintained.
 - [Competition problem / metric](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) — official evaluator constants and format.
+
+---
+
+## Round H68 (2026-10-11, session `arena/b34e68ab-60gemsdoe`) — 5 New Tectonic-Geomorphology Candidate Hypotheses
+
+Before executing the `H68` implementation, we formulated **5 new tectonic-geomorphology hypotheses** (`H68-1` through `H68-5`) grounded in the cached 10 m 3DEP DEM hydrology stack, 10 m derived sub-cell topography, and 1 m USGS 3DEP LiDAR scarp features, ranked by expected `HOLDOUT-DTI` improvement and compute cost:
+
+| Rank | ID | Candidate Hypothesis | Specific Layers Used | Expected `HOLDOUT-DTI` Lift | Compute Cost | Status |
+|---:|---|---|---|---|---|---|
+| **1** | **`H68-1`** | **Strict Multi-Drainage ($\ge 3$ Drainages) 10 m Bedrock $\Delta k_{sn}$ + 1 m LiDAR / 10 m Piedmont Curvature Break + Anisotropic Range-Front Continuity** | `dem10_chi_100m_i16.tif` (bands 1 `step_max`, 3 `ksn_max`, 5 `zmean`), `dem10_chi_100m_u8.tif` (band 3 `raised_n`), `dem10_chi_100m_sig_i32.tif` (`branch_sig`), `topo_10m_derived_100m_u8.tif` (band 6 `curv_prof_absmax`, band 2 `slope_max`), `lidar_scarp_features_u8.tif` (band 8 `cross_scarp`, band 7 `upface`, band 12 `valid_px`), `training_features.tif` (band 15 `depth_to_base_surf`, band 17 `cond_surf`) | **`+0.1062` over `H66-1` (`+0.1603` over `H65-1`)** | **Low** (~170 s total) | **VALIDATED (`HOLDOUT-DTI = 0.171894 [0.157848, 0.183994]`, `E1 = +0.4502 [+0.2510, +0.6491]` PROCEED)** |
+| **2** | **`H68-2`** | **Bi-Directional Dip-Slip + Antithetic/Graben-Bounding Steepness Contrast ($\max(\Delta k_{sn,\text{up}}, 0.7\,\Delta k_{sn,\text{down}})$) Gated by 10 m Piedmont Break** | `dem10_chi_100m_i16.tif` (bands 1 `step_max`, 2 `step_min`, 3 `ksn_max`), `topo_10m_derived_100m_u8.tif` (band 6 `curv_prof_absmax`, band 2 `slope_max`), `training_features.tif` (band 15 `depth_to_base_surf`) | `+0.015` to `+0.030` over `H66-1` | Low | Registered (`registry/hypotheses.json`) |
+| **3** | **`H68-3`** | **Catchment-Scale Normalized Steepness Gradient ($\|\nabla \max_{300\text{m}}(k_{sn})\|$) + Drainage-Area Power-Law Scaling** | `dem10_chi_100m_i16.tif` (bands 3 `ksn_max`, 4 `loga_at_max`, 5 `zmean`), `dem10_chi_100m_u8.tif` (bands 1 `chan_n`, 2 `knick_n`), `training_features.tif` (bands 12 `det_elev`, 15 `depth_to_base_surf`) | `+0.010` to `+0.025` | Low | Registered (`registry/hypotheses.json`) |
+| **4** | **`H68-4`** | **Radiometric K/Th Hydrothermal-Alteration Gate on Multi-Drainage Knickpoint Corridors** | `dem10_chi_100m_i16.tif` (bands 1, 3), `geodawn_rad_u8.tif` (K, Th, U), `geodawn_extensions_u8.tif` (K/Th ratio, tilt derivative) | `+0.005` to `+0.015` | Low | Registered (`registry/hypotheses.json`) |
+| **5** | **`H68-5`** | **Cross-Lane Selector Fusion: Champion Flank-Peel Shell (`H33-2-B2`) + Strict Multi-Drainage 10 m Bedrock $\Delta k_{sn}$ Corridors (`H68-1`)** | `gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif` (`37,654` dots) + `gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif` (`40,000` dots) | `+0.015` to `+0.045` live DTI over `0.2778` | Low (selector step) | Promoted to cross-lane selector (`verdict: "promote"`) |
+
