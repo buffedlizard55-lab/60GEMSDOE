@@ -1,0 +1,75 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>H70-1 paired knickpoint trains — run report · 60GEMSDOE</title><link rel="stylesheet" href="assets/site.css"></head>
+<body>
+<div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
+<p><b>Governing STOP record:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
+<strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast +0.0326,
+95% CI [-0.0144, +0.0790] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
+The earlier c7653 run also stopped. Later H66/H67/H68 artifacts do not lift this STOP; their literal uniqueness clearance failed against the dense calibration lattice corpus. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
+<p><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download the existing H65-1 GeoTIFF for research only</a>
+<a class="btn alt" href="downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif" download>Download H68-1 GeoTIFF (research only)</a>
+<strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
+<p>H65-1 diagnostic <b>HOLDOUT-DTI</b>: 0.01158 [0.00840, 0.01462],
+22,641 withheld positives (`gems57-pooled-hide-v2`); H68-1 diagnostic <b>HOLDOUT-DTI</b>: 0.171894 [0.157848, 0.183994] (2.61× H66-1, 14.85× H65-1, E1 +0.4502 [+0.2510, +0.6491], max non-lattice 3-px overlap 0.6234 ≤ 0.70, literal 70-raster overlap 0.9985 &gt; 0.70 → verdict NEGATIVE, <a href="downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros-runcard.json">H68-1 run card</a> · <a href="downloads/checks-gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif.json">H68-1 format checks</a>); not a leaderboard score.
+<a href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.json">Local format receipt</a> · <a href="research/active-lane-review-2026-10-11.md">Full review</a> ·
+<a href="../evidence/h65_runcard.json">final JSON run card</a> · <a href="../registry/leaderboard_snapshot_2026-10-11.json">manual 50-row public-board snapshot</a></p></div><header class="top"><div class="wrap"><h1>H70-1 run report — paired-polarity knickpoint trains (NEGATIVE)</h1>
+<nav><a href="index.html">Home</a> <a href="executive-summary.html">Submission status</a> <a href="research.html">Research</a></nav></div></header>
+<main class="wrap">
+<div class="banner"><h2>Verdict: NEGATIVE — no new GeoTIFF, no slot spent</h2>
+<p><b>Hypothesis:</b> An active fault that steps the range-front base level drives a migrating incision wave up each transverse footwall drainage; in chi space that wave is a trapped PAIR of opposite-polarity steepness steps on the same branch: an upstream steepened crest (step_max > 0) and, exactly 500 m downstream along the same flow path (the committed substrate sig band), the wave's leading edge (step_min < 0). pair_strength = min(crest, base_drop), floored at ln(1.25), blockwise z-scored at 40 km, corroborated across >= 3 independent drainages along a common strike, was hypothesised to mark active fault traces the given Quaternary catalogue omits, with single-flank lithologic steps filtered out by the pairing itself.</p>
+<p><b>Mechanism:</b> Kirby & Whipple (2012) base-level-step -> knickpoint; Perron & Royden (2013) chi normalisation; Wobus et al. (2006) / Berlin & Anderson (2007) knickpoint waves: the profile steepens at the crest while the reach immediately downstream of the wave face remains gentle relative to the unperturbed reach below it, so the wave carries one positive and one negative chi-slope step, pinned to the same branch. Gailleton et al. (2019) segmentation motivates the fixed-window two-segment approximation used by the committed 10 m substrate.</p>
+<p><b>Named non-fault mimic process:</b> A resistant-over-weak dipping lithologic couplet (its two contacts make a paired step as a channel crosses the unit twice). Countered by the radiometric-contact-gradient mask, the low-radioelement high-relief core mask, the >= 3-drainage along-strike alignment rule and 40 km blockwise standardization. Secondary mimics: debris-flow headcuts and fan-head trenches (ephemeral-wash mask ksn_max < 10 m^0.9), playa and closed-basin floors (raised_n >= 50), DEM fill artefacts.</p></div>
+<h2>Primary result — preregistered first test G1 (GATING)</h2>
+<p>pair_strength = min(crest, base_drop) at 500 m paired separation → <b>STOP</b>.</p>
+<ul>
+<li>n = 241 components scored (85 skipped upstream: crossing pool excludes components with no valid paired crossing)</li>
+<li>mean -0.0347, median +0.0491, 95% CI [-0.0853, +0.0126], 60.17% of components positive</li>
+<li>1000 bootstrap draws, seed 60101, percentile over withheld components; draw: withheld catalogue segments (mode 'all', 8 cells, seeds 20/21 — the identical draw every prior lane run used)</li>
+<li>distribution note: mean negative with positive median — the CI crosses zero on the heavy negative tail; no post-hoc rescue claimed</li>
+</ul>
+<h2>Non-gating diagnostic E1b (SGMC 1:750k off-catalogue truth)</h2>
+<p>mean +0.0567, 95% CI [+0.0103, +0.1030], n = 85 — verdict if it had been the gate: <b>PROCEED</b> (it was registered non-gating and stays non-gating).
+Single-limb comparisons on the same population: H66-1 measured mean -0.1128 (95% CI [-0.1738, -0.0437], n=86, STOP;
+<a href="../evidence/h66_e1_first_test.json">evidence/h66_e1_first_test.json</a>) and H66-2 both-limb measured mean -0.0860 (95% CI [-0.1372, -0.0220], STOP;
+<a href="../evidence/h66b_e1_first_test.json">evidence/h66b_e1_first_test.json</a>).
+The sign flip motivates hypothesis H71 (paired-basin k<sub>sn</sub> contrast); it changes nothing about this verdict, because the gates were registered before any number existed.</p>
+<h2>Ablation and tool verification</h2>
+<p>Identical first test on the raw crest-only statistic: mean +0.0326 (H65-1 published mean +0.0326), 95% CI [-0.0144, +0.0790] (H65-1 published CI [-0.0144, +0.0790]) → INCONCLUSIVE.
+the crest-only ablation reproduces H65-1's published INCONCLUSIVE first test on the identical holdout draw and seeds to ~1e-9 (H65-1: mean 0.03259120937549255, CI [-0.0143535845, +0.0789952332]; H70 ablation: mean 0.03259120759121011, CI [-0.0143535868, +0.0789952321]) — run_h70's E1 path is the shared one, not a fork</p>
+<h2>Substrate and counts</h2>
+<ul>
+<li>USGS 3DEP 1/3 arc-second (~10 m) DEM, 18 tiles (public domain) -> committed 100 m reduction</li>
+<li>channel pixels 786,299; pair-defined channel pixels 743,640; candidates after confounds and pair floor 13,720</li>
+<li>manifest: <code>data/external/dem10_chi_100m.manifest.json (sha256-checked before computing)</code>; feature-cache receipt: <code>evidence/h70_feature_cache.json</code></li>
+</ul>
+<h2>Downstream fields of the run card</h2>
+<ul>
+<li>holdout DTI: not run: G1 STOP halts the lane before any surface exists (protocol rule 2 / prereg gates)</li>
+<li>leakage canary: canary is defined on the lane emission domain, which G1 STOP prevents from existing</li>
+<li>uniqueness vs registry: not applicable: no surface was built and no dots were emitted</li>
+<li>raster sha256 / validator / submission name: none (nothing was emitted)</li>
+</ul>
+<h2>Budget</h2>
+<p>1 of 3 experiments · the mandated first test is the protocol's stop condition; running further preregistrations in the same hour to find a passing gate would be gate-shopping</p>
+<h2>What this session did NOT do</h2>
+<ul>
+<li>No GeoTIFF was generated or made downloadable — the G1 STOP precedes emission. nothing. The negative card is the deliverable. Under the governing H68 lane-stop audit (registry/current_site_status.json) the only download is the H65-1 research artifact — research only, DO NOT SUBMIT; the H66/H67 artifacts carry negative errata (their literal registry-uniqueness clearance failed: max raw 3-px dot overlap 1.00 vs the 0.70 bound) and the H67-1 'promote' was reversed (IR-H66C-STOPCONFLICT-01, PRs #19/#20). H70 changes none of that (H70 probes a different statistic and adds the IR-70-SEL-01 selection-history caveat).</li>
+<li>No holdout bench, leaderboard chase or projection-to-score was run for H70.</li>
+<li>The STOP-vs-'promote' governance conflict this session originally logged was already recorded upstream as
+IR-H66C-STOPCONFLICT-01 and resolved by PRs #19/#20; H70 keeps its three remaining flags (IR-70-SEL-01, IR-70-DATA-01, IR-70-LB-01).</li>
+<li>No external data was downloaded through this sandbox (egress is limited to code hosts; fresh-board facts come from the 2026-10-11 verified snapshot).</li>
+</ul>
+<p>H71: paired-basin ksn contrast across fault blocks (rank 1 of the deferred backlog): the E1b flip (+0.0567 off-catalogue with CI > 0) says the PAIRED signal does live on mapped structures absent from the catalogue, but the pixel-crossing test population is the wrong one for it; test it at basin scale on a fresh 10 m substrate with explicit catchment pairing, masked for erodibility, with E1a-catalogue and E1b-SGMC-off both preregistered as gating before any number is seen.</p>
+<h2>Standing stop status (unchanged by this session)</h2>
+<p>The registry's current research-only artifact remains
+<a href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif</a>
+(<a href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.json">local format receipt</a>) — research only, <b>DO NOT SUBMIT</b>.
+The H70 round created no TIFF and does not alter that status; the H66/H67 artifacts carry negative errata
+(their literal uniqueness clearance failed) and are research-only likewise.</p>
+<p>Full analysis (why h33-2-b2 scores 0.2778, the +15–49% credit-per-pixel algebra, ranked next hypotheses, external-data obtainability):
+<a href="research/h70-paired-knickpoint-trains.md">docs/research/h70-paired-knickpoint-trains.md</a> ·
+run card <a href="../evidence/h70_runcard.json">evidence/h70_runcard.json</a> · evidence rows <a href="../evidence/h70_e1_first_test.json">evidence/h70_e1_first_test.json</a> · lane stop <a href="../evidence/h70_lane_stop.json">evidence/h70_lane_stop.json</a>.</p>
+</main>
+<footer><div class="wrap">Run report regenerated 2026-10-11 from committed evidence files; no hand-entered numbers. · <a href="feed.json">feed</a></div></footer>
+</body></html>

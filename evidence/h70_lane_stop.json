@@ -1,0 +1,58 @@
+{
+  "reason": "G1 failed: paired-polarity steps at withheld catalogue crossings do not exceed random same-orientation transects; H70-1 stops here, no surface, no emission, negative run card",
+  "e1a_summary": {
+    "evidence_class": "MEASUREMENT",
+    "n_components": 241,
+    "mean": -0.03469608848006856,
+    "median": 0.049123004314606075,
+    "ci95": [
+      -0.08530424352747466,
+      0.01264583296723547
+    ],
+    "fraction_positive": 0.6016597510373444,
+    "component_std": 0.37613837430407504,
+    "bootstrap": {
+      "draws": 1000,
+      "seed": 60101,
+      "method": "percentile over withheld components"
+    },
+    "verdict": "STOP"
+  },
+  "e1a_crest_ablation": {
+    "evidence_class": "MEASUREMENT",
+    "n_components": 262,
+    "mean": 0.032591207591210106,
+    "median": -0.009159055794589213,
+    "ci95": [
+      -0.014353586758144493,
+      0.07899523208377333
+    ],
+    "fraction_positive": 0.4732824427480916,
+    "component_std": 0.3896411519749987,
+    "bootstrap": {
+      "draws": 1000,
+      "seed": 60101,
+      "method": "percentile over withheld components"
+    },
+    "verdict": "INCONCLUSIVE"
+  },
+  "e1b_diagnostic": {
+    "evidence_class": "MEASUREMENT",
+    "n_components": 85,
+    "mean": 0.05673608173227323,
+    "median": 0.05300944212358444,
+    "ci95": [
+      0.010346126782969709,
+      0.10300385759671851
+    ],
+    "fraction_positive": 0.6235294117647059,
+    "component_std": 0.22161867160929496,
+    "bootstrap": {
+      "draws": 1000,
+      "seed": 60101,
+      "method": "percentile over withheld components"
+    },
+    "verdict": "PROCEED"
+  },
+  "protocol": "registry/preregistration-h70.json gates.G1_first_test"
+}

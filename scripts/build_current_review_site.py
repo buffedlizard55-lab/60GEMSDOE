@@ -139,9 +139,16 @@ def render(root: Path | None = None) -> dict:
                 f"<tr><td>{_e(r['session'])}</td><td>{_e(r['id'])}</td>"
                 f"<td>{_e(r['verdict'])}</td><td>{_e(r['artifact'])} {dl} {card}</td>"
                 f"<td>{badge}</td></tr>")
+        # Hard-code no head-count here: sessions append post_review_runs rows later, and a
+        # fixed "three runs / two negative" sentence silently goes stale (H70-1 found this on
+        # 2026-10-11).  Count from the data instead.
+        _NUM = {0: "No", 1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five",
+               6: "Six", 7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten"}
+        n_all, n_flag = len(post_runs), sum("CONTRADICT" in r["verdict"].upper() for r in post_runs)
+        n_neg = n_all - n_flag
         post_html = f'''<h2>Lane runs recorded after this review (other sessions, same day)</h2>
-<div class="card"><p>Three more tectonic-geomorphology runs were recorded on 2026-10-11 after the
-review above. Two are <b>negative and corroborate the STOP</b>; one <b>claimed a pass
+<div class="card"><p>{_NUM.get(n_all, str(n_all))} tectonic-geomorphology runs were recorded on 2026-10-11 after the
+review above. {_NUM.get(n_neg, str(n_neg))} are <b>negative and corroborate the STOP</b>; one <b>claimed a pass
 and promote</b> while the stop file was in force — it was flagged as
 <code>IR-H66C-STOPCONFLICT-01</code> and its promotion was <b>reversed</b> by session
 <code>arena/a856d257</code> (PRs #19/#20), so it remains a research artifact, not a

@@ -1,0 +1,83 @@
+{
+  "schema": "preregistration/2",
+  "id": "H70-1",
+  "registered_utc": "2026-10-11T18:55:00Z",
+  "registered_by": "session arena/ccdca785-60gemsdoe (60GEMSDOE)",
+  "commit_at_registration": "79bba965c60db393010aa887a1031ef002c9b9ac (main tip of merged PR #17; branch arena/ccdca785-60gemsdoe starts here)",
+  "written_before_computation": true,
+  "note": "Written before any H70 number exists. No field in this file is edited after the run; post-hoc observations go in evidence/h70_*.json and the run card.",
+  "lane": "tectonic geomorphology: channel steepness (chi / ksn) and knickpoints, not scarp shape",
+  "authorization_and_governance_deviation": {
+    "status_at_registration": "registry/current_site_status.json has status=STOP for the channel-steepness lane (H65-1 INCONCLUSIVE), and scripts/stop_guard.py fail-closed will block scripts/run_lane60.py, scripts/build_dem10_cache.py, scripts/build_submission60.py and scripts/run_h66.py. Those exact stops stay untouched and those exact scripts and statistics are NOT re-run.",
+    "why_this_run_is_permitted": "(1) The owner brief for THIS session is the PARALLEL-RUN PROTOCOL, which assigns the channel-steepness lane to this session and makes the stop condition empirical and per-run ('First test: do channels crossing withheld segments show larger steepness steps than random lines of the same orientation? If not, stop'). (2) The owner instructs, with highest urgency, that a unique TIF submission must be generated this session, and that negative results are deliverables. That is the separate explicit authorization docs/research/next-chi-hypotheses-2026-10-11.md demands for any post-STOP activity. (3) H70-1 asks a genuinely different preregistered question (paired-polarity knickpoint trains), not a re-fit of the stopped H65/H66 statistics. (4) The empirical G1 gate below is enforced: if the first test does not pass, the run stops, no submission is built, and the negative run card is the deliverable.",
+    "irregularities_logged": [
+      "IR-70-GOV-01: the committed current_site_status.json (STOP, active_run H65-1) and the committed evidence/h67_runcard.json (H66-1 verdict 'promote') coexist; the repository's governance record is internally contradictory about whether the lane may run. H70 records the deviation instead of silently editing the status file.",
+      "IR-70-SEL-01 (selection history, declared): E1 in this lane has been probed four times before H70 with four different statistics (raw log-ratio, abs, 100 m det_elev, bedrock dksn+piedmont); two of four passed. Reading H70's single G1 verdict requires knowing this selection history; H70's statistic is fixed here BEFORE it is measured."
+    ]
+  },
+  "hypothesis": "An active fault that steps the range-front base level drives a MIGRATING incision wave up each transverse footwall drainage. In chi space that wave is a trapped PAIR of opposite-polarity steepness steps on the same branch: an upstream steepened crest (step_max > 0) and, a short distance downstream, the wave's leading edge where the profile below the wave is still gentle relative to the unperturbed reach below it (step_min < 0 at the paired downstream cell). Single-polarity knickpoints (H65-1 raw log-ratio; H66-1 bedrock dksn) are dominated by lithologic and wash-geometry steps; requiring both polarities of one wave on the same drainage removes a whole class of single-flank mimics at no extra data cost. Paired trains corroborated across >= 3 independent drainages along a common strike mark active fault traces the given Quaternary catalogue omits.",
+  "mechanism": "Kirby & Whipple (2012, J. Struct. Geol. 44, 54-75, doi:10.1016/j.jsg.2012.07.009): a base-level step across an active normal fault produces a knickpoint and elevated ksn above it. Perron & Royden (2013, ESPL 38, 570-576, doi:10.1002/esp.3302): chi puts drainages on one axis. A vertical base-level step advances upstream as a wave (Wobus et al. 2006, 'Tectonics from topography: procedures, promise, and pitfalls', GSA Special Papers 398, 55-74, doi:10.1130/2006.2398(04); Berlin & Anderson 2007, 'Modeling of knickpoint retreat on the Roan Plateau, western Colorado', J. Geophys. Res. 112, F03S06, doi:10.1029/2006JF000553): the profile steepens at the crest while the reach immediately downstream of the face remains relatively gentle, giving one positive and one negative chi-slope step, pinned to the same branch and separated by the wave width. Gailleton et al. (2019, ESurf 7, 211-230, doi:10.5194/esurf-7-211-2019) motivate reproducible segmentation; the fixed-window two-segment implementation used by the committed substrate is a declared approximation, never their method. (DOIs for the three lane-defining papers are reused from the repository's own pinned citations; the two wave references were corrected 2026-10-11 to their checked bibliographic records.)",
+  "novelty_vs_prior_lane_runs": [
+    "c7653 / H60-A: single-polarity local step on 100 m detrended elevation; no pairing.",
+    "H65-1: raw 10 m log-ratio step_max alone; E1 INCONCLUSIVE -> committed STOP.",
+    "H66 (TAG h66): dksn on an off-catalogue target; E1b STOP (mean -0.113).",
+    "H66b (step statistic 'abs'): absolute step, both limbs pooled INDEPENDENTLY anywhere on the grid; E1 STOP. H70 differs exactly here: 'abs' treats a limb as valid by itself and loses the branch; H70 requires the OPPOSITE polarities of ONE wave on the SAME branch at the committed 500 m downstream separation (substrate sig band).",
+    "H66-1 (evidence TAG h67): bedrock dksn signed upstream difference + piedmont/basement corroboration, single-polarity claim; E1 PROCEED on catalogue truth, HOLDOUT-DTI 0.0657. H70 re-uses none of its tuned statistic; it keeps the shared corridor/alignment machinery and the shared confound concept, with declared substitute layers where the un-committed training_features.tif bands were used."
+  ],
+  "named_non_fault_mimic": "A resistant-over-weak dipping lithologic couplet can also make a paired step as the channel crosses the unit's two boundaries; it is countered by (a) the radiometric-contact-gradient mask (GeoDAWN K/Th contacts), (b) the low-radioelement high-relief core mask, (c) the >= 3-drainage along-strike alignment requirement (dipping beds do not hold one regional strike across divides at the competition scale), and (d) 40 km blockwise standardization. Other named mimics: debris-flow headcuts and fan-head trenches (partially removed by the ephemeral-wash ksn_max<10 m^0.9 mask and the playa/closed-basin floor mask), and DEM fill artefacts (removed by the raised_n pumping mask).",
+  "substrate": {
+    "product": "USGS 3DEP 1/3 arc-second (~10 m) DEM, 18 current 1x1-degree tiles, public domain: https://www.usgs.gov/3d-elevation-program",
+    "committed_reduction": [
+      "data/external/dem10_chi_100m_i16.tif (bands: step_max_x1000, step_min_x1000, ksn_max_m0.9, log10_area_m2_x1000, zmean_m)",
+      "data/external/dem10_chi_100m_u8.tif (chan_n, knick_n, raised_n, valid_n)",
+      "data/external/dem10_chi_100m_sig_i32.tif (global 100 m index 500 m downstream of the max-|step| 10 m cell; -1 where undefined)"
+    ],
+    "reduction_pins": "data/external/dem10_chi_100m.manifest.json (sha256-checked before computing)",
+    "feature_cache": ".cache/features70 (scripts/build_features70.py, new substrate reduction; not in git, fully rebuildable)",
+    "confound_sources": [
+      "playa/closed-basin floor: raised_n >= 50 (from the DEM fill; shared definition)",
+      "basin fill: GeoDAWN radiometric Th > footprint p95 (shared substitute, IR-66-DATA-01; data/official/training_features.tif band 15 is not committed in this checkout)",
+      "conductive clay-rich alluvium: GeoDAWN K > footprint p95 (shared substitute; band 17 likewise absent)",
+      "ephemeral alluvial/desert washes: ksn_max < 10 m^0.9 (H66-1 definition)",
+      "radiometric-contact-gradient mask: 40 km blockwise z of ||grad(K)|| and ||grad(Th)| > z 1.645 (blockwise p95-ish one-sided), dilated 2 px (lithologic contacts)",
+      "low-radioelement high-relief cores: zmean 20 km relative elevation > 180 m AND rad K <= p25 AND rad Th <= p25 (bedrock cores whose steps are erodibility steps; substitute for H66's depth_to_base<p25 member, which is unavailable in this checkout)"
+    ]
+  },
+  "declared_parameters": {
+    "statistic_name": "pair_strength",
+    "definition": [
+      "crest(i) = step_max(i)/1000  (log ksn ratio, steeper-upstream extreme; committed 500 m two-segment dz/dchi at 10 m, theta_ref 0.45, A0 1 m^2)",
+      "down(i) = sig(i)  (committed i32 band; the 100 m pixel exactly 500 m downstream of the pixel's max-|step| 10 m cell)",
+      "base_drop(i) = -step_min(down(i))/1000 when down(i) is a valid in-grid index, else NaN",
+      "pair_strength(i) = min(crest(i), base_drop(i)); NaN where either flank is missing",
+      "candidates additionally require pair_strength >= ln(1.25) = 0.22314355131420976 (both flanks show at least a 25% ksn contrast) before blockwise z-scoring"
+    ],
+    "e1_statistic": "mean pair_strength within 3 px of withheld segment crossings on channel pixels, minus the mean of 10 random same-orientation same-length transects per component (identical kernel, pool discipline and seeds to scripts/run_lane60.py)",
+    "z_min_candidate": 1.0,
+    "block_px": 400,
+    "n_drainage_min": 3,
+    "corridor_half_len_px": 6,
+    "corridor_half_width_px": 2,
+    "n_strike_bins": 18,
+    "trace_decay": 0.5,
+    "catalogue_buffer_px": 2,
+    "production_dot_budget": 40000,
+    "min_sep_px_nms": 2.8,
+    "include_positive_channels": true,
+    "e1_min_segment_px": 6,
+    "e1_transects_per_component": 10,
+    "bootstrap_draws": 1000,
+    "bootstrap_seed": 60101,
+    "holdout": "gems57.holdout.build_holdout defaults (2 draws x 4 quadrants, mode 'all', HIDE_FRAC 0.20) scored by gems57.evaluate_holdout (VERSION gems57-pooled-hide-v2, alpha 0.2, beta 0.8, 300 m triangular kernel), per-cell dot budget = round(40000/5106385 x per-cell allowed) as in scripts/run_lane60.py",
+    "budget_reason": "40,000 = the H66-1 incumbent lane emission, keeping the comparison within-lane like-for-like; it also sits in the family's measured near-optimal emission regime (37,654-44,090)."
+  },
+  "gates": {
+    "G1_first_test": "paired_bootstrap verdict PROCEED (component resample mean > 0 AND 95% CI lower bound > 0) on withheld catalogue segments, mode 'all'. If not PROCEED: STOP, no surface, no emission, negative run card.",
+    "G1b_off_catalogue_diagnostic": "the identical statistic scored on USGS SGMC faults > 300 m from the given catalogue. NON-GATING, declared in advance: H66 measured the single-limb dksn statistic on this population at -0.113 (CI excludes 0); the SGMC-off population mixes ancient/relict structures in which a transient trapped wave is not expected to persist, so H70's population-of-interest is the active-withheld catalogue population that G1 probes. The number is measured and reported, never hidden.",
+    "G2_leakage_canary": "every predictive feature individually: max(AUC, 1-AUC) <= 0.90 on the emission domain (pair_strength, crest_only, base_drop, ksn, drainage_area, lane_p); dist_to_visible is reported as the deliberate positive control and is NOT a lane input.",
+    "G3_holdout_ablation": "in the shared pooled evaluator: lane_h70 paired delta vs random_mass_control has CI95 lower bound > 0; AND lane_h70 paired delta vs the crest_only_no_pairing ablation (identical z/candidate/corridor machinery with pair_strength replaced by crest) is reported as the mechanism test (positive => pairing adds information; negative => negative mechanism result, reported either way).",
+    "G4_format": "gems57.validate.assert_submittable passes (finite, [0,1], EPSG:32611, 3730x3292, exact sample_submission transform, nodata none, 0 on catalogue).",
+    "G5_uniqueness": "surface before placement: max |Spearman rho| <= 0.90 vs every GeoTIFF physically in this checkout (scan scope declared); final dots: <= 70% of dots within 3 px of any one scanned raster's dots, with the space-filling calibration-lattice handling of IR-60-UNIQ-DENSE-01 carried over verbatim, and the mass-matched random-excess control of IR-60-GATE-01 reported. The 655-raster pinned corpus in .cache/registry is NOT available in this fresh sandbox (not in git); the scan covers the 62 committed registry rasters + every TIFF in docs/downloads, downloads, submission, docs/lane1, and that scope is stated on the run card.",
+    "verdict_rule": "promote iff G1 and G2 and G3 (random-control part) and G4 and G5 pass; else negative. Either verdict is a deliverable."
+  }
+}

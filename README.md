@@ -55,6 +55,29 @@ official lithology/hydroclimate coverage, and organizer receipts remain unresolv
 
 Parallel review retained: [H68 audit](docs/research/2026-10-11-lane-stop-audit.md) and [H68 historical review card](docs/h68-runcard.json). Both agree that no lane submission is cleared.
 
+## Round H70 (`arena/ccdca785-60gemsdoe`, 2026-10-11) — Paired-Polarity Knickpoint Trains (χ/ksn Crest + Base-Drop): **NEGATIVE at first test, no new TIF**
+
+**Lane:** tectonic geomorphology — channel steepness and knickpoints via the χ transform. **Budget used:** 1 of 3 experiments (stopped at the protocol's own stop condition). **Submission slots spent: 0.** Run card: [`evidence/h70_runcard.json`](evidence/h70_runcard.json) · Report page: [`docs/h70-report.html`](docs/h70-report.html) · Full analysis: [`docs/research/h70-paired-knickpoint-trains.md`](docs/research/h70-paired-knickpoint-trains.md) · Preregistration (before any number): [`registry/preregistration-h70.json`](registry/preregistration-h70.json) — all five lane-defining DOIs verified against publisher records this round.
+
+The four standing questions, answered:
+
+1. **Where is the new unique TIF submission?** There isn't one. The preregistered gate G1 stopped the lane before any surface was built, so **no GeoTIFF was generated, nothing is offered for download, and nothing may be submitted** — the JSON run card with the NEGATIVE verdict is the deliverable. This corroborates the governing STOP rather than lifting it.
+2. **Why did `h33-h33-2-b2` score 0.2778?** Verified score algebra (`docs/research/h70-paired-knickpoint-trains.md` §1): with the measured metric identity `DTI = T/(0.2·(T+S−M)+0.8·|G|)`, implied hidden truth `|G| ≈ 7,905 px`, and the champion's counted 37,654 dots, its mean realised credit per pixel is **0.1022 vs 0.0893** for the 0.2600 anchor (+14%) at 15% less mass. The whole gain is emission economics plus catalogue-flank discrimination on the same multi-physics field — **not** a new detector. Score 0.2778 is an owner report; the participant row (extradr19, 0.2778) sits at rank 23 in the verified 2026-10-11 snapshot.
+3. **Can we beat it (0.4133 on today's verified board — the brief's 0.3195/0.3774 are stale, IR-70-LB-01)?** At the same 37,654-dot mass the identity requires credit-per-pixel 0.1522 — **+49%** over the champion's 0.1022, on a family whose entire emission-optimisation campaign moved 0.0893→0.1022. Conclusion: no re-emission of the same field closes the gap; only a genuinely better (off-catalogue) physical field can — exactly what this lane tested; measured negative today.
+4. **Is it obvious what is OK to download?** Yes — the home page says it plainly: the only download offered is the registry research artifact (H65-1 GeoTIFF, research only, **DO NOT SUBMIT**); the H66/H67 artifacts carry negative errata (literal uniqueness clearance failed, promotion reversed by PRs #19/#20); and this session created no file. Spending a portal slot requires the cross-lane selector, and no artifact is currently cleared.
+
+What was measured (all numbers from [`evidence/h70_e1_first_test.json`](evidence/h70_e1_first_test.json), MEASUREMENT class):
+
+| test | population | n | mean | 95% CI | verdict |
+|---|---|---|---|---|---|
+| **G1 (GATING)** | withheld catalogue crossings (identical kernel/draw/seeds as every prior lane run) | 241 | **−0.0347** | [−0.0853, +0.0126] | **STOP** |
+| crest-only ablation | same draw | 262 | +0.0326 | [−0.0144, +0.0790] | INCONCLUSIVE — reproduces H65-1's published first test to ~1e-9 (tool verification) |
+| E1b (non-gating) | SGMC 1:750k off-catalogue | 85 | **+0.0567** | [+0.0103, +0.1030] | would-be PROCEED → motivates H71 |
+
+Hypothesis: a paired-polarity signature — a χ/ksn crest plus a matching *base-drop* 500 m downstream on the same drainage (`pair_strength = min(crest, −step_min(downstream))`) marking a migrating incision wave (Kirby & Whipple 2012; Wobus et al. 2006; Berlin & Anderson 2007; χ per Perron & Royden 2013; segmentation per Gailleton et al. 2019). The pairing itself filters the dominant single-flank mimic (dipping resistant-over-weak lithology). Result: the paired signal is **absent on the catalogue-withheld active-fault population** but **present on mapped-but-uncatalogued (older) structures**, where both prior single-limb statistics were negative (H66-1: −0.1128 [−0.1738, −0.0437]; H66-2: −0.0860 [−0.1372, −0.0220]). The sign flip is logged as the motivation for **H71 (paired-basin ksn contrast across fault blocks — next preregistered question)**; it changed nothing about today's verdict because the gates were fixed before any number existed.
+
+Irregularities this round (in [`registry/irregularities.json`](registry/irregularities.json)): **IR-70-SEL-01** (five first-test statistics probed lane-wide; 2/5 passed — the caveat travels with every E1 verdict) · **IR-70-DATA-01** (H66-1's "piedmont profile curvature" reads topo band 4 `slope_std` in raw codes, not band 6 `curv_prof_absmax`; features66 unrebuildable offline) · **IR-70-LB-01** (brief's 0.3195/0.3774 stale vs verified 0.4133). The STOP-vs-'promote' governance conflict H70 observed is already recorded upstream as IR-H66C-STOPCONFLICT-01 (resolved).
+
 ## Sources and project values
 
 [Official competition](https://www.drivendata.org/competitions/306/competition-doe-gems/) ·
