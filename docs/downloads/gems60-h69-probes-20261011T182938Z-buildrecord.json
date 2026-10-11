@@ -1,0 +1,54 @@
+{
+  "hypothesis": "H69",
+  "generated_utc": "20261011T182938Z",
+  "champion_file": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+  "champion_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "champion_dots": 37654,
+  "anchor_live_score": 0.2778,
+  "anchor_live_score_class": "OWNER-REPORTED / UNVERIFIED",
+  "alpha": 0.2,
+  "beta": 0.8,
+  "probes": {
+    "A": {
+      "file": "gems60-h69a-champ-half-20261011T182938Z-zeros.tif",
+      "sha256": "14724cf39af7a08e5be2aa7df2113c23d85cbbb4e0bbfd4725bfeede147d5076",
+      "bytes": 147259,
+      "submission_name": "60GEMSDOE-H69A-CHAMP-HALF-37654-20261011T182938Z",
+      "note": "H69A identification probe: 0.5 x champion h33-2-b2 (37654 dots); recovers beta*K/T from one leaderboard return; below anchor by construction",
+      "note_chars": 140,
+      "zip": "gems60-h69a-champ-half-20261011T182938Z-zeros.zip",
+      "zip_sha256": "bf2dbbebe3b007cdb89e264fd42fb6dad4ef803af785cf550c96f2e201ba1399",
+      "validator_all_checks_passed": true
+    },
+    "B": {
+      "file": "gems60-h69b-champ-nulladd-2000px-20261011T182938Z-zeros.tif",
+      "sha256": "9cd5197014f64bbc5e9fce194929b882c65a8179dbbade8e1de1aba39549f426",
+      "bytes": 152645,
+      "submission_name": "60GEMSDOE-H69B-CHAMP-NULLADD-2000PX-20261011T182938Z",
+      "note": "H69B identification probe: champion + 2000 floor dots (>300m from catalogue, no belief); T=alpha*M/(1/sB-1/s1); below anchor by construction",
+      "note_chars": 140,
+      "zip": "gems60-h69b-champ-nulladd-2000px-20261011T182938Z-zeros.zip",
+      "zip_sha256": "52f45b2a3fcfbc3042c3afe5a07093f7d0b51b2238b4bb14f47e6e4c817acd0e",
+      "validator_all_checks_passed": true,
+      "M": 2000,
+      "min_sep_px": 4.0,
+      "min_catalogue_distance_px": 8.0,
+      "min_champion_distance_px": 8.0
+    }
+  },
+  "recovery": {
+    "a": "1/s1 - alpha = alpha*(F/T) + beta*(K/T)",
+    "b": "1/sA - alpha = alpha*(F/T) + 2*beta*(K/T)   =>   K = T*(b-a)/beta",
+    "c": "1/sB - 1/s1 = alpha*M/T                     =>   T = alpha*M/(1/sB - 1/s1)",
+    "F": "F = T*(2a - b)/alpha",
+    "instrument_file": "scripts/h69_recovery.py"
+  },
+  "predicted_returns_MODEL": {
+    "s1_check": 0.27779596290234587,
+    "sA": 0.1811403446362252,
+    "sB": 0.27186332087560067,
+    "both_below_anchor": true,
+    "note": "arithmetic on the repo's [MODEL] T/F/K; not a score"
+  },
+  "seconds": 9.9
+}

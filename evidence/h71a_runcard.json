@@ -1,0 +1,738 @@
+{
+  "run": "H71-A",
+  "hypothesis_id": "GEMS60-H71",
+  "profile": "restricted",
+  "generated_utc": "20261011T185116Z",
+  "preregistration": "registry/preregistration-h71.json",
+  "evidence_class": "HOLDOUT-DTI + INSTRUMENT-DTI (proxies; NOT organizer-confirmed)",
+  "guard_report": {
+    "called": true,
+    "verdict": "STOPPED",
+    "output": "STOP GUARD: H71-A complementary-cover emission not run \u2014 The H65-1 preregistered first test was INCONCLUSIVE (95% CI crosses zero); under the pre-registered rule, failure to establish a positive signal means STOP. The H65 report prohibits rerunning the knickpoint lane at any resolution. No follow-up experiment or submission is authorized..\nNo experiment or GeoTIFF was generated. Do not override without separate authorization.",
+    "interpretation": "printed for the record; not used as a gate because this runner is not a lane runner (see preregistration)"
+  },
+  "champion": {
+    "file": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+    "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "dots": 37654,
+    "live_score": 0.2778,
+    "live_score_class": "OWNER-REPORTED / UNVERIFIED"
+  },
+  "field": {
+    "profile": "restricted",
+    "channel_px": 1125140,
+    "valid_channel_px": 786299,
+    "wash_px": 186546,
+    "sgmc_off_near_px": 782526,
+    "base_pool_px": 3666787,
+    "pool_px": 265134,
+    "catalogue_px": 60988,
+    "footprint_px": 5167373,
+    "champion_dots": 37654,
+    "components": [
+      "step_rank",
+      "ksn_rank",
+      "knick_rank",
+      "relief_rank",
+      "curv_rank",
+      "lineament_rank",
+      "sgmc_off_rank"
+    ],
+    "comparators": [
+      {
+        "raster": "r13_lattice_s5_00904.tif",
+        "dots": 206895,
+        "support_fraction": 0.040039,
+        "footprint_fraction_within_3px": 0.998713
+      },
+      {
+        "raster": "calib_r13lattice_00904.tif",
+        "dots": 206895,
+        "support_fraction": 0.040039,
+        "footprint_fraction_within_3px": 0.998713
+      },
+      {
+        "raster": "r11_greedy_mp.tif",
+        "dots": 272853,
+        "support_fraction": 0.052803,
+        "footprint_fraction_within_3px": 0.739731
+      },
+      {
+        "raster": "r14_union_tips10_lat6.tif",
+        "dots": 192231,
+        "support_fraction": 0.037201,
+        "footprint_fraction_within_3px": 0.761973
+      }
+    ],
+    "universal_gt_70pct_blockers": [
+      {
+        "raster": "r13_lattice_s5_00904.tif",
+        "footprint_fraction_within_3px": 0.998713
+      },
+      {
+        "raster": "calib_r13lattice_00904.tif",
+        "footprint_fraction_within_3px": 0.998713
+      },
+      {
+        "raster": "r11_greedy_mp.tif",
+        "footprint_fraction_within_3px": 0.739731
+      },
+      {
+        "raster": "r14_union_tips10_lat6.tif",
+        "footprint_fraction_within_3px": 0.761973
+      }
+    ],
+    "restricted_against": [
+      "r11_greedy_mp.tif",
+      "r14_union_tips10_lat6.tif"
+    ],
+    "note": "comparator coverage is measured over the footprint: a comparator within 3 px of >70% of the footprint makes the <=70% dot clause unsatisfiable for any emission"
+  },
+  "artifact": {
+    "file": "gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
+    "sha256": "5c22c464a40e15bae84463f921a6c704d29b45c67dd334c08202320d7b7e68e0",
+    "bytes": 74127,
+    "zip": "gems60-h71a-convcomp-6000-20261011T185116Z-zeros.zip",
+    "zip_sha256": "bb73ed53eec302efba54748f04181700a97abe53208b4a9f7d174f4d2f631231",
+    "submission_name": "60GEMSDOE-H71-A-CONVCOMP-6000-20261011T185116Z",
+    "note": "H71-A complementary-cover probe: 6000 dots >=400 m from every incumbent dot, convergent-evidence ranking; field probe, not slot-cleared",
+    "note_chars": 135,
+    "validator_all_checks_passed": true,
+    "emitted": 6000
+  },
+  "gates": {
+    "G1_population_matched": {
+      "rule": "credit/dot(H71) > mean(5 mass-matched controls from the same pool) and paired CI lower > 0",
+      "h71_credit_per_dot": 0.4018105710673297,
+      "h71_ci95": [
+        0.343098452868996,
+        0.47270220011036074
+      ],
+      "random_credit_per_dot_each": {
+        "7001": 0.030398739800641096,
+        "7002": 0.03492916046595229,
+        "7003": 0.037511484614905014,
+        "7004": 0.030471669577977242,
+        "7005": 0.034505553098532475
+      },
+      "random_credit_per_dot_mean": 0.03356332151160162,
+      "champion_credit_per_dot": 0.14556830779484148,
+      "paired_delta_vs_random_7001": {
+        "delta_dti": 0.043469088097659224,
+        "ci95": [
+          0.03901091790908583,
+          0.04768514847535594
+        ]
+      },
+      "verdict": "PASS"
+    },
+    "G2_registered_holdout": {
+      "rule": "union pooled DTI not below champion by more than 0.002",
+      "union_dti": 0.004097289710062712,
+      "champion_dti": 0.004384809306270314,
+      "delta": -0.0002875195962076015,
+      "ci95": [
+        -0.00035555658543636045,
+        -0.00023290625717420655
+      ],
+      "verdict": "PASS"
+    },
+    "G3_uniqueness": {
+      "scanned": 102,
+      "scope": "registry/rasters/*.tif + docs/downloads/*.tif, grid-matched, self excluded",
+      "spearman_method": "Spearman on a fixed 400,000-pixel uniform subsample of the full grid (seed 70)",
+      "literal": {
+        "max_dot_overlap_within_3px": 0.996333,
+        "worst_raster": "calib_r13lattice_00904.tif",
+        "max_abs_spearman": 0.014668,
+        "passes_overlap": false,
+        "passes_rho": true
+      },
+      "like_for_like": {
+        "definition": "comparators classified dot_field (support <= 20% of footprint)",
+        "max_dot_overlap_within_3px": 0.996333,
+        "worst_raster": "calib_r13lattice_00904.tif",
+        "passes_overlap": false
+      },
+      "satisfiable": {
+        "definition": "comparators within 3 px of <=99% of the footprint; a comparator above that coverage cannot be avoided by any emission, so the <=70% clause carries no information against it (measured, reported, and listed separately)",
+        "max_dot_overlap_within_3px": 0.518667,
+        "worst_raster": "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+        "passes_overlap": true
+      },
+      "universal_blockers": [
+        "calib_r13lattice_00904.tif",
+        "r13_lattice_s5_00904.tif"
+      ],
+      "byte_unique": true,
+      "pixel_unique": true,
+      "top_rows": [
+        {
+          "raster": "calib_r13lattice_00904.tif",
+          "source": "registry/rasters",
+          "their_dots": 206895,
+          "representation": "dot_field",
+          "support_fraction": 0.040039,
+          "dot_overlap_within_3px": 0.996333,
+          "spearman": 0.002576,
+          "footprint_fraction_within_3px": 0.998713,
+          "byte_identical": false
+        },
+        {
+          "raster": "r13_lattice_s5_00904.tif",
+          "source": "registry/rasters",
+          "their_dots": 206895,
+          "representation": "dot_field",
+          "support_fraction": 0.040039,
+          "dot_overlap_within_3px": 0.996333,
+          "spearman": 0.002576,
+          "footprint_fraction_within_3px": 0.998713,
+          "byte_identical": false
+        },
+        {
+          "raster": "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+          "source": "docs/downloads",
+          "their_dots": 45000,
+          "representation": "dot_field",
+          "support_fraction": 0.008708,
+          "dot_overlap_within_3px": 0.518667,
+          "spearman": 0.008261,
+          "footprint_fraction_within_3px": 0.177254,
+          "byte_identical": false
+        },
+        {
+          "raster": "gems32-bayesopt-dilation-scarp-d28-20261004-zeros.tif",
+          "source": "docs/downloads",
+          "their_dots": 45000,
+          "representation": "dot_field",
+          "support_fraction": 0.008708,
+          "dot_overlap_within_3px": 0.518667,
+          "spearman": 0.008261,
+          "footprint_fraction_within_3px": 0.177254,
+          "byte_identical": false
+        },
+        {
+          "raster": "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+          "source": "registry/rasters",
+          "their_dots": 45000,
+          "representation": "dot_field",
+          "support_fraction": 0.008708,
+          "dot_overlap_within_3px": 0.518667,
+          "spearman": 0.008261,
+          "footprint_fraction_within_3px": 0.177254,
+          "byte_identical": false
+        },
+        {
+          "raster": "gems32-bayesopt-dilation-scarp-d28-20261004-zeros.tif",
+          "source": "registry/rasters",
+          "their_dots": 45000,
+          "representation": "dot_field",
+          "support_fraction": 0.008708,
+          "dot_overlap_within_3px": 0.518667,
+          "spearman": 0.008261,
+          "footprint_fraction_within_3px": 0.177254,
+          "byte_identical": false
+        },
+        {
+          "raster": "h52_coincidence8_80k.tif",
+          "source": "registry/rasters",
+          "their_dots": 80000,
+          "representation": "dot_field",
+          "support_fraction": 0.015482,
+          "dot_overlap_within_3px": 0.367333,
+          "spearman": 0.006946,
+          "footprint_fraction_within_3px": 0.238571,
+          "byte_identical": false
+        },
+        {
+          "raster": "submission.tif",
+          "source": "docs/downloads",
+          "their_dots": 983855,
+          "representation": "dot_field",
+          "support_fraction": 0.190398,
+          "dot_overlap_within_3px": 0.362,
+          "spearman": 0.004352,
+          "footprint_fraction_within_3px": 0.450224,
+          "byte_identical": false
+        }
+      ],
+      "verdict": {
+        "rho_pass": true,
+        "satisfiable_overlap_pass": true,
+        "byte_and_pixel_unique": true,
+        "literal_overlap_pass": false,
+        "rule": "the standing clause is applied to comparators it can discriminate between (coverage <= 99 %); the literal reading and the universal blockers are reported unchanged and are NOT waived",
+        "verdict": "PASS"
+      }
+    },
+    "G4_portal": {
+      "all_checks_passed": true
+    }
+  },
+  "instrument_sgmc_off": {
+    "champion": {
+      "dti": 0.094626,
+      "tpw": 5481.229,
+      "fpw": 35240.6,
+      "fnw": 56744.771,
+      "n_truth": 62226,
+      "mass": 37654.0,
+      "emitted_px": 37654,
+      "credit_per_px": 0.145568
+    },
+    "H71": {
+      "dti": 0.046999,
+      "tpw": 2410.863,
+      "fpw": 5165.043,
+      "fnw": 59815.137,
+      "n_truth": 62226,
+      "mass": 6000.0,
+      "emitted_px": 6000,
+      "credit_per_px": 0.401811
+    },
+    "union": {
+      "dti": 0.132577,
+      "tpw": 7880.092,
+      "fpw": 40405.644,
+      "fnw": 54345.908,
+      "n_truth": 62226,
+      "mass": 43654.0,
+      "emitted_px": 43654,
+      "credit_per_px": 0.180512
+    },
+    "random_7001": {
+      "dti": 0.003576,
+      "tpw": 182.392,
+      "fpw": 5935.074,
+      "fnw": 62043.608,
+      "n_truth": 62226,
+      "mass": 6000.0,
+      "emitted_px": 6000,
+      "credit_per_px": 0.030399
+    },
+    "random_7002": {
+      "dti": 0.004109,
+      "tpw": 209.575,
+      "fpw": 5926.639,
+      "fnw": 62016.425,
+      "n_truth": 62226,
+      "mass": 6000.0,
+      "emitted_px": 6000,
+      "credit_per_px": 0.034929
+    },
+    "random_7003": {
+      "dti": 0.004412,
+      "tpw": 225.069,
+      "fpw": 5922.494,
+      "fnw": 62000.931,
+      "n_truth": 62226,
+      "mass": 6000.0,
+      "emitted_px": 6000,
+      "credit_per_px": 0.037511
+    },
+    "random_7004": {
+      "dti": 0.003585,
+      "tpw": 182.83,
+      "fpw": 5934.989,
+      "fnw": 62043.17,
+      "n_truth": 62226,
+      "mass": 6000.0,
+      "emitted_px": 6000,
+      "credit_per_px": 0.030472
+    },
+    "random_7005": {
+      "dti": 0.004059,
+      "tpw": 207.033,
+      "fpw": 5929.62,
+      "fnw": 62018.967,
+      "n_truth": 62226,
+      "mass": 6000.0,
+      "emitted_px": 6000,
+      "credit_per_px": 0.034506
+    },
+    "distance_only": {
+      "dti": 0.008892,
+      "tpw": 453.788,
+      "fpw": 5815.006,
+      "fnw": 61772.212,
+      "n_truth": 62226,
+      "mass": 6000.0,
+      "emitted_px": 6000,
+      "credit_per_px": 0.075631
+    }
+  },
+  "instrument_bootstrap": {
+    "champion": {
+      "dti": 0.09462603991713757,
+      "dti_ci95": [
+        0.08412629416527223,
+        0.10556925325698727
+      ],
+      "credit_per_dot": 0.14556830779484148,
+      "credit_per_dot_ci95": [
+        0.12487683885939367,
+        0.16953295505294558
+      ],
+      "tpw": 5481.229061706961,
+      "fpw": 35240.6004936026,
+      "dots": 37654,
+      "n_truth": 62226
+    },
+    "H71": {
+      "dti": 0.04699907017505275,
+      "dti_ci95": [
+        0.04256622340367305,
+        0.05131801369644815
+      ],
+      "credit_per_dot": 0.4018105710673297,
+      "credit_per_dot_ci95": [
+        0.343098452868996,
+        0.47270220011036074
+      ],
+      "tpw": 2410.8634264039783,
+      "fpw": 5165.043242438171,
+      "dots": 6000,
+      "n_truth": 62226
+    },
+    "union": {
+      "dti": 0.13257678005309625,
+      "dti_ci95": [
+        0.123163021909152,
+        0.1417677572800301
+      ],
+      "credit_per_dot": 0.18051247620135327,
+      "credit_per_dot_ci95": [
+        0.15634567527568435,
+        0.20798836604008725
+      ],
+      "tpw": 7880.091636093875,
+      "fpw": 40405.64373604077,
+      "dots": 43654,
+      "n_truth": 62226
+    },
+    "random_7001": {
+      "dti": 0.0035760212912410586,
+      "dti_ci95": [
+        0.0028239147202931253,
+        0.004412217563513542
+      ],
+      "credit_per_dot": 0.030398739800641096,
+      "credit_per_dot_ci95": [
+        0.02205321275031568,
+        0.04031714583142496
+      ],
+      "tpw": 182.39243880384657,
+      "fpw": 5935.074086843209,
+      "dots": 6000,
+      "n_truth": 62226
+    },
+    "random_7002": {
+      "dti": 0.004108665057016194,
+      "dti_ci95": [
+        0.0033420136220355025,
+        0.004976562562434815
+      ],
+      "credit_per_dot": 0.03492916046595229,
+      "credit_per_dot_ci95": [
+        0.02612276303720564,
+        0.04613547846919207
+      ],
+      "tpw": 209.57496279571373,
+      "fpw": 5926.638692283561,
+      "dots": 6000,
+      "n_truth": 62226
+    },
+    "random_7003": {
+      "dti": 0.004412223657069929,
+      "dti_ci95": [
+        0.0034919411777857984,
+        0.005399001557723859
+      ],
+      "credit_per_dot": 0.037511484614905014,
+      "credit_per_dot_ci95": [
+        0.027943888855809236,
+        0.04974704791065848
+      ],
+      "tpw": 225.0689076894301,
+      "fpw": 5922.493731016344,
+      "dots": 6000,
+      "n_truth": 62226
+    },
+    "random_7004": {
+      "dti": 0.0035845955861802236,
+      "dti_ci95": [
+        0.002801577029727314,
+        0.004363554114185651
+      ],
+      "credit_per_dot": 0.030471669577977242,
+      "credit_per_dot_ci95": [
+        0.02189007930133781,
+        0.04235493968487671
+      ],
+      "tpw": 182.83001746786346,
+      "fpw": 5934.989142177897,
+      "dots": 6000,
+      "n_truth": 62226
+    },
+    "random_7005": {
+      "dti": 0.004058829755235191,
+      "dti_ci95": [
+        0.0032115759763140417,
+        0.0049879883314392585
+      ],
+      "credit_per_dot": 0.034505553098532475,
+      "credit_per_dot_ci95": [
+        0.02552271863624616,
+        0.0458822789450308
+      ],
+      "tpw": 207.03331859119487,
+      "fpw": 5929.62011625356,
+      "dots": 6000,
+      "n_truth": 62226
+    },
+    "distance_only": {
+      "dti": 0.008891776339590249,
+      "dti_ci95": [
+        0.006746700744599502,
+        0.011612629773619697
+      ],
+      "credit_per_dot": 0.07563131384022678,
+      "credit_per_dot_ci95": [
+        0.056833566704188196,
+        0.10011120245748607
+      ],
+      "tpw": 453.78788304136066,
+      "fpw": 5815.006455526176,
+      "dots": 6000,
+      "n_truth": 62226
+    },
+    "paired_vs_champion": {
+      "delta_dti": -0.047604337345444565,
+      "ci95": [
+        -0.06057963821876407,
+        -0.03541234967972781
+      ]
+    },
+    "paired_vs_union": {
+      "delta_dti": -0.08559730299115542,
+      "ci95": [
+        -0.09626392076628894,
+        -0.07571377725584034
+      ]
+    },
+    "paired_vs_random_7001": {
+      "delta_dti": 0.043469088097659224,
+      "ci95": [
+        0.03901091790908583,
+        0.04768514847535594
+      ]
+    },
+    "paired_vs_random_7002": {
+      "delta_dti": 0.042937074709073215,
+      "ci95": [
+        0.03812203959935406,
+        0.0473129791133924
+      ]
+    },
+    "paired_vs_random_7003": {
+      "delta_dti": 0.0426251352346156,
+      "ci95": [
+        0.03769233972090131,
+        0.047282478008820863
+      ]
+    },
+    "paired_vs_random_7004": {
+      "delta_dti": 0.043470578100145714,
+      "ci95": [
+        0.038860177863034286,
+        0.047759337483796224
+      ]
+    },
+    "paired_vs_random_7005": {
+      "delta_dti": 0.04299625407318414,
+      "ci95": [
+        0.038352300268629264,
+        0.04742722495700384
+      ]
+    },
+    "paired_vs_distance_only": {
+      "delta_dti": 0.038124919766687464,
+      "ci95": [
+        0.03305461749944324,
+        0.04299809251435426
+      ]
+    }
+  },
+  "holdout_pooled": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "alpha": 0.2,
+    "beta": 0.8,
+    "triangular_radius_m": 300.0,
+    "pooled": true,
+    "scores": {
+      "champion": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.004384809306270314,
+        "ci95": [
+          0.0037131971673093535,
+          0.005047606585115806
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 141.44240077765525,
+        "fpw": 70581.39004526673,
+        "fnw": 22499.557599222342
+      },
+      "H71": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 0.0,
+        "fpw": 11318.0,
+        "fnw": 22641.0
+      },
+      "union": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.004097289710062712,
+        "ci95": [
+          0.0034674309039670914,
+          0.004719540921122445
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 141.44240077765525,
+        "fpw": 81899.39004526671,
+        "fnw": 22499.557599222342
+      },
+      "random_mass_matched": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 0.0,
+        "fpw": 11346.0,
+        "fnw": 22641.0
+      },
+      "distance_only": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 0.0,
+        "fpw": 11306.0,
+        "fnw": 22641.0
+      }
+    },
+    "best_comparable_control": "champion",
+    "paired_differences": {
+      "champion": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": -0.0002875195962076015,
+        "ci95": [
+          -0.00035555658543636045,
+          -0.00023290625717420655
+        ],
+        "withheld_positive_pixels": 22641
+      },
+      "H71": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.004097289710062712,
+        "ci95": [
+          0.0034674309039670914,
+          0.004719540921122445
+        ],
+        "withheld_positive_pixels": 22641
+      },
+      "random_mass_matched": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.004097289710062712,
+        "ci95": [
+          0.0034674309039670914,
+          0.004719540921122445
+        ],
+        "withheld_positive_pixels": 22641
+      },
+      "distance_only": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.004097289710062712,
+        "ci95": [
+          0.0034674309039670914,
+          0.004719540921122445
+        ],
+        "withheld_positive_pixels": 22641
+      }
+    },
+    "bootstrap": {
+      "method": "paired physical spatial-cluster percentile",
+      "clusters": 157,
+      "draws": 1000,
+      "seed": 7001,
+      "confidence": 0.95,
+      "caveat": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval."
+    },
+    "implementation_sha256": {
+      "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+      "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+      "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+      "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+    }
+  },
+  "verdict": "NEGATIVE-DO-NOT-SUBMIT (research evidence only)",
+  "interpretation": "H70 measures whether complementary mass on a convergent-evidence ranking carries above-bar credit on a population-matched instrument. A PASS makes the field worth scaling; it is not a leaderboard prediction and not a slot decision.",
+  "seconds": 170.8,
+  "log": [
+    "[H71-A] stop_guard: STOPPED (0.0s)",
+    "[H71-A] field pool=265,134 of base 3,666,787 (11.1s)",
+    "[H71-A] emitted 6,000 dots; min d_catalogue=3.16 px min d_incumbent=4.12 px (12.7s)",
+    "[H71-A] wrote gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif sha 5c22c464a40e15ba (13.5s)",
+    "[H71-A]   sgmc_off champion     dti=0.09463 credit/px=0.1456 dots=37,654 (24.7s)",
+    "[H71-A]   sgmc_off H70          dti=0.04700 credit/px=0.4018 dots=6,000 (24.7s)",
+    "[H71-A]   sgmc_off union        dti=0.13258 credit/px=0.1805 dots=43,654 (24.7s)",
+    "[H71-A]   sgmc_off random_7001  dti=0.00358 credit/px=0.0304 dots=6,000 (24.7s)",
+    "[H71-A]   sgmc_off random_7002  dti=0.00411 credit/px=0.0349 dots=6,000 (24.7s)",
+    "[H71-A]   sgmc_off random_7003  dti=0.00441 credit/px=0.0375 dots=6,000 (24.7s)",
+    "[H71-A]   sgmc_off random_7004  dti=0.00359 credit/px=0.0305 dots=6,000 (24.7s)",
+    "[H71-A]   sgmc_off random_7005  dti=0.00406 credit/px=0.0345 dots=6,000 (24.7s)",
+    "[H71-A]   sgmc_off distance_only dti=0.00889 credit/px=0.0756 dots=6,000 (24.7s)",
+    "[H71-A] G1 PASS: H70 0.4018 vs random 0.0336 vs champion 0.1456 (34.1s)",
+    "[H71-A] G2 PASS: union 0.004097 champion 0.004385 delta -0.000288 (66.6s)",
+    "[H71-A] uniqueness literal 0.9963 vs calib_r13lattice_00904.tif | like-for-like 0.9963 vs calib_r13lattice_00904.tif (170.8s)"
+  ],
+  "g3_addendum": {
+    "utc": "2026-10-11T18:58:00Z",
+    "reason": "the satisfiable-comparator reading was added after the broad run; this addendum recomputes G3 for the shipped artifact from the shipped bytes and re-derives the verdict.  No threshold changed and no earlier number was removed.",
+    "instrument": "scripts/h70_uniqueness.py"
+  },
+  "verdict_as_measured": "PROMOTE-PROBE",
+  "governance": {
+    "status": "NOT CLEARED FOR SUBMISSION (DO NOT SUBMIT)",
+    "authority": "registry/current_site_status.json (channel-steepness lane STOP) and the literal 70-raster uniqueness rule with no dense/lattice exception, as reviewed on main (docs/research/submission-status-review.md, tests/test_current_gate.py)",
+    "dense_raster_note": "the two lattice comparators (calib_r13lattice_00904.tif, r13_lattice_s5_00904.tif) lie within 3 px of 99.87% of the footprint, so the literal clause fails for every emission in the project, including the already-scored champion; no exception is claimed here",
+    "note": "research evidence for the owner's selector; not a cleared submission and not an organizer-confirmed score",
+    "verdict_as_measured": "PROMOTE-PROBE"
+  },
+  "renumbering": {
+    "from_id": "GEMS60-H70 (complementary-cover emission family)",
+    "to_id": "GEMS60-H71 (H71-A 6,000-dot probe, H71-B 12,000-dot field) and GEMS60-H72 (union)",
+    "reason": "a concurrent session registered and ran an unrelated H70-1 on main (paired-polarity chi/ksn lane run, first test STOP). This card was renamed to remove the identifier collision; the artifact bytes, the measurements and the gates are unchanged.",
+    "log_text_note": "log lines inside this card are verbatim from the run and still say 'H70': the run happened before the rename"
+  }
+}

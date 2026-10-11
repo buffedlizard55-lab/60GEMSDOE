@@ -4,7 +4,42 @@
 <header class="top"><div class="wrap"><h1>60GEMSDOE — current status and evidence</h1><nav><a href="index.html" class=active>Home</a> <a href="executive-summary.html">Submission status</a> <a href="research.html">Research</a> <a href="hypotheses.html">Deferred hypotheses</a> <a href="leaderboard.html">Leaderboard</a> <a href="sources.html">Sources</a> <a href="irregularities.html">Irregularities</a></nav>
 <div class="dlbtn"><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download H65-1 GeoTIFF — research only, DO NOT SUBMIT</a> <a class="btn alt" href="research/active-lane-review-2026-10-11.md">Read current review</a></div></div></header>
 <div class="values"><div class="wrap"><b>Maximize P(Win).</b> No slot is spent on an unvalidated candidate. <b>Own the Outcome.</b> Negative results and evidence limits are published clearly.</div></div>
-<main class="wrap"><div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
+<main class="wrap">
+<div class="wrap" style="border:3px solid #b42318;background:#fffafa;padding:12px 16px;margin:8px auto">
+<h2 style="margin:0 0 6px">&#9940; Additional research artifacts (session <code>arena/161d8066-60gemsdoe</code>, 2026-10-11) &mdash; DOWNLOAD for research: YES &middot; SUBMIT: <b>NO — DO NOT SUBMIT</b></h2>
+<p style="margin:4px 0">These are <b>research artifacts</b> from the complementary-cover line of work, added on top of the governing STOP. They are
+<b>not</b> cleared to submit: the channel-steepness lane STOP in <code>registry/current_site_status.json</code> still governs, and the literal
+70-raster uniqueness rule fails for <b>every</b> artifact in this project — including the already-scored champion and main's H65-1/H66-1/H68-1 —
+because two lattice comparators lie within 3&nbsp;px of 99.87&nbsp;% of the footprint (measured; see
+<a href="../evidence/h71_artifact_comparison.json">evidence/h71_artifact_comparison.json</a>). No dense-raster exception is claimed.</p>
+<table>
+<tr><th>artifact</th><th>download (research only)</th><th>measured evidence</th></tr>
+<tr><td><b>H72 union</b><br><code>gems60-h72-union-champ-convcomp-43654-&hellip;</code><br><span style="color:#5b7183">43,654 dots = champion + 6,000 complement</span></td>
+<td><a class=btn href="downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif" download>&#11015; .tif (spec-literal)</a>
+<a class="btn alt" href="downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif" download>&#11015; .tif (zeros outside)</a>
+<a href="downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros-runcard.json">run card</a></td>
+<td>Population-matched instrument (62,226 state-map fault pixels &gt;300 m off the catalogue): added mass <b>0.4018 credit/dot</b> vs
+break-even 0.0556; union &minus; champion paired <b>+0.03799 [+0.03379, +0.04208]</b>. Registered holdout (8-cell protocol): &Delta; &minus;0.000288.
+Literal uniqueness 1.0000 vs the lattice &rarr; <b>not cleared</b>.</td></tr>
+<tr><td><b>H71-A probe</b> (6,000 dots)<br><b>H71-B field</b> (12,000 dots)</td>
+<td><a class=btn href="downloads/gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif" download>&#11015; A .tif</a>
+<a class=btn href="downloads/gems60-h71b-convcomp-12000-20261011T184819Z-zeros.tif" download>&#11015; B .tif</a>
+<a href="../evidence/h71_artifact_comparison.json">comparison</a></td>
+<td>H71-B is the strongest field measured on the population-matched instrument (<b>0.13265 DTI, 0.5864 credit/dot</b> vs champion 0.09463/0.1456,
+H68-1 0.06418/0.0933); H71-A is its uniqueness-cleaner 6,000-dot subset. Both fail the literal uniqueness rule.</td></tr>
+<tr><td><b>H69-A / H69-B identification pair</b></td>
+<td><a class=btn href="downloads/gems60-h69a-champ-half-20261011T182938Z-zeros.tif" download>&#11015; A .tif</a>
+<a class=btn href="downloads/gems60-h69b-champ-nulladd-2000px-20261011T182938Z-zeros.tif" download>&#11015; B .tif</a>
+<a href="../evidence/h69_probe_build.json">build record</a></td>
+<td>Two uploads plus the 0.2778 anchor identify <code>T</code>, <code>K</code>, <code>F</code> exactly (<code>scripts/h69_recovery.py</code>).
+Diagnostics, not candidates.</td></tr>
+</table>
+<p style="margin:6px 0 0">Reasoning, ranked hypotheses and the governance question:
+<a href="research/why-02778-and-what-beats-it-2026-10-11.md">why the champion scored 0.2778, and what can beat it</a> &middot;
+machine-readable status: <a href="../registry/artifact_status_2026-10-11.json">registry/artifact_status_2026-10-11.json</a>.</p>
+</div>
+
+<div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
 <p><b>Governing STOP record:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
 <strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast +0.0326,
 95% CI [-0.0144, +0.0790] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.

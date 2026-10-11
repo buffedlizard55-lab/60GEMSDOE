@@ -272,3 +272,31 @@ Do not stop after the first pass. Each pass must build on the previous one. Befo
 
 Go ahead and create a pull request and then merge the pull request onto the main. Make suggestions for what work still needs to be done and any limitations that is in the way of a successful project.  It should be worked on in this next session or the next session.  Work line by line verify everything no hallucinations.
 ```
+
+---
+
+## Appendix (2026-10-11, session `arena/161d8066-60gemsdoe`) — complementary-cover research artifacts
+
+**Status of everything below: DOWNLOAD for research: YES · SUBMIT: NO — DO NOT SUBMIT.** The governing
+[`registry/current_site_status.json`](registry/current_site_status.json) STOP and the literal 70-raster uniqueness rule are unchanged and not waived.
+
+* **H72 union** (`gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif`, sha256 `c8a76393aa543462…`; `-zeros` sha256 `79e3fafab1adf16e…`)
+  = the live-scored champion (37,654 dots) plus 6,000 complementary-cover dots. Card [`evidence/h72_runcard.json`](evidence/h72_runcard.json),
+  preregistration [`registry/preregistration-h72.json`](registry/preregistration-h72.json).
+  Measured: added mass **0.4018 credit/dot** on the population-matched instrument vs break-even 0.0556, union − champion paired
+  **+0.03799 [+0.03379, +0.04208]**; registered holdout Δ −0.000288. Literal uniqueness **fails** (lattice comparator).
+* **H71-A / H71-B** probes: [`docs/downloads/gems60-h71a-convcomp-6000-…`](docs/downloads) and
+  [`gems60-h71b-convcomp-12000-…`](docs/downloads); cards [`evidence/h71a_runcard.json`](evidence/h71a_runcard.json),
+  [`evidence/h71b_runcard.json`](evidence/h71b_runcard.json). H71-B is the strongest field measured on the population-matched instrument
+  (0.13265 DTI / 0.5864 credit per dot vs the champion's 0.09463 / 0.1456).
+* **H69-A / H69-B** identification pair: [`evidence/h69_probe_build.json`](evidence/h69_probe_build.json) — two uploads plus the 0.2778 anchor
+  identify `T`, `K`, `F` exactly (`scripts/h69_recovery.py`, self-test exact).
+* **Side-by-side comparison of every candidate** (champion, H65-1, H66-1, H68-1, H71-A/B, H72, H68-1 ∪ H71-A) on both proxies plus the literal
+  uniqueness number for each: [`evidence/h71_artifact_comparison.json`](evidence/h71_artifact_comparison.json).
+* **Identification note:** these files were renamed from the H70 family (H70-A/B, union H71) to H71/H72 to avoid colliding with the unrelated
+  **H70-1** lane run merged to main; artifact bytes and measurements are unchanged, and the run cards carry a `renumbering` record.
+* **The governance question this session raises:** the literal "≤70 % of dots within 3 px of any registry raster" rule cannot be satisfied
+  against `calib_r13lattice_00904.tif` / `r13_lattice_s5_00904.tif` (their dots lie within 3 px of 99.87 % of the footprint) — so, as written,
+  **no artifact from this project, including the already-scored champion and H65-1/H66-1/H68-1, can pass it**. That is a decision for the owner
+  (exclude space-filling comparators, or keep the rule and accept that no submission is ever cleared); this session did not waive it and did not
+  edit the status file.
