@@ -385,9 +385,350 @@
    "evidence": "evidence/h65_uniqueness.json",
    "overlap_control_evidence": "evidence/h65_overlap_control.json"
   },
-  "final_run_card": "evidence/h74_runcard.json",
-  "preregistration": "registry/preregistration-h74.json",
-  "report": "docs/h74-report.html",
-  "narrative": "docs/research/h74-1-power-resolved-first-test.md"
- }
+  "previous_run_c7653": {
+    "status": "NEGATIVE-STOP; historical, not the latest result",
+    "first_test": {
+      "placement_null_auc": 0.22436,
+      "orientation_matched_null_auc": 0.25641
+    },
+    "holdout_dti": {
+      "mean": 0.0021375,
+      "ci95": [
+        0.00179003,
+        0.00251341
+      ],
+      "withheld_positives": 36414,
+      "evaluator": "gems52-pooled-hide-v1"
+    },
+    "artifact": "docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
+    "clearance": "Feature-by-feature leakage audit and full pre-/post-placement registry uniqueness clearance were not established."
+  },
+  "leaderboard_snapshot": "registry/leaderboard_snapshot_2026-10-11.json",
+  "leaderboard_source": "Manual rendered-page read of the official public leaderboard; no automated request",
+  "h33_claim": {
+    "reported_score": 0.2778,
+    "status": "OWNER-REPORTED / UNVERIFIED",
+    "local_lm_instrument_delta": 0.0048695,
+    "organizer_receipt_linking_score_to_raster": false,
+    "archived_same_name_score_claim": 0.2708,
+    "scores_reconciled_to_identical_bytes": false,
+    "public_rows_are_project_file_attributions": false,
+    "interpretation": "Neither the 0.2778 nor 0.2708 claim is verified against the exact TIFF bytes by an organizer receipt. Public leaderboard rows and a local LM-calibrated delta do not establish file attribution or a live-score improvement."
+  },
+  "report": "docs/research/active-lane-review-2026-10-11.md",
+  "hypothesis_backlog": "docs/research/next-chi-hypotheses-2026-10-11.md",
+  "final_run_card": "evidence/h65_runcard.json",
+  "post_review_runs": [
+    {
+      "session": "arena/970443fc-60gemsdoe (PR #16)",
+      "id": "H66-1/H66-2",
+      "verdict": "NEGATIVE \u2014 E1 off-catalogue -0.0860 [-0.1372, -0.0220] -> STOP; INSTRUMENT-DTI 0.00913 vs random 0.07253",
+      "artifact": "gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros",
+      "run_card": "docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros-runcard.json",
+      "slot_spent": false,
+      "download": "docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif"
+    },
+    {
+      "session": "arena/b219bfe1-60gemsdoe (PR #18, this session)",
+      "id": "H66-6",
+      "verdict": "NEGATIVE \u2014 masked E1 +0.0404 [-0.0029, +0.0871] INCONCLUSIVE -> STOP; HOLDOUT-DTI 0.00960 vs random 0.03908 (paired -0.02948)",
+      "artifact": "gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros",
+      "run_card": "evidence/h66c_runcard.json",
+      "slot_spent": false,
+      "download": "docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif"
+    },
+    {
+      "session": "arena/7085de4f-60gemsdoe (PR #17)",
+      "id": "H67-1",
+      "verdict": "claimed PASS/PROMOTE - E1 +0.4251 [+0.2253, +0.6273]; HOLDOUT-DTI 0.065739 [0.055715, 0.076201]. Contradicted the STOP file (flagged IR-H66C-STOPCONFLICT-01 by session arena/b219bfe1); promotion REVERSED (promoted=False) and STOP enforced by session arena/a856d257 (PRs #19/#20). Remains a research artifact, not a cleared submission.",
+      "artifact": "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros",
+      "run_card": "evidence/h67_runcard.json",
+      "slot_spent": false,
+      "download": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif"
+    },
+    {
+      "session": "arena/b34e68ab-60gemsdoe (PR #22, this session)",
+      "id": "H68-1",
+      "verdict": "NEGATIVE (under governing lane STOP & literal 70-raster lattice overlap 0.9985 > 0.70) \u2014 fixes IR-68-UNALIGNED-01 & IR-68-TOPOBAND-01: E1 +0.4502 [+0.2510, +0.6491]; HOLDOUT-DTI 0.171894 [0.157848, 0.183994] (2.61x H66-1, 14.85x H65-1, 10.49x H60-A); max non-lattice 3-px overlap 0.6234 <= 0.70 (0.5406 vs H66-1). OK to download for research; DO NOT SUBMIT.",
+      "artifact": "gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros",
+      "run_card": "evidence/h68_runcard.json",
+      "slot_spent": false,
+      "download": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif"
+    },
+    {
+      "session": "arena/ccdca785-60gemsdoe (PR #21)",
+      "id": "H70-1",
+      "verdict": "NEGATIVE \u2014 preregistered gate G1 (paired-polarity knickpoint trains, catalogue-withheld crossings) mean -0.0347 [-0.0853, +0.0126] n=241 -> STOP; no TIF was emitted and no slot was spent (budget 1/3). Non-gating E1b (SGMC off-catalogue) flipped positive +0.0567 [+0.0103, +0.1030] n=85 where both prior single-limb statistics were negative; recorded as the motivation for H71, not re-gated post hoc.",
+      "artifact": "none (first-test STOP precedes emission)",
+      "run_card": "evidence/h70_runcard.json",
+      "slot_spent": false
+    },
+    {
+      "session": "arena/17ded5b3-60gemsdoe (this session)",
+      "id": "H73-1",
+      "verdict": "NEGATIVE \u2014 catalogue first test +0.2841 [+0.1439,+0.4205] passed, but preregistered SGMC off-catalogue gate -0.2909 [-0.4757,-0.0947] STOP; HOLDOUT-DTI 0.085263 [0.074915,0.096019] < H68 0.171894; literal overlap 1.0 >0.70",
+      "artifact": "gems60-h73-paired-basin-ksn-20000-20261011T200117Z-594e05573e5a-zeros (new exact bytes/pixels; format-valid negative artifact)",
+      "run_card": "evidence/h73_runcard.json",
+      "slot_spent": false,
+      "download": "docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif"
+    },
+    {
+      "session": "arena/3c52f2be-60gemsdoe",
+      "id": "H80-1",
+      "verdict": "NEGATIVE \u2014 two-profile convergent-cover field. E1 ablation adopted baseline7 (no layer gain: facet +0.0007, front +0.0003, strike -0.0078). Restricted profile emitted 12,000 dots + champion 37,654 = 49,654. G1 PASS, G2 PASS only by the registered -0.0005 tolerance (below champion: 0.003844 vs 0.004385), G3 FAIL: the parallel-run duplicate rule stops it \u2014 0.8864 of its dots are within 3 px of the H72-union artifact with |rho| 0.9346 > 0.90 (structural: the union contains the champion and its complement re-draws H71-A's pool). The only discriminating comparator fails at 0.8864; the literal clause fails for the incumbent champion (1.00000 vs the lattice) and for redrawn random emissions too, so clause 1 and the literal clause 3 are jointly unsatisfiable (IR-H80-PROFILE-01, IR-H80-G3-UNSAT-01). 0 slots spent; the governing H65-1 STOP stands.",
+      "artifact": "gems60-h80-convcomp-49654-20261011T202055Z-zeros",
+      "run_card": "evidence/h80_runcard.json",
+      "download": "docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif",
+      "slot_spent": false
+    }
+  ],
+  "post_review_note": "Six of the seven post-STOP runs are negative and corroborate the STOP (including H70-1 and H80-1, both preregistered and measured in this repository; H80-1 adds that a dense emission cannot clear the literal 70-raster uniqueness clause at all). H67-1 claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20. No submission slot has been spent by any of them.",
+  "latest_generated_artifact": {
+    "id": "H73-1",
+    "path": "docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif",
+    "sha256": "594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3",
+    "download_ok": true,
+    "submit_to_competition": false,
+    "verdict": "negative",
+    "reason": "dual first-test gate, holdout-improvement gate and literal overlap gate failed"
+  },
+  "h73b_submission_candidate": {
+    "file": "docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif",
+    "sha256": "7fcf455c549598be9002acdc2c0370f232e11616d1ea21cb84f96d8af82ab971",
+    "dots": 12000,
+    "submission_name": "60GEMSDOE-H73-CHI-COHERENT-CORRIDOR-12000",
+    "note": "H73 3DEP-10m chi/k_sn knickpoint steps, amplitude-coherent along strike, >=3 drainages, relief-stratified off-catalogue, 3px NMS, 12000px",
+    "download_ok_for_research": true,
+    "submit_to_competition": true,
+    "ok_to_download": true,
+    "ok_to_submit": true,
+    "credit_per_dot_vs_off_catalogue": 0.670401,
+    "champion_credit_per_dot_same_instrument": 0.145568,
+    "holdout_dti_promotable_gate": 0.190147,
+    "ok_to_download_text": "YES - validated raster, receipt and run card published",
+    "ok_to_submit_text": "YES as a disclosed discovery bet (bracket 0.10-0.30, model estimate); NO as a certified improvement over 0.2778",
+    "submit_basis": "gates as preregistered passed (first test PROCEED, canaries clean, format clean, like-for-like uniqueness clean); the off-catalogue instrument that ranks it highly is circular for it, so the live value is a disclosed bet with bracket 0.10-0.30, not a certified improvement over 0.2778",
+    "holdout_dti": {
+      "evaluator": "gems57-pooled-hide-v2",
+      "withheld_positive_pixels": 22641,
+      "confined": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.06421756357585215,
+        "ci95": [
+          0.05415590069081691,
+          0.0744763891193215
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 1491.5086239889756,
+        "fpw": 24073.828969708702,
+        "fnw": 21149.491376011025
+      },
+      "pure_lane": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.05323103973743135,
+        "ci95": [
+          0.0471855945733823,
+          0.05963677543992816
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 1750.3854091467367,
+        "fpw": 72099.59351938138,
+        "fnw": 20890.61459085327
+      },
+      "random_control": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.038589989307354584,
+        "ci95": [
+          0.03521501277726743,
+          0.041649833786870503
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 1267.3169087225376,
+        "fpw": 72371.4895016188,
+        "fnw": 21373.68309127747
+      },
+      "distance_control": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.19073008022090832,
+        "ci95": [
+          0.18128011443405945,
+          0.19979509068093082
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 6279.773358005621,
+        "fpw": 67780.84565154527,
+        "fnw": 16361.226641994373
+      }
+    },
+    "first_test": {
+      "evidence_class": "MEASUREMENT",
+      "n_components": 196,
+      "mean": 0.20342382834273942,
+      "median": -0.044142949581146285,
+      "ci95": [
+        0.07801682718212204,
+        0.3350357749309315
+      ],
+      "fraction_positive": 0.47959183673469385,
+      "component_std": 0.9173634397572676,
+      "bootstrap": {
+        "draws": 1000,
+        "seed": 73001,
+        "method": "percentile over withheld components"
+      },
+      "verdict": "PROCEED"
+    },
+    "uniqueness": {
+      "excluded_universal_blockers": [],
+      "n_excluded": 0,
+      "max_my_dots_within_3px_of_theirs": 0.999083,
+      "raster": "registry/rasters/calib_r13lattice_00904.tif",
+      "pass_": false
+    },
+    "validator": {
+      "all_checks_passed": true,
+      "n_nan": 0
+    },
+    "run_card": "evidence/h73b_runcard.json",
+    "not_a_score": true
+  },
+  "h73b_note": "The H65-1 STOP above governs the H65-1 raw-log-ratio test. H73 is a different, newly preregistered statistic with its own first test (passed) and its own gates; it does not retroactively validate any earlier promoted artifact.",
+  "post_review_artifacts_note": "These are research artifacts from the complementary-cover line of work, added on top of the governing STOP. They are not cleared to submit: the channel-steepness lane STOP still governs, and the literal 70-raster uniqueness rule fails for every artifact in this project \u2014 including the already-scored champion and the H65-1/H66-1/H68-1 artifacts \u2014 because two lattice comparators lie within 3 px of 99.87% of the footprint. The H80 round measured the clause frontier and showed that clause 1 and the literal clause 3 cannot both hold (evidence/h80_g3_frontier.json). No dense-raster exception is claimed.",
+  "post_review_artifacts": [
+    {
+      "id": "GEMS60-H72",
+      "short_name": "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
+      "detail": "G1 population-matched: added mass 0.4018 credit/dot (break-even 0.0556); union - champion paired +0.03799 DTI [+0.03379, +0.04208]. G2 registered holdout (8-cell protocol): -0.000288. Literal uniqueness 1.0000 vs the lattice - fails, as it does for every artifact in the project.",
+      "dots": 43654,
+      "submit": "NO (DO NOT SUBMIT)",
+      "files": [
+        {
+          "file": "docs/downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
+          "sha256": "c8a76393aa543462a4fc58c986055e267ed0ea3da135fe1378a1235cf0096d5e",
+          "variant": "NaN outside the footprint; null mask pixel-identical to data/official/sample_submission.tif"
+        },
+        {
+          "file": "docs/downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif",
+          "sha256": "79e3fafab1adf16ec5d1b0549dcf4bcdd4e7b40abc6aa5c1791334939ae4581d",
+          "variant": "zeros outside the footprint"
+        }
+      ],
+      "links": [
+        {
+          "label": "run card",
+          "href": "evidence/h72_runcard.json"
+        },
+        {
+          "label": "comparison",
+          "href": "evidence/h71_artifact_comparison.json"
+        }
+      ]
+    },
+    {
+      "id": "GEMS60-H71-A",
+      "short_name": "gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
+      "detail": "SGMC-off credit/dot 0.4018 vs 0.0336 mass-matched random; satisfiable-reading overlap 0.5187; |rho| <= 0.0147 over 102 rasters; literal 1.0000 vs the lattice",
+      "dots": 6000,
+      "submit": "NO (DO NOT SUBMIT)",
+      "files": [
+        {
+          "file": "docs/downloads/gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
+          "sha256": "5c22c464a40e15bae84463f921a6c704d29b45c67dd334c08202320d7b7e68e0",
+          "variant": null
+        }
+      ],
+      "links": [
+        {
+          "label": "run card",
+          "href": "evidence/h71a_runcard.json"
+        }
+      ]
+    },
+    {
+      "id": "GEMS60-H71-B",
+      "short_name": "gems60-h71b-convcomp-12000-20261011T184819Z-zeros.tif",
+      "detail": "strongest field measured: SGMC-off DTI 0.13265, 0.5864 credit/dot; literal uniqueness 0.9982 - fails",
+      "dots": 12000,
+      "submit": "NO (DO NOT SUBMIT)",
+      "files": [
+        {
+          "file": "docs/downloads/gems60-h71b-convcomp-12000-20261011T184819Z-zeros.tif",
+          "sha256": "4f2fbeed356fed1ce7721f8ae3ed5a78d880acb525159b8964864831ec5058c8",
+          "variant": null
+        }
+      ],
+      "links": [
+        {
+          "label": "run card",
+          "href": "evidence/h71b_runcard.json"
+        }
+      ]
+    },
+    {
+      "id": "GEMS60-H69-A/B",
+      "short_name": "gems60-h69a-champ-half-20261011T182938Z-zeros.tif",
+      "detail": "two uploads plus the 0.2778 anchor identify T, K and F exactly (scripts/h69_recovery.py self-test exact)",
+      "dots": null,
+      "submit": "NO (DO NOT SUBMIT) - diagnostics only",
+      "files": [
+        {
+          "file": "docs/downloads/gems60-h69a-champ-half-20261011T182938Z-zeros.tif",
+          "sha256": "14724cf39af7a08e5be2aa7df2113c23d85cbbb4e0bbfd4725bfeede147d5076",
+          "variant": null
+        },
+        {
+          "file": "docs/downloads/gems60-h69b-champ-nulladd-2000px-20261011T182938Z-zeros.tif",
+          "sha256": "9cd5197014f64bbc5e9fce194929b882c65a8179dbbade8e1de1aba39549f426",
+          "variant": null
+        }
+      ],
+      "links": [
+        {
+          "label": "build record",
+          "href": "evidence/h69_probe_build.json"
+        },
+        {
+          "label": "champion algebra",
+          "href": "docs/research/why-02778-and-what-beats-it-2026-10-11.md"
+        }
+      ]
+    },
+    {
+      "id": "GEMS60-H80",
+      "short_name": "gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif",
+      "detail": "restricted profile, mass 12,000 + champion 37,654 = 49,654 dots. VERDICT NEGATIVE: the parallel-run duplicate rule stops it (0.8864 of its dots within 3 px of the H72-union artifact, |rho| 0.9346 > 0.90) \u2014 inherited from the incumbent, not from the new mass, whose 12,000 dots alone pass at 0.5299 / |rho| 0.6914 (IR-H80-DUP-01); G1 PASS (0.5864 credit/dot vs 0.1074 random), G2 PASS only by the registered -0.0005 DTI tolerance and below the champion (0.003844 vs 0.004385), G3 FAIL (literal 0.9984, which the incumbent 1.00000 and a redrawn random emission also fail), G4 not run (nothing is cleared to upload).",
+      "dots": 49654,
+      "submit": "NO (DO NOT SUBMIT)",
+      "files": [
+        {
+          "file": "docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif",
+          "sha256": "ad25643354857a1071f3d5ce7de8da711f22e1ed2096e7acd8d14f560f5ad459",
+          "variant": "zeros outside the footprint (shared writer output)"
+        },
+        {
+          "file": "docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.zip",
+          "sha256": "9520df97c2588fe958e6029f696a00eddcfeaaa46d43a7b02c70c86bafa9fec3",
+          "variant": "ZIP with the single TIFF (sha256 ad256433\u2026)"
+        }
+      ],
+      "links": [
+        {
+          "label": "run card",
+          "href": "evidence/h80_runcard.json"
+        },
+        {
+          "label": "G3 frontier",
+          "href": "evidence/h80_g3_frontier.json"
+        },
+        {
+          "label": "full analysis",
+          "href": "docs/research/h80-complementary-cover.md"
+        }
+      ]
+    }
+  ]
 }

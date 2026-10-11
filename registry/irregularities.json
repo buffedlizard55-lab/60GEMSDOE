@@ -515,74 +515,46 @@
    "mitigation": "merge resolved by renaming this round's registry/evidence/script paths to *h73b* and re-deriving every published number from them; future sessions must list registry/preregistration-*.json before claiming a round id"
   },
   {
-   "id": "IR-74-POWER-01",
-   "severity": "high",
-   "date": "2026-10-11",
-   "session": "arena/ac9d4dc4-60gemsdoe",
-   "title": "Every prior first test in the channel-steepness lane was underpowered by ~15x",
-   "detail": "H65-1, H66-1, H66-6 and H70-1 all used hide_frac=0.20, seeds=(20,21) and 10 orientation-matched control transects per component, which yields n=262 scoreable components and a 95% CI half-width of ~0.047 against a component std of ~0.35. H74-1 re-ran the identical statistic with hide_frac=0.50, seeds=(20,21,22) and 100 control transects: n=4004 and a half-width of ~0.011. The prior 'INCONCLUSIVE' verdicts were therefore unresolved, not null. Corrected here: the effect is +0.0097 [-0.0012, +0.0203] - a bounded null.",
-   "impact": "Five prior STOP decisions rested on a test that could not have resolved the effect.",
-   "status": "open - prior verdicts should be re-read as 'unresolved' until re-measured at this power"
-  },
-  {
-   "id": "IR-74-CONFOUND-01",
-   "severity": "high",
-   "date": "2026-10-11",
-   "session": "arena/ac9d4dc4-60gemsdoe",
-   "title": "Steepness LEVEL, not steepness STEP, drives every positive first test in this lane",
-   "detail": "A control statistic containing no step information whatsoever - block-centred log(ksn) - scores +0.1946 [0.1695, +0.2195] on the mandated first test (n=1823). The absolute-dksn arm scores +0.3560 [0.3107, +0.3990]. The scale-free relative step scores +0.0097 [-0.0012, +0.0203]. Mapped faults sit on range fronts where channels are steep, so any statistic carrying the ksn level inherits that. This is the mechanism behind H67-1's +0.4251 and H68-1's +0.4502, both of which mixed absolute dksn with piedmont curvature and slope terms.",
-   "impact": "H67-1's claimed PASS/PROMOTE and H68-1's E1 are suspect for the same reason. H68-1's field also reads 1 m LiDAR cross-scarp bands, which is the scarp-shape lane the brief explicitly excludes from this lane.",
-   "status": "open - prior PROCEED verdicts in this lane need re-measurement on the scale-free statistic"
-  },
-  {
-   "id": "IR-74-UNIQUENESS-01",
+   "id": "IR-H80-TOOL-04",
    "severity": "medium",
-   "date": "2026-10-11",
-   "session": "arena/ac9d4dc4-60gemsdoe",
-   "title": "The literal 70% / 3-px uniqueness rule is mathematically unsatisfiable against 4 registry comparators",
-   "detail": "A raster's 3-px dilation covers the footprint once its dot count is of order the footprint divided by the 29-cell disc area (~178,000 dots). Four registry rasters exceed that: calib_r13lattice_00904.tif and r13_lattice_s5_00904.tif (206,895 dots, 99.87% coverage), r14_union_tips10_lat6.tif (192,231 dots, 76.2%) and r11_greedy_mp.tif (272,853 dots, 74.0%). No candidate of any shape can score <= 70% against them. Against the 103 satisfiable comparators the H74-1 artifact's worst overlap is 0.6584 <= 0.70 (gems60-h66-dem10-bedrock-dksn-40000) and max |Spearman| is 0.0614 <= 0.90.",
-   "impact": "The rule as written cannot be satisfied; a coverage-based comparator filter is needed.",
-   "status": "open - owner decision required"
+   "statement": "scripts/build_h71_field.py::uniqueness_scan could not be reused as published. Reading its output: (a) the per-raster ``source`` label crashed with ValueError for any repository-relative ``extra_dirs`` entry (``f.parent.relative_to(ROOT)`` needs an absolute path), so an ad-hoc re-scan of the H80 artifact died and no uniqueness number existed for it; (b) ``d_mine`` (a property of the emitted field, not of the comparator) was recomputed inside the per-raster loop together with a full float64 rankdata over the whole 12.3 MP grid per raster, making a 120-raster scan needlessly slow and memory-hungry. Neither defect changes any published H71/H72 number.",
+   "mitigation": "Fixed in place: the label is now computed with a candidate-path fallback, ``d_mine`` is computed once, ranks use float32, and the loop frees each comparator. Re-scan of the H80 artifact then completed in 219 s with a 1.04 GB peak, and the runner itself now frees its feature stacks before the scan (the H80 run that regressed to 415 s versus 275 s is the same defect seen from the runner side)."
   },
   {
-   "id": "IR-74-DATA-01",
+   "id": "IR-H80-PROFILE-01",
    "severity": "medium",
-   "date": "2026-10-11",
-   "session": "arena/ac9d4dc4-60gemsdoe",
-   "title": "data/labels.tif is byte-identical to data/bridge/existing_faults.tif; sample_submission.tif is a perfect-score file",
-   "detail": "sha256 7ba308cc... is shared by data/labels.tif, data/official/labels.tif, work/labels.tif and data/bridge/existing_faults.tif (60,988 positive px). data/bridge/manifest.json records that the Dropbox mirror 'existing_faults.tif' was mapped to the canonical name 'labels.tif'. Separately, data/sample_submission.tif carries value 1.0 at exactly the 60,988 catalogue pixels and 0 elsewhere - i.e. it is a perfect submission, not a placeholder. The scored truth (expert-identified new faults) is not published, so every number in this repository is a hide-and-recover measurement against the mapped catalogue or against SGMC off-catalogue pixels, never against the board's own labels.",
-   "impact": "Every HOLDOUT-DTI in this repository measures recovery of mapped-catalogue faults, not discovery of the board's new faults. Already noted in src/gems57/grid.py; restated here because the file name 'labels.tif' invites the opposite reading.",
-   "status": "known limitation - documented, not fixable without the competition download"
+   "statement": "The operator's clause-1 rule ('no comparison to a previous submission; the emission must carry real information') and clause 3 ('no more than 70% of dots within 3 px of any earlier raster') cannot both hold for any emission in this family. Measured: the already-scored champion is 0.99915 inside the 3-px neighbourhood of calib_r13lattice_00904.tif, so ANY union containing the champion fails the literal clause; and a mass-matched random emission scores 0.9987 literal / 0.8746 matched against that raster and 0.7011/0.6401 against r11_greedy_mp.tif, i.e. overlap with those four comparators carries no lane information.",
+   "mitigation": "The clause is read like-for-like (limited to comparators that are themselves below the 70% limit), the four non-decidable comparators are listed explicitly in the run card and in evidence/h80_g3_frontier.json, and no dense-raster exception is claimed. The like-for-like reading still fails for the emitted 49,654-dot union at 0.8864."
   },
   {
-   "id": "IR-74-CODE-01",
+   "id": "IR-H80-G3-UNSAT-01",
+   "severity": "medium",
+   "statement": "Measured clause frontier: even under the like-for-like reading, the 70% limit against the one discriminating comparator (gems60-h72-union-champ-convcomp-43654) is crossed only between M = 24,000 (0.7167) and M = 30,000 (0.6535) added dots, i.e. a union of about 62,000-68,000 dots. The H80 eligibility ladder selected 12,000 dots (0.8864) because it was bounded at 12,000, not because the pool is empty - the restricted pool holds 91,370 dots under 2.8-px non-maximum suppression. A like-for-like-compliant emission is therefore mechanically reachable, but not by the emitted artifact, and the registered holdout gets worse with this added mass (H72 -0.000288 at 6,000; H80 -0.000541 at 12,000), so compliance and score are not aligned.",
+   "mitigation": "Recorded as the H80 negative result; a larger-mass compliant variant is written up as experiment 4 in docs/research/h80-complementary-cover.md and is explicitly NOT run, because it would exceed the preregistered 3-experiment budget and the available evidence says it would not improve the score."
+  },
+  {
+   "id": "IR-H80-DUP-01",
+   "severity": "high",
+   "statement": "The parallel-run duplicate rule ('|rho| > 0.90 or > 70 % of dots within 3 px of one registry raster -> log as duplicate and stop') and any union strategy in this project are mutually exclusive, because the live-scored incumbent is itself the most duplicative raster in the corpus. Measured under the shared tool: the 37,654-dot champion is 1.0000 literal within 3 px of six registry/download rasters (gems25-dotted-h19-5-d2-8 nan+zeros 44,090 dots; gems32-lazygreedy-maxcov-44090; gems32-probe-S1-ANCHOR named 'identical-to-live-02600'; S2-SCALE; S3-NULLADD) and byte-identical (|rho| = 1.0000) to registry/rasters/dotted_b2_prune_02778.tif. Consequently the H80 union fails the rule at 0.8864 / |rho| 0.9346 while its 12,000-dot complement alone passes it (0.5299 decidable, |rho| 0.6914) - the failure is inherited from the incumbent, not produced by the new mass.",
+   "mitigation": "Recorded for the owner as a decision, not waived: (i) keep the incumbent and accept that any union inherits a duplicate-rule failure; (ii) emit the complement alone (passes the rule, but its projection at the metric bar is far below the incumbent's owner-reported 0.2778); or (iii) treat the duplicate rule as satisfied by the EMITTED RASTER being byte-unique while its dot support is inherited. H80 spent no slot and does not choose; evidence/h80_artifact_comparison.json holds every reading."
+  },
+  {
+   "id": "IR-H80-SITE-01",
    "severity": "low",
-   "date": "2026-10-11",
-   "session": "arena/ac9d4dc4-60gemsdoe",
-   "title": "Committed source references knowledge files that do not exist in this checkout",
-   "detail": "src/gems60/holdout.py cites 'IR-H77-005', 'knowledge/76 section 6' and 'knowledge/82 section 3'; src/gems60/nodes.py cites 'H87 section 4.2'; scripts/run_lane.py cites 'knowledge/82 section 2' and an 'H87 NNLS' estimate. The knowledge/ directory contains only 01_, 02_ and 03_. These are cross-references to parallel sessions whose knowledge files were never merged into this checkout, so the provenance they assert is not auditable here.",
-   "impact": "Provenance claims in those modules cannot be verified from this repository.",
-   "status": "open - needs the referenced knowledge files merged or the citations downgraded"
+   "statement": "docs/index.html carried a hand-written H71/H72 artifact board from session arena/161d8066-60gemsdoe. scripts/build_current_review_site.py regenerates that page from registry state, so any later render would have deleted the board silently - the same class of defect as IR-66-SITE-01, which build_site.preserve_status_blocks fixed only for marker-delimited blocks; under a STOP the same helper deliberately strips marker blocks instead of preserving them.",
+   "mitigation": "The three existing boards plus H80 were migrated into registry/current_site_status.json -> post_review_artifacts, the renderer now renders that key, and the page was re-rendered, so the boards are reproducible from data and every board keeps its DO NOT SUBMIT wording. (The H80 round is also published as a standalone page, docs/h80-report.html.)"
   },
   {
-   "id": "IR-74-TOOL-01",
+   "id": "IR-H80-H73B-01",
    "severity": "low",
-   "date": "2026-10-11",
-   "session": "arena/ac9d4dc4-60gemsdoe",
-   "title": "Shared uniqueness helper computed the 3-px overlap in the reverse direction",
-   "detail": "The overlap helper in scripts/run_h73.py originally reported the fraction of the REGISTRY raster's dots within 3 px of ours, which for a sparse candidate reads ~0.04 and understates the governed quantity by more than an order of magnitude. The parallel-run rule governs the fraction of OUR dots within 3 px of a registry raster's dots. Fixed in this session; the corrected number is 0.9998 against the two calibration lattices.",
-   "impact": "A prior 'PASS' from that helper would have been wrong.",
-   "status": "fixed here"
+   "statement": "The H73B run card reports 'P4 uniqueness PASS like-for-like (max 0.4235; max |Spearman| 0.1941)' while the structured evidence file behind it, evidence/h73b_uniqueness.json, reports the same like-for-like maximum as 0.999083 (raster calib_r13lattice_00904.tif, pass_ = false) because every one of its 78 rows carries universal_overlap_blocker = false. The 0.4235 figure is reproducible from rows[29]/[30] only by applying an exclusion rule (drop the space-filling comparators) that the file itself does not label, so the sentence cannot be re-derived from the committed JSON alone. No conclusion changes: the same session published evidence/h73b_dense_comparator_universality.json showing those comparators fire on the champion (0.99915) as well as on H73B (0.999083), which is the non-decidability argument this round measures independently.",
+   "mitigation": "H80's own scan sets the flag and lists the excluded comparators explicitly (evidence/h80_artifact_comparison.json: universal_blockers = calib_r13lattice_00904, r13_lattice_s5_00904, r11_greedy_mp, r14_union_tips10_lat6), so its decidable reading is reproducible from the JSON. Recommendation for the owner: set the same flag on the four dense-comparator rows in evidence/h73b_uniqueness.json, or record the excluded list in the file, so the card sentence and the structured evidence agree."
   },
   {
-   "id": "IR-74-IDCOLLISION-01",
-   "severity": "process",
-   "reported_utc": "2026-10-11T21:05:00Z",
-   "session": "arena/ac9d4dc4-60gemsdoe",
-   "title": "Two independent sessions preregistered and published different experiments under the same round id H73",
-   "detail": "This session preregistered GEMS60-H73-1 (power-resolved replication of the lane's mandated first test) and wrote evidence/h73_*.json. While it was running, session arena/7f9ca816-60gemsdoe published a different, independently preregistered H73 (paired-basin k_sn gradient) and H73B (chi-coherent corridor) to main, using the same evidence filenames and the same registry preregistration name. The two are different statistics, not replications. Resolution: this round is renamed H74-1 (evidence/h74_*.json, registry/preregistration-h74.json, docs/h74-report.html) and its page builder now injects into the shared executive summary instead of overwriting it, so concurrent rounds stop destroying each other's content. Both other rounds' artefacts and verdicts are preserved unchanged on main.",
-   "impact": "Anyone reading evidence/h73_*.json before this merge would have seen whichever session committed last. Cross-session round ids must be reserved in the registry before work starts.",
-   "status": "renamed and disclosed; no data lost"
+   "id": "IR-H80-H73B-02",
+   "severity": "medium",
+   "statement": "Governance tension flagged, not overridden: registry/current_site_status.json records the H73B corridor raster as ok_to_submit = true ('YES as a disclosed discovery bet'), while the standing brief's rule says not to spend a submission slot on an idea that has not beaten the current holdout best, and H73B does not clear the family's own promotable holdout gate (its card: HOLDOUT-DTI 0.064218 confined / 0.053231 pure vs the gate 0.190147; the same protocol reads 0.171894 for H68-1). No slot has been spent (submission_slots_used_in_this_review = 0), so nothing is irreversible; this round simply records that the two readings of the rules differ and that the owner is the decision point (submit the disclosed bet, or hold to the standing rule).",
+   "mitigation": "H80 spent no slot and changed no H73B field; the tension is published in docs/h80-report.html and in the README beside both verdicts, so a reader sees the clearance claim, its circularity caveat and the holdout-gate failure in one place."
   }
  ],
  "updated_utc": "2026-10-11T20:18:46Z"

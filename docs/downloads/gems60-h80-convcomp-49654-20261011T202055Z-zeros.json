@@ -1,0 +1,126 @@
+{
+  "file": "gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif",
+  "sha256": "ad25643354857a1071f3d5ce7de8da711f22e1ed2096e7acd8d14f560f5ad459",
+  "bytes": 174010,
+  "submission_name": "60GEMSDOE-H80-CONVCOMP-49654-20261011T202055Z",
+  "note": "H80: 12000 new dots in the champion complement (convergent field, baseline7); union with the live-scored 0.2778 artifact",
+  "note_chars": 120,
+  "validator": {
+    "file": "/home/user/60GEMSDOE/docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif",
+    "bytes": 174010,
+    "sha256": "ad25643354857a1071f3d5ce7de8da711f22e1ed2096e7acd8d14f560f5ad459",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.004043762106448412,
+    "emitted_positive_pixels": 49654,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 49654,
+    "footprint_fraction": 0.0096091379507537
+  },
+  "template_report": {
+    "path": "/home/user/60GEMSDOE/docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif",
+    "bytes": 174010,
+    "sha256": "ad25643354857a1071f3d5ce7de8da711f22e1ed2096e7acd8d14f560f5ad459",
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "ref_bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "blocksize": [
+      256,
+      256
+    ],
+    "fixture_grid": false,
+    "has_validity_mask": false,
+    "nan_pixels": 0,
+    "infinity_pixels": 0,
+    "n_nan": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.004043762106448412,
+    "n_nonzero": 49654,
+    "mass": 49654.0,
+    "mass_outside_footprint": 0,
+    "problems": [],
+    "ok": true,
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+  },
+  "zip_file": "gems60-h80-convcomp-49654-20261011T202055Z-zeros.zip",
+  "zip_sha256": "9520df97c2588fe958e6029f696a00eddcfeaaa46d43a7b02c70c86bafa9fec3",
+  "approved_for_weekly_slot": false,
+  "promoted": false,
+  "submission_slots_used": 0,
+  "status": "locally validated within separately recorded inventory scope; not organizer acceptance or slot approval",
+  "metadata": {
+    "preregistration": "registry/preregistration-h80.json",
+    "adopted_field": "baseline7",
+    "final_mass": 12000,
+    "min_sep_px": 2.8,
+    "complement_px": 4.0
+  }
+}

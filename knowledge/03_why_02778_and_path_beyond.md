@@ -113,13 +113,44 @@ the LM instrument (`evidence/h33_validation.json`).
 
 ## 5. The ranked path (registry, with the honest costs)
 
+**Update after round H80 (2026-10-11, `evidence/h80_runcard.json`) — the path below stands, with two
+new, measured constraints on it:**
+
+* *The uniqueness clause has a frontier.* Clause 1 (a dense field) and the literal clause 3
+  (≤ 70 % of dots within 3 px of any earlier raster) are jointly unsatisfiable: the incumbent
+  champion is 0.99915 inside the 3-px neighbourhood of `calib_r13lattice_00904.tif`, and a
+  mass-matched drew-random emission scores 0.99871 there — so four comparators (the two lattices,
+  `r11_greedy_mp` at 0.7397 footprint coverage, `r14_union_tips10_lat6` at 0.7620) cannot be
+  cleared by anything. Against the one discriminating comparator the limit is crossed only between
+  24,000 (0.7167) and 30,000 (0.6535) added dots, i.e. a union of ≈62,000–68,000 dots. The emitted
+  12,000-dot complement (49,654-dot union) therefore fails like-for-like at 0.8864 — and the
+  *incumbent* fails the same measurement (one-to-one matched 0.7096). Measured frontier:
+  `evidence/h80_g3_frontier.json`, `evidence/h80_artifact_comparison.json`.
+* *The population-matched instrument and the catalogue holdout disagree in sign, again.* The
+  12,000-dot complement scores 0.5864 credit/dot (5.5× random, union − champion +0.05321
+  [0.04921, 0.05721] on the SGMC off-catalogue instrument) while the registered hide-and-recover
+  holdout puts the union 0.000541 **below** the incumbent (0.003844 vs 0.004385, inside the −0.002
+  tolerance, CI excludes zero). Adding mass helps the first and slightly hurts the second; the
+  only arm in the family that improved the second was the broad 85,654-dot emission that clause 1
+  forbids. Until the instrument question below is settled, *neither* proxy can certify a slot.
+* *Marginal analysis of the ladder* (diagnostic, `ladder_restricted`): the 3,000-dot rungs carry
+  0.4881 credit/dot, falling to 0.2939 at 12,000. Discounted by the truth-density ratio
+  (hidden truth ≈12.7 k px vs SGMC-off ≈62.2 k px, ÷4.9), the marginal rung credits are
+  ≈0.13 / 0.11 / 0.08 / 0.03 — i.e. the ladder turns negative in *transfer* terms at the last
+  rung. That is the quantitative reason the ladder cap, not the pool, decided the emission size.
+
 1. **Instrument repair first** (hypothesis #1, `docs/hypotheses.html`): relief-stratified
    thinning of the off-catalogue sample, then re-score every registry raster. Until then no
-   "no skill" verdict — including the knickpoint lane's — is fully trustworthy.
+   "no skill" verdict — including the knickpoint lane's — is fully trustworthy. H80 sharpens
+   the case: its added mass is 5.5× random on that instrument, yet the density-discounted
+   marginal credit crosses the metric bar inside the same ladder.
 2. **H65-2 mountain-front piedmont junction at 10 m** (Bull & McFadden 1977): the
    hillslope/fan slope break is where range-bounding faults sit *even when the scarp is
    buried*; weight by front sinuosity. One new reduction band in the committed `dem10-chi`
    runner (~minutes of runner time). Registered as the next session's first experiment.
+   **H80 measured this layer and it is null**: the mountain-front rank added
+   +0.00033 [−0.00103, +0.00179] credit/dot over the seven-layer baseline at 6,000 dots, so
+   the front band is demoted behind the facet and relief-stratification work below.
 3. **H65-3 fan-apex alignment + fan-head trenching** (confinement jump ≥ 3×, ≥ 3 apices on
    one strike).
 4. **H65-4 divide asymmetry of tilted blocks** (χ across divides; Willett et al. 2014,
