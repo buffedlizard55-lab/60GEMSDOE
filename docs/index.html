@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>60GEMSDOE - Geothermal Target Generation</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; color: #333; background: #f9f9f9; }
+        header { background: #005A9C; color: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center; }
+        h1 { margin: 0 0 10px 0; }
+        .hero-box { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; text-align: center; border: 2px solid #005A9C; }
+        .btn { display: inline-block; background: #28a745; color: #fff; text-decoration: none; padding: 15px 30px; font-size: 1.2rem; font-weight: bold; border-radius: 50px; margin-top: 15px; transition: background 0.3s; }
+        .btn:hover { background: #218838; }
+        nav { background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        nav a { margin-right: 15px; text-decoration: none; color: #005A9C; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        .card { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        code { background: #eee; padding: 2px 5px; border-radius: 4px; }
+        .warning { color: #dc3545; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>60GEMSDOE Project</h1>
+        <p>Tectonic-Geomorphology Analysis for the DOE GEMS Competition</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="executive-summary.html">Executive Summary & Submission Guide</a>
+        <a href="hypotheses.html">Hypotheses</a>
+    </nav>
+
+    <div class="hero-box">
+        <h2>Ready to Submit!</h2>
+        <p>We have successfully generated a unique TIF submission testing our <strong>Channel Steepness Knickpoints (H61)</strong> hypothesis.</p>
+        <p class="warning">IMPORTANT: Predicted values must be in range [0, 1]. Our file complies with this format.</p>
+        <a href="downloads/submission.tif" class="btn" download="h61-geomorph-submission.tif">📥 Download TIF Submission</a>
+    </div>
+
+    <div class="card">
+        <h3>About This Submission</h3>
+        <p>This submission tests a Tectonic-Geomorphology hypothesis focused on <strong>channel steepness and knickpoints</strong> rather than simple scarp shape. Using principles from Kirby and Whipple (2012) and Perron and Royden (2013), we proxy drainage from the DEM to isolate regions where channels exhibit collinear steepness steps across independent drainages. This reveals spatial gradients in rock uplift along active hidden structures.</p>
+        <ul>
+            <li><strong>Holdout DTI Score:</strong> 0.0130</li>
+            <li><strong>Raster SHA256:</strong> (Check submission_card.json for details)</li>
+            <li><strong>Validator Status:</strong> Passed (Values mapped to [0,1], matches CRS and dimensions)</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>Core Values</h3>
+        <p><strong>Maximize P(Win):</strong> In every decision, we weigh tradeoffs, assess risk, and choose the path that maximizes the probability that Arena succeeds.</p>
+        <p><strong>Own the Outcome:</strong> We own results end to end. We treat failure and success as signals and use them to improve.</p>
+    </div>
+</body>
+</html>

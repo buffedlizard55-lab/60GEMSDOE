@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Hypotheses - 60GEMSDOE</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; color: #333; background: #f9f9f9; }
+        header { background: #005A9C; color: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center; }
+        h1 { margin: 0 0 10px 0; }
+        nav { background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        nav a { margin-right: 15px; text-decoration: none; color: #005A9C; font-weight: bold; }
+        nav a:hover { text-decoration: underline; }
+        .card { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        h3 { color: #005A9C; border-bottom: 2px solid #eee; padding-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Geological Hypotheses Log</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="executive-summary.html">Executive Summary & Submission Guide</a>
+        <a href="hypotheses.html">Hypotheses</a>
+    </nav>
+
+    <div class="card">
+        <h2>3-5 Future Candidate Geological Hypotheses</h2>
+        <p>Ranked by expected DTI improvement and implementation cost, these new hypotheses look beyond surface manifestations into distinct data correlations not captured by the current models.</p>
+
+        <h3>1. Deep Geothermal Upflow Proxies via Magnetotelluric (MT) + Gravity Gradients</h3>
+        <ul>
+            <li><strong>Layers involved:</strong> <code>cond_surf</code> (band 17), <code>depth_to_base_surf</code> (band 15), <code>iso_grav_anom</code> (band 13).</li>
+            <li><strong>Target Physical Signature:</strong> Spatial overlap of high-gradient boundaries in both gravity (indicating basement offset) and MT conductivity (indicating fluid pathways). We look for high local gradient product `grad(grav) * grad(MT)` aligned along a single strike.</li>
+            <li><strong>Why it catches hidden faults:</strong> Fluid pathways associated with geothermal activity often alter conductivity but don't always leave surface scarps. The catalogue heavily relies on surficial maps.</li>
+            <li><strong>Difference from Repo:</strong> H33-D uses MT gradient orientation coherence, but this demands concordant gravity steps (basement offsets) verifying the fluid conduit is fault-hosted.</li>
+            <li><strong>Implementation Cost:</strong> Low. Can be built quickly in Python with scipy.ndimage.</li>
+        </ul>
+
+        <h3>2. Radiometric Alteration Halos around Structural Lineaments</h3>
+        <ul>
+            <li><strong>Layers involved:</strong> GeoDAWN radiometric K, Th, U (external bands), <code>det_elev</code> (band 12).</li>
+            <li><strong>Target Physical Signature:</strong> Low K / High Th ratios indicative of hydrothermal alteration, located specifically within 300m of topographic lineaments or valleys.</li>
+            <li><strong>Why it catches hidden faults:</strong> Hydrothermal alteration creates distinct radiometric signatures. Where these line up with minor topographic weaknesses not mapped as major faults, they reveal fluid-flow active structures.</li>
+            <li><strong>Difference from Repo:</strong> Current models treat radiometrics as an edge detector; this explicitly models the ratio anomaly (K depletion) typical of geothermal alteration.</li>
+            <li><strong>Implementation Cost:</strong> Medium. Requires accurate ratio computations robust to sensor noise.</li>
+        </ul>
+
+        <h3>3. Thermal Infrared Emissivity Anomalies (Requires New External Data)</h3>
+        <ul>
+            <li><strong>Layers involved:</strong> ASTER or Landsat 8 TIR (Thermal Infrared), <code>det_elev</code> (band 12).</li>
+            <li><strong>Target Physical Signature:</strong> Sub-pixel thermal anomalies aligned in linear arrays, specifically at night-time when solar heating is removed.</li>
+            <li><strong>Why it catches hidden faults:</strong> Active geothermal systems emit heat along fault traces. Night-time TIR can detect subtle linear heat signatures missed by standard optical/lidar surveys.</li>
+            <li><strong>Difference from Repo:</strong> Introduces direct thermal sensing, the most proximal proxy to geothermal vents, which the current repository entirely lacks.</li>
+            <li><strong>Implementation Cost:</strong> High. Requires fetching ASTER/Landsat TIR from EarthExplorer/USGS APIs (free, official source: https://earthexplorer.usgs.gov), processing night-time scenes, and masking albedo effects.</li>
+        </ul>
+
+        <h3>4. Strain-Accumulation Zones from InSAR Velocity Gradients (Requires New External Data)</h3>
+        <ul>
+            <li><strong>Layers involved:</strong> Sentinel-1 InSAR LOS velocity maps (e.g., COMET or ASF DAAC), existing USGS fault lines.</li>
+            <li><strong>Target Physical Signature:</strong> Sharp linear discontinuities in InSAR unwrapped phase velocities.</li>
+            <li><strong>Why it catches hidden faults:</strong> Blind faults actively accommodating strain will show subtle creep or interseismic velocity gradients across them, completely invisible to DEMs or magnetics.</li>
+            <li><strong>Difference from Repo:</strong> Current repository uses static fields; InSAR introduces time-series deformation.</li>
+            <li><strong>Implementation Cost:</strong> High. InSAR processing is complex; relying on pre-processed DAAC products (free, official: https://search.asf.alaska.edu/) makes it feasible but requires handling large rasters and referencing to the local grid.</li>
+        </ul>
+    </div>
+</body>
+</html>
