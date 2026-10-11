@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-10-11T16:54:12Z",
+ "generated_utc": "2026-10-11T18:25:34Z",
  "sources": [
   {
    "id": "competition",
@@ -1898,7 +1898,7 @@
    }
   },
   "approved_for_weekly_slot": false,
-  "promoted": true,
+  "promoted": false,
   "superseded_primaries": [
    {
     "name": "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros",
@@ -1915,7 +1915,8 @@
     "verdict": "NEGATIVE - deliverable negative result; do not spend a submission slot (brief: never submit anything that has not beaten the family's best promotable holdout)",
     "status_line": "PRIMARY = this session's GEMS61 thermally-corroborated knickpoint-lane file. ITS VERDICT IS NEGATIVE: it is unique, format-valid, leakage-free and fully documented, but it is NOT recommended for a weekly slot. Measured: pooled HOLDOUT-DTI (evaluator gems52-pooled-hide-v1, 36,439 withheld positives, 20 km-block bootstrap, 1,000 draws / 161 clusters) = 0.002495, 95% CI [0.001506, 0.003511]; paired d"
    }
-  ]
+  ],
+  "decision_erratum": "2026-10-11: literal H67 uniqueness failed. Historical build only; DO NOT SUBMIT. See evidence/h67_uniqueness.json."
  },
  "holdout": {
   "preregistration": "GEMSDOE32-PREREG-1",
@@ -2809,6 +2810,12 @@
    "title": "H63-A GeoTIFF (gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif) has a drifted affine transform origin (243349.9656 vs 243350.0) and fails sample-grid alignment",
    "statement": "In addition to the uncomputed/projected holdout_dti and 36,000-vs-42,000 dot mismatch documented in IR-65-H63-01, direct inspection of docs/downloads/gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif reveals that its affine geotransform origin is (243349.965575182, 4670136.453840564) instead of sample_submission.tif's (243350.0, 4670136.453999999). scripts/audit_shipped.py did not previously check affine transform equality against sample_submission.tif.",
    "mitigation": "Updated scripts/audit_shipped.py to verify np.allclose(tuple(prof['transform'])[:6], tuple(tpl_prof['transform'])[:6], atol=0.05) and record exact_sample_transform in docs/downloads/submissions_manifest.json."
+  },
+  {
+   "id": "IR-60-PROMOTION-CONFLICT",
+   "severity": "high",
+   "statement": "H67 PROMOTE banners and cards contradicted authoritative STOP and a raw 3px overlap of 0.998675; a dense-raster exclusion silently relaxed the literal 0.70 limit.",
+   "mitigation": "Published verdict corrected to negative; shared renderer suppresses old banners while stopped; selector uses raw overlap; H67 publishers now STOP-guarded. See docs/research/submission-status-review.md."
   }
  ]
 }

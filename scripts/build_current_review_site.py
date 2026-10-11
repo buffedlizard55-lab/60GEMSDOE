@@ -74,10 +74,10 @@ def _common_status(status: dict, *, prefix: str = "") -> str:
     mean_text = f"{first['mean_log_ksn_step_contrast']:+.4f}"
     hold_text = f"{hold['mean']:.5f}"
     return f'''<div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
-<p><b>Latest run:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
+<p><b>Governing STOP record:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
 <strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast {mean_text},
 95% CI [{ci[0]:+.4f}, {ci[1]:+.4f}] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
-The earlier c7653 run also stopped. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
+The earlier c7653 run also stopped. Later H66/H67 artifacts do not lift this STOP; their literal uniqueness clearance failed. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
 <p><a class="btn" href="{tif}" download>Download the existing H65-1 GeoTIFF for research only</a>
 <strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
 <p>H65-1 diagnostic <b>HOLDOUT-DTI</b>: {hold_text} [{hold['ci95'][0]:.5f}, {hold['ci95'][1]:.5f}],
@@ -175,6 +175,7 @@ file remains an audit example, not a recommendation.</p>'''
     # Submission/executive page: disclose why the correct file is research-only and distinguish
     # format validity from organizer acceptance and uniqueness clearance.
     body = _common_status(status) + f'''<h2>Download / submission decision</h2>
+<p><a href="research/submission-status-review.md">Latest repository audit and H66/H67 decision erratum</a> · <a href="../evidence/review_run_card.json">Review run card</a> · <a href="../evidence/submission_status_audit.json">Fresh format audit</a></p>
 <p><a class="btn" href="{_site_href(art['path'])}" download>Download H65-1 GeoTIFF (research only)</a>
 <a class="btn alt" href="{receipt_href}">Local format receipt</a></p>
 <ul><li><b>OK to download for research:</b> yes.</li><li><b>OK to submit to DrivenData:</b> <b>no</b> — the first-test stop and failed raw-overlap gate prohibit promotion.</li>
@@ -218,7 +219,7 @@ this is an algebraic condition, not a score projection.</p>
     _write_page((docs / "leaderboard.html"), _base("Public leaderboard — 2026-10-11 manual snapshot", body, "leaderboard.html", status=status))
 
     body = _common_status(status) + f'''<h2>Executive findings</h2>
-<ol><li><b>H65-1 is the latest run and stops.</b> The first-test mean was {first['mean_log_ksn_step_contrast']:+.5f}
+<ol><li><b>H65-1 is the governing STOP record.</b> The first-test mean was {first['mean_log_ksn_step_contrast']:+.5f}
 (95% CI [{first['ci95'][0]:+.5f}, {first['ci95'][1]:+.5f}]); it is inconclusive and therefore fails the preregistered PROCEED gate.
 The diagnostic HOLDOUT-DTI was {hold['mean']:.5f} [{hold['ci95'][0]:.5f}, {hold['ci95'][1]:.5f}], not a competition score.</li>
 <li><b>H65-1 is not uniqueness-cleared.</b> The reported max |Spearman| is {unique['max_abs_spearman_reported']:.4f},

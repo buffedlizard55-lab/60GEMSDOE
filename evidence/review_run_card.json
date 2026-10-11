@@ -1,0 +1,104 @@
+{
+  "run": "a856d257-review",
+  "hypothesis": "Strike-aligned channel steepness steps across independent drainages indicate unmapped faults.",
+  "mechanism": "Fault-driven base-level changes can generate chi-profile breaks; not every break is tectonic.",
+  "named_non_fault_process": "Lithologic erodibility contacts and playa base-level change.",
+  "experiment_count_this_review": 0,
+  "new_raster_generated": false,
+  "holdout_dti": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator": "gems57-pooled-hide-v2",
+    "withheld_positive_pixels": 22641,
+    "mean": 0.01158,
+    "ci95": [
+      0.0084,
+      0.01462
+    ],
+    "random_mass_control": 0.03908,
+    "random_mass_control_ci95": [
+      0.03568,
+      0.04231
+    ],
+    "not_a_leaderboard_score": true,
+    "evidence": "evidence/h65_holdout.json",
+    "provenance": "Inherited H65-1 evidence; not rerun in this review"
+  },
+  "correlation_overlap_vs_registry": {
+    "expected_registry_rasters": 655,
+    "checked_registry_rasters": 651,
+    "complete_accessible_scan": false,
+    "max_abs_spearman_reported": 0.02819544413278874,
+    "max_final_dot_overlap_within_3px": 1.0,
+    "limits": {
+      "abs_spearman": 0.9,
+      "dot_overlap": 0.7
+    },
+    "byte_unique_among_checked": true,
+    "pixel_unique_among_checked": true,
+    "tool_verdict_unique": false,
+    "preplacement_surface_spearman_check_documented": false,
+    "postplacement_final_dot_overlap_check_documented": true,
+    "clearance": "NOT CLEARED: the raw 3-px overlap exceeds the 70% limit and the scan is incomplete. A matched random-control diagnostic does not override the literal gate.",
+    "evidence": "evidence/h65_uniqueness.json",
+    "overlap_control_evidence": "evidence/h65_overlap_control.json",
+    "provenance": "Inherited; incomplete scan, not rerun"
+  },
+  "raster_role": "Existing H65-1 research artifact, NOT a new submission",
+  "raster_sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
+  "validator_output": {
+    "path": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+    "bytes": 104586,
+    "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "ref_bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "blocksize": [
+      256,
+      256
+    ],
+    "fixture_grid": false,
+    "has_validity_mask": false,
+    "nan_pixels": 0,
+    "infinity_pixels": 0,
+    "n_nan": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0032575519289821386,
+    "n_nonzero": 40000,
+    "mass": 40000.0,
+    "mass_outside_footprint": 0,
+    "problems": [],
+    "ok": true,
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance",
+    "pinned_sha256_matches": true
+  },
+  "submission_name": "60GEMSDOE-H65-1-DEM10-KNICK-40000",
+  "note": "H65-1 native 3DEP 10m chi/ksn knickpoints, >=3 independent drainages, 40000 dots; E1 failed: NEGATIVE, research only",
+  "verdict": "negative",
+  "download_for_research": true,
+  "submit_to_competition": false,
+  "reason": "Binding first-test STOP and failed literal uniqueness. No selector promotion, no slot used."
+}
