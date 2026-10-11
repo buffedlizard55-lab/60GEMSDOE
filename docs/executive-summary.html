@@ -1,64 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Executive Summary & Submission Guide - 60GEMSDOE</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; color: #333; background: #f9f9f9; }
-        header { background: #005A9C; color: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center; }
-        h1 { margin: 0 0 10px 0; }
-        nav { background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        nav a { margin-right: 15px; text-decoration: none; color: #005A9C; font-weight: bold; }
-        nav a:hover { text-decoration: underline; }
-        .card { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        ol { padding-left: 20px; }
-        li { margin-bottom: 15px; }
-        .highlight { background: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin: 15px 0; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary — how to submit to the GEMS Prize (DrivenData #306)</title>
+<style>
+:root{--ok:#0a7d33;--bad:#b3261e;--ink:#1b1f23;--mut:#57606a;--bg:#f6f8fa;--card:#fff;--line:#d0d7de}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+.wrap{max-width:900px;margin:0 auto;padding:20px}
+.banner{border:2px solid var(--bad);background:#fff5f4;border-radius:10px;padding:16px 20px;margin:16px 0}
+.banner h2{margin:0;color:var(--bad);font-size:19px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:14px 0}
+ol li,ul li{margin:6px 0}
+code,pre{background:#eff1f3;border-radius:6px;padding:1px 5px;font-size:14px}
+pre{padding:12px;overflow:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+td,th{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#eaeef2}
+h1{font-size:24px}h3{margin:14px 0 6px}
+footer{color:var(--mut);font-size:13px;margin:24px 0}
+a{color:#1f6feb}
+</style>
 </head>
 <body>
-    <header>
-        <h1>Executive Summary & Submission Guide</h1>
-    </header>
+<div class="wrap">
+<h1>Executive summary — exactly how to submit</h1>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="executive-summary.html">Executive Summary & Submission Guide</a>
-        <a href="hypotheses.html">Hypotheses</a>
-    </nav>
+<div class="banner">
+<h2>First: this session's generated file must NOT be submitted (negative verdict).</h2>
+<p>The knickpoint-lane raster on the <a href="index.html">front page</a> is a validated, unique,
+portal-safe GeoTIFF — but it failed its preregistered lane test and scored 0.00214 on our pooled
+holdout against 0.086 for the best comparison arm. Submitting it would burn one of the three
+weekly slots for no upside. It is published so the negative result is auditable and reusable.</p>
+</div>
 
-    <div class="card">
-        <h2>Executive Summary</h2>
-        <p>The goal of this project is to discover hidden geothermal vents using multi-modal geophysical and topographic data for the DOE GEMS competition. We are testing the <strong>H61 Tectonic-Geomorphology Hypothesis</strong>.</p>
-        <p>Rather than relying solely on high-resolution LiDAR scarps (which degrade over time), this hypothesis leverages the idea that channel profiles persistently record base-level steps. We extract local valley networks and compute channel steepness, searching for collinear knickpoints (steps in steepness) that align across multiple independent drainages.</p>
-        <p>This approach gives us a unique signal uncorrelated with standard edge detectors and catalogue-heavy ML models, bringing true scientific discovery to the forefront.</p>
-    </div>
+<div class="card">
+<h3>The 60-second submission ritual (when a validated, PROMOTED file exists)</h3>
+<ol>
+<li><b>Download the file</b> from the front page download box (the <code>.tif</code>; the <code>.zip</code> is byte-identical inside, both are accepted).</li>
+<li>Open <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/">the submission form</a> (New submission).</li>
+<li><b>File to submit:</b> choose the downloaded <code>.tif</code>.</li>
+<li><b>Note (optional but required by our protocol):</b> paste the note printed on the front page —
+this session's would be:
+<pre>tectono-geomorphic chi/ksn knickpoint lane; 7653 concordant channel dots; E1 negative AUC 0.224; RESEARCH-ONLY, not promoted</pre></li>
+<li>Click <b>Create submission</b>. The public score (DW-Tversky) appears after scoring.</li>
+<li>Record the score on the site feed and in <code>evidence/</code> (ORGANIZER-CONFIRMED class) — a projection is never written as a score.</li>
+</ol>
+</div>
 
-    <div class="card">
-        <h2>How to Make a Submission</h2>
-        <p>Follow these exact steps to submit our generated TIF file into the competition:</p>
-        
-        <ol>
-            <li>
-                <strong>Download the file:</strong> Go to the <a href="index.html">Home</a> page and click the green <strong>"Download TIF Submission"</strong> button. The file will save as <code>h61-geomorph-submission.tif</code>.
-            </li>
-            <li>
-                <strong>Navigate to DrivenData:</strong> Go to the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/" target="_blank">Competition Submission Page</a>. Ensure you are logged into your account.
-            </li>
-            <li>
-                <strong>Upload:</strong> Click "Choose File" under the "File to submit" section and select the <code>h61-geomorph-submission.tif</code> you just downloaded.
-            </li>
-            <li>
-                <strong>Add Note (Optional):</strong> In the Note section, add a short comment to identify it, such as: <em>"H61: collinear steepness steps across drainages"</em>.
-            </li>
-            <li>
-                <strong>Submit:</strong> Click the submit button.
-                <div class="highlight">
-                    <strong>Note:</strong> Our file correctly guarantees all predicted values are in the range <code>[0, 1]</code> and matches the exact CRS, shape, and geotransform required.
-                </div>
-            </li>
-        </ol>
-    </div>
+<div class="card">
+<h3>Why “Predicted values must be in range [0, 1]” happened before, and why it cannot happen again</h3>
+<p>The official format allows <i>data outside the bounds to be null or NaN</i>, but a naive reader that
+ignores the nodata tag sees NaN and fails a literal [0,1] range test. <b>All our exports use the
+all-finite container:</b> 0 (not NaN) outside the footprint, values exactly in {0,1}, float32,
+EPSG:32611, 3730×3292 at 100 m, and the exact official geotransform
+<code>(100, 0, 243350, 0, −100, 4508550)</code>. The on-disk validator
+(<code>gems52.gates.format_report</code>) re-checks every one of those properties against
+<code>data/bridge/example_submission.tif</code> before anything is published, and fails closed.</p>
+</div>
+
+<div class="card">
+<h3>Format contract (from the official page, verified 2026-10-11)</h3>
+<table>
+<tr><th>requirement</th><th>official wording (page 967)</th><th>our guarantee</th></tr>
+<tr><td>CRS</td><td>“UTM zone 11N, EPSG 32611”</td><td>written and validator-checked</td></tr>
+<tr><td>resolution</td><td>“100m”</td><td>transform pinned</td></tr>
+<tr><td>bounds</td><td>“same bounds as the training data”</td><td>bounds equality checked</td></tr>
+<tr><td>outside bounds</td><td>“null or nan” (all-finite 0 also accepted — the current 0.2778 champion used it)</td><td>we ship 0-filled (NaN-free)</td></tr>
+<tr><td>layer/dtype</td><td>“single layer … 32-bit float”</td><td>single float32 band</td></tr>
+<tr><td>values</td><td>“between 0 and 1”</td><td>exactly {0.0, 1.0}; min/max checked</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>What “promoted” means here (parallel-run protocol)</h3>
+<p>A file is <b>promoted</b> only if it (a) beat the current holdout best under the shared
+hide-and-recover evaluator, (b) passed the uniqueness gate vs every registry raster
+(ρ ≤ 0.90 and ≤ 70% dot overlap), (c) passed the on-disk validator, and (d) was chosen by the
+separate selector step within the weekly slot cap. This session produced (b) and (c) but failed (a):
+the lane is a negative result. <b>Negative results are deliverables.</b></p>
+<p>Official sources for the ritual: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem &amp; metric</a> ·
+<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/rules/">rules</a> ·
+<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data</a> ·
+<a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">official rules PDF (NLR/OT-6A50-96647)</a></p>
+</div>
+<footer>60GEMSDOE · 2026-10-11</footer>
+</div>
 </body>
 </html>

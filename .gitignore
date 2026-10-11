@@ -34,3 +34,13 @@ data/*
 .idea/
 .DS_Store
 Thumbs.db
+
+# --- 60GEMSDOE lane session additions ---
+# bridge parts are re-fetchable from the pinned upstream mirror (scripts/fetch_bridge.py)
+data/bridge/gems-geodawn-numerical-features.tif.part-*
+.bridge_upstream/
+# keep the small hash-pinned bridge files (manifest + template + labels) in git
+!data/bridge/
+!data/bridge/manifest.json
+!data/bridge/example_submission.tif
+!data/bridge/existing_faults.tif

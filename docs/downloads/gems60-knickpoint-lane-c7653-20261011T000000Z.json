@@ -1,0 +1,69 @@
+{
+  "file": "gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
+  "sha256": "c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c",
+  "bytes": 78835,
+  "submission_name": "gems60-lane-knickpoint-c7653-20261011T000000Z",
+  "note": "tectono-geomorphic chi/ksn knickpoint lane; 7653 concordant channel dots; E1 negative AUC 0.224; RESEARCH-ONLY, not promoted",
+  "note_chars": 124,
+  "validator": {
+    "path": "/home/user/60GEMSDOE/docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
+    "bytes": 78835,
+    "sha256": "c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c",
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "ref_bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "blocksize": [
+      256,
+      256
+    ],
+    "fixture_grid": false,
+    "has_validity_mask": false,
+    "nan_pixels": 0,
+    "infinity_pixels": 0,
+    "n_nan": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0006232510786503553,
+    "n_nonzero": 7653,
+    "mass": 7653.0,
+    "mass_outside_footprint": 0,
+    "problems": [],
+    "ok": true,
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+  },
+  "zip_file": "gems60-knickpoint-lane-c7653-20261011T000000Z.zip",
+  "zip_sha256": "8e1cc8c0572b4637c44da7f267321e0c1fdb60832fae7f84a692292f4db5e931",
+  "approved_for_weekly_slot": false,
+  "promoted": false,
+  "submission_slots_used": 0,
+  "status": "research-only; local format validation is not organizer acceptance",
+  "metadata": {
+    "lane": "tectono-geomorphology",
+    "dots": 7653,
+    "e1_auc_placement_null": 0.224,
+    "e1_verdict": "NEGATIVE-STOP"
+  }
+}
