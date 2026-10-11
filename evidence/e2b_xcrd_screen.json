@@ -1,0 +1,119 @@
+{
+  "e1_screen_live": {
+    "H33-2-B2 champion": {
+      "mass": 37654,
+      "tp_w": 2466.423,
+      "coverage": 0.039335,
+      "sgmc_offcat_quality_ratio": 1.6177,
+      "expected_coverage_if_random": 0.024315,
+      "offcat_excess_vs_random": 0.01502,
+      "scarp_offcat_enrichment": 1.8352,
+      "scarp_known_fault_enrichment": 0.0826,
+      "med_dist_to_catalogue_px": 19.6468827043885,
+      "reported_live_dti": 0.2778
+    },
+    "H27-4-R1-SOLO": {
+      "mass": 40199,
+      "tp_w": 2531.515,
+      "coverage": 0.040373,
+      "sgmc_offcat_quality_ratio": 1.5553,
+      "expected_coverage_if_random": 0.025958,
+      "offcat_excess_vs_random": 0.014415,
+      "scarp_offcat_enrichment": 1.719,
+      "scarp_known_fault_enrichment": 0.1752,
+      "med_dist_to_catalogue_px": 17.69180601295413,
+      "reported_live_dti": 0.2708
+    },
+    "TIP-STEPOVER-R30": {
+      "mass": 41865,
+      "tp_w": 2560.898,
+      "coverage": 0.040842,
+      "sgmc_offcat_quality_ratio": 1.5108,
+      "expected_coverage_if_random": 0.027034,
+      "offcat_excess_vs_random": 0.013808,
+      "scarp_offcat_enrichment": 1.6618,
+      "scarp_known_fault_enrichment": 0.2211,
+      "med_dist_to_catalogue_px": 16.64331697709324,
+      "reported_live_dti": 0.2632
+    },
+    "D2.8": {
+      "mass": 44090,
+      "tp_w": 2555.161,
+      "coverage": 0.04075,
+      "sgmc_offcat_quality_ratio": 1.4313,
+      "expected_coverage_if_random": 0.028471,
+      "offcat_excess_vs_random": 0.01228,
+      "scarp_offcat_enrichment": 1.5673,
+      "scarp_known_fault_enrichment": 0.3075,
+      "med_dist_to_catalogue_px": 15.0,
+      "reported_live_dti": 0.26
+    },
+    "Hedge-v2": {
+      "mass": 227507,
+      "tp_w": 8876.164,
+      "coverage": 0.141559,
+      "sgmc_offcat_quality_ratio": 0.9636,
+      "expected_coverage_if_random": 0.14691,
+      "offcat_excess_vs_random": -0.005351,
+      "scarp_offcat_enrichment": 0.7246,
+      "scarp_known_fault_enrichment": 0.4152,
+      "med_dist_to_catalogue_px": 6.708203932499369,
+      "reported_live_dti": 0.1563
+    },
+    "LATTICE-S5": {
+      "mass": 206895,
+      "tp_w": 8386.992,
+      "coverage": 0.133757,
+      "sgmc_offcat_quality_ratio": 1.0012,
+      "expected_coverage_if_random": 0.1336,
+      "offcat_excess_vs_random": 0.000157,
+      "scarp_offcat_enrichment": 0.8741,
+      "scarp_known_fault_enrichment": 0.0824,
+      "med_dist_to_catalogue_px": 23.194827009486403,
+      "reported_live_dti": 0.0904
+    }
+  },
+  "e1_fit_live_vs_excess": {
+    "slope": 7.922651415366045,
+    "intercept": 0.15329347948600705,
+    "spearman": 0.942857142857143,
+    "spearman_p": 0.004804664723032055,
+    "n": 6
+  },
+  "quality_ratio_ladder": {
+    "H33-2-B2 champion": 1.6177,
+    "H27-4-R1-SOLO": 1.5553,
+    "TIP-STEPOVER-R30": 1.5108,
+    "D2.8": 1.4313,
+    "Hedge-v2": 0.9636,
+    "LATTICE-S5": 1.0012
+  },
+  "quality_ratio_spearman": 0.942857142857143,
+  "quality_ratio_slope_low_mass_arms": 0.0983,
+  "candidate_projection_from_quality_ratio": 0.3598,
+  "candidate": {
+    "mass": 37654,
+    "tp_w": 3756.173,
+    "coverage": 0.059904,
+    "sgmc_offcat_quality_ratio": 2.4637,
+    "expected_coverage_if_random": 0.024315,
+    "offcat_excess_vs_random": 0.03559,
+    "scarp_offcat_enrichment": 0.4819,
+    "scarp_known_fault_enrichment": 0.0,
+    "med_dist_to_catalogue_px": 23.08679276123039
+  },
+  "candidate_projected_live_dti_from_screen": 0.4353,
+  "projection_warning": "projection from the E1 screen, NOT an organizer score; only ORGANIZER-CONFIRMED numbers are scores",
+  "scarp_control_note": "enrichment <1 means the emission hits that scarp family less often than random allowed pixels; compare against the live artifacts' rows",
+  "uniqueness": {
+    "n_registry_rasters": 35,
+    "max_abs_spearman": 0.024072567370000995,
+    "worst_peer": "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+    "max_within_3px_excess": 0.2836883199660063,
+    "worst_peer_3px": "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+    "worst_peer_3px_frac": 0.45857,
+    "worst_peer_3px_random": 0.17488,
+    "pass_spearman_gate": true,
+    "pass_within_3px_gate": false
+  }
+}

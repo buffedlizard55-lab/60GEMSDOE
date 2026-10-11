@@ -1,12 +1,12 @@
 {
   "workflow": "probe-egress",
-  "run_id": "38101183127",
+  "run_id": "38103732408",
   "run_attempt": "1",
-  "ref": "refs/heads/main",
-  "sha": "7379b6da49eb61d094f2bb9fef7a86dfff85794c",
+  "ref": "refs/heads/arena/54b1897a-60gemsdoe",
+  "sha": "1e3d1e2a3fe903bc10ca8999b20f1f9768eb5eed",
   "runner": "Linux  X64",
   "python": "3.12.3",
-  "utc": "2026-10-11T01:15:14.923176+00:00",
+  "utc": "2026-10-11T02:01:02.514252+00:00",
   "head_probes": [
     "200 0 image/tiff  https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif",
     "200 0 image/tiff  https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1/TIFF/current/n39w119/USGS_1_n39w119.tif",

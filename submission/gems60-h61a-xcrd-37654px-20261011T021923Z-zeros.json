@@ -1,0 +1,87 @@
+{
+  "file": "gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
+  "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
+  "bytes": 127363,
+  "submission_name": "gems60-h61a-xcrd-37654px-20261011T021923Z",
+  "note": "H61-A XCRD: gradient-boosted 30-channel detector (17 physics + 9 topo + 4 radiometric), 4 spatial folds, dots >=350 m from the visible catal",
+  "note_chars": 140,
+  "validator": {
+    "path": "/home/user/60GEMSDOE/submission/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
+    "bytes": 127363,
+    "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "ref_bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "blocksize": [
+      256,
+      256
+    ],
+    "fixture_grid": false,
+    "has_validity_mask": false,
+    "nan_pixels": 0,
+    "infinity_pixels": 0,
+    "n_nan": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030664964579045773,
+    "n_nonzero": 37654,
+    "mass": 37654.0,
+    "mass_outside_footprint": 0,
+    "problems": [],
+    "ok": true,
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+  },
+  "zip_file": "gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.zip",
+  "zip_sha256": "b9e66142e20d103dd4bf9663d56b532b754c372deb28b31cd1efe406a560cdfd",
+  "approved_for_weekly_slot": false,
+  "promoted": false,
+  "submission_slots_used": 0,
+  "status": "research-only; local format validation is not organizer acceptance",
+  "metadata": {
+    "dots": 37654,
+    "min_dist_cat_px": 3.5,
+    "emissions": {
+      "mass": 37654,
+      "tp_w": 3756.1729323287364,
+      "coverage": 0.059904198081889806,
+      "sgmc_raw_dti": 0.06510599052104471,
+      "sgmc_prevalence_cal": 0.04299148238239179,
+      "offcat_excess_vs_random": 0.03558952179758203
+    },
+    "independent": {
+      "weight_offcatalogue": 965.591,
+      "expected_offcatalogue": 2000.163,
+      "enrichment_offcatalogue": 0.4828,
+      "weight_known_fault_control": 0.0,
+      "expected_known_fault_control": 0.0,
+      "enrichment_known_fault_control": null,
+      "n_offcat_scarp_px": 805545,
+      "field_auc_vs_offcat_scarp": 0.5538
+    },
+    "folds": [],
+    "projection": "MODEL only"
+  }
+}

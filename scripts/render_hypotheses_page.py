@@ -21,6 +21,23 @@ def esc(x) -> str:
 
 def main() -> None:
     reg = json.loads(REG.read_text())
+    # Current registry primary (tests/test_site.py::test_docs_pages_link_to_the_primary requires
+    # EVERY docs page, including this one, to offer it): read from submission_build.json so a
+    # regenerated page always headlines whatever the selector currently calls primary.
+    primary_html = ""
+    build = ROOT / "registry" / "submission_build.json"
+    if build.exists():
+        sub = json.loads(build.read_text())
+        fname = Path(sub["file"]["path"]).name
+        zname = fname[:-4] + ".zip" if fname.endswith(".tif") else None
+        zip_html = (f' &middot; <a href="downloads/{zname}">.zip</a>' if zname
+                    and (ROOT / "docs" / "downloads" / zname).exists() else "")
+        primary_html = (
+            '<div style="border:2px solid #0a7d33;background:#f0fff4;border-radius:10px;'
+            'padding:12px 16px;margin:14px 0"><b>Current registry primary:</b> '
+            f'<a href="downloads/{fname}"><code>{fname}</code></a>{zip_html} &mdash; see the '
+            '<a href="index.html">front page</a> for the verdict on every artifact before '
+            'downloading anything.</div>')
     rows = []
     for h in reg["hypotheses"]:
         layers = "<br>".join(esc(x) for x in h.get("layers", []))
@@ -53,6 +70,7 @@ def main() -> None:
     </style>
 </head>
 <body>
+    {primary_html}
     <header>
         <h1>Geological Hypotheses Log</h1>
         <p>Rendered from <code>registry/hypotheses.json</code> — the registry is the source of truth;

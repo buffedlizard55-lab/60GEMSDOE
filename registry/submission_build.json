@@ -1,26 +1,27 @@
 {
- "name": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
- "note": "GEMSDOE32 H33-2-B2 | flank B=2 prune on the 0.2708 base: 37,654 dots, 0 within 200 m of the catalogue; live-mirror +0.00487 in 4/4 folds, safety 2.08, projected 0.2747; UNSCORED",
- "status_line": "PRIMARY = H33-2-B2 (Tier 1: live-anchored gate). 0.2708 base with every dot at d(catalogue) <= 2 px deleted (37,654 dots). 37,654 dots, 0 on the catalogue. Live mirror (spatially blocked, off-catalogue truth, validated on the known live orderings) +0.004870 in 4 quadrants over the 0.2708 base; live-anchored safety factor 2.08; projected live DTI 0.2747 (a MODEL, not a score). NO ORGANISER SCORE EXISTS for this or any artifact in this repository.",
+ "name": "60GEMSDOE-H61A-XCRD-37654px",
+ "note": "H61-A XCRD: 30-channel off-catalogue detector; 37,654 dots >=350 m from catalogue; unique vs 35 rasters; UNSCORED, projection only.",
+ "status_line": "PRIMARY = H61-A XCRD (2026-10-11), the session's UNIQUE artifact: max |Spearman| 0.024 against all 35 registry rasters, worst within-3-px share 46 % (brief's stop rule 70 %). DOWNLOAD: YES. SLOT DECISION: NOT CLEARED - no local instrument can certify it beats the owner-reported 0.2778 (the repository's catalogue hide-and-recover gate scores every off-catalogue emission exactly 0 by construction: evidence/e6_blocked_gate.json), so it is an explicit bounded-downside bet (only the best submission counts). Screens: 2.46 vs the champion's 1.62 at equal 37,654-dot mass on the one mass-normalised screen that reproduces the ladder (Spearman +0.94, evidence/e2b_xcrd_screen.json); independent LiDAR scarp screen NEGATIVE (0.48x), stated on purpose. The parallel 2026-10-11b GEMS61 lane artifact keeps its own NEGATIVE verdict and is retained alongside.",
  "file": {
-  "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
-  "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
-  "bytes": 219065,
+  "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
+  "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
+  "bytes": 127363,
   "positive_px": 37654
  },
  "file_zeros": {
-  "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
-  "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
-  "bytes": 219065
+  "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
+  "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
+  "bytes": 127363,
+  "positive_px": 37654
  },
  "zip": {
-  "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.zip",
-  "sha256": "0322d0b413530b9fb445a366ca1ad234c5180868c2f89cdc70fe2ce80bd4439f",
-  "bytes": 216
+  "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.zip",
+  "sha256": "b9e66142e20d103dd4bf9663d56b532b754c372deb28b31cd1efe406a560cdfd",
+  "bytes": 86350
  },
- "candidate_id": "H33-2-B2",
- "tier": 1,
- "hypothesis": "H33-2",
+ "candidate_id": "H61-A XCRD",
+ "tier": 2,
+ "hypothesis": "H61-A",
  "selection_rule": {
   "tier_1": "slot-eligible under the live-anchored gate (LM-cal +margin in 4/4 quadrants over a live-scored base, safety factor >= 2.0) AND on_catalogue_pixels == 0; highest projected live DTI wins",
   "tier_2": "scripts/build_slot_plan.py's frozen holdout rule: beats the owner-reported 0.2600 incumbent on all three holdout instruments AND 0 on-catalogue dots",
@@ -46,11 +47,20 @@
  "sgmc_prevalence_calibrated_dti": 0.06412093764176459,
  "on_catalogue_pixels": 0,
  "anchor": {
-  "role": "ANCHOR -- the group's best live-scored emission",
-  "path": "docs/downloads/gems32-probe-S1-ANCHOR-identical-to-live-02600.tif",
-  "note": "in-footprint bit-identical to the owner-reported 0.2708 / 0.2600 emissions; upload this if you want a file whose leaderboard behaviour is already known"
+  "role": "ANCHOR -- the group's best live-scored (owner-reported) emission, unchanged",
+  "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+  "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "note": "the 0.2778 owner-reported champion: 37,654 dots, 0 on the catalogue; upload this only as an already-known reference, never as a new discovery"
  },
  "pack": [
+  {
+   "role": "ANCHOR (already-scored base)",
+   "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+   "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+   "bytes": 219065,
+   "positive_px": 37654,
+   "note": "the owner-reported 0.2778 champion emission (H33-2-B2); kept downloadable as the audit-trail anchor and as the only already-scored upload"
+  },
   {
    "role": "SECONDARY (Tier 2)",
    "path": "docs/downloads/gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif",
@@ -58,14 +68,6 @@
    "bytes": 250577,
    "positive_px": 46090,
    "note": "Tier 2 candidate: d2.8 emission (44,090 px) with 500 uncorroborated speckles pruned and 2,500 priority-ordered H32 dots added on the dip-projected step, transtensional swarm and MT clay-cap surfaces; 46,090 px; 0 on-catalogue"
-  },
-  {
-   "role": "NaN-outside twin of the primary",
-   "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif",
-   "sha256": "baeae3219bba6a19bc8cfe79224e28555c50184b7c1ca65c2a822f54807c77dd",
-   "bytes": 355443,
-   "positive_px": 37654,
-   "note": "the competition's own format (identical values inside the footprint)"
   },
   {
    "role": "AVAILABLE DOWNLOAD",
@@ -244,6 +246,51 @@
    "note": "kept for the audit trail; see docs/research/ for its status"
   }
  ],
- "rule": "0.2708 base (GEMS28-H27-4-R1-SOLO-D2.8, 40,199 dots) minus every dot within 2 px (200 m) of the published catalogue",
- "provenance": "built by scripts/build_submission_build.py from evidence/h33_validation.json + registry/slot_plan.json; every digest re-read from the written bytes; receipts evidence/h33_submission_bundles.json and docs/research/hypotheses-round4.md"
+ "rule": "E2/E3: strike-concordant knickpoints (chi/ksn on the 3DEP-10m-reduced 100 m pack) x INGENIOUS thermal corroboration (springs, 2 m probes, paleo travertine), 3-px NMS, 2-px catalogue ring, 40,000-dot budget chosen as the in-sample maximum of the audited selection instrument; the emission rule is unchanged from the audited selector",
+ "provenance": "built by scripts/e62_lane_thermal.py (E2/E3) and scripts/e62b_substrate.py (E2b) from the hash-pinned bridge + data/external inputs; every digest re-read from the written bytes; receipts evidence/e62_lane_thermal.json, evidence/e62b_substrate.json, docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.json",
+ "verdict": "OK TO DOWNLOAD; slot NOT CLEARED (explicit bounded-downside bet). Superseded parallel-session claims and their negative verdicts are preserved in superseded_primaries.",
+ "evidence": {
+  "lane_thermal": "evidence/e62_lane_thermal.json",
+  "substrate_diagnostic": "evidence/e62b_substrate.json",
+  "instrument_audit": "evidence/e61_instrument_audit.json",
+  "receipt": "docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.json"
+ },
+ "session": "2026-10-11 H61-H63",
+ "file_nan_twin": {
+  "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-nan.tif",
+  "sha256": "8cbd52542e7bb8ea4949497d4f1b40f2f7936167f87d841f9242fe29f85e1383",
+  "bytes": 1560705
+ },
+ "audit_receipts": [
+  "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-audit.json",
+  "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros-audit.json"
+ ],
+ "run_card": "evidence/run_card_h61_20261011.json",
+ "writeup": "docs/research/h61-h63-session-20261011.md",
+ "screens": {
+  "sgmc_offcat_quality_ratio_at_equal_mass": 2.4637,
+  "champion_same_screen": 1.6177,
+  "lidar_scarp_enrichment": 0.4819,
+  "lidar_scarp_enrichment_champion": 1.8352,
+  "held_out_auc_folds": [
+   0.7575,
+   0.7281,
+   0.7989,
+   0.7849
+  ],
+  "uniqueness": {
+   "max_abs_spearman": 0.0241,
+   "worst_within_3px_frac": 0.4586,
+   "random": 0.1749
+  }
+ },
+ "approved_for_weekly_slot": false,
+ "promoted": false,
+ "superseded_primaries": [
+  {
+   "name": "gems61-lane-thermal-knick-40000px-20261011T020352Z",
+   "verdict": "NEGATIVE - deliverable negative result; do not spend a submission slot (brief: never submit anything that has not beaten the family's best promotable holdout)",
+   "status_line": "PRIMARY = this session's GEMS61 thermally-corroborated knickpoint-lane file. ITS VERDICT IS NEGATIVE: it is unique, format-valid, leakage-free and fully documented, but it is NOT recommended for a weekly slot. Measured: pooled HOLDOUT-DTI (evaluator gems52-pooled-hide-v1, 36,439 withheld positives, 20 km-block bootstrap, 1,000 draws / 161 clusters) = 0.002495, 95% CI [0.001506, 0.003511]; paired d"
+  }
+ ]
 }

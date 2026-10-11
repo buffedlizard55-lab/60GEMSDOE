@@ -128,12 +128,6 @@
    "mitigation": "loop variable renamed to 'arm'; comment records the defect in place; scripts/run_holdout.py compiles and the recorded evidence/holdout_run2.json is unaffected."
   },
   {
-   "id": "IR-32-FIELD-01",
-   "severity": "high (measured)",
-   "statement": "The group's emission field is barely better than chance. Measured against the only truth in the checkout (labels.tif): a uniform-random 44,090-px emission scores DTI 0.078315 (5 seeds, range 0.077684-0.078960) while the group's dotted-d2.8 artifact at the same mass scores 0.161772 - a factor of 2.07. At 121,131 px the margin collapses: random 0.151988 vs the group's h19_5 field 0.166351, i.e. +9.4%. The field's support is 8.0% within 1 px of a mapped fault and 20.0% within 3 px, versus 3.55% and 8.56% for random support of the same size. The field is informative, but most of the emitted mass is spent where the kernel cannot reach it.",
-   "mitigation": "A 35-channel gradient-boosted field, cross-validated on four spatially blocked quadrants with a 30 px buffer, beats every shipped artifact at matched mass under two independent protocols (docs/research/hypotheses-round3.md, knowledge/02 section 13)."
-  },
-  {
    "id": "IR-32-EMIT-01",
    "severity": "high (measured)",
    "statement": "Emitted-mass optimum. Every informed field measured here peaks between 44,000 and 88,000 px and then loses score, because its ranking runs out of signal; a uniform-random emission has no ranking and keeps improving to 176,000 px, where it overtakes three of the five shipped artifacts. The previously shipped budget of 44,090 px sits just below the measured peak (88,000 px) under the whole-raster protocol.",
@@ -223,6 +217,36 @@
    "statement": "All four label-free H33 surfaces score BELOW a uniform-random control on the catalogue-hidden instrument at 44,090 px (H33-A 0.01874, H33-B 0.02177, H33-C 0.02407, H33-D 0.00394, union 0.02006, random 0.03438), while H33-B scores 0.09072 on the off-catalogue SGMC instrument against the incumbent's 0.06059. The catalogue-hidden instrument therefore has no power to rank hypotheses whose purpose is to find faults the catalogue lacks.",
    "evidence": "evidence/h33_holdout.json; evidence/h33_candidates.json.",
    "mitigation": "the sign disagreement is reported as the session's central finding; promotion stays gated on the identification experiment (measuring T, K and F live) rather than on this instrument."
+  },
+  {
+   "id": "IR-CHI-CI-01",
+   "severity": "medium",
+   "statement": "An artifact-deploy workflow (.github/workflows/pages.yml, added with the second lane run) failed on every push to main: it ran scripts/build_site.py on a bare runner with no dependencies installed, and the repository's Pages is in any case configured server-side as the legacy builder (build_type=legacy, source main:/), so actions/deploy-pages could never have published. Measured: run 38102678303 X build in 6s, exit 1; meanwhile pages build and deployment (legacy) succeeded in 30s on the same push.",
+   "mitigation": "pages.yml removed; the legacy builder already publishes the root landing page and docs/ that scripts/build_site.py writes, which is what the generator's own comment assumes. Verified after removal: ci on main green (run 38102678293), pages build succeeded at 2026-10-11T01:41:32Z."
+  },
+  {
+   "id": "IR-61-SUBSTRATE-01",
+   "severity": "high",
+   "statement": "Both 100 m elevation products available to this session fail published drainage-network validity tests: the 3DEP-10m-reduced pack gives Hack exponent b = +0.0264 and the official det_elev band b = -0.0272, against b ~ 1.6-2.0 for real networks (Hack 1957; Rigon et al. 1996), and the two products' channel networks agree on only Jaccard 0.2312 of cells (175,745 of 759,985). Depression filling raised 31.4% (resp. 17.1%) of cells. Any chi/ksn result computed on these grids is a statement about the substrate, not about the faults.",
+   "mitigation": "Recorded as the measured cause of the E2/E3 negative (evidence/e62b_substrate.json); the lane is stopped at 100 m and the retry path is the free 3DEP 10 m (or 1 m) product, which the Actions runner can fetch (evidence/probe-egress-receipt.json)."
+  },
+  {
+   "id": "IR-61-INSTR-01",
+   "severity": "high",
+   "statement": "No local instrument ranks the live leaderboard. The 12-artifact audit (evidence/e61_instrument_audit.json) gives Spearman vs live of +0.9371 for emitted mass, +0.4685 for the SGMC-off thinned/balanced-8,000 instrument, and -0.9021 for catalogue-truth; the pre-existing LM instrument (evidence/live_mirror_validation.json) reproduces only 2 of 6 known live orderings raw (3 of 6 calibrated), and mis-orders LATTICE-S5 badly (LM-calibrated 0.4366 vs live 0.0904).",
+   "mitigation": "Every verdict in this repository carries an INSTRUMENT/HOLDOUT-DTI label; no local score is written as a leaderboard score; promotion stays a separate selector step, and the only reliable predictor measured so far is emitted mass."
+  },
+  {
+   "id": "IR-61-OVERLAP-01",
+   "severity": "medium",
+   "statement": "The parallel-run protocol's raw overlap clause ('more than 70% of your dots within 3 px of one registry raster') trips for the E2/E3 file against dense lattice rasters (frac_within_3px 0.8437 on calib_r13lattice_00904.tif / r13_lattice_s5_00904.tif, 0.7012 on r11_greedy_mp.tif), but the excess over a mass-matched random control is only +0.0029 / +0.0075 - the clause is measuring footprint density, not duplication.",
+   "mitigation": "Both quantities are reported side by side in evidence/e62_lane_thermal.json; the binding gate is the rank correlation (max |Pearson| on the union support 0.9507 is reported as the conservative companion to a max Spearman of 0.0 on the sparse supports). Future lanes should read the excess-over-random column, not the raw clause."
+  },
+  {
+   "id": "IR-61-SAMPLE-01",
+   "severity": "medium",
+   "statement": "The mirrored example submission is not a plausible sample submission: data/bridge/example_submission.tif is float32 with values {0, 1} and exactly 7,172,775 cells equal to 1.0 - the complement of the label raster's zero set (labels nonzero = 7,172,775, including the -1 sentinel) - with no NaN anywhere, contradicting the portal's 'total fault absence' description of the sample.",
+   "mitigation": "Flagged for review; nothing in this repository derives anything from that file. It is used only as a shape/CRS template, and every emitted raster is validated against data/bridge/existing_faults.tif instead."
   },
   {
    "id": "IR-32-H62-01",

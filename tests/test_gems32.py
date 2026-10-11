@@ -49,17 +49,24 @@ def test_dti_exact_matches_bruteforce():
 def test_data_restore_and_sentinel_sanitization_manifests():
     _require_inputs("training_features.tif")
     restore = json.loads((ROOT / "data" / "restore_receipt.json").read_text())
-    # BUGFIX 2026-10-11: this pinned == 22 while registry/data_manifest.json lists 23 entries, so
-    # the assertion only ever "passed" via the _require_inputs skip on machines without data (CI),
-    # and it also broke on a fresh restore ("restored" vs "present").  The receipt is now checked
-    # against the manifest itself: every manifest entry verified, no extras.
+    # The receipt is data-driven: `present` means the file was already on disk and hash-matched,
+    # `restored` means it was re-fetched from the pinned mirror and hash-matched. Both are successes.
+    # What must hold: the count equals the number of listed files, every listed file exists at its
+    # recorded size, and every row carries a sha256 -- never a hard-coded count that drifts silently.
+    # (Merged 2026-10-11: this assertion was a stale hard-coded 22 that only ever ran via skip on CI;
+    # both parallel sessions replaced it independently.  The manifest cross-check from the H62
+    # session is kept on top of the size/bytes checks from the H61-H63 session.)
+    assert restore["verified_files_count"] == len(restore["files"]) >= 22
+    for f in restore["files"]:
+        assert f["status"] in ("present", "restored"), f
+        dest = ROOT / "data" / f["dest"]
+        assert dest.is_file(), f"receipt-listed file missing: {f['dest']}"
+        assert dest.stat().st_size == f["bytes"], f"size drift: {f['dest']}"
+        assert len(f["sha256"]) == 64 and f["sha256"] != "0" * 64, f
     manifest = json.loads((ROOT / "registry" / "data_manifest.json").read_text())
     manifest_ids = {f["id"] for f in manifest["files"]}
     receipt_ids = {f["id"] for f in restore["files"]}
-    assert restore["verified_files_count"] == len(manifest["files"])
     assert receipt_ids == manifest_ids, (manifest_ids - receipt_ids, receipt_ids - manifest_ids)
-    assert all(f["status"] in ("present", "restored") for f in restore["files"])
-    assert all(f.get("sha256") for f in restore["files"])
 
     prep = json.loads((ROOT / "data" / "prepared_manifest.json").read_text())
     assert prep["grid"]["epsg"] == 32611

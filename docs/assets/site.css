@@ -34,3 +34,32 @@ small{color:var(--mut)}
 header.top .dlbtn{margin-top:12px}
 header.top .dlbtn .btn{margin:0 8px 0 0;font-size:14px;padding:10px 16px}
 header.top .dlbtn .btn.alt{background:#12261c;color:#8fe3b4;border:1px solid #1f6feb}
+
+/* ===== 60GEMSDOE-H60A-CORRIDOR: lane page styles (all classes prefixed, never global) ===== */
+.h60a-body{margin:0;font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#10202b;background:#fff}
+.h60a-head{padding:28px 32px;background:#f7fafc;border-bottom:1px solid #dfe7ee}
+.h60a-head h1{margin:0 0 6px;font-size:26px}
+.h60a-sub{margin:0;color:#5b7183}
+.h60a-sec{padding:22px 32px;border-bottom:1px solid #dfe7ee;max-width:1100px}
+.h60a-sec h2{font-size:20px;margin:0 0 10px} .h60a-sec h3{font-size:16px}
+.h60a-nav{padding:10px 32px;border-bottom:1px solid #dfe7ee;font-size:14px}
+.h60a-banner{border-left:8px solid #5b7183;background:#f7fafc;padding:22px 32px}
+.h60a-banner.h60a-go{border-left-color:#0d6b3f;background:#f0fbf4}
+.h60a-banner.h60a-hold{border-left-color:#8a5b00;background:#fff9ec}
+.h60a-banner.h60a-stop{border-left-color:#9b1c1c;background:#fdf2f2}
+.h60a-big{font-size:20px;font-weight:700;margin:6px 0}
+.h60a-btn{display:inline-block;background:#0d6b3f;color:#fff;padding:12px 18px;border-radius:8px;text-decoration:none;font-weight:700;margin:6px 8px 6px 0}
+.h60a-btn.h60a-alt{background:#254a63}
+.h60a-table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}
+.h60a-table th,.h60a-table td{border:1px solid #dfe7ee;padding:6px 8px;text-align:left;vertical-align:top}
+.h60a-table th{background:#f7fafc} .h60a-table td.h60a-num{text-align:right;font-variant-numeric:tabular-nums}
+.h60a-code,.h60a-pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+.h60a-pre{background:#f7fafc;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap}
+.h60a-warn{color:#8a5b00;font-size:14px} .h60a-tag{background:#e8eef4;border-radius:4px;padding:1px 5px;font-size:12px}
+.h60a-foot{padding:18px 32px;color:#5b7183;font-size:13px}
+/* ===== /60GEMSDOE-H60A-CORRIDOR ===== */
+
+/* verdict banners (sessions 2026-10-11) */
+.banner{border:2px solid var(--bad);background:#fff5f4;border-radius:14px;padding:16px 20px;margin:18px 0}
+.banner h2{border:0;margin:0 0 8px;padding:0;color:var(--bad)}
+.btn.ghost{opacity:.85;background:transparent;border:1px solid currentColor}
