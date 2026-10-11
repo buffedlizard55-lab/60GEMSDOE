@@ -1,0 +1,83 @@
+{
+  "run_id": "H73",
+  "session": "arena/970ed663-60gemsdoe",
+  "date": "2026-10-11",
+  "lane": "channel steepness / chi / knickpoints (tectonic geomorphology)",
+  "experiments_run_this_session": 0,
+  "experiment_budget": 3,
+  "submission_slots_used": 0,
+  "new_tif_generated": false,
+  "verdict": "negative",
+  "verdict_reason": "No candidate clears the governing gates. The lane STOP (registry/current_site_status.json) stands. The literal >70% dot-overlap rule fails for the strongest candidate (H68-1) against a dense lattice comparator. The first test was not re-run, because the preregistered rule prohibits re-running the lane.",
+
+  "hypothesis": "Question posed in the brief: can a submission beat 0.3195 (DARD, live rank 9) or 0.4133 (xiaofanhu, live rank 1)? Answered negatively for this lane. No new raster was produced.",
+  "mechanism": "Bedrock-channel steepness (ksn) and chi-transform knickpoints record rock-uplift gradients across active normal faults (Kirby & Whipple 2012). Chi transform per Perron & Royden (2013). Segmentation per Gailleton et al. (2019).",
+  "named_non_fault_mimic": "Lithologic contrasts (resistant over weak rock) and base-level steps from playas or ephemeral channels both create steepness steps without faulting.",
+  "first_test": {
+    "preregistered_test": "withheld-segment steepness-step contrast vs same-orientation random transects",
+    "source": "evidence/h65_e1_first_test.json (H65-1, quoted in active-lane review)",
+    "result": "INCONCLUSIVE; n=262; mean log-ksn step contrast 0.03259; 95% CI [-0.01435, 0.07900]; decision STOP",
+    "source_h70": "evidence/h70_e1_first_test.json (H70-1 gate G1): n=241 mean -0.0347 CI [-0.0853, +0.0126] -> STOP"
+  },
+
+  "best_candidate_checked": {
+    "name": "gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros",
+    "file": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif",
+    "sha256": "f4aa17400c7ff9ae12a428862ccaa4e2b0397015a3a7e7b55aa006341599f8ed",
+    "sha256_recomputed_this_session": true
+  },
+
+  "holdout_dti": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator": "gems57-pooled-hide-v2 (alpha 0.2, beta 0.8, 300 m triangular kernel)",
+    "withheld_positive_pixels": 22641,
+    "h68_1_lane": {"dti": 0.171894, "ci95": [0.157848, 0.183994], "source": "evidence/h68_holdout.json pooled_binary.scores.lane_h60a"},
+    "distance_only_control": {"dti": 0.190730, "ci95": [0.181999, 0.199647], "source": "evidence/h68_holdout.json pooled_binary.scores.distance_only"},
+    "random_mass_control": {"dti": 0.039080, "ci95": [0.035678, 0.042310]},
+    "paired_h68_minus_distance_only": {"ci95": [-0.034536, -0.004729], "interpretation": "H68-1 is below a pure proximity-to-visible-catalogue baseline; the CI excludes zero"},
+    "not_a_leaderboard_score": true
+  },
+
+  "leakage_canary": {
+    "status": "Reused from prior runs, not re-run this session. h65_runcard: knickpoint_step 0.517, ksn 0.5134, drainage_area 0.5179, lane_p 0.5167 (threshold 0.90). Positive control dist_to_visible 0.9243 (expected to be high)."
+  },
+
+  "uniqueness_vs_registry": {
+    "evidence": "evidence/h68_uniqueness.json and evidence/h68_surface_uniqueness.json",
+    "registry_rasters_checked": 70,
+    "scope_note": "70 committed local rasters. The registry index expects 655 (see registry/current_site_status.json). This is not a complete registry scan.",
+    "worst_full_footprint_spearman": 0.1485,
+    "spearman_limit": 0.90,
+    "worst_dot_overlap_within_3px": 0.9985,
+    "worst_overlap_comparator": "registry/rasters/calib_r13lattice_00904.tif",
+    "overlap_limit": 0.70,
+    "duplicate_count": 3,
+    "verdict": "negative (literal 70% rule fails)"
+  },
+
+  "validator_output": {
+    "command": "PYTHONPATH=src python scripts/check_submission.py <tif> --template data/official/sample_submission.tif --strict-finite",
+    "result": "format checks passed: shape 3730x3292 matches template; 1 band; EPSG:32611; transform matches; dtype float32; in-footprint range [0,1] all finite; whole-array range [0,1] finite=True",
+    "meaning": "format only. Not uniqueness, not governance, not organizer acceptance. Message wording corrected this session (was 'ready for submission')."
+  },
+
+  "submission_name": null,
+  "submission_note": null,
+  "submission_note_chars": 0,
+
+  "organizer_facts": {
+    "official_format_page": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/ (float32, one band, EPSG:32611, 100 m, values in [0,1], NaN outside bounds)",
+    "official_leaderboard_read_2026_10_11": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/ (#1 xiaofanhu 0.4133; #2 cfld__ 0.3585; #8 kinghorton42 0.3261; #9 DARD 0.3195; #23 extradr19 0.2778)",
+    "label": "ORGANIZER-CONFIRMED is NOT available for any repo score. Leaderboard rows are public and carry no file attribution."
+  },
+
+  "irregularities_logged": [
+    "IR-H73-01: validator printed 'ready for submission' on a format-only check; wording fixed (scripts/check_submission.py).",
+    "IR-H73-02: registry/leaderboard_snapshot_2026-10-11.json has cfld__ at rank 10 (0.3108); the live board shows cfld__ at #2 (0.3585). The snapshot is not reliable for ranks 2-10. Erratum added; rows kept for audit.",
+    "IR-H73-03: README stated DARD 0.3195 at rank 8. Live board: rank 9. Corrected in README.",
+    "IR-H73-04: H68-1 is headlined as 2.61x H66-1, but its holdout DTI (0.1719) is below the distance_only control (0.1907), with paired CI excluding zero. The headline omits this comparison.",
+    "IR-H73-05: H68 uniqueness scan covered 70 local rasters; the registry index expects 655. Not a complete scan."
+  ],
+
+  "recommendation_to_owner": "Do not upload any current lane raster. Decide whether the literal 70% overlap rule should exempt dense 'universal-support' comparators. Any such change must be a documented amendment, not a silent waiver. Next lane work needs a new preregistered question that reports against the distance_only control first."
+}
