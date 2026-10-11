@@ -1,21 +1,16 @@
 {
   "knick_strength": {
-    "auc_vs_off_catalogue_truth": 0.5002890561238293
+    "auc_vs_catalogue_truth": 0.5010286660909679
   },
   "ksn_seg": {
-    "auc_vs_off_catalogue_truth": 0.5050826095187098
+    "auc_vs_catalogue_truth": 0.5203393717541455
   },
   "coherence": {
-    "auc_vs_off_catalogue_truth": 0.584336535090587
+    "auc_vs_catalogue_truth": 0.6391880783072753
   },
   "score": {
-    "auc_vs_off_catalogue_truth": 0.5013614817831903
+    "auc_vs_catalogue_truth": 0.5086646424157425
   },
-  "|detrended slope|": {
-    "auc_vs_off_catalogue_truth": 0.3142375526949335
-  },
-  "det_elev": {
-    "auc_vs_off_catalogue_truth": 0.29243109183647037
-  },
-  "flagged_gt_0.90": []
+  "flagged_gt_0.90": [],
+  "note": "catalogue truth is a PROXY only; the board's off-catalogue instrument (SGMC >= 300 m from catalogue) is unavailable in this checkout -- no SGMC layer"
 }

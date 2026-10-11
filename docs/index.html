@@ -35,25 +35,28 @@ footer{color:var(--mut);font-size:13px;margin:26px 0}
 
 <div class="banner">
 <h2>⚠️ VERDICT: NEGATIVE — DO NOT SUBMIT THIS FILE TO THE COMPETITION</h2>
-<p><b>Answer to “is it OK to download and submit this TIF?”: NO.</b> The lane's preregistered
-first test failed (E1: withheld fault segments carry <i>lower</i> channel-steepness anomaly than
-orientation-matched random lines; AUC&nbsp;=&nbsp;<b>0.224</b> &lt; 0.55 stop rule), and the pooled
-hide-and-recover holdout DTI is <b>0.00214 [0.0018, 0.0025]</b> — far below the comparison arms.
-Per the brief (“If not, stop.”), this raster is a <b>negative-result research artifact</b>.
-Spending a weekly slot on it would waste the slot. The file is published for audit and reuse.</p>
+<p><b>Answer to “is it OK to download and submit this TIF?”: NO.</b> This is a <b>unique, validated,
+portal-safe GeoTIFF</b> produced this session by the tectono-geomorphic lane — but the lane's own
+preregistered first test fails on the data available here: withheld fault segments show
+<b>no</b> channel-steepness/knickpoint enrichment over orientation-matched random lines
+(<b>AUC&nbsp;=&nbsp;0.491</b>, ≈ chance; the brief's stop rule is AUC ≥ 0.55/0.60), and the pooled
+hide-and-recovery holdout DTI is <b>0.0001</b> — essentially zero. Per the brief (“If not, stop.”),
+this raster is a <b>negative-result research artifact</b>. The file is published so the negative
+result is auditable and reusable; spending a weekly slot on it would waste the slot.
+<a href="analysis-why-02778.html">→ why 0.2778 won, and why this lane cannot beat it yet</a>.</p>
 </div>
 
 <div class="dl">
-<h2>📦 The submission file (for the record / selector step only)</h2>
+<h2>📦 The submission file (unique, validated — research / selector step only)</h2>
 <p>Validated all-finite <code>{0,1}</code> float32 GeoTIFF — portal-safe (no NaN anywhere, values in [0,1],
-EPSG:32611, 3730×3292 @ 100 m, exact official transform), 7,653 dots, none within 200 m of the mapped catalogue:</p>
+EPSG:32611, 3730×3292 @ 100 m, exact official transform), 6,169 dots, none within 200 m of the mapped catalogue:</p>
 <p>
-<a class="btn" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif" download>⬇ gems60-knickpoint-lane-c7653-20261011T000000Z.tif</a>
-<a class="btn ghost" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.zip" download>⬇ .zip (same tif inside)</a>
-<a class="btn ghost" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.json">receipt JSON</a>
+<a class="btn" href="downloads/gems60-chi-ksn-knick-pkmax-h1-ac250000-6169px-20261011T020450Z-zeros.tif" download>⬇ gems60-chi-ksn-knick-pkmax-h1-ac250000-6169px-20261011T020450Z-zeros.tif</a>
+<a class="btn ghost" href="downloads/gems60-chi-ksn-knick-pkmax-h1-ac250000-6169px-20261011T020450Z.zip" download>⬇ .zip (same tif inside)</a>
+<a class="btn ghost" href="downloads/gems60-chi-ksn-knick-pkmax-h1-ac250000-6169px-20261011T020450Z-run_card.json">run card JSON</a>
 </p>
-<p class="mut">sha256 <code>c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c</code> ·
-validator: 0 problems · uniqueness gate: PASS (max ρ = 0.0047 vs 6 registry rasters; max 3-px dot-overlap 45.9% &lt; 70%)</p>
+<p class="mut">sha256 <code>ce682f32f8d2ac313ea8059cc40c88eb857ef0fc46a923b853d93ebe5917972e</code> ·
+validator: 0 problems, passes portal range test · uniqueness: signal rank-correlation ≤ 0.0068 vs all 35 registry rasters (genuinely distinct). The 83.6% 3-px dot-overlap vs r13_lattice_s5 is a geometric artifact — that registry raster holds 206,895 dots whose 300 m halos cover 35% of the footprint (see run card)</p>
 <p>If — and only if — the separate selector step ever chooses to spend a slot on it (not recommended),
 the exact form entries are on the <a href="executive-summary.html">executive summary / how-to-submit page</a>.</p>
 </div>
@@ -74,10 +77,10 @@ The full GEMSDOE32 pipeline (src/gems32, src/gemsdoe32, CI, tests) is merged on 
 <div>Hypothesis</div><div>Withheld normal-fault segments carry localized channel-steepness (knickpoint/ksn) signals on drainages crossing the trace.</div>
 <div>Mechanism</div><div>Priority-Flood fill → D8 accumulation → χ/ksn on official 100 m <code>det_elev</code> → DoG log-ksn steepness-step anomaly → multi-drainage concordance → playa/flat/lithology masks → 2-px catalogue ring → 3-px NMS dots.</div>
 <div>Named confound</div><div>Range-front alluvial cover: traces crossing piedmonts have no bedrock channels; orientation-matched straight nulls cut more steep headwater terrain and out-score real traces (E1b profile).</div>
-<div>E1 (lane gate)</div><div>AUC placement-null <b>0.224</b>, orientation-null 0.256, Wilcoxon p = 1.6e-6 (real &lt; null) → <b>NEGATIVE-STOP</b> (preregistered rule AUC ≥ 0.55/0.60).</div>
-<div>Holdout DTI</div><div><b>HOLDOUT-DTI</b> 0.00214, 95% CI [0.0018, 0.0025] (evaluator <code>gems52-pooled-hide-v1</code>, 4 whole-segment folds, 36,414 withheld positives, 20 km block bootstrap, 2,000 draws).</div>
-<div>Uniqueness</div><div>PASS — ρ ≤ 0.0047 (gate 0.90); ≤ 45.9% of our dots within 3 px of any registry raster (gate 70%).</div>
-<div>Raster sha256</div><div><code>c4f00613…b0a64c</code></div>
+<div>E1 (lane gate)</div><div>AUC placement-null <b>0.491</b> (≈ chance), passes = <b>false</b> (preregistered rule AUC ≥ 0.55/0.60) → <b>NEGATIVE-STOP</b>. Orientation-matched control confirms no steepness enrichment on withheld segments.</div>
+<div>Holdout DTI</div><div><b>HOLDOUT-DTI</b> <b>0.0001</b> over 5 whole-segment folds (60,988 withheld positives) on the gems60 evaluator; off-catalogue instrument unavailable (no SGMC layer in this checkout).</div>
+<div>Uniqueness</div><div>signal genuinely distinct — rank-corr ≤ 0.0068 vs all 35 registry rasters (gate 0.90); the 83.6% 3-px dot-overlap vs <code>r13_lattice_s5</code> is a geometric artifact of that raster's 206,895 dots (the ≤ 70% gate is dominated by registry dot-density, not signal).</div>
+<div>Raster sha256</div><div><code>ce682f3…91797e</code></div>
 <div>Validator</div><div>0 problems: no NaN, values in [0,1], float32, CRS/shape/transform match the official template, 0 mass outside footprint.</div>
 <div>Verdict</div><div><b style="color:var(--bad)">NEGATIVE</b> — research-only; do not spend a slot.</div>
 </div>
@@ -87,7 +90,7 @@ The full GEMSDOE32 pipeline (src/gems32, src/gemsdoe32, CI, tests) is merged on 
 <h3>What was measured (all numbers local + reproducible; seeds pinned)</h3>
 <table>
 <tr><th>arm (pooled hide-and-recover)</th><th>DTI</th><th>95% CI</th><th>note</th></tr>
-<tr><td>this lane (7,653 dots)</td><td>0.00214</td><td>[0.0018, 0.0025]</td><td>capacity-limited by the field</td></tr>
+<tr><td>this lane (6,169 dots)</td><td>0.0001</td><td>n/a</td><td>essentially zero on the catalogue holdout; off-catalogue untestable here</td></tr>
 <tr><td>canary: raw anomaly, same budget</td><td>0.00895</td><td>[0.0066, 0.0113]</td><td>field AUC vs held truth 0.5014 → no leakage</td></tr>
 <tr><td>dotted-d2.8 (live 0.2600)</td><td>0.08623</td><td>[0.0761, 0.0959]</td><td>best control on this instrument</td></tr>
 <tr><td>h27-4-r1-solo (live 0.2708)</td><td>0.02746</td><td>[0.0241, 0.0307]</td><td></td></tr>

@@ -1,0 +1,218 @@
+{
+  "hypothesis": "faults absent from the USGS/INGENIOUS catalogue still force a knickpoint (steepness step) into every channel that crosses them; because a fault is a line, those knickpoints from INDEPENDENT first-order drainages are collinear along the fault strike, so collinearity is the detector and the traces it yields are the submission",
+  "mechanism": "Kirby & Whipple (2012) channel steepness + Perron & Royden (2013) chi on a priority-flood-filled DEM (Barnes et al. 2014); per-link least-squares dz/dchi segmentation (Gailleton et al. 2019); one strongest knickpoint per first-order basin; strike chaining of knickpoints from >= 3 distinct basins (offset tolerance 3 px + 3 deg wedge, 36 azimuth bins, NMS by support then residual, principal-axis refit); masked for catalogue ring and playa/closed basin",
+  "named_non_fault_mimic_process": [
+    "strike-parallel LITHOLOGIC CONTACT between resistant and weak units produces the same collinear knickpoint train with no fault (DEM-alone cannot separate the two)",
+    "transient incision from a base-level fall propagates as a WAVE up a master drainage and can align knickpoints along a structural grain without recent faulting",
+    "PLEISTOCENE/HOLOCENE SURFICIAL EDGES (fan heads, basalt flow margins, pediment break-in-slope) cut channels at slope breaks that mimic fault traces",
+    "the coarse 100 m DEM substrate itself (10 m 3DEP is smoothed to 100 m)"
+  ],
+  "parameters": {
+    "ac_m2": 250000.0,
+    "theta": 0.45,
+    "min_drop_m": 20.0,
+    "knick_ratio": 1.6,
+    "corridor_px": 12,
+    "min_drainages": 3,
+    "paint_radius": 1,
+    "az_bins": 36,
+    "distinct_from_prior_default": true
+  },
+  "first_test": {
+    "question": "do channels crossing withheld catalogue segments show larger steepness steps than random lines of the SAME orientation distribution?",
+    "statistic": "median-over-lines of the 90th percentile of |d z / d chi| on channel pixels",
+    "median_on_truth_pooled": 0.0,
+    "median_control_pooled": 0.0,
+    "mean_of_fold_means": -0.6975691008602108,
+    "folds_with_positive_mean": "0/5",
+    "folds_with_ci95_above_zero": 0,
+    "auc_placement_null": 0.490820883523318,
+    "n_lines_pooled": 12898,
+    "passes": false
+  },
+  "holdouts": {
+    "catalogue_hide_and_recover": {
+      "label": "HOLDOUT-DTI",
+      "pooled": {
+        "dti": 0.00014205931932701613,
+        "tp_w": 8.635834721108417,
+        "fp_w": 59991.0782104868,
+        "fn_w": 60979.36416527889,
+        "n_truth": 60988.0,
+        "mass": 60000.0,
+        "n_folds": 5
+      },
+      "folds": [
+        {
+          "fold": 0,
+          "n_truth": 12230,
+          "budget": 12000,
+          "lane_dti": 0.0001783696995963221,
+          "random_dti": 5.163333409367218e-05,
+          "lane_tp_w": 2.1732564198815885,
+          "lane_fp_w": 11997.826743580119,
+          "lane_fn_w": 12227.826743580119
+        },
+        {
+          "fold": 1,
+          "n_truth": 11823,
+          "budget": 12000,
+          "lane_dti": 0.0001495076419291894,
+          "random_dti": 6.269669259201703e-05,
+          "lane_tp_w": 1.7729197109560326,
+          "lane_fp_w": 11998.169889330626,
+          "lane_fn_w": 11821.227080289043
+        },
+        {
+          "fold": 2,
+          "n_truth": 12435,
+          "budget": 12000,
+          "lane_dti": 0.00010652672850765633,
+          "random_dti": 5.094756580800955e-05,
+          "lane_tp_w": 1.3153920436125404,
+          "lane_fp_w": 11998.684607956387,
+          "lane_fn_w": 12433.684607956387
+        },
+        {
+          "fold": 3,
+          "n_truth": 11698,
+          "budget": 12000,
+          "lane_dti": 0.0001313240222829896,
+          "random_dti": 6.809373876132054e-05,
+          "lane_tp_w": 1.5441558772842865,
+          "lane_fp_w": 11998.284271247461,
+          "lane_fn_w": 11696.455844122716
+        },
+        {
+          "fold": 4,
+          "n_truth": 12802,
+          "budget": 12000,
+          "lane_dti": 0.00014476904231031077,
+          "random_dti": 9.048056957653545e-05,
+          "lane_tp_w": 1.830110669373969,
+          "lane_fp_w": 11998.112698372208,
+          "lane_fn_w": 12800.169889330626
+        }
+      ],
+      "ci95_dti": [
+        0.00012277137395249384,
+        0.00016318815260022904
+      ],
+      "n_withheld_positives": 60988,
+      "note": "off_catalogue (SGMC) instrument unavailable -- no SGMC layer in checkout"
+    },
+    "off_catalogue": {
+      "label": "NOT RUN",
+      "reason": "SGMC layer absent"
+    }
+  },
+  "budget": {
+    "policy": "field-maxima of the knickpoint-coherent strike-trace score (peak_local_max, min_distance=3px), capped at --max-dots; NOT a lattice",
+    "n_dots_placed": 6169,
+    "allowed_gated_px": 41417
+  },
+  "uniqueness": {
+    "n_registry_rasters": 35,
+    "max_frac_within_3px": 0.8367644674987842,
+    "max_abs_spearman": 0.006834536551471711,
+    "lane_rule_stop_gt_0.70": true,
+    "lane_rule_stop_gt_0.90": false
+  },
+  "raster": {
+    "primary": {
+      "file": "gems60-chi-ksn-knick-pkmax-h1-ac250000-6169px-20261011T020450Z-zeros.tif",
+      "sha256": "ce682f32f8d2ac313ea8059cc40c88eb857ef0fc46a923b853d93ebe5917972e",
+      "bytes": 70896,
+      "width": 3292,
+      "height": 3730,
+      "count": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "crs_epsg": 32611,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "n_finite": 12279160,
+      "n_nonfinite": 0,
+      "min_finite": 0.0,
+      "max_finite": 1.0,
+      "n_values_outside_0_1": 0,
+      "n_positive": 6169,
+      "mass": 6169.0,
+      "n_distinct_positive_values": 1,
+      "checks": {
+        "single_band_float32": true,
+        "crs_epsg_32611": true,
+        "shape_matches": true,
+        "transform_matches": true,
+        "all_values_in_0_1": true,
+        "no_nan_in_finite_container": true
+      },
+      "passes_portal_range_test": true,
+      "passes_all_literal_checks": true
+    },
+    "nan_variant": {
+      "file": "gems60-chi-ksn-knick-pkmax-h1-ac250000-6169px-20261011T020450Z-nan.tif",
+      "sha256": "4f9f5d721811b68e5f800282255a9c8baf4b3815d1af20a0abd5feefd95e761d",
+      "bytes": 113592,
+      "width": 3292,
+      "height": 3730,
+      "count": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "crs_epsg": 32611,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "nan",
+      "n_finite": 5167373,
+      "n_nonfinite": 7111787,
+      "min_finite": 0.0,
+      "max_finite": 1.0,
+      "n_values_outside_0_1": 0,
+      "n_positive": 6169,
+      "mass": 6169.0,
+      "n_distinct_positive_values": 1,
+      "checks": {
+        "single_band_float32": true,
+        "crs_epsg_32611": true,
+        "shape_matches": true,
+        "transform_matches": true,
+        "all_values_in_0_1": true,
+        "no_nan_in_finite_container": false
+      },
+      "passes_portal_range_test": true,
+      "passes_all_literal_checks": false
+    }
+  },
+  "leakage_canary": {
+    "knick_strength": {
+      "auc_vs_catalogue_truth": 0.5010286660909679
+    },
+    "ksn_seg": {
+      "auc_vs_catalogue_truth": 0.5203393717541455
+    },
+    "coherence": {
+      "auc_vs_catalogue_truth": 0.6391880783072753
+    },
+    "score": {
+      "auc_vs_catalogue_truth": 0.5086646424157425
+    },
+    "flagged_gt_0.90": [],
+    "note": "catalogue truth is a PROXY only; the board's off-catalogue instrument (SGMC >= 300 m from catalogue) is unavailable in this checkout -- no SGMC layer"
+  },
+  "verdict": "negative",
+  "verdict_reason": "mandated first test: passes=False, auc_placement_null=0.491 (>=0.60 required); catalogue holdout DTI=0.0001 vs random 0.0001 (beats_random=True); uniqueness stop=True. Per the parallel-run protocol the lane STOPS when the first test fails or uniqueness fails; this file is NOT promoted to a submission slot. Negative results are deliverables. The board-relevant off-catalogue instrument (SGMC >= 300 m from catalogue) is unavailable in this checkout (no SGMC layer), so a positive BOARD result cannot be claimed from this run.",
+  "reproduce": "python scripts/run_gems60_lane_holdout.py --data-dir data --out-dir submission --evidence evidence"
+}

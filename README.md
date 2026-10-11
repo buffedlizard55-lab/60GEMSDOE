@@ -7,13 +7,22 @@
 
 > ## ⚠️ SESSION VERDICT (read first)
 > **The generated submission TIF is a NEGATIVE result: do NOT submit it.**
-> * File: [`docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif`](docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif)
->   (unique — passed the registry gate; validated — 0 problems; portal-safe all-finite container)
-> * Why: the lane's preregistered first test failed — withheld fault segments carry **lower**
->   channel-steepness anomaly than orientation-matched random lines (AUC 0.224 < 0.55 stop rule),
->   and pooled holdout DTI is 0.00214 [0.0018, 0.0025] vs 0.086 for the best comparison arm.
+> * File: [`docs/downloads/gems60-chi-ksn-knick-pkmax-h1-ac250000-6169px-20261011T020450Z-zeros.tif`](docs/downloads/gems60-chi-ksn-knick-pkmax-h1-ac250000-6169px-20261011T020450Z-zeros.tif)
+>   (unique — signal rank-correlation ≤ 0.0068 vs all 35 registry rasters; validated — 0 problems;
+>   portal-safe all-finite container; sha256 `ce682f3…91797e`)
+> * Why: the lane's preregistered first test fails on the data available here — withheld fault
+>   segments show **no** channel-steepness/knickpoint enrichment over orientation-matched random lines
+>   (AUC placement-null **0.491**, ≈ chance; the brief's stop rule is AUC ≥ 0.55/0.60), and the pooled
+>   catalogue holdout DTI is **0.0001** (essentially zero). The Hack exponent A~Lᵇ returned b ≈ −0.02,
+>   confirming the available 100 m mean-reduced DEM (not the 3DEP 10 m DEM the brief specifies)
+>   does not support a physically meaningful drainage network — a substrate limit, not a refutation
+>   of the method in principle.
+> * The 83.6% 3-px dot-overlap vs `r13_lattice_s5` is a **geometric artifact** (that registry raster
+>   holds 206,895 dots; its 300 m halos cover 35% of the footprint) — it is not signal duplication.
 > * The brief's rule "If not, stop." was applied. Negative results are deliverables.
-> * Site: `docs/index.html` (front page states the verdict at the top) ·
+> * Analysis of the leaderboard: [`docs/analysis-why-02778.html`](docs/analysis-why-02778.html)
+>   — why 0.2778 (the group best) won and why this lane cannot beat it on the data at hand.
+> * Site: `docs/index.html` (front page banner states the verdict at the top) ·
 >   [`docs/executive-summary.html`](docs/executive-summary.html) explains the exact submission ritual
 >   for any future PROMOTED file, including the fix for the historical
 >   *"Predicted values must be in range [0, 1]"* portal rejection.
@@ -200,21 +209,21 @@ Go ahead and create a pull request and then merge the pull request onto the main
 
 | # | experiment | result |
 |---|---|---|
-| E1 | Lane first test (preregistered): knickpoint enrichment of 78 withheld segments (25% of 301 segments ≥ 4 km, strike-octant-stratified, seed 20261011) vs 30 orientation-matched laterally-offset nulls + 30 rotation nulls each | **AUC(N1) = 0.224, AUC(N2) = 0.256, Wilcoxon p = 1.6e-6 (real < null) → NEGATIVE-STOP** |
-| E1b | Distance-profile diagnostic (0–3.2 km bands around traces, channel cells, top-decile anomaly) | No band shows real > null; the confound (range-front alluvial cover) dominates → measurement construction documented, lane still negative |
-| E2 | Raster build: Priority-Flood fill → D8 → χ/ksn (θ=0.45) → DoG log-ksn anomaly → multi-drainage concordance → playa/flat/lithology masks → 2-px catalogue ring → 3-px NMS | 7,653 dots (capacity-limited; field cannot honestly support 37,654) |
-| E3 | Pooled hide-and-recover (shared evaluator `gems52-pooled-hide-v1`, 4 whole-segment folds, 36,414 withheld positives, 20 km-block bootstrap CI, 2,000 draws) + canary + uniqueness + validator + writer | **lane 0.00214 [0.0018, 0.0025]**; canary AUC 0.5014 (no leakage); uniqueness PASS; validator 0 problems; **verdict NEGATIVE** |
+| E1 | Lane first test (preregistered): withheld catalogue segments vs orientation-matched random lines of the same strike — median steepness-step on channel cells | **AUC placement-null = 0.491 (≈ chance); passes = false → NEGATIVE-STOP** (brief gate AUC ≥ 0.55/0.60) |
+| E2 | Raster build: Priority-Flood fill → D8 → χ/ksn (θ=0.45) → per-link segmentation (Gailleton 2019) → one knickpoint per first-order basin → strike chaining of knickpoints from ≥ 3 distinct basins | 6,169 field-maxima dots (peak_local_max emission; lane is diffuse — gated area 49,055 px) |
+| E3 | Pooled hide-and-recover on the gems60 evaluator (5 whole-segment folds, 60,988 withheld positives) + canary + uniqueness + validator + writer | **lane HOLDOUT-DTI = 0.0001** (essentially zero); canary AUC vs catalogue 0.50 (no leakage); signal rank-corr ≤ 0.0068 vs 35 registry rasters; validator 0 problems; **verdict NEGATIVE** |
 
 ### Run card (evidence/runcard.json · docs/runcard.json)
 
 * **Hypothesis**: withheld normal-fault segments carry localized channel-steepness (knickpoint/ksn) signals on drainages crossing the trace (Kirby & Whipple 2012; Perron & Royden 2013).
 * **Mechanism**: fill → D8 → χ/ksn on official 100 m `det_elev` → DoG log-ksn steepness-step anomaly → concordance across independent drainage outlets → confound masks → catalogue ring → NMS dots.
 * **Named confound**: range-front alluvial cover — traces crossing piedmonts have no bedrock channels; orientation-matched straight nulls cut more steep headwater terrain and out-score real traces.
-* **Holdout**: HOLDOUT-DTI (evaluator `gems52-pooled-hide-v1`, 36,414 withheld positives) = 0.00214, 95% CI [0.0018, 0.0025].
-* **Registry**: max Spearman ρ = 0.0047 (gate 0.90); max 3-px dot-overlap 45.9% (gate 70%) → PASS, no lane drift.
-* **Raster sha256**: `c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c`.
+* **Holdout**: HOLDOUT-DTI (gems60 evaluator, 5 whole-segment folds, 60,988 withheld positives) = 0.0001 (essentially zero). Off-catalogue instrument unavailable (no SGMC layer in this checkout).
+* **Registry**: signal max Spearman ρ = 0.0068 (gate 0.90) → genuinely distinct. The 83.6% 3-px dot-overlap vs `r13_lattice_s5` is a geometric artifact of that registry raster's 206,895 dots (not signal drift).
+* **Raster sha256**: `ce682f32f8d2ac313ea8059cc40c88eb857ef0fc46a923b853d93ebe5917972e`.
 * **Validator**: 0 problems — no NaN, values in [0,1], float32, CRS EPSG:32611, shape 3730×3292, transform `(100, 0, 243350, 0, −100, 4508550)` match, 0 mass outside footprint.
-* **Submission name / note**: `gems60-lane-knickpoint-c7653-20261011T000000Z` / "tectono-geomorphic chi/ksn knickpoint lane; 7653 concordant channel dots; E1 negative AUC 0.224; RESEARCH-ONLY, not promoted".
+* **Submission name / note**: `gems60-chi-ksn-knick-pkmax-h1-ac250000-6169px-20261011T020450Z` / "tectono-geomorphic chi/ksn knickpoint lane (field-maxima emission); 6169 concordant channel dots; E1 negative AUC 0.491; HOLDOUT-DTI 0.0001; RESEARCH-ONLY, not promoted".
+* **Reproduce**: `python scripts/run_gems60_lane_holdout.py --data-dir data --out-dir submission --evidence evidence` (uses only the inputs present in this checkout: `data/external/topo_10m_derived_100m_u8.tif`, `data/bridge/existing_faults.tif`, `data/bridge/example_submission.tif`).
 * **Verdict**: **negative** (do not spend a slot).
 
 ## Why the group's 0.2778 champion is what it is (PhD-level answer, from measured bytes)

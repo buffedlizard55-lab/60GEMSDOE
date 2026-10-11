@@ -1,8 +1,8 @@
 {
   "primary": {
-    "file": "gems60-chi-ksn-knick-coherent-3770px-20261011T010511Z-zeros.tif",
-    "sha256": "d3c411f5137c65f530bf1e2846482d4a06a5ac9a1b27d8d90dc0ec344d84692a",
-    "bytes": 65898,
+    "file": "gems60-chi-ksn-knick-pkmax-h1-ac250000-6169px-20261011T020450Z-zeros.tif",
+    "sha256": "ce682f32f8d2ac313ea8059cc40c88eb857ef0fc46a923b853d93ebe5917972e",
+    "bytes": 70896,
     "width": 3292,
     "height": 3730,
     "count": 1,
@@ -23,8 +23,8 @@
     "min_finite": 0.0,
     "max_finite": 1.0,
     "n_values_outside_0_1": 0,
-    "n_positive": 3770,
-    "mass": 3770.0,
+    "n_positive": 6169,
+    "mass": 6169.0,
     "n_distinct_positive_values": 1,
     "checks": {
       "single_band_float32": true,
@@ -38,9 +38,9 @@
     "passes_all_literal_checks": true
   },
   "nan_variant": {
-    "file": "gems60-chi-ksn-knick-coherent-3770px-20261011T010511Z-nan.tif",
-    "sha256": "4878334499bba92d34d7575805e8336032cef2beb79fb77acb02aab51b42a948",
-    "bytes": 108286,
+    "file": "gems60-chi-ksn-knick-pkmax-h1-ac250000-6169px-20261011T020450Z-nan.tif",
+    "sha256": "4f9f5d721811b68e5f800282255a9c8baf4b3815d1af20a0abd5feefd95e761d",
+    "bytes": 113592,
     "width": 3292,
     "height": 3730,
     "count": 1,
@@ -61,8 +61,8 @@
     "min_finite": 0.0,
     "max_finite": 1.0,
     "n_values_outside_0_1": 0,
-    "n_positive": 3770,
-    "mass": 3770.0,
+    "n_positive": 6169,
+    "mass": 6169.0,
     "n_distinct_positive_values": 1,
     "checks": {
       "single_band_float32": true,

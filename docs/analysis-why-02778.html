@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analysis — why 0.2778 won, and can the geomorphic lane beat it? (60GEMSDOE)</title>
+<style>
+:root{--ok:#0a7d33;--bad:#b3261e;--ink:#1b1f23;--mut:#57606a;--bg:#f6f8fa;--card:#fff;--line:#d0d7de}
+*{box-sizing:border-box}body{margin:0;font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+.wrap{max-width:920px;margin:0 auto;padding:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 22px;margin:14px 0}
+.banner{border:2px solid #8957e5;background:#faf5ff;border-radius:10px;padding:16px 20px;margin:16px 0}
+h1{font-size:25px;margin:6px 0 2px}h2{font-size:20px;margin:18px 0 6px}h3{font-size:17px;margin:14px 0 4px}
+p{margin:8px 0}code{background:#eff1f3;border-radius:6px;padding:1px 5px;font-size:14px}
+pre{background:#eff1f3;border-radius:8px;padding:12px;overflow:auto;font-size:14px}
+table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:#eaeef2}
+.mut{color:var(--mut);font-size:14px}a{color:#1f6feb}footer{color:var(--mut);font-size:13px;margin:24px 0}
+.kv{display:grid;grid-template-columns:210px 1fr;gap:5px 14px;font-size:15px}.kv div:nth-child(odd){color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Analysis — why did 0.2778 win, and can the tectono-geomorphic lane beat it?</h1>
+<p class="mut">60GEMSDOE · Lane 1 (channel steepness &amp; knickpoints) · 2026-10-11 · PhD-level assessment, every claim linked for manual review.</p>
+
+<div class="banner">
+<h2>One-line answer</h2>
+<p><b>0.2778 is the group's best because it is a fault-<i>continuation</i> "dotted" raster</b> that places limited-credit points where hidden faults are most probable
+(along strike-extrapolated catalogue gaps and at geophysically-concordant lineaments), which is exactly what the DTI metric rewards.
+<b>The pure geomorphic lane cannot beat it on the data available here</b> — our own first test returns AUC&nbsp;0.491 (chance) and a pooled holdout DTI of 0.0001.
+The method is not refuted in principle; it is blocked by a <i>substrate</i> limit (we only have a 100&nbsp;m mean-reduced DEM, not the 3DEP 10&nbsp;m DEM the brief specifies) and by the absence of the board's actual off-catalogue scoring population.</p>
+</div>
+
+<div class="card">
+<h2>1. What the metric actually rewards</h2>
+<p>The competition score is the distance-weighted Tversky index (DW-Tversky), literal transcription in
+<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/#performance-metric">the official metric page</a>:
+with kernel radius R = 300&nbsp;m, α = 0.2, β = 0.8, a prediction is scored on a 300&nbsp;m triangular kernel around each hidden-truth pixel, and
+false positives are taxed at the full distance weight. Because β is four times α, <b>covering a hidden-truth pixel is worth ~4× more than a comparable false positive costs</b> — but only out to 300&nbsp;m.
+So the optimal strategy concentrates dots where the <i>posterior probability of an unmapped fault</i> is highest and keeps them inside the 300&nbsp;m halo of real traces.</p>
+<p>Concretely, for a single previously-uncovered truth pixel the marginal acceptance bar is roughly
+<code>w &gt; 0.2 × DTI</code> (≈ 0.056 at DTI&nbsp;0.2778), i.e. the dot must land within ~283&nbsp;m of a hidden fault.
+A dense, undirected scatter fails: most dots fall outside every truth halo and pay the false-positive tax.</p>
+</div>
+
+<div class="card">
+<h2>2. Why h33-h33-2-b2 = 0.2778 is the group best</h2>
+<p>From the per-site ledger the group champion is <code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros</code>
+(<a href="https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html">GEMSDOE32</a>, 0.2778).
+The naming and the lane-1 run card show it is a <b>dotted fault-continuation</b> product: it extrapolates the supplied USGS/INGENIOUS catalogue along strike,
+fills its gaps, and up-weights locations where independent geophysical lineaments (the GEODAWN magnetic/radiometric products,
+<a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GEODAWN</a>; and the
+<a href="https://gbcge.org/current-projects/ingenious/">GBCGE INGENIOUS</a> compilation) concur.
+This is precisely the high-posterior placement the metric wants, and it is computed from data that is <i>directly tied to where faults are known to be</i>.</p>
+<p>The live leaderboard ceiling is <b>0.3774</b>
+(<a href="https://buffedlizard55-lab.github.io/GEMSDOE/docs/index.html">GEMSDOE</a>) — a different entrant, almost certainly a tighter fusion of the same ideas
+plus more careful budget control. 0.2778 is our <i>group's</i> best, not the global best.</p>
+</div>
+
+<div class="card">
+<h2>3. Our empirical result for the geomorphic lane (this session, reproduced)</h2>
+<div class="kv">
+<div>First test (the brief's gate)</div><div>withheld catalogue segments vs orientation-matched random lines: <b>AUC placement-null = 0.491</b> (≈ chance; the brief's stop rule is AUC ≥ 0.55/0.60). Passes = <b>false</b>.</div>
+<div>Catalogue holdout DTI</div><div><b>HOLDOUT-DTI 0.0001</b> over 5 whole-segment folds (60,988 withheld positives) — essentially zero.</div>
+<div>Uniqueness (signal)</div><div>rank correlation ≤ 0.0068 vs all 35 registry rasters → the field is genuinely distinct.</div>
+<div>Uniqueness (packing)</div><div>83.6% of our dots lie within 3&nbsp;px of <code>r13_lattice_s5</code> — an <b>artifact</b> (that registry raster holds 206,895 dots; its 3&nbsp;px halo covers 35% of the footprint, so any spread dot set overlaps). Not signal duplication.</div>
+<div>Diagnostic</div><div>Hack exponent A ~ L<sup>b</sup> returned <b>b ≈ −0.02</b> (a real bedrock network gives b ≈ 1.7) → the available elevation does not support a physically meaningful drainage network.</div>
+</div>
+<p>These numbers are not a modelling failure of the geomorphology <i>code</i>; they are the output of the shared, byte-pinned evaluator on the data present in this checkout.</p>
+</div>
+
+<div class="card">
+<h2>4. Why the lane is blocked here (root causes, each a missing input)</h2>
+<ul>
+<li><b>DEM resolution.</b> The brief specifies extracting drainage from the "free 3DEP 10&nbsp;m DEM (or 1&nbsp;m tiles)". This checkout only contains
+<code>dem_mean</code> — the 10&nbsp;m 3DEP DEM reduced to the competition's 100&nbsp;m grid
+(source: <a href="https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/USGS_Seamless_DEM_13.vrt">USGS 3DEP seamless DEM, public domain</a>).
+At 100&nbsp;m, channel steepness and knickpoints are averaged out; the negative Hack exponent confirms it.</li>
+<li><b>Off-catalogue instrument unavailable.</b> The board scores faults <i>absent from</i> the catalogue. Testing that requires the USGS State Geologic Map Compilation (SGMC) layer ≥ 300&nbsp;m from the catalogue; that layer is not in this checkout, so the decisive holdout could not be run.</li>
+<li><b>Confound layers unavailable.</b> Lithology and climate gradients (Wobus et al. 2006 confound list) cannot be masked — no free gridded product is reachable from this environment.</li>
+</ul>
+<p>None of these refutes channel-steepness/knickpoint theory (Kirby &amp; Whipple 2012; Perron &amp; Royden 2013; Gailleton et al. 2019). They only mean the theory cannot be <i>tested to a positive conclusion</i> on the data at hand.</p>
+</div>
+
+<div class="card">
+<h2>5. The contrarian, realistic path to &gt; 0.2778</h2>
+<p>Beating 0.2778 means raising DTI, which means covering more hidden-truth pixels inside their 300&nbsp;m halos without raising false positives.
+The geomorphic lane is a <b>corroborating signal</b>, not a standalone winner on this substrate. The defensible next phase is a <b>fusion</b>:</p>
+<ol>
+<li>Keep the proven fault-continuation placement (catalogue strike-extrapolation + geophysical concordance) as the prior.</li>
+<li>Use geomorphology (off-catalogue χ/ksn knickpoint coherence) as a <b>gating / up-weighting</b> term on off-catalogue candidates — it can suppress false continuations in alluviated basins and promote real, active traces.</li>
+<li>Re-test on the real 10&nbsp;m DEM and the SGMC off-catalogue population, which is the board's actual scoring set.</li>
+</ol>
+<p>This fusion is outside the single-lane assignment but is the project's logical next step and the only evidence-based route to the top of the leaderboard.</p>
+</div>
+
+<div class="card">
+<h2>6. Links for manual verification</h2>
+<table>
+<tr><th>Topic</th><th>Source (open for review)</th></tr>
+<tr><td>Official metric &amp; problem</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">DrivenData #306 — page 967</a></td></tr>
+<tr><td>Competition home / rules</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData #306</a></td></tr>
+<tr><td>Live leaderboard</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">DrivenData leaderboard</a></td></tr>
+<tr><td>Group champion 0.2778</td><td><a href="https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html">GEMSDOE32</a></td></tr>
+<tr><td>Reference solution</td><td><a href="https://github.com/drivendataorg/gems-prize-reference-solution">drivendataorg/gems-prize-reference-solution</a></td></tr>
+<tr><td>GEODAWN airborne geophysics</td><td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GEODAWN</a></td></tr>
+<tr><td>INGENIOUS geologic compilation</td><td><a href="https://gbcge.org/current-projects/ingenious/">GBCGE INGENIOUS</a></td></tr>
+<tr><td>USGS 3DEP 10 m DEM (the lane's specified substrate)</td><td><a href="https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/USGS_Seamless_DEM_13.vrt">USGS 3DEP seamless DEM vrt</a></td></tr>
+<tr><td>Kirby &amp; Whipple (2012), J. Struct. Geol. 44, 54–75</td><td>"Expression of active tectonics in erosional landscapes" (peer-reviewed; cite by title/year)</td></tr>
+<tr><td>Perron &amp; Royden (2013), EPSL/ESPL 38, 570–576</td><td>"An integral approach to bedrock river profile analysis" (χ transform)</td></tr>
+<tr><td>Gailleton et al. (2019), Earth Surf. Dyn. 7, 459–483</td><td>"A segmentation approach to computing channel steepness index"</td></tr>
+</table>
+</div>
+
+<footer>Generated 2026-10-11 · Lane 1 (tectono-geomorphology) · negative-result research artifact, not for submission · all evaluator numbers are HOLDOUT-DTI on the shared gems60/gems52 evaluator.</footer>
+</div>
+</body>
+</html>
