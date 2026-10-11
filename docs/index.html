@@ -1,9 +1,30 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>60GEMSDOE — current status and evidence · 60GEMSDOE</title><link rel="stylesheet" href="assets/site.css"></head><body>
-<header class="top"><div class="wrap"><h1>60GEMSDOE — current status and evidence</h1><nav><a href="index.html" class=active>Home</a> <a href="executive-summary.html">Submission status</a> <a href="research.html">Research</a> <a href="hypotheses.html">Deferred hypotheses</a> <a href="leaderboard.html">Leaderboard</a> <a href="sources.html">Sources</a> <a href="irregularities.html">Irregularities</a></nav>
-<div class="dlbtn"><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download H65-1 GeoTIFF — research only, DO NOT SUBMIT</a> <a class="btn alt" href="research/active-lane-review-2026-10-11.md">Read current review</a></div></div></header>
+<header class="top"><div class="wrap"><h1>60GEMSDOE — current status and evidence</h1><nav><a href="index.html" class=active>Home</a> <a href="executive-summary.html">How to submit</a> <a href="h73-report.html">H73-1 report</a> <a href="research.html">Research</a> <a href="hypotheses.html">Deferred hypotheses</a> <a href="leaderboard.html">Leaderboard</a> <a href="sources.html">Sources</a> <a href="irregularities.html">Irregularities</a></nav>
+<div class="dlbtn"><a class="btn" href="downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif" download>Download the H73-1 GeoTIFF — research only, DO NOT SUBMIT</a> <a class="btn alt" href="research/active-lane-review-2026-10-11.md">Read current review</a></div></div></header>
 <div class="values"><div class="wrap"><b>Maximize P(Win).</b> No slot is spent on an unvalidated candidate. <b>Own the Outcome.</b> Negative results and evidence limits are published clearly.</div></div>
+
+<div class="wrap" style="border:3px solid #b42318;background:#fffafa;padding:12px 16px;margin:8px auto">
+<h2 style="margin:0 0 6px">&#9940; This session's artifact (H73-1, session <code>arena/ac9d4dc4-60gemsdoe</code>, 2026-10-11) &mdash; DOWNLOAD for research: <b>YES</b> &middot; SUBMIT: <b>NO &mdash; DO NOT SUBMIT</b></h2>
+<table style="width:100%">
+<tr><th style="width:32%">question</th><th>answer</th></tr>
+<tr><td><b>OK to download?</b></td><td><b style="color:#067647">YES</b> &mdash; validated single-band float32 GeoTIFF, 8,811 px, all-finite, values in [0,1].</td></tr>
+<tr><td><b>OK to submit?</b></td><td><b style="color:#b42318">NO.</b> The lane's preregistered first test did not pass; the statistic is significantly negative on the population the board scores; the field is below a mass-matched random control on the shared holdout. A slot spent here scores near zero.</td></tr>
+</table>
+<p><a class="btn" href="downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif" download>&#11015; Download the H73-1 GeoTIFF</a>
+<a class="btn alt" href="downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.zip">&#11015; .zip</a>
+<a class="btn alt" href="h73-report.html">H73-1 report</a>
+<a class="btn alt" href="executive-summary.html">How to submit</a></p>
+<table>
+<tr><th>quantity</th><th>value</th></tr>
+<tr><td>First test, scale-free relative step (PRIMARY, n = 4,004)</td><td>+0.0097 [-0.0012, +0.0202] &rarr; INCONCLUSIVE</td></tr>
+<tr><td>Same statistic, off-catalogue population (n = 3,282)</td><td>-0.0851 [-0.0948, -0.0751] &rarr; STOP</td></tr>
+<tr><td>Control with no step information, block-centred log(ksn)</td><td>+0.1946 [+0.1695, +0.2195] &mdash; steepness LEVEL, not step, drives every positive result in this lane</td></tr>
+<tr><td>HOLDOUT-DTI (gems57-pooled-hide-v2)</td><td>0.003475 vs random mass control 0.013561</td></tr>
+<tr><td>SHA-256</td><td><code>aed3c9bd1902ee440cd5fdf975a0c646ae332588a65a08d2ddd43334ca80b60d</code></td></tr>
+</table>
+</div>
 <main class="wrap">
 <div class="wrap" style="border:3px solid #b42318;background:#fffafa;padding:12px 16px;margin:8px auto">
 <h2 style="margin:0 0 6px">&#9940; Additional research artifacts (session <code>arena/161d8066-60gemsdoe</code>, 2026-10-11) &mdash; DOWNLOAD for research: YES &middot; SUBMIT: <b>NO — DO NOT SUBMIT</b></h2>
@@ -44,7 +65,7 @@ machine-readable status: <a href="../registry/artifact_status_2026-10-11.json">r
 <strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast +0.0326,
 95% CI [-0.0144, +0.0790] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
 The earlier c7653 run also stopped. Later H66/H67/H68 artifacts do not lift this STOP; their literal uniqueness clearance failed against the dense calibration lattice corpus. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
-<p><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download the existing H65-1 GeoTIFF for research only</a>
+<p><a class="btn" href="downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif" download>Download the existing H65-1 GeoTIFF for research only</a>
 <a class="btn alt" href="downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif" download>Download H68-1 GeoTIFF (research only)</a>
 <strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
 <p>H65-1 diagnostic <b>HOLDOUT-DTI</b>: 0.01158 [0.00840, 0.01462],

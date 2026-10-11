@@ -1,0 +1,16 @@
+{
+ "n_channel_cells": 541176,
+ "corr_stepabs_vs_ksn": 0.04823673516511917,
+ "corr_relstep_vs_ksn": -0.0347164161503315,
+ "corr_stepabs_vs_relstep": 0.7316961884498596,
+ "corr_relstep_vs_relief(zmean)": -0.20974460244178772,
+ "corr_stepabs_vs_relief(zmean)": -0.12263064831495285,
+ "step_abs ~ 1 + relstep + log(ksn): R2": 0.5419176378314939,
+ "coefs [intercept, relstep, log_ksn]": [
+  -1.3597507395696444,
+  3.217955218193439,
+  0.238821021276706
+ ],
+ "R2 of step_abs on log(ksn) alone": 0.0019079284466129165,
+ "R2 of step_abs on relstep alone": 0.5353792686708991
+}

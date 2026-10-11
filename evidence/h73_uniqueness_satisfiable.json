@@ -1,0 +1,67 @@
+{
+ "comparators_total": 109,
+ "unsatisfiable_comparators": 4,
+ "unsatisfiable_definition": "the registry raster's own 3-px dilation already covers > 70% of the footprint, so no candidate raster of any shape can score <= 70% against it",
+ "unsatisfiable_examples": [
+  {
+   "path": "registry/rasters/calib_r13lattice_00904.tif",
+   "dots": 206895,
+   "coverage": 0.9987132726822701
+  },
+  {
+   "path": "registry/rasters/r13_lattice_s5_00904.tif",
+   "dots": 206895,
+   "coverage": 0.9987132726822701
+  },
+  {
+   "path": "registry/rasters/r14_union_tips10_lat6.tif",
+   "dots": 192231,
+   "coverage": 0.7619734437595274
+  },
+  {
+   "path": "registry/rasters/r11_greedy_mp.tif",
+   "dots": 272853,
+   "coverage": 0.7397311941677135
+  }
+ ],
+ "satisfiable_comparators": 105,
+ "worst_among_satisfiable": {
+  "path": "docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-nan.tif",
+  "n_dots": 8811,
+  "footprint_covered_by_3px_dilation": 0.0039699088879397715,
+  "our_dots_within_3px": 1.0
+ },
+ "worst5_among_satisfiable": [
+  {
+   "path": "docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-nan.tif",
+   "n_dots": 8811,
+   "footprint_covered_by_3px_dilation": 0.0039699088879397715,
+   "our_dots_within_3px": 1.0
+  },
+  {
+   "path": "docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif",
+   "n_dots": 8811,
+   "footprint_covered_by_3px_dilation": 0.0039699088879397715,
+   "our_dots_within_3px": 1.0
+  },
+  {
+   "path": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+   "n_dots": 40000,
+   "footprint_covered_by_3px_dilation": 0.12495130504416847,
+   "our_dots_within_3px": 0.658381568493928
+  },
+  {
+   "path": "docs/downloads/submission.tif",
+   "n_dots": 983855,
+   "footprint_covered_by_3px_dilation": 0.45022374038026675,
+   "our_dots_within_3px": 0.6283055271819317
+  },
+  {
+   "path": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+   "n_dots": 40000,
+   "footprint_covered_by_3px_dilation": 0.042398526291792756,
+   "our_dots_within_3px": 0.5408012711383497
+  }
+ ],
+ "our_dots": 8811
+}

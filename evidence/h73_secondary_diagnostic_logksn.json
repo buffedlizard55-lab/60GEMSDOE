@@ -1,0 +1,24 @@
+{
+ "generated_utc": "2026-10-11T20:17:31Z",
+ "purpose": "diagnostic: is the secondary (absolute dksn) arm's PROCEED driven by steepness LEVEL rather than by a steepness STEP?",
+ "statistic": "block-centred log(ksn) - contains no step information whatsoever",
+ "n_control_transects": 40,
+ "summary": {
+  "evidence_class": "MEASUREMENT",
+  "n_components": 1823,
+  "mean": 0.1946195819481432,
+  "median": 0.19474350928794593,
+  "ci95": [
+   0.169465144962427,
+   0.21950889751967306
+  ],
+  "fraction_positive": 0.6286341195831048,
+  "component_std": 0.5504377525407604,
+  "bootstrap": {
+   "draws": 4000,
+   "seed": 60101,
+   "method": "percentile over withheld components"
+  },
+  "verdict": "PROCEED"
+ }
+}

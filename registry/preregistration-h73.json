@@ -1,0 +1,124 @@
+{
+ "schema": 1,
+ "hypothesis_id": "H73-1",
+ "session": "arena/ac9d4dc4-60gemsdoe",
+ "preregistered_utc": "2026-10-11T00:00:00Z",
+ "lane": "tectonic geomorphology - channel steepness and knickpoints (chi / ksn), NOT scarp shape",
+ "title": "Power-resolved replication of the lane's mandated first test on chi-normalised steepness steps with the brief's four confounds masked, plus a strike-corroborated (>=3 independent drainages) emission field",
+ "status": "PREREGISTERED - written before any number in this session was computed",
+ "why_this_is_a_new_experiment_and_not_a_rerun": [
+  "Every prior first test in this lane (H65-1, H66-1, H66-6, H70-1) used the SAME underpowered test design: hide_frac = 0.20, seeds (20, 21), and 10 orientation-matched random transects per withheld component. That design yields n = 262 scoreable components and a 95% CI half-width of ~0.047 for a component std of ~0.39.",
+  "The pooled point estimate has been positive and stable across three independent statistics (+0.0326 H65-1, +0.0404 H66-6 masked, +0.0326 H70-1 crest-only ablation), i.e. the effect is consistently ~1.5x smaller than the CI half-width the design can resolve. The lane has therefore been reporting 'no signal' for what is, on its own numbers, an unresolved signal.",
+  "This experiment changes only the DESIGN (more withheld segments, more control transects per component), not the statistic, and pre-commits the endpoint before computing. It is a replication with more power, not a new detector."
+ ],
+ "statistic": {
+  "name": "dksn_signed, block-centred, confound-masked",
+  "source_layers": [
+   "data/external/dem10_chi_100m_i16.tif bands 1..5 (step_max/1000, step_min/1000, ksn_max, log10_area/1000, zmean) - native USGS 3DEP 10 m reduction committed by workflow 'dem10-chi'",
+   "data/external/dem10_chi_100m_u8.tif bands 1..4 (chan_n, knick_n, raised_n, valid_n)",
+   "data/bridge/existing_faults.tif (catalogue), data/bridge/sample_submission.tif (footprint)",
+   "data/external/derived_sgmc_faults_100m.tif (off-catalogue SGMC truth, non-gating arm only)"
+  ],
+  "formula": {
+   "ku": "max(ksn_max, 0)",
+   "kd": "max(0, (ku + 0.5) * exp(-clip(step_max, -2.3, 2.3)) - 0.5)",
+   "dksn_signed": "log1p(max(ku - kd, 0)) - log1p(max(kd - ku, 0))",
+   "step": "dksn_signed - blockwise median of dksn_signed over channel cells in 40 km blocks (climate / regional-gradient control)"
+  },
+  "mechanism": "Kirby & Whipple (2012) doi:10.1016/j.jsg.2012.07.009 - a step in rock-uplift rate across an active normal fault produces a knickpoint and elevated normalised steepness upstream of it. Perron & Royden (2013) doi:10.1002/esp.3302 - the chi transform puts channels of different drainage area on one axis so ksn steps are comparable between drainages. Gailleton et al. (2019) doi:10.5194/esurf-7-831-2019 - reproducible piecewise segmentation of the chi-z profile.",
+  "channel_mask": "footprint & finite(step_max) & finite(ksn_max)",
+  "confounds_masked": {
+   "playa_or_closed_basin_base_level": "u8 band 3 (raised_n) >= 50 - cells the priority-flood filler had to raise, i.e. internal-drainage floors where the channel profile is truncated by a depositional base level rather than by rock uplift",
+   "ephemeral_alluvial_channels": "channel & (ksn_max < 10 m^0.9) - unincised desert washes with no bedrock profile",
+   "lithology_range_core_proxy": "footprint & (zmean - 20-cell median of zmean > 180 m) - intra-range high-relief cores. NOTE: the depth-to-basement band (training_features.tif band 15) used by H66/H68 is NOT PRESENT in this checkout, so the lithology proxy is DEM-only and is reported as a limitation.",
+   "climate_gradient": "40 km blockwise median subtraction (above)"
+  }
+ },
+ "e1_gating_first_test": {
+  "question": "Do channels crossing withheld catalogue segments show larger chi-normalised steepness steps than random lines of the same orientation?",
+  "unit": "one connected withheld catalogue component per fold cell",
+  "observed": "mean of `step` over channel cells inside a 3-px dilation of the component, intersected with the cell's active domain",
+  "control": "mean of `step` over channel cells along N_CTRL random transects of the SAME length and the SAME azimuth as the component, started at uniform random points of the cell's active pool, pooled per component",
+  "control_pool_exclusions": "10-px dilation of (truth | visible) - a control transect can never accidentally sit on the answer or on a visible mapped fault",
+  "validity_rules": [
+   "component must have >= 3 finite channel cells in its dilation zone, else recorded as skipped",
+   "a transect counts only if >= 60% of its cells are inside the active domain AND it contains >= 3 channel cells",
+   "a component is scored only if >= 25 valid control transects were obtained"
+  ],
+  "power_settings_this_session": {
+   "hide_frac": 0.5,
+   "seeds": [
+    20,
+    21,
+    22
+   ],
+   "quadrants": [
+    "NW",
+    "NE",
+    "SW",
+    "SE"
+   ],
+   "n_control_transects_per_component": 100,
+   "bootstrap_draws": 4000,
+   "bootstrap_seed": 60101,
+   "expected_components": ">= 600 (vs 262 in every prior run)"
+  },
+  "gate": "PROCEED iff (mean > 0) AND (bootstrap 2.5th percentile > 0). Any other outcome is STOP.",
+  "precommitted": "The gate is fixed here and is not re-specified after the numbers exist. A STOP does not forbid emitting a clearly-labelled research GeoTIFF; it forbids claiming promotion."
+ },
+ "e1b_non_gating": {
+  "population": "USGS State Geologic Map Compilation fault pixels >= 300 m from every catalogue pixel (off-catalogue), inside the footprint",
+  "role": "secondary / non-gating. The board scores this population; the catalogue population is the one the lane brief names in its first test.",
+  "note": "Prior rounds measured a sign flip here (H70-1 E1b +0.0567 vs E1a -0.0347). It is recorded, not used to override the gate."
+ },
+ "leakage_canary": {
+  "rule": "Each input feature is scored ALONE (rank AUC) against the withheld truth before it is trusted. max(AUC, 1-AUC) > 0.90 is leakage until proven otherwise.",
+  "features": [
+   "dksn_signed",
+   "ksn",
+   "log10_drainage_area",
+   "zmean",
+   "step_min",
+   "knick_n",
+   "lane_surface"
+  ]
+ },
+ "emission": {
+  "surface": "strike-aligned corridors joining knickpoints corroborated by >= 3 independent drainages within a common strike corridor (the lane brief's corroboration rule)",
+  "support_rule": "no dot on a mapped catalogue pixel (the organiser's own statement, forum thread 11516, is that a dot near a known trace but far from any new-fault pixel is fully penalised)",
+  "grid": "3.0 px non-maximum suppression, value 1.0 on every retained dot (DTI is monotone increasing in a uniform rescaling of a fixed support, so p = 1 is optimal on the chosen support)",
+  "budgets_reported": [
+   10000,
+   20000,
+   40000,
+   60000
+  ],
+  "primary_budget": 40000
+ },
+ "submission_policy": {
+  "emits_geotiff": true,
+  "promotes_to_slot": false,
+  "rule": "This session never promotes. The submit-OK flag on the download is set by the measured gate: OK only if the gating test PROCEEDs, the leakage canary is clean, and the literal uniqueness rule (max |Spearman| <= 0.90 and <= 70% of dots within 3 px of any registry raster) is satisfied. Otherwise the artifact is labelled DO NOT SUBMIT."
+ },
+ "uniqueness_rule": {
+  "spearman_limit": 0.9,
+  "dot_overlap_within_3px_limit": 0.7,
+  "registry": "registry/rasters/** plus every committed docs/downloads/*.tif"
+ },
+ "budget": {
+  "experiments_allowed": 3,
+  "experiments_planned": 3,
+  "hours_allowed": 2
+ },
+ "amendments": [
+  {
+   "amendment_utc": "2026-10-11T19:57:10Z",
+   "stage": "before any E1 number existed in this session (stage 'cache' had run, 'e1' had not)",
+   "change": "endpoint split into a pre-specified PRIMARY and SECONDARY statistic",
+   "reason": "The originally preregistered statistic, absolute dksn_signed = log1p(ku-kd) - log1p(kd-ku), is not scale free: a cell with a large ksn produces a large value even for a modest relative steepness step, so transects that happen to cross steep channels score high. Kirby & Whipple (2012) and Wobus et al. (2006) read the RELATIVE step, which is exactly the committed reduction's step_max = ln(ku/kd) (stored as step_max/1000). It is also the statistic H65-1, H66-6 and H70-1 measured, so it is the only choice that is comparable to the lane's own literature.",
+   "primary": "relative_step = step_max/1000 (scale-free log ratio), block-centred, confound-masked",
+   "secondary": "dksn_signed as originally written",
+   "decision_rule_unchanged": "PROCEED iff (primary mean > 0) AND (primary bootstrap 2.5th percentile > 0)"
+  }
+ ]
+}

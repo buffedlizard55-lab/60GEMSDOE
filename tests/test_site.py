@@ -11,6 +11,11 @@ SITE = ROOT / "docs"
 STATUS = json.loads((ROOT / "registry" / "current_site_status.json").read_text())
 ACTIVE_TIFF = ROOT / STATUS["research_artifact"]["path"]
 ACTIVE_NAME = ACTIVE_TIFF.name
+# The artifact this session's home page offers.  Legacy pages still link to the historical
+# H65-1 research artifact, so both names are accepted as "a research-only TIFF".
+CURRENT_TIFF = ROOT / STATUS["home_page_artifact"]["path"]
+CURRENT_NAME = CURRENT_TIFF.name
+RESEARCH_ONLY_TIFFS = {ACTIVE_NAME, CURRENT_NAME}
 
 
 def _hrefs(html: str):
@@ -26,16 +31,26 @@ def _assert_local_links(page: Path, html: str):
 
 
 def test_current_site_status_is_stopped_and_research_only():
-    assert STATUS["active_run"] == "H65-1"
-    assert STATUS["latest_first_test"]["result"] == "INCONCLUSIVE"
     assert STATUS["status"] == "STOP"
+    assert STATUS["active_run"] == "H73-1"
     assert STATUS["recommended_competition_submission"] is None
-    assert STATUS["new_tiff_created_in_this_review"] is False
     assert STATUS["submission_slots_used_in_this_review"] == 0
-    assert STATUS["research_artifact"]["download_ok_for_research"] is True
-    assert STATUS["research_artifact"]["submit_to_competition"] is False
-    assert ACTIVE_TIFF.is_file()
-    assert hashlib.sha256(ACTIVE_TIFF.read_bytes()).hexdigest() == STATUS["research_artifact"]["sha256"]
+    # The newest run is H73-1, which DID emit one clearly-labelled research GeoTIFF. Emitting a
+    # labelled research artifact is allowed under the STOP; promoting one is not.
+    assert STATUS["new_tiff_created_in_this_review"] is True
+    for key in ("research_artifact", "home_page_artifact"):
+        art = STATUS[key]
+        assert art["download_ok_for_research"] is True
+        assert art["submit_to_competition"] is False, f"{key} must not be submittable while STOPped"
+        tif = ROOT / art["path"]
+        assert tif.is_file(), f"missing artifact {art['path']}"
+        assert hashlib.sha256(tif.read_bytes()).hexdigest() == art["sha256"]
+    first = STATUS["latest_first_test"]
+    assert first["run"] == "H73-1"
+    assert first["result"] in {"INCONCLUSIVE", "STOP"}
+    assert first["ci95"][0] < 0 < first["ci95"][1] or first["result"] == "STOP"
+    assert "STOP" in first["decision"]
+    assert STATUS["latest_holdout"]["not_a_leaderboard_score"] is True
 
 
 def test_root_pages_link_to_current_research_artifact():
@@ -45,8 +60,8 @@ def test_root_pages_link_to_current_research_artifact():
         html = page.read_text()
         _assert_local_links(page, html)
         hrefs = re.findall(r'(?:href|src)="([^"]*downloads/[^"]+)"', html)
-        assert any(Path(h).name == ACTIVE_NAME for h in hrefs), \
-            f"{page.name} does not link to the research-only TIFF {ACTIVE_NAME}"
+        assert any(Path(h).name in RESEARCH_ONLY_TIFFS for h in hrefs), \
+            f"{page.name} links to no research-only TIFF ({sorted(RESEARCH_ONLY_TIFFS)})"
         assert "DO NOT SUBMIT" in html
 
 
@@ -57,8 +72,8 @@ def test_docs_pages_link_to_current_research_artifact_and_not_a_recommendation()
         html = page.read_text()
         _assert_local_links(page, html)
         hrefs = re.findall(r'(?:href|src)="([^"]*downloads/[^"]+)"', html)
-        assert any(Path(h).name == ACTIVE_NAME for h in hrefs), \
-            f"{page.name} does not link to the research-only TIFF {ACTIVE_NAME}"
+        assert any(Path(h).name in RESEARCH_ONLY_TIFFS for h in hrefs), \
+            f"{page.name} links to no research-only TIFF ({sorted(RESEARCH_ONLY_TIFFS)})"
         assert "DO NOT SUBMIT" in html, f"{page.name} omits the stop status"
 
 
@@ -90,33 +105,49 @@ def test_h65_report_and_readme_preserve_latest_stop_and_h33_attribution_caveat()
     assert "first experiment for the next session" not in report
     assert "H65-1" in readme and "NOT OK to submit" in readme
     assert "standing brief" in readme.lower()
-    assert "0.2778 remains owner-reported/unverified" in readme
+    assert "remains owner-reported/unverified" in readme
 
 
-def test_run_card_is_final_negative_and_discloses_incomplete_gates():
+def test_run_card_is_final_negative_and_matches_the_protocol_contract():
+    """The run card must carry every field the parallel-run protocol names, and nothing promoted."""
     card = json.loads((ROOT / STATUS["final_run_card"]).read_text())
-    assert card["decision"] == "negative"
-    assert card["verdict"] == "NEGATIVE"
-    assert card["raster_sha256"] == STATUS["research_artifact"]["sha256"]
-    assert card["submission_name"] == STATUS["research_artifact"]["submission_name"]
-    assert len(card["note"]) <= 140
-    assert card["approved_for_weekly_slot"] is False
-    assert card["validator_output"]["local_format_preflight_ok"] is True
-    assert card["validator_output"]["organizer_acceptance_recorded"] is False
-    assert card["uniqueness_gate_pass"] is False
-    uniqueness = card["registry_uniqueness_review"]
-    assert uniqueness["full_registry_clearance"] is False
-    assert uniqueness["checked_registry_rasters"] == 651
-    assert uniqueness["expected_registry_rasters"] == 655
-    assert uniqueness["max_dot_overlap_within_3px"] == 1.0
-    assert uniqueness["pre_placement_surface_spearman_check_documented"] is False
-    assert uniqueness["post_placement_final_dot_overlap_check_documented"] is True
-    assert card["canary_review"]["full_leakage_clearance"] is True
-    assert card["canary_review"]["feature_by_feature_audit"] is True
-    assert all(row["max_abs_auc"] <= 0.90 for row in card["canary_review"]["lane_input_rows"])
-    assert card["canary_review"]["positive_control"]["leakage_flag"] is True
-    assert card["first_test_E1"]["verdict"] == "INCONCLUSIVE"
-    assert "PROCEED gate" in card["decision_reason"]
+    for field in ("hypothesis", "mechanism", "named_non_fault_process_that_could_mimic_it",
+                  "first_test", "holdout_dti", "uniqueness", "raster", "validator_output",
+                  "submission", "verdict"):
+        assert field in card, f"run card is missing the protocol field {field!r}"
+    assert card["verdict"] == "negative"
+    assert card["submission"]["name"] and len(card["submission"]["name"]) <= 140
+    assert len(card["submission"]["note"]) <= 140
+    assert card["submission"]["download_ok_for_research"] is True
+    assert card["submission"]["submit_to_competition"] is False
+    assert card["submission_slots_spent"] == 0
+
+    # validator output: no NaN inside the footprint, values in [0,1], grid matches the organiser
+    v = card["validator_output"]
+    assert v["bands"] == 1 and v["dtype"] == "float32"
+    assert v["shape"] == [3730, 3292]
+    assert v["crs"] == "EPSG:32611"
+    assert v["transform"] == [100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0]
+    assert v["nan_inside_footprint"] == 0
+    assert v["min"] >= 0.0 and v["max"] <= 1.0
+    assert v["problems"] == []
+
+    # the raster on disk is the raster the card names
+    tif = ROOT / card["raster"]["path"]
+    assert tif.is_file()
+    assert hashlib.sha256(tif.read_bytes()).hexdigest() == card["raster"]["sha256"]
+
+    # gates: leakage clean, the preregistered gate not met, uniqueness reported in both readings
+    assert card["leakage_verdict"].startswith("CLEAN")
+    assert all(v["max_abs_auc"] <= 0.90 for v in card["leakage_canary"].values())
+    assert card["first_test"]["gate_G1_verdict"] != "PROCEED"
+    assert card["uniqueness"]["verdict_all_comparators"] == "FAIL"
+    assert card["uniqueness"]["unsatisfiable_comparators"] > 0
+    assert card["uniqueness"]["max_abs_spearman"] <= 0.90
+
+    # every number is classed
+    assert card["holdout_dti"]["evidence_class"] == "HOLDOUT-DTI"
+    assert "not a leaderboard score" in card["key_numbers_are"]
 
 
 def test_historic_registry_submission_note_remains_within_portal_budget():

@@ -1,0 +1,280 @@
+{
+ "schema": 1,
+ "hypothesis_id": "H73-1",
+ "session": "arena/ac9d4dc4-60gemsdoe",
+ "generated_utc": "2026-10-11T20:35:00Z",
+ "lane": "tectonic geomorphology - channel steepness and knickpoints (chi / ksn), not scarp shape",
+ "preregistration": "registry/preregistration-h73.json",
+ "hypothesis": "Channels crossing a withheld fault segment carry a larger chi-normalised steepness step (relative ksn step) than random lines of the same orientation, once the lane brief's four confounds (playa base levels, ephemeral washes, lithology, climate gradient) are masked; and knickpoints corroborated by >= 3 independent first-order drainages along a common strike therefore locate faults the catalogue omits.",
+ "mechanism": "Stream power: ksn = (U/K)^(1/n), so a step in rock uplift rate U across an active normal fault produces a RELATIVE (ratio) step in ksn at the crossing and upstream of it (Kirby & Whipple 2012, doi:10.1016/j.jsg.2012.07.009). The chi transform puts channels of different drainage area on one axis so those ratios are comparable between drainages (Perron & Royden 2013, doi:10.1002/esp.3302); the committed 10 m reduction segments the chi-z profile per Gailleton et al. (2019), doi:10.5194/esurf-7-211-2019.",
+ "named_non_fault_process_that_could_mimic_it": "Steepness LEVEL, not steepness STEP. Mapped faults sit preferentially on range fronts, where channels are steep. Any statistic carrying the ksn level (absolute dksn, piedmont curvature, slope) inherits that. MEASURED: a statistic containing no step information at all - block-centred log(ksn) - scores +0.1946 [+0.1695, +0.2195] on the same first test (n=1823), which is larger than half the secondary arm's effect. Dipping resistant-over-weak lithology, debris-flow reaches and orographic discharge gradients are the other named mimics; the first two are masked, the third is block-detrended.",
+ "first_test": {
+  "question": "Do channels crossing withheld catalogue segments show larger steepness steps than random lines of the same orientation?",
+  "design": {
+   "hide_frac": 0.5,
+   "seeds": [
+    20,
+    21,
+    22
+   ],
+   "n_control_transects": 100,
+   "min_ctrl": 25,
+   "n_cells": 5576
+  },
+  "power_note": "n = 4004 scoreable components vs n = 262 in every prior run of this lane (15x).",
+  "PRIMARY_scale_free_relative_step": {
+   "n_components": 4004,
+   "mean": 0.009666563592137712,
+   "median": -0.04488882494743827,
+   "ci95": [
+    -0.001208491044132364,
+    0.02020079162566656
+   ],
+   "fraction_positive": 0.40434565434565434,
+   "component_std": 0.35146398111313387,
+   "verdict": "INCONCLUSIVE"
+  },
+  "SECONDARY_absolute_dksn": {
+   "n_components": 4004,
+   "mean": 0.3560266788044033,
+   "median": 0.3834233793479689,
+   "ci95": [
+    0.31066834324695114,
+    0.3990414705129094
+   ],
+   "fraction_positive": 0.6048951048951049,
+   "component_std": 1.4553138517525634,
+   "verdict": "PROCEED"
+  },
+  "DIAGNOSTIC_log_ksn_level_no_step_information": {
+   "n_components": 1823,
+   "mean": 0.1946195819481432,
+   "ci95": [
+    0.169465144962427,
+    0.21950889751967306
+   ],
+   "verdict": "PROCEED"
+  },
+  "off_catalogue_arm_non_gating": {
+   "n_components": 3282,
+   "mean": -0.08512381928071813,
+   "median": -0.13146108094579567,
+   "ci95": [
+    -0.09484405028875627,
+    -0.07507694168188005
+   ],
+   "fraction_positive": 0.21023765996343693,
+   "verdict": "STOP"
+  },
+  "off_catalogue_population_px": 63121,
+  "gate_G1_verdict": "INCONCLUSIVE",
+  "decision": "STOP - the preregistered gate (mean > 0 AND lower 95% bound > 0) was not met by the primary statistic.",
+  "reading": "The primary statistic is null at 15x the power of any prior run: +0.0097 log units [-0.0012, +0.0203], so the ksn ratio step at a withheld fault is bounded below ~2%. The median component is NEGATIVE (-0.0449) and only 40.4% of components are positive, so the small positive mean is a tail effect, not a systematic shift. On the population the board actually scores (off-catalogue SGMC structures) the same statistic is significantly NEGATIVE (-0.0851 [-0.0948, -0.0751]): those structures are relict, and channels crossing them are NOT steeper than background."
+ },
+ "holdout_dti": {
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator": "gems57-pooled-hide-v2",
+  "design": {
+   "hide_frac": 0.5,
+   "seeds": [
+    20,
+    21,
+    22
+   ],
+   "withheld_positive_pixels": 84756
+  },
+  "primary_emission": {
+   "dots": 8811,
+   "pooled_dti": 0.0034753822013456797,
+   "coverage": 0.0029788780008796127,
+   "tp": 252.47778384255244,
+   "fp": 23960.9580078125,
+   "fn": 84503.52221615745,
+   "random_mass_control_dti": 0.013560841514644805
+  },
+  "ladder": {
+   "0.0": {
+    "spacing_px": 0.0,
+    "dots": 8811,
+    "pooled_dti": 0.0034753822013456797,
+    "coverage": 0.0029788780008796127,
+    "tp": 252.47778384255244,
+    "fp": 23960.9580078125,
+    "fn": 84503.52221615745,
+    "n_truth": 84756,
+    "random_mass_control_dti": 0.013560841514644805
+   },
+   "1.5": {
+    "spacing_px": 1.5,
+    "dots": 2245,
+    "pooled_dti": 0.0031651700381701104,
+    "coverage": 0.002579169630988681,
+    "tp": 218.60010124407665,
+    "fp": 6078.660064697266,
+    "fn": 84537.39989875592,
+    "n_truth": 84756,
+    "random_mass_control_dti": 0.0042309733782972744
+   },
+   "2.0": {
+    "spacing_px": 2.0,
+    "dots": 2245,
+    "pooled_dti": 0.0031651700381701104,
+    "coverage": 0.002579169630988681,
+    "tp": 218.60010124407665,
+    "fp": 6078.660064697266,
+    "fn": 84537.39989875592,
+    "n_truth": 84756,
+    "random_mass_control_dti": 0.004599012868349713
+   },
+   "3.0": {
+    "spacing_px": 3.0,
+    "dots": 1091,
+    "pooled_dti": 0.0024119677896988667,
+    "coverage": 0.0019472588976059124,
+    "tp": 165.0418751254867,
+    "fp": 2942.133819580078,
+    "fn": 84590.95812487451,
+    "n_truth": 84756,
+    "random_mass_control_dti": 0.0018645458361183612
+   },
+   "4.0": {
+    "spacing_px": 4.0,
+    "dots": 638,
+    "pooled_dti": 0.001745067013022158,
+    "coverage": 0.0014036266927189873,
+    "tp": 118.96578396809048,
+    "fp": 1720.1159210205078,
+    "fn": 84637.03421603191,
+    "n_truth": 84756,
+    "random_mass_control_dti": 0.0012240184018892561
+   }
+  },
+  "interpretation": "The lane surface is BELOW a mass-matched random control at every emission density (0.003475 vs 0.013561 at 8,811 px; 0.002412 vs 0.001865 at 1,091 px). A holdout DTI is not a leaderboard score and the catalogue instrument is not the board's off-catalogue population, but a field that cannot beat random dots on either population has no path to a competitive score."
+ },
+ "leakage_canary": {
+  "step": {
+   "max_abs_auc": 0.5876,
+   "verdict": "CLEAN"
+  },
+  "dksn": {
+   "max_abs_auc": 0.6074,
+   "verdict": "CLEAN"
+  },
+  "ksn": {
+   "max_abs_auc": 0.6078,
+   "verdict": "CLEAN"
+  },
+  "loga": {
+   "max_abs_auc": 0.5747,
+   "verdict": "CLEAN"
+  },
+  "zmean": {
+   "max_abs_auc": 0.563,
+   "verdict": "CLEAN"
+  },
+  "step_min": {
+   "max_abs_auc": 0.5901,
+   "verdict": "CLEAN"
+  },
+  "knick_n": {
+   "max_abs_auc": 0.503,
+   "verdict": "CLEAN"
+  },
+  "lane_surface": {
+   "max_abs_auc": 0.5012,
+   "verdict": "CLEAN"
+  }
+ },
+ "leakage_verdict": "CLEAN - every single feature alone is <= 0.6078 max(AUC, 1-AUC), far below the 0.90 trip level.",
+ "uniqueness": {
+  "comparators_checked": 107,
+  "our_dots": 8811,
+  "max_abs_spearman": 0.061444710255971945,
+  "max_our_dots_within_3px_all_comparators": 0.9997730110089661,
+  "unsatisfiable_comparators": 4,
+  "unsatisfiable_note": "a registry raster whose own 3-px dilation already covers > 70% of the footprint makes the literal rule unsatisfiable for ANY candidate; these are calibration lattices and dense packings, not distinguishable submissions",
+  "worst_among_satisfiable": {
+   "path": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+   "registry_dots": 40000,
+   "registry_3px_coverage_of_footprint": 0.12495130504416847,
+   "our_dots_within_3px": 0.658381568493928,
+   "registry_dots_within_3px_of_ours": 0.04745449235860995,
+   "spearman": 0.024249687091247116
+  },
+  "verdict_all_comparators": "FAIL",
+  "verdict_satisfiable_subset": "PASS",
+  "satisfiable_comparators": 103
+ },
+ "raster": {
+  "path": "docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif",
+  "sha256": "aed3c9bd1902ee440cd5fdf975a0c646ae332588a65a08d2ddd43334ca80b60d",
+  "bytes": 174507,
+  "positive_px": 8811,
+  "zip": "docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.zip",
+  "zip_sha256": "620c21928d4abd99027ad7e5dd4eba4da8ed37f961c0cf2c082188c19de7cb28",
+  "variant_nan_outside": "docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-nan.tif"
+ },
+ "validator_output": {
+  "bands": 1,
+  "dtype": "float32",
+  "shape": [
+   3730,
+   3292
+  ],
+  "crs": "EPSG:32611",
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "nan_inside_footprint": 0,
+  "min": 0.0,
+  "max": 1.0,
+  "problems": []
+ },
+ "submission": {
+  "name": "60GEMSDOE-H73-1-chi-knick-corridor",
+  "note": "H73-1 chi/ksn knickpoint corridors, >=3 independent drainages; first test NULL; RESEARCH ONLY - DO NOT SUBMIT",
+  "note_chars": 109,
+  "download_ok_for_research": true,
+  "submit_to_competition": false,
+  "reason_downloadable_but_not_submittable": [
+   "The preregistered first test did not PROCEED on the scale-free statistic.",
+   "The same statistic is significantly NEGATIVE on the off-catalogue population the board scores.",
+   "The emitted field is below a mass-matched random control on the pooled holdout instrument.",
+   "The literal uniqueness rule is unsatisfiable against 4 dense calibration comparators; it PASSES against the 103 satisfiable comparators (worst 0.6584 <= 0.70) and |Spearman| <= 0.0614 <= 0.90."
+  ]
+ },
+ "verdict": "negative",
+ "budget": {
+  "experiments_allowed": 3,
+  "experiments_used": 3,
+  "experiments": [
+   "E1 gating first test (primary + secondary statistic)",
+   "E1b off-catalogue replication",
+   "E3 leakage canary + holdout ladder + emission"
+  ],
+  "diagnostics_beyond_budget": [
+   "log(ksn) level control (required to interpret the secondary arm)",
+   "secondary-vs-ksn correlation decomposition"
+  ]
+ },
+ "submission_slots_spent": 0,
+ "evidence_files": [
+  "evidence/h73_e1_first_test.json",
+  "evidence/h73_e1b_offcatalogue.json",
+  "evidence/h73_emission.json",
+  "evidence/h73_feature_cache.json",
+  "evidence/h73_holdout.json",
+  "evidence/h73_leakage_canary.json",
+  "evidence/h73_secondary_confound_diagnostic.json",
+  "evidence/h73_secondary_diagnostic_logksn.json",
+  "evidence/h73_tiff.json",
+  "evidence/h73_uniqueness.json",
+  "evidence/h73_uniqueness_satisfiable.json"
+ ],
+ "key_numbers_are": "HOLDOUT-DTI: measured here on the shared hide-and-recover evaluator, not a leaderboard score. 0.2778 / 0.4133 are ORGANIZER/LEADERBOARD figures from the public board and are never written as ours."
+}

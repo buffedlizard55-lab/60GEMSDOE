@@ -1,0 +1,142 @@
+{
+ "generated_utc": "2026-10-11T20:30:00Z",
+ "hypothesis": "H73-1",
+ "rule": "more than 70% of OUR dots within 3 px of one registry raster's dots => duplicate lane",
+ "limits": {
+  "dot_overlap": 0.7,
+  "abs_spearman": 0.9
+ },
+ "comparators_checked": 107,
+ "our_dots": 8811,
+ "unsatisfiable_comparators": 4,
+ "unsatisfiable_note": "a registry raster whose own 3-px dilation already covers > 70% of the footprint makes the literal rule unsatisfiable for ANY candidate; these are calibration lattices and dense packings, not distinguishable submissions",
+ "unsatisfiable_list": [
+  {
+   "path": "registry/rasters/calib_r13lattice_00904.tif",
+   "registry_dots": 206895,
+   "registry_3px_coverage_of_footprint": 0.9987132726822701,
+   "our_dots_within_3px": 0.9997730110089661,
+   "registry_dots_within_3px_of_ours": 0.04015380122651611,
+   "spearman": -0.0012300176004329535
+  },
+  {
+   "path": "registry/rasters/r11_greedy_mp.tif",
+   "registry_dots": 272853,
+   "registry_3px_coverage_of_footprint": 0.7397311941677135,
+   "our_dots_within_3px": 0.6918624446714334,
+   "registry_dots_within_3px_of_ours": 0.05368441545799669,
+   "spearman": -0.006163001945380391
+  },
+  {
+   "path": "registry/rasters/r13_lattice_s5_00904.tif",
+   "registry_dots": 206895,
+   "registry_3px_coverage_of_footprint": 0.9987132726822701,
+   "our_dots_within_3px": 0.9997730110089661,
+   "registry_dots_within_3px_of_ours": 0.04015380122651611,
+   "spearman": -0.0012300176004329535
+  },
+  {
+   "path": "registry/rasters/r14_union_tips10_lat6.tif",
+   "registry_dots": 192231,
+   "registry_3px_coverage_of_footprint": 0.7619734437595274,
+   "our_dots_within_3px": 0.7669958007036659,
+   "registry_dots_within_3px_of_ours": 0.04161393945293488,
+   "spearman": 0.0007790539840324742
+  }
+ ],
+ "satisfiable_comparators": 103,
+ "worst_among_satisfiable": {
+  "path": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+  "registry_dots": 40000,
+  "registry_3px_coverage_of_footprint": 0.12495130504416847,
+  "our_dots_within_3px": 0.658381568493928,
+  "registry_dots_within_3px_of_ours": 0.04745449235860995,
+  "spearman": 0.024249687091247116
+ },
+ "max_our_dots_within_3px_all": 0.9997730110089661,
+ "max_abs_spearman": 0.061444710255971945,
+ "verdict_all_comparators": "FAIL",
+ "verdict_satisfiable_subset": "PASS",
+ "top_satisfiable": [
+  {
+   "path": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+   "registry_dots": 40000,
+   "registry_3px_coverage_of_footprint": 0.12495130504416847,
+   "our_dots_within_3px": 0.658381568493928,
+   "registry_dots_within_3px_of_ours": 0.04745449235860995,
+   "spearman": 0.024249687091247116
+  },
+  {
+   "path": "docs/downloads/submission.tif",
+   "registry_dots": 983855,
+   "registry_3px_coverage_of_footprint": 0.45022374038026675,
+   "our_dots_within_3px": 0.6283055271819317,
+   "registry_dots_within_3px_of_ours": 0.27956779908498003,
+   "spearman": 0.0061343577053324105
+  },
+  {
+   "path": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+   "registry_dots": 40000,
+   "registry_3px_coverage_of_footprint": 0.042398526291792756,
+   "our_dots_within_3px": 0.5408012711383497,
+   "registry_dots_within_3px_of_ours": 0.11447483695123138,
+   "spearman": 0.061444710255971945
+  },
+  {
+   "path": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif",
+   "registry_dots": 40000,
+   "registry_3px_coverage_of_footprint": 0.14102755887759602,
+   "our_dots_within_3px": 0.5402337986607649,
+   "registry_dots_within_3px_of_ours": 0.027742626301956584,
+   "spearman": 0.01428091536223306
+  },
+  {
+   "path": "docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif",
+   "registry_dots": 37654,
+   "registry_3px_coverage_of_footprint": 0.050978901658541007,
+   "our_dots_within_3px": 0.5145840426739303,
+   "registry_dots_within_3px_of_ours": 0.08571011389078166,
+   "spearman": 0.05121924033482238
+  },
+  {
+   "path": "docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif",
+   "registry_dots": 40000,
+   "registry_3px_coverage_of_footprint": 0.035357617884367934,
+   "our_dots_within_3px": 0.4431960049937578,
+   "registry_dots_within_3px_of_ours": 0.10819624257763068,
+   "spearman": 0.05867496799012449
+  },
+  {
+   "path": "docs/downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-nan.tif",
+   "registry_dots": 48000,
+   "registry_3px_coverage_of_footprint": 0.11145702081115491,
+   "our_dots_within_3px": 0.3652252865736012,
+   "registry_dots_within_3px_of_ours": 0.031052272948505794,
+   "spearman": 0.009271570854430037
+  },
+  {
+   "path": "docs/downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif",
+   "registry_dots": 48000,
+   "registry_3px_coverage_of_footprint": 0.11145702081115491,
+   "our_dots_within_3px": 0.3652252865736012,
+   "registry_dots_within_3px_of_ours": 0.031052272948505794,
+   "spearman": 0.009271570854430037
+  },
+  {
+   "path": "registry/rasters/h60_union_d2_75308.tif",
+   "registry_dots": 75308,
+   "registry_3px_coverage_of_footprint": 0.31933963350429706,
+   "our_dots_within_3px": 0.3295880149812734,
+   "registry_dots_within_3px_of_ours": 0.014163340796262046,
+   "spearman": 0.0029144584214631543
+  },
+  {
+   "path": "docs/downloads/gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204-zeros.tif",
+   "registry_dots": 40000,
+   "registry_3px_coverage_of_footprint": 0.048982722942586106,
+   "our_dots_within_3px": 0.3149472250595846,
+   "registry_dots_within_3px_of_ours": 0.06069307894480677,
+   "spearman": 0.03189982473154822
+  }
+ ]
+}

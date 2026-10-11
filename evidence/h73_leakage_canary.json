@@ -1,0 +1,50 @@
+{
+ "step": {
+  "n_folds": 12,
+  "mean_auc": 0.5378885336213902,
+  "max_abs_auc": 0.5875768491614369,
+  "verdict": "CLEAN"
+ },
+ "dksn": {
+  "n_folds": 12,
+  "mean_auc": 0.560545598913834,
+  "max_abs_auc": 0.6074431550216134,
+  "verdict": "CLEAN"
+ },
+ "ksn": {
+  "n_folds": 12,
+  "mean_auc": 0.5743566128139046,
+  "max_abs_auc": 0.6077950539662671,
+  "verdict": "CLEAN"
+ },
+ "loga": {
+  "n_folds": 12,
+  "mean_auc": 0.47923684737326777,
+  "max_abs_auc": 0.5747494328384033,
+  "verdict": "CLEAN"
+ },
+ "zmean": {
+  "n_folds": 12,
+  "mean_auc": 0.5044631246408348,
+  "max_abs_auc": 0.5630090600450554,
+  "verdict": "CLEAN"
+ },
+ "step_min": {
+  "n_folds": 12,
+  "mean_auc": 0.5367580001783848,
+  "max_abs_auc": 0.5900584420876166,
+  "verdict": "CLEAN"
+ },
+ "knick_n": {
+  "n_folds": 12,
+  "mean_auc": 0.4998992781538351,
+  "max_abs_auc": 0.5029637014278119,
+  "verdict": "CLEAN"
+ },
+ "lane_surface": {
+  "n_folds": 12,
+  "mean_auc": 0.49914896479850973,
+  "max_abs_auc": 0.5011924672071518,
+  "verdict": "CLEAN"
+ }
+}

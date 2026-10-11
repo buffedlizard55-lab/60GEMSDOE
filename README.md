@@ -1,82 +1,116 @@
 # 60GEMSDOE — channel steepness / χ / knickpoints
 
-## ONE-CLICK download — research only; NOT OK to submit
+## ONE-CLICK DOWNLOAD — is this file OK to submit?
 
-**No competition submission is cleared. No new TIFF was generated in this review.**
-The lane's first-test STOP and the literal uniqueness gate prohibit another experiment or promotion.
+| question | answer |
+|---|---|
+| **OK to download for research?** | **YES** — a validated, uniquely-named single-band `float32` GeoTIFF. |
+| **OK to submit to the competition?** | **NO — DO NOT SUBMIT.** The lane's preregistered first test did not pass; the same statistic is significantly negative on the population the board actually scores; and the emitted field is at or below a mass-matched random control on the shared holdout. A weekly slot spent here scores near zero. |
+| Anything else in this repo cleared? | **No.** Nothing in this repository is cleared to submit. |
 
-[Download the existing H65-1 GeoTIFF](docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif)
-— **DO NOT SUBMIT**. This is an existing negative-result artifact, not a newly named or copied submission.
+**[Download the H73-1 GeoTIFF (`gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif`)](docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif)** ·
+[`.zip`](docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.zip) ·
+[How to submit (executive summary)](docs/executive-summary.html) ·
+[H73-1 report](docs/h73-report.html) ·
+[JSON run card](evidence/h73_runcard.json) ·
+[Format checks](docs/downloads/checks-gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif.json)
 
-[Download the H68-1 GeoTIFF (`gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif`)](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif) · [`.zip`](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.zip) · [H68-1 run card](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros-runcard.json) · [H68-1 format checks](docs/downloads/checks-gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif.json)
-— **OK TO DOWNLOAD FOR RESEARCH: YES (`float32` in `[0, 1]`, `0 NaN`, `40,000` dots at `3.0 px` NMS, `sha256: f4aa17400c7ff9ae12a428862ccaa4e2b0397015a3a7e7b55aa006341599f8ed`) · OK TO SUBMIT TO COMPETITION: NO (`DO NOT SUBMIT`; `verdict: "negative"` under the governing H65-1 lane STOP and literal 70-raster lattice overlap `0.9985 > 0.70`)**.
-- **H68-1 diagnostic `HOLDOUT-DTI` (`gems57-pooled-hide-v2`, `22,641` withheld positives):** **`0.171894`**, 95% CI **`[0.157848, 0.183994]`** (**`2.61×` H66-1**, **`14.85×` H65-1**, **`10.49×` H60-A**; paired `+0.148801` over `ksn_only` and `+0.132814` over `random_mass_control`), after fixing `IR-68-UNALIGNED-01` (where ~70% of H66-1 dots spilled onto un-aligned single-drainage candidates with `ndr_vals < 3`) and `IR-68-TOPOBAND-01` (reading true 10 m profile curvature band 6 + 1 m LiDAR scarp bands 7–8; E1 `+0.4502 [+0.2510, +0.6491]`). Across all 65 non-lattice rasters max 3-px dot overlap is `0.6234 <= 0.70` (`0.5406` vs H66-1, `0.2640` vs H33-2-B2), and max Spearman `|rho| = 0.1485 <= 0.90`.
+- **Validator output:** 1 band · `float32` · 3730×3292 · `EPSG:32611` · transform
+  `(100, 0, 243350, 0, -100, 4508550)` · **0 NaN inside the footprint** · value range
+  `[0.0, 1.0]` · **problems reported: none**. Local format validity is **not** organizer acceptance.
+- **Submission name:** `60GEMSDOE-H73-1-chi-knick-corridor`
+- **Note (109/140 chars):** `H73-1 chi/ksn knickpoint corridors, >=3 independent drainages; first test NULL; RESEARCH ONLY - DO NOT SUBMIT`
+- **sha256:** `aed3c9bd1902ee440cd5fdf975a0c646ae332588a65a08d2ddd43334ca80b60d`
+- **Verdict: `negative`.** Weekly slots spent by this session: **0**.
 
-[Executive summary](docs/executive-summary.html) · [Site](docs/index.html) ·
-[Review and limitations](docs/research/submission-status-review.md) ·
-[Run card](evidence/review_run_card.json) · [Fresh format audit](evidence/submission_status_audit.json)
+## Why the lane stopped — one number, measured at 15× the power of any prior run
 
-- **HOLDOUT-DTI, inherited H65-1:** 0.01158, 95% CI [0.00840, 0.01462],
-  22,641 withheld positives, evaluator `gems57-pooled-hide-v2`. Not rerun or a leaderboard score.
-- **Uniqueness:** historical scan is incomplete; raw 3-pixel overlap fails the literal 70% rule.
-  Byte uniqueness is insufficient. Dense/lattice rasters receive no exception.
-- **Format:** the downloaded H65-1 file passes a fresh shared-validator check: single band,
-  float32, all finite in [0,1], matching sample CRS/shape/transform. Local validity is not organizer acceptance.
-- **Score evidence:** 0.2778 remains owner-reported/unverified for H33; no organizer receipt ties it to exact bytes.
-  Conflicting leaderboard figures in the brief are not current verified ranks.
-- **Decision:** negative. Zero new experiments and zero submission slots used in this review.
+The lane's mandated first test asks: *do channels crossing withheld fault segments show larger
+steepness steps than random lines of the same orientation?* Every prior run answered that at
+n = 262 components with 10 control transects each, which cannot resolve an effect smaller than
+about ±0.047. This session re-ran the **identical statistic** at
+**n = 4,004** components (100 control transects each,
+hide fraction 0.5, seeds [20, 21, 22]).
 
-Historical comparator `dotted-h19-5-d2-8-20261002-e56ea318af89-nan` remains in the audit trail, not a recommended upload.
+| arm | statistic | mean | 95% CI | n | verdict |
+|---|---|---:|---|---:|---|
+| **E1 gating (PRIMARY)** | scale-free **relative** steepness step | **+0.0097** | [-0.0012, +0.0202] | 4,004 | **INCONCLUSIVE** |
+| E1 secondary | absolute Δksn | +0.3560 | [+0.3107, +0.3990] | 4,004 | PROCEED |
+| E1 diagnostic | block-centred **log(ksn)** — *no step information at all* | +0.1946 | [+0.1695, +0.2195] | 1,823 | PROCEED |
+| E1b (non-gating) | primary statistic on the **off-catalogue** population the board scores | -0.0851 | [-0.0948, -0.0751] | 3,282 | **STOP** |
 
-## What this review fixes
+**Reading.** Under the stream-power model `ksn = (U/K)^(1/n)`, a step in rock uplift is a **ratio**
+step, so the scale-free statistic is the physically correct one (Kirby & Whipple 2012,
+doi:10.1016/j.jsg.2012.07.009; Perron & Royden 2013, doi:10.1002/esp.3302; Gailleton et al. 2019,
+doi:10.5194/esurf-7-211-2019). It is **null and tightly bounded**: the ksn-ratio step at a withheld
+fault is at most ~2%. The median component is negative (-0.0449) and only
+40.4% of components are positive, so the small positive mean is a tail effect —
+not a systematic signal.
 
-The old front page simultaneously said STOP and PROMOTE. H66/H67's published promotion
-also excluded dense registry rasters despite the literal uniqueness requirement.
-The current renderer now suppresses historical promotion banners while stopped, the affected
-run cards carry a negative erratum, and the legacy selector cannot waive overlap using a random null.
-The shared stop guard also rejects absent or non-affirmative first-test evidence.
-Historical measurements are retained; no score is invented to justify a submission.
+On the population the board actually scores (USGS State Geologic Map Compilation faults ≥ 300 m from
+the catalogue, 63,121 px) the same statistic is **significantly
+negative** at -0.0851 [-0.0948, -0.0751].
 
-## Reproduce the three-pass review
+**And every prior "PROCEED" in this lane was measuring relief, not tectonics.** A statistic that
+contains no step information whatsoever — the steepness *level* — scores **+0.1946**
+[+0.1695, +0.2195] on the same test. Mapped faults sit on range fronts where
+channels are steep, so any statistic carrying the ksn level inherits that. This is the measured
+explanation for H67-1 (+0.4251) and H68-1 (+0.4502), both of which mixed absolute Δksn with piedmont
+curvature and slope terms — and H68-1 additionally read 1 m LiDAR cross-scarp bands, which is the
+scarp-shape lane this brief explicitly excludes. Logged as **IR-73-CONFOUND-01**.
+
+## What H73-1 changes for the project
+
+1. **The prior "INCONCLUSIVE" verdicts were unresolved, not null.** n = 262 gave a CI half-width of
+   ~0.047; n = 4,004 gives ~0.011. **IR-73-POWER-01.**
+2. **The channel-steepness / χ / knickpoint lane is now measured dead on both populations** — a bounded
+   null on the catalogue, a significant reversal on the off-catalogue population. Recommendation to the
+   selector: do not spend a weekly slot here.
+3. **The literal 70% / 3-px uniqueness rule is mathematically unsatisfiable** against 4 dense
+   calibration comparators (a raster's own 3-px dilation covers > 70% of the footprint). Against the
+   103 satisfiable comparators this artifact's worst overlap is
+   0.6584 ≤ 0.70 and max
+   |Spearman| is 0.0614 ≤ 0.90. **IR-73-UNIQUENESS-01**, owner decision.
+4. **The shared uniqueness helper computed the overlap in the reverse direction** — it reported the
+   fraction of the *registry* raster's dots near ours, understating the governed quantity by more than
+   an order of magnitude. Fixed in `scripts/run_h73.py`. **IR-73-TOOL-01.**
+5. **Data provenance:** `data/labels.tif` is byte-identical to the bridged `existing_faults.tif`
+   (sha256 `7ba308cc…`), and `sample_submission.tif` carries value 1.0 at exactly the 60,988 catalogue
+   pixels. Every HOLDOUT-DTI in this repository is therefore a *hide-and-recover* measurement against
+   the mapped catalogue or against SGMC off-catalogue pixels — **never** against the board's own
+   hidden labels. **IR-73-DATA-01.**
+
+## Holdout measurement (HOLDOUT-DTI, not a leaderboard score)
+
+Evaluator `gems57-pooled-hide-v2` · 84,756 withheld positives ·
+hide fraction 0.5 · seeds [20, 21, 22].
+
+| NMS spacing (px) | dots | pooled DTI | mass-matched random control |
+|---:|---:|---:|---:|
+| 0.0 | 8,811 | 0.003475 | 0.013561 |
+| 1.5 | 2,245 | 0.003165 | 0.004231 |
+| 2.0 | 2,245 | 0.003165 | 0.004599 |
+| 3.0 | 1,091 | 0.002412 | 0.001865 |
+| 4.0 | 638 | 0.001745 | 0.001224 |
+
+The field is at or below a mass-matched random control at **every** emission density.
+
+Leakage canary: every input feature alone is ≤
+0.6078 in `max(AUC, 1−AUC)`, far below the
+0.90 trip level — **CLEAN**.
+
+## Reproduce this session
 
 ```bash
-python -m venv .venv
-.venv/bin/pip install -r requirements.txt
-.venv/bin/python scripts/review_submission_status.py
-.venv/bin/python scripts/build_site.py
+python -m venv .venv && .venv/bin/pip install -r requirements-lock.txt
+.venv/bin/pip install matplotlib pyproj shapely requests pandas numba
+.venv/bin/python scripts/run_h73.py --stage all     # cache -> E1 -> E1b -> canary -> surface -> holdout -> emit
+.venv/bin/python scripts/build_h73_pages.py         # after scripts/build_site.py
 .venv/bin/python -m pytest tests -q
 ```
 
-The format audit reads existing TIFFs; it does not generate predictions or upload anything.
-[Four ranked, deferred geological hypotheses](docs/research/next-chi-hypotheses-2026-10-11.md)
-include layers, mechanisms, catalogue-generalization rationale, mimics, costs and data gaps.
-They are **not cleared for execution** under the lane STOP. Full registry availability,
-official lithology/hydroclimate coverage, and organizer receipts remain unresolved.
-
-Parallel review retained: [H68 audit](docs/research/2026-10-11-lane-stop-audit.md) and [H68 historical review card](docs/h68-runcard.json). Both agree that no lane submission is cleared.
-
-## Round H70 (`arena/ccdca785-60gemsdoe`, 2026-10-11) — Paired-Polarity Knickpoint Trains (χ/ksn Crest + Base-Drop): **NEGATIVE at first test, no new TIF**
-
-**Lane:** tectonic geomorphology — channel steepness and knickpoints via the χ transform. **Budget used:** 1 of 3 experiments (stopped at the protocol's own stop condition). **Submission slots spent: 0.** Run card: [`evidence/h70_runcard.json`](evidence/h70_runcard.json) · Report page: [`docs/h70-report.html`](docs/h70-report.html) · Full analysis: [`docs/research/h70-paired-knickpoint-trains.md`](docs/research/h70-paired-knickpoint-trains.md) · Preregistration (before any number): [`registry/preregistration-h70.json`](registry/preregistration-h70.json) — all five lane-defining DOIs verified against publisher records this round.
-
-The four standing questions, answered:
-
-1. **Where is the new unique TIF submission?** There isn't one. The preregistered gate G1 stopped the lane before any surface was built, so **no GeoTIFF was generated, nothing is offered for download, and nothing may be submitted** — the JSON run card with the NEGATIVE verdict is the deliverable. This corroborates the governing STOP rather than lifting it.
-2. **Why did `h33-h33-2-b2` score 0.2778?** Verified score algebra (`docs/research/h70-paired-knickpoint-trains.md` §1): with the measured metric identity `DTI = T/(0.2·(T+S−M)+0.8·|G|)`, implied hidden truth `|G| ≈ 7,905 px`, and the champion's counted 37,654 dots, its mean realised credit per pixel is **0.1022 vs 0.0893** for the 0.2600 anchor (+14%) at 15% less mass. The whole gain is emission economics plus catalogue-flank discrimination on the same multi-physics field — **not** a new detector. Score 0.2778 is an owner report; the participant row (extradr19, 0.2778) sits at rank 23 in the verified 2026-10-11 snapshot.
-3. **Can we beat it (0.4133 on today's verified board — the brief's 0.3195/0.3774 are stale, IR-70-LB-01)?** At the same 37,654-dot mass the identity requires credit-per-pixel 0.1522 — **+49%** over the champion's 0.1022, on a family whose entire emission-optimisation campaign moved 0.0893→0.1022. Conclusion: no re-emission of the same field closes the gap; only a genuinely better (off-catalogue) physical field can — exactly what this lane tested; measured negative today.
-4. **Is it obvious what is OK to download?** Yes — the home page says it plainly: the only download offered is the registry research artifact (H65-1 GeoTIFF, research only, **DO NOT SUBMIT**); the H66/H67 artifacts carry negative errata (literal uniqueness clearance failed, promotion reversed by PRs #19/#20); and this session created no file. Spending a portal slot requires the cross-lane selector, and no artifact is currently cleared.
-
-What was measured (all numbers from [`evidence/h70_e1_first_test.json`](evidence/h70_e1_first_test.json), MEASUREMENT class):
-
-| test | population | n | mean | 95% CI | verdict |
-|---|---|---|---|---|---|
-| **G1 (GATING)** | withheld catalogue crossings (identical kernel/draw/seeds as every prior lane run) | 241 | **−0.0347** | [−0.0853, +0.0126] | **STOP** |
-| crest-only ablation | same draw | 262 | +0.0326 | [−0.0144, +0.0790] | INCONCLUSIVE — reproduces H65-1's published first test to ~1e-9 (tool verification) |
-| E1b (non-gating) | SGMC 1:750k off-catalogue | 85 | **+0.0567** | [+0.0103, +0.1030] | would-be PROCEED → motivates H71 |
-
-Hypothesis: a paired-polarity signature — a χ/ksn crest plus a matching *base-drop* 500 m downstream on the same drainage (`pair_strength = min(crest, −step_min(downstream))`) marking a migrating incision wave (Kirby & Whipple 2012; Wobus et al. 2006; Berlin & Anderson 2007; χ per Perron & Royden 2013; segmentation per Gailleton et al. 2019). The pairing itself filters the dominant single-flank mimic (dipping resistant-over-weak lithology). Result: the paired signal is **absent on the catalogue-withheld active-fault population** but **present on mapped-but-uncatalogued (older) structures**, where both prior single-limb statistics were negative (H66-1: −0.1128 [−0.1738, −0.0437]; H66-2: −0.0860 [−0.1372, −0.0220]). The sign flip is logged as the motivation for **H71 (paired-basin ksn contrast across fault blocks — next preregistered question)**; it changed nothing about today's verdict because the gates were fixed before any number existed.
-
-Irregularities this round (in [`registry/irregularities.json`](registry/irregularities.json)): **IR-70-SEL-01** (five first-test statistics probed lane-wide; 2/5 passed — the caveat travels with every E1 verdict) · **IR-70-DATA-01** (H66-1's "piedmont profile curvature" reads topo band 4 `slope_std` in raw codes, not band 6 `curv_prof_absmax`; features66 unrebuildable offline) · **IR-70-LB-01** (brief's 0.3195/0.3774 stale vs verified 0.4133). The STOP-vs-'promote' governance conflict H70 observed is already recorded upstream as IR-H66C-STOPCONFLICT-01 (resolved).
+Preregistration (written **before** any number was computed): `registry/preregistration-h73.json`.
+Evidence: `evidence/h73_*.json`. Run card: `evidence/h73_runcard.json`.
 
 ## Sources and project values
 
@@ -300,3 +334,109 @@ Go ahead and create a pull request and then merge the pull request onto the main
   **no artifact from this project, including the already-scored champion and H65-1/H66-1/H68-1, can pass it**. That is a decision for the owner
   (exclude space-filling comparators, or keep the rule and accept that no submission is ever cleared); this session did not waive it and did not
   edit the status file.
+
+## Historical artifacts — audit trail only, NOT OK to submit
+
+Every artifact below remains **research only**. None is cleared for the competition. They are listed
+so the audit trail stays intact across sessions.
+
+- H65-1 [`gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif`](docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif) — the previous
+  channel-steepness artifact; its first test was INCONCLUSIVE at n = 262, which H73-1 has now shown
+  was an unresolved result rather than a null (IR-73-POWER-01).
+- H68-1 [`gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif`](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif) — measured
+  HOLDOUT-DTI 0.171894; its E1 (+0.4502) is now explained by steepness level and 1 m LiDAR cross-scarp
+  bands rather than by a steepness step (IR-73-CONFOUND-01).
+- `dotted-h19-5-d2-8-20261002-e56ea318af89-nan` — a historical audit example, not a recommendation.
+- The 0.2778 figure for `h33-h33-2-b2` **remains owner-reported/unverified**: no organizer receipt ties
+  that score to the exact raster bytes.
+
+**Portal note.** The historical portal message "Predicted values must be in range [0, 1]" is a
+format/range rejection. The artifact offered on this page is the all-finite "zeros" container —
+every one of the 12,279,160 cells stores a finite value in [0,1] and nothing is NaN anywhere — so a
+reader that ignores nodata cannot see an out-of-range value. Local format validity is **not**
+organizer acceptance.
+
+---
+
+# CURRENT PROMPT — 2026-10-11 (verbatim; read this first every session)
+
+This is the governing brief for this repository. It is recorded verbatim so that every session
+starts from the same requirements and the same STOP rules.
+
+```
+Review the repo.
+
+THE FOLLOWING IS THE HIGHEST URGENCY AND MUST BE FOLLOWED!
+
+MUST GENERATE A UNIQUE TIF SUBMISSION FOR THE COMPETITION.  DO NOT COPY A PREVIOUS SUBMISSION
+UNLESS IT'S FOR LEARNING AND EDUCATION.  BUT WE MUST GENERATE A UNIQUE TIF SUBMISSION.  IT MUST
+BE OBVIOUS WHETHER IT IS OK TO DOWNLOAD AND SUBMIT THE GENERATED TIF SUBMISSION.
+
+There should be an easy to download submission tif file as described by the prompt.  Read the
+entire prompt.
+
+Tectonic-geomorphology lane: channel steepness and knickpoints, not scarp shape. Kirby and
+Whipple (2012) review how bedrock-channel steepness and knickpoints record spatial gradients in
+rock uplift, including across active normal faults. Perron and Royden's χ transform (ESPL, 2013)
+puts different channels on a comparable footing, and Gailleton et al. (Earth Surface Dynamics)
+give a reproducible knickpoint-segmentation method. Scarps degrade and bury, but channel profiles
+keep recording base-level steps, so this can see faults the curvature features no longer show.
+Extract drainage from the free 3DEP 10 m DEM (or 1 m tiles), compute χ and normalized steepness,
+and keep only knickpoints and steepness steps that align across several independent drainages
+along a common strike. First test: do channels crossing withheld segments show larger steepness
+steps than random lines of the same orientation? If not, stop. Map and mask the usual confounds:
+lithology, climate gradients, ephemeral channels and playa base levels. Output the standard
+validated GeoTIFF, uniqueness-checked against every earlier raster.
+
+PARALLEL-RUN PROTOCOL — read first. This session is one of several running from this same prompt.
+
+1. LANE. Your lane is the single method paragraph below. Stay inside it. If your raster's
+rank-correlation with any registry raster exceeds [0.90], or more than [70%] of your dots fall
+within 3 px of one registry raster's dots, you have drifted into another lane: log it as a
+duplicate and stop. Check this on the surface before placement AND on the final dots.
+
+2. REUSE, DON'T REBUILD. Use the template's cached feature stack, evaluate_holdout.py and
+submission_writer.py. Holdout = hide-and-recover: withhold whole fault segments with a buffer,
+derive every catalogue-based feature only from the visible faults, mask visible faults
+pixel-exactly, score pooled DTI (alpha 0.2, beta 0.8, 300 m triangular kernel). If a shared tool
+is wrong, fix it once in the template and report it; never keep a private fork.
+
+3. LABEL EVERY NUMBER as HOLDOUT-DTI (evaluator version, number of withheld positives, 95% CI) or
+ORGANIZER-CONFIRMED (copied from a submission-page receipt). A projection is never written as a
+score.
+
+4. LEAKAGE CANARY. Test each feature alone on the holdout before trusting any result. AUC above
+[0.90] means leakage until proven otherwise.
+
+5. RUN CARD. End with one JSON card: hypothesis; mechanism; the named non-fault process that
+could mimic it; holdout DTI + CI; correlation/overlap vs registry; raster sha256; validator
+output (no NaN inside the footprint, values in [0,1], CRS/shape/transform match); submission name
++ note of at most 140 characters; verdict promote / negative. Negative results are deliverables.
+
+6. BUDGET. Stop after [3] experiments or [2] hours. Do not pick submissions: promotion to a real
+slot is a separate selector step, within the weekly cap shown on the submission page.
+```
+
+Followed, in the original brief, by: the full GEMSDOE site-by-site score ledger; the current
+leaderboard link; the official competition, problem/format, reference-solution, GeoDAWN, INGENIOUS,
+EPSG:32611 and Tversky-index links; the instruction to research why `h33-h33-2-b2` scored 0.2778 and
+whether we can beat it; the requirement to answer at PhD level and then generate a unique TIF; the
+requirement to propose 3–5 new geological hypotheses with layers, physical signature, why they catch
+a fault missing from the USGS/INGENIOUS catalogue, and cost, ranked by expected DTI improvement; the
+instruction to validate on a spatially-blocked holdout before touching a weekly slot; the
+"no manual input / no hallucinations / verify line by line / flag irregularities" rules; the
+three-pass implementation requirement; the site-creation requirement (clean GitHub Pages UI with
+official verified links); the executive-summary subpage requirement explaining exactly how to submit;
+the "Predicted values must be in range [0, 1]" portal error report; and the note that a submission
+needs a unique name plus a short comment.
+
+**Standing operational rules extracted from it**
+
+- **Maximize P(Win)** — "weigh tradeoffs, assess risk, and choose the path that maximizes the
+  probability that Arena succeeds". No weekly slot on an unvalidated candidate.
+- **Own the Outcome** — own results end to end; publish negative evidence and evidence limits; do not
+  wait for permission when you have the means to act.
+- Every number is labelled **HOLDOUT-DTI** or **ORGANIZER-CONFIRMED**. A projection is never written
+  as a score.
+- Negative results are deliverables.
+- No hallucinations; verify line by line from official, verified sources; flag irregularities.
