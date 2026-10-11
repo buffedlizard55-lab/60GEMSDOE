@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>60GEMSDOE — Tectono-geomorphic knickpoint lane (GEMS Prize #306)</title>
+<style>
+:root{--ok:#0a7d33;--bad:#b3261e;--ink:#1b1f23;--mut:#57606a;--bg:#f6f8fa;--card:#fff;--line:#d0d7de}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+.wrap{max-width:980px;margin:0 auto;padding:20px}
+.banner{border:2px solid var(--bad);background:#fff5f4;border-radius:10px;padding:18px 20px;margin:18px 0}
+.banner h2{margin:0 0 6px;color:var(--bad);font-size:20px}
+.dl{border:2px solid var(--ok);background:#f0fff4;border-radius:10px;padding:18px 20px;margin:18px 0}
+.dl h2{margin:0 0 6px;color:var(--ok);font-size:20px}
+a.btn{display:inline-block;background:#1f6feb;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600;margin:4px 8px 4px 0}
+a.btn.ghost{background:#fff;color:#1f6feb;border:1px solid #1f6feb}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:14px 0}
+code,pre{background:#eff1f3;border-radius:6px;padding:1px 5px;font-size:14px}
+pre{padding:12px;overflow:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+td,th{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#eaeef2}
+.mut{color:var(--mut);font-size:14px}
+.kv{display:grid;grid-template-columns:230px 1fr;gap:4px 14px;font-size:15px}
+.kv div:nth-child(odd){color:var(--mut)}
+h1{font-size:26px;margin:10px 0 2px}h3{margin:16px 0 6px}
+footer{color:var(--mut);font-size:13px;margin:26px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>60GEMSDOE — Tectono-geomorphic knickpoint lane</h1>
+<p class="mut">DOE GEMS Prize (DrivenData #306) · session 2026-10-11 · lane: channel steepness &amp; knickpoints (Kirby &amp; Whipple 2012; Perron &amp; Royden 2013)</p>
+
+<div class="banner">
+<h2>⚠️ VERDICT: NEGATIVE — DO NOT SUBMIT THIS FILE TO THE COMPETITION</h2>
+<p><b>Answer to “is it OK to download and submit this TIF?”: NO.</b> The lane's preregistered
+first test failed (E1: withheld fault segments carry <i>lower</i> channel-steepness anomaly than
+orientation-matched random lines; AUC&nbsp;=&nbsp;<b>0.224</b> &lt; 0.55 stop rule), and the pooled
+hide-and-recover holdout DTI is <b>0.00214 [0.0018, 0.0025]</b> — far below the comparison arms.
+Per the brief (“If not, stop.”), this raster is a <b>negative-result research artifact</b>.
+Spending a weekly slot on it would waste the slot. The file is published for audit and reuse.</p>
+</div>
+
+<div class="dl">
+<h2>📦 The submission file (for the record / selector step only)</h2>
+<p>Validated all-finite <code>{0,1}</code> float32 GeoTIFF — portal-safe (no NaN anywhere, values in [0,1],
+EPSG:32611, 3730×3292 @ 100 m, exact official transform), 7,653 dots, none within 200 m of the mapped catalogue:</p>
+<p>
+<a class="btn" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif" download>⬇ gems60-knickpoint-lane-c7653-20261011T000000Z.tif</a>
+<a class="btn ghost" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.zip" download>⬇ .zip (same tif inside)</a>
+<a class="btn ghost" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.json">receipt JSON</a>
+</p>
+<p class="mut">sha256 <code>c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c</code> ·
+validator: 0 problems · uniqueness gate: PASS (max ρ = 0.0047 vs 6 registry rasters; max 3-px dot-overlap 45.9% &lt; 70%)</p>
+<p>If — and only if — the separate selector step ever chooses to spend a slot on it (not recommended),
+the exact form entries are on the <a href="executive-summary.html">executive summary / how-to-submit page</a>.</p>
+</div>
+
+<div class="card">
+<h3>Run card (one line each; full JSON: <a href="runcard.json">docs/runcard.json</a>)</h3>
+<div class="kv">
+<div>Hypothesis</div><div>Withheld normal-fault segments carry localized channel-steepness (knickpoint/ksn) signals on drainages crossing the trace.</div>
+<div>Mechanism</div><div>Priority-Flood fill → D8 accumulation → χ/ksn on official 100 m <code>det_elev</code> → DoG log-ksn steepness-step anomaly → multi-drainage concordance → playa/flat/lithology masks → 2-px catalogue ring → 3-px NMS dots.</div>
+<div>Named confound</div><div>Range-front alluvial cover: traces crossing piedmonts have no bedrock channels; orientation-matched straight nulls cut more steep headwater terrain and out-score real traces (E1b profile).</div>
+<div>E1 (lane gate)</div><div>AUC placement-null <b>0.224</b>, orientation-null 0.256, Wilcoxon p = 1.6e-6 (real &lt; null) → <b>NEGATIVE-STOP</b> (preregistered rule AUC ≥ 0.55/0.60).</div>
+<div>Holdout DTI</div><div><b>HOLDOUT-DTI</b> 0.00214, 95% CI [0.0018, 0.0025] (evaluator <code>gems52-pooled-hide-v1</code>, 4 whole-segment folds, 36,414 withheld positives, 20 km block bootstrap, 2,000 draws).</div>
+<div>Uniqueness</div><div>PASS — ρ ≤ 0.0047 (gate 0.90); ≤ 45.9% of our dots within 3 px of any registry raster (gate 70%).</div>
+<div>Raster sha256</div><div><code>c4f00613…b0a64c</code></div>
+<div>Validator</div><div>0 problems: no NaN, values in [0,1], float32, CRS/shape/transform match the official template, 0 mass outside footprint.</div>
+<div>Verdict</div><div><b style="color:var(--bad)">NEGATIVE</b> — research-only; do not spend a slot.</div>
+</div>
+</div>
+
+<div class="card">
+<h3>What was measured (all numbers local + reproducible; seeds pinned)</h3>
+<table>
+<tr><th>arm (pooled hide-and-recover)</th><th>DTI</th><th>95% CI</th><th>note</th></tr>
+<tr><td>this lane (7,653 dots)</td><td>0.00214</td><td>[0.0018, 0.0025]</td><td>capacity-limited by the field</td></tr>
+<tr><td>canary: raw anomaly, same budget</td><td>0.00895</td><td>[0.0066, 0.0113]</td><td>field AUC vs held truth 0.5014 → no leakage</td></tr>
+<tr><td>dotted-d2.8 (live 0.2600)</td><td>0.08623</td><td>[0.0761, 0.0959]</td><td>best control on this instrument</td></tr>
+<tr><td>h27-4-r1-solo (live 0.2708)</td><td>0.02746</td><td>[0.0241, 0.0307]</td><td></td></tr>
+<tr><td>champion h33-2-b2 (live 0.2778)</td><td>0.00407</td><td>[0.0035, 0.0046]</td><td>live-vs-holdout rank inversion: the known weak-gate effect (16GEMSDOE measured ρ=+0.17)</td></tr>
+<tr><td>h16-1 topo ridges (live 0.1855)</td><td>0.05714</td><td>[0.0489, 0.0654]</td><td></td></tr>
+</table>
+<p class="mut">Every arm is scored under identical folds, masks and budgets; the champion's low holdout
+score despite its live 0.2778 is itself evidence that catalogue-segment hideouts cannot rank the
+leaderboard — chase holdout drift, don't trust it blindly.</p>
+</div>
+
+<div class="card">
+<h3>Candidate geological hypotheses generated this session (brief requirement)</h3>
+<table>
+<tr><th>#</th><th>hypothesis</th><th>layers</th><th>signature</th><th>why it can find uncatalogued faults</th><th>rank / cost</th><th>status</th></tr>
+<tr><td>1</td><td>χ / ksn knickpoint concordance across independent drainages</td><td><code>det_elev</code> (100 m); 3DEP 10 m/1 m preferred</td><td>DoG of log ksn along D8 channels; multi-outlet concordance</td><td>base-level steps persist in profiles after scarps degrade/bury</td><td>was rank 1 / medium</td><td><b style="color:var(--bad)">TESTED → NEGATIVE</b> (this session's E1/E1b/E3)</td></tr>
+<tr><td>2</td><td>Basement-step lineaments gated by surface quiescence</td><td><code>depth_to_base_surf</code>, <code>det_elev_slope</code>, <code>iso_grav_anom*</code></td><td>ridge extraction on ‖∇(cover thickness)‖, gated by low relief</td><td>buried block boundaries invisible to surface catalogues</td><td>2 / low</td><td>untried here; bands on disk</td></tr>
+<tr><td>3</td><td>Seismicity lineament coupling</td><td><code>ieq_n100a15</code>, <code>deq_n100a15</code>, <code>det_elev</code></td><td>anisotropic coherence of quake density ∩ curvature inflection</td><td>blind/low-slip faults light up seismically without scarps</td><td>3 / low</td><td>untried here; bands on disk</td></tr>
+<tr><td>4</td><td>Tilt-angle (TDR) zero-crossing magnetic contacts</td><td><code>tc</code>, <code>tmi_vg</code>, <code>rtp</code>, <code>tmi</code></td><td>TDR zero-contour (depth-independent contact locator)</td><td>subsurface magnetisation contrasts under cover</td><td>4 / low</td><td>untried here; bands on disk</td></tr>
+<tr><td>5</td><td>Full 10 m channel extraction (this lane, done right)</td><td>USGS 3DEP 10 m/1 m tiles (official, public domain)</td><td>χ/ksn at 10 m, knickpoint segmentation (Gailleton et al., ESurf)</td><td>same physics at true resolution; 100 m detrended grid likely too coarse (this session's finding)</td><td>5 / high — needs egress</td><td>source named + sha-pins exist; blocked from this sandbox (see irregularities)</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h3>Irregularities flagged for review</h3>
+<ol>
+<li><b>Brief staleness:</b> “0.3195 is the highest score” — the live leaderboard top is <b>0.3774</b> (xiaofanhu), verified on the official page 2026-10-11; 0.3195 (DARD) is #8.</li>
+<li><b>Rules-PDF host:</b> the brief's <code>docs.nlr.gov/docs/fy26osti/96647.pdf</code> did not resolve from this sandbox; the document is real and lives at <code>www.nlr.gov/docs/fy26osti/96647.pdf</code> (DOI <a href="https://doi.org/10.2172/3818146">10.2172/3818146</a>).</li>
+<li><b>Official sample pattern:</b> the provided <code>sample_submission.tif</code> contains 60,988 ones — exactly the mapped-catalogue pixel set — while the problem page calls it “a sample submission that predicts total fault absence”. Anyone submitting the sample as-is would score ≈ the catalogue baseline, not absence.</li>
+<li><b>DEMO egress:</b> this sandbox cannot reach <code>prd-tnm.s3.amazonaws.com</code> (3DEP tiles) or ScienceBase; the 10 m/1 m raw DEM therefore could not be pulled here. Source is named, free, official, public-domain; 716 tile URLs + sha256 pins already extracted (<code>data/dem_links.json</code> upstream; 706/716 tiles processed successfully in session 7GEMSDOE).</li>
+<li><b>Portal error root cause (historical):</b> “Predicted values must be in range [0, 1]” is what a reader that ignores the nodata tag reports for the NaN-outside container. All our exports use the all-finite zeros container, which cannot trigger it.</li>
+<li><b>GitHub API rate limit</b> (60 req/h unauthenticated) aborted bulk raster fetches mid-session; worked around with full clones.</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>Sources (verified 2026-10-11)</h3>
+<ul>
+<li>Official problem, labels &amp; metric: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">drivendata.org …/page/967/</a> (metric α=0.2, β=0.8, R=300 m triangular; submission format float32/EPSG:32611/100 m)</li>
+<li>Official leaderboard (0.3774 #1): <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">…/leaderboard/</a></li>
+<li>Official rules (NLR/OT-6A50-96647, DOI 10.2172/3818146): <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">www.nlr.gov/docs/fy26osti/96647.pdf</a> · research-hub entry: <a href="https://research-hub.nlr.gov/en/publications/geologic-enhanced-mapping-system-gems-prize-official-rules/">research-hub.nlr.gov</a></li>
+<li>Official reference solution: <a href="https://github.com/drivendataorg/gems-prize-reference-solution">github.com/drivendataorg/gems-prize-reference-solution</a></li>
+<li>Kirby &amp; Whipple 2012 (JGR 117, F01024) — ksn/tectonics review; Perron &amp; Royden 2013 (ESPL 38:94–102) — χ transform; Barnes et al. 2014 (Comput. Geosci. 62:117–127) — Priority-Flood.</li>
+<li>GeoDAWN survey (USGS): <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">usgs.gov …/geodawn…</a> · ScienceBase item <a href="https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7">657e1d85d34e23d3533209f7</a></li>
+<li>USGS 3DEP (public domain): <a href="https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/">prd-tnm.s3.amazonaws.com StagedProducts/Elevation</a></li>
+<li>EPSG:32611: <a href="https://epsg.io/32611">epsg.io/32611</a> · Tversky index: <a href="https://en.wikipedia.org/wiki/Tversky_index">wikipedia</a> · INGENIOUS: <a href="https://gbcge.org/current-projects/ingenious/">gbcge.org</a> · GDR 1391 (CC BY 4.0, DOI 10.15121/1881483): <a href="https://gdr.openei.org/submissions/1391">gdr.openei.org/submissions/1391</a></li>
+</ul>
+</div>
+
+<p class="mut">Feed: <a href="feed.json">docs/feed.json</a> · Run card: <a href="runcard.json">docs/runcard.json</a> · Code: <code>scripts/e1_lane_test.py</code>, <code>scripts/e1b_distance_profile.py</code>, <code>scripts/e2_build.py</code>, <code>scripts/e3_validate.py</code> · Shared template metric/holdout/writer vendored from GEMSDOE52 with parity tests (<code>tests/test_lane_core.py</code>).</p>
+<footer>60GEMSDOE · built autonomously 2026-10-11 · Core values: Maximize P(Win) · Own the Outcome</footer>
+</div>
+</body>
+</html>

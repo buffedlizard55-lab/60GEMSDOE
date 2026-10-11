@@ -1,0 +1,24 @@
+{
+  "experiment": "E2-lane-build",
+  "field": {
+    "playa": 593392,
+    "flats": 2480228,
+    "litho": 103348,
+    "channels": 217415,
+    "knick": 10871,
+    "knick_floor": 1.3888185931091392,
+    "concordant": 3614,
+    "n_networks": 249
+  },
+  "emission": {
+    "peaks": 7653,
+    "emitted": 7653,
+    "budget_requested": 37654,
+    "budget_used": 7653,
+    "capacity_limited": true,
+    "ring_px": 2,
+    "min_sep_px": 3
+  },
+  "field_sum": 24890.06034511139,
+  "dot_mass_outside_footprint": 0
+}

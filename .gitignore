@@ -1,0 +1,13 @@
+# large data, caches, working artifacts — never commit
+data/training_features.tif
+data/labels.tif
+data/sample_submission.tif
+data/gems-geodawn-numerical-features.tif
+data/work/
+data/*.tif
+.bridge_upstream/
+__pycache__/
+*.pyc
+.pytest_cache/
+# bridge parts are re-fetchable from the pinned upstream mirror (scripts/fetch_data.py)
+data/bridge/gems-geodawn-numerical-features.tif.part-*
