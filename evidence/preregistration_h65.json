@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "session": "60GEMSDOE arena/96ecd67e",
+  "preregistered_utc": "2026-10-11T05:05:26Z",
+  "written_before": "any 10 m number existed: git author time of this file 2026-10-11T05:05:26Z precedes the runner merge (dem10_chi_100m.manifest.json generated_utc 2026-10-11T05:07:15Z, commit 2634e4d). A later rebase placed the runner commit first in history; the author timestamps are the record.",
+  "lane": "tectonic-geomorphology: channel steepness (ksn) and knickpoints, not scarp shape",
+  "hypothesis_id": "H65-1",
+  "executes": "H62-5 (registry/hypotheses.json): the lane at the resolution it requires",
+  "hypothesis": "The three negative 100 m runs of this lane are a resolution verdict (E2b: Hack exponent ~0 on both 100 m DEMs, 17-31% of cells raised by filling). On the native USGS 3DEP 1/3 arc-second (~10 m) DEM, chi-space steepness steps at channels crossing withheld fault segments are larger than on random same-orientation lines, and strike-concordant knickpoints from >=3 independent drainages place dots on hidden faults better than the controls.",
+  "mechanism": "Fault-crossing bedrock channels record a step in rock-uplift rate as a step in ksn = dz/dchi (Kirby & Whipple 2012; Perron & Royden 2013). 10 m resolves first-order channels and knickpoint reaches that 100 m smears out.",
+  "named_non_fault_mimic": "Lithologic resistance contact (hard range-core vs soft Tertiary volcaniclastics / basin fill) -- strike-aligned across drainages exactly like a fault. Secondary: playa/closed-basin base level, ephemeral alluvial-fan reaches, orographic precipitation gradient (Sierra Nevada rain shadow).",
+  "substrate": {
+    "dem": "USGS 3DEP 1/3 arc-second current 1x1 degree tiles (public domain), fetched on GitHub-hosted runners, sha256 pinned per tile in data/external/dem10_chi_100m.manifest.json",
+    "fine_grid": "10 m EPSG:32611, nested exactly 10x10 in the 100 m competition pixels",
+    "blocks": "6 x 6 tiling of the 3730 x 3292 grid, 8 km halo, cells whose catchment may leave the block are excluded (edge contamination)"
+  },
+  "declared_parameters": {
+    "theta_ref": 0.45,
+    "A0_m2": 1.0,
+    "a_channel_m2": 200000.0,
+    "window_m": 500.0,
+    "step_statistic": "log((max(ksn_up,0)+0.5)/(max(ksn_dn,0)+0.5)), ksn_up/dn = dz/dchi over 50 x 10 m cells along the main stem upstream / the flow path downstream; winsor log 10",
+    "reduction_to_100m": "step := step_max (the steeper-upstream extreme over the uncontaminated, unfilled 10 m channel cells of the pixel) -- same sign convention as H60-A; channel := step defined",
+    "fill_raise_mask_m": 1.0,
+    "playa_mask_100m": "raised_n >= 50 of 100 fine cells",
+    "independence": "branch signature = global 100 m index of the 10 m cell 500 m downstream of the max-|step| cell",
+    "all_lane_constants": "src/gems60/lane.py unchanged (Z_MIN 1.5, N_DRAINAGE_MIN 3, corridor 600 m x 200 m, 18 strike bins, 40 km blockwise z-score, 2 px catalogue buffer)",
+    "production_dot_budget": 40000
+  },
+  "first_test_mandated_by_brief": {
+    "implementation": "scripts/run_lane60.py run_e1 unchanged (same test that H60-A passed at 100 m with +0.1089 [0.0586, 0.1569])",
+    "decision_rule": "PROCEED only if pooled mean paired difference > 0 AND its 95% bootstrap CI excludes 0; otherwise STOP and ship the negative."
+  },
+  "leakage_canary": "max(AUC, 1-AUC) > 0.90 for any single feature = leakage until proven otherwise",
+  "holdout": {
+    "evaluator": "src/gems57/evaluate_holdout.py (gems57-pooled-hide-v2), unmodified",
+    "arms": ["lane_h60a (= lane on the 10 m substrate)", "distance_only", "ksn_only_no_alignment", "random_mass_control"]
+  },
+  "promotion_gate": "PROMOTE only if (a) E1 PROCEED, (b) no canary flag on a lane feature, (c) pooled HOLDOUT-DTI of the lane beats EVERY control arm with the paired 95% CI excluding 0, (d) uniqueness rho <= 0.90 and dot overlap <= 70% (literal gate; excess-over-random reported beside it), (e) validator 0 problems. Any failure = NEGATIVE: the file is published with SUBMIT: NO.",
+  "secondary_comparison": "E1 effect size and pooled DTI versus the identical driver on the 100 m det_elev substrate (H60-A record: evidence/h60a_holdout.json) -- answers 'was it resolution?'",
+  "slot_policy": "This session selects no submission; promotion is a separate selector step within the weekly cap."
+}

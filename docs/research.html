@@ -2,20 +2,32 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Research review — metric, evidence and stop status · 60GEMSDOE</title><link rel="stylesheet" href="assets/site.css"></head><body>
 <header class="top"><div class="wrap"><h1>Research review — metric, evidence and stop status</h1><nav><a href="index.html">Home</a> <a href="executive-summary.html">Submission status</a> <a href="research.html" class=active>Research</a> <a href="hypotheses.html">Deferred hypotheses</a> <a href="leaderboard.html">Leaderboard</a> <a href="sources.html">Sources</a> <a href="irregularities.html">Irregularities</a></nav>
-<div class="dlbtn"><a class="btn" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif" download>Download c7653 GeoTIFF — research only, DO NOT SUBMIT</a> <a class="btn alt" href="research/active-lane-review-2026-10-11.md">Read current review</a></div></div></header>
+<div class="dlbtn"><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download H65-1 GeoTIFF — research only, DO NOT SUBMIT</a> <a class="btn alt" href="research/active-lane-review-2026-10-11.md">Read current review</a></div></div></header>
 <div class="values"><div class="wrap"><b>Maximize P(Win).</b> No slot is spent on an unvalidated candidate. <b>Own the Outcome.</b> Negative results and evidence limits are published clearly.</div></div>
-<main class="wrap"><div class="banner"><h2>STOP — no competition submission is cleared</h2>
-<p><b>Active lane:</b> channel-steepness / χ / knickpoints. The preregistered c7653 E1 test returned
-<strong>NEGATIVE-STOP</strong> (placement-null AUC 0.22436; orientation-matched AUC 0.25641).
-No follow-up experiment was run, no new TIFF was created, and no weekly slot was used.</p>
-<p><a class="btn" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif" download>Download the existing c7653 GeoTIFF for research only</a>
-<strong>DO NOT SUBMIT.</strong> This is not an approved/promoted file; local format validation is not organizer acceptance.</p>
-<p><a href="research/active-lane-review-2026-10-11.md">Full review</a> · <a href="../evidence/runcard.json">final JSON run card</a> ·
-<a href="../registry/leaderboard_snapshot_2026-10-11.json">manual 50-row public-board snapshot</a></p></div><h2>Executive findings</h2>
-<ol><li><b>c7653 stops.</b> The preregistered first test failed; no further experiment is authorized in this lane.
-The pooled local HOLDOUT-DTI is 0.00213750 [0.00179003, 0.00251341], not a competition score.</li>
-<li><b>Uniqueness and leakage clearance remain incomplete.</b> The six archived Spearman values compare final binary dot masks, not the pre-placement score surface; no full-registry coverage is documented. The old 0.50145 “AUC” was actually (Spearman rho + 1)/2, not ROC AUC, and no feature-by-feature canary table exists.</li>
-<li><b>H33 score attribution is unresolved.</b> The 0.2778 claim is owner-reported; an archived report calls a same-named file 0.2708. No receipt reconciles the claims or ties either to bytes. Public ranks 23 and 36 are not file attributions.</li>
+<main class="wrap"><div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
+<p><b>Latest run:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
+<strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast +0.0326,
+95% CI [-0.0144, +0.0790] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
+The earlier c7653 run also stopped. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
+<p><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download the existing H65-1 GeoTIFF for research only</a>
+<strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
+<p>H65-1 diagnostic <b>HOLDOUT-DTI</b>: 0.01158 [0.00840, 0.01462],
+22,641 withheld positives (`gems57-pooled-hide-v2`); not a leaderboard score.
+<a href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.json">Local format receipt</a> · <a href="research/active-lane-review-2026-10-11.md">Full review</a> ·
+<a href="../evidence/h65_runcard.json">final JSON run card</a> · <a href="../registry/leaderboard_snapshot_2026-10-11.json">manual 50-row public-board snapshot</a></p></div><h2>Executive findings</h2>
+<ol><li><b>H65-1 is the latest run and stops.</b> The first-test mean was +0.03259
+(95% CI [-0.01435, +0.07900]); it is inconclusive and therefore fails the preregistered PROCEED gate.
+The diagnostic HOLDOUT-DTI was 0.01158 [0.00840, 0.01462], not a competition score.</li>
+<li><b>H65-1 is not uniqueness-cleared.</b> The reported max |Spearman| is 0.0282,
+but final-dot overlap reaches 100% against a 70% limit;
+651/655 rasters were checked, and a separate pre-placement surface screen is not documented. The matched random-control diagnostic
+does not override this literal gate.</li>
+<li><b>H65-1 feature canaries:</b> the four recorded lane inputs have max(AUC,1-AUC) ≤0.518. The deliberate
+<code>dist_to_visible</code> positive control is 0.9243 and is not an input. This later audit does not retroactively clear c7653.</li>
+<li><b>c7653 is an earlier independent negative stop.</b> Its placement/orientation AUCs were 0.22436/0.25641;
+its incomplete uniqueness and leakage reviews remain incomplete.</li>
+<li><b>H33 score attribution is unresolved.</b> The 0.2778 claim remains owner-reported; a same-named archived file is reported as
+0.2708. No organizer receipt reconciles the numbers or ties either to exact bytes. Public ranks 23 and 36 are not file attributions.</li>
 <li><b>The leaderboard was manually captured.</b> #1 xiaofanhu 0.4133; #8 DARD 0.3195; #23 extradr19 0.2778. No file attribution is available.</li></ol>
 <h2>Metric decision rule</h2>
 <p>For a candidate unit-mass dot with maximum kernel weight <code>q</code> and actual incremental weighted truth credit <code>ΔT</code>,

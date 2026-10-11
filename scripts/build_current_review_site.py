@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Render the dated, authoritative site view for the stopped c7653 lane.
+"""Render the dated current STOP review without promoting a registry artifact.
 
 The legacy builder still renders prior experimental runs. This narrow post-render pass replaces
-its recommendation surfaces and injects the current stop/research-only notice into archived pages.
-It never changes or creates a GeoTIFF and never treats a public leaderboard row as a project score.
+its recommendation surfaces with the latest reviewed result (H65-1), labels its TIFF as research
+only, and injects a current stop notice into archived pages. It never creates or changes a GeoTIFF
+and never treats a public leaderboard row as a project score.
 """
 from __future__ import annotations
 
@@ -21,7 +22,15 @@ def _e(value) -> str:
     return html.escape(str(value), quote=True)
 
 
-def _base(title: str, body: str, active: str = "", *, root_prefix: str = "") -> str:
+def _site_href(root_path: str, *, root_prefix: str = "") -> str:
+    """Map a repository-relative path to a URL from a docs page or the published root."""
+    path = Path(root_path)
+    if path.parts and path.parts[0] == "docs":
+        return root_prefix + "/".join(path.parts[1:])
+    return root_prefix + "../" + path.as_posix()
+
+
+def _base(title: str, body: str, active: str = "", *, root_prefix: str = "", status: dict) -> str:
     nav = [
         ("index.html", "Home"),
         ("executive-summary.html", "Submission status"),
@@ -35,9 +44,10 @@ def _base(title: str, body: str, active: str = "", *, root_prefix: str = "") -> 
         f'<a href="{root_prefix}{href}"{" class=active" if href == active else ""}>{label}</a>'
         for href, label in nav
     )
-    tif = f'{root_prefix}downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif'
+    artifact = status["research_artifact"]
+    tif = _site_href(artifact["path"], root_prefix=root_prefix)
     review = f'{root_prefix}research/active-lane-review-2026-10-11.md'
-    btn = (f'<a class="btn" href="{tif}" download>Download c7653 GeoTIFF — research only, DO NOT SUBMIT</a> '
+    btn = (f'<a class="btn" href="{tif}" download>Download H65-1 GeoTIFF — research only, DO NOT SUBMIT</a> '
            f'<a class="btn alt" href="{review}">Read current review</a>')
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -53,18 +63,27 @@ def _base(title: str, body: str, active: str = "", *, root_prefix: str = "") -> 
 
 def _common_status(status: dict, *, prefix: str = "") -> str:
     art = status["research_artifact"]
-    tif = prefix + "downloads/" + Path(art["path"]).name
+    tif = _site_href(art["path"], root_prefix=prefix)
+    receipt = _site_href(art["validator_receipt"], root_prefix=prefix)
     report = prefix + "research/active-lane-review-2026-10-11.md"
-    card = prefix + "../evidence/runcard.json"
-    snapshot = prefix + "../registry/leaderboard_snapshot_2026-10-11.json"
-    return f'''<div class="banner"><h2>STOP — no competition submission is cleared</h2>
-<p><b>Active lane:</b> channel-steepness / χ / knickpoints. The preregistered c7653 E1 test returned
-<strong>NEGATIVE-STOP</strong> (placement-null AUC 0.22436; orientation-matched AUC 0.25641).
-No follow-up experiment was run, no new TIFF was created, and no weekly slot was used.</p>
-<p><a class="btn" href="{tif}" download>Download the existing c7653 GeoTIFF for research only</a>
-<strong>DO NOT SUBMIT.</strong> This is not an approved/promoted file; local format validation is not organizer acceptance.</p>
-<p><a href="{report}">Full review</a> · <a href="{card}">final JSON run card</a> ·
-<a href="{snapshot}">manual 50-row public-board snapshot</a></p></div>'''
+    card = _site_href(status["final_run_card"], root_prefix=prefix)
+    snapshot = _site_href(status["leaderboard_snapshot"], root_prefix=prefix)
+    first = status["latest_first_test"]
+    hold = status["latest_holdout"]
+    ci = first["ci95"]
+    mean_text = f"{first['mean_log_ksn_step_contrast']:+.4f}"
+    hold_text = f"{hold['mean']:.5f}"
+    return f'''<div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
+<p><b>Latest run:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
+<strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast {mean_text},
+95% CI [{ci[0]:+.4f}, {ci[1]:+.4f}] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
+The earlier c7653 run also stopped. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
+<p><a class="btn" href="{tif}" download>Download the existing H65-1 GeoTIFF for research only</a>
+<strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
+<p>H65-1 diagnostic <b>HOLDOUT-DTI</b>: {hold_text} [{hold['ci95'][0]:.5f}, {hold['ci95'][1]:.5f}],
+{hold['withheld_positive_pixels']:,} withheld positives (`{_e(hold['evaluator'])}`); not a leaderboard score.
+<a href="{receipt}">Local format receipt</a> · <a href="{report}">Full review</a> ·
+<a href="{card}">final JSON run card</a> · <a href="{snapshot}">manual 50-row public-board snapshot</a></p></div>'''
 
 
 def render(root: Path | None = None) -> dict:
@@ -79,54 +98,92 @@ def render(root: Path | None = None) -> dict:
     if art.get("submit_to_competition") is not False or status.get("recommended_competition_submission") is not None:
         raise ValueError("current site status must not promote a submission")
 
+    active_href = _site_href(art["path"])
+    card_href = _site_href(status["final_run_card"])
+    receipt_href = _site_href(art["validator_receipt"])
+    first = status["latest_first_test"]
+    hold = status["latest_holdout"]
+    unique = status["registry_uniqueness_review"]
+    leak = status["leakage_review"]
+    h33 = status["h33_claim"]
+    previous = status["previous_run_c7653"]
+
     # Home: never surface registry/submission_build.json as a recommendation while the stop applies.
     body = _common_status(status) + f'''<h2>Current research state</h2>
-<div class="grid"><section class="card"><h3>c7653 negative result</h3>
-<p><b>First test:</b> 78 segments, 5,683 withheld pixels; placement AUC 0.22436 and orientation-matched AUC 0.25641.
-The preregistered action is stop.</p>
-<p><b>Pooled HOLDOUT-DTI:</b> 0.00213750, 95% CI [0.00179003, 0.00251341], 36,414 withheld positives,
-evaluator <code>gems52-pooled-hide-v1</code>. This is a catalogue hide-and-recover proxy, not a public or organizer score.</p>
-<p>Full-registry uniqueness and feature-by-feature leakage clearance were not established.</p></section>
-<section class="card"><h3>H33-2-B2 score claim</h3>
-<p>The reported 0.2778 remains <b>owner-reported / unverified</b>. A local LM-calibrated change of +0.0048695 is instrument evidence only.
-No organizer receipt links the bytes to a score. An older report calls a same-named file 0.2708; exact-byte identity is unresolved. Public rank 23 (0.2778, extradr19) and rank 36 (0.2708, smrtdoog5) are not file attributions.</p>
-<a href="research/active-lane-review-2026-10-11.md">What the evidence does and does not establish →</a></section></div>
+<div class="grid"><section class="card"><h3>H65-1 — latest 10 m result</h3>
+<p><b>First test:</b> 262 withheld components; mean log-ksn step contrast
+{first['mean_log_ksn_step_contrast']:+.4f}, 95% CI [{first['ci95'][0]:+.4f}, {first['ci95'][1]:+.4f}],
+median {first['median']:+.4f}, {first['fraction_positive']:.1%} positive. The interval crosses zero;
+INCONCLUSIVE fails the preregistered PROCEED gate, so the lane stops.</p>
+<p><b>Diagnostic HOLDOUT-DTI:</b> {hold['mean']:.5f}, 95% CI [{hold['ci95'][0]:.5f}, {hold['ci95'][1]:.5f}],
+{hold['withheld_positive_pixels']:,} withheld positives, evaluator <code>{_e(hold['evaluator'])}</code>.
+The matched random-mass control is {hold['random_mass_control']:.5f} [{hold['random_mass_control_ci95'][0]:.5f}, {hold['random_mass_control_ci95'][1]:.5f}].
+This conditional catalogue hide-and-recover diagnostic is not a public or organizer score.</p>
+<p>All four recorded lane-feature canaries are below the 0.90 leakage threshold. The deliberate
+<code>dist_to_visible</code> positive control is 0.9243 and is not a lane input; see the run card.</p></section>
+<section class="card"><h3>Uniqueness — NOT CLEARED</h3>
+<p>Registry comparison checked {unique['checked_registry_rasters']}/{unique['expected_registry_rasters']} rasters;
+max recorded |Spearman| {unique['max_abs_spearman_reported']:.4f}. The final-dot 3-px overlap reaches
+{unique['max_final_dot_overlap_within_3px']:.0%}, above the {unique['limits']['dot_overlap']:.0%} limit;
+the scan is incomplete and the tool verdict is <code>unique=false</code>. A density-matched random diagnostic
+does not override the literal gate. A distinct pre-placement surface screen is not documented.</p>
+<p><a href="h65-report.html">Full H65-1 run report →</a></p></section></div>
+<div class="grid"><section class="card"><h3>Earlier c7653 result — archived</h3>
+<p>Its first-test AUCs were 0.22436 (placement null) and 0.25641 (orientation-matched null), a NEGATIVE-STOP.
+Its diagnostic HOLDOUT-DTI was {previous['holdout_dti']['mean']:.8f}
+[{previous['holdout_dti']['ci95'][0]:.8f}, {previous['holdout_dti']['ci95'][1]:.8f}],
+{previous['holdout_dti']['withheld_positives']:,} withheld positives. The c7653 canary audit and full registry uniqueness
+clearance were not established; H65-1 is the newer result.</p>
+<p><a href="{_site_href(previous['artifact'])}">c7653 TIFF — historical research only</a> ·
+<a href="../evidence/runcard.json">c7653 run card</a></p></section>
+<section class="card"><h3>H33-2-B2 score attribution</h3>
+<p>The reported 0.2778 remains <b>owner-reported / unverified</b>. No organizer receipt ties the exact raster bytes
+to 0.2778. An archived report assigns 0.2708 to a same-named artifact; byte identity and attribution remain unresolved.
+The local LM-calibrated delta (+0.0048695) is instrument evidence only. Public ranks 23 and 36 do not authenticate files.</p>
+<a href="research/active-lane-review-2026-10-11.md">Evidence and score algebra →</a></section></div>
 <h2>Official public leaderboard — manual read 2026-10-11</h2>
-<p class="mut">50 rows captured manually from the official page. Public ranks/scores only; not project scores, private-test performance, or file attribution.</p>
+<p class="mut">50 rows captured manually from the official page. Public ranks/scores only; not project scores,
+private-test performance, or file attribution.</p>
 <table><tr><th>rank</th><th>participant</th><th>public score</th></tr>
 <tr><td>1</td><td>xiaofanhu</td><td>0.4133</td></tr>
 <tr><td>8</td><td>DARD</td><td>0.3195</td></tr>
 <tr><td>23</td><td>extradr19</td><td>0.2778</td></tr></table>
 <p><a href="leaderboard.html">Open all 50 rows →</a> · <a href="data/feed.json">Current repository feed</a></p>
 <h2>Research paths</h2><ul>
-<li><a href="research/active-lane-review-2026-10-11.md">Executive review, algebra correction, H33 evidence limits and citations</a></li>
-<li><a href="research/next-chi-hypotheses-2026-10-11.md">Four ranked hypotheses — explicitly UNTESTED / DEFERRED</a></li>
-<li><a href="../evidence/runcard.json">c7653 JSON run card</a> · <a href="downloads/{Path(art['validator_receipt']).name}">local format receipt</a></li>
+<li><a href="research/active-lane-review-2026-10-11.md">Executive review, H65-1 / c7653 results, H33 evidence limits and citations</a></li>
+<li><a href="research/next-chi-hypotheses-2026-10-11.md">Four ranked hypotheses — explicitly UNTESTED / DEFERRED; no experiment authorized</a></li>
+<li><a href="h65-report.html">Detailed H65-1 report</a> · <a href="{card_href}">H65-1 final JSON run card</a> · <a href="{receipt_href}">local format receipt</a></li>
 </ul>
-<p class="mut">The previous portal message “Predicted values must be in range [0, 1]” is a format/range rejection. For any future separately promoted raster, use the shared writer and validate the official grid, CRS, transform, dimensions, finite values and [0,1] range before upload. c7653 passed local format checks but is <b>not submit-cleared</b>. The historical <code>gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan</code> file remains an audit example, not a recommendation.</p>'''
-    (docs / "index.html").write_text(_base("60GEMSDOE — current status and evidence", body, "index.html"))
+<p class="mut">The historical portal message “Predicted values must be in range [0, 1]” is a format/range rejection.
+H65-1 passed local format/range checks but is <b>not submit-cleared</b>. For any separately authorized future artifact,
+use the shared writer and validator to check the official grid, CRS, transform, dimensions, finite values and [0,1] range.
+This informational checklist does not authorize an experiment or upload. The historical <code>gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan</code>
+file remains an audit example, not a recommendation.</p>'''
+    (docs / "index.html").write_text(_base("60GEMSDOE — current status and evidence", body, "index.html", status=status))
 
-    # Submission/executive page: disclose why the correct file is research-only and repeat the
-    # format-vs-acceptance distinction relevant to the previous [0,1] portal rejection.
+    # Submission/executive page: disclose why the correct file is research-only and distinguish
+    # format validity from organizer acceptance and uniqueness clearance.
     body = _common_status(status) + f'''<h2>Download / submission decision</h2>
-<p><a class="btn" href="downloads/{Path(art['path']).name}" download>Download c7653 GeoTIFF (research only)</a>
-<a class="btn alt" href="downloads/{Path(art['validator_receipt']).name}">Local format receipt</a></p>
-<ul><li><b>OK to download for research:</b> yes.</li><li><b>OK to submit to DrivenData:</b> <b>no</b> — the stop rule fired and the artifact was not promoted.</li>
-<li><b>Weekly slots used in this review:</b> 0. No new raster was generated.</li>
-<li><b>Unique submission name recorded on the artifact:</b> <code>{_e(art['submission_name'])}</code>.</li>
-<li><b>Note ({len(art['note'])} characters):</b> <code>{_e(art['note'])}</code>.</li></ul>
+<p><a class="btn" href="{_site_href(art['path'])}" download>Download H65-1 GeoTIFF (research only)</a>
+<a class="btn alt" href="{receipt_href}">Local format receipt</a></p>
+<ul><li><b>OK to download for research:</b> yes.</li><li><b>OK to submit to DrivenData:</b> <b>no</b> — the first-test stop and failed raw-overlap gate prohibit promotion.</li>
+<li><b>Weekly slots used in this review:</b> 0. No TIFF was created by this review.</li>
+<li><b>Recorded run-card name (not a portal receipt):</b> <code>{_e(art['submission_name'])}</code>.</li>
+<li><b>Artifact filename id:</b> <code>{_e(art['artifact_filename_id'])}</code>.</li>
+<li><b>Note ({art['note_chars']} characters):</b> <code>{_e(art['note'])}</code>.</li>
+<li><b>SHA-256:</b> <code>{art['sha256']}</code>.</li></ul>
 <h2>Local format receipt is not an organizer receipt</h2>
-<p>The TIFF is single-band float32, EPSG:32611, 3292×3730 on the 100 m grid, with values in [0,1],
-no NaN/Inf, and 7,653 positive cells. The recorded local validator returned no listed problems.
-That does <b>not</b> prove that DrivenData accepted the upload, passed its private validation, or assigned a score.
-No such organizer receipt is recorded for this raster.</p>
+<p>The local validator reports single-band float32, EPSG:32611, 3292×3730 on the 100 m grid, values in [0,1],
+no NaN/Inf, and 40,000 positive cells; it lists no problems. That does <b>not</b> prove that DrivenData accepted
+an upload, passed private validation, assigned a score, or cleared uniqueness. No organizer receipt is recorded for this raster.</p>
 <p>The historical portal message “Predicted values must be in range [0, 1]” is a format/range failure.
-For any separately promoted future file, use the shared submission writer and verify the complete official grid,
+For any separately authorized future file, use the shared submission writer and verify the complete official grid,
 CRS, transform, dimensions, finite values and [0,1] range with the shared validator before upload.
-That checklist does not override this run's negative stop or authorize submitting c7653.</p>
+That checklist does not override H65-1's negative stop or authorize submitting H65-1.</p>
 <p><a href="research/active-lane-review-2026-10-11.md">Read full review</a> ·
-<a href="research/next-chi-hypotheses-2026-10-11.md">Deferred hypothesis backlog</a></p>'''
-    (docs / "executive-summary.html").write_text(_base("Submission status — research only", body, "executive-summary.html"))
+<a href="research/next-chi-hypotheses-2026-10-11.md">Deferred hypothesis backlog</a> ·
+<a href="h65-report.html">Detailed H65-1 evidence</a></p>'''
+    (docs / "executive-summary.html").write_text(_base("Submission status — research only", body, "executive-summary.html", status=status))
 
     # Full 50-row board, based only on the dated manual snapshot.
     rows = "".join(
@@ -147,13 +204,22 @@ this is an algebraic condition, not a score projection.</p>
 <p>Machine-readable provenance: <a href="../{_e(status['leaderboard_snapshot'])}">dated JSON snapshot</a> ·
 <a href="../registry/leaderboard_history.jsonl">snapshot history</a> · <a href="score-ledger.csv">score ledger</a> ·
 <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">official public board</a>.</p>'''
-    (docs / "leaderboard.html").write_text(_base("Public leaderboard — 2026-10-11 manual snapshot", body, "leaderboard.html"))
+    (docs / "leaderboard.html").write_text(_base("Public leaderboard — 2026-10-11 manual snapshot", body, "leaderboard.html", status=status))
 
-    body = _common_status(status) + '''<h2>Executive findings</h2>
-<ol><li><b>c7653 stops.</b> The preregistered first test failed; no further experiment is authorized in this lane.
-The pooled local HOLDOUT-DTI is 0.00213750 [0.00179003, 0.00251341], not a competition score.</li>
-<li><b>Uniqueness and leakage clearance remain incomplete.</b> The six archived Spearman values compare final binary dot masks, not the pre-placement score surface; no full-registry coverage is documented. The old 0.50145 “AUC” was actually (Spearman rho + 1)/2, not ROC AUC, and no feature-by-feature canary table exists.</li>
-<li><b>H33 score attribution is unresolved.</b> The 0.2778 claim is owner-reported; an archived report calls a same-named file 0.2708. No receipt reconciles the claims or ties either to bytes. Public ranks 23 and 36 are not file attributions.</li>
+    body = _common_status(status) + f'''<h2>Executive findings</h2>
+<ol><li><b>H65-1 is the latest run and stops.</b> The first-test mean was {first['mean_log_ksn_step_contrast']:+.5f}
+(95% CI [{first['ci95'][0]:+.5f}, {first['ci95'][1]:+.5f}]); it is inconclusive and therefore fails the preregistered PROCEED gate.
+The diagnostic HOLDOUT-DTI was {hold['mean']:.5f} [{hold['ci95'][0]:.5f}, {hold['ci95'][1]:.5f}], not a competition score.</li>
+<li><b>H65-1 is not uniqueness-cleared.</b> The reported max |Spearman| is {unique['max_abs_spearman_reported']:.4f},
+but final-dot overlap reaches {unique['max_final_dot_overlap_within_3px']:.0%} against a 70% limit;
+651/655 rasters were checked, and a separate pre-placement surface screen is not documented. The matched random-control diagnostic
+does not override this literal gate.</li>
+<li><b>H65-1 feature canaries:</b> the four recorded lane inputs have max(AUC,1-AUC) ≤0.518. The deliberate
+<code>dist_to_visible</code> positive control is 0.9243 and is not an input. This later audit does not retroactively clear c7653.</li>
+<li><b>c7653 is an earlier independent negative stop.</b> Its placement/orientation AUCs were 0.22436/0.25641;
+its incomplete uniqueness and leakage reviews remain incomplete.</li>
+<li><b>H33 score attribution is unresolved.</b> The 0.2778 claim remains owner-reported; a same-named archived file is reported as
+0.2708. No organizer receipt reconciles the numbers or ties either to exact bytes. Public ranks 23 and 36 are not file attributions.</li>
 <li><b>The leaderboard was manually captured.</b> #1 xiaofanhu 0.4133; #8 DARD 0.3195; #23 extradr19 0.2778. No file attribution is available.</li></ol>
 <h2>Metric decision rule</h2>
 <p>For a candidate unit-mass dot with maximum kernel weight <code>q</code> and actual incremental weighted truth credit <code>ΔT</code>,
@@ -167,7 +233,7 @@ false-mass term in score inversion, not the general single-dot cutoff. Full deri
 <li>Gailleton et al. (2019), <a href="https://doi.org/10.5194/esurf-7-211-2019">reproducible knickpoint segmentation</a>.</li>
 <li>Barnes et al. (2014), <a href="https://doi.org/10.1016/j.cageo.2013.04.024">Priority-Flood</a>; Wobus et al. (2006), <a href="https://doi.org/10.1130/2006.2398(04)">tectonics from topography: procedures, promise and pitfalls</a>.</li></ul>
 <p>Full evidence, trusted-source links and caveats: <a href="research/active-lane-review-2026-10-11.md">dated active-lane review</a>.</p>'''
-    (docs / "research.html").write_text(_base("Research review — metric, evidence and stop status", body, "research.html"))
+    (docs / "research.html").write_text(_base("Research review — metric, evidence and stop status", body, "research.html", status=status))
 
     hypothesis_rows = [
         (1, "Paired-basin ksn contrast across fault blocks", "High potential; very uncertain", "High", "Differential rock uplift expressed as a drainage-scale normalized-steepness contrast; SGMC lithology, runoff and outlet matching required."),
@@ -179,16 +245,17 @@ false-mass term in score inversion, not the general single-dot cutoff. Full deri
                     for n, title, pot, cost, sig in hypothesis_rows)
     body = _common_status(status) + f'''<h2>Four ranked candidates — all UNTESTED / DEFERRED</h2>
 <p>The ordering is qualitative research priority, not predicted DTI improvement or a leaderboard forecast.
-The c7653 NEGATIVE-STOP remains binding; this page does not authorize follow-up experiments, a new TIFF, or a slot.</p>
+H65-1's STOP remains binding: no follow-up, resolution change, new TIFF, or slot is authorized by this backlog.</p>
 <table><tr><th>rank</th><th>hypothesis</th><th>potential (qualitative)</th><th>cost</th><th>physical signal and principal controls</th></tr>{hrows}</table>
 <p>Every item is scoped to the active tectonic-geomorphology channel-steepness/χ/knickpoint lane, not scarp morphology.
-The complete backlog specifies layers, physical mechanisms, off-catalogue rationale, novelty, mimics, data status and future gates:
+They are dormant research ideas only; the complete backlog specifies layers, physical mechanisms, off-catalogue rationale,
+novelty, mimics, data status and validation gates:
 <a href="research/next-chi-hypotheses-2026-10-11.md">read the full backlog</a>.</p>
 <p>Trusted candidate sources: <a href="https://www.usgs.gov/3d-elevation-program">USGS 3DEP</a> ·
 <a href="https://mrdata.usgs.gov/geology/state/">USGS SGMC</a> ·
 <a href="https://prism.oregonstate.edu/">PRISM</a> ·
 <a href="https://www.usgs.gov/3d-hydrography-program">USGS 3DHP</a>.</p>'''
-    (docs / "hypotheses.html").write_text(_base("Untested hypotheses — explicitly deferred", body, "hypotheses.html"))
+    (docs / "hypotheses.html").write_text(_base("Untested hypotheses — explicitly deferred", body, "hypotheses.html", status=status))
 
     # Focused source/provenance pages replace stale generated leaderboard assertions while retaining
     # the repository's dated registries and manual-review links.
@@ -199,26 +266,28 @@ The complete backlog specifies layers, physical mechanisms, off-catalogue ration
 <li><a href="https://doi.org/10.1016/j.jsg.2012.07.009">Kirby &amp; Whipple (2012)</a>; <a href="https://doi.org/10.1002/esp.3302">Perron &amp; Royden (2013)</a>; <a href="https://doi.org/10.1002/jgrf.20031">Royden &amp; Perron (2013)</a>.</li>
 <li><a href="https://doi.org/10.5194/esurf-7-211-2019">Gailleton et al. (2019)</a>; <a href="https://doi.org/10.1016/j.cageo.2013.04.024">Barnes et al. (2014)</a>; <a href="https://doi.org/10.1130/2006.2398(04)">Wobus et al. (2006)</a>.</li>
 <li><a href="https://www.usgs.gov/3d-elevation-program">USGS 3DEP</a>; <a href="https://mrdata.usgs.gov/geology/state/">USGS SGMC</a>; <a href="https://prism.oregonstate.edu/">PRISM Climate Group</a>; <a href="https://www.usgs.gov/3d-hydrography-program">USGS 3DHP</a>.</li>
-</ul><p>Data sources are identified as candidates, not as datasets downloaded and validated in this run. The recorded 3DEP sample-tile probe succeeded; the full regional high-resolution DEM stack was not assembled. SGMC map-unit scales vary. PRISM grids were not downloaded. 3DHP permanence coverage must be checked before use.</p>
-<p><a href="research/active-lane-review-2026-10-11.md">Full source-linked review</a> ·
+</ul><p>H65-1 used a pinned 18-tile USGS 3DEP 1/3-arc-second (~10 m) DEM stack with 5,167,373/5,167,373 footprint pixels covered.
+The SGMC, PRISM climate and 3DHP permanence layers were not assembled into matched confound masks for this run; those remain
+requirements for any separately authorized research. USGS says legacy NHD is retired; do not treat an old NHD layer as current 3DHP.</p>
+<p><a href="h65-report.html">H65-1 processing and source record</a> ·
+<a href="research/active-lane-review-2026-10-11.md">Full source-linked review</a> ·
 <a href="research/next-chi-hypotheses-2026-10-11.md">Deferred hypothesis data requirements</a>.</p>'''
-    (docs / "sources.html").write_text(_base("Trusted sources and data status", body, "sources.html"))
+    (docs / "sources.html").write_text(_base("Trusted sources and data status", body, "sources.html", status=status))
 
-    body = _common_status(status) + '''<h2>Current irregularities / review limits</h2>
+    body = _common_status(status) + f'''<h2>Current irregularities / review limits</h2>
 <table><tr><th>Issue</th><th>Status and consequence</th></tr>
-<tr><td>H33-2-B2 score attribution</td><td>Current 0.2778 is owner-reported; an archived report calls a same-named file 0.2708. No organizer receipt reconciles either value or links it to exact bytes. Public rank-23 0.2778 (extradr19) and rank-36 0.2708 (smrtdoog5) are not file attributions. See <code>IR-60-H33-SCORE-20261011</code>.</td></tr>
-<tr><td>c7653 E1 outcome</td><td>Placement and orientation-matched AUCs are below 0.5; preregistered result is NEGATIVE-STOP. No follow-up in the lane.</td></tr>
-<tr><td>c7653 uniqueness scope</td><td>Six archived Spearman values compare final binary dot masks, not the pre-placement score surface; post-placement overlap is limited to those six rasters. Complete-registry uniqueness is not established. See <code>IR-60-UNIQUENESS-SURFACE-20261011</code>.</td></tr>
-<tr><td>c7653 leakage audit</td><td>The legacy 0.50145 “AUC” is actually (Spearman rho + 1)/2, not ROC AUC; no feature-by-feature canary results are recorded. Full leakage clearance is not established. See <code>IR-60-CANARY-LABEL-20261011</code>.</td></tr>
-<tr><td>DEM resolution / hydrography</td><td>Existing 100 m networks fail the recorded Hack-exponent and network-agreement checks. Full 10 m coverage has not been assembled; this is a data-quality warning, not a reason to override the failed first-test stop.</td></tr>
+<tr><td>H65-1 first test</td><td>Mean log-ksn step contrast {first['mean_log_ksn_step_contrast']:+.5f}, 95% CI [{first['ci95'][0]:+.5f}, {first['ci95'][1]:+.5f}]; inconclusive means STOP under the registered rule. No rerun at another resolution.</td></tr>
+<tr><td>H65-1 registry uniqueness</td><td>651/655 rasters checked; max |Spearman| {unique['max_abs_spearman_reported']:.4f}; final 3-px dot overlap {unique['max_final_dot_overlap_within_3px']:.0%} exceeds the 70% threshold; tool verdict unique=false. Pre-placement screen is not documented, so no clearance. See <code>IR-60-GATE-01</code> / <code>IR-60-CORPUS-01</code>.</td></tr>
+<tr><td>H65-1 DEM cache</td><td>The first local cache did not match its recorded hash; a rebuild from pinned input TIFs matched all 11 arrays and reproduced the shipped raster. Root cause of the stale scratch cache is unknown. See <code>IR-65-CACHE-01</code>.</td></tr>
+<tr><td>c7653 historical outcome</td><td>Earlier placement/orientation AUCs were 0.22436/0.25641, a negative stop. Its six final-mask comparisons did not establish full-registry or pre-placement uniqueness; no feature-by-feature canary audit was recorded.</td></tr>
+<tr><td>H33-2-B2 score attribution</td><td>0.2778 remains owner-reported/unverified. A same-named artifact was elsewhere reported as 0.2708; no organizer receipt reconciles either value or links it to exact bytes. Local LM diagnostics and public ranks do not establish attribution.</td></tr>
 <tr><td>Public board freshness</td><td>Snapshot is a manual 2026-10-11 read and may become stale. No competition-host polling is performed.</td></tr>
-<tr><td>Automated leaderboard fetch (fixed 2026-10-11)</td><td>A scheduled refresh script previously contained a direct leaderboard fetch. The fetch/parser is removed; the scheduled workflow now preserves manual board snapshots and probes only non-competition sources. See <code>IR-60-LB-AUTO-20261011</code>.</td></tr>
+<tr><td>Automated leaderboard fetch (fixed 2026-10-11)</td><td>The scheduled refresh preserves manual board snapshots and probes only non-competition sources; it makes no request to the DrivenData host. See <code>IR-60-LB-AUTO-20261011</code>.</td></tr>
 </table><p>The historical irregularity register remains at <a href="../registry/irregularities.json">registry/irregularities.json</a>; older entries are preserved as historical records. This page highlights only the current decision-relevant items.</p>
 <p><a href="research/active-lane-review-2026-10-11.md">Full explanation and evidence links</a>.</p>'''
-    (docs / "irregularities.html").write_text(_base("Current irregularities and evidence limits", body, "irregularities.html"))
+    (docs / "irregularities.html").write_text(_base("Current irregularities and evidence limits", body, "irregularities.html", status=status))
 
-    # Replace the rendered score-ceiling text with the corrected research note rather than leaving
-    # generated HTML that contradicts the exact general condition.
+    # Replace rendered score-ceiling text with the corrected research note.
     ceiling = root / "docs/research/score-ceiling-analysis.md"
     if ceiling.exists():
         markdown = _e(ceiling.read_text())
@@ -227,10 +296,10 @@ The complete backlog specifies layers, physical mechanisms, off-catalogue ration
 altering equations or claims during HTML conversion.</p><pre>{markdown}</pre>
 <p><a href="research/score-ceiling-analysis.md">Open the Markdown source</a> ·
 <a href="research/active-lane-review-2026-10-11.md">active-lane review</a></p>'''
-        (docs / "score-ceiling.html").write_text(_base("Score-ceiling analysis — corrected algebra", body))
+        (docs / "score-ceiling.html").write_text(_base("Score-ceiling analysis — corrected algebra", body, status=status))
 
-    # Keep a visible current status on the remaining historical reports, but remove the old injected
-    # H61/registry-primary recommendation banner so it cannot be mistaken for today's choice.
+    # Keep a visible current status on remaining historical reports, but remove any stale injected
+    # H61/registry-primary recommendation banner before inserting the latest H65-1 notice.
     notice = _common_status(status)
     core = {"index.html", "executive-summary.html", "leaderboard.html", "research.html", "hypotheses.html", "sources.html", "irregularities.html", "score-ceiling.html"}
     for page in sorted(docs.glob("*.html")):
@@ -241,22 +310,22 @@ altering equations or claims during HTML conversion.</p><pre>{markdown}</pre>
         text = re.sub(r'<div class=dlbtn[^>]*>\s*<b>Registry primary.*?</div>\s*', "", text, flags=re.S)
         text = re.sub(r'<div class="banner current-stop-notice">.*?</div>\s*', "", text, flags=re.S)
         research_button = (
-            '<a class="btn" href="downloads/' + Path(art["path"]).name + '" download>'
-            'Download c7653 — research only, DO NOT SUBMIT</a>'
+            '<a class="btn" href="' + _site_href(art["path"]) + '" download>'
+            'Download H65-1 — research only, DO NOT SUBMIT</a>'
         )
         text = re.sub(r'(<div class=dlbtn>).*?(</div>)',
                       lambda m: m.group(1) + research_button + m.group(2), text,
                       count=1, flags=re.S)
-        notice_with_class = notice.replace('<div class="banner">', '<div class="banner current-stop-notice">', 1)
+        notice_with_class = notice.replace('<div class="banner current-stop-notice">', '<div class="banner current-stop-notice">', 1)
         text = re.sub(r'(<body[^>]*>\s*)', lambda m: m.group(1) + notice_with_class, text, count=1)
         page.write_text(text)
 
-    # GitHub Pages in this repository publishes the root. Keep root landing/stubs aligned with the
-    # research-only status rather than the legacy registry submission pointer.
+    # GitHub Pages publishes the repository root; keep root landing/stubs aligned with STOP.
+    root_status = _common_status(status, prefix="docs/")
     root_index = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>60GEMSDOE — STOP / research-only artifact</title><link rel="stylesheet" href="docs/assets/site.css">
 <meta http-equiv="refresh" content="0; url=docs/index.html"></head><body><main class="wrap">
-<h1>60GEMSDOE — current status: STOP</h1>{_common_status(status, prefix='docs/')}
+<h1>60GEMSDOE — current status: STOP</h1>{root_status}
 <p><a href="docs/index.html">Open the current evidence site →</a></p></main></body></html>'''
     (root / "index.html").write_text(root_index)
     for page in sorted(root.glob("*.html")):
@@ -266,11 +335,11 @@ altering equations or claims during HTML conversion.</p><pre>{markdown}</pre>
         root_html = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{_e(target)} · 60GEMSDOE</title><link rel="canonical" href="docs/{_e(target)}"><link rel="stylesheet" href="docs/assets/site.css">
 <meta http-equiv="refresh" content="0; url=docs/{_e(target)}"></head><body><main class="wrap">
-<h1>Current status: STOP</h1>{_common_status(status, prefix='docs/')}
+<h1>Current status: STOP</h1>{_common_status(status, prefix="docs/")}
 <p><a href="docs/{_e(target)}">Open current page →</a> · <a href="docs/index.html">Home</a></p></main></body></html>'''
-        page.write_text(root_html)
+        (root / page.name).write_text(root_html)
 
-    return {"status": status["status"], "artifact": art["path"], "leaderboard_rows": len(snapshot["rows"]), "pages_updated": True}
+    return {"status": status["status"], "run": status["active_run"], "artifact": art["path"], "leaderboard_rows": len(snapshot["rows"]), "pages_updated": True}
 
 
 if __name__ == "__main__":

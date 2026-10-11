@@ -1,6 +1,6 @@
 # Ranked channel-steepness / knickpoint hypotheses — untested and deferred
 
-**Status on 2026-10-11: UNTESTED / DEFERRED. No experiment was run from this list.** The c7653 lane's preregistered E1 first test returned `NEGATIVE-STOP` (placement-null AUC 0.22436). The standing instruction says to stop if that test fails; this backlog is not permission to continue the lane, spend a slot, or create a submission. No numerical DTI improvement can be forecast from catalogue hide-and-recover data for genuinely off-catalogue faults.
+**Status on 2026-10-11: UNTESTED / DEFERRED. No experiment was run from this list.** The latest recorded run, H65-1, tested the channel-steepness/χ/knickpoint lane on a pinned 10 m 3DEP source stack. Its first-test CI crossed zero, so `INCONCLUSIVE` failed the preregistered PROCEED gate and required STOP; the H65 report says not to rerun the knickpoint lane at any resolution. The earlier c7653 result was also `NEGATIVE-STOP` (placement-null AUC 0.22436). This backlog is not permission to continue either run, change resolution, spend a slot, or create a submission. No numerical DTI improvement can be forecast from catalogue hide-and-recover data for genuinely off-catalogue faults.
 
 The ranking below is a **qualitative research-priority ranking** (plausible signal relative to implementation cost), not an estimated DTI lift, calibrated probability, or leaderboard projection. All items use only visible catalogue faults when defining training/holdout examples; final candidate surfaces must not use hidden truth or catalogue-derived proximity as a predictive feature.
 
@@ -19,7 +19,7 @@ The ranking below is a **qualitative research-priority ranking** (plausible sign
 - **Why it could generalize off-catalogue:** the target is a regional channel response to differential uplift, not distance from or reconstruction of a known trace. Train only on visible catalogue segments; hold out entire fault segments and buffer their full geometry before deriving any examples.
 - **What is new relative to this repository:** c7653 asks whether a local channel-steepness/knickpoint anomaly occurs at withheld segment crossings; H60A uses strike-corridor corroboration. This is a **paired catchment / block-scale contrast**, with explicit lithology, runoff, area and outlet matching, rather than local breakpoint or strike-chain detection.
 - **Named non-fault mimic:** contrasts in rock erodibility across a mapped contact. Secondary mimics are orographic rainfall, alluvial thickness, basin outlet/base level and DEM-derived flow-routing errors.
-- **Data status:** 3DEP is an official, free USGS source. A recorded Actions egress probe obtained and hashed a sample tile (`evidence/probe-egress-receipt.json`), but the complete 10 m coverage was **not** assembled here. SGMC is a public USGS release (DOI [10.5066/F7WH2N65](https://doi.org/10.5066/F7WH2N65)); its constituent state maps vary in scale and age, so map-unit matching is an imperfect control, not ground truth for erodibility. Existing tests on 3DEP reduced to 100 m and the official 100 m network failed the recorded Hack-exponent check; that failure is a resolution/input warning, not positive evidence for this hypothesis.
+- **Data status:** H65-1 already assembled a pinned 18-tile USGS 3DEP 1/3-arc-second (~10 m) stack with full footprint coverage, then aligned/reduced inputs to the 100 m submission grid. Its first test stopped; having the stack does not authorize another experiment or rescue this distinct hypothesis. SGMC is a public USGS release (DOI [10.5066/F7WH2N65](https://doi.org/10.5066/F7WH2N65)); its constituent state maps vary in scale and age, so map-unit matching is an imperfect control, not ground truth for erodibility. The existing 100 m network checks failed the recorded Hack-exponent test; this is a data-quality warning, not positive evidence for this hypothesis.
 
 ## 2. Bedrock-channel confinement × ksn residual
 
@@ -29,7 +29,7 @@ The ranking below is a **qualitative research-priority ranking** (plausible sign
 - **Why it could generalize off-catalogue:** a channel response can span a buried trace without the fault itself appearing in a line catalogue. The model would learn the relationship on visible faults and evaluate it only on fully withheld fault segments.
 - **What is new:** the existing c7653/H60A systems score knickpoint steps or strike-aligned corridors; this candidate tests the *joint reach-scale incision/confinement response*. It is not H60-C divide migration, nor a scarp-shape detector.
 - **Named non-fault mimic:** resistant lithology can independently narrow a valley and steepen a channel. Landslides, resistant channel beds, alluvial narrowing and DEM smoothing are additional mimics.
-- **Data status:** the source is USGS 3DEP as above. The required 10 m terrain tiles are not all locally present, and 100 m terrain is too coarse for a defensible valley-width measurement. **Do not treat this as data-ready until full-resolution coverage, vertical quality and pixel/grid alignment are verified.**
+- **Data status:** H65-1 has already pinned a full-footprint 10 m 3DEP source stack, but its channel test stopped and does not validate valley-width measurements for this hypothesis. Vertical quality, valley-width scale, and pixel/grid alignment for this different measure are not validated. This is not authorization to reuse the stopped lane or generate another TIFF.
 
 ## 3. Hydroclimate- and permanence-matched ksn residual
 
@@ -51,15 +51,15 @@ The ranking below is a **qualitative research-priority ranking** (plausible sign
 - **Named non-fault mimic:** playa base-level fall, alluvial-fan toe, lake-level change or internal-drainage outlet capture.
 - **Data status:** 3DEP is the required elevation source; the [USGS NHD/3DHP product-access page](https://www.usgs.gov/national-hydrography/access-national-hydrography-products) lists hydrography downloads and services. Dataset currency and coverage must be verified for the footprint before use. The existing 100 m drainage products failed the recorded validity check, so no result from them is treated as a positive screening result.
 
-## Mandatory gates if a future continuation is separately authorized
+## Mandatory gates for any genuinely separate future research project
 
-These are validation requirements, **not** permission to continue the stopped c7653 lane:
+These are validation requirements, **not** permission to continue H65-1/c7653, rerun the knickpoint lane at another resolution, spend a slot, or create a TIFF. H65-1's STOP remains controlling; any future activity needs separate explicit authorization and a genuinely different preregistered question.
 
 1. Keep every feature derived from permitted visible data only. Build a feature-by-feature leakage canary before combining features; any AUC above 0.90 is a leakage flag until explained and cleared.
 2. Use the shared template's cached stack and shared evaluator/writer. Hide complete fault segments with buffers, preserve pixel-exact masking, and use pooled DTI with the official α=0.2, β=0.8 and 300 m triangular kernel.
 3. Check uniqueness of each continuous feature/surface **before placement** and of final dots **after placement**, against the full registry: absolute surface-rank correlation ≤0.90 and no more than 70% of final dots within 3 px of a registry raster. Record coverage, checksums and comparison scope; a partial list is not clearance.
 4. Compare only like-for-like HOLDOUT-DTI runs with the same evaluator, truth mask, folds and bootstrap. A family record lists 0.190147 as a best promotable local holdout value; verify exact evaluator/mask compatibility before treating that number as a direct comparator. A local holdout is not the public or private competition score.
-5. A weekly slot remains off limits unless the blocked holdout beats the current best under the registered rule and all leakage, uniqueness, validator and receipt requirements pass. The c7653 negative stop remains binding for this lane.
+5. A weekly slot remains off limits unless the blocked holdout beats the current best under the registered rule and all leakage, uniqueness, validator and receipt requirements pass. H65-1's INCONCLUSIVE→STOP and prohibition on rerunning this knickpoint lane remain binding; this backlog does not lift that stop.
 
 ## Manual-review sources
 

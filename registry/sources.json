@@ -128,6 +128,34 @@
       "status": "link table mirrored in the group's GEMSDOE repo (data/dem_links.json, sha256 8804dbff8754...)"
     },
     {
+      "id": "usgs_3dep_h65_dem10",
+      "title": "USGS 3DEP 1/3-arc-second elevation tiles used by H65-1",
+      "url": "https://www.usgs.gov/3d-elevation-program",
+      "role": "H65-1 terrain source for channel-steepness / chi measurements; 18 1-degree tiles were pinned and reduced/aligned to the 100 m competition grid",
+      "status": "Already used in the recorded H65-1 run; 5,167,373/5,167,373 footprint pixels covered; source pins are in data/external/dem10_chi_100m.manifest.json; no rerun authorized. Direct tile index: https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/"
+    },
+    {
+      "id": "usgs_sgmc_geology",
+      "title": "USGS State Geologic Map Compilation (SGMC)",
+      "url": "https://mrdata.usgs.gov/geology/state/",
+      "role": "Candidate bedrock/surficial-lithology confound layer for channel-steepness studies",
+      "status": "Official source and DOI 10.5066/F7WH2N65; not assembled into a complete H65-1 confound mask; map scales/source ages vary. https://doi.org/10.5066/F7WH2N65"
+    },
+    {
+      "id": "prism_climate_normals",
+      "title": "PRISM Climate Group climate grids",
+      "url": "https://prism.oregonstate.edu/",
+      "role": "Candidate climate/runoff confound layer for future separately authorized research",
+      "status": "Public source page records datasets and 1991-2020 normals; a regional H65-1 climate grid was not downloaded or validated."
+    },
+    {
+      "id": "usgs_3dhp",
+      "title": "USGS 3D Hydrography Program",
+      "url": "https://www.usgs.gov/3d-hydrography-program",
+      "role": "Current hydrography and stream-permanence source, subject to footprint attribute availability",
+      "status": "H65-1 did not validate a regional 3DHP permanence layer. USGS states legacy NHD was retired; check current 3DHP coverage before any separately authorized use."
+    },
+    {
       "id": "comcat",
       "title": "USGS ANSS Comprehensive Earthquake Catalog (ComCat)",
       "url": "https://earthquake.usgs.gov/fdsnws/event/1/",

@@ -6,25 +6,30 @@
 **Official public leaderboard (manual read 2026-10-11): #1 xiaofanhu 0.4133 · #8 DARD 0.3195 · #23 extradr19 0.2778** · **H33 group claim (owner-reported): 0.2778, not organizer-confirmed**
 
 > ## Current review — 2026-10-11: channel-steepness / χ / knickpoint lane STOP
-> **The c7653 preregistered E1 test failed** (placement-null AUC 0.224; orientation-null AUC 0.256), so the stop rule applies. No further experiment was run, no new TIFF was created, and no weekly slot was used. The existing [c7653 GeoTIFF](docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif) is **OK to download for research only; NOT OK to submit**. Its holdout is 0.0021375 [0.0017900, 0.0025134] (36,414 positives; `gems52-pooled-hide-v1`), not an organizer score. The run card has only six final binary-dot comparisons (no pre-placement score-surface Spearman screen) and no feature-by-feature leakage audit, so uniqueness/leakage clearance is not established.
+> **Latest recorded run: H65-1 — INCONCLUSIVE → STOP.** The preregistered withheld-crossing vs same-orientation-random first test had mean log-ksn step contrast +0.03259, 95% CI [−0.01435, +0.07900], median −0.00916, 262 components; the interval crosses zero, so the PROCEED gate failed. The lane is stopped; the H65 report says not to rerun it at any resolution. This review did not run an experiment, create a TIFF, or use a weekly slot.
 >
-> [Executive review](docs/research/active-lane-review-2026-10-11.md) · [ranked untested/deferred hypotheses](docs/research/next-chi-hypotheses-2026-10-11.md) · [final JSON run card](evidence/runcard.json) · [current manual 50-row board snapshot](registry/leaderboard_snapshot_2026-10-11.json). The daily feed probes only non-competition sources; DrivenData board snapshots remain manual. H60A is a separate run (positive first test, failed later holdout/uniqueness gates); do not pool it with c7653.
+> **[Download the existing H65-1 GeoTIFF](docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif) — OK for research only; NOT OK to submit.** SHA-256 `0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e`; local format/range receipt passes (single-band float32, EPSG:32611, official 100 m grid, 40,000 positives, [0,1], no listed problems), but no organizer acceptance is recorded. Its unique byte/pixel identity among checked files does not equal uniqueness clearance: 651/655 rasters checked, max final-dot 3-px overlap 100% (>70% limit), tool verdict `unique=false`, and a distinct pre-placement surface screen is not documented. **Do not submit or spend a slot.**
 >
-> **H33-2-B2 0.2778 remains owner-reported.** Its local LM-calibrated +0.00487 is instrument evidence only; no organizer receipt attributes that score to the raster. extradr19 at public rank 23 has the same number, which is not evidence of attribution.
-
-> **Archive note:** The remaining older session narratives and their run cards are retained for auditability. They are not current recommendations; where an archived value or “primary” conflicts with the status above, the dated 2026-10-11 review and `registry/current_site_status.json` govern.
-
-> ## 📦 ONE-CLICK SUBMISSION DOWNLOADS (start here)
+> Diagnostic **HOLDOUT-DTI** is 0.01158 [0.00840, 0.01462] (22,641 withheld positives; `gems57-pooled-hide-v2`), below the random-mass control 0.03908 [0.03568, 0.04231]; this is not a leaderboard or organizer score. See the [H65-1 report](docs/h65-report.html), [active-lane review](docs/research/active-lane-review-2026-10-11.md), [four ranked untested/deferred hypotheses](docs/research/next-chi-hypotheses-2026-10-11.md), [final JSON run card](evidence/h65_runcard.json), and [manual 50-row board snapshot](registry/leaderboard_snapshot_2026-10-11.json). Feed updates skip automated requests to DrivenData; leaderboard snapshots remain manual.
+>
+> **Earlier c7653 is historical and also NEGATIVE-STOP** (placement/orientation AUC 0.22436/0.25641; HOLDOUT-DTI 0.00213750 [0.00179003, 0.00251341], 36,414 positives, `gems52-pooled-hide-v1`). Its feature-by-feature canary and full registry uniqueness clearance were not established. H60A is separate and must not be pooled with c7653 or H65-1.
+>
+> **H33-2-B2 0.2778 remains owner-reported/unverified.** A local LM-calibrated +0.00487 is instrument evidence only; no organizer receipt links the exact raster bytes to 0.2778. An archived same-name report gives 0.2708; neither the public 0.2778 at rank 23 nor 0.2708 at rank 36 authenticates a file or explains a live-score change.
+>
+> **Archive note:** Older session narratives and run cards are retained for auditability. They are not current recommendations; where an archived value or “primary” conflicts with the status above, the dated review and `registry/current_site_status.json` govern.
+>
+> ## 📦 ONE-CLICK RESEARCH TIFFS (start here; none is submit-cleared)
 > | file | what it is | OK to download & submit? |
 > |---|---|---|
-> | [`docs/downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif`](docs/downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif) | **artifact from the archived H62-1 run (not created in this review)** — locally format-validated; organizer acceptance is not recorded, sha256 `b8d29b2f445ccc9746af53e0716e22b866bb5747297cf81aa2ab973660af6857` | ❌ **NO — NEGATIVE verdict** (failed gates G2/G3/G4 including raw dot uniqueness; HOLDOUT-DTI 0.00420 vs 0.08623 best arm). Receipt + note are in the file's `.json`. |
-> | [`docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif`](docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif) | existing c7653 channel-steepness run | ❌ **NO — research only** (E1 NEGATIVE-STOP; six final binary-dot comparisons only, no pre-placement surface-rank check; full registry not cleared) |
-> | [`docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif`](docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif) | H33-2-B2 owner-reported **0.2778**; no organizer receipt links this raster to a public row | historical research anchor; no current slot recommendation |
-> | [`docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif`](docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif) | owner-reported 0.2600 base file, kept for the audit trail | reference only |
+> | [`docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif`](docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif) | **Latest H65-1 research artifact**; 116-character note and local validator receipt; full report/card linked above | ✅ **Download for research only** · ❌ **DO NOT SUBMIT** (first-test STOP; raw 3-px overlap gate fails; scan incomplete) |
+> | [`docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif`](docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif) | historical c7653 channel-steepness run | ❌ **Research only; do not submit** (NEGATIVE-STOP; incomplete leakage/uniqueness clearance) |
+> | [`docs/downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif`](docs/downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif) | archived H62-1 artifact; local format validation only | ❌ **NO** (negative verdict; raw dot uniqueness gate failed) |
+> | [`docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif`](docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif) | H33-2-B2 owner-reported **0.2778**; no organizer receipt links bytes to score | historical research anchor; not a current candidate |
+> | [`docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif`](docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif) | owner-reported 0.2600 base file, kept for audit | reference only |
 >
-> Only upload an artifact explicitly marked **OK TO SUBMIT**. c7653 passed local format checks (float32, EPSG:32611, 3730×3292 at 100 m, finite values in [0,1]) but is **research-only** after NEGATIVE-STOP; older archive files may have different formats. For any separately promoted future artifact, use the shared writer and validator to prevent the historical *"Predicted values must be in range [0, 1]"* portal rejection. The exact ritual is in [`docs/executive-summary.html`](docs/executive-summary.html). **Core values applied to every decision: Maximize P(Win) (slots are only for validated winners) and Own the Outcome (negative results are shipped, labelled and auditable).**
+> Only upload an artifact explicitly marked **OK TO SUBMIT**—there is none here. H65-1 passes local format/range validation but fails the decision/uniqueness gates; a local validator is not a portal acceptance receipt. The historical *“Predicted values must be in range [0, 1]”* message is a format/range rejection. For any separately authorized future artifact, use the shared writer and validator to check the official grid, CRS, transform, dimensions and finite [0,1] values; this checklist does not authorize a new experiment or submission. **Core values applied to every decision: Maximize P(Win) (slots are only for validated winners) and Own the Outcome (negative results are shipped, labelled and auditable).**
 >
-> *Why this current verdict:* the c7653 channel-steepness lane's preregistered first test was decisively below its orientation-matched nulls (AUC 0.224 and 0.256, real < null), so the written `NEGATIVE-STOP` applies. No new experiment, TIFF or slot followed. H61 and H62 runs below are explicitly archived historical results, not current candidates.
+> *Why this current verdict:* H65-1's first-test CI includes zero and therefore fails the preregistered PROCEED gate; its raw 3-px overlap also exceeds the 70% threshold. Both H65-1 and c7653 are stopped, and the H65 instruction bars any-resolution reruns. H61/H62/H63 remain archived, not fallback candidates.
 > ## ARCHIVED PRIOR-RUN STATUS — NOT THE CURRENT RECOMMENDATION
 > **Historical prior-run artifact only: do NOT treat the file below as the current recommendation.**
 > * Earlier-run file (registry PRIMARY at that time; not created in this review):
@@ -47,7 +52,7 @@
 > * Earlier lane file, kept for the audit trail:
 >   [`docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif`](docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif)
 >   (NEGATIVE, pooled 0.00214 [0.0018, 0.0025]).
-> * Historical note: the site then displayed that run. The current `docs/index.html` now presents the c7653 NEGATIVE-STOP and research-only download status. ·
+> * Historical note: the site then displayed that run. The current `docs/index.html` presents H65-1 as the latest STOP and research-only download; c7653 remains in the archive. ·
 >   [`docs/executive-summary.html`](docs/executive-summary.html) explains the exact submission ritual for any
 >   future PROMOTED file, including the fix for the historical
 >   *"Predicted values must be in range [0, 1]"* portal rejection.
@@ -81,7 +86,7 @@
 > [receipt](docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.json) · [write-up](docs/research/h61-h63-session-20261011.md)).
 > This archived raster had max |Spearman| 0.024 and a worst within-3-px share of 46% against the 35 rasters checked. Those partial checks do not establish complete-registry uniqueness. The repository's catalogue hide-and-recover gate scores its off-catalogue emission as exactly 0 by construction (`evidence/e6_blocked_gate.json`); no weekly submission slot was cleared. **Download for research only; do not submit.**
 >
-> The accompanying mass-normalised LM instrument and held-out AUC values (0.73–0.80) are local diagnostics, not organizer scores or proof of hidden-set improvement. The independent LiDAR scarp screen was negative (0.48×). This historical H61–H63 write-up includes scarp-morphology analyses outside the current channel-steepness / χ / knickpoint lane and is retained for audit only. The separate H61 thermal run is also negative. The current c7653 lane's E1 `NEGATIVE-STOP` governs; no old raster is a current promotion.
+> The accompanying mass-normalised LM instrument and held-out AUC values (0.73–0.80) are local diagnostics, not organizer scores or proof of hidden-set improvement. The independent LiDAR scarp screen was negative (0.48×). This historical H61–H63 write-up includes scarp-morphology analyses outside the current channel-steepness / χ / knickpoint lane and is retained for audit only. The separate H61 thermal run is also negative. The newer H65-1 `INCONCLUSIVE → STOP` governs; no old raster is a current promotion.
 
 ## Standing brief (verbatim — read every session before working)
 
@@ -267,7 +272,7 @@ Go ahead and create a pull request and then merge the pull request onto the main
 
 ### Archived H62-1 run (2026-10-11; not the current recommendation)
 
-> **Historical record only.** The H62-1 experiment and the earlier c7653 run below are both archived; the active review at the top of this README is the c7653 NEGATIVE-STOP. H62-1 failed preregistered gates, including the raw-overlap G4 gate. Full machine-readable record: [`docs/h62_runcard.json`](docs/h62_runcard.json) and [`evidence/h62_validation.json`](evidence/h62_validation.json).
+> **Historical record only.** The H62-1 experiment and the earlier c7653 run below are both archived; the active review at the top of this README is the newer H65-1 INCONCLUSIVE→STOP. H62-1 failed preregistered gates, including the raw-overlap G4 gate. Full machine-readable record: [`docs/h62_runcard.json`](docs/h62_runcard.json) and [`evidence/h62_validation.json`](evidence/h62_validation.json).
 >
 > | # | experiment | result |
 > |---|---|---|
@@ -283,7 +288,7 @@ Go ahead and create a pull request and then merge the pull request onto the main
 > private sandbox path (`/home/user/registry_rasters`) and now reads `registry/rasters`, and
 > `scripts/run_lane.py` now accepts the manifest's `external/` destination for the SGMC raster.
 
-### Archived c7653 run card — channel-steepness lane (evidence/runcard.json · docs/runcard.json; stop remains binding)
+### Archived c7653 run card — channel-steepness lane (evidence/runcard.json · docs/runcard.json; historical negative-stop, superseded as latest evidence by H65-1)
 
 | # | experiment | result |
 |---|---|---|
@@ -358,7 +363,7 @@ The separate c7653 run is a negative result: its first-test AUCs were 0.22436 an
 
 ## Historical reproduction commands (archive only; not current next steps)
 
-The commands below are **historical reference only**, not current next steps. The c7653 E1 `NEGATIVE-STOP` is binding. Fail-closed guards now block the c7653, H61/H62 and H60A channel-steepness experiment/build entrypoints (`e1_lane_test.py`, `e1b_distance_profile.py`, `e2_build.py`, `e3_validate.py`, `e61_instrument_audit.py`, `e62_lane_thermal.py`, `e62b_substrate.py`, `run_h62.py`, `run_lane.py`, `run_lane60.py`, `build_submission60.py`, and `check_uniqueness60.py`). The guards consult both the registered status and the recorded E1 verdict; an unreadable status/evidence also blocks. Do not bypass them or change status to rerun historical experiments.
+The commands below are **historical reference only**, not current next steps. H65-1's `INCONCLUSIVE→STOP` is the latest binding result; c7653 also remains a recorded negative stop. Fail-closed guards block the c7653, H61/H62, H60A and H65 channel-steepness experiment/build entrypoints (`e1_lane_test.py`, `e1b_distance_profile.py`, `e2_build.py`, `e3_validate.py`, `e61_instrument_audit.py`, `e62_lane_thermal.py`, `e62b_substrate.py`, `run_h62.py`, `run_lane.py`, `run_lane60.py`, `build_submission60.py`, `check_uniqueness60.py`, `dem10_block.py`, `dem10_merge.py`, and `build_dem10_cache.py`). The H65 Actions workflow has no automatic push trigger and fails before dependencies/data preparation on the same stopped evidence. Guards consult the authoritative stopped status and recorded E1 evidence; missing/unreadable status or evidence also blocks. Do not bypass them or change status to rerun historical experiments.
 
 For safe dependency setup in a disposable virtual environment:
 
@@ -397,16 +402,17 @@ lidar-scarp ridge ← `7GEMSDOE/downloads`; dem10-multiphysics ← `12GEMSDOE/do
    sha `7ba308cc…`). No labels exist for the organisers' hidden set anywhere.
 2. **Historical 100 m substrate audit; no current rerun is authorized.** An earlier lane audit
    measured both available 100 m products failing its recorded network diagnostics (Hack exponents
-   +0.0264 and −0.0272; network Jaccard 0.2312; 31.4% / 17.1% of cells raised by filling). Full
-   10 m/1 m regional coverage was not assembled. An official 3DEP sample-tile probe succeeded, but
-   this does not authorize another lane experiment. The c7653 `NEGATIVE-STOP` governs. Older notes
-   about a runner-side fetch and H61-1 are archival only. Large mirrored feature packs are not
-   committed; their hashes and provenance remain in `registry/data_manifest.json`.
+   +0.0264 and −0.0272; network Jaccard 0.2312; 31.4% / 17.1% of cells raised by filling). H65-1
+   later assembled a pinned 18-tile 10 m 3DEP source stack with full footprint coverage, aligned to
+   the 100 m submission grid; its first test was INCONCLUSIVE and the lane stopped. This data result
+   does not authorize another resolution or lane experiment. H65-1's `INCONCLUSIVE→STOP` governs.
+   Older notes about a runner-side fetch and H61-1 are archival only. Large mirrored feature packs
+   are not committed; their hashes and provenance remain in `registry/data_manifest.json`.
 3. **Local instruments are weak**: measured champion-vs-holdout rank inversion (above). No local
    score predicts a leaderboard score; only the submission page scores.
-4. **Budget / promotion:** the archived session stopped at 3 experiments / under 2 hours and used
-   no weekly slot. The current c7653 first-test `NEGATIVE-STOP` is a complete negative decision,
-   not a deferral to a selector; no promotion or further experiment is authorized.
+4. **Budget / promotion:** archived runs used no weekly slot. H65-1 is the latest first-test result:
+   its inconclusive CI failed the preregistered proceed gate, so the lane is STOPPED, not deferred to
+   a selector. No promotion, resolution change, or further experiment is authorized.
 
 ## Core values
 
@@ -425,8 +431,8 @@ A parallel session of this same brief landed the GEMSDOE32 pipeline in this repo
 * its **H61 knickpoint raster** — `docs/downloads/submission.tif`, sha256 `386e7cd1…5a5e7`,
   `submission_card.json` holdout 0.01305 on *its own* instrument (not comparable to our pooled
   evaluator), 983,855 emitted px;
-* the group's **champion** download — `docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif`
-  (owner-reported live **0.2778**, the group best);
+* the group's owner-claimed **champion** download — `docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif`
+  (owner-reported **0.2778**, unverified against exact bytes; no organizer receipt attributes it);
 * its fetcher retained as `scripts/fetch_data.py` (used by its CI, `--dest` interface).
 
 **Lane-drift check of THIS session's raster against the parallel session's H61 raster** (the
@@ -443,13 +449,11 @@ session.
 
 ---
 
-## Lane 1 (60GEMSDOE): chi/ksn knickpoint strike traces — NEGATIVE (2026-10-11)
+## Archived lane notes — c7653 / H60A-era narratives (superseded by H65-1)
 
-**Read this file first, every session.** It carries the working brief, the current verdict, and the exact
-commands that reproduce every number in the repository.
+> **Historical material only.** The experiments and next-step plans in this old section predate the latest H65-1 result. H65-1's first-test CI crosses zero, its preregistered result is INCONCLUSIVE→STOP, and its report prohibits rerunning the knickpoint lane at any resolution. No historical command or next-step suggestion below is current authorization. The current status, H65-1 research-only TIFF, final card, and four deferred hypotheses are linked at the top of this README.
 
-**Site (start here): <https://buffedlizard55-lab.github.io/60GEMSDOE/>** — the first visible thing on that
-page is the submission download and the verdict banner.
+The README and site remain the start points for each session, but the current site shows a STOP banner and a research-only download—not a cleared submission. Current pages summarize the latest evidence; old commands below are historical and fail-closed guarded.
 
 ---
 
@@ -532,23 +536,13 @@ slot on anything that has not beaten the best promotable holdout in the family r
   `src/gems60/nodes.py` (marginal-rule budget, hex lattice, emission with 3 px minimum separation,
   registry overlap), `src/gems60/metric.py` (the organizers' metric, byte-pinned from the sibling
   registry), `src/gems60/grid.py` (grid/template/validator).
-* **Two experiments, the same answer.** Run 1 on the cube's detrended-elevation band (documented
-  deviation): 5/5 folds positive, 1/5 with CI above zero, lane below random on the off-catalogue
-  instrument. Run 2 on real elevation (USGS 3DEP 10 m reduced to 100 m — the substrate the lane is
-  specified on): 4/5 folds positive, 1/5 with CI above zero, lane below random at 8 of 9 budgets.
-  The negative is robust to the substrate, and it is a *placement* failure, not a leak: the canary is
-  clean.
+* **Historical lane results, superseded by H65-1.** Earlier runs on detrended and 100 m terrain were negative on their own measures. H65-1 then used a pinned 10 m 3DEP source stack aligned/reduced to the 100 m submission grid; its withheld-segment E1 mean was +0.0326 with 95% CI [−0.0144, +0.0790], INCONCLUSIVE→STOP. This does not establish a positive signal or clear the lane. H65-1 feature canaries were recorded for four inputs, but c7653's old canary was not feature-by-feature cleared. The latest result and its limitations are documented at the top of this README and in `docs/research/active-lane-review-2026-10-11.md`.
 * **The instrument itself is now a finding.** The off-catalogue truth used by the whole family is
   anti-correlated with relief (AUC 0.90 for local relief, 0.90 for slope p90, 0.88 for absolute
   elevation), because maximal-separation thinning spreads the sample into basin floors. Every
   topography-based lane in the family has therefore been graded on a sample biased against it. Fixing
   the instrument is hypothesis #1 (see `docs/hypotheses.html`).
-* **Why 0.2778.** Inverting the organizers' metric on the champion file with the published |G| pins
-  implies it matched ≈5.1–5.6k of ≈12.4–14.3k hidden truth pixels (recall ≈39–41%) while paying the
-  0.2 mass tax on 37.4k unmatched pixels. It is a mass/precision point on the metric's frontier, not a
-  physical achievement: the family's own inversion fits 13 board-calibrated submissions with zero
-  weight difference between physical bases (LOO MAE ≈0.020). The same recall at 6,000 px of mass is
-  worth ≈0.40–0.42, and the then-current board's best (0.3774) needs ≈54–57% recall at the same mass under that old model. This is a historical, assumption-dependent calculation, not a current estimate: the 2026-10-11 public top is 0.4133. Details and limitations: `docs/research/active-lane-review-2026-10-11.md` and `docs/research/score-ceiling-analysis.md`.
+* **Historical score-inversion model — not attribution.** The H33-2-B2 0.2778 value remains owner-reported/unverified; no organizer receipt ties it to exact bytes, and a same-name archive reports 0.2708. Older inversions of the claimed value assumed published truth-mass bounds and generated model-dependent recall/mass ranges. They are not measurements of this TIFF's hidden-truth performance or explanation of a live-score change. The public 2026-10-11 leader was 0.4133, but neither public value authenticates H33 bytes. The current report gives the exact score algebra and evidence limits in `docs/research/active-lane-review-2026-10-11.md` and `docs/research/score-ceiling-analysis.md`.
 
 ---
 
@@ -580,35 +574,16 @@ holds the 35 comparator rasters used by the uniqueness stop rule.
 | `data/external/` | committed external data with provenance (3DEP-derived pack + manifest) |
 | `.github/workflows/probe-egress.yml` | runner-side egress probe + receipt (the sandbox cannot reach `prd-tnm.s3.amazonaws.com`) |
 
-### 5. Remaining work and limitations for the next session
+### 5. Current limitations and safe next work (no new lane experiment authorized)
 
-0. **H62-1 is done and NEGATIVE** (failed G2/G3/G4; full record `docs/h62_runcard.json`,
-   `evidence/h62_validation.json`). Next in lane: **H62-2** (alteration-front Th/K edges — bands on
-   disk, next to preregister), then **H62-3** (warm-spring corridor chaining, GDR CSV on disk) and
-   **H62-4** (playa-margin rings). **H62-5** (10 m DEM lane) is pinned but needs the Actions egress
-   (item 2 below).
-0b. **Protocol defect to fix in the shared text**: the raw "≤70 % of dots within 3 px of a registry
-   raster" gate is *uninformative* against dense lattice rasters — a matched uniform-random set scores
-   83.7 % against `r13_lattice_s5` too (H62-1's excess-over-random was **−0.0059**;
-   `evidence/h62_uniqueness_excess_control.json`). The family selector already uses
-   excess-over-random; the literal gate should be amended to that form rather than waived silently.
-   Preregistered gates are never retroactively passed — H62-1 stays G4-FAIL in the record.
-1. **Instrument first** (hypothesis #1): relief-stratified thinning; then re-score every registry raster.
-   Until that exists, no "no skill" verdict in the family record is trustworthy — including this one.
-2. **Real 10 m DEM** (hypothesis #2): fetch through the Actions runner and commit a decimated grid;
-   the 100 m substrate cannot resolve first-order channels (31% of cells raised by depression filling,
-   per-cell A-vs-L exponent ≈0.03). **The egress lane is verified**: Actions run 38100992879 returned
-   HTTP 200 for `Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif` (10 m) and
-   `Elevation/1/...` (30 m) and downloaded a tile whose sha256 `b7fe301c…` matches the pin published
-   independently in the sibling `12GEMSDOE/evidence/dem10-fetch.json`; see
-   `evidence/probe-egress-receipt.json`.
-3. **Emission policy**: the marginal rule at the *measured* DTI, plus the 100–200 m ring deletion.
-4. **Not obtained:** `1m_DEM_links.csv` and the portal's own data downloads (login-walled). Irregularity
-   flagged for the operator: the mirrored `sample_submission.tif` contains 60,988 pixels equal to 1 on
-   the labelled faults, contradicting the portal's "total fault absence" description.
-5. **Unverified / pending:** the egress probe's receipt (runner-side reachability of the 3DEP hosts) and
-   the submissions page widget (no authenticated session). Treat both as open items, not as facts.
+H65-1 is the latest result: its first-test CI crosses zero, the preregistered decision is INCONCLUSIVE→STOP, and the H65 report explicitly prohibits rerunning the knickpoint lane at any resolution. The old H62/H63 next-step list below this heading in prior README revisions is superseded. Do not run a detector, rebuild a candidate, change resolution, or spend a slot.
 
+1. **H33 score attribution remains unavailable.** The 0.2778 claim is owner-reported; an archived same-name record gives 0.2708. No organizer receipt links either number to exact TIFF bytes. The local LM delta is not a live score.
+2. **H65 uniqueness is not cleared.** The scan covered 651/655 rasters, final-dot overlap reached 100% against a 70% threshold, and the tool verdict is `unique=false`. A separate pre-placement surface screen is not documented. The random-density diagnostic does not waive the literal gate.
+3. **Confound mapping is incomplete.** H65 used its pinned 3DEP source stack and recorded playa/basin exclusions, but a complete SGMC lithology, PRISM climate, and current 3DHP permanence analysis was not assembled. This is a documented limitation, not permission to resume the stopped lane.
+4. **Cache irregularity remains explained only operationally.** Rebuilding H65 from pinned TIFs reproduced all 11 arrays and the output raster; the stale scratch-cache cause is unidentified.
+5. **Leaderboard provenance is dated.** The 2026-10-11 public snapshot is a manual, 50-row capture, not a project score. Continue to avoid automated requests to DrivenData.
+6. **Safe follow-up:** keep the STOP and research-only labels, maintain the manual/source-linked audit trail, and finish the PR/CI review. Any experimental work would require separate explicit authorization for a genuinely distinct question and cannot be a resolution rerun of H65-1/c7653.
 
 ---
 
@@ -649,9 +624,9 @@ a portal geotransform mismatch had `scripts/verify_submission.py` not caught it.
 **Archived research ideas — not current next steps or authorization.** An earlier independent
 prototype proposed: (1) 10 m 3DEP terrain, (2) χ-transient inversion, (3) knickpoint recurrence
 across basins, (4) a playa/closed-basin base-level mask, and (5) lithology-normalized ksn.
-These ideas remain untested in that prototype. The c7653 preregistered `NEGATIVE-STOP` and
+These ideas remain untested in that prototype. The later H65-1 `INCONCLUSIVE→STOP` and
 `registry/current_site_status.json` prohibit further channel-steepness experiments in this review;
-no new data fetch or rerun is authorized.
+no new data fetch, resolution change, or rerun is authorized.
 
 <!-- 60GEMSDOE-H60A-CORRIDOR:BEGIN -->
 ## Lane-60 third run (session `arena/54b1897a-60gemsdoe`) — H60-A knickpoint corridors, NEGATIVE
@@ -708,6 +683,6 @@ no new data fetch or rerun is authorized.
   (holdout truth *is* the catalogue), IR-60-MEM-01, IR-60-PERF-01, IR-60-INDEP-01, IR-60-CORPUS-01
   (resolved: 4 deleted registry rasters recovered from git history).
 * **Archived next-session suggestion (superseded; not authorization):** the old H60A record proposed
-  H60-D (`depth_to_base_surf` coincidence) as a possible follow-up. The c7653 `NEGATIVE-STOP` and
+  H60-D (`depth_to_base_surf` coincidence) as a possible follow-up. H65-1's `INCONCLUSIVE→STOP` and
   current registered STOP supersede that suggestion; do not run it or any other lane experiment.
 <!-- 60GEMSDOE-H60A-CORRIDOR:END -->

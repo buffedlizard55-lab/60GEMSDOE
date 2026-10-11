@@ -2,33 +2,38 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Submission status — research only · 60GEMSDOE</title><link rel="stylesheet" href="assets/site.css"></head><body>
 <header class="top"><div class="wrap"><h1>Submission status — research only</h1><nav><a href="index.html">Home</a> <a href="executive-summary.html" class=active>Submission status</a> <a href="research.html">Research</a> <a href="hypotheses.html">Deferred hypotheses</a> <a href="leaderboard.html">Leaderboard</a> <a href="sources.html">Sources</a> <a href="irregularities.html">Irregularities</a></nav>
-<div class="dlbtn"><a class="btn" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif" download>Download c7653 GeoTIFF — research only, DO NOT SUBMIT</a> <a class="btn alt" href="research/active-lane-review-2026-10-11.md">Read current review</a></div></div></header>
+<div class="dlbtn"><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download H65-1 GeoTIFF — research only, DO NOT SUBMIT</a> <a class="btn alt" href="research/active-lane-review-2026-10-11.md">Read current review</a></div></div></header>
 <div class="values"><div class="wrap"><b>Maximize P(Win).</b> No slot is spent on an unvalidated candidate. <b>Own the Outcome.</b> Negative results and evidence limits are published clearly.</div></div>
-<main class="wrap"><div class="banner"><h2>STOP — no competition submission is cleared</h2>
-<p><b>Active lane:</b> channel-steepness / χ / knickpoints. The preregistered c7653 E1 test returned
-<strong>NEGATIVE-STOP</strong> (placement-null AUC 0.22436; orientation-matched AUC 0.25641).
-No follow-up experiment was run, no new TIFF was created, and no weekly slot was used.</p>
-<p><a class="btn" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif" download>Download the existing c7653 GeoTIFF for research only</a>
-<strong>DO NOT SUBMIT.</strong> This is not an approved/promoted file; local format validation is not organizer acceptance.</p>
-<p><a href="research/active-lane-review-2026-10-11.md">Full review</a> · <a href="../evidence/runcard.json">final JSON run card</a> ·
-<a href="../registry/leaderboard_snapshot_2026-10-11.json">manual 50-row public-board snapshot</a></p></div><h2>Download / submission decision</h2>
-<p><a class="btn" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif" download>Download c7653 GeoTIFF (research only)</a>
-<a class="btn alt" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.json">Local format receipt</a></p>
-<ul><li><b>OK to download for research:</b> yes.</li><li><b>OK to submit to DrivenData:</b> <b>no</b> — the stop rule fired and the artifact was not promoted.</li>
-<li><b>Weekly slots used in this review:</b> 0. No new raster was generated.</li>
-<li><b>Unique submission name recorded on the artifact:</b> <code>gems60-lane-knickpoint-c7653-20261011T000000Z</code>.</li>
-<li><b>Note (124 characters):</b> <code>tectono-geomorphic chi/ksn knickpoint lane; 7653 concordant channel dots; E1 negative AUC 0.224; RESEARCH-ONLY, not promoted</code>.</li></ul>
+<main class="wrap"><div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
+<p><b>Latest run:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
+<strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast +0.0326,
+95% CI [-0.0144, +0.0790] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
+The earlier c7653 run also stopped. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
+<p><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download the existing H65-1 GeoTIFF for research only</a>
+<strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
+<p>H65-1 diagnostic <b>HOLDOUT-DTI</b>: 0.01158 [0.00840, 0.01462],
+22,641 withheld positives (`gems57-pooled-hide-v2`); not a leaderboard score.
+<a href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.json">Local format receipt</a> · <a href="research/active-lane-review-2026-10-11.md">Full review</a> ·
+<a href="../evidence/h65_runcard.json">final JSON run card</a> · <a href="../registry/leaderboard_snapshot_2026-10-11.json">manual 50-row public-board snapshot</a></p></div><h2>Download / submission decision</h2>
+<p><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download H65-1 GeoTIFF (research only)</a>
+<a class="btn alt" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.json">Local format receipt</a></p>
+<ul><li><b>OK to download for research:</b> yes.</li><li><b>OK to submit to DrivenData:</b> <b>no</b> — the first-test stop and failed raw-overlap gate prohibit promotion.</li>
+<li><b>Weekly slots used in this review:</b> 0. No TIFF was created by this review.</li>
+<li><b>Recorded run-card name (not a portal receipt):</b> <code>60GEMSDOE-H65-1-DEM10-KNICK-40000</code>.</li>
+<li><b>Artifact filename id:</b> <code>gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b</code>.</li>
+<li><b>Note (116 characters):</b> <code>H65-1 native 3DEP 10m chi/ksn knickpoints, &gt;=3 independent drainages, 40000 dots; E1 failed: NEGATIVE, research only</code>.</li>
+<li><b>SHA-256:</b> <code>0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e</code>.</li></ul>
 <h2>Local format receipt is not an organizer receipt</h2>
-<p>The TIFF is single-band float32, EPSG:32611, 3292×3730 on the 100 m grid, with values in [0,1],
-no NaN/Inf, and 7,653 positive cells. The recorded local validator returned no listed problems.
-That does <b>not</b> prove that DrivenData accepted the upload, passed its private validation, or assigned a score.
-No such organizer receipt is recorded for this raster.</p>
+<p>The local validator reports single-band float32, EPSG:32611, 3292×3730 on the 100 m grid, values in [0,1],
+no NaN/Inf, and 40,000 positive cells; it lists no problems. That does <b>not</b> prove that DrivenData accepted
+an upload, passed private validation, assigned a score, or cleared uniqueness. No organizer receipt is recorded for this raster.</p>
 <p>The historical portal message “Predicted values must be in range [0, 1]” is a format/range failure.
-For any separately promoted future file, use the shared submission writer and verify the complete official grid,
+For any separately authorized future file, use the shared submission writer and verify the complete official grid,
 CRS, transform, dimensions, finite values and [0,1] range with the shared validator before upload.
-That checklist does not override this run's negative stop or authorize submitting c7653.</p>
+That checklist does not override H65-1's negative stop or authorize submitting H65-1.</p>
 <p><a href="research/active-lane-review-2026-10-11.md">Read full review</a> ·
-<a href="research/next-chi-hypotheses-2026-10-11.md">Deferred hypothesis backlog</a></p></main>
+<a href="research/next-chi-hypotheses-2026-10-11.md">Deferred hypothesis backlog</a> ·
+<a href="h65-report.html">Detailed H65-1 evidence</a></p></main>
 <footer><div class="wrap">Current review date: 2026-10-11 · Official board capture is a manual snapshot; the competition host is not polled automatically. ·
 <a href="data/feed.json">Machine-readable feed</a> · <a href="../README.md">README</a> ·
 <a href="https://github.com/buffedlizard55-lab/60GEMSDOE">Repository</a></div></footer></body></html>

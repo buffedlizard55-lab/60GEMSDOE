@@ -26,6 +26,8 @@ def _assert_local_links(page: Path, html: str):
 
 
 def test_current_site_status_is_stopped_and_research_only():
+    assert STATUS["active_run"] == "H65-1"
+    assert STATUS["latest_first_test"]["result"] == "INCONCLUSIVE"
     assert STATUS["status"] == "STOP"
     assert STATUS["recommended_competition_submission"] is None
     assert STATUS["new_tiff_created_in_this_review"] is False
@@ -80,22 +82,41 @@ def test_ranked_hypothesis_backlog_is_explicitly_deferred():
     assert "NEGATIVE-STOP" in backlog
 
 
+def test_h65_report_and_readme_preserve_latest_stop_and_h33_attribution_caveat():
+    report = (SITE / "h65-report.html").read_text()
+    readme = (ROOT / "README.md").read_text()
+    assert "INCONCLUSIVE" in report and "Do not rerun the knickpoint lane at" in report
+    assert "no organizer receipt ties that score to these exact bytes" in report.lower()
+    assert "first experiment for the next session" not in report
+    assert "H65-1" in readme and "NOT OK to submit" in readme
+    assert "standing brief" in readme.lower()
+    assert "0.2778 remains owner-reported/unverified" in readme
+
+
 def test_run_card_is_final_negative_and_discloses_incomplete_gates():
     card = json.loads((ROOT / STATUS["final_run_card"]).read_text())
-    assert card["verdict"] == "negative"
+    assert card["decision"] == "negative"
+    assert card["verdict"] == "NEGATIVE"
     assert card["raster_sha256"] == STATUS["research_artifact"]["sha256"]
     assert card["submission_name"] == STATUS["research_artifact"]["submission_name"]
     assert len(card["note"]) <= 140
     assert card["approved_for_weekly_slot"] is False
-    assert card["registry_uniqueness_review"]["full_registry_clearance"] is False
-    assert card["registry_uniqueness_review"]["pre_placement_surface_spearman_check_documented"] is False
-    assert card["registry_uniqueness_review"]["post_placement_final_dot_overlap_check_documented"] is True
+    assert card["validator_output"]["local_format_preflight_ok"] is True
+    assert card["validator_output"]["organizer_acceptance_recorded"] is False
     assert card["uniqueness_gate_pass"] is False
-    assert card["canary_review"]["full_leakage_clearance"] is False
-    assert card["canary_review"]["legacy_value_is_roc_auc"] is False
-    assert "not ROC AUC" in card["canary_review"]["status"]
-    assert card["canary"]["implied_spearman_rho"] == 0.0029023158232568402
-    assert "roc_auc_score" in (ROOT / "scripts" / "e3_validate.py").read_text()
+    uniqueness = card["registry_uniqueness_review"]
+    assert uniqueness["full_registry_clearance"] is False
+    assert uniqueness["checked_registry_rasters"] == 651
+    assert uniqueness["expected_registry_rasters"] == 655
+    assert uniqueness["max_dot_overlap_within_3px"] == 1.0
+    assert uniqueness["pre_placement_surface_spearman_check_documented"] is False
+    assert uniqueness["post_placement_final_dot_overlap_check_documented"] is True
+    assert card["canary_review"]["full_leakage_clearance"] is True
+    assert card["canary_review"]["feature_by_feature_audit"] is True
+    assert all(row["max_abs_auc"] <= 0.90 for row in card["canary_review"]["lane_input_rows"])
+    assert card["canary_review"]["positive_control"]["leakage_flag"] is True
+    assert card["first_test_E1"]["verdict"] == "INCONCLUSIVE"
+    assert "PROCEED gate" in card["decision_reason"]
 
 
 def test_historic_registry_submission_note_remains_within_portal_budget():
@@ -136,21 +157,38 @@ def test_current_and_archived_channel_runners_are_stop_guarded():
         "e1_lane_test.py", "e1b_distance_profile.py", "e2_build.py", "e3_validate.py",
         "e61_instrument_audit.py", "e62_lane_thermal.py", "e62b_substrate.py",
         "run_h62.py", "run_lane.py", "run_lane60.py", "build_submission60.py",
-        "check_uniqueness60.py",
+        "check_uniqueness60.py", "dem10_block.py", "dem10_merge.py", "build_dem10_cache.py",
     )
     for name in guarded:
         source = (ROOT / "scripts" / name).read_text()
         assert "lane_is_stopped" in source, f"{name} can bypass the registered E1 stop"
 
 
-def test_recorded_negative_e1_cannot_be_overridden_by_active_status(tmp_path, capsys):
+def test_dem10_workflow_is_manual_only_and_stops_before_data_preparation():
+    workflow = (ROOT / ".github" / "workflows" / "dem10-chi.yml").read_text()
+    assert "workflow_dispatch:" in workflow
+    assert "  push:" not in workflow
+    assert workflow.count("fail closed on the recorded lane STOP") == 2
+    assert "evidence/h65_e1_first_test.json" in workflow
+    assert workflow.index("fail closed on the recorded lane STOP") < workflow.index("- name: install")
+
+
+def test_recorded_h65_inconclusive_e1_cannot_be_overridden_by_active_status(tmp_path, capsys):
     (tmp_path / "registry").mkdir()
     (tmp_path / "evidence").mkdir()
-    active = dict(STATUS, status="ACTIVE")
+    active = dict(STATUS, status="ACTIVE", recommended_competition_submission={"name": "test-only"})
+    active["latest_first_test"] = dict(
+        STATUS["latest_first_test"], result="PROCEED", decision="PROCEED",
+        evidence="evidence/h65_e1_first_test.json",
+    )
     (tmp_path / "registry" / "current_site_status.json").write_text(json.dumps(active))
-    (tmp_path / "evidence" / "e1_lane_test.json").write_text(json.dumps({"verdict": "NEGATIVE-STOP"}))
-    assert _load_stop_guard().lane_is_stopped(tmp_path, "test E3 runner") is True
-    assert "NEGATIVE-STOP" in capsys.readouterr().out
+    (tmp_path / "evidence" / "e1_lane_test.json").write_text(json.dumps({"verdict": "PROCEED"}))
+    (tmp_path / "evidence" / "h65_e1_first_test.json").write_text(
+        json.dumps({"summary": {"verdict": "INCONCLUSIVE"}})
+    )
+    assert _load_stop_guard().lane_is_stopped(tmp_path, "test H65 runner") is True
+    output = capsys.readouterr().out
+    assert "INCONCLUSIVE" in output and "STOP" in output
 
 
 def test_stop_guard_fails_closed_when_status_is_missing(tmp_path, capsys):

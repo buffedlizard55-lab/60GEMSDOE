@@ -2,24 +2,27 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Current irregularities and evidence limits · 60GEMSDOE</title><link rel="stylesheet" href="assets/site.css"></head><body>
 <header class="top"><div class="wrap"><h1>Current irregularities and evidence limits</h1><nav><a href="index.html">Home</a> <a href="executive-summary.html">Submission status</a> <a href="research.html">Research</a> <a href="hypotheses.html">Deferred hypotheses</a> <a href="leaderboard.html">Leaderboard</a> <a href="sources.html">Sources</a> <a href="irregularities.html" class=active>Irregularities</a></nav>
-<div class="dlbtn"><a class="btn" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif" download>Download c7653 GeoTIFF — research only, DO NOT SUBMIT</a> <a class="btn alt" href="research/active-lane-review-2026-10-11.md">Read current review</a></div></div></header>
+<div class="dlbtn"><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download H65-1 GeoTIFF — research only, DO NOT SUBMIT</a> <a class="btn alt" href="research/active-lane-review-2026-10-11.md">Read current review</a></div></div></header>
 <div class="values"><div class="wrap"><b>Maximize P(Win).</b> No slot is spent on an unvalidated candidate. <b>Own the Outcome.</b> Negative results and evidence limits are published clearly.</div></div>
-<main class="wrap"><div class="banner"><h2>STOP — no competition submission is cleared</h2>
-<p><b>Active lane:</b> channel-steepness / χ / knickpoints. The preregistered c7653 E1 test returned
-<strong>NEGATIVE-STOP</strong> (placement-null AUC 0.22436; orientation-matched AUC 0.25641).
-No follow-up experiment was run, no new TIFF was created, and no weekly slot was used.</p>
-<p><a class="btn" href="downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif" download>Download the existing c7653 GeoTIFF for research only</a>
-<strong>DO NOT SUBMIT.</strong> This is not an approved/promoted file; local format validation is not organizer acceptance.</p>
-<p><a href="research/active-lane-review-2026-10-11.md">Full review</a> · <a href="../evidence/runcard.json">final JSON run card</a> ·
-<a href="../registry/leaderboard_snapshot_2026-10-11.json">manual 50-row public-board snapshot</a></p></div><h2>Current irregularities / review limits</h2>
+<main class="wrap"><div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
+<p><b>Latest run:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
+<strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast +0.0326,
+95% CI [-0.0144, +0.0790] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
+The earlier c7653 run also stopped. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
+<p><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download the existing H65-1 GeoTIFF for research only</a>
+<strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
+<p>H65-1 diagnostic <b>HOLDOUT-DTI</b>: 0.01158 [0.00840, 0.01462],
+22,641 withheld positives (`gems57-pooled-hide-v2`); not a leaderboard score.
+<a href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.json">Local format receipt</a> · <a href="research/active-lane-review-2026-10-11.md">Full review</a> ·
+<a href="../evidence/h65_runcard.json">final JSON run card</a> · <a href="../registry/leaderboard_snapshot_2026-10-11.json">manual 50-row public-board snapshot</a></p></div><h2>Current irregularities / review limits</h2>
 <table><tr><th>Issue</th><th>Status and consequence</th></tr>
-<tr><td>H33-2-B2 score attribution</td><td>Current 0.2778 is owner-reported; an archived report calls a same-named file 0.2708. No organizer receipt reconciles either value or links it to exact bytes. Public rank-23 0.2778 (extradr19) and rank-36 0.2708 (smrtdoog5) are not file attributions. See <code>IR-60-H33-SCORE-20261011</code>.</td></tr>
-<tr><td>c7653 E1 outcome</td><td>Placement and orientation-matched AUCs are below 0.5; preregistered result is NEGATIVE-STOP. No follow-up in the lane.</td></tr>
-<tr><td>c7653 uniqueness scope</td><td>Six archived Spearman values compare final binary dot masks, not the pre-placement score surface; post-placement overlap is limited to those six rasters. Complete-registry uniqueness is not established. See <code>IR-60-UNIQUENESS-SURFACE-20261011</code>.</td></tr>
-<tr><td>c7653 leakage audit</td><td>The legacy 0.50145 “AUC” is actually (Spearman rho + 1)/2, not ROC AUC; no feature-by-feature canary results are recorded. Full leakage clearance is not established. See <code>IR-60-CANARY-LABEL-20261011</code>.</td></tr>
-<tr><td>DEM resolution / hydrography</td><td>Existing 100 m networks fail the recorded Hack-exponent and network-agreement checks. Full 10 m coverage has not been assembled; this is a data-quality warning, not a reason to override the failed first-test stop.</td></tr>
+<tr><td>H65-1 first test</td><td>Mean log-ksn step contrast +0.03259, 95% CI [-0.01435, +0.07900]; inconclusive means STOP under the registered rule. No rerun at another resolution.</td></tr>
+<tr><td>H65-1 registry uniqueness</td><td>651/655 rasters checked; max |Spearman| 0.0282; final 3-px dot overlap 100% exceeds the 70% threshold; tool verdict unique=false. Pre-placement screen is not documented, so no clearance. See <code>IR-60-GATE-01</code> / <code>IR-60-CORPUS-01</code>.</td></tr>
+<tr><td>H65-1 DEM cache</td><td>The first local cache did not match its recorded hash; a rebuild from pinned input TIFs matched all 11 arrays and reproduced the shipped raster. Root cause of the stale scratch cache is unknown. See <code>IR-65-CACHE-01</code>.</td></tr>
+<tr><td>c7653 historical outcome</td><td>Earlier placement/orientation AUCs were 0.22436/0.25641, a negative stop. Its six final-mask comparisons did not establish full-registry or pre-placement uniqueness; no feature-by-feature canary audit was recorded.</td></tr>
+<tr><td>H33-2-B2 score attribution</td><td>0.2778 remains owner-reported/unverified. A same-named artifact was elsewhere reported as 0.2708; no organizer receipt reconciles either value or links it to exact bytes. Local LM diagnostics and public ranks do not establish attribution.</td></tr>
 <tr><td>Public board freshness</td><td>Snapshot is a manual 2026-10-11 read and may become stale. No competition-host polling is performed.</td></tr>
-<tr><td>Automated leaderboard fetch (fixed 2026-10-11)</td><td>A scheduled refresh script previously contained a direct leaderboard fetch. The fetch/parser is removed; the scheduled workflow now preserves manual board snapshots and probes only non-competition sources. See <code>IR-60-LB-AUTO-20261011</code>.</td></tr>
+<tr><td>Automated leaderboard fetch (fixed 2026-10-11)</td><td>The scheduled refresh preserves manual board snapshots and probes only non-competition sources; it makes no request to the DrivenData host. See <code>IR-60-LB-AUTO-20261011</code>.</td></tr>
 </table><p>The historical irregularity register remains at <a href="../registry/irregularities.json">registry/irregularities.json</a>; older entries are preserved as historical records. This page highlights only the current decision-relevant items.</p>
 <p><a href="research/active-lane-review-2026-10-11.md">Full explanation and evidence links</a>.</p></main>
 <footer><div class="wrap">Current review date: 2026-10-11 · Official board capture is a manual snapshot; the competition host is not polled automatically. ·

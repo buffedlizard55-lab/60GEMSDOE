@@ -1,0 +1,128 @@
+# Historical H65-1 3DEP feature-preparation workflow. H65-1 stopped at its preregistered first test.
+# Automatic push triggering is disabled, and every job fails closed on the recorded STOP before
+# installing dependencies, downloading elevation tiles, building blocks, or committing data. Do not
+# change or bypass the guard to rerun the knickpoint lane at another resolution.
+#
+# Official source (public domain): USGS 3DEP 1/3 arc-second DEM, current 1x1 degree tiles
+#   https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/nYYwXXX/USGS_13_nYYwXXX.tif
+#   landing page: https://www.usgs.gov/3d-elevation-program
+name: dem10-chi
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dem10-chi-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  block:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        by: [0, 1, 2, 3, 4, 5]
+        bx: [0, 1, 2, 3, 4, 5]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            src
+            scripts
+            data/official
+            registry/current_site_status.json
+            evidence/e1_lane_test.json
+            evidence/h65_e1_first_test.json
+      - name: fail closed on the recorded lane STOP
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          from pathlib import Path
+          root = Path('.')
+          status = json.loads((root / 'registry/current_site_status.json').read_text())
+          if status.get('status') != 'ACTIVE' or status.get('recommended_competition_submission') is None:
+              print('STOP GUARD: H65-1 is stopped; no DEM10 lane preparation is authorized.')
+              sys.exit(1)
+          for name in ('evidence/e1_lane_test.json', 'evidence/h65_e1_first_test.json'):
+              data = json.loads((root / name).read_text())
+              verdict = data.get('summary', {}).get('verdict', data.get('verdict'))
+              if str(verdict).upper() in {'NEGATIVE-STOP', 'NEGATIVE', 'INCONCLUSIVE', 'STOP', 'FAIL'}:
+                  print(f'STOP GUARD: {name} has verdict {verdict}; do not rerun this lane.')
+                  sys.exit(1)
+          PY
+      - name: runner facts
+        run: python3 -V; nproc; free -m | head -2; df -h / | tail -1
+      - name: install
+        run: python3 -m pip install --quiet --no-input numpy scipy numba rasterio pyproj
+      - name: block ${{ matrix.by }}-${{ matrix.bx }}
+        run: |
+          /usr/bin/time -v python3 scripts/dem10_block.py --by ${{ matrix.by }} --bx ${{ matrix.bx }} \
+            --nby 6 --nbx 6 --halo 80 --out out/dem10 2> >(tee /tmp/time.txt >&2)
+          grep -E "Maximum resident|Elapsed" /tmp/time.txt || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: block-${{ matrix.by }}-${{ matrix.bx }}
+          path: out/dem10/
+          retention-days: 7
+
+  merge:
+    needs: block
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            src
+            scripts
+            data/official
+            data/external
+            registry/current_site_status.json
+            evidence/e1_lane_test.json
+            evidence/h65_e1_first_test.json
+      - name: fail closed on the recorded lane STOP
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          from pathlib import Path
+          root = Path('.')
+          status = json.loads((root / 'registry/current_site_status.json').read_text())
+          if status.get('status') != 'ACTIVE' or status.get('recommended_competition_submission') is None:
+              print('STOP GUARD: H65-1 is stopped; no DEM10 lane preparation is authorized.')
+              sys.exit(1)
+          for name in ('evidence/e1_lane_test.json', 'evidence/h65_e1_first_test.json'):
+              data = json.loads((root / name).read_text())
+              verdict = data.get('summary', {}).get('verdict', data.get('verdict'))
+              if str(verdict).upper() in {'NEGATIVE-STOP', 'NEGATIVE', 'INCONCLUSIVE', 'STOP', 'FAIL'}:
+                  print(f'STOP GUARD: {name} has verdict {verdict}; do not rerun this lane.')
+                  sys.exit(1)
+          PY
+      - name: install
+        run: python3 -m pip install --quiet --no-input numpy rasterio
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: block-*
+          path: blocks
+      - name: merge
+        run: python3 scripts/dem10_merge.py --blocks blocks --out data/external
+      - name: commit the rasters and the manifest back to the branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f data/external/dem10_chi_100m_i16.tif data/external/dem10_chi_100m_sig_i32.tif \
+                     data/external/dem10_chi_100m_u8.tif data/external/dem10_chi_100m.manifest.json
+          git commit -m "H65-1 dem10-chi features (run $GITHUB_RUN_ID) [skip ci]" || echo "nothing to commit"
+          for i in 1 2 3; do
+            git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break
+            sleep 10
+          done
