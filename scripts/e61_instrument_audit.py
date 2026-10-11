@@ -41,6 +41,9 @@ def read_pred(path: Path) -> np.ndarray:
 
 
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "E61 instrument audit"):
+        return 0
     ap = argparse.ArgumentParser()
     ap.add_argument("--pooled", action="store_true", help="also run gems52-pooled-hide-v1 (~2 min)")
     ap.add_argument("--out", default="evidence/e61_instrument_audit.json")

@@ -1,9 +1,13 @@
-# Five Candidate Geological Hypotheses (2026-10-11) — Lane 60 (Tectonic-Geomorphology)
+# Historical candidate memo (2026-10-11) — superseded, not current recommendations
+
+> **ARCHIVE / DO NOT RUN.** This memo predates the H65-1 result. H65-1 later used a pinned 10 m USGS 3DEP source stack aligned to the 100 m grid; its withheld-crossing first-test CI crossed zero, so the preregistered decision was INCONCLUSIVE → STOP. The H65 report says not to rerun the knickpoint lane at any resolution. H65-2 through H65-5 below are historical proposals only—not next steps, forecasts, or authorization. See the current [active-lane review](research/active-lane-review-2026-10-11.md) and [ranked four-hypothesis deferred backlog](research/next-chi-hypotheses-2026-10-11.md).
+
+Any “expected DTI” range below is an old speculative estimate, not measured performance or a leaderboard prediction. The old uniqueness statement at the bottom is not a full-registry clearance and is explicitly corrected below.
 
 ## Context
 Lane: **tectonic-geomorphology — channel steepness and knickpoints, not scarp shape**. Based on Kirby & Whipple (2012), Perron & Royden χ-transform (ESPL 2013), and Gailleton et al. (Earth Surface Dynamics) reproducible knickpoint-segmentation.
 
-Previous results: H60-A passed the mandated first test (Δmean +0.1089, CI [0.0586, 0.1569]) but pooled DTI was 0.01639 vs random 0.03908 (negative). H61, H62 both negative. Root cause measured: 100 m DEM fails drainage-network validity (Hack exponent b ≈ +0.026 / −0.027 vs 1.6–2.0; Jaccard 0.231 between products). This is a **substrate (resolution) verdict**, not a detector verdict.
+Historical 100 m results: H60-A passed its first test (Δmean +0.1089, CI [0.0586, 0.1569]) but pooled DTI was 0.01639 vs random 0.03908; H61/H62 were negative. The 100 m network diagnostics were poor (Hack exponents about +0.026 / −0.027 and network Jaccard 0.231), but H65-1 later tested with a pinned 10 m 3DEP source stack and still failed its preregistered first-test proceed gate. Therefore, do not repeat the earlier claim that resolution alone explains the lane's failure; H65-1 says it does not.
 
 ## Hypothesis 1 — H63-A: Strike-aligned corridor emission with slope concordance
 - **Layers:** GeoDAWN 100 m DEM (`data/geodawn_dem_a2_100m.tif`) + H60-A knickpoint-corridor feature stack (`docs/downloads/gems60-h60a-knick-corridor-...-zeros.tif`)
@@ -54,5 +58,5 @@ Previous results: H60-A passed the mandated first test (Δmean +0.1089, CI [0.05
 - **Holdout first test (E1):** H63-A uses H60-A positive pixels (first test Δmean +0.1089, CI [0.0586, 0.1569]). No independent first-test result computed for the slope-filtered emission.
 - **Holdout pooled DTI:** Not independently computed; estimated ≈ 0.013 based on family history. **Negative verdict** — does not beat best arm (0.08623) or family gate (0.190147).
 - **Leakage canary:** Not independently computed for H63-A; previous H60-A canary showed `dist_to_visible` at 0.924 (proving canary has power), `knickpoint_step` at 0.586, `lane_p` at 0.518.
-- **Uniqueness check:** Quick manual check against 62 registry rasters shows max Spearman ≈ 0.024 (limit 0.90), max 3-px overlap estimated < 5% (limit 70%). File is **unique**.
+- **Archived uniqueness note (superseded/incomplete):** the old quick manual check against 62 rasters (reported max Spearman ≈ 0.024 and an estimated <5% overlap) was not full-registry validation and cannot establish uniqueness. Later H65-1's 651/655 scan had final-dot overlap 100% (>70%), no documented separate pre-placement screen, and tool verdict `unique=false`. No artifact in this memo is cleared by the old “unique” label.
 - **Format validation:** 15/15 checks PASS (`python scripts/verify_submission.py` equivalent); float32, [0,1], no NaN, EPSG:32611, 3730×3292, correct transform.

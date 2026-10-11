@@ -1,7 +1,6 @@
-# Highest-score study: why the 0.2600 dotted file is shaped that way, whether >0.26 is reachable, and the system most likely to beat 0.3195
+# Metric-ceiling analysis: the 0.2600 dotted file, marginal-emission algebra, and the current public target
 
-**Date:** 2026-10-03 · **Author:** Arena session 30 · **Status:** analysis + one registered experiment,
-no new submission slot requested.
+**Analysis snapshot:** 2026-10-03 · **Current board update:** 2026-10-11 · **Status:** historical analysis plus one registered experiment; no submission slot requested. The formulas and measured comparisons below are retained, but 0.3195 was the public leader only in the 2026-10-03 snapshot. The manual official read on 2026-10-11 has xiaofanhu #1 at 0.4133, DARD #8 at 0.3195, and extradr19 #23 at 0.2778. Public scores are not attributed to files in this repository.
 
 Evidence labels are used throughout, because nothing here is an organizer-confirmed score:
 
@@ -21,7 +20,7 @@ Evidence labels are used throughout, because nothing here is an organizer-confir
    `d2.8` is `dot_thin(H19-5, 2.8 px)` — 44,090 dots, 36 % of the 121,131-dot parent, and **0 of its
    dots lie on the training catalogue** (measured). The published index is
    `DTI = T / (0.2(T+F) + 0.8G)` and a prediction on a *known* fault pixel is masked out of every
-   metric term, so the winning artifact had to be (i) binary, (ii) sparse, (iii) off-catalogue.
+   metric term. The observed owner-reported file is binary and sparse, but those properties alone do not establish that they are globally optimal.
    The reported score 0.2600 is recorded in `docs/score-ledger.csv` as **user-reported, with a
    conflicting owner-page statement that it is unscored/not slot-approved** [OWNER-REPORT]; it is not
    an organizer-verified receipt.
@@ -33,19 +32,14 @@ Evidence labels are used throughout, because nothing here is an organizer-confir
    before scoring. This is the measured explanation for the failed 30-arm catalogue-gap factorial
    [OWNER-REPORT] and for the repository's own standing rule that catalogue holdouts are a
    *necessary* sanity frame, never a promotion frame.
-3. **Is >0.26 achievable?** Yes, and the requirement is arithmetic, not speculative. At
-   `s = 0.3195` a dot pays for itself iff its kernel credit exceeds `0.2s/(1−0.2s) = 0.0683`, i.e.
-   iff it lands within ≈ 280 m of a scored truth pixel, and with the owner-model hidden mass
-   `N̂ ≈ 12,691 px` [MODEL] the leader's statistics need `T = 3,466 + 0.0683·F` — between roughly
-   **one dot in eight and one dot in five landing within 300 m of a hidden fault**, or a weighted
-   coverage of **27 % of the hidden truth at zero false-positive mass, 34 % at parity**.
+3. **Is >0.26 achievable?** The metric arithmetic says what must be achieved, not that a local proxy can predict it. For a simple nonredundant dot that adds its full kernel credit to one previously uncovered truth pixel, the break-even condition is `k > αs`; at the historical target `s = 0.3195` this is `k > 0.0639` (about 281 m), and at the current public top `s = 0.4133` it is `k > 0.08266` (about 275 m). With the owner-model hidden mass `N̂ ≈ 12,691 px` [MODEL], score inversion gives `T = 3,465 + 0.0683·F` for `s = 0.3195`, and `T = 4,574 + 0.0901·F` for `s = 0.4133`. These are algebraic requirements under the stated hidden-mass assumption, not forecasts or evidence about any leaderboard file.
 4. **What the project's own measurements say about the gap.** In the same-frame, leave-one-fold-out
    comparison registered and run this session, an exact marginal-credit emitter (EDGE) beat every
    belief-ordered emission family on all three belief fields, by **+0.049** (proximity), **+0.018**
    (external evidence) and **+0.044** (hybrid) index points, winning ≥ 3 of 4 spatial folds each.
    Emission, in other words, is now demonstrably solvable; the binding constraint is the *coverage*
    of faults that the catalogue does not contain.
-5. **The system to beat 0.3195** (§6) is therefore: EDGE emission over a belief field built from
+5. **The system needed to compete with the current public 0.4133** (§6) is therefore: EDGE emission over a belief field built from
    *concealment* evidence (where a surface catalogue cannot see) fused with near-trace structural and
    external-evidence priors, validated on spatially blocked holdouts, with the coverage arithmetic of
    §4 used as the acceptance test instead of any catalogue proxy.
@@ -69,28 +63,24 @@ cannot radiate credit into the scored domain.
 
 Three exact corollaries drive everything below.
 
-**(i) Binary beats calibrated.** For a support set scaled by λ ∈ (0,1] the index is
-`DTI(λ) = λT / (αλ(T+F) + 0.8G)` and `dDTI/dλ = 0.8·T·G / (αλ(T+F) + 0.8G)² > 0`: a graded
-probability map is *strictly dominated by its own thresholded support*. Every competitive artifact
-must be a binary 0/1 dot raster. The repository's download set already respects this: the OOF GBM
-file's unique positive value is exactly `{1.0}` [MEASURED].
+**(i) What uniform scaling does—and does not—prove.** For a fixed nonzero support, scaling every positive value by a common λ ∈ (0,1] gives
+`DTI(λ) = λT / (αλ(T+F) + 0.8G)` and `dDTI/dλ = 0.8·T·G / (αλ(T+F) + 0.8G)² > 0`. Thus, for this deterministic metric and this fixed support, increasing all positive values together toward 1 improves the score. This does **not** establish that an arbitrary thresholded subset is globally optimal, identify the best support, or prove that binary emission maximizes expected leaderboard DTI. The repository's OOF GBM artifact happens to have unique positive value `{1.0}` [MEASURED]; that observation alone is not a general optimality proof.
 
-**(ii) The marginal-inclusion rule.** Adding a dot of credit `k` raises `T` by `k` and the denominator
-by `α`, so it pays iff
+**(ii) Exact marginal inclusion.** Let `s = T/D` be the current DTI, `q = max_g k(d(x,g))` the new unit-mass dot's own best kernel weight, and `ΔT` the actual increase in `T = TP_w` after the per-truth maxima are recomputed. Since `S` rises by 1 and `M` rises by `q`, the denominator `D = α(T+S−M)+βG` rises by `α(ΔT + 1 − q)`. The dot improves the score exactly when
 
 ```
-k > alpha*s / (1 - alpha*s),        s = current index.                            (2)
+ΔT · (1 − αs) > αs · (1 − q).                                      (2)
 ```
 
-| `s` | 0.10 | 0.20 | 0.26 | **0.3195** | 0.40 |
-| --- | --- | --- | --- | --- | --- |
-| required credit `k` | 0.0204 | 0.0417 | 0.0549 | **0.0683** | 0.0870 |
-| implied maximum distance for a dot to pay | 294 m | 288 m | 284 m | **280 m** | 274 m |
+If the dot uniquely improves one previously uncovered truth by its full kernel weight (`ΔT = q = k`), this reduces to `k > αs`—not `αs/(1−αs)`. If the algebra is considered with `q=0`, the corresponding threshold on `ΔT` is `αs/(1−αs)`; the `q=0` case is not a physical direct match to a truth under the triangular kernel. Also, `αs/(1−αs)` is the coefficient on false-positive mass `F` when inverting a target score, which is the role it plays in Eq. (3) below.
 
-A dot at distance `d` from the nearest scored truth carries `k = 1 − d/300 m`. **Credit is nearly
-free anywhere inside the kernel and worthless outside it**; the metric is a *distance* filter, not a
-precision filter. This is the mechanism the owner's `dot_thin` sweep d≈2.4 px located empirically
-[OWNER-REPORT] and the reason EDGE's stopping rule is stated in exactly these terms.
+| `s` | 0.10 | 0.20 | 0.26 | **0.3195 (historical)** | **0.4133 (current)** | 0.40 |
+| --- | --- | --- | --- | --- | --- | --- |
+| `k` threshold for the nonredundant special case (`αs`) | 0.0200 | 0.0400 | 0.0520 | **0.0639** | **0.0827** | 0.0800 |
+| maximum distance in that special case | 294.0 m | 288.0 m | 284.4 m | **280.8 m** | **275.2 m** | 276.0 m |
+| `αs/(1−αs)` (F coefficient in score inversion) | 0.0204 | 0.0417 | 0.0549 | **0.0683** | **0.0901** | 0.0870 |
+
+For redundant dots or dots that improve more than one truth pixel, use Eq. (2), not the one-truth simplification. The owner's `dot_thin` sweep is an owner-reported observation [OWNER-REPORT], not a proof that a universal spacing is optimal.
 
 **(iii) False positives cost a quarter of false negatives** (α = 0.2 vs β = 0.8), which is why
 fine-grained dot *placement* is worth more than any amount of probability calibration.
@@ -110,10 +100,7 @@ All rows [MEASURED] on the hash-pinned grid (`data/raw/labels.tif`,
 | `GEMSDOE30_oof-gbm-adaptive-r5_…-nan.tif` | 90,358 | 2,517 | 0.1902044 |
 | `gemsdoe30-sgmc-hedge-d10-85k-…-nan.tif` | 85,526 | 0 | 0.0017506 |
 
-Two checks give confidence in the protocol: the `d2.8` proxy value reproduces the repository's
-recorded `0.1617719829` to seven decimals, and the OOF GBM file is confirmed *strictly binary*
-(`np.unique` of positives = `{1.0}`), i.e. the project has been emitting in the metric-optimal shape
-all along.
+Two checks give confidence in the measurement protocol: the `d2.8` proxy value reproduces the repository's recorded `0.1617719829` to seven decimals, and the OOF GBM file is confirmed *strictly binary* (`np.unique` of positives = `{1.0}`). Binary output is a measured property of that file, not evidence that its support or the repository's full emission strategy is metric-optimal.
 
 **The reported rank order and the proxy order disagree, and not by noise.** With 121,131 → 60,069 →
 44,090 dots the reported scores rise (0.1922 → 0.2477 → 0.2600 [OWNER-REPORT]) while the proxy falls
@@ -145,24 +132,25 @@ x = s*(0.2*rho + 0.8) / (1 - 0.2*s).                                            
 | target `s` | ρ = 0 | ρ = 0.5 | ρ = 1 | ρ = 2 | ρ = 4 |
 | ---: | ---: | ---: | ---: | ---: | ---: |
 | 0.26 | 21.9 % | 24.7 % | 27.4 % | 32.9 % | 43.9 % |
-| **0.3195** | **27.3 %** | 30.7 % | **34.1 %** | 41.0 % | 54.6 % |
+| **0.3195 (historical)** | **27.3 %** | 30.7 % | **34.1 %** | 41.0 % | 54.6 % |
+| **0.4133 (current public top)** | **36.0 %** | 40.5 % | **45.1 %** | **54.1 %** | **72.1 %** |
 | 0.36 | 31.0 % | 34.9 % | 38.8 % | 46.6 % | 62.1 % |
 | 0.40 | 34.8 % | 39.1 % | 43.5 % | 52.2 % | 69.6 % |
 
-Under the owner-model hidden mass `N̂ = 12,691 px` [MODEL], `s = 0.3195` is equivalent to
+Under the owner-model hidden mass `N̂ = 12,691 px` [MODEL], the 2026-10-03 historical `s = 0.3195` target is equivalent to
 
 ```
 T = 3,466 + 0.0683 * F      (weighted credit versus emitted false-positive mass),
 ```
 
-so the leader's file must be carrying **3.5k–6.5k weighted truth credit** — that is, of its emitted
+so a file at that historical target would need **3.5k–6.5k weighted truth credit** — that is, of its emitted
 dots, roughly **one in eight to one in five sits within 300 m of a hidden fault**, at a mean credit
 per dot of ≈ 0.11–0.15 (compare the parent's 12,199.64/121,131 = 0.101 measured **on the catalogue**,
 which is the only per-dot credit number we can measure and is *not* the hidden-truth number).
 
 **Is there room?** Yes, by a wide margin. With `G = 12,691` and perfect knowledge, dots every ≈ 3 px
 along the hidden traces (≈ 4,200 dots) give `T ≈ 0.8G`, `F ≈ 4,200`, hence `DTI ≈ 0.78`. The
-0.26 → 0.3195 gap is therefore **not** an emission-quality gap; it is a coverage gap of roughly
+0.26 → 0.3195 historical gap is therefore **not** an emission-quality gap; it is a coverage gap of roughly
 +25 % relative weighted coverage of hidden faults. That is the only quantity worth optimizing now.
 
 ---
@@ -215,7 +203,7 @@ cross-validated, not in-sample.
 
 ---
 
-## 5. The strategy most likely to beat 0.3195
+## 5. Historical strategy argument, with the current public target noted
 
 **The target is not a better detector; it is coverage of faults that a surface catalogue cannot
 contain.** Three moves, in order of expected value:
@@ -229,16 +217,10 @@ contain.** Three moves, in order of expected value:
 2. **Emit with EDGE at the exact marginal stopping point.** Measured above; it converts a belief field
    into the metric-optimal sparse support and removes the last degree of freedom that was costing the
    project score (thinning radius, budget, order).
-3. **Hedge the belief across quantiles, not across space.** Because the marginal bar at `s ≈ 0.32` is
-   only `k > 0.068`, a dot that has a ≥ 7 % chance of sitting within 280 m of *any* hidden fault pays
-   for itself. Under that arithmetic, spending the budget on the top belief decile alone is dominated
-   by spreading it over the top two or three deciles *unless* the field's top decile is far more
-   accurate than its calibration suggests. Register this as a decision rule, not an intuition: the
-   next EDGE run should sweep a "quantile floor" parameter (guaranteed dots per belief stratum) with
-   leave-one-fold-out selection, exactly as the thinning radius was swept here.
+3. **Hedge the belief across quantiles only as a testable allocation hypothesis.** At `s ≈ 0.32`, the simple nonredundant threshold is about `k > 0.064`; the 0.0683 value is instead the score-inversion coefficient on `F`. A probability of being within the kernel cannot be substituted directly for `ΔT` without accounting for existing coverage and the candidate's own `q`. Any quantile-floor sweep would require a new preregistration and a valid holdout; it is not authorized by this analysis.
 
 An honest statement of the ceiling: if the hidden faults are simply not near the catalogue at all,
-none of the above beats a well-thinned model emission, and 0.3195 may reflect a private data source
+none of the above beats a well-thinned model emission, and the current public 0.4133 may reflect a private data source
 the organizers acknowledge exists but will not describe (thread 11527). The concealment prior is the
 only lever under our control that is *orthogonal* to that risk: it improves coverage precisely where
 a catalogue-driven field is blind.
@@ -264,9 +246,10 @@ a catalogue-driven field is blind.
 # metric algebra
 python - <<'PY'
 def x(s, r): return s*(0.2*r+0.8)/(1-0.2*s)
-for s in (0.26, 0.3195, 0.36, 0.40):
+for s in (0.26, 0.3195, 0.4133, 0.36, 0.40):
     print(s, [round(100*x(s, r), 1) for r in (0, 0.5, 1, 2, 4)])
-print([round(0.2*s/(1-0.2*s), 4) for s in (0.10, 0.20, 0.26, 0.3195, 0.40)])
+print("nonredundant k thresholds:", [round(0.2*s, 4) for s in (0.10, 0.20, 0.26, 0.3195, 0.4133, 0.40)])
+print("false-mass inversion coefficients:", [round(0.2*s/(1-0.2*s), 4) for s in (0.10, 0.20, 0.26, 0.3195, 0.4133, 0.40)])
 PY
 
 # artifact measurements and the registered emitter comparison
@@ -283,7 +266,7 @@ Machine-readable results: `docs/research/emitter-opt-holdout.json`,
 * Metric constants and kernel, official problem description:
   <https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/>
 * Official rules (PDF): <https://docs.nlr.gov/docs/fy26osti/96647.pdf>
-* Public leaderboard snapshot read 2026-10-03 (leader 0.3195): `docs/score-ledger.csv`,
+* Historical public leaderboard snapshot read 2026-10-03 (then-leader 0.3195); current manual snapshot read 2026-10-11 (leader 0.4133, DARD #8 at 0.3195): `registry/leaderboard_snapshot_2026-10-11.json` and `docs/score-ledger.csv`,
   <https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/>
 * Known-fault masking and the "new fault may be new geometry of an existing system" clarification:
   community threads 11516 / 11536 / 11527, cited in `docs/hypotheses.md`.

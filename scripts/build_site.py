@@ -726,6 +726,20 @@ organizer-authenticated, and naming inconsistencies. Each item is also tracked b
 
 
 def main() -> int:
+    active_status = read("registry/current_site_status.json")
+    if (active_status and active_status.get("status") == "STOP"
+            and not active_status.get("recommended_competition_submission")):
+        fl = FEED.build(ROOT)
+        from build_current_review_site import render as render_current_review_site
+        current_review = render_current_review_site(ROOT)
+        print(json.dumps({
+            "mode": "active stop review",
+            "current_review": current_review,
+            "leaderboard_rows": len(fl.get("leaderboard", [])),
+            "submission_recommendation": None,
+        }, indent=2))
+        return 0
+
     fl = FEED.build(ROOT)
     sub = read("registry/submission_build.json")
     name = (sub or {}).get("name", "gems32-h19-5-maxcov-r1")

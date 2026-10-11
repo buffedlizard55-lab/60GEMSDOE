@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-10-11T11:28:40Z",
+ "generated_utc": "2026-10-11T15:33:58Z",
  "sources": [
   {
    "id": "competition",
@@ -34,8 +34,8 @@
    "id": "leaderboard",
    "title": "Public leaderboard",
    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
-   "role": "live score feed",
-   "status": "verified 2026-10-04: #1 nchuzhoy 0.3262, #2 DARD 0.3195, #3 alexoktaba 0.3042"
+   "role": "manual public leaderboard snapshot only; not a project score or file attribution",
+   "status": "manual read 2026-10-11: 50 public rows; #1 xiaofanhu 0.4133, #8 DARD 0.3195, #23 extradr19 0.2778; dynamic snapshot; no file attribution; never automatically probed"
   },
   {
    "id": "rules_pdf",
@@ -129,6 +129,34 @@
    "status": "link table mirrored in the group's GEMSDOE repo (data/dem_links.json, sha256 8804dbff8754...)"
   },
   {
+   "id": "usgs_3dep_h65_dem10",
+   "title": "USGS 3DEP 1/3-arc-second elevation tiles used by H65-1",
+   "url": "https://www.usgs.gov/3d-elevation-program",
+   "role": "H65-1 terrain source for channel-steepness / chi measurements; 18 1-degree tiles were pinned and reduced/aligned to the 100 m competition grid",
+   "status": "Already used in the recorded H65-1 run; 5,167,373/5,167,373 footprint pixels covered; source pins are in data/external/dem10_chi_100m.manifest.json; no rerun authorized. Direct tile index: https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/"
+  },
+  {
+   "id": "usgs_sgmc_geology",
+   "title": "USGS State Geologic Map Compilation (SGMC)",
+   "url": "https://mrdata.usgs.gov/geology/state/",
+   "role": "Candidate bedrock/surficial-lithology confound layer for channel-steepness studies",
+   "status": "Official source and DOI 10.5066/F7WH2N65; not assembled into a complete H65-1 confound mask; map scales/source ages vary. https://doi.org/10.5066/F7WH2N65"
+  },
+  {
+   "id": "prism_climate_normals",
+   "title": "PRISM Climate Group climate grids",
+   "url": "https://prism.oregonstate.edu/",
+   "role": "Candidate climate/runoff confound layer for future separately authorized research",
+   "status": "Public source page records datasets and 1991-2020 normals; a regional H65-1 climate grid was not downloaded or validated."
+  },
+  {
+   "id": "usgs_3dhp",
+   "title": "USGS 3D Hydrography Program",
+   "url": "https://www.usgs.gov/3d-hydrography-program",
+   "role": "Current hydrography and stream-permanence source, subject to footprint attribute availability",
+   "status": "H65-1 did not validate a regional 3DHP permanence layer. USGS states legacy NHD was retired; check current 3DHP coverage before any separately authorized use."
+  },
+  {
    "id": "comcat",
    "title": "USGS ANSS Comprehensive Earthquake Catalog (ComCat)",
    "url": "https://earthquake.usgs.gov/fdsnws/event/1/",
@@ -178,156 +206,474 @@
    "status": "verified: every fetched blob re-hashed against registry/data_manifest.json pins"
   }
  ],
- "source_count": 25,
+ "source_count": 29,
  "leaderboard": [
   {
    "rank": 1,
-   "participant": "nchuzhoy",
-   "score": 0.3262,
-   "submissions": 3
+   "participant": "xiaofanhu",
+   "score": 0.4133,
+   "submissions": 16,
+   "last_activity": "3h 52min ago"
   },
   {
    "rank": 2,
-   "participant": "kinghorton42",
-   "score": 0.3222,
-   "submissions": 6
+   "participant": "JerryDataWorks",
+   "score": 0.3418,
+   "submissions": 19,
+   "last_activity": "1d 5h ago"
   },
   {
    "rank": 3,
-   "participant": "DARD",
-   "score": 0.3195,
-   "submissions": 12
+   "participant": "alexoktaba",
+   "score": 0.3361,
+   "submissions": 27,
+   "last_activity": "1d 19h ago"
   },
   {
    "rank": 4,
-   "participant": "alexoktaba",
-   "score": 0.3042,
-   "submissions": 21
+   "participant": "joeyfezster",
+   "score": 0.3333,
+   "submissions": 27,
+   "last_activity": "1h 14min ago"
   },
   {
    "rank": 5,
    "participant": "Batik Shirt Brothers",
-   "score": 0.2998,
-   "submissions": 19
+   "score": 0.33,
+   "submissions": 26,
+   "last_activity": "23h 52min ago"
   },
   {
    "rank": 6,
-   "participant": "xiaofanhu",
-   "score": 0.2941,
-   "submissions": 8
+   "participant": "nchuzhoy",
+   "score": 0.3262,
+   "submissions": 6,
+   "last_activity": "1w ago"
   },
   {
    "rank": 7,
-   "participant": "joeyfezster",
-   "score": 0.2919,
-   "submissions": 19
+   "participant": "kinghorton42",
+   "score": 0.3261,
+   "submissions": 10,
+   "last_activity": "1d 7h ago"
   },
   {
    "rank": 8,
-   "participant": "ndavis7",
-   "score": 0.2888,
-   "submissions": 7
+   "participant": "DARD",
+   "score": 0.3195,
+   "submissions": 18,
+   "last_activity": "1w 2d ago"
   },
   {
    "rank": 9,
    "participant": "mzoorob",
-   "score": 0.2884,
-   "submissions": 23
+   "score": 0.3129,
+   "submissions": 30,
+   "last_activity": "4h 30min ago"
   },
   {
    "rank": 10,
-   "participant": "GrigorSargsyan",
-   "score": 0.2876,
-   "submissions": 10
+   "participant": "cfld__",
+   "score": 0.3108,
+   "submissions": 4,
+   "last_activity": "14h 58min ago"
   },
   {
    "rank": 11,
-   "participant": "HardcoreTechGod",
-   "score": 0.2854,
-   "submissions": 6
+   "participant": "ruping",
+   "score": 0.3104,
+   "submissions": 8,
+   "last_activity": "12h 45min ago"
   },
   {
    "rank": 12,
-   "participant": "op01",
-   "score": 0.2792,
-   "submissions": 6
+   "participant": "newway",
+   "score": 0.308,
+   "submissions": 8,
+   "last_activity": "1h 23min ago"
   },
   {
    "rank": 13,
-   "participant": "smashi34",
-   "score": 0.2708,
-   "submissions": 8
+   "participant": "BrandenKMurray",
+   "score": 0.305,
+   "submissions": 17,
+   "last_activity": "3h 8min ago"
   },
   {
    "rank": 14,
-   "participant": "ad3002",
-   "score": 0.2627,
-   "submissions": 20
+   "participant": "giles",
+   "score": 0.3025,
+   "submissions": 7,
+   "last_activity": "1d 10h ago"
   },
   {
    "rank": 15,
-   "participant": "No Fault of Our Own",
-   "score": 0.2624,
-   "submissions": 20
+   "participant": "ohyeah",
+   "score": 0.2983,
+   "submissions": 5,
+   "last_activity": "16h ago"
   },
   {
    "rank": 16,
-   "participant": "wbg1",
-   "score": 0.26,
-   "submissions": 10
+   "participant": "notmyfault",
+   "score": 0.2981,
+   "submissions": 21,
+   "last_activity": "2h 21min ago"
   },
   {
    "rank": 17,
-   "participant": "SDCF9",
-   "score": 0.26,
-   "submissions": 9
+   "participant": "baobao",
+   "score": 0.2974,
+   "submissions": 6,
+   "last_activity": "1d 2h ago"
   },
   {
    "rank": 18,
-   "participant": "tchu",
-   "score": 0.2511,
-   "submissions": 18
+   "participant": "GrigorSargsyan",
+   "score": 0.2892,
+   "submissions": 16,
+   "last_activity": "1d 3h ago"
   },
   {
    "rank": 19,
-   "participant": "moongrega",
-   "score": 0.2474,
-   "submissions": 18
+   "participant": "ndavis7",
+   "score": 0.2888,
+   "submissions": 11,
+   "last_activity": "1w 1d ago"
   },
   {
    "rank": 20,
-   "participant": "BrandenKMurray",
-   "score": 0.2469,
-   "submissions": 9
+   "participant": "HardcoreTechGod",
+   "score": 0.2854,
+   "submissions": 6,
+   "last_activity": "3w 1d ago"
   },
   {
    "rank": 21,
-   "participant": "extradr19",
-   "score": 0.2449,
-   "submissions": 7
+   "participant": "nsabaj",
+   "score": 0.2843,
+   "submissions": 14,
+   "last_activity": "5h 9min ago"
   },
   {
    "rank": 22,
-   "participant": "jgaines",
-   "score": 0.2433,
-   "submissions": 20
+   "participant": "op01",
+   "score": 0.2797,
+   "submissions": 10,
+   "last_activity": "2d 10h ago"
   },
   {
    "rank": 23,
-   "participant": "kpomazi",
-   "score": 0.2381,
-   "submissions": 10
+   "participant": "extradr19",
+   "score": 0.2778,
+   "submissions": 15,
+   "last_activity": "6d 13h ago"
   },
   {
    "rank": 24,
-   "participant": "hiii12345",
-   "score": 0.2326,
-   "submissions": 10
+   "participant": "arnofault",
+   "score": 0.2764,
+   "submissions": 2,
+   "last_activity": "3d 2h ago"
+  },
+  {
+   "rank": 25,
+   "participant": "faultsofthy",
+   "score": 0.2764,
+   "submissions": 3,
+   "last_activity": "2d 3h ago"
+  },
+  {
+   "rank": 26,
+   "participant": "wonderfulbig12",
+   "score": 0.2761,
+   "submissions": 4,
+   "last_activity": "2d ago"
+  },
+  {
+   "rank": 27,
+   "participant": "No Fault of Our Own",
+   "score": 0.2761,
+   "submissions": 27,
+   "last_activity": "4d 5h ago"
+  },
+  {
+   "rank": 28,
+   "participant": "doublebigmac",
+   "score": 0.2758,
+   "submissions": 6,
+   "last_activity": "9h 1min ago"
+  },
+  {
+   "rank": 29,
+   "participant": "wbg1",
+   "score": 0.275,
+   "submissions": 17,
+   "last_activity": "5d 5h ago"
+  },
+  {
+   "rank": 30,
+   "participant": "raboush2",
+   "score": 0.2747,
+   "submissions": 11,
+   "last_activity": "3d ago"
+  },
+  {
+   "rank": 31,
+   "participant": "Mekhi12",
+   "score": 0.2747,
+   "submissions": 6,
+   "last_activity": "8h 49min ago"
+  },
+  {
+   "rank": 32,
+   "participant": "1stop",
+   "score": 0.2747,
+   "submissions": 4,
+   "last_activity": "8h 46min ago"
+  },
+  {
+   "rank": 33,
+   "participant": "jgaines",
+   "score": 0.2734,
+   "submissions": 27,
+   "last_activity": "4h 57min ago"
+  },
+  {
+   "rank": 34,
+   "participant": "li002666",
+   "score": 0.2726,
+   "submissions": 4,
+   "last_activity": "2d 12h ago"
+  },
+  {
+   "rank": 35,
+   "participant": "smashi34",
+   "score": 0.271,
+   "submissions": 15,
+   "last_activity": "5d 5h ago"
+  },
+  {
+   "rank": 36,
+   "participant": "smrtdoog5",
+   "score": 0.2708,
+   "submissions": 15,
+   "last_activity": "6d 14h ago"
+  },
+  {
+   "rank": 37,
+   "participant": "bot_account",
+   "score": 0.2707,
+   "submissions": 2,
+   "last_activity": "3d 2h ago"
+  },
+  {
+   "rank": 38,
+   "participant": "kpomazi",
+   "score": 0.2706,
+   "submissions": 17,
+   "last_activity": "1d ago"
+  },
+  {
+   "rank": 39,
+   "participant": "NoahNault",
+   "score": 0.2702,
+   "submissions": 11,
+   "last_activity": "1d 21h ago"
+  },
+  {
+   "rank": 40,
+   "participant": "shixing",
+   "score": 0.2664,
+   "submissions": 7,
+   "last_activity": "12h 44min ago"
+  },
+  {
+   "rank": 41,
+   "participant": "yifanxu",
+   "score": 0.265,
+   "submissions": 4,
+   "last_activity": "2d 6h ago"
+  },
+  {
+   "rank": 42,
+   "participant": "ad3002",
+   "score": 0.2643,
+   "submissions": 25,
+   "last_activity": "2d 16h ago"
+  },
+  {
+   "rank": 43,
+   "participant": "moongrega",
+   "score": 0.264,
+   "submissions": 23,
+   "last_activity": "1d 2h ago"
+  },
+  {
+   "rank": 44,
+   "participant": "regan_towin",
+   "score": 0.2632,
+   "submissions": 1,
+   "last_activity": "3d 2h ago"
+  },
+  {
+   "rank": 45,
+   "participant": "jfper21",
+   "score": 0.2607,
+   "submissions": 15,
+   "last_activity": "4h 26min ago"
+  },
+  {
+   "rank": 46,
+   "participant": "SDCF9",
+   "score": 0.26,
+   "submissions": 16,
+   "last_activity": "1w ago"
+  },
+  {
+   "rank": 47,
+   "participant": "roison",
+   "score": 0.2586,
+   "submissions": 5,
+   "last_activity": "5h 9min ago"
+  },
+  {
+   "rank": 48,
+   "participant": "haiderz",
+   "score": 0.2584,
+   "submissions": 1,
+   "last_activity": "3d 3h ago"
+  },
+  {
+   "rank": 49,
+   "participant": "tchu",
+   "score": 0.2511,
+   "submissions": 21,
+   "last_activity": "1w 4d ago"
+  },
+  {
+   "rank": 50,
+   "participant": "MSU-Laskowski-GEMS",
+   "score": 0.2448,
+   "submissions": 13,
+   "last_activity": "1d 4h ago"
   }
  ],
- "leaderboard_observed_utc": "2026-10-04",
+ "leaderboard_observed_utc": "2026-10-11",
  "leaderboard_verified": true,
- "leaderboard_snapshots": 2,
+ "leaderboard_snapshots": 3,
+ "leaderboard_retrieval_policy": "manual rendered-page snapshots only; no automated competition-host request",
+ "active_site_status": {
+  "review_date": "2026-10-11",
+  "active_run": "H65-1",
+  "active_lane": "channel-steepness / \u03c7 / knickpoints",
+  "status": "STOP",
+  "stop_reason": "The H65-1 preregistered first test was INCONCLUSIVE (95% CI crosses zero); under the pre-registered rule, failure to establish a positive signal means STOP. The H65 report prohibits rerunning the knickpoint lane at any resolution. No follow-up experiment or submission is authorized.",
+  "new_tiff_created_in_this_review": false,
+  "submission_slots_used_in_this_review": 0,
+  "recommended_competition_submission": null,
+  "research_artifact": {
+   "path": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+   "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
+   "submission_name": "60GEMSDOE-H65-1-DEM10-KNICK-40000",
+   "artifact_filename_id": "gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b",
+   "note": "H65-1 native 3DEP 10m chi/ksn knickpoints, >=3 independent drainages, 40000 dots; E1 failed: NEGATIVE, research only",
+   "note_chars": 116,
+   "download_ok_for_research": true,
+   "submit_to_competition": false,
+   "format_validation": "Local preflight passed: single-band float32 EPSG:32611, 3292x3730 on the official 100 m grid, 40,000 in-footprint positives, finite values in [0,1], 0 listed problems. This is not organizer acceptance, uniqueness clearance, or upload approval.",
+   "validator_receipt": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.json",
+   "run_card": "evidence/h65_runcard.json"
+  },
+  "latest_first_test": {
+   "test": "withheld-segment steepness-step contrast vs same-orientation random transects",
+   "n_components": 262,
+   "mean_log_ksn_step_contrast": 0.03259120937549255,
+   "median": -0.009159043588752754,
+   "fraction_positive": 0.4732824427480916,
+   "ci95": [
+    -0.014353584532868854,
+    0.07899523324810305
+   ],
+   "result": "INCONCLUSIVE",
+   "decision": "STOP (does not pass preregistered PROCEED gate)",
+   "evidence": "evidence/h65_e1_first_test.json"
+  },
+  "latest_holdout": {
+   "evidence_class": "HOLDOUT-DTI",
+   "evaluator": "gems57-pooled-hide-v2",
+   "withheld_positive_pixels": 22641,
+   "mean": 0.01158,
+   "ci95": [
+    0.0084,
+    0.01462
+   ],
+   "random_mass_control": 0.03908,
+   "random_mass_control_ci95": [
+    0.03568,
+    0.04231
+   ],
+   "not_a_leaderboard_score": true,
+   "evidence": "evidence/h65_holdout.json"
+  },
+  "leakage_review": {
+   "feature_by_feature_audit": "Recorded for all four lane inputs: knickpoint_step max(AUC,1-AUC)=0.517; ksn=0.5134; drainage_area=0.5179; lane_p=0.5167. The deliberate dist_to_visible positive control is 0.9243 and is not a lane input.",
+   "evidence": "evidence/h65_runcard.json",
+   "note": "This result does not retroactively clear the incomplete c7653 leakage audit."
+  },
+  "registry_uniqueness_review": {
+   "expected_registry_rasters": 655,
+   "checked_registry_rasters": 651,
+   "complete_accessible_scan": false,
+   "max_abs_spearman_reported": 0.02819544413278874,
+   "max_final_dot_overlap_within_3px": 1.0,
+   "limits": {
+    "abs_spearman": 0.9,
+    "dot_overlap": 0.7
+   },
+   "byte_unique_among_checked": true,
+   "pixel_unique_among_checked": true,
+   "tool_verdict_unique": false,
+   "preplacement_surface_spearman_check_documented": false,
+   "postplacement_final_dot_overlap_check_documented": true,
+   "clearance": "NOT CLEARED: the raw 3-px overlap exceeds the 70% limit and the scan is incomplete. A matched random-control diagnostic does not override the literal gate.",
+   "evidence": "evidence/h65_uniqueness.json",
+   "overlap_control_evidence": "evidence/h65_overlap_control.json"
+  },
+  "previous_run_c7653": {
+   "status": "NEGATIVE-STOP; historical, not the latest result",
+   "first_test": {
+    "placement_null_auc": 0.22436,
+    "orientation_matched_null_auc": 0.25641
+   },
+   "holdout_dti": {
+    "mean": 0.0021375,
+    "ci95": [
+     0.00179003,
+     0.00251341
+    ],
+    "withheld_positives": 36414,
+    "evaluator": "gems52-pooled-hide-v1"
+   },
+   "artifact": "docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
+   "clearance": "Feature-by-feature leakage audit and full pre-/post-placement registry uniqueness clearance were not established."
+  },
+  "leaderboard_snapshot": "registry/leaderboard_snapshot_2026-10-11.json",
+  "leaderboard_source": "Manual rendered-page read of the official public leaderboard; no automated request",
+  "h33_claim": {
+   "reported_score": 0.2778,
+   "status": "OWNER-REPORTED / UNVERIFIED",
+   "local_lm_instrument_delta": 0.0048695,
+   "organizer_receipt_linking_score_to_raster": false,
+   "archived_same_name_score_claim": 0.2708,
+   "scores_reconciled_to_identical_bytes": false,
+   "public_rows_are_project_file_attributions": false,
+   "interpretation": "Neither the 0.2778 nor 0.2708 claim is verified against the exact TIFF bytes by an organizer receipt. Public leaderboard rows and a local LM-calibrated delta do not establish file attribution or a live-score improvement."
+  },
+  "report": "docs/research/active-lane-review-2026-10-11.md",
+  "hypothesis_backlog": "docs/research/next-chi-hypotheses-2026-10-11.md",
+  "final_run_card": "evidence/h65_runcard.json"
+ },
  "hypotheses": [
   {
    "id": "H33-1",
@@ -989,7 +1335,7 @@
    "expected_dti": "UNVALIDATED; best of the slate because H65-1's step support is only 1.04-1.19x enriched near mapped faults, while junctions are where mapped faults are",
    "cost": "medium: one new reduction band in scripts/dem10_block.py + one runner run (~4 min)",
    "data_status": "USGS 3DEP 10 m - verified obtainable 2026-10-11 (18 tiles, n39w119 sha256 b7fe301c... matches the independent probe pin)",
-   "status": "PROPOSED - first experiment of the next session"
+   "status": "DEFERRED / NOT AUTHORIZED after H65-1 INCONCLUSIVE\u2192STOP; H65-1 report prohibits rerunning the knickpoint lane at any resolution. Historical proposal only; no experiment, TIFF, or slot."
   },
   {
    "id": "H65-3",
@@ -1007,7 +1353,7 @@
    "expected_dti": "UNVALIDATED; moderate",
    "cost": "medium-high (valley-width extraction at 10 m)",
    "data_status": "USGS 3DEP 10 m - verified obtainable",
-   "status": "PROPOSED"
+   "status": "DEFERRED / NOT AUTHORIZED after H65-1 INCONCLUSIVE\u2192STOP; H65-1 report prohibits rerunning the knickpoint lane at any resolution. Historical proposal only; no experiment, TIFF, or slot."
   },
   {
    "id": "H65-4",
@@ -1024,7 +1370,7 @@
    "expected_dti": "UNVALIDATED; low-moderate (coarse localisation, ~km)",
    "cost": "high (global chi datum across blocks)",
    "data_status": "USGS 3DEP 10 m - verified obtainable",
-   "status": "PROPOSED"
+   "status": "DEFERRED / NOT AUTHORIZED after H65-1 INCONCLUSIVE\u2192STOP; H65-1 report prohibits rerunning the knickpoint lane at any resolution. Historical proposal only; no experiment, TIFF, or slot."
   },
   {
    "id": "H65-5",
@@ -1041,7 +1387,7 @@
    "expected_dti": "UNVALIDATED; low (H65-1 shows 10 m knickpoint support barely enriched near faults)",
    "cost": "high",
    "data_status": "USGS 3DEP 10 m - verified obtainable",
-   "status": "PROPOSED"
+   "status": "DEFERRED / NOT AUTHORIZED after H65-1 INCONCLUSIVE\u2192STOP; H65-1 report prohibits rerunning the knickpoint lane at any resolution. Historical proposal only; no experiment, TIFF, or slot."
   }
  ],
  "claims": [
@@ -1083,7 +1429,8 @@
    "note": "different detector family"
   }
  ],
- "submission": {
+ "submission": null,
+ "historical_registry_submission_build": {
   "name": "60GEMSDOE-H61A-XCRD-37654px",
   "note": "H61-A XCRD: 30-channel off-catalogue detector; 37,654 dots >=350 m from catalogue; unique vs 35 rasters; UNSCORED, projection only.",
   "status_line": "PRIMARY = H61-A XCRD (2026-10-11), the session's UNIQUE artifact: max |Spearman| 0.024 against all 35 registry rasters, worst within-3-px share 46 % (brief's stop rule 70 %). DOWNLOAD: YES. SLOT DECISION: NOT CLEARED - no local instrument can certify it beats the owner-reported 0.2778 (the repository's catalogue hide-and-recover gate scores every off-catalogue emission exactly 0 by construction: evidence/e6_blocked_gate.json), so it is an explicit bounded-downside bet (only the best submission counts). Screens: 2.46 vs the champion's 1.62 at equal 37,654-dot mass on the one mass-normalised screen that reproduces the ladder (Spearman +0.94, evidence/e2b_xcrd_screen.json); independent LiDAR scarp screen NEGATIVE (0.48x), stated on purpose. The parallel 2026-10-11b GEMS61 lane artifact keeps its own NEGATIVE verdict and is retained alongside.",
@@ -1919,8 +2266,8 @@
   {
    "id": "IR-32-SCORE-01",
    "severity": "high",
-   "statement": "Every live score in the group's ledger (0.2477, 0.2600, 0.1922, ...) is an owner/leaderboard-row report, not an organizer receipt linking those bytes to that row. The public leaderboard rows verified today (nchuzhoy 0.3262, DARD 0.3195) are the only scores this repository treats as observed, and they are observed for *other* teams, not for our files.",
-   "mitigation": "registry/submissions.json keeps 'claim' and 'verified' fields separate; the site prints the distinction on every card"
+   "statement": "Every group's live score in the ledger, including H33-2-B2 0.2778, is owner-reported and has no organizer receipt linking the bytes to that score. A manual public-page read on 2026-10-11 records other participants only: #1 xiaofanhu 0.4133, #8 DARD 0.3195, and #23 extradr19 0.2778. The numerical match between extradr19's public score and the H33 claim is not attribution.",
+   "mitigation": "Keep owner reports, local HOLDOUT-DTI measurements, and official public-board snapshots as distinct evidence classes; require an organizer receipt to attribute a score to a raster. Manual dated snapshots only; no automated DrivenData access."
   },
   {
    "id": "IR-32-PROXY-01",
@@ -2164,6 +2511,44 @@
    "status": "open (protocol amendment needed)",
    "statement": "The literal uniqueness gate 'more than 70% of dots within 3 px of one registry raster = duplicate' is uninformative against dense lattice rasters: H62-1 scored 83.1% vs r13_lattice_s5, and a matched uniform-random set of the same size scored 83.7% (H62-1 excess-over-random -0.0059, evidence/h62_uniqueness_excess_control.json). The family selector already uses excess-over-random; the shared protocol text should adopt that form. Preregistered gates are not retroactively passed: H62-1 remains G4-FAIL in the record.",
    "evidence": "evidence/h62_uniqueness.json; evidence/h62_uniqueness_excess_control.json; registry/preregistration-h62.json"
+  },
+  {
+   "id": "IR-60-LB-20261011",
+   "severity": "high",
+   "statement": "Historical site/README fields incorrectly presented 0.3774 or DARD's 0.3195 as the current official leader. The manual 2026-10-11 public board has 50 rows: xiaofanhu #1 at 0.4133; DARD #8 at 0.3195; extradr19 #23 at 0.2778. The 0.2778 numeric match does not authenticate the H33-2-B2 owner claim.",
+   "mitigation": "Append the dated 50-row snapshot, distinguish public rank from owner-reported and HOLDOUT-DTI evidence, and refresh pages manually without polling the competition host."
+  },
+  {
+   "id": "IR-60-LB-AUTO-20261011",
+   "severity": "high",
+   "status": "fixed 2026-10-11",
+   "statement": "The scheduled scripts/refresh_feed.py path contained a direct urllib fetch/parser for the DrivenData leaderboard, despite the repository policy to skip automated competition-host requests. The feed workflow invoked it on a daily schedule. This contradicted the manual-snapshot-only requirement.",
+   "evidence": "Prior scripts/refresh_feed.py implementation and .github/workflows/feed.yml; current refresh script has no urllib/fetch/parser and delegates only to FEED.refresh_sources, whose SKIP_PROBE includes drivendata.org.",
+   "mitigation": "Removed leaderboard fetching from scripts/refresh_feed.py; retained only non-competition source health probes and repository-feed rebuilding. Updated the workflow label and kept the 2026-10-11 50-row board as a manual snapshot. Added test_feed_does_not_promote_historic_build_or_scrape_competition_host."
+  },
+  {
+   "id": "IR-60-CANARY-LABEL-20261011",
+   "severity": "high",
+   "status": "fixed label; leakage clearance open",
+   "statement": "The c7653 run card labelled 0.501451 as field AUC, but scripts/e3_validate.py had computed (Spearman rho + 1)/2, not ROC AUC. The available figure therefore cannot be used to claim the user-requested ROC-AUC leakage canary passed; no feature-by-feature results are recorded.",
+   "evidence": "Legacy evidence/runcard.json canary.field_auc_vs_held_truth and prior scripts/e3_validate.py calculation; implied Spearman rho is 0.0029023158. Current card labels this as a legacy rank-association midpoint; scripts/e3_validate.py now uses sklearn.metrics.roc_auc_score if separately authorized to run.",
+   "mitigation": "Corrected evidence/runcard.json and docs/runcard.json; changed active status and report language; added a fail-closed stop guard to the c7653 experiment/evaluation runners; feature-by-feature leakage clearance remains NOT CLEARED."
+  },
+  {
+   "id": "IR-60-UNIQUENESS-SURFACE-20261011",
+   "severity": "high",
+   "status": "corrected label; uniqueness clearance open",
+   "statement": "The c7653 run card\u2019s six Spearman values were computed from the final binary emission mask against listed registry rasters, not from the pre-placement continuous score surface. Final-dot overlap was measured for those six rasters, but there is no documented pre-placement surface-rank audit or evidence that registry/rasters covers the complete registry.",
+   "evidence": "scripts/e3_validate.py loaded lane_emission.npy into `lane`, then passed `lane.astype(float64)` to `spearman`; the continuous `lane_field.npy` was not used for the rank comparison. The recorded six final-dot overlaps range up to 0.4590 (evidence/runcard.json).",
+   "mitigation": "Corrected the run-card terminology and current status; uniqueness gate is NOT CLEARED. The guarded E3 code now compares the continuous field against locally available registry rasters before assessing final-dot overlap, but the lane stop guard prevents rerunning c7653."
+  },
+  {
+   "id": "IR-60-H33-SCORE-20261011",
+   "severity": "high",
+   "status": "unresolved attribution conflict; claim unverified",
+   "statement": "The current H33-2-B2 owner claim is 0.2778, while archived docs/lane-chi-report.html calls a same-named h33-h33-2-b2 artifact an owner-reported 0.2708 raster. No organizer receipt authenticates either score or links it to exact bytes; the two records cannot be assumed to describe identical artifacts. On the 2026-10-11 public snapshot, 0.2778 is extradr19 at rank 23 and 0.2708 is smrtdoog5 at rank 36; neither public row identifies a project file.",
+   "evidence": "README.md; docs/lane-chi-report.html; docs/research/active-lane-review-2026-10-11.md; registry/leaderboard_snapshot_2026-10-11.json; docs/score-ledger.csv.",
+   "mitigation": "Current review labels 0.2778 OWNER-REPORTED / UNVERIFIED, explicitly separates the archived 0.2708 note, and does not attribute either public leaderboard row to project bytes."
   }
  ]
 }
