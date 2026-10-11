@@ -168,6 +168,13 @@
    "url": "https://github.com/buffedlizard55-lab",
    "role": "prior experiments, mirrors and evidence; used as priors, never as verification",
    "status": "listed"
+  },
+  {
+   "id": "gemsdoe24_mirror",
+   "title": "GEMSDOE24 mirrored feature packs (lidar scarp, GeoDAWN radiometrics, SGMC-derived, GDR 1391 extracts)",
+   "url": "https://github.com/buffedlizard55-lab/GEMSDOE24",
+   "role": "sha256-pinned mirror of official public-domain products used by the H33/G61 arms (not organizer-authenticated)",
+   "status": "verified: every fetched blob re-hashed against registry/data_manifest.json pins"
   }
  ]
 }

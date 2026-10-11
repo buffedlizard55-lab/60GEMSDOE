@@ -50,6 +50,16 @@ data/bridge/gems-geodawn-numerical-features.tif.part-*
 !data/external/
 !data/external/*.tif
 !data/external/*.json
+!data/external/*.csv
+!data/external/*.zip
+!data/external/audit_sources/
+
+# The three large (26-37 MB) mirrored feature packs are sha256-pinned in registry/data_manifest.json
+# and re-fetchable from the mirror (GEMSDOE24 @ 07345ea0) in ~3 s per blob; keep them out of git so the
+# repository stays small. Small mirrored inputs (SGMC-derived, GDR extracts, probes, paleo) are kept.
+data/external/lidar_scarp_features_u8.tif
+data/external/geodawn_rad_u8.tif
+data/external/geodawn_extensions_u8.tif
 
 # 60GEMSDOE session arena/54b1897a (third independent run of the knickpoint lane)
 out/
@@ -57,7 +67,3 @@ data/raw/
 registry/cache/
 *.download
 
-# --- H61-H63 session (2026-10-11) ---
-# work/ holds regenerable numpy caches (already ignored via *.npy). labels.tif is a byte copy of
-# the tracked data/bridge/existing_faults.tif, so it is not committed twice.
-work/labels.tif

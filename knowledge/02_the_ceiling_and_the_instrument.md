@@ -580,7 +580,65 @@ about the leaderboard. What it *is* is a field that beats the incumbent under tw
 protocols, that was validated on a spatially blocked holdout, and that therefore clears the
 repository's own standing rule for a submission. **No slot has been spent and none is claimed.**
 
-## 14. Links for manual review
+## 14. Session 2026-10-11b — the thermally-corroborated lane, and the substrate verdict
+
+`[MEASURED]` This session ran three experiments under the standing 3-experiment budget. All of them are
+delivered as evidence, including the negative.
+
+**E1 — instrument audit** (`evidence/e61_instrument_audit.json`, 175 s). Twelve live-scored artifacts
+(the owner-reported 0.2778 champion, the 0.2600 / 0.2477 / 0.1922 / 0.1563 / 0.0904 anchors, and the
+family's lattice/ridge variants) were re-scored against six truth sets, and each instrument was ranked
+by Spearman correlation with the live score. Result: **no local instrument ranks the live board.**
+Emitted mass is the only reliable predictor (**+0.9371**); credit per emitted pixel is +0.7343; the
+best off-catalogue sampler (SGMC-off, thinned or balanced to 8,000 px, seed 61) sits at **+0.4685**;
+the "balanced DTI" variant at +0.3217; and catalogue-truth instruments are actively anti-predictive
+(**SGMC-off full −0.2797**, **catalogue-full −0.9021**). Independently, the pre-existing live-mirror
+instrument (`evidence/live_mirror_validation.json`) reproduces only **2 of 6** known live orderings raw
+(3 of 6 after calibration) — e.g. it places H16-1 above the r13 lattice when the live board puts the lattice at 0.0904 against H16-1's 0.1911.
+Conclusion: *every* verdict in this family, including the one below, is graded on a screen that has
+never been shown to rank the competition. The screen is used because the brief mandates it; the label
+`INSTRUMENT` is carried on every number it produces.
+
+**E2/E3 — lane × thermal** (`evidence/e62_lane_thermal.json`). The chi/ksn knickpoint-strike lane was
+re-run on the 3DEP-10m-reduced 100 m pack (4,240 knickpoints on 506,408 channel px; 28,541 px pass the
+≥3-drainage strike-concordance gate) with INGENIOUS thermal evidence (2,632 spring/well sites in the
+footprint, 2,029 positive 2 m probes, 709 paleo sinter/travertine sites) splatted at σ = 3 px as a
+multiplicative corroboration term, catalogue ring deleted, 3-px NMS. Arms were emitted at 3k/8k/20k/40k
+dots and read on the fixed off-catalogue screen (`sgmc_off_thin8000`, seed 61): lane-only 0.00282 /
+0.00792 / 0.01009 / 0.01781; lane × thermal (all) 0.00282 / 0.00811 / 0.01010 / **0.01787**; the thermal
+term is worth **+0.00019 at 8k** — essentially nothing, which is itself the E2 measurement the brief
+asked for. Thermal evidence *alone* (4,000 dots) is the most credit-efficient emission measured here
+(0.01236 credit/dot vs 0.0064–0.0081 for the lane) but still a factor 4 below the live break-even bar
+0.05416. The selected emission (40,000 dots, `lane_x_thermal_all|40000`, the arm with the best
+instrument score) was then scored by the protocol's pooled hide-and-recover instrument: **HOLDOUT-DTI
+0.002495, 95% CI [0.001506, 0.003511]** on 36,439 withheld positives, against 0.003912 [0.003438,
+0.004403] for the owner-reported champion control, 0.088157 for the incumbent d28 and 0.039959 for a
+mass-matched uniform-random control. Paired differences: champion **−0.001417 [−0.002430, −0.000312]**,
+d28 −0.085662, random −0.037464 — it loses to every control. Canary AUCs at chance (0.5045 / 0.5134 /
+0.5045), so no leakage. Uniqueness passes the *rank* gate (max |Pearson| on the shared support 0.9507 is
+reported as the conservative companion to a max Spearman of 0.0 on the sparse supports); the raw 3-px
+clause trips at 0.8437 on the r13 lattice, but the excess over a mass-matched random control is only
++0.0029 — dense-mass geometry, not duplication. Validator 0 problems. **Verdict NEGATIVE** — the raster
+is a deliverable, not a submission.
+
+**E2b — substrate validity** (`evidence/e62b_substrate.json`). Before accepting the negative as a
+statement about the *detector*, the lane's substrate was tested the way a geomorphologist would test it:
+the Hack exponent of the extracted network, and the agreement between two independent 100 m elevation
+products. The 3DEP-10m-reduced pack gives **b = +0.0264**, the official `det_elev` band gives
+**b = −0.0272**; published real-network values are **b ≈ 1.6–2.0** (Hack 1957; Rigon et al. 1996). The
+two products' channel networks agree on only **Jaccard 0.2312** of cells (175,745 of 759,985), and
+depression filling raised **31.4 %** (resp. 17.1 %) of cells — the "network" is substantially an
+artefact of 100 m sampling plus priority-flood filling. So the lane's negative verdict is a
+**resolution verdict**, and the only honest retry is free 3DEP 10 m (or 1 m) elevation, which is
+fetchable from a GitHub runner but blocked in this sandbox. Do not re-run the lane on 100 m elevation.
+
+**Budget.** Three experiments, no more, and no submission slot spent — the family's hard gate for a
+slot remains the best promotable holdout DTI (0.190147), and nothing here came within a factor of 70
+of it. The alternative candidate that *has* survived a paired live-anchored Monte Carlo is the
+σ = 1.85 px scatter-smoothed max-coverage emission of §7 (+0.0247 ± 0.0005, 12/12 draws); that is the
+next deliverable to re-check.
+
+## 15. Links for manual review
 
 | Claim | Source |
 | --- | --- |

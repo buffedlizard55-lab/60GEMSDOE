@@ -1,0 +1,114 @@
+{
+ "schema": 1,
+ "generated_utc": "2026-10-11T00:00:00Z",
+ "generated_by": "scripts/e61_instrument_audit.py (restore step) -- fetched through api.github.com from the family's own public mirrors",
+ "purpose": "Live-scored artifacts used as calibration anchors for the selection-instrument audit. Each entry carries the sha256 published in registry/data_manifest.json (or recomputed and recorded here for files not in that manifest) and the score class it carries.",
+ "score_class": "OWNER-REPORT / OFFICIAL-SNAPSHOT (docs/score-ledger.csv). No organizer receipt exists for these bytes.",
+ "files": [
+  {
+   "path": "registry/rasters/calib_d15_02477.tif",
+   "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310",
+   "bytes": 1632732,
+   "live_score": 0.2477,
+   "label": "h25-1 dotted h19-5 d1.5",
+   "class": "owner-report"
+  },
+  {
+   "path": "registry/rasters/calib_h195_01922.tif",
+   "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+   "bytes": 1712322,
+   "live_score": 0.1922,
+   "label": "h19-5 solid (powerlaw budget, multiline corroborated)",
+   "class": "owner-report"
+  },
+  {
+   "path": "registry/rasters/calib_h194_01894.tif",
+   "sha256": "89109a3bd2cd3b12e7a0f388113c519843acfc9c4f46825affefc3e63dd99b22",
+   "bytes": 1716768,
+   "live_score": 0.1894,
+   "label": "h19-4 multiline corroborated openness thermal pop",
+   "class": "owner-report"
+  },
+  {
+   "path": "registry/rasters/calib_h161_01855.tif",
+   "sha256": "055309694ed499ca3d87e76b3f5e81c292aef6e39c418d33ff5a817aa1309bea",
+   "bytes": 1718028,
+   "live_score": 0.1855,
+   "label": "h16-1 topo+geophys baseline ridges",
+   "class": "owner-report"
+  },
+  {
+   "path": "registry/rasters/calib_h28ridge_01839.tif",
+   "sha256": "7637b72d4c6c3e10226bf46bd72a20272d62ccbe29743062632d10b158b49c58",
+   "bytes": 1620739,
+   "live_score": 0.1839,
+   "label": "h28 dotted ridge",
+   "class": "owner-report"
+  },
+  {
+   "path": "registry/rasters/calib_hedgev2_01563_sample.tif",
+   "sha256": "052688eafbc7a55d90caab72252a50304fe5caa8ecf973f8e791b4ae910f0792",
+   "bytes": 736494,
+   "live_score": 0.1563,
+   "label": "8GEMSDOE Hedge-v2 sample (1-px subsample of the submitted raster)",
+   "class": "owner-report"
+  },
+  {
+   "path": "registry/rasters/calib_h25ctx_01280.tif",
+   "sha256": "1381e784fb8b8340beffd0e735ac9eea89ad35d1a807f8a9bab5506e3fc8275e",
+   "bytes": 1772935,
+   "live_score": 0.128,
+   "label": "h25-ctx-ridge",
+   "class": "owner-report"
+  },
+  {
+   "path": "registry/rasters/calib_r13lattice_00904.tif",
+   "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+   "bytes": 1706456,
+   "live_score": 0.0904,
+   "label": "r13 lattice s5 v2",
+   "class": "owner-report"
+  },
+  {
+   "path": "registry/rasters/dotted_b2_prune_02778.tif",
+   "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+   "bytes": 219065,
+   "live_score": 0.2778,
+   "label": "H33-2-B2 champion (catalogue-flank B=2 prune of the 0.2708 base)",
+   "class": "owner-report"
+  },
+  {
+   "path": "registry/rasters/dotted_d2_8_02708.tif",
+   "sha256": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73",
+   "bytes": 1595850,
+   "live_score": 0.2708,
+   "label": "dotted-h19-5-d2-8 + blind 1px catalogue prune",
+   "class": "owner-report"
+  },
+  {
+   "path": "registry/rasters/dotted_d2_8_02600.tif",
+   "sha256": "3e78737f0da8dd2ca66cc6caac0ce8eeefcd6715707f8d1bd3091845cd9bcc30",
+   "bytes": 836982,
+   "live_score": 0.26,
+   "label": "dotted-h19-5-d2-8 (the family's live anchor)",
+   "class": "owner-report"
+  },
+  {
+   "path": "registry/rasters/tip_stepover_r30_02632.tif",
+   "sha256": "87f857d505e23247e991ccfab2cbe9f49a04df4f9c8028dce7ea261554690757",
+   "bytes": 917544,
+   "live_score": 0.2632,
+   "label": "h33d analog tip-stepover r30",
+   "class": "owner-report"
+  },
+  {
+   "path": "registry/rasters/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+   "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+   "bytes": 1603424,
+   "live_score": 0.26,
+   "label": "same emission, NaN-outside container (duplicate score level of dotted_d2_8_02600)",
+   "class": "owner-report"
+  }
+ ],
+ "n_files": 13
+}
