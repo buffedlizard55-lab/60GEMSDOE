@@ -141,21 +141,33 @@ def _accumulate(parent: np.ndarray, order: np.ndarray):
 
 @njit(cache=True)
 def _chi(parent: np.ndarray, order: np.ndarray, acc: np.ndarray,
-         theta: float, a0_m2: float, cell_m: float):
+         theta: float, a0_m2: float, cell_m: float, width: int = 0):
     """chi = integral of (A0/A)^theta dx' downstream (fused single pass).
 
     order is ascending filled z: the parent (strictly lower) is always
     final before any of its upstream neighbours is reached.
+
+    Shared-tool fix (2026-10-11, session arena/96ecd67e, H65): ``dx'`` is the
+    true length of the D8 step into the parent -- ``cell_m * sqrt(2)`` for a
+    diagonal step -- when the grid ``width`` is supplied.  The previous form
+    used ``cell_m`` for every step, under-stating chi by up to 29 % on
+    diagonal reaches.  ``width = 0`` keeps the legacy behaviour for callers
+    that do not pass it.
     """
     N = parent.shape[0]
     chi = np.zeros(N, dtype=np.float64)
     cell2 = cell_m * cell_m
+    diag = cell_m * np.sqrt(2.0)
     for t in range(order.shape[0]):
         i = order[t]
         p = parent[i]
         if p >= 0:
             a_m2 = acc[i] * cell2
-            chi[i] = chi[p] + cell_m * ((a0_m2 / a_m2) ** theta)
+            ds = cell_m
+            if width > 0:
+                if (i // width) != (p // width) and (i % width) != (p % width):
+                    ds = diag
+            chi[i] = chi[p] + ds * ((a0_m2 / a_m2) ** theta)
     return chi
 
 
@@ -166,7 +178,7 @@ def hydro_stack(z: np.ndarray, valid: np.ndarray, cell_m: float = 100.0,
     vbool = np.ascontiguousarray(valid.astype(np.bool_))
     filled, parent, order = _priority_flood_full(z64, vbool)
     acc = _accumulate(parent, order)
-    chi = _chi(parent, order, acc, float(theta), float(a0_m2), float(cell_m))
+    chi = _chi(parent, order, acc, float(theta), float(a0_m2), float(cell_m), int(z.shape[1]))
 
     H, W = z.shape
     N = H * W
