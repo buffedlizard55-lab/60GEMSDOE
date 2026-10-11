@@ -35,8 +35,18 @@ data/*
 .DS_Store
 Thumbs.db
 
-# Lane 1 (chi/ksn knickpoint strike traces): the public-domain USGS 3DEP 10 m product, mean-reduced
-# to the competition's 100 m grid, is committed so the lane is reproducible without network access.
+# --- 60GEMSDOE lane session additions ---
+# bridge parts are re-fetchable from the pinned upstream mirror (scripts/fetch_bridge.py)
+data/bridge/gems-geodawn-numerical-features.tif.part-*
+.bridge_upstream/
+# keep the small hash-pinned bridge files (manifest + template + labels) in git
+!data/bridge/
+!data/bridge/manifest.json
+!data/bridge/example_submission.tif
+!data/bridge/existing_faults.tif
+
+# Lane 1 (chi/ksn knickpoint strike traces): the public-domain USGS 3DEP 10 m product,
+# mean-reduced to the competition 100 m grid, is committed so the lane reproduces offline.
 !data/external/
 !data/external/*.tif
 !data/external/*.json
