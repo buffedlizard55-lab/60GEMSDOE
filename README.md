@@ -560,7 +560,12 @@ closed-basin base-level mask (the fill raises **899,623 cells, 17.4 %** of the v
   (limit 0.90), worst Jaccard 0.01158, no byte- or pixel-identical
   prior; the literal forward-overlap gate **fires** on 60 dense
   universal-support priors (worst 1.000) → logged as a duplicate,
-  `unique_literal = false`, `stop_required = true` (IR-60-GATE-01).
+  `unique_literal = false`, `stop_required = true` (IR-60-GATE-01). The same gate was then run on the
+  **continuous surface before dot placement** (protocol rule 1 requires both): 655/655 rasters,
+  None positive cells, worst ρ
+  **0.05197**, worst Jaccard
+  &mdash;, same 60 dense-prior overlap
+  firings → `evidence/h60a_uniqueness_surface.json`.
 * **Format**: 15/15 local checks pass, every cell finite and in `[0, 1]` (zeros mode, never NaN — the
   fix for the portal's *"Predicted values must be in range [0, 1]"*), EPSG:32611, 3730 × 3292,
   transform identical to `sample_submission.tif`, **0** dots on mapped catalogue faults, recomputed

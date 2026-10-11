@@ -133,6 +133,7 @@ def main() -> int:
     except Exception:                                              # noqa: BLE001
         primary, primary_name = None, None
     uniq = build.get("uniqueness") or {}
+    usurf = load("h60a_uniqueness_surface.json") or {}
     DL.mkdir(parents=True, exist_ok=True)
 
     tif_rel = zip_rel = rcpt_rel = None
@@ -317,7 +318,14 @@ has power; it is not a lane feature and it is not promoted.</p>
 <tr><td>worst forward 3-px dot overlap</td><td class="h60a-num">{num(uniq.get('worst_dot_overlap'), 5)}</td><td>0.70</td><td><strong>FIRES on {esc(uniq.get('duplicate_count'))} rows</strong></td></tr>
 <tr><td>worst Jaccard of dot sets (diagnostic only)</td><td class="h60a-num">{num(uniq.get('worst_jaccard_dot_sets'), 5)}</td><td>0.50</td><td>clear</td></tr>
 <tr><td>byte-identical / pixel-identical to any prior</td><td>no / no</td><td>&mdash;</td><td>clear</td></tr>
-<tr><td><code>unique</code> (literal, fail-closed)</td><td><strong>{esc(uniq.get('unique'))}</strong></td><td>&mdash;</td><td><code>stop_required = {esc(uniq.get('stop_required'))}</code></td></tr></table>
+<tr><td><code>unique</code> (literal, fail-closed)</td><td><strong>{esc(uniq.get('unique'))}</strong></td><td>&mdash;</td><td><code>stop_required = {esc(uniq.get('stop_required'))}</code></td></tr>
+<tr><td colspan="4"><strong>Same gate on the continuous SURFACE before dot placement</strong>
+({esc(usurf.get('registry_rasters_checked'))}/{esc(usurf.get('registry_rasters_expected'))} rasters,
+{esc(usurf.get('positive_pixels'))} positive cells): worst &rho;
+{num(usurf.get('worst_spearman_full_footprint'), 5)} &middot; worst forward overlap
+{num(usurf.get('worst_dot_overlap'), 5)} &middot; worst Jaccard
+{num(usurf.get('worst_jaccard'), 5)} &middot; firings {esc(usurf.get('duplicate_count'))}
+&middot; <code>unique = {esc(usurf.get('unique_literal'))}</code></td></tr></table>
 <p class="h60a-warn">The literal overlap gate fires because dense universal-support priors in the
 family corpus (support = the whole footprint, 5,167,373 cells, or the whole grid, 12,279,160 cells)
 contain <em>any</em> non-empty candidate &mdash; IR-60-GATE-01, the same structural finding the other
@@ -469,7 +477,12 @@ forward-overlap gate fires on {esc(uniq.get('duplicate_count'))} dense universal
   (limit 0.90), worst Jaccard {num(uniq.get('worst_jaccard_dot_sets'), 5)}, no byte- or pixel-identical
   prior; the literal forward-overlap gate **fires** on {esc(uniq.get('duplicate_count'))} dense
   universal-support priors (worst {num(uniq.get('worst_dot_overlap'), 3)}) → logged as a duplicate,
-  `unique_literal = false`, `stop_required = true` (IR-60-GATE-01).
+  `unique_literal = false`, `stop_required = true` (IR-60-GATE-01). The same gate was then run on the
+  **continuous surface before dot placement** (protocol rule 1 requires both): 655/655 rasters,
+  {esc((usurf.get('positive_pixels')))} positive cells, worst ρ
+  **{num(usurf.get('worst_spearman_full_footprint'), 5)}**, worst Jaccard
+  {num(usurf.get('worst_jaccard'), 5)}, same {esc(usurf.get('duplicate_count'))} dense-prior overlap
+  firings → `evidence/h60a_uniqueness_surface.json`.
 * **Format**: 15/15 local checks pass, every cell finite and in `[0, 1]` (zeros mode, never NaN — the
   fix for the portal's *"Predicted values must be in range [0, 1]"*), EPSG:32611, 3730 × 3292,
   transform identical to `sample_submission.tif`, **0** dots on mapped catalogue faults, recomputed
