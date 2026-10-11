@@ -2,13 +2,26 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Score-ceiling analysis — corrected algebra · 60GEMSDOE</title><link rel="stylesheet" href="assets/site.css"></head><body>
 <header class="top"><div class="wrap"><h1>Score-ceiling analysis — corrected algebra</h1><nav><a href="index.html">Home</a> <a href="executive-summary.html">Submission status</a> <a href="research.html">Research</a> <a href="hypotheses.html">Deferred hypotheses</a> <a href="leaderboard.html">Leaderboard</a> <a href="sources.html">Sources</a> <a href="irregularities.html">Irregularities</a></nav>
-<div class="dlbtn"><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download H65-1 GeoTIFF — research only, DO NOT SUBMIT</a> <a class="btn alt" href="research/active-lane-review-2026-10-11.md">Read current review</a></div></div></header>
+<div class="dlbtn"><a class="btn" href="downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif" download>Download NEW H73 GeoTIFF — research only, DO NOT SUBMIT</a> <a class="btn alt" href="research/h73-ranked-hypotheses-2026-10-11.md">Read H73 research</a></div></div></header>
 <div class="values"><div class="wrap"><b>Maximize P(Win).</b> No slot is spent on an unvalidated candidate. <b>Own the Outcome.</b> Negative results and evidence limits are published clearly.</div></div>
-<main class="wrap"><div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
+<main class="wrap"><div class="banner current-stop-notice"><h2>NEW BYTE/PIXEL-UNIQUE H73 GeoTIFF — DOWNLOAD OK; COMPETITION SUBMISSION: NO</h2>
+<p><a class="btn" href="downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif" download>Download H73 .tif (95,592 bytes)</a>
+<a class="btn alt" href="downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.zip" download>Download one-TIFF .zip</a>
+<strong>DO NOT SUBMIT.</strong> This is a newly computed, exact-byte/pixel-unique negative artifact—not a copied prior submission and not selector-cleared.</p>
+<ul><li><b>Local format:</b> PASS — single-band float32, EPSG:32611, 3730×3292, exact transform, 0 NaN/Inf, range [0,1], 0 outside-footprint and 0 catalogue positives.</li>
+<li><b>HOLDOUT-DTI</b> (<code>gems57-pooled-hide-v2</code>, 22,641 withheld positives): <b>0.085263</b>, 95% CI [0.074915, 0.096019] — below H68 0.171894, so the improvement gate failed.</li>
+<li><b>First tests:</b> catalogue-withheld +0.2841 [+0.1439,+0.4205] passed; preregistered SGMC-off-catalogue −0.2909 [−0.4757,−0.0947] failed → dual gate STOP.</li>
+<li><b>Uniqueness:</b> new SHA-256 <code>594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3</code>; no decoded or byte-identical match in 680 checked unique-SHA rasters (all 655 pinned rows plus 25 later local files). Exact full-footprint max |Spearman| 0.1561 ≤ 0.90. The literal 3-px overlap is 1.000 &gt; 0.70 because earlier continuous registry rasters are positive on every footprint cell; no exception is claimed, so the protocol verdict remains DUPLICATE-STOP.</li>
+<li><b>Portal name:</b> <code>60GEMSDOE-H73-PAIRED-BASIN-KSN-20000-20261011T200117Z</code>. <b>Note (94 chars):</b> <code>H73 paired-basin ksn, 20k weighted cells; holdout negative; unique bytes/pixels; DO NOT SUBMIT</code>.</li></ul>
+<p><a href="downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.json">Format receipt</a> · <a href="downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros-runcard.json">JSON run card</a> ·
+<a href="research/h73-result-and-h33-analysis.md">H73 result + why H33 reported 0.2778</a> ·
+<a href="research/h73-ranked-hypotheses-2026-10-11.md">ranked hypotheses and official sources</a> ·
+<a href="../evidence/h73_preplacement_uniqueness.json">680-raster audit</a></p></div>
+<div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
 <p><b>Governing STOP record:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
 <strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast +0.0326,
 95% CI [-0.0144, +0.0790] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
-The earlier c7653 run also stopped. Later H66/H67/H68 artifacts do not lift this STOP; their literal uniqueness clearance failed against the dense calibration lattice corpus. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
+The earlier c7653 run also stopped. H66/H67/H68 did not lift that STOP. The later H73 session generated a new format-valid negative research TIFF but failed its SGMC, holdout, and literal-overlap gates; it likewise used no slot. No artifact is cleared for competition submission.</p>
 <p><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download the existing H65-1 GeoTIFF for research only</a>
 <a class="btn alt" href="downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif" download>Download H68-1 GeoTIFF (research only)</a>
 <strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
@@ -19,7 +32,7 @@ The earlier c7653 run also stopped. Later H66/H67/H68 artifacts do not lift this
 <p>The Markdown source is authoritative. This escaped rendering is intentionally plain to avoid silently
 altering equations or claims during HTML conversion.</p><pre># Metric-ceiling analysis: the 0.2600 dotted file, marginal-emission algebra, and the current public target
 
-**Analysis snapshot:** 2026-10-03 · **Current board update:** 2026-10-11 · **Status:** historical analysis plus one registered experiment; no submission slot requested. The formulas and measured comparisons below are retained, but 0.3195 was the public leader only in the 2026-10-03 snapshot. The manual official read on 2026-10-11 has xiaofanhu #1 at 0.4133, DARD #8 at 0.3195, and extradr19 #23 at 0.2778. Public scores are not attributed to files in this repository.
+**Analysis snapshot:** 2026-10-03 · **Current board update:** 2026-10-11 · **Status:** historical analysis plus one registered experiment; no submission slot requested. The formulas and measured comparisons below are retained, but 0.3195 was the public leader only in the 2026-10-03 snapshot. The manual official read on 2026-10-11 has xiaofanhu #1 at 0.4133, DARD #9 at 0.3195, and extradr19 #23 at 0.2778. Public scores are not attributed to files in this repository.
 
 Evidence labels are used throughout, because nothing here is an organizer-confirmed score:
 
@@ -285,7 +298,7 @@ Machine-readable results: `docs/research/emitter-opt-holdout.json`,
 * Metric constants and kernel, official problem description:
   &lt;https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/&gt;
 * Official rules (PDF): &lt;https://docs.nlr.gov/docs/fy26osti/96647.pdf&gt;
-* Historical public leaderboard snapshot read 2026-10-03 (then-leader 0.3195); current manual snapshot read 2026-10-11 (leader 0.4133, DARD #8 at 0.3195): `registry/leaderboard_snapshot_2026-10-11.json` and `docs/score-ledger.csv`,
+* Historical public leaderboard snapshot read 2026-10-03 (then-leader 0.3195); current manual snapshot read 2026-10-11 (leader 0.4133, DARD #9 at 0.3195): `registry/leaderboard_snapshot_2026-10-11.json` and `docs/score-ledger.csv`,
   &lt;https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/&gt;
 * Known-fault masking and the &quot;new fault may be new geometry of an existing system&quot; clarification:
   community threads 11516 / 11536 / 11527, cited in `docs/hypotheses.md`.

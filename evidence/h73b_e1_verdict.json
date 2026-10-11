@@ -1,0 +1,20 @@
+{
+  "summary": {
+    "evidence_class": "MEASUREMENT",
+    "n_components": 196,
+    "mean": 0.20342382834273942,
+    "median": -0.044142949581146285,
+    "ci95": [
+      0.07801682718212204,
+      0.3350357749309315
+    ],
+    "fraction_positive": 0.47959183673469385,
+    "component_std": 0.9173634397572676,
+    "bootstrap": {
+      "draws": 1000,
+      "seed": 73001,
+      "method": "percentile over withheld components"
+    },
+    "verdict": "PROCEED"
+  }
+}

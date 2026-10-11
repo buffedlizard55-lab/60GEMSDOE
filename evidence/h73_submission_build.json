@@ -1,0 +1,24 @@
+{
+  "hypothesis": "H73-1",
+  "generated_utc": "2026-10-11T20:01:17Z",
+  "production": {
+    "file": "docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif",
+    "sha256": "594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3",
+    "positive_cells": 20000,
+    "primary_cells": 13800,
+    "low_confidence_cells": 6200,
+    "low_confidence_value": 0.05,
+    "weighted_mass": 14110.0,
+    "positive_on_catalogue": 0,
+    "positive_outside_footprint": 0
+  },
+  "gates": {
+    "dual_first_test_passed": false,
+    "holdout_beats_h68": false,
+    "leakage_canary_passed": true,
+    "uniqueness_passed": false,
+    "format_passed": true
+  },
+  "decision": "negative / DO NOT SUBMIT",
+  "submission_slots_used": 0
+}

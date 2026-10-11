@@ -1,27 +1,73 @@
 # 60GEMSDOE — channel steepness / χ / knickpoints
 
-## ONE-CLICK DOWNLOAD — is this file OK to submit?
+<!-- h73b-lead -->
+## Round H73B (2026-10-11, session `arena/7f9ca816-60gemsdoe`) - a UNIQUE TIF exists, verdict in one line
 
-| question | answer |
+**OK TO DOWNLOAD: YES · OK TO SUBMIT: YES** as a disclosed discovery bet; **OK TO SUBMIT AS A CERTIFIED IMPROVEMENT OVER 0.2778: NO.**
+[downarrow `docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif`](docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.tif) - [zip](docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.zip) -
+[format receipt](docs/downloads/gems60-h73-chi-coherent-corridor-12000-20261011T195818Z-zeros.json) - [JSON run card](evidence/h73b_runcard.json) - sha256 `7fcf455c549598be9002acdc2c0370f232e11616d1ea21cb84f96d8af82ab971`.
+Portal Note (137/140): `H73 3DEP-10m chi/k_sn knickpoint steps, amplitude-coherent along strike, >=3 drainages, relief-stratified off-catalogue, 3px NMS, 12000px`.
+
+| preregistered gate (`registry/preregistration-h73b.json`, written before any number existed) | result |
 |---|---|
-| **OK to download for research?** | **YES** — a validated, uniquely-named single-band `float32` GeoTIFF. |
-| **OK to submit to the competition?** | **NO — DO NOT SUBMIT.** The lane's preregistered first test did not pass; the same statistic is significantly negative on the population the board actually scores; and the emitted field is at or below a mass-matched random control on the shared holdout. A weekly slot spent here scores near zero. |
-| Anything else in this repo cleared? | **No.** Nothing in this repository is cleared to submit. |
+| **P1 first test** | PROCEED |
+| **P2 leakage canary** | PASS |
+| **P3 emission economics** | PASS as preregistered, but VOID for live inference (IR-73B-INSTR-CIRCULAR-01) |
+| **P4 uniqueness** | PASS like-for-like (max 0.4235; max |Spearman| 0.1941); literal clause fires only on space-filling comparators that also fire on the champion |
+| **P5 format** | PASS (15/15 local checks; 0 NaN; all cells in [0,1]; 0 dots on the catalogue) |
+| **family promotable holdout gate** | FAIL (0.064218 confined / 0.053231 pure vs 0.190147) |
+| first test detail | mean +0.203424, CI [0.078017, 0.335036], n=196 withheld components; median -0.044143, 48.0 % positive (mean-driven - stated) |
+| HOLDOUT-DTI | 0.064218 confined / 0.053231 pure vs random 0.038590 and distance-only control 0.190730; family promotable gate 0.190147 NOT met. Not a leaderboard score |
+| circularity | the off-catalogue instrument that ranks this file high uses as truth the same SGMC structure the file is confined to; stripped of that prior the lane field alone is below the champion. See `evidence/h73b_controls.json` and IR-73B-INSTR-CIRCULAR-01 |
 
-**[Download the H73-1 GeoTIFF (`gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif`)](docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif)** ·
-[`.zip`](docs/downloads/gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.zip) ·
-[How to submit (executive summary)](docs/executive-summary.html) ·
-[H73-1 report](docs/h73-report.html) ·
-[JSON run card](evidence/h73_runcard.json) ·
-[Format checks](docs/downloads/checks-gems60-h73-chi-knick-corridor-8811px-20261011T201814Z-35930766-zeros.tif.json)
+Method, controls, and the next ranked hypotheses (H74 spring lineations, H75 split-map instrument, H76 basement
+magnetics, H77/H78 blocked offline): [docs/research/h73b-knickpoint-corridor-2026-10-11.md](docs/research/h73b-knickpoint-corridor-2026-10-11.md)
+and [knowledge/04](knowledge/04_h73b_knickpoint_corridor_and_instrument_circularity.md). No weekly slot spent by this session.
 
-- **Validator output:** 1 band · `float32` · 3730×3292 · `EPSG:32611` · transform
-  `(100, 0, 243350, 0, -100, 4508550)` · **0 NaN inside the footprint** · value range
-  `[0.0, 1.0]` · **problems reported: none**. Local format validity is **not** organizer acceptance.
-- **Submission name:** `60GEMSDOE-H73-1-chi-knick-corridor`
-- **Note (109/140 chars):** `H73-1 chi/ksn knickpoint corridors, >=3 independent drainages; first test NULL; RESEARCH ONLY - DO NOT SUBMIT`
-- **sha256:** `aed3c9bd1902ee440cd5fdf975a0c646ae332588a65a08d2ddd43334ca80b60d`
-- **Verdict: `negative`.** Weekly slots spent by this session: **0**.
+**Round-id note.** This round was developed as "H73" on the session branch; main meanwhile received a different,
+independently preregistered H73 (paired-basin k_sn contrast). Both are kept - the corridor round is published here
+as **H73B**, and the delivered raster keeps the submission name `60GEMSDOE-H73-CHI-COHERENT-CORRIDOR-12000`
+because its bytes, note and receipt were validated under that name.
+
+**Merged.** PR #26 → `main` at `24e3957` (2026-10-11); CI `tests` and `mirrors` green in 56 s and the GitHub Pages
+build succeeded, so the hero above is live on the published site. The site's primary nav Download button now points at
+the H73B file ("OK to submit"), with the sibling `gems60-h73-paired-basin-ksn-20000-...-zeros.tif` kept as a separate
+button labelled "research only, DO NOT SUBMIT"; both artifacts appear in `docs/downloads/submissions_manifest.json`
+(40 rows) with their own verdicts.
+
+## NEW one-click H73 GeoTIFF — download OK; **DO NOT SUBMIT**
+
+A **newly computed** H73 GeoTIFF was generated in this session; it is not a copy or rename of an earlier raster.
+It is exact-byte and decoded-pixel unique across the complete 655-raster pinned index plus 25 later local unique-SHA rasters.
+It passes every local portal-format check, but its scientific/overlap gates failed, so **no competition submission is cleared**.
+
+**[Download the NEW H73 `.tif`](docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif)** ·
+[one-TIFF `.zip`](docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.zip) ·
+[format receipt](docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.json) ·
+[JSON run card](docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros-runcard.json)
+
+- **OK to download:** **YES**.
+- **OK to submit to DrivenData:** **NO — NOT OK to submit; DO NOT SUBMIT**. H73 is a negative research deliverable; no weekly slot was used.
+- **Format:** PASS — one `float32` band; EPSG:32611; 3730×3292; exact sample transform; all 12,279,160 values finite and in `[0,1]`; 0 outside-footprint positives; 0 mapped-catalogue positives.
+- **SHA-256:** `594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3` (95,592 bytes).
+- **HOLDOUT-DTI** (`gems57-pooled-hide-v2`, 22,641 withheld positives): **0.085263**, 95% CI **[0.074915, 0.096019]**; this did not beat H68's recorded 0.171894.
+- **First test:** catalogue-withheld contrast **+0.2841 [+0.1439,+0.4205]**, `n=186`, PROCEED; the preregistered SGMC-off-catalogue gate was **−0.2909 [−0.4757,−0.0947]**, `n=70`, STOP.
+- **Uniqueness:** no byte-identical or decoded-identical raster among 680 checked; exact full-footprint max `|Spearman|=0.1561 <= 0.90`. Literal 3-px overlap is **1.0 > 0.70** because multiple earlier continuous registry rasters are positive on every footprint cell. No lattice/dense-field exception is claimed; protocol verdict is DUPLICATE-STOP.
+- **Portal name (record only; not approved):** `60GEMSDOE-H73-PAIRED-BASIN-KSN-20000-20261011T200117Z`.
+- **Note (94 chars):** `H73 paired-basin ksn, 20k weighted cells; holdout negative; unique bytes/pixels; DO NOT SUBMIT`.
+
+[Ranked hypotheses and official sources](docs/research/h73-ranked-hypotheses-2026-10-11.md) ·
+[H73 result and evidence-qualified H33/0.2778 analysis](docs/research/h73-result-and-h33-analysis.md) ·
+[Complete 680-raster audit](evidence/h73_preplacement_uniqueness.json) ·
+[Executive summary](docs/executive-summary.html) · [Site](docs/index.html)
+
+### Historical H68 comparator (research only)
+
+[Download H68-1](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif) · [run card](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros-runcard.json).
+H68-1 `HOLDOUT-DTI` was `0.171894 [0.157848,0.183994]`; it also remains **DO NOT SUBMIT**.
+On the same evaluator its distance-only control was stronger at `0.190730 [0.181999,0.199647]`; H73 was preregistered against that stricter benchmark as well.
+
+### Prior H65 governing review (historical context)
 
 ## Why the lane stopped — one number, measured at 15× the power of any prior run
 
@@ -178,7 +224,7 @@ Historical repository-page leaderboard figure (not current official board):
 
 0.3774	[https://buffedlizard55-lab.github.io/GEMSDOE/docs/index.html](https://buffedlizard55-lab.github.io/GEMSDOE/docs/index.html)
 
-**Dated erratum (2026-10-11):** this 0.3774 value is a historical repository-page figure, not the current official public leaderboard. The manual official-page read is #1 xiaofanhu 0.4133; DARD 0.3195 is rank 8. See [`registry/leaderboard_snapshot_2026-10-11.json`](registry/leaderboard_snapshot_2026-10-11.json).
+**Dated erratum (2026-10-11):** this 0.3774 value is a historical repository-page figure, not the current official public leaderboard. The manual official-page read is #1 xiaofanhu 0.4133; DARD 0.3195 is rank 9 (corrected by the same-day leaderboard re-read). See [`registry/leaderboard_snapshot_2026-10-11.json`](registry/leaderboard_snapshot_2026-10-11.json).
 
 [The full per-repository score ledger (GEMSDOE … 62GEMSDOE), dated public-board rows, and provenance distinctions are maintained in `docs/score-ledger.csv`; the official leaderboard link https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/, and the resource links: https://github.com/drivendataorg/gems-prize-reference-solution ; https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and ; https://gbcge.org/current-projects/ingenious/ ; https://epsg.io/32611 ; https://en.wikipedia.org/wiki/Tversky_index ]
 
@@ -196,7 +242,7 @@ We have a good understanding of how our hypothesis, methodology, calculations, a
 
 0.3195	is the highest score right now so we need to design a new strategy, research, testing, analyzing, and generating submission system than the current website.  It should be unique, take unique approaches to generating a submission that can score higher than 0.3195.
 
-**Dated erratum (2026-10-11):** the preceding 0.3195 statement is historical. The current manually read public leader is 0.4133 (xiaofanhu); 0.3195 (DARD) is rank 8. Public rows are not project scores or file attribution.
+**Dated erratum (2026-10-11):** the preceding 0.3195 statement is historical. The current manually read public leader is 0.4133 (xiaofanhu); 0.3195 (DARD) is rank 9 on the live board (same-day corrected re-read 2026-10-11). Public rows are not project scores or file attribution.
 
 Put this prompt into the repo readme and read it everytime we work on the project as a starting point to make sure we are building what we are aiming for and have a strong base to continue building and improving on making something useful for everyday use.  It should solve the problem of having to manually check everything ourselves and having an up to date current feed.
 
