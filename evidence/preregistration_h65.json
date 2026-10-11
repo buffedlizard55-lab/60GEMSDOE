@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "session": "60GEMSDOE arena/96ecd67e",
-  "preregistered_utc": "2026-10-11T05:12:00Z",
-  "written_before": "the 10 m features existed anywhere (GitHub Actions run 38113556275 was still running; no 10 m number had been seen)",
+  "preregistered_utc": "2026-10-11T05:05:26Z",
+  "written_before": "any 10 m number existed: git author time of this file 2026-10-11T05:05:26Z precedes the runner merge (dem10_chi_100m.manifest.json generated_utc 2026-10-11T05:07:15Z, commit 2634e4d). A later rebase placed the runner commit first in history; the author timestamps are the record.",
   "lane": "tectonic-geomorphology: channel steepness (ksn) and knickpoints, not scarp shape",
   "hypothesis_id": "H65-1",
   "executes": "H62-5 (registry/hypotheses.json): the lane at the resolution it requires",

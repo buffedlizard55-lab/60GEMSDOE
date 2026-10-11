@@ -1,0 +1,54 @@
+{
+  "evidence_class": "DESCRIPTIVE (not a holdout score)",
+  "hypothesis": "H65-1",
+  "support": {
+    "step_defined": {
+      "share_of_catalogue_within_300m": 0.6560634878992588,
+      "share_of_footprint_within_300m": 0.6109332537055095,
+      "enrichment": 1.0738709734983645,
+      "pixels": 786299
+    },
+    "knickpoint_10m": {
+      "share_of_catalogue_within_300m": 0.15258739424149012,
+      "share_of_footprint_within_300m": 0.14607364322258137,
+      "enrichment": 1.044592240428914,
+      "pixels": 91907
+    },
+    "step_ge_log2": {
+      "share_of_catalogue_within_300m": 0.09555978225224634,
+      "share_of_footprint_within_300m": 0.08050183333001121,
+      "enrichment": 1.1870510061616386,
+      "pixels": 57480
+    }
+  },
+  "relative_elevation_m": {
+    "catalogue_p25_p50_p75": [
+      -42.0,
+      7.0,
+      99.0
+    ],
+    "footprint_p25_p50_p75": [
+      -40.0,
+      0.0,
+      117.0
+    ],
+    "step_defined_p25_p50_p75": [
+      -64.0,
+      -16.0,
+      37.0
+    ],
+    "note": "relative to a 20 km running median (1 km samples) of the 10 m mean elevation; read the percentiles, no direction is asserted in advance"
+  },
+  "champion_h33_2_b2": {
+    "file": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+    "nonzero": 37654,
+    "values": [
+      0.0,
+      1.0
+    ],
+    "nan": 0,
+    "min_dist_to_catalogue_m": 223.60679774997897,
+    "p50_dist_to_catalogue_m": 1964.68827043885,
+    "share_within_300m_of_catalogue": 0.057656557072289796
+  }
+}

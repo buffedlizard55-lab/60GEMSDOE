@@ -14,10 +14,10 @@ Implements, on the official 100 m competition grid (EPSG:32611):
 
 Everything is deterministic. No labels are used anywhere in this module.
 
-References (verified 2026-10-11):
-  - Perron & Royden, Earth Surf. Process. Landforms 38(1):94-102 (2013).
-  - Kirby & Whipple, J. Geophys. Res. 117:F01024 (2012) - ksn / theta review.
-  - Barnes, Lehman & Mulla, Comput. Geosci. 62:117-127 (2014) - Priority-Flood.
+References (re-verified 2026-10-11, session arena/96ecd67e; two citations corrected):
+  - Perron & Royden, Earth Surf. Process. Landforms 38(6):570-576 (2013), doi:10.1002/esp.3302.
+  - Kirby & Whipple, J. Struct. Geol. 44:54-75 (2012), doi:10.1016/j.jsg.2012.07.009 - ksn / theta review.
+  - Barnes, Lehman & Mulla, Comput. Geosci. 62:117-127 (2014), doi:10.1016/j.cageo.2013.04.024 - Priority-Flood.
 """
 from __future__ import annotations
 

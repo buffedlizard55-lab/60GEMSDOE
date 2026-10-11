@@ -1,6 +1,6 @@
 """10 m channel-steepness kernels and their exact reduction to the 100 m grid.
 
-Lane: channel steepness and knickpoints (Kirby & Whipple 2012, JGR 117, F04002;
+Lane: channel steepness and knickpoints (Kirby & Whipple 2012, J. Struct. Geol. 44, 54-75;
 Perron & Royden 2013, ESPL 38, 570-576; Gailleton et al. 2019, ESurf 7, 211-230).
 
 Pipeline for one block (all deterministic, no labels anywhere):

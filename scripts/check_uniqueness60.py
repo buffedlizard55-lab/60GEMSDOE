@@ -97,11 +97,15 @@ def main() -> int:
         from gems60 import geomorph as gm
         from gems60 import lane as L
         from run_lane60 import confound_masks, load
-        cache = ROOT / ".cache" / "features60"
+        import os
+        cache = ROOT / ".cache" / os.environ.get("GEMS60_FEATURE_CACHE", "features60")
         step = np.load(cache / "step.npy")
         channel = np.load(cache / "channel.npy")
-        branch = gm.branch_signature(np.load(cache / "dircode.npy"), fp,
-                                     k=L.CORRIDOR_HALF_LEN_PX - 1).astype(np.int64)
+        if (cache / "branch_sig.npy").is_file():      # substrate-supplied independence (H65-1)
+            branch = np.load(cache / "branch_sig.npy").astype(np.int64)
+        else:
+            branch = gm.branch_signature(np.load(cache / "dircode.npy"), fp,
+                                         k=L.CORRIDOR_HALF_LEN_PX - 1).astype(np.int64)
         exclude, _conf = confound_masks(step, channel)
         z, cand, cand_diag = L.prepare_candidates(step, channel, exclude)
         res = L.surface_from_candidates(z, cand, branch, grid.catalogue, dict(cand_diag))

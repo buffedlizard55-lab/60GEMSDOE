@@ -130,7 +130,8 @@ def main() -> int:
     else:
         branch = gm.branch_signature(load("dircode"), load("footprint"),
                                      k=L.CORRIDOR_HALF_LEN_PX - 1).astype(np.int64)
-    mark(f"independence=branch_signature(k={L.CORRIDOR_HALF_LEN_PX - 1}) "
+    mark(("independence=substrate branch_sig " if (CACHE / "branch_sig.npy").is_file() else
+          f"independence=branch_signature(k={L.CORRIDOR_HALF_LEN_PX - 1}) ") +
          f"distinct={int(np.unique(branch[channel]).size)}")
     exclude, conf = confound_masks(step, channel)
     z, cand, cand_diag = L.prepare_candidates(step, channel, exclude)
@@ -228,7 +229,9 @@ def main() -> int:
                  f"worst_rho={uniq.get('worst_spearman_full_footprint')} "
                  f"worst_overlap={uniq.get('worst_dot_overlap')}")
         else:
-            mark("WARNING: --skip-uniqueness and no evidence/{TAG}_uniqueness.json yet")
+            mark(f"WARNING: --skip-uniqueness and no evidence/{TAG}_uniqueness.json yet")
+            uniq = dict(unique=None, pending=True,
+                        note=f"run scripts/check_uniqueness60.py, then re-run with --verify-existing")
     if uniq is None:
         index = json.loads((EVID / "registry_full_index.json").read_text())
         rows_index = index["rasters"]

@@ -304,7 +304,8 @@ def run(args) -> int:
     else:
         terminal = gm.branch_signature(load("dircode"), load("footprint"),
                                        k=L.CORRIDOR_HALF_LEN_PX - 1).astype(np.int64)
-    mark(f"independence=branch_signature(k={L.CORRIDOR_HALF_LEN_PX - 1})")
+    mark("independence=substrate branch_sig" if (CACHE / "branch_sig.npy").is_file() else
+         f"independence=branch_signature(k={L.CORRIDOR_HALF_LEN_PX - 1})")
     ksn = load("ksn").astype(np.float64)
     # chi is only a canary row; a substrate without a comparable chi datum (H65-1: chi is
     # block-local on the 10 m runner) omits it rather than faking one
