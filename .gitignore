@@ -60,3 +60,10 @@ data/bridge/gems-geodawn-numerical-features.tif.part-*
 data/external/lidar_scarp_features_u8.tif
 data/external/geodawn_rad_u8.tif
 data/external/geodawn_extensions_u8.tif
+
+# 60GEMSDOE session arena/54b1897a (third independent run of the knickpoint lane)
+out/
+data/raw/
+registry/cache/
+*.download
+

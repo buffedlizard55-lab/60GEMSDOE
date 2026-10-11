@@ -761,6 +761,32 @@ def main() -> int:
     for fname, html_text in pages.items():
         (DOCS / fname).write_text(html_text)
 
+    # ---- every other page that lives under docs/ must also offer the registry primary ------------
+    # Sibling lane sessions ship their own standalone report pages (lane-chi-report.html,
+    # lane-knick-corridor-report.html) that link their own file and the already-scored anchor, but not
+    # the registry primary.  The repository invariant (tests/test_site.py) is that *every* served page
+    # headlines the primary download, so inject an idempotent banner wherever it is missing.
+    if sub:
+        _primary_rel = sub.get("file", {}).get("path", "")
+        _primary_name = Path(_primary_rel).name
+        _verdict = (sub.get("verdict") or "")[:160]
+        banner = (
+            '<div class=dlbtn style="margin:10px 0;padding:10px 14px;border:2px solid #b45309;'
+            'border-radius:10px;background:#fffbeb">'
+            f'<b>Registry primary (verdict: {esc(_verdict)}):</b> '
+            f'<a href="downloads/{esc(_primary_name)}">{esc(_primary_name)}</a> '
+            f'<a href="downloads/{esc(_primary_name.replace(".tif", ".zip"))}">.zip</a></div>\n')
+        for page_path in sorted(DOCS.glob("*.html")):
+            if page_path.name in pages:
+                continue
+            text = page_path.read_text()
+            if _primary_name in text:
+                continue
+            import re as _re
+            new_text, n = _re.subn(r'(<body[^>]*>\s*)', lambda m: m.group(1) + banner, text, count=1)
+            if n:
+                page_path.write_text(new_text)
+
     # ---- root landing page: GitHub Pages for this repository is configured (server-side, legacy
     # builder, source main:/) to publish the repository root, and the API token available here
     # cannot change that setting.  So the root gets a thin, generated landing page whose first

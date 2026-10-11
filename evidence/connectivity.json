@@ -1,0 +1,36 @@
+{
+ "evidence_class": "MEASURED",
+ "measured_utc": "2026-10-11T01:15:23.725116Z",
+ "method": "curl -s -o /dev/null -w '%{http_code}' --max-time 10 <host>",
+ "note": "000 means the connection did not complete (blocked / no route) from this sandbox.",
+ "hosts": {
+  "https://prd-tnm.s3.amazonaws.com": {
+   "role": "USGS 3DEP staged products (10 m / 1 m DEM)",
+   "http_code": "000"
+  },
+  "https://www.drivendata.org": {
+   "role": "competition data tab (login required)",
+   "http_code": "000"
+  },
+  "https://raw.githubusercontent.com": {
+   "role": "GitHub raw (registry raster bytes)",
+   "http_code": "000"
+  },
+  "https://earthquake.usgs.gov": {
+   "role": "USGS FDSN earthquake catalogue",
+   "http_code": "000"
+  },
+  "https://api.github.com": {
+   "role": "GitHub API",
+   "http_code": "200"
+  },
+  "https://github.com": {
+   "role": "GitHub",
+   "http_code": "200"
+  },
+  "https://codeload.github.com": {
+   "role": "GitHub codeload",
+   "http_code": "301"
+  }
+ }
+}

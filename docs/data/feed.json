@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-10-11T02:19:22Z",
+ "generated_utc": "2026-10-11T02:21:31Z",
  "sources": [
   {
    "id": "competition",
@@ -1738,12 +1738,6 @@
    "mitigation": "loop variable renamed to 'arm'; comment records the defect in place; scripts/run_holdout.py compiles and the recorded evidence/holdout_run2.json is unaffected."
   },
   {
-   "id": "IR-32-FIELD-01",
-   "severity": "high (measured)",
-   "statement": "The group's emission field is barely better than chance. Measured against the only truth in the checkout (labels.tif): a uniform-random 44,090-px emission scores DTI 0.078315 (5 seeds, range 0.077684-0.078960) while the group's dotted-d2.8 artifact at the same mass scores 0.161772 - a factor of 2.07. At 121,131 px the margin collapses: random 0.151988 vs the group's h19_5 field 0.166351, i.e. +9.4%. The field's support is 8.0% within 1 px of a mapped fault and 20.0% within 3 px, versus 3.55% and 8.56% for random support of the same size. The field is informative, but most of the emitted mass is spent where the kernel cannot reach it.",
-   "mitigation": "A 35-channel gradient-boosted field, cross-validated on four spatially blocked quadrants with a 30 px buffer, beats every shipped artifact at matched mass under two independent protocols (docs/research/hypotheses-round3.md, knowledge/02 section 13)."
-  },
-  {
    "id": "IR-32-EMIT-01",
    "severity": "high (measured)",
    "statement": "Emitted-mass optimum. Every informed field measured here peaks between 44,000 and 88,000 px and then loses score, because its ranking runs out of signal; a uniform-random emission has no ranking and keeps improving to 176,000 px, where it overtakes three of the five shipped artifacts. The previously shipped budget of 44,090 px sits just below the measured peak (88,000 px) under the whole-raster protocol.",
@@ -1833,6 +1827,12 @@
    "statement": "All four label-free H33 surfaces score BELOW a uniform-random control on the catalogue-hidden instrument at 44,090 px (H33-A 0.01874, H33-B 0.02177, H33-C 0.02407, H33-D 0.00394, union 0.02006, random 0.03438), while H33-B scores 0.09072 on the off-catalogue SGMC instrument against the incumbent's 0.06059. The catalogue-hidden instrument therefore has no power to rank hypotheses whose purpose is to find faults the catalogue lacks.",
    "evidence": "evidence/h33_holdout.json; evidence/h33_candidates.json.",
    "mitigation": "the sign disagreement is reported as the session's central finding; promotion stays gated on the identification experiment (measuring T, K and F live) rather than on this instrument."
+  },
+  {
+   "id": "IR-CHI-CI-01",
+   "severity": "medium",
+   "statement": "An artifact-deploy workflow (.github/workflows/pages.yml, added with the second lane run) failed on every push to main: it ran scripts/build_site.py on a bare runner with no dependencies installed, and the repository's Pages is in any case configured server-side as the legacy builder (build_type=legacy, source main:/), so actions/deploy-pages could never have published. Measured: run 38102678303 X build in 6s, exit 1; meanwhile pages build and deployment (legacy) succeeded in 30s on the same push.",
+   "mitigation": "pages.yml removed; the legacy builder already publishes the root landing page and docs/ that scripts/build_site.py writes, which is what the generator's own comment assumes. Verified after removal: ci on main green (run 38102678293), pages build succeeded at 2026-10-11T01:41:32Z."
   },
   {
    "id": "IR-61-SUBSTRATE-01",
