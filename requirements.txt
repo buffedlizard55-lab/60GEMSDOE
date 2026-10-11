@@ -8,4 +8,6 @@ pyproj>=3.5
 shapely>=2.0
 requests>=2.28
 pandas>=2.0
+# src/gems52/lane_hydro.py imports numba unconditionally (tests/test_lane_core.py collects it);
+# without this pin CI installs requirements.txt and dies at collection.  Fixed 2026-10-11.
 numba>=0.58

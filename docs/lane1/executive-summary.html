@@ -75,6 +75,16 @@ This run is a <strong>negative</strong>. The candidate GeoTIFF is validated, uni
 <tr><td>14,088.7</td><td>5,514</td><td>39.1%</td><td>7,652 (54.3%)</td></tr>
 <tr><td>14,333.8</td><td>5,572</td><td>38.9%</td><td>7,732 (53.9%)</td></tr>
 </table>
+<p><span class="lab">Method note (added 2026-10-11)</span> The table above inverts
+<code>(★) DTI = T / (0.2·(T + S − M) + 0.8·|G|)</code> with the conservative bound <code>M = 0</code>.
+In the thin-dotted regime <code>M ≈ T</code> — the assumption <code>knowledge/01</code> uses and the one
+cross-checked exactly against the owner-published d2.8 pair
+(<code>0.0893 × 44,090 = 3,937 = 0.2600 × (0.2 × 44,090 + 0.8 × 7,905)</code>) — the same inversion is
+simply <code>T = DTI × (0.2·S + 0.8·|G|)</code> and yields <strong>4,841 / 5,223 / 5,278 px</strong>
+(recall 39.1 / 37.1 / 36.8 %) for the three <code>|G|</code> rows, i.e. the table's numbers are the ~5 %
+upper bound. At <code>T ≈ M</code> the board-top 0.3774 needs <code>T ≈ 6,576–7,169</code> px (recall
+50.0–53.2 %). Both variants agree on every conclusion below: mass, not recall, is the binding
+constraint at 37.7k dots.</p>
 <p>Three readings follow, and they are the answer to "why 0.2778":</p>
 <ol>
 <li><strong>It is a mass-precision point, not a physical achievement.</strong> With <code>S = 37,654</code> and <code>T ≈ 5.5k</code>, 99.3% of the emitted mass (≈37,376 px) sits outside every hidden fault's 300 m kernel and is pure 0.2-weight penalty. The score is carried by the minority of dots that happen to fall within 300 m of an unseen fault. Nothing in the number identifies <em>which</em> physical idea produced the dots: the sibling repositories' inversion of 13 board-calibrated submissions fit every candidate physical basis with zero weight difference (LOO MAE ≈ 0.020, ρ ≈ 0.94) — the leaderboard cannot distinguish the physics, only the mass/recall trade-off.</li>

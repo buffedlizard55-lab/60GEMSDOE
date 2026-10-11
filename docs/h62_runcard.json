@@ -1,0 +1,213 @@
+{
+  "hypothesis": "Do conjunctive buried-contrast steps (min of percentile-ranked |grad depth_to_base_surf| and |grad iso_grav_anom|, low-relief arm) place emission on off-catalogue fault pixels better than a uniform-random emission of identical mass under identical masks, on the repository's two preregistered instruments?",
+  "mechanism": "depth_to_base_surf and iso_grav_anom Sobel gradients -> percentile ranks -> min() conjunctive step field -> low-relief gate (slope_p90 <= 8 deg, relief_local <= 25 m) -> 200 m catalogue ring + striped-row mask -> hex-lattice top-k emission, 3 px NMS",
+  "named_non_fault_mimic_process": [
+    "buried unconformities and basin-fill thickness edges (lithology/draping) produce coincident basement-depth and gravity steps with no fault",
+    "Quaternary alluvial-fan/delta depocentre edges locally deepen the cover and bend both gradients without rupture",
+    "the maximal-separation thinning of the off-catalogue instrument itself spreads truth into basin floors, rewarding any basin-prior field (the measured instrument bias)"
+  ],
+  "holdout": {
+    "label": "HOLDOUT-DTI",
+    "evaluator_version": "gems52-pooled-hide-v1",
+    "candidate": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems52-pooled-hide-v1",
+      "dti": 0.0042028353060120215,
+      "ci95": [
+        0.0032113908162253145,
+        0.005281897645342627
+      ],
+      "withheld_positive_pixels": 36414,
+      "tpw": 283.86697528080873,
+      "fpw": 191769.03024791766,
+      "fnw": 36130.13302471918
+    },
+    "all_arms": {
+      "h62_candidate": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems52-pooled-hide-v1",
+        "dti": 0.0042028353060120215,
+        "ci95": [
+          0.0032113908162253145,
+          0.005281897645342627
+        ],
+        "withheld_positive_pixels": 36414,
+        "tpw": 283.86697528080873,
+        "fpw": 191769.03024791766,
+        "fnw": 36130.13302471918
+      },
+      "random_matched": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems52-pooled-hide-v1",
+        "dti": 0.002000108492181838,
+        "ci95": [
+          0.001712756958880022,
+          0.002284772750082497
+        ],
+        "withheld_positive_pixels": 36414,
+        "tpw": 135.08300408089295,
+        "fpw": 191898.1088795462,
+        "fnw": 36278.91699591912
+      },
+      "field_topk_canary": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems52-pooled-hide-v1",
+        "dti": 0.008984330163774137,
+        "ci95": [
+          0.005460823681326609,
+          0.013070921958709864
+        ],
+        "withheld_positive_pixels": 36414,
+        "tpw": 605.25101412481,
+        "fpw": 190575.77695110528,
+        "fnw": 35808.748985875194
+      },
+      "champion": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems52-pooled-hide-v1",
+        "dti": 0.004066112431797188,
+        "ci95": [
+          0.0034973841344132944,
+          0.004609417675240994
+        ],
+        "withheld_positive_pixels": 36414,
+        "tpw": 240.98580708543977,
+        "fpw": 150437.42590386423,
+        "fnw": 36173.01419291457
+      },
+      "d28": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems52-pooled-hide-v1",
+        "dti": 0.08623051953519958,
+        "ci95": [
+          0.07610170184857615,
+          0.09587993390649414
+        ],
+        "withheld_positive_pixels": 36414,
+        "tpw": 5608.627586351358,
+        "fpw": 173946.65587703415,
+        "fnw": 30805.372413648623
+      },
+      "h274r1": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems52-pooled-hide-v1",
+        "dti": 0.027462193830208315,
+        "ci95": [
+          0.0241051057486567,
+          0.030672301406538614
+        ],
+        "withheld_positive_pixels": 36414,
+        "tpw": 1687.7952371090778,
+        "fpw": 159950.5250098971,
+        "fnw": 34726.204762890906
+      },
+      "h16topo": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems52-pooled-hide-v1",
+        "dti": 0.05714296632356753,
+        "ci95": [
+          0.04889398940579964,
+          0.06536685337482333
+        ],
+        "withheld_positive_pixels": 36414,
+        "tpw": 7339.917245534368,
+        "fpw": 489245.61463195574,
+        "fnw": 29074.082754465628
+      }
+    },
+    "paired_differences_vs_candidate": {
+      "random_matched": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems52-pooled-hide-v1",
+        "delta": 0.0022027268138301837,
+        "ci95": [
+          0.0012369677559972714,
+          0.003210598073409344
+        ],
+        "withheld_positive_pixels": 36414
+      },
+      "field_topk_canary": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems52-pooled-hide-v1",
+        "delta": -0.0047814948577621155,
+        "ci95": [
+          -0.008342899178666754,
+          -0.0017652196645113738
+        ],
+        "withheld_positive_pixels": 36414
+      },
+      "champion": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems52-pooled-hide-v1",
+        "delta": 0.00013672287421483392,
+        "ci95": [
+          -0.0009336880435902342,
+          0.0012647108633411597
+        ],
+        "withheld_positive_pixels": 36414
+      },
+      "d28": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems52-pooled-hide-v1",
+        "delta": -0.08202768422918756,
+        "ci95": [
+          -0.09149643930442808,
+          -0.0721162750178806
+        ],
+        "withheld_positive_pixels": 36414
+      },
+      "h274r1": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems52-pooled-hide-v1",
+        "delta": -0.02325935852419629,
+        "ci95": [
+          -0.026406116428712243,
+          -0.019904406040808224
+        ],
+        "withheld_positive_pixels": 36414
+      },
+      "h16topo": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems52-pooled-hide-v1",
+        "delta": -0.05294013101755551,
+        "ci95": [
+          -0.06089840182425868,
+          -0.04505780844091998
+        ],
+        "withheld_positive_pixels": 36414
+      }
+    }
+  },
+  "gates": {
+    "G0_surface_uniqueness": true,
+    "G1_canary": true,
+    "G2_beats_random": false,
+    "G3_beats_holdout_best": false,
+    "G4_dots_uniqueness": false
+  },
+  "failed_gates": [
+    "G2_beats_random",
+    "G3_beats_holdout_best",
+    "G4_dots_uniqueness"
+  ],
+  "verdict": "NEGATIVE",
+  "correlation_vs_registry": {
+    "max_abs_spearman_surface": 0.09951684863449713,
+    "max_abs_spearman_dots": 0.015578533339952672,
+    "max_frac_dots_within_3px": 0.8312916666666667
+  },
+  "raster_sha256": "b8d29b2f445ccc9746af53e0716e22b866bb5747297cf81aa2ab973660af6857",
+  "validator": {
+    "ok": true,
+    "problems": [],
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance",
+    "nan_pixels": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mass_outside_footprint": 0
+  },
+  "submission_name": "h62-1-undercover-step-48000px-20261011T020550Z",
+  "submission_note": "H62-1 buried basement-step x gravity-step; 48000 dots; HOLDOUT-DTI 0.0042; NEGATIVE - do not submit",
+  "verdict_detail": "NEGATIVE - do not submit; failed gates: G2_beats_random, G3_beats_holdout_best, G4_dots_uniqueness",
+  "evidence_class": "HOLDOUT-DTI"
+}

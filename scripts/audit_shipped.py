@@ -31,19 +31,37 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from gems32 import metric as M  # noqa: E402
 
-TPL = ROOT / "data" / "raw" / "sample_submission.tif"
-LAB = ROOT / "data" / "raw" / "labels.tif"
+# The competition rasters live at one of three layouts depending on which shared tool last ran
+# (fetch_mirrors.sh defaults to data/raw/, the restore receipt uses data/bridge/, and a plain
+# download_competition_data.sh drops them in data/).  BUGFIX 2026-10-11: resolve across all three
+# instead of hard-failing on data/raw only.
+def _first_existing(*names: str) -> Path | None:
+    for rel in names:
+        p = ROOT / rel
+        if p.exists():
+            return p
+    return None
+
+
+TPL = _first_existing("data/raw/sample_submission.tif", "data/bridge/sample_submission.tif",
+                      "data/sample_submission.tif")
+LAB = _first_existing("data/raw/labels.tif", "data/bridge/labels.tif", "data/labels.tif")
 DOWN = ROOT / "docs" / "downloads"
 
-# belief fields an artifact can be packed from, for the off-support measure
+# belief fields an artifact can be packed from, for the off-support measure (legacy data/raw layout
+# first, then the shared restore layout's scored group)
 FIELDS = {
-    "h19_5": ROOT / "data" / "raw" / "h19_5.tif",
+    "h19_5": _first_existing(
+        "data/raw/h19_5.tif",
+        "data/scored/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
+    ),
 }
 
 
 def main() -> int:
-    if not TPL.exists() or not LAB.exists():
-        print(f"missing {TPL} or {LAB}; run: bash scripts/fetch_mirrors.sh", file=sys.stderr)
+    if TPL is None or LAB is None:
+        print("missing sample_submission.tif / labels.tif (checked data/raw, data/bridge, data); "
+              "run: bash scripts/fetch_mirrors.sh", file=sys.stderr)
         return 2
 
     with rasterio.open(TPL) as s:
@@ -56,13 +74,20 @@ def main() -> int:
 
     fields = {}
     for k, p in FIELDS.items():
-        if p.exists():
+        if p is not None and p.exists():
             with rasterio.open(p) as s:
                 a = s.read(1)
             fields[k] = np.where(np.isfinite(a), a, 0.0) > 0
 
     rows = []
     for tif in sorted(DOWN.glob("*.tif")):
+        if tif.name == "submission.tif":
+            # Verbatim mirror of the ORGANIZER's sample_submission.tif (integrity-pinned download,
+            # kept so the brief's "easy to download submission tif" is one click away).  Its nodata
+            # tag is the organizers'; auditing it under IR-34-NODATA-01 would be a false positive,
+            # and it is not an artifact this project packed.  Excluded from the manifest by design
+            # (matches the pre-2026-10-11 manifests).
+            continue
         with rasterio.open(tif) as s:
             prof = dict(crs=str(s.crs), transform=list(s.transform)[:6],
                         shape=[s.height, s.width], res=list(s.res),

@@ -58,3 +58,8 @@ header.top .dlbtn .btn.alt{background:#12261c;color:#8fe3b4;border:1px solid #1f
 .h60a-warn{color:#8a5b00;font-size:14px} .h60a-tag{background:#e8eef4;border-radius:4px;padding:1px 5px;font-size:12px}
 .h60a-foot{padding:18px 32px;color:#5b7183;font-size:13px}
 /* ===== /60GEMSDOE-H60A-CORRIDOR ===== */
+
+/* verdict banners (sessions 2026-10-11) */
+.banner{border:2px solid var(--bad);background:#fff5f4;border-radius:14px;padding:16px 20px;margin:18px 0}
+.banner h2{border:0;margin:0 0 8px;padding:0;color:var(--bad)}
+.btn.ghost{opacity:.85;background:transparent;border:1px solid currentColor}

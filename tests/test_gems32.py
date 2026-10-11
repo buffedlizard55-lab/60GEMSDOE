@@ -53,6 +53,9 @@ def test_data_restore_and_sentinel_sanitization_manifests():
     # `restored` means it was re-fetched from the pinned mirror and hash-matched. Both are successes.
     # What must hold: the count equals the number of listed files, every listed file exists at its
     # recorded size, and every row carries a sha256 -- never a hard-coded count that drifts silently.
+    # (Merged 2026-10-11: this assertion was a stale hard-coded 22 that only ever ran via skip on CI;
+    # both parallel sessions replaced it independently.  The manifest cross-check from the H62
+    # session is kept on top of the size/bytes checks from the H61-H63 session.)
     assert restore["verified_files_count"] == len(restore["files"]) >= 22
     for f in restore["files"]:
         assert f["status"] in ("present", "restored"), f
@@ -60,6 +63,10 @@ def test_data_restore_and_sentinel_sanitization_manifests():
         assert dest.is_file(), f"receipt-listed file missing: {f['dest']}"
         assert dest.stat().st_size == f["bytes"], f"size drift: {f['dest']}"
         assert len(f["sha256"]) == 64 and f["sha256"] != "0" * 64, f
+    manifest = json.loads((ROOT / "registry" / "data_manifest.json").read_text())
+    manifest_ids = {f["id"] for f in manifest["files"]}
+    receipt_ids = {f["id"] for f in restore["files"]}
+    assert receipt_ids == manifest_ids, (manifest_ids - receipt_ids, receipt_ids - manifest_ids)
 
     prep = json.loads((ROOT / "data" / "prepared_manifest.json").read_text())
     assert prep["grid"]["epsg"] == 32611

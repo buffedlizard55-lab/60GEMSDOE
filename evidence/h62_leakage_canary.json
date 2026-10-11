@@ -1,0 +1,26 @@
+{
+  "field_h62_primary": {
+    "auc_vs_off_catalogue_truth": 0.4536876943291886
+  },
+  "field_h62_ungated": {
+    "auc_vs_off_catalogue_truth": 0.744793975199565
+  },
+  "gate_slope_inv": {
+    "auc_vs_off_catalogue_truth": 0.10453072551347943
+  },
+  "gate_relief_inv": {
+    "auc_vs_off_catalogue_truth": 0.10426638689600055
+  },
+  "det_elev": {
+    "auc_vs_off_catalogue_truth": 0.29243109183647037
+  },
+  "abs_det_elev_slope": {
+    "auc_vs_off_catalogue_truth": 0.3142375526949335
+  },
+  "dem_mean": {
+    "auc_vs_off_catalogue_truth": 0.2947024668409325
+  },
+  "flagged_gt_0_90": [],
+  "primary_barred": false,
+  "ungated_barred": false
+}

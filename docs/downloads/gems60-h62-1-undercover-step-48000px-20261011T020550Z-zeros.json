@@ -1,0 +1,78 @@
+{
+  "file": "gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif",
+  "sha256": "b8d29b2f445ccc9746af53e0716e22b866bb5747297cf81aa2ab973660af6857",
+  "bytes": 114694,
+  "submission_name": "h62-1-undercover-step-48000px-20261011T020550Z",
+  "note": "H62-1 buried basement-step x gravity-step; 48000 dots; HOLDOUT-DTI 0.0042; NEGATIVE - do not submit",
+  "note_chars": 99,
+  "validator": {
+    "path": "/home/user/60GEMSDOE/docs/downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif",
+    "bytes": 114694,
+    "sha256": "b8d29b2f445ccc9746af53e0716e22b866bb5747297cf81aa2ab973660af6857",
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "ref_bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "blocksize": [
+      256,
+      256
+    ],
+    "fixture_grid": false,
+    "has_validity_mask": false,
+    "nan_pixels": 0,
+    "infinity_pixels": 0,
+    "n_nan": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0039090621285140514,
+    "n_nonzero": 48000,
+    "mass": 48000.0,
+    "mass_outside_footprint": 0,
+    "problems": [],
+    "ok": true,
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+  },
+  "zip_file": "gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.zip",
+  "zip_sha256": "8635b99d557a95291ebef55aa2c2f55275db88ecc61e26c5b45b37feff826081",
+  "approved_for_weekly_slot": false,
+  "promoted": false,
+  "submission_slots_used": 0,
+  "status": "research-only; local format validation is not organizer acceptance",
+  "metadata": {
+    "hypothesis": "H62-1",
+    "arm": "h62_primary",
+    "prereg_sha256": "f3091e5fe21f55e49f2b8369d6f0ed1fb6e5e84c1e2844bc6bdc687a02aa833a",
+    "gates": {
+      "G0_surface_uniqueness": true,
+      "G1_canary": true,
+      "G2_beats_random": false,
+      "G3_beats_holdout_best": false,
+      "G4_dots_uniqueness": false
+    },
+    "verdict": "NEGATIVE",
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems52-pooled-hide-v1"
+  }
+}

@@ -38,16 +38,21 @@ from e1_lane_test import load_inputs  # noqa: E402
 
 WORK = ROOT / "data" / "work"
 EVID = ROOT / "evidence"
-REG = Path("/home/user/registry_rasters")
+# BUGFIX 2026-10-11: this pointed at a private sandbox path (/home/user/registry_rasters) that no
+# fresh clone has, so the shared evaluator vendor could not be re-run outside the session that
+# created it.  It now reads the in-repo registry (the same bytes; champion/d28 aliases verified
+# sha256-identical to docs/downloads) plus the restored scored/ anchor.  Reported once, per the
+# protocol's "fix shared tools in the template, never fork privately".
+REG = ROOT / "registry" / "rasters"
 SEED = 20261011
 BLOCK_SIDE = 200          # px -> 20 km spatial bootstrap clusters
 BUDGET = 7653
 
 ANCHORS = {
-    "champion": REG / "champion-h33-2-b2-zeros.tif",
-    "d28": REG / "dotted-d28-zeros.tif",
-    "h274r1": REG / "h274r1-solo-nan.tif",
-    "h16topo": REG / "h16-1-topo-nan.tif",
+    "champion": REG / "dotted_b2_prune_02778.tif",
+    "d28": REG / "dotted_d2_8_02600.tif",
+    "h274r1": REG / "dotted_d2_8_02708.tif",
+    "h16topo": ROOT / "data" / "scored" / "gems16-h16-1-topo-geophys-baseline-ridges-20260930-df20f65e-nan.tif",
 }
 
 

@@ -247,6 +247,20 @@
    "severity": "medium",
    "statement": "The mirrored example submission is not a plausible sample submission: data/bridge/example_submission.tif is float32 with values {0, 1} and exactly 7,172,775 cells equal to 1.0 - the complement of the label raster's zero set (labels nonzero = 7,172,775, including the -1 sentinel) - with no NaN anywhere, contradicting the portal's 'total fault absence' description of the sample.",
    "mitigation": "Flagged for review; nothing in this repository derives anything from that file. It is used only as a shape/CRS template, and every emitted raster is validated against data/bridge/existing_faults.tif instead."
+  },
+  {
+   "id": "IR-32-H62-01",
+   "severity": "medium",
+   "status": "fixed (2026-10-11)",
+   "statement": "Three shared-tool CI blind spots made the full suite un-runnable on a fresh clone: requirements.txt omitted numba (tests/test_lane_core.py import error), scripts/e3_validate.py read a private sandbox path /home/user/registry_rasters instead of registry/rasters, and scripts/run_lane.py ignored the manifest's external/ destination for derived_sgmc_faults_100m_u8.tif. Additionally tests/test_gems32.py pinned verified_files_count == 22 while registry/data_manifest.json lists 23 (the assertion only ever ran via skip on CI). All four fixed in the shared template, never as private forks.",
+   "evidence": "requirements.txt; scripts/e3_validate.py; scripts/run_lane.py; tests/test_gems32.py; full suite 104 passed 0 failed on 2026-10-11"
+  },
+  {
+   "id": "IR-32-H62-02",
+   "severity": "medium",
+   "status": "open (protocol amendment needed)",
+   "statement": "The literal uniqueness gate 'more than 70% of dots within 3 px of one registry raster = duplicate' is uninformative against dense lattice rasters: H62-1 scored 83.1% vs r13_lattice_s5, and a matched uniform-random set of the same size scored 83.7% (H62-1 excess-over-random -0.0059, evidence/h62_uniqueness_excess_control.json). The family selector already uses excess-over-random; the shared protocol text should adopt that form. Preregistered gates are not retroactively passed: H62-1 remains G4-FAIL in the record.",
+   "evidence": "evidence/h62_uniqueness.json; evidence/h62_uniqueness_excess_control.json; registry/preregistration-h62.json"
   }
  ]
 }

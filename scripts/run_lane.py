@@ -87,9 +87,20 @@ def main() -> int:
     cache.mkdir(parents=True, exist_ok=True)
 
     # ---------------------------------------------------------------- 1. inputs
+    # BUGFIX 2026-10-11: the manifest's destination for the SGMC raster is external/ (that is where
+    # scripts/restore_data.py puts it), but this script only looked at data/ root, so a faithful
+    # restore did not satisfy the pin.  Both locations are accepted; the digest check is unchanged.
+    def _resolve(fname: str) -> Path:
+        p = data / fname
+        if not p.exists() and not fname.startswith("external/"):
+            alt = data / "external" / fname
+            if alt.exists():
+                return alt
+        return p
+
     pins = {}
     for fname, want in PINNED.items():
-        p = data / fname
+        p = _resolve(fname)
         if not p.exists():
             print(f"FATAL: missing {p}", file=sys.stderr)
             return 2
@@ -138,7 +149,7 @@ def main() -> int:
                                         / np.maximum(cnt, 1), np.nan)
             del a
         feat = None
-    with rasterio.open(data / "derived_sgmc_faults_100m_u8.tif") as ds:
+    with rasterio.open(_resolve("derived_sgmc_faults_100m_u8.tif")) as ds:
         sgmc = ds.read(1) > 0
     log(f"streamed {n_bands} bands; row-mean matrix {row_means.shape}", t0)
     log(f"grid {grid.shape} footprint {grid.n_footprint} catalogue {int(cat.sum())} "

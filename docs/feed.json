@@ -1,7 +1,7 @@
 {
- "generated_utc": "2026-10-11T02:20:00Z",
+ "generated_utc": "2026-10-11T02:35:00Z",
  "repo": "60GEMSDOE",
- "session": "2026-10-11b GEMS61 thermally-corroborated knickpoint lane + substrate diagnostic",
+ "session": "2026-10-11 sessions b/c: GEMS61 thermal-knickpoint lane (main) + H62-1 preregistered validation (this branch); earlier knickpoint-lane run shared",
  "current_official_leaderboard_top": {
   "score": 0.3774,
   "participant": "xiaofanhu",
@@ -14,6 +14,25 @@
   "evidence_class": "OWNER-REPORT"
  },
  "submissions": [
+  {
+   "name": "h62-1-undercover-step-48000px-20261011T020550Z",
+   "file": "downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif",
+   "sha256": "b8d29b2f445ccc9746af53e0716e22b866bb5747297cf81aa2ab973660af6857",
+   "dots": 48000,
+   "verdict": "NEGATIVE - research-only; do not submit (failed gates G2, G3, G4)",
+   "evidence_class": "HOLDOUT-DTI",
+   "evaluator_version": "gems52-pooled-hide-v1",
+   "holdout_dti": 0.0042028353060120215,
+   "ci95": [
+    0.0032113908162253145,
+    0.005281897645342627
+   ],
+   "withheld_positive_pixels": 36414,
+   "prereg": "registry/preregistration-h62.json (written before computation)",
+   "uniqueness": "G0 surface PASS (max |rho| 0.0995); G4 raw FAIL (83.1% <=3px of r13_lattice, excess-over-random -0.0059, rank |rho| 0.0156)",
+   "validator": "0 problems (receipt: docs/downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.json)",
+   "submitted_to_competition": false
+  },
   {
    "name": "gems61-lane-thermal-knick-40000px-20261011T020352Z",
    "file": "downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif",
@@ -79,12 +98,33 @@
   "official sample_submission.tif contains the 60,988-px catalogue pattern despite 'total fault absence' wording",
   "mirrored example_submission.tif is 7,172,775 cells of 1.0 (complement of the label zero-set) - flagged, never used",
   "sandbox egress blocks prd-tnm.s3.amazonaws.com / ScienceBase: 10m/1m raw DEM not fetchable here; runner path verified HTTP 200",
-  "local instruments cannot rank the live leaderboard (E1 audit + LM 2/6 orderings) - never promote on a local rank alone"
+  "local instruments cannot rank the live leaderboard (E1 audit + LM 2/6 orderings) - never promote on a local rank alone",
+  "sandbox egress blocks prd-tnm.s3.amazonaws.com / ScienceBase: 10m/1m raw DEM not fetchable here (source free+official; 716 pinned URLs)",
+  "requirements.txt was missing numba (CI could not collect tests/test_lane_core.py) - fixed in this run",
+  "scripts/e3_validate.py pointed at a private sandbox path /home/user/registry_rasters - fixed to registry/rasters in this run",
+  "scripts/run_lane.py did not accept the manifest's external/ destination for derived_sgmc_faults_100m_u8.tif - fixed in this run",
+  "the raw 70% dot-overlap gate is uninformative against dense lattice registry rasters (matched random also scores 83.7%); family selector already uses excess-over-random - protocol text should adopt the excess form"
  ],
  "next_steps": [
   "G61-1: fetch free 3DEP 10 m (or 1 m) tiles on the Actions runner, rebuild the chi/ksn lane on a valid network, re-run the brief's first test",
   "G61-5: repair the selection instrument (terrain-balanced off-catalogue sampling), then re-score every registry raster",
   "Alternative deliverable already measured: sigma=1.85 px scatter-smoothed max-coverage emission (+0.0247, 12/12 paired draws)",
-  "Write the PhD-level explainer page for why the champion reads 0.2778"
- ]
+  "Write the PhD-level explainer page for why the champion reads 0.2778",
+  "H62-2 (alteration-front Th/K edges) - bands on disk, next candidate to preregister",
+  "H62-3 (warm-spring corridor chaining, GDR CSV on disk) and H62-4 (playa-margin rings)",
+  "H62-5 full 10m chi/ksn lane needs one unrestricted run (S3 egress) - pins + Actions receipt ready",
+  "selector step: no promotable file this session; champion family remains the live anchor"
+ ],
+ "h62_gate": {
+  "experiment": "E1 (H62-1, this run)",
+  "prereg": "60H62-PREREG-1",
+  "gates": {
+   "G0_surface_uniqueness": "PASS (max |rho| 0.0995 <= 0.90)",
+   "G1_leakage_canary": "PASS (field AUC 0.4537; no feature > 0.90)",
+   "G2_beats_random": "FAIL (hideout 4/4 folds OK; off-catalogue 0/9 budget rungs)",
+   "G3_beats_holdout_best": "FAIL (0.00420 vs d28 0.08623)",
+   "G4_dots_uniqueness_raw": "FAIL (83.1% <=3px of r13_lattice vs gate 70%; excess-over-random -0.0059; |rho| 0.0156)"
+  },
+  "result": "NEGATIVE - no slot spent"
+ }
 }
