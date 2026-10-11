@@ -115,7 +115,8 @@
    "verdict": "NEGATIVE \u2014 E1 off-catalogue -0.0860 [-0.1372, -0.0220] -> STOP; INSTRUMENT-DTI 0.00913 vs random 0.07253",
    "artifact": "gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros",
    "run_card": "docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros-runcard.json",
-   "slot_spent": false
+   "slot_spent": false,
+   "download": "docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif"
   },
   {
    "session": "arena/b219bfe1-60gemsdoe (PR #18, this session)",
@@ -123,15 +124,18 @@
    "verdict": "NEGATIVE \u2014 masked E1 +0.0404 [-0.0029, +0.0871] INCONCLUSIVE -> STOP; HOLDOUT-DTI 0.00960 vs random 0.03908 (paired -0.02948)",
    "artifact": "gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros",
    "run_card": "evidence/h66c_runcard.json",
-   "slot_spent": false
+   "slot_spent": false,
+   "download": "docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif"
   },
   {
    "session": "arena/7085de4f-60gemsdoe (PR #17)",
    "id": "H67-1",
-   "verdict": "CLAIMS PASS/PROMOTE \u2014 E1 +0.4251 [+0.2253, +0.6273]; HOLDOUT-DTI 0.065739 [0.055715, 0.076201]. CONTRADICTS this STOP file \u2014 flagged IR-H66C-STOPCONFLICT-01, pending arbitration, not endorsed.",
+   "verdict": "claimed PASS/PROMOTE - E1 +0.4251 [+0.2253, +0.6273]; HOLDOUT-DTI 0.065739 [0.055715, 0.076201]. Contradicted the STOP file (flagged IR-H66C-STOPCONFLICT-01 by session arena/b219bfe1); promotion REVERSED (promoted=False) and STOP enforced by session arena/a856d257 (PRs #19/#20). Remains a research artifact, not a cleared submission.",
    "artifact": "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros",
    "run_card": "evidence/h67_runcard.json",
-   "slot_spent": false
+   "slot_spent": false,
+   "download": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif"
   }
- ]
+ ],
+ "post_review_note": "Two of the three post-STOP runs are negative and corroborate the STOP; the third (H67-1) claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20 before this session's merge. No submission slot has been spent."
 }

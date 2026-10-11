@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-10-11T18:30:37Z",
+ "generated_utc": "2026-10-11T18:32:57Z",
  "sources": [
   {
    "id": "competition",
@@ -680,7 +680,8 @@
     "verdict": "NEGATIVE \u2014 E1 off-catalogue -0.0860 [-0.1372, -0.0220] -> STOP; INSTRUMENT-DTI 0.00913 vs random 0.07253",
     "artifact": "gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros",
     "run_card": "docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros-runcard.json",
-    "slot_spent": false
+    "slot_spent": false,
+    "download": "docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif"
    },
    {
     "session": "arena/b219bfe1-60gemsdoe (PR #18, this session)",
@@ -688,17 +689,28 @@
     "verdict": "NEGATIVE \u2014 masked E1 +0.0404 [-0.0029, +0.0871] INCONCLUSIVE -> STOP; HOLDOUT-DTI 0.00960 vs random 0.03908 (paired -0.02948)",
     "artifact": "gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros",
     "run_card": "evidence/h66c_runcard.json",
-    "slot_spent": false
+    "slot_spent": false,
+    "download": "docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif"
    },
    {
     "session": "arena/7085de4f-60gemsdoe (PR #17)",
     "id": "H67-1",
-    "verdict": "CLAIMS PASS/PROMOTE \u2014 E1 +0.4251 [+0.2253, +0.6273]; HOLDOUT-DTI 0.065739 [0.055715, 0.076201]. CONTRADICTS this STOP file \u2014 flagged IR-H66C-STOPCONFLICT-01, pending arbitration, not endorsed.",
+    "verdict": "claimed PASS/PROMOTE - E1 +0.4251 [+0.2253, +0.6273]; HOLDOUT-DTI 0.065739 [0.055715, 0.076201]. Contradicted the STOP file (flagged IR-H66C-STOPCONFLICT-01 by session arena/b219bfe1); promotion REVERSED (promoted=False) and STOP enforced by session arena/a856d257 (PRs #19/#20). Remains a research artifact, not a cleared submission.",
     "artifact": "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros",
     "run_card": "evidence/h67_runcard.json",
-    "slot_spent": false
+    "slot_spent": false,
+    "download": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif"
    }
-  ]
+  ],
+  "post_review_note": "Two of the three post-STOP runs are negative and corroborate the STOP; the third (H67-1) claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20 before this session's merge. No submission slot has been spent."
+ },
+ "current_lane_decision": {
+  "verdict": "negative",
+  "submit_to_competition": false,
+  "new_tiff_generated": false,
+  "research_raster_sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1",
+  "report": "docs/research/2026-10-11-lane-stop-audit.md",
+  "note": "Snapshot of this repository; NOT a live DrivenData score feed."
  },
  "hypotheses": [
   {
@@ -1917,7 +1929,7 @@
     "hypothesis": "H66-6",
     "session": "arena/b219bfe1-60gemsdoe",
     "run_card": "evidence/h66c_runcard.json",
-    "role": "NEGATIVE research artifact (this session); NOT the PRIMARY; do not use for a submission slot",
+    "role": "NEGATIVE research artifact (session arena/b219bfe1); NOT the PRIMARY; do not use for a submission slot",
     "ok_to_download": true,
     "ok_to_submit": false
    }
@@ -1961,7 +1973,7 @@
    }
   },
   "approved_for_weekly_slot": false,
-  "promoted": true,
+  "promoted": false,
   "superseded_primaries": [
    {
     "name": "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros",
@@ -1979,7 +1991,8 @@
     "status_line": "PRIMARY = this session's GEMS61 thermally-corroborated knickpoint-lane file. ITS VERDICT IS NEGATIVE: it is unique, format-valid, leakage-free and fully documented, but it is NOT recommended for a weekly slot. Measured: pooled HOLDOUT-DTI (evaluator gems52-pooled-hide-v1, 36,439 withheld positives, 20 km-block bootstrap, 1,000 draws / 161 clusters) = 0.002495, 95% CI [0.001506, 0.003511]; paired d"
    }
   ],
-  "post_review_note": "2026-10-11 post-STOP runs: H66-2 (arena/970443fc) NEGATIVE, H66-6 (arena/b219bfe1) NEGATIVE, H67-1 (arena/7085de4f) claims PROMOTE - contradicts the STOP file, flagged IR-H66C-STOPCONFLICT-01, pending arbitration."
+  "decision_erratum": "2026-10-11: literal H67 uniqueness failed. Historical build only; DO NOT SUBMIT. See evidence/h67_uniqueness.json.",
+  "post_review_note": "2026-10-11 post-STOP runs: H66-2 (arena/970443fc) NEGATIVE; H66-6 (arena/b219bfe1, this session) NEGATIVE; H67-1 (arena/7085de4f) claimed PASS/PROMOTE, contradicting the STOP file - flagged IR-H66C-STOPCONFLICT-01, and the promotion was REVERSED (promoted=False) by session arena/a856d257 (PRs #19/#20). STOP remains in force; no slot spent by any of them."
  },
  "holdout": {
   "preregistration": "GEMSDOE32-PREREG-1",
@@ -2875,6 +2888,12 @@
    "mitigation": "Updated scripts/audit_shipped.py to verify np.allclose(tuple(prof['transform'])[:6], tuple(tpl_prof['transform'])[:6], atol=0.05) and record exact_sample_transform in docs/downloads/submissions_manifest.json."
   },
   {
+   "id": "IR-60-PROMOTION-CONFLICT",
+   "severity": "high",
+   "statement": "H67 PROMOTE banners and cards contradicted authoritative STOP and a raw 3px overlap of 0.998675; a dense-raster exclusion silently relaxed the literal 0.70 limit.",
+   "mitigation": "Published verdict corrected to negative; shared renderer suppresses old banners while stopped; selector uses raw overlap; H67 publishers now STOP-guarded. See docs/research/submission-status-review.md."
+  },
+  {
    "id": "IR-H66-BUILD-01",
    "severity": "medium",
    "statement": "The first H66-6 build (dot digest 66c49029b6cb, TIF sha 958c176d...) produced 12 of 40,000 dots that differ from a fresh recompute, and that process was OOM-killed (exit 137) in its built-in final-dot uniqueness audit. Three independent fresh recomputes (z, candidates, p, dots all hash-compared) are bit-identical to each other and to the shipped file (digest 3306ed8afbcd; --verify-existing identical=True). The cause of the first build's deviation was not identified.",
@@ -2894,9 +2913,9 @@
   },
   {
    "id": "IR-H66C-STOPCONFLICT-01",
-   "severity": "high",
+   "severity": "resolved",
    "statement": "On main after PR #17 (session arena/7085de4f, 2026-10-11 ~16:24 UTC): hypothesis H67-1 (bedrock-subtracted delta-ksn step) is recorded as VALIDATED with E1 PASS +0.4251 [+0.2253, +0.6273] (262 comps), HOLDOUT-DTI 0.065739 [0.055715, 0.076201], verdict 'promote', and registry/submission_build.json carries promoted=True and PRIMARY = that artifact. This contradicts (a) registry/current_site_status.json (status STOP, review 16:34 UTC, 'no follow-up experiment or submission is authorized'), (b) scripts/stop_guard.py, which fails closed on that same status, and (c) the H66 review's finding that every 2026-10-11 knickpoint round was negative. Either the STOP registration is stale/wrong, or the H67-1 run was unauthorized and/or its numbers are wrong; this session has not independently re-derived them. Discovered while merging this session's work (PR #18).",
-   "mitigation": "Both records are preserved verbatim; this session's site card (post_review_runs) lists all three post-review runs with their claims and this flag. The STOP status remains in force (the conservative reading: a promote claim needs re-verification, a STOP file is a hard gate). Arbitration is requested from the next session / operator: re-run the H67-1 first test from its own evidence + receipt and decide which of the two records stands. Note the family slot gate is unaffected either way: 0.065739 < 0.190147 (best promotable holdout)."
+   "mitigation": "RESOLVED 2026-10-11 by session arena/a856d257 (PRs #19/#20, merged before this merge): registry/submission_build.json promotion was reversed (promoted False), the stop guard was extended to fail closed, and the audited research-only pages were regenerated. The STOP registration stands; H67-1's artifact remains a research download, not a cleared submission. This session (PR #18) had flagged the contradiction first (IR text preserved as the record)."
   }
  ]
 }

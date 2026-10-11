@@ -370,6 +370,12 @@
    "mitigation": "Updated scripts/audit_shipped.py to verify np.allclose(tuple(prof['transform'])[:6], tuple(tpl_prof['transform'])[:6], atol=0.05) and record exact_sample_transform in docs/downloads/submissions_manifest.json."
   },
   {
+   "id": "IR-60-PROMOTION-CONFLICT",
+   "severity": "high",
+   "statement": "H67 PROMOTE banners and cards contradicted authoritative STOP and a raw 3px overlap of 0.998675; a dense-raster exclusion silently relaxed the literal 0.70 limit.",
+   "mitigation": "Published verdict corrected to negative; shared renderer suppresses old banners while stopped; selector uses raw overlap; H67 publishers now STOP-guarded. See docs/research/submission-status-review.md."
+  },
+  {
    "id": "IR-H66-BUILD-01",
    "severity": "medium",
    "statement": "The first H66-6 build (dot digest 66c49029b6cb, TIF sha 958c176d...) produced 12 of 40,000 dots that differ from a fresh recompute, and that process was OOM-killed (exit 137) in its built-in final-dot uniqueness audit. Three independent fresh recomputes (z, candidates, p, dots all hash-compared) are bit-identical to each other and to the shipped file (digest 3306ed8afbcd; --verify-existing identical=True). The cause of the first build's deviation was not identified.",
@@ -389,9 +395,9 @@
   },
   {
    "id": "IR-H66C-STOPCONFLICT-01",
-   "severity": "high",
+   "severity": "resolved",
    "statement": "On main after PR #17 (session arena/7085de4f, 2026-10-11 ~16:24 UTC): hypothesis H67-1 (bedrock-subtracted delta-ksn step) is recorded as VALIDATED with E1 PASS +0.4251 [+0.2253, +0.6273] (262 comps), HOLDOUT-DTI 0.065739 [0.055715, 0.076201], verdict 'promote', and registry/submission_build.json carries promoted=True and PRIMARY = that artifact. This contradicts (a) registry/current_site_status.json (status STOP, review 16:34 UTC, 'no follow-up experiment or submission is authorized'), (b) scripts/stop_guard.py, which fails closed on that same status, and (c) the H66 review's finding that every 2026-10-11 knickpoint round was negative. Either the STOP registration is stale/wrong, or the H67-1 run was unauthorized and/or its numbers are wrong; this session has not independently re-derived them. Discovered while merging this session's work (PR #18).",
-   "mitigation": "Both records are preserved verbatim; this session's site card (post_review_runs) lists all three post-review runs with their claims and this flag. The STOP status remains in force (the conservative reading: a promote claim needs re-verification, a STOP file is a hard gate). Arbitration is requested from the next session / operator: re-run the H67-1 first test from its own evidence + receipt and decide which of the two records stands. Note the family slot gate is unaffected either way: 0.065739 < 0.190147 (best promotable holdout)."
+   "mitigation": "RESOLVED 2026-10-11 by session arena/a856d257 (PRs #19/#20, merged before this merge): registry/submission_build.json promotion was reversed (promoted False), the stop guard was extended to fail closed, and the audited research-only pages were regenerated. The STOP registration stands; H67-1's artifact remains a research download, not a cleared submission. This session (PR #18) had flagged the contradiction first (IR text preserved as the record)."
   }
  ]
 }

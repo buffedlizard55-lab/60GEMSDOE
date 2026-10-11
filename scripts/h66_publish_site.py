@@ -99,14 +99,13 @@ It is research evidence, not a candidate.</td></tr>
 Uploading it again spends a slot and repeats a known number.</td></tr>
 <tr><td><b>Registry primary</b><br><code>{esc(primary)}</code></td>
 <td><a class="btn alt" href="{d}downloads/{esc(primary)}" download>&#11015; .tif</a></td>
-<td><b>NOT CLEARED</b> for a slot by any local instrument. Unique and portal-safe; a bounded-downside bet.</td></tr>
+<td><b>NOT CLEARED</b> for a slot by any local instrument. NOT CLEARED: format and sparse-only comparison do not override the lane STOP or literal registry overlap. DO NOT SUBMIT.</td></tr>
 </table>
 <p style="margin:6px 0 0"><b>Bottom line: this session cleared no file for a submission slot.</b>
 Format is not the issue &mdash; the H66 file is single-band float32, EPSG:32611, 3730&times;3292,
-<b>0 NaN, min 0.0, max 1.0, no nodata tag, 0 dots on the mapped catalogue</b>, so the portal error
-<i>&ldquo;Predicted values must be in range [0, 1]&rdquo;</i> cannot come from it. The issue is skill:
+<b>0 NaN, min 0.0, max 1.0, no nodata tag, 0 dots on the mapped catalogue</b>, so the known local range test passes; organizer acceptance has not been established. The issue is skill:
 the tectonic-geomorphology lane measures <i>below</i> random dots on the only local truth set that
-contains off-catalogue faults. If you upload it anyway for research, use the name
+contains off-catalogue faults. For recordkeeping only (NOT an invitation to upload), the historical name was
 <code>{esc(rc['submission_name'])}</code> and the note
 <code>{esc(rc['note'])}</code> ({rc['note_chars']}/140 characters).
 Full write-up: <a href="{d}h66-report.html">{d}h66-report.html</a> &middot;

@@ -146,7 +146,7 @@ Five independent implementations of the brief's first test, all on the record:
 | **H65-1** | **10 m native 3DEP** | **+0.0326 [−0.0144, +0.0790] INCONCLUSIVE** (262) | 0.01158 [0.0084, 0.0146] vs random 0.03908 (22,641) | NEGATIVE (stop) |
 | **H66-6 (this session)** | 10 m, **brief-mandated confound masks applied to the statistic** + litho arm split | **+0.0404 [−0.0029, +0.0871] INCONCLUSIVE** (239; arms T +0.0030 n=174, L +0.0696 n=14, both INCONCLUSIVE) | **0.00960 [0.00654, 0.01307]** vs random 0.03908, paired −0.02948 [−0.0339, −0.0249] (gems57-pooled-hide-v2, 22,641) | **NEGATIVE (stop)** |
 | H66-1/H66-2 (parallel, `arena/970443fc`) | 10 m chi/ksn, both-limb variant | **−0.0860 [−0.1372, −0.0220]** vs off-catalogue truth (86 segments) | INSTRUMENT-DTI 0.00913 vs random 0.07253 (paired −0.06339) | **NEGATIVE (stop)** |
-| H67-1 (`arena/7085de4f`, PR #17) | 10 m bedrock-subtracted Δksn step + 4-confound mask | **claims +0.4251 [+0.2253, +0.6273] PROCEED** (262) | **claims 0.065739 [0.055715, 0.076201]** (22,641) | **claims PASS/promote — contradicts the STOP file (IR-H66C-STOPCONFLICT-01), pending arbitration; not independently re-derived** |
+| H67-1 (`arena/7085de4f`, PR #17) | 10 m bedrock-subtracted Δksn step + 4-confound mask | **claims +0.4251 [+0.2253, +0.6273] PROCEED** (262) | **claims 0.065739 [0.055715, 0.076201]** (22,641) | **claimed PASS/promote — contradicted the STOP file (flagged IR-H66C-STOPCONFLICT-01 by session arena/b219bfe1); promotion REVERSED (promoted=False) by arena/a856d257, PRs #19/#20; remains a research artifact, not a cleared submission** |
 
 The lane's named confounds are measured to dominate: step-bearing 10 m channels are only
 1.19× (steps ≥ ln2) / 1.04× (knickpoints) enriched within 300 m of the catalogue
@@ -158,7 +158,7 @@ its result — masked first test still INCONCLUSIVE (+0.0404, CI straddles 0) an
 holdout (0.00960) still below the mass-matched random control (0.03908) — is recorded in
 `evidence/h66c_runcard.json`. Masking the confounds moved the first-test mean only from
 +0.0326 (H65-1) to +0.0404: the confounds did not create the (non-)signal, and the lane is
-closed: every independently confirmed run is negative (8/8), and the sole positive claim — H67-1 of session `arena/7085de4f` — contradicts the STOP registration and is flagged for arbitration (IR-H66C-STOPCONFLICT-01), not accepted.**
+closed: every independently confirmed run is negative (8/8); the sole positive claim — H67-1 of session `arena/7085de4f` — contradicted the STOP registration (IR-H66C-STOPCONFLICT-01) and its promotion was reversed by PRs #19/#20, so it stands as an uncorroborated research artifact.**
 
 ## 7. Irregularities carried forward
 
