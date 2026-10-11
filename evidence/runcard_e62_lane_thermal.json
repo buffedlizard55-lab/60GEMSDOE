@@ -1,0 +1,200 @@
+{
+ "experiment": "E2/E3 lane x thermal + E2b substrate diagnostic",
+ "hypothesis": "Faults crossing channels leave knickpoints whose strike alignment across independent drainages survives scarp degradation (Kirby & Whipple 2012; Perron & Royden 2013); thermal evidence (GDR 1391 springs/wells, 2 m probes, paleo sinter/travertine) should concentrate the same structures, adding off-catalogue recall to the lane.",
+ "mechanism": "Priority-Flood fill -> D8 accumulation -> chi/ksn (theta = 0.45) on the 3DEP-10m-reduced 100 m pack -> knickpoint detection -> strike-concordance gating across >=3 independent first-order drainages -> thermal splat (max-splat, sigma = 3 px, normalised by the 99.9th percentile) -> 2-px catalogue ring -> 3-px NMS -> budgeted emission.",
+ "named_confound": "A lithologic resistance contrast along a range front produces the same strike-aligned steepness steps. The substrate diagnostic adds a second, measured confound: on 100 m elevation the extracted channel network is itself partly an artefact of sampling and depression filling (Hack exponent b = +0.0264 / -0.0272 against 1.6-2.0 for real networks; the two independent 100 m products' channel networks agree at Jaccard 0.2312).",
+ "holdout": {
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator_version": "gems52-pooled-hide-v1",
+  "withheld_positive_pixels": 36439,
+  "dti": 0.002495104638095785,
+  "ci95": [
+   0.0015064297795352602,
+   0.00351135785500254
+  ],
+  "arms": {
+   "lane_thermal": {
+    "dti": 0.002495104638095785,
+    "ci95": [
+     0.0015064297795352602,
+     0.00351135785500254
+    ]
+   },
+   "champion_h33b2": {
+    "dti": 0.003911723596775291,
+    "ci95": [
+     0.003438115791604256,
+     0.004402536527074898
+    ]
+   },
+   "incumbent_d28": {
+    "dti": 0.08815711123835286,
+    "ci95": [
+     0.08035691373238064,
+     0.09571604180667195
+    ]
+   },
+   "random_matched": {
+    "dti": 0.039959179665228876,
+    "ci95": [
+     0.03697269019019106,
+     0.04293103115601415
+    ]
+   }
+  },
+  "paired_differences": {
+   "champion_h33b2": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems52-pooled-hide-v1",
+    "delta": -0.0014166189586795061,
+    "ci95": [
+     -0.0024295308514700998,
+     -0.00031173430039470914
+    ],
+    "withheld_positive_pixels": 36439
+   },
+   "incumbent_d28": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems52-pooled-hide-v1",
+    "delta": -0.08566200660025708,
+    "ci95": [
+     -0.09336176774058097,
+     -0.07795629551884191
+    ],
+    "withheld_positive_pixels": 36439
+   },
+   "random_matched": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems52-pooled-hide-v1",
+    "delta": -0.037464075027133094,
+    "ci95": [
+     -0.040657775870556336,
+     -0.03427111075053374
+    ],
+    "withheld_positive_pixels": 36439
+   }
+  },
+  "instrument_selection": {
+   "truth": "SGMC off-catalogue, thinned to 8,000 px, seed 61",
+   "evidence_class": "INSTRUMENT",
+   "E1_spearman_vs_live": 0.4685
+  }
+ },
+ "selected_arm": "lane_x_thermal_all|40000",
+ "ladder_instrument_dti": {
+  "lane_only|3000": 0.002819,
+  "lane_only|8000": 0.007922,
+  "lane_only|20000": 0.010089,
+  "lane_only|40000": 0.017811,
+  "lane_x_thermal_all|3000": 0.002819,
+  "lane_x_thermal_all|8000": 0.008106,
+  "lane_x_thermal_all|20000": 0.010098,
+  "lane_x_thermal_all|40000": 0.017872,
+  "lane_x_thermal_offcat|3000": 0.002819,
+  "lane_x_thermal_offcat|8000": 0.008106,
+  "lane_x_thermal_offcat|20000": 0.010124,
+  "lane_x_thermal_offcat|40000": 0.017872,
+  "thermal_only": 0.006867
+ },
+ "canary": {
+  "concordance": 0.5045,
+  "thermal_offcatalogue": 0.5134,
+  "lane_x_thermal_offcatalogue": 0.5045
+ },
+ "uniqueness": {
+  "gate_rank": 0.9,
+  "gate_overlap": 0.7,
+  "max_abs_pearson_on_support": -0.9507,
+  "worst_overlap": {
+   "frac_within_3px": 0.8437,
+   "n_dots_in_halo": 33748,
+   "raster": "calib_r13lattice_00904.tif",
+   "frac_random_within_3px": 0.8408,
+   "excess_over_random": 0.0029000000000000137
+  },
+  "rasters_above_raw_70pct_clause": [
+   {
+    "raster": "calib_r13lattice_00904.tif",
+    "frac_within_3px": 0.8437,
+    "excess_over_random": 0.0029000000000000137
+   },
+   {
+    "raster": "r13_lattice_s5_00904.tif",
+    "frac_within_3px": 0.8437,
+    "excess_over_random": 0.0029000000000000137
+   },
+   {
+    "raster": "r11_greedy_mp.tif",
+    "frac_within_3px": 0.7012,
+    "excess_over_random": 0.007500000000000062
+   }
+  ],
+  "gate_pass": true,
+  "note": "gate is on rank correlation; Pearson on the union support is reported as the conservative companion since both rasters are binary"
+ },
+ "sha256": "a856efbac5e229194da7374c720eb83d5fd2e88568657b0f763a2e6af3d95d90",
+ "bytes": 75800,
+ "zip_sha256": "9a1dcc97e15edc63c47dbfbfb69d2c608dce422a0bb32a13a6eeb062f66f318b",
+ "submission_name": "gems61-lane-thermal-knick-40000px-20261011T020352Z",
+ "note": "chi/ksn knickpoint strike-concordance x INGENIOUS thermal corroboration; 40000 dots; E1-audited selector; UNSCORED",
+ "validator": {
+  "problems": [],
+  "ok": true,
+  "validation_class": "local on-disk template/range check; not organizer upload acceptance",
+  "bands": 1,
+  "dtype": "float32",
+  "crs": "EPSG:32611",
+  "shape": [
+   3730,
+   3292
+  ],
+  "bounds": [
+   243350.0,
+   4135550.0,
+   572550.0,
+   4508550.0
+  ],
+  "ref_bounds": [
+   243350.0,
+   4135550.0,
+   572550.0,
+   4508550.0
+  ],
+  "transform": [
+   100.0,
+   0.0,
+   243350.0,
+   0.0,
+   -100.0,
+   4508550.0
+  ],
+  "nodata": null,
+  "nan_pixels": 0,
+  "infinity_pixels": 0,
+  "min": 0.0,
+  "max": 1.0,
+  "n_nonzero": 40000,
+  "mass_outside_footprint": 0
+ },
+ "substrate_diagnostic": {
+  "citation": "Hack (1957) USGS Prof. Paper 294-B; Rigon et al. (1996) Water Resources Research 32, 3189-3194 (b ~ 1.6-2.0 for real networks)",
+  "hack_exponent": {
+   "3dep_10m_reduced_to_100m": 0.02644983116595324,
+   "official_det_elev_100m": -0.027221331976058086
+  },
+  "channel_network_jaccard": 0.2312,
+  "verdict": "Both 100 m products fail published drainage-network validity tests, so the lane's negative verdict is a RESOLUTION verdict. Fix = free 3DEP 10 m (or 1 m) elevation, fetchable on the GitHub Actions runner, not a new detector."
+ },
+ "verdict": "NEGATIVE - do not spend a submission slot. Loses to every control on the pooled hide-and-recover instrument and sits ~76x below the family's hard slot gate (best promotable holdout DTI 0.190147).",
+ "evidence_class": "HOLDOUT-DTI",
+ "slot_gate": {
+  "family_best_promotable_holdout_dti": 0.190147,
+  "spent": false
+ },
+ "sources": {
+  "dem_3dep_100m": "data/external/topo_10m_derived_100m_u8.tif",
+  "springs_csv": "data/external/gdr_wellspring_in_footprint.csv",
+  "probes_zip": "data/external/2m_temperature_probe_INGENIOUS_regional_data.zip",
+  "paleo_zip": "data/external/paleo_geothermal_regional.zip"
+ }
+}

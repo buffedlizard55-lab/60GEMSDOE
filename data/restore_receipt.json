@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "verified_files_count": 23,
-  "storage_root": "data",
+  "storage_root": "/home/user/60GEMSDOE/data",
   "files": [
     {
       "id": "training_features",
@@ -15,7 +15,7 @@
       "id": "labels",
       "dest": "labels.tif",
       "group": "core",
-      "status": "present",
+      "status": "restored",
       "bytes": 425830,
       "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
     },
@@ -23,7 +23,7 @@
       "id": "existing_faults",
       "dest": "existing_faults.tif",
       "group": "core",
-      "status": "present",
+      "status": "restored",
       "bytes": 425830,
       "sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093"
     },
@@ -31,7 +31,7 @@
       "id": "sample_submission",
       "dest": "sample_submission.tif",
       "group": "core",
-      "status": "present",
+      "status": "restored",
       "bytes": 1599597,
       "sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc"
     },
@@ -87,7 +87,7 @@
       "id": "ext_gdr_volcanic_vents_in_footprint",
       "dest": "external/gdr_volcanic_vents_in_footprint.csv",
       "group": "external",
-      "status": "present",
+      "status": "restored",
       "bytes": 672,
       "sha256": "f91bafbaccaaf2754e71d60434fc0f9eb2c7b880c6e714883f4974542ff6a0bf"
     },
@@ -95,7 +95,7 @@
       "id": "scored_h19_5",
       "dest": "scored/gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
       "group": "scored",
-      "status": "present",
+      "status": "restored",
       "bytes": 1712322,
       "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d"
     },
@@ -103,7 +103,7 @@
       "id": "scored_h19_4",
       "dest": "scored/gems19-h19-4-multiline-corroborated-openness-thermal-pop-20260930-691e4dfa-nan.tif",
       "group": "scored",
-      "status": "present",
+      "status": "restored",
       "bytes": 1716768,
       "sha256": "89109a3bd2cd3b12e7a0f388113c519843acfc9c4f46825affefc3e63dd99b22"
     },
@@ -111,7 +111,7 @@
       "id": "scored_h16_1",
       "dest": "scored/gems16-h16-1-topo-geophys-baseline-ridges-20260930-df20f65e-nan.tif",
       "group": "scored",
-      "status": "present",
+      "status": "restored",
       "bytes": 1718028,
       "sha256": "055309694ed499ca3d87e76b3f5e81c292aef6e39c418d33ff5a817aa1309bea"
     },
@@ -119,7 +119,7 @@
       "id": "scored_d15_scored",
       "dest": "scored/gems24-h25-1-dotted-h19-5-d1-5-20261002-989f59505db1-nan.tif",
       "group": "scored",
-      "status": "present",
+      "status": "restored",
       "bytes": 1632732,
       "sha256": "68d0e2e4fcc594f9a23f56c44b885fee733d026d39be55e18ad2a07289525310"
     },
@@ -127,7 +127,7 @@
       "id": "scored_d28_unscored",
       "dest": "scored/gems24-h25-1-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
       "group": "scored",
-      "status": "present",
+      "status": "restored",
       "bytes": 1603424,
       "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8"
     },
@@ -135,7 +135,7 @@
       "id": "calib_13gems_20261001_r13-lattice-s5_v2_nan-ou",
       "dest": "scored/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
       "group": "scored",
-      "status": "present",
+      "status": "restored",
       "bytes": 1706456,
       "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2"
     },

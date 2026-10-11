@@ -31,7 +31,7 @@ NAV = [("index.html", "Home"), ("executive-summary.html", "Make a submission"),
        ("research.html", "Research"), ("hypotheses.html", "Hypotheses"),
        ("leaderboard.html", "Leaderboard"), ("sources.html", "Sources"),
        ("irregularities.html", "Irregularities")]
-TITLE = "GEMSDOE32"
+TITLE = "60GEMSDOE"
 
 
 def esc(x) -> str:
@@ -62,8 +62,8 @@ def page(title: str, body: str, active: str = "", dl_btn: str = "") -> str:
 Site generated {stamp} from <code>registry/*.json</code> and <code>evidence/*.json</code> by
 <code>scripts/build_site.py</code>. Owner-reported scores are labelled <em>claim</em>; the only
 scores this repository reads itself are the other teams' public-leaderboard rows.
-<a href="https://github.com/buffedlizard55-lab/GEMSDOE32">Repository</a> ·
-<a href="data/feed.json">feed.json</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE32/issues">report an irregularity</a>
+<a href="https://github.com/buffedlizard55-lab/60GEMSDOE">Repository</a> ·
+<a href="data/feed.json">feed.json</a> · <a href="https://github.com/buffedlizard55-lab/60GEMSDOE/issues">report an irregularity</a>
 </div></footer></body></html>"""
 
 
@@ -130,7 +130,7 @@ def download_block(sub: dict | None, name: str, prefix: str = "") -> str:
 <h2>&#11015;&nbsp;ONE-CLICK SUBMISSION FILE</h2>
 <p>{primary}{zzip}{twin}</p>
 <p><b>Filename:</b> <code>{esc(name)}.tif</code><br>
-<b>Unique submission name to use:</b> <code>GEMSDOE32-{esc(sub.get('candidate_id','primary'))}</code><br>
+<b>Unique submission name to use:</b> <code>60GEMSDOE-{esc(sub.get('candidate_id','primary'))}</code><br>
 <b>Note to paste into the submit form's <em>Note (optional)</em> field
 ({len(note)}/200 characters):</b><br>
 <code>{esc(note)}</code></p>
@@ -251,11 +251,15 @@ cells outside the footprint is a legitimate competition format, but it is one va
 from the same rejection. Every primary download here is written <b>all-finite</b>, with
 <code>nodata=None</code>.</li>
 </ul>
-<p><b>The fix, verified by re-reading the written bytes:</b> every GeoTIFF offered on this site is
-single-band float32, EPSG:32611, 100 m, 3730&times;3292, <b>every one of the 12,279,160 cells
+<p><b>The fix, verified by re-reading the written bytes:</b> every file this site marks
+<b>PRIMARY</b>, <b>ANCHOR</b> or <b>SECONDARY</b>, and every <code>-zeros</code> variant of the
+audit trail, is single-band float32, EPSG:32611, 100 m, 3730&times;3292, <b>all 12,279,160 cells
 finite</b>, <b>min 0.0, max 1.0, zero cells outside <code>[0, 1]</code>, zero NaN</b>, and
-<b>no nodata tag</b>. Each download ships a
-<code>checks-*.json</code> format receipt produced by re-opening the file from disk.</p>
+<b>no nodata tag</b>. Each download ships a <code>checks-*.json</code> format receipt produced by
+re-opening the file from disk. The <code>-nan.tif</code> twins are the deliberate exception: they
+use the competition's own NaN-outside format (7,111,787 NaN cells, <code>nodata=NaN</code>) and are
+offered only as the twin the portal's documentation describes &mdash; upload the all-finite file if
+you want the container that cannot trigger the <code>[0, 1]</code> rejection.</p>
 </div>
 
 <h2>What this is</h2>
@@ -453,7 +457,7 @@ def research(fl: dict, sub: dict | None, name: str) -> str:
     ev = fl.get("evidence", {}).get("h60_2_catalogue_difference.json", {})
     hd = fl.get("holdout", {})
     research_rows = "".join(
-        f'<tr><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/research/'
+        f'<tr><td><a href="https://github.com/buffedlizard55-lab/60GEMSDOE/blob/main/docs/research/'
         f'{esc(fn)}">{esc(fn)}</a></td><td>{esc(desc)}</td></tr>' for fn, desc in RESEARCH_NOTES)
     return f"""<div class=card><h3>Session findings (2026-10-04) &mdash; read these three first</h3>
 <ul>
@@ -571,7 +575,8 @@ slot-eligible only at safety &ge; 2.0.</p>
 <tr><th>arm</th><th>dots</th><th>live-mirror &Delta;DTI</th><th>folds</th><th>credit/dot</th><th>safety</th><th>verdict</th></tr>
 <tr><td>base &mdash; GEMS28-H27-4-R1-SOLO-D2.8</td><td>40,199</td><td>0.263051</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>the anchor</td></tr>
 <tr><td>D2.8 emission (live 0.2600)</td><td>44,090</td><td>0.251593</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>the other anchor</td></tr>
-<tr><td><b>H33-2-B2 (catalogue flank B = 2)</b></td><td><b>37,654</b></td><td><b>+0.004870</b></td><td><b>4/4</b></td><td>&mdash;</td><td><b>2.08</b></td><td class=ok><b>WINNER &mdash; shipped primary</b></td></tr>
+<tr><td><b>H33-2-B2 (catalogue flank B = 2)</b></td><td><b>37,654</b></td><td><b>+0.004870</b></td><td><b>4/4</b></td><td>&mdash;</td><td><b>2.08</b></td><td class=ok><b>slot-eligible winner of round 4 &mdash; the group's owner-reported 0.2778 champion, kept as the audit-trail ANCHOR download</b></td></tr>
+<tr><td>G61 lane &times; thermal (this session's registry primary)</td><td>40,000</td><td>pooled holdout 0.002495 [0.001506, 0.003511]</td><td>4 folds</td><td>0.006407</td><td>&mdash;</td><td class=bad><b>NEGATIVE (substrate-limited) &mdash; see the status banner on the download panel</b></td></tr>
 <tr><td>H33-2-B3 (catalogue flank B = 3)</td><td>35,483</td><td>+0.001317</td><td>3/4</td><td>&mdash;</td><td>1.27</td><td class=bad>rejected: safety &lt; 2.0</td></tr>
 <tr><td>H33-2B2 + H33-1</td><td>38,554</td><td>+0.004978</td><td>4/4</td><td>&mdash;</td><td>&mdash;</td><td>slot-eligible secondary</td></tr>
 <tr><td>H33-1-P600A1800 (geothermometry)</td><td>41,999</td><td>+0.002639</td><td>2/4</td><td>0.00541</td><td>&mdash;</td><td class=bad>FALSIFIED as an addition arm</td></tr>
@@ -625,7 +630,7 @@ def hypotheses_page(fl: dict) -> str:
 <td>{esc(h.get('why_off_catalogue',''))}</td><td>{esc(h.get('differs_from_repo',''))}</td>
 <td>{esc(h.get('expected_dti',''))} · cost {esc(h.get('cost',''))} · data: {esc(h.get('data_status',''))}</td>
 <td>{esc(h.get('status',''))}</td></tr>""" for h in hyp)
-    return f"""<h2 style="margin-top:6px">The five candidates, ranked by expected value per unit of cost</h2>
+    return f"""<h2 style="margin-top:6px">The {len(hyp)} registered candidates, ranked by expected value per unit of cost</h2>
 <p class=mut>Each row names the layers it needs, the physical signature, why it can catch a fault the
 USGS&nbsp;/&nbsp;INGENIOUS catalogue lacks, how it differs from everything the group has already run,
 and its measured status. Nothing is promoted to a submission slot without passing the holdout and
@@ -716,7 +721,7 @@ def irregularities_page(fl: dict) -> str:
 <p class=mut>Anything that could mislead a reader about what is verified is recorded here rather than
 buried: unverified score claims, proxies that cannot measure the real objective, mirrors that are not
 organizer-authenticated, and naming inconsistencies. Each item is also tracked by the repository's
-<a href="https://github.com/buffedlizard55-lab/GEMSDOE32/issues">issue template</a>.</p>
+<a href="https://github.com/buffedlizard55-lab/60GEMSDOE/issues">issue template</a>.</p>
 <table><tr><th>id</th><th>severity</th><th>statement</th><th>mitigation</th></tr>{rows}</table>"""
 
 
@@ -771,7 +776,7 @@ def main() -> int:
 {download_block(sub, name, "docs/")}
 <div class=card><b>Full site:</b> <a href="docs/index.html">evidence, instruments, hypotheses and the
 irregularity register &rarr;</a> &nbsp;·&nbsp; <a href="docs/executive-summary.html">how to submit, step by step &rarr;</a>
-&nbsp;·&nbsp; <a href="README.md">README</a> &nbsp;·&nbsp; <a href="https://github.com/buffedlizard55-lab/GEMSDOE32">repository</a></div>
+&nbsp;·&nbsp; <a href="README.md">README</a> &nbsp;·&nbsp; <a href="https://github.com/buffedlizard55-lab/60GEMSDOE">repository</a></div>
 </main></body></html>"""
     (ROOT / "index.html").write_text(landing)
 

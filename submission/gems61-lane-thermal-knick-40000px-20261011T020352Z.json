@@ -1,0 +1,83 @@
+{
+  "file": "gems61-lane-thermal-knick-40000px-20261011T020352Z.tif",
+  "sha256": "a856efbac5e229194da7374c720eb83d5fd2e88568657b0f763a2e6af3d95d90",
+  "bytes": 75800,
+  "submission_name": "gems61-lane-thermal-knick-40000px-20261011T020352Z",
+  "note": "chi/ksn knickpoint strike-concordance x INGENIOUS thermal corroboration; 40000 dots; E1-audited selector; UNSCORED",
+  "note_chars": 114,
+  "validator": {
+    "path": "/home/user/60GEMSDOE/submission/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif",
+    "bytes": 75800,
+    "sha256": "a856efbac5e229194da7374c720eb83d5fd2e88568657b0f763a2e6af3d95d90",
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "ref_bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "blocksize": [
+      256,
+      256
+    ],
+    "fixture_grid": false,
+    "has_validity_mask": false,
+    "nan_pixels": 0,
+    "infinity_pixels": 0,
+    "n_nan": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0032575519289821386,
+    "n_nonzero": 40000,
+    "mass": 40000.0,
+    "mass_outside_footprint": 0,
+    "problems": [],
+    "ok": true,
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+  },
+  "zip_file": "gems61-lane-thermal-knick-40000px-20261011T020352Z.zip",
+  "zip_sha256": "9a1dcc97e15edc63c47dbfbfb69d2c608dce422a0bb32a13a6eeb062f66f318b",
+  "approved_for_weekly_slot": false,
+  "promoted": false,
+  "submission_slots_used": 0,
+  "status": "research-only; local format validation is not organizer acceptance",
+  "metadata": {
+    "arm": "lane_x_thermal_all|40000",
+    "budget": 40000,
+    "instrument_dti": 0.017872,
+    "arms_ladder": {
+      "lane_only|3000": 0.002819,
+      "lane_only|8000": 0.007922,
+      "lane_only|20000": 0.010089,
+      "lane_only|40000": 0.017811,
+      "lane_x_thermal_all|3000": 0.002819,
+      "lane_x_thermal_all|8000": 0.008106,
+      "lane_x_thermal_all|20000": 0.010098,
+      "lane_x_thermal_all|40000": 0.017872,
+      "lane_x_thermal_offcat|3000": 0.002819,
+      "lane_x_thermal_offcat|8000": 0.008106,
+      "lane_x_thermal_offcat|20000": 0.010124,
+      "lane_x_thermal_offcat|40000": 0.017872,
+      "thermal_only": 0.006867
+    }
+  }
+}

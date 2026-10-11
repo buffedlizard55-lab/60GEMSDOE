@@ -223,6 +223,30 @@
    "statement": "All four label-free H33 surfaces score BELOW a uniform-random control on the catalogue-hidden instrument at 44,090 px (H33-A 0.01874, H33-B 0.02177, H33-C 0.02407, H33-D 0.00394, union 0.02006, random 0.03438), while H33-B scores 0.09072 on the off-catalogue SGMC instrument against the incumbent's 0.06059. The catalogue-hidden instrument therefore has no power to rank hypotheses whose purpose is to find faults the catalogue lacks.",
    "evidence": "evidence/h33_holdout.json; evidence/h33_candidates.json.",
    "mitigation": "the sign disagreement is reported as the session's central finding; promotion stays gated on the identification experiment (measuring T, K and F live) rather than on this instrument."
+  },
+  {
+   "id": "IR-61-SUBSTRATE-01",
+   "severity": "high",
+   "statement": "Both 100 m elevation products available to this session fail published drainage-network validity tests: the 3DEP-10m-reduced pack gives Hack exponent b = +0.0264 and the official det_elev band b = -0.0272, against b ~ 1.6-2.0 for real networks (Hack 1957; Rigon et al. 1996), and the two products' channel networks agree on only Jaccard 0.2312 of cells (175,745 of 759,985). Depression filling raised 31.4% (resp. 17.1%) of cells. Any chi/ksn result computed on these grids is a statement about the substrate, not about the faults.",
+   "mitigation": "Recorded as the measured cause of the E2/E3 negative (evidence/e62b_substrate.json); the lane is stopped at 100 m and the retry path is the free 3DEP 10 m (or 1 m) product, which the Actions runner can fetch (evidence/probe-egress-receipt.json)."
+  },
+  {
+   "id": "IR-61-INSTR-01",
+   "severity": "high",
+   "statement": "No local instrument ranks the live leaderboard. The 12-artifact audit (evidence/e61_instrument_audit.json) gives Spearman vs live of +0.9371 for emitted mass, +0.4685 for the SGMC-off thinned/balanced-8,000 instrument, and -0.9021 for catalogue-truth; the pre-existing LM instrument (evidence/live_mirror_validation.json) reproduces only 2 of 6 known live orderings raw (3 of 6 calibrated), and mis-orders LATTICE-S5 badly (LM-calibrated 0.4366 vs live 0.0904).",
+   "mitigation": "Every verdict in this repository carries an INSTRUMENT/HOLDOUT-DTI label; no local score is written as a leaderboard score; promotion stays a separate selector step, and the only reliable predictor measured so far is emitted mass."
+  },
+  {
+   "id": "IR-61-OVERLAP-01",
+   "severity": "medium",
+   "statement": "The parallel-run protocol's raw overlap clause ('more than 70% of your dots within 3 px of one registry raster') trips for the E2/E3 file against dense lattice rasters (frac_within_3px 0.8437 on calib_r13lattice_00904.tif / r13_lattice_s5_00904.tif, 0.7012 on r11_greedy_mp.tif), but the excess over a mass-matched random control is only +0.0029 / +0.0075 - the clause is measuring footprint density, not duplication.",
+   "mitigation": "Both quantities are reported side by side in evidence/e62_lane_thermal.json; the binding gate is the rank correlation (max |Pearson| on the union support 0.9507 is reported as the conservative companion to a max Spearman of 0.0 on the sparse supports). Future lanes should read the excess-over-random column, not the raw clause."
+  },
+  {
+   "id": "IR-61-SAMPLE-01",
+   "severity": "medium",
+   "statement": "The mirrored example submission is not a plausible sample submission: data/bridge/example_submission.tif is float32 with values {0, 1} and exactly 7,172,775 cells equal to 1.0 - the complement of the label raster's zero set (labels nonzero = 7,172,775, including the -1 sentinel) - with no NaN anywhere, contradicting the portal's 'total fault absence' description of the sample.",
+   "mitigation": "Flagged for review; nothing in this repository derives anything from that file. It is used only as a shape/CRS template, and every emitted raster is validated against data/bridge/existing_faults.tif instead."
   }
  ]
 }

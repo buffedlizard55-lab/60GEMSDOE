@@ -1,70 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candidate Hypotheses - 60GEMSDOE</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 20px; color: #333; background: #f9f9f9; }
-        header { background: #005A9C; color: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; text-align: center; }
-        h1 { margin: 0 0 10px 0; }
-        nav { background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        nav a { margin-right: 15px; text-decoration: none; color: #005A9C; font-weight: bold; }
-        nav a:hover { text-decoration: underline; }
-        .card { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        h3 { color: #005A9C; border-bottom: 2px solid #eee; padding-bottom: 5px; }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Geological Hypotheses Log</h1>
-    </header>
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="executive-summary.html">Executive Summary & Submission Guide</a>
-        <a href="hypotheses.html">Hypotheses</a>
-    </nav>
-
-    <div class="card">
-        <h2>3-5 Future Candidate Geological Hypotheses</h2>
-        <p>Ranked by expected DTI improvement and implementation cost, these new hypotheses look beyond surface manifestations into distinct data correlations not captured by the current models.</p>
-
-        <h3>1. Deep Geothermal Upflow Proxies via Magnetotelluric (MT) + Gravity Gradients</h3>
-        <ul>
-            <li><strong>Layers involved:</strong> <code>cond_surf</code> (band 17), <code>depth_to_base_surf</code> (band 15), <code>iso_grav_anom</code> (band 13).</li>
-            <li><strong>Target Physical Signature:</strong> Spatial overlap of high-gradient boundaries in both gravity (indicating basement offset) and MT conductivity (indicating fluid pathways). We look for high local gradient product `grad(grav) * grad(MT)` aligned along a single strike.</li>
-            <li><strong>Why it catches hidden faults:</strong> Fluid pathways associated with geothermal activity often alter conductivity but don't always leave surface scarps. The catalogue heavily relies on surficial maps.</li>
-            <li><strong>Difference from Repo:</strong> H33-D uses MT gradient orientation coherence, but this demands concordant gravity steps (basement offsets) verifying the fluid conduit is fault-hosted.</li>
-            <li><strong>Implementation Cost:</strong> Low. Can be built quickly in Python with scipy.ndimage.</li>
-        </ul>
-
-        <h3>2. Radiometric Alteration Halos around Structural Lineaments</h3>
-        <ul>
-            <li><strong>Layers involved:</strong> GeoDAWN radiometric K, Th, U (external bands), <code>det_elev</code> (band 12).</li>
-            <li><strong>Target Physical Signature:</strong> Low K / High Th ratios indicative of hydrothermal alteration, located specifically within 300m of topographic lineaments or valleys.</li>
-            <li><strong>Why it catches hidden faults:</strong> Hydrothermal alteration creates distinct radiometric signatures. Where these line up with minor topographic weaknesses not mapped as major faults, they reveal fluid-flow active structures.</li>
-            <li><strong>Difference from Repo:</strong> Current models treat radiometrics as an edge detector; this explicitly models the ratio anomaly (K depletion) typical of geothermal alteration.</li>
-            <li><strong>Implementation Cost:</strong> Medium. Requires accurate ratio computations robust to sensor noise.</li>
-        </ul>
-
-        <h3>3. Thermal Infrared Emissivity Anomalies (Requires New External Data)</h3>
-        <ul>
-            <li><strong>Layers involved:</strong> ASTER or Landsat 8 TIR (Thermal Infrared), <code>det_elev</code> (band 12).</li>
-            <li><strong>Target Physical Signature:</strong> Sub-pixel thermal anomalies aligned in linear arrays, specifically at night-time when solar heating is removed.</li>
-            <li><strong>Why it catches hidden faults:</strong> Active geothermal systems emit heat along fault traces. Night-time TIR can detect subtle linear heat signatures missed by standard optical/lidar surveys.</li>
-            <li><strong>Difference from Repo:</strong> Introduces direct thermal sensing, the most proximal proxy to geothermal vents, which the current repository entirely lacks.</li>
-            <li><strong>Implementation Cost:</strong> High. Requires fetching ASTER/Landsat TIR from EarthExplorer/USGS APIs (free, official source: https://earthexplorer.usgs.gov), processing night-time scenes, and masking albedo effects.</li>
-        </ul>
-
-        <h3>4. Strain-Accumulation Zones from InSAR Velocity Gradients (Requires New External Data)</h3>
-        <ul>
-            <li><strong>Layers involved:</strong> Sentinel-1 InSAR LOS velocity maps (e.g., COMET or ASF DAAC), existing USGS fault lines.</li>
-            <li><strong>Target Physical Signature:</strong> Sharp linear discontinuities in InSAR unwrapped phase velocities.</li>
-            <li><strong>Why it catches hidden faults:</strong> Blind faults actively accommodating strain will show subtle creep or interseismic velocity gradients across them, completely invisible to DEMs or magnetics.</li>
-            <li><strong>Difference from Repo:</strong> Current repository uses static fields; InSAR introduces time-series deformation.</li>
-            <li><strong>Implementation Cost:</strong> High. InSAR processing is complex; relying on pre-processed DAAC products (free, official: https://search.asf.alaska.edu/) makes it feasible but requires handling large rasters and referencing to the local grid.</li>
-        </ul>
-    </div>
-</body>
-</html>
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Candidate hypotheses, ranked · 60GEMSDOE</title><link rel=stylesheet href=assets/site.css></head><body>
+<header class=top><div class=wrap>
+<h1>Candidate hypotheses, ranked</h1><nav><a href="index.html">Home</a> <a href="executive-summary.html">Make a submission</a> <a href="research.html">Research</a> <a href="hypotheses.html" class=active>Hypotheses</a> <a href="leaderboard.html">Leaderboard</a> <a href="sources.html">Sources</a> <a href="irregularities.html">Irregularities</a></nav>
+<div class=dlbtn><a class="btn" href="downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif">&#11015; Download the submission GeoTIFF</a> <a class="btn alt" href="downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.zip">.zip</a></div>
+</div></header>
+<div class=values><div class=wrap><b>Core Values.</b> <b>Maximize P(Win)</b> — every weekly submission slot is an experiment, not a lottery ticket. <b>Own the Outcome</b> — every claim here carries an evidence class, and the defect in our own previously-shipped primary was measured, published and replaced rather than quietly dropped.</div></div>
+<main class=wrap><h2 style="margin-top:6px">The 25 registered candidates, ranked by expected value per unit of cost</h2>
+<p class=mut>Each row names the layers it needs, the physical signature, why it can catch a fault the
+USGS&nbsp;/&nbsp;INGENIOUS catalogue lacks, how it differs from everything the group has already run,
+and its measured status. Nothing is promoted to a submission slot without passing the holdout and
+the slot gate.</p>
+<table><tr><th>#</th><th>hypothesis</th><th>layers</th><th>signature</th><th>why off-catalogue</th>
+<th>difference from prior work</th><th>expected / cost / data</th><th>status</th></tr><tr><td>1</td><td><b>H33-1</b><br>GDR measured geothermometry (wellspring chemistry, T &gt;= 150/180/200 C) as a *removal prior* on the 0.2708 base emission</td>
+<td>external: gdr.openei.org files/1391/wellspringdata.gdb.zip (1,014 chemistry rows, 184 geothermometer sites); external: gdr_wellspring_in_footprint.csv (27,092 rows); 19 official bands only as a corroboration filter</td><td>each spring&#x27;s Na-K-Ca / silica geothermometer temperature placed on the 100 m grid, blurred by the 300 m kernel, and used to *delete* dots from the base emission</td>
+<td>15 of the 53 sites above 150 C lie &gt;3 km from any mapped trace, so a geothermometer anomaly is evidence of a fault the catalogue has not mapped</td><td>H18-5 &#x27;thermal-anchor linking&#x27; was registered by the 16GEMSDOE operator with the same premise and was never built; this arm builds it. No arm in this repo has ever used measured geochemistry.</td>
+<td>as an ADDITION arm: FALSIFIED - measured credit/dot 0.0022-0.0054 against the live break-even bar tau_live = 0.05416 (10-25x too expensive) · cost low (one CSV + IDW surface + a threshold) · data: VERIFIED OBTAINABLE: gdr.openei.org/submissions/1391, official, CC BY 4.0, DOI 10.15121/1881483, file wellspringdata.gdb.zip; already materialised in data/raw/external/</td>
+<td>FALSIFIED as an addition arm (H33-1-P600A1800: +0.002639 LM, 2/4 folds, 0.00541 credit/dot). Retained only as a possible pruning prior; NOT slot-eligible.</td></tr><tr><td>1</td><td><b>H33-A</b><br>Multi-physics oriented-lineament consensus</td>
+<td>rtp(2); tmi(14); mag_anom(1); iso_grav_anom(13); det_elev(12); cond_surf(17); depth_to_base_surf(15); geodawn_rad K/Th/TC; lidar_scarp_features (ex_max/step_max/downface_max)</td><td>scale-normalised Hessian line response per physics x 2nd-order orientation order parameter (do independent physics agree on the strike?)</td>
+<td>the catalogue is dominated by faults that were mappable in one dataset (usually topography or the existing maps); requiring multi-physics strike agreement selects the class of curvilinear structure an expert can only accept when several fields agree</td><td>no channel or H32 surface requires *independent* physics to agree on an orientation; features.py has per-band ridges and H32-A/C have pixel products</td>
+<td>measured, catalogue instrument (hidden-catalogue mean credit) 0.01874 vs 0.03438 for a uniform-random control; SGMC prevalence-calibrated DTI 0.02832 - i.e. below the random control on the catalogue instrument · cost already built (src/gems32/h33.py::build_h33a; scripts/run_h33.py) · data: ON DISK: 19 official bands + data/external/lidar_scarp_features_u8.tif and geodawn_rad_u8.tif (mirrored, sha256-pinned)</td>
+<td>measured (not promoted)</td></tr><tr><td>1</td><td><b>G61-1</b><br>10 m-DEM chi/ksn knickpoint lane (the lane&#x27;s own specification; the resolution fix)</td>
+<td>free 3DEP 10 m (1/3 arc-second) elevation tiles, or 1 m tiles where published (prd-tnm.s3.amazonaws.com, public domain); reduced to the competition 100 m grid as per-cell concordance counts</td><td>Priority-Flood fill -&gt; D8 -&gt; chi (Perron &amp; Royden 2013) and normalised steepness ksn on a network that obeys Hack&#x27;s law, then keep only knickpoints aligning across &gt;= 3 independent first-order drainages along a common strike (the brief&#x27;s own filter), aggregated to 100 m</td>
+<td>a fault with no preserved scarp still forces a step into every channel crossing it, and the step survives in the channel profile long after the scarp has degraded, so it can see faults the curvature/scarp lanes and the 100 m substrate cannot</td><td>every DEM lane in this family ran on a 100 m substrate, which this session measured to be invalid for network extraction (Hack exponent b = +0.026 on the 3DEP-10m-reduced pack and -0.027 on the official det_elev band, against 1.6-2.0 for real networks; the two products agree on only Jaccard 0.231 of channel cells). The lidar-scarp lanes measure scarps, not channels; no arm in the repo has ever built a 10 m channel network.</td>
+<td>unblocks the one lane the brief specifies; ceiling unknown, but it is the only route by which the brief&#x27;s first test can be run as written · cost high (~700 free official tiles must be fetched on a GitHub-hosted runner; sandbox egress to the 3DEP host is blocked, and the Actions path is already verified HTTP 200 in evidence/probe-egress-receipt.json) · data: VERIFIED REACHABLE from a runner (HTTP 200 receipt, Actions run 38100992879); NOT obtainable in this sandbox</td>
+<td>NOT RUN - blocked by sandbox egress; named data verified reachable from a runner</td></tr><tr><td>2</td><td><b>H33-2</b><br>Catalogue-flank buffer B = 2 (200 m) on the 0.2708 base: a pure removal arm with a live-anchored credit-loss budget</td>
+<td>existing_faults.tif (byte-identical to labels.tif, sha256 7ba308ccdc...); the group&#x27;s best live-scored emission (GEMS28-H27-4-R1-SOLO-D2.8, 40,199 dots)</td><td>delete every dot within B pixels of the published catalogue; no transform, no new data, no geometry change - one mechanism only</td>
+<td>the hidden truth is drawn from faults *not* in the catalogue, so mass spent within 100-200 m of a mapped line can never earn round-2 credit; B = 1 was the only value the group ever tested live and it produced the 0.2708 record</td><td>the group tested B = 1 live (0.2600 -&gt; 0.2708) and never anything else; B = 2 is a new, non-obvious operating point that the live-anchored inversion shows is still inside the credit-loss budget</td>
+<td>+0.004870 live-mirror, 4/4 folds, safety factor 2.08, projected live 0.2747 (a MODEL, not a score) · cost very low (one distance transform + a threshold) · data: all inputs already in the repository; no external data needed</td>
+<td>WINNER. H33-2-B2 is the shipped primary: 37,654 dots, LM-cal 0.267921 vs base 0.263051, off-catalogue credit 58.6 units against a budget of 125.1. Slot-eligible.</td></tr><tr><td>2</td><td><b>H33-B</b><br>Aligned drainage-valley chains</td>
+<td>det_elev(12); det_elev_slope(19)</td><td>valley skeleton (NMS ridge of -det_elev) x 9-px 16-direction collinearity vote, de-emphasised where det_elev_slope is high</td>
+<td>faults that lack a preserved scarp still deflect and align drainage; a collinear chain of valley segments across several drainages is structural, which a single scarp-height map cannot see</td><td>the repo&#x27;s DEM channels are all local; nothing aggregates evidence *along* a line</td>
+<td>+49.8% over the incumbent on the SGMC-only instrument (0.09072 vs 0.06059), but -37% vs a random control on the catalogue instrument (mean credit 0.02177 vs 0.03438): the two instruments disagree in sign · cost already built (src/gems32/h33.py::build_h33b; scripts/run_h33.py) · data: ON DISK (official bands 12 and 19)</td>
+<td>measured (not promoted)</td></tr><tr><td>2</td><td><b>G61-2</b><br>Along-front outlet-chi residual steps (a relational, not a scarp, signature)</td>
+<td>one elevation product (the 3DEP-10m-reduced pack or the official det_elev band); the first-order basin graph already built by src/gems60/drains.py</td><td>per first-order basin, the residual of outlet elevation against chi; order the residuals along the range-front strike and look for a step/offset - a fault crossing the front moves every outlet on one side out of the regional trend</td>
+<td>it measures the discontinuity between adjacent drainage systems rather than the height of any scarp, so a fault whose scarp is buried or degraded still steps the along-front residual; the catalogue&#x27;s faults are exactly those with mappable surface expression</td><td>H33-B uses valley-line collinearity, H33-A multi-physics orientation agreement and the H61 arm knickpoint density; nothing uses outlet-chi residuals ordered along a front, i.e. a statistic defined between basins rather than inside one</td>
+<td>medium; the named mimic is lithologic resistance contrast along a front, which is measurable against the SGMC map-unit polygons · cost low (~1 min CPU on the cached hydrology) · data: ON DISK (data/external/topo_10m_derived_100m_u8.tif + the basin graph)</td>
+<td>NOT RUN - queued behind the instrument repair (G61-5)</td></tr><tr><td>3</td><td><b>H33-3</b><br>2 m temperature-probe thermal grid (GDR 1391 resource &#x27;2m Temperature Probes&#x27;) as a *thin* anomaly mask, added only where it is corroborated by at least two independent official layers</td>
+<td>external: gdr.openei.org/files/1391/2m_temperature_probe_INGENIOUS_regional_data.zip (1.03 MB); official bands 1-19 as the corroboration filter; catalogue buffer B = 2 as the domain restriction</td><td>a shallow thermal anomaly map; only cells where the probe temperature and an independent geophysical layer agree are eligible for emission</td>
+<td>shallow conductive heat is the physical driver of hydrothermal alteration and fault permeability, and the 2 m probe network samples ground the geophysical grid cannot resolve</td><td>features.py has 35 channels and NO thermal channel; no arm has ever used a measured temperature field. Requires the external download, so it is a registered-but-unbuilt arm.</td>
+<td>unmeasured. Expected to be cheaper than H33-1 (a *mask*, not an IDW surface) but still subject to the same tau_live bar · cost medium (one download + a join + a two-layer corroboration rule) · data: VERIFIED OBTAINABLE and OFFICIAL: gdr.openei.org/submissions/1391, CC BY 4.0, DOI 10.15121/1881483, resource 2m_temperature_probe_INGENIOUS_regional_data.zip (1.03 MB). Not yet downloaded to this checkout.</td>
+<td>registered; not yet built; no slot</td></tr><tr><td>3</td><td><b>H33-C</b><br>En-echelon scarplet chain vote on the 1 m LiDAR scarp product</td>
+<td>lidar_scarp_features_u8 (ex_max, step_max, downface_max)</td><td>scarplet skeleton x 11-px collinearity vote requiring contrast vs the local minimum (a scarp, not a slope break)</td>
+<td>a single 1 m scarplet is noise; en-echelon collinear scarplets are what expert mappers accept as a fault, and they are below the 100 m grid</td><td>the repo uses the LiDAR product only as a per-pixel corroboration weight</td>
+<td>measured, catalogue instrument 0.02407 (below the 0.03438 random control); SGMC prevalence-calibrated DTI 0.02990 · cost already built (src/gems32/h33.py::build_h33c; scripts/run_h33.py) · data: ON DISK: data/external/lidar_scarp_features_u8.tif (1 m LiDAR scarplets, sha256-pinned)</td>
+<td>measured (not promoted)</td></tr><tr><td>3</td><td><b>G61-3</b><br>Thermal-anomaly-anchored conduit traces (INGENIOUS springs + travertine/sinter + 2 m probes)</td>
+<td>GDR 1391 spring &amp; well chemistry (27,092 rows in the footprint; Na-K-Ca / silica geothermometers); GDR 1391 paleo-geothermal travertine/sinter deposits (709 sites in the footprint); GDR 1391 2 m temperature-probe anomalies (2,029 positive stations inside the footprint); elevation-gradient lineament orientation (Horn slopes) as the shape prior</td><td>lineaments that terminate at, or pass through, a thermal anomaly, weighted by the anomaly&#x27;s distance from the mapped catalogue and by measured reservoir temperature</td>
+<td>fluid reaches the surface along a permeable fault; 15+ sites above 150 C lie &gt;3 km from any mapped trace, so some unmapped structure must feed them, and a paleo-sinter or travertine body marks a conduit that need not be active today</td><td>H33-1 used geothermometry only as a deletion prior on the incumbent&#x27;s raster and was FALSIFIED as an addition arm; this treats all three thermal datasets as a joint positive anchor. The 2 m probes and the paleo-features table had never been used anywhere in the family before the E2/E3 arm of this session, which measured the corroboration term at only +2% at an 8,000-dot budget (lane_x_thermal 0.00811 vs lane 0.00792) - i.e. the thermal layer barely reorders the lane&#x27;s dots</td>
+<td>low-medium after that measurement; the corroboration is real but small · cost low (all three datasets are on disk; the build is 3 s) · data: ON DISK (data/external/gdr_wellspring_in_footprint.csv, paleo_geothermal_regional.zip, 2m_temperature_probe_INGENIOUS_regional_data.zip) - GDR 1391, CC BY 4.0, DOI 10.15121/1881483</td>
+<td>PARTIALLY MEASURED this session as a corroboration term (E2/E3); still NOT slot-eligible on any measured instrument</td></tr><tr><td>4</td><td><b>H33-4</b><br>Paleo geothermal features (GDR 1391 resource &#x27;Paleo Geothermal Features&#x27;) as a *geological prior* for the tip and step-over neighbourhoods of range-front faults</td>
+<td>external: gdr.openei.org/files/1391/paleo_geothermal_regional.zip (82.04 kB); official bands 1-19; catalogue buffer B = 2</td><td>a Quaternary/paleo geothermal feature layer (silica sinter, travertine, tufa, spring mounds) marking where the crust has already leaked fluid; these sit on active structures and are largely absent from the fault catalogue</td>
+<td>a paleo-geothermal feature is evidence of a *present-day* permeable structure; the INGENIOUS fault compilation does not carry that attribute, so the layer points at faults the catalogue has not mapped</td><td>no arm has used any geothermal-feature vector. It is a *prior over where to emit*, not a detector, so it cannot be confused with the detector-field family (H33-5).</td>
+<td>unmeasured; expected small on the public split, unbounded on the final round if the expert panel verifies a new fault · cost medium (one download + rasterise + neighbourhood emission rule) · data: VERIFIED OBTAINABLE and OFFICIAL: gdr.openei.org/submissions/1391, CC BY 4.0, DOI 10.15121/1881483, resource paleo_geothermal_regional.zip (82.04 kB). Not yet downloaded.</td>
+<td>registered; not yet built; no slot</td></tr><tr><td>4</td><td><b>H33-D</b><br>Long-straight conductive / basement structural boundary</td>
+<td>cond_surf(17); depth_to_base_surf(15)</td><td>gradient magnitude x directional coherence of the gradient direction over a 3x3 window (a straight boundary, not a blobby anomaly)</td>
+<td>MT conductivity and basement depth image the *subsurface*; a straight conductivity step locates a fault under cover, where a surface catalogue has nothing</td><td>cond_surf/depth are used as scalars or plain gradient magnitudes in features.py</td>
+<td>measured, catalogue instrument 0.00394 and SGMC prevalence-calibrated DTI 0.00418 - weakest of the five · cost already built (src/gems32/h33.py::build_h33d; scripts/run_h33.py) · data: ON DISK (official bands 15 and 17)</td>
+<td>measured (not promoted)</td></tr><tr><td>4</td><td><b>G61-4</b><br>Closed-basin / playa geometry as a structural signal (the confound turned into a feature)</td>
+<td>the depression-filled surface and its sinks (already computed by the lane); the playa/closed-basin mask every lane discards (759,635 px in this footprint)</td><td>elongation axes of closed basins, collinear alignments of adjacent basin boundaries, and the along-axis gradient of the filled base level</td>
+<td>basin-bounding faults under fill have no scarp at all; the only expression they leave is the shape and alignment of the depocentres they control, which the catalogue (a surficial map) systematically misses</td><td>every lane in the repo masks playas out as a confound (src/gems60/surface.py masks raised cells and relief &lt; 5 m); nothing uses their geometry as positive evidence</td>
+<td>low-medium; the named mimic is depositional control of basin axes by pre-existing topography · cost medium (needs a closed-basin segmentation and an orientation analysis) · data: ON DISK (derivable from the filled surface already cached)</td>
+<td>NOT RUN</td></tr><tr><td>5</td><td><b>H33-5</b><br>Detector-field tip / step-over extension: grow the existing ridge field at the propagation tip and at releasing-bend step-overs of detected structures</td>
+<td>the 35-channel detector field built from the 19 official bands; existing_faults.tif for the catalogue-flank buffer</td><td>skeletonise the ridge field, find its endpoints and its releasing/ restraining bends, and extend a short arm at each; the physical target is fault-tip damage zones and step-over relay ramps</td>
+<td>a fault tip is by definition the *end* of a mapped trace, so anything predicted there is off-catalogue by construction</td><td>the repo has ridge NMS (H32-A..D) and Poisson thinning, but no tip/step-over geometry operator at all</td>
+<td>FALSIFIED as an addition arm: +0.001870 LM, 3/4 folds, 0.00767 credit/dot vs tau_live = 0.05416 (7x too expensive) · cost medium (skeleton + Hessian ridge response + a short-extension rule) · data: no external data needed</td>
+<td>FALSIFIED as an addition arm (H33-5-P300A900). Not slot-eligible. Do not re-propose as an addition arm.</td></tr><tr><td>5</td><td><b>H33-E</b><br>Sub-kilometre seismicity lineaments and nodal-plane traces from the raw earthquake catalogue</td>
+<td>ieq_n100a15 (16) and deq_n100a15 (10) would be replaced/augmented by a raw epicentre catalogue (USGS FDSN event web service) plus moment tensors</td><td>epicentre density lineaments + focal-mechanism nodal-plane strikes as fault-plane proxies at the epicentre</td>
+<td>instrumental seismicity is a dynamic inventory: blind, low-slip-rate faults light up seismically while leaving no scarp for a geomorphic map</td><td>the supplied seismic bands are computed on a 100 km radius; measured here, ieq is 0.9935-correlated with itself at a 3 km lag, i.e. constant at the metric&#x27;s 300 m resolution</td>
+<td>not measurable here: the supplied seismic bands are constant at the metric&#x27;s 300 m scale (autocorrelation 0.9935 at 3 km), so the arm needs a raw epicentre catalogue · cost medium (curl the USGS FDSN event service + moment tensors, then lineament/nodal-plane geometry) · data: NAMED SOURCE, NOT REACHABLE from this sandbox: scripts/fetch_earthquake_catalog.sh -&gt; earthquake.usgs.gov returns HTTP 000 (and the browsing path HTTP 500); free and official, so a runner or any unrestricted host can fetch it</td>
+<td>DATA-BLOCKED (source named, obtainability not verified here)</td></tr><tr><td>5</td><td><b>G61-5</b><br>Terrain-matched selection instrument (methods; the measured binding constraint)</td>
+<td>USGS SGMC faults rasterised to 100 m (off-catalogue population 83,593 px inside the footprint; 62,703 px beyond 300 m of the catalogue); local relief from the 3DEP-derived pack; the 12 live-scored calibration artifacts restored this session</td><td>official DTI against a terrain-balanced sample of the off-catalogue population, plus the emitted-mass baseline as a control</td>
+<td>not a fault-finder: it decides which candidate raster may be spent on a slot, and every previous family instrument has been shown to rank live scores at or below chance</td><td>19GEMSDOE measured rho = +0.17 for a catalogue-truth instrument; this session measured the failure across 12 live-scored artifacts and 6 truth sets (evidence/e61_instrument_audit.json): emitted mass +0.9371 Spearman vs live, SGMC-off thinned/balanced 8,000 +0.4685, catalogue-full -0.9021 - and the pre-existing LM instrument (evidence/live_mirror_validation.json) reproduces only 2 of 6 known live orderings raw (3 of 6 after calibration)</td>
+<td>zero directly; it is the item that stops slots being spent on files that cannot beat the incumbent · cost low (175 s; already run this session) · data: ON DISK (registry/calibration_manifest.json + registry/rasters/calib_*.tif + data/external/derived_sgmc_faults_100m_u8.tif)</td>
+<td>RUN this session (E1 audit). Result: no instrument yet ranks the live board; mass is the only reliable predictor; a terrain-balanced off-catalogue instrument is the top repair target.</td></tr><tr><td>6</td><td><b>H60-1</b><br>Post-catalogue coseismic surface ruptures (Monte Cristo Range 2020 Mw 6.5 and the pre-2020 historical rupture set) as high-precision line targets</td>
+<td>USGS/NBMG 2020 MCRE surface-rupture traces (Dee et al., NBMG TR-190; SRL 92(2A)); 19 official bands only as a corroboration filter</td><td>exact mapped rupture polylines rasterised on the 100 m grid (no transform, no detection: the geometry is the measurement)</td>
+<td>the competition labels are the pre-2020 USGS/INGENIOUS catalogue; the MCRE rupture occurred on 2020-05-15 in *largely unmapped parts of the Candelaria fault* and is by construction absent from a pre-2020 catalogue, while being real, published and trivially verifiable by the expert panel</td><td>the group has emission, packing, Euler, slip-tendency, hydrothermal and catalogue-difference families, but no arm built on post-catalogue coseismic ruptures; H41/SGMC arms used *catalogue* vectors, which cannot contain a fault that post-dates the catalogue</td>
+<td>0.000 to +0.02 on the public split (single 28 km trace, ~2 % of the group&#x27;s emitted mass); unbounded on the final round because the expert panel can verify the fault and add it to the expanded label set · cost low (one vector download + rasterise + geometric thinning) · data: source located and documented (see registry/sources.json); obtainability from this sandbox is blocked (sciencebase.gov unknown-host), so the arm ships as a registered hypothesis with a CI fetch step, not as a claimed result</td>
+<td>registered; not yet measured; no slot</td></tr><tr><td>7</td><td><b>H60-2</b><br>Catalogue-difference emission: faults mapped in newer state datasets but absent from the competition labels, gated by a geophysical corroboration filter</td>
+<td>NBMG Qfaults-INGENIOUS v2 vectors (1,179 features in footprint); GDR 1391 trace table; USGS SGMC 1:24,000 faults; 19 bands for the gate</td><td>distance-to-nearest-newer-catalogue-trace &lt; 2 px AND ridge/curvature corroboration on the detrended DEM</td>
+<td>the hidden test set is *newly identified* faults: a newer state mapping that post-dates the national catalogue is, by construction, a sample of exactly that population</td><td>the group&#x27;s H41/SGMC arms emitted catalogue vectors *without* a geophysical gate and both lost their secondary proxy; here the gate is the corroboration filter inside `emission.py` (credit bar), and the arm is scored at matched mass</td>
+<td>0 to +0.01 proxy · cost medium (vector download + rasterisation + gate) · data: vectors are hash-pinned in the group&#x27;s own mirrors (GEMSDOE24) and reachable from this sandbox via the GitHub API</td>
+<td>registered; partially measured (see evidence/)</td></tr><tr><td>8</td><td><b>H60-3</b><br>Adaptive credit-bar emission: stop the emission where the marginal expected credit per unit mass falls below 0.2 x DTI (the metric&#x27;s own break-even)</td>
+<td>any detector field</td><td>greedy maximum-expected-coverage packing of the field under the official triangular kernel with an *adaptive* stopping rule</td>
+<td>not a geological hypothesis but the decision rule for every other one: it removes the fixed-count budget that the group&#x27;s sweeps showed to be family-limited and replaces it with the metric&#x27;s analytic bar</td><td>H37-1 fixed the packing objective but kept a matched *count*; here the count is an output, and the same rule gives the discovery-weighted variant used for the two-round objective</td>
+<td>measured on the blocked holdout (see evidence/holdout_run1.json) · cost low (already implemented) · data: n/a (no new data)</td>
+<td>measured on the blocked holdout</td></tr><tr><td>9</td><td><b>H60-4</b><br>Two-round discovery option value: lower the emission bar for candidates whose verification is likely, because the same file is re-scored against the expanded label set</td>
+<td>any field; published fault evidence for the verification prior</td><td>objective DTI_1 + rho * DTI_2 with rho set by the prize structure ($50k initial round vs $250k final round); the effective bar becomes 0.2 x DTI / (1 + rho)</td>
+<td>the initial-round label set is deliberately incomplete, so public-LB maximisation under-prices true-but-unlabelled faults; the metric&#x27;s alpha = 0.2 (false positives four times cheaper than false negatives) is the organisers&#x27; own statement that they want such predictions</td><td>no prior arm, gate or budget in the group&#x27;s record uses the two-round structure; every promotion bar to date is round-1 only</td>
+<td>raises the *expected* final-round score; cannot be measured on any local holdout and must be reasoned about from the published prize structure · cost none (a change in the decision rule) · data: n/a</td>
+<td>implemented as A3 in the holdout ladder and as `rho` in `bo.slot_gate`</td></tr><tr><td>10</td><td><b>H60-5</b><br>Cross-scale drainage-network organisation (stream-power / knickpoint residuals) as an independent lineament family</td>
+<td>1 m / 10 m 3DEP DEM from the official link table (1m_DEM_links.csv)</td><td>chi-profile and knickpoint residuals along the channel network; aligned knickpoints across a basin trace a fault that displaces the network but has no preserved scarp</td>
+<td>targets faults in alluvium/valley fill with no topographic scarp, i.e. exactly the class a surface-mapping catalogue lacks</td><td>the group ran a drainage arm (H43) that *passed* its primary screen and was withheld on a secondary proxy; it was built on the 100 m detrended surface, and a 1 m/10 m channel network with a chi transform is a different measurement</td>
+<td>0 to +0.01 · cost high (DEM tile download + hydrology) · data: the official link table is mirrored in the group&#x27;s repo (`data/dem_links.json`, sha256 8804dbff8754...); tile fetch needs CI egress</td>
+<td>registered; not run (cost), no slot</td></tr><tr><td>11</td><td><b>H61-1</b><br>Basement-step lineaments gated by surface quiescence</td>
+<td>depth_to_base_surf (organizer: &#x27;Depth to basement surface - thickness of sedimentary cover&#x27;); det_elev_slope, det_elev; iso_grav_anom + iso_grav_anom_hg / _vg / _slope</td><td>multi-scale ridge extraction on the GRADIENT-MAGNITUDE RIDGE (Hessian ridge, 3 scales) of sediment-cover thickness, then skeletonised: a fault-block boundary is a STEP in cover thickness, so the boundary is the crest line of the gradient field, not the gradient blob. Gated by LOW surface expression (small det_elev_slope, small surface curvature).</td>
+<td>a Quaternary surface-fault catalogue records what is exposed; a block boundary under thick basin fill has no surface trace and therefore cannot be in it. The quiescence gate is the discriminator: it removes exactly the population the catalogue already contains (faults with scarps).</td><td>features.py has only depth_grad = smoothed |grad band15|, a first-derivative magnitude. It never extracts the ridge line of that gradient, never uses the cover-thickness VALUE as a concealment weight, never applies a surface-quiescence gate, and never works at more than one scale. The sibling repository&#x27;s concealment prior used SGMC map-unit polygons, not the official cover-thickness raster.</td>
+<td>highest of the five: it changes WHERE mass goes rather than how it is packed · cost low (one official band, already on disk; no new data) · data: band already fetched and hash-verified (registry/data_manifest.json)</td>
+<td>registered; NOT validated; no slot requested</td></tr><tr><td>12</td><td><b>H61-2</b><br>Seismicity lineament coupling</td>
+<td>ieq_n100a15 (organizer: &#x27;Earthquake intensity or density&#x27;); deq_n100a15 (organizer: &#x27;Distance to earthquake&#x27;); det_elev, det_elev_slope as the corroborating surface witness</td><td>anisotropic ridge / coherence maxima of the seismicity-density field (structure tensor -&gt; coherence + orientation, then non-maximum suppression along the minor axis at two scales), required to coincide with a curvature inflection in the detrended surface. A line of hypocentres is a fault plane; a density blob is not.</td>
+<td>instrumental seismicity is a DYNAMIC inventory. Blind faults, creeping faults, and faults whose slip rate is too low to have preserved a Quaternary scarp still rupture small earthquakes; a geomorphic catalogue records only the last of those three.</td><td>features.py carries bands 10 and 16 ONLY as raw columns; no derived channel uses them, no registry arm uses seismicity, and there is no ridge, coherence or orientation transform on either band anywhere in the tree.</td>
+<td>moderate: coverage gain concentrated in basin interiors the field currently under-serves · cost low (bands on disk; free USGS ComCat API optional for hypocentral depths) · data: bands on disk; ComCat obtainability untested</td>
+<td>registered; NOT validated; no slot requested</td></tr><tr><td>13</td><td><b>H61-3</b><br>Tilt-angle (TDR) zero-crossing magnetic edge lineaments</td>
+<td>tc (organizer: &#x27;Tilt angle or total curvature - magnetic field derivative FOR EDGE DETECTION&#x27;); tmi_vg, tmi_hg, rtp, tmi</td><td>the ZERO-CROSSING CONTOUR of the tilt angle, not its magnitude: the tilt derivative is the standard depth-independent locator for a magnetic contact, whereas the magnitude peaks wander with source depth. Paired with tmi_vg as an independent witness, rejecting where the two disagree.</td>
+<td>TDR edges respond to SUBSURFACE magnetisation contrasts irrespective of exposure, so they locate contacts under cover and contacts with no topographic expression.</td><td>features.py derives tmi_edge = |grad band14| and rtp_edge = |grad band2| but never touches band 6 or band 9. Band 6 is the layer the organizers describe as being for edge detection and it has NO derived channel in this repo. Measured: tmi_edge correlates with official band 3 at rho = +0.9330 (IR-32-REDUND-01), so the repo spends a channel recomputing a supplied layer while leaving the purpose-built edge layer unused.</td>
+<td>moderate: strongest where magnetic coverage exists · cost low (bands on disk) · data: bands on disk</td>
+<td>registered; NOT validated; no slot requested</td></tr><tr><td>14</td><td><b>H61-4</b><br>GNSS-derived full 2-D strain tensor -&gt; principal-axis anisotropic matched filter</td>
+<td>official bands INSUFFICIENT: geod_2ndinv, geod_shearrate and geod_dilaterate are three scalars of a tensor; orientation is not recoverable from them; external: Nevada Geodetic Laboratory MIDAS velocity field (http://geodesy.unr.edu/) and/or EarthScope/UNAVCO GNSS velocity products (https://www.unavco.org/)</td><td>reconstruct the full 2-D strain-rate tensor from GNSS velocities, take its principal extensional axis, and use that azimuth as the orientation prior of an oriented matched filter (a fault strikes near-perpendicular to sigma_3), tuned per pixel rather than isotropically.</td>
+<td>orientation predicts WHICH WAY a missing fault must run, so the search can be steered to the mechanically favoured strike where the topographic expression is ambiguous.</td><td>no arm in this repo uses the orientation of the geodetic tensor, because it is not in the supplied data.</td>
+<td>indirect: sharpening rather than extension · cost medium · data: NOT OBTAINED and NOT VERIFIED as obtainable from this sandbox; per the standing brief a candidate needing external data must have its source checked as obtainable BEFORE being proposed as viable, so this entry is ranked and explicitly NOT proposed as ready to run</td>
+<td>registered; data obtainability unverified; no slot requested</td></tr><tr><td>15</td><td><b>H61-5</b><br>Metre-scale scarp matched filter from the official 1 m DEM link table</td>
+<td>external: 1 m / 10 m 3DEP DEM tiles from the official 1m_DEM_links.csv; det_elev, det_elev_slope for context</td><td>anisotropic matched filter for metre-scale scarps; a fault with less than 1 m of throw averaged over a 100 m cell is invisible in the provided grid by construction.</td>
+<td>below-grid-resolution scarps are precisely the class a 1:24,000-scale surface compilation omits.</td><td>the repo has NO LiDAR arm at all. H60-5 (chi/knickpoint residuals) is registered but was never run; this variant is a matched filter on the scarp itself, which is a cheaper and different measurement.</td>
+<td>indirect, and the tile fetch plus hydrology is heavy on 2 vCPU · cost high · data: the official link table is mirrored in a sibling repository (sha256 8804dbff8754...); the tiles themselves were NOT obtained and their obtainability from this sandbox is unverified</td>
+<td>registered; data obtainability unverified; no slot requested</td></tr></table>
+<h2>Promotion rules (preregistered)</h2>
+<ol>
+<li>every hypothesis is registered with its layers, signature, novelty and data status before it is
+fitted;</li>
+<li>the holdout protocol is written to <code>registry/preregistration.json</code> <em>before</em> the
+run, and the run's own copy is embedded in its evidence JSON;</li>
+<li>a candidate must beat the incumbent <em>at matched emitted mass</em> on &ge;3 of 4 blocked folds
+(preregistered rule);</li>
+<li>it must then pass <code>bo.slot_gate</code>: expected improvement over the incumbent must exceed
+the slot cost under the surrogate, and the candidate must not be a repeat;</li>
+<li>every holdout evaluation is appended to <code>registry/observations.jsonl</code> as training data
+for the surrogate, submitted or not.</li></ol>
+<h2>What the current evidence already says</h2>
+<ul>
+<li><b>The catalogue-difference lane is nearly empty.</b> GDR QFaults v2 has
+1 px beyond 300&nbsp;m of the given
+catalogue; only the older SGMC compilation has a large off-catalogue population
+(61664 px).</li>
+<li><b>The best field is blind to that population</b> beyond a
+1.402&times;
+enrichment over background — so the discovery lane is genuinely unexploited, not already used up.</li>
+<li><b>The 2020 Monte Cristo rupture is inside the footprint</b> and ruptured largely unmapped ground
+with displacements mostly below 5&nbsp;cm — a real fault the catalogue lacks, which is why H60-1 is
+first on the list.</li></ul></main>
+<footer><div class=wrap>
+Site generated 2026-10-11 02:19 UTC from <code>registry/*.json</code> and <code>evidence/*.json</code> by
+<code>scripts/build_site.py</code>. Owner-reported scores are labelled <em>claim</em>; the only
+scores this repository reads itself are the other teams' public-leaderboard rows.
+<a href="https://github.com/buffedlizard55-lab/60GEMSDOE">Repository</a> ·
+<a href="data/feed.json">feed.json</a> · <a href="https://github.com/buffedlizard55-lab/60GEMSDOE/issues">report an irregularity</a>
+</div></footer></body></html>

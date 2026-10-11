@@ -49,8 +49,17 @@ def test_dti_exact_matches_bruteforce():
 def test_data_restore_and_sentinel_sanitization_manifests():
     _require_inputs("training_features.tif")
     restore = json.loads((ROOT / "data" / "restore_receipt.json").read_text())
-    assert restore["verified_files_count"] == 22
-    assert all(f["status"] == "present" for f in restore["files"])
+    # The receipt is data-driven: `present` means the file was already on disk and hash-matched,
+    # `restored` means it was re-fetched from the pinned mirror and hash-matched. Both are successes.
+    # What must hold: the count equals the number of listed files, every listed file exists at its
+    # recorded size, and every row carries a sha256 -- never a hard-coded count that drifts silently.
+    assert restore["verified_files_count"] == len(restore["files"]) >= 22
+    for f in restore["files"]:
+        assert f["status"] in ("present", "restored"), f
+        dest = ROOT / "data" / f["dest"]
+        assert dest.is_file(), f"receipt-listed file missing: {f['dest']}"
+        assert dest.stat().st_size == f["bytes"], f"size drift: {f['dest']}"
+        assert len(f["sha256"]) == 64 and f["sha256"] != "0" * 64, f
 
     prep = json.loads((ROOT / "data" / "prepared_manifest.json").read_text())
     assert prep["grid"]["epsg"] == 32611

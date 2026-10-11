@@ -1,0 +1,36 @@
+{
+ "experiment": "E2b substrate validity for the chi/ksn lane",
+ "generated_utc": "2026-10-11T02:06:31Z",
+ "citation": "Hack (1957) USGS Prof. Paper 294-B; Rigon et al. (1996) Water Resources Research 32, 3189-3194 (b ~ 1.6-2.0 for real networks)",
+ "products": {
+  "3dep_10m_reduced_to_100m": {
+   "sha256_of_source": "a6398d9950965dec6aae6ccecdaa6ced48645d133eab222cbdd11def9bdabfa4",
+   "filled_raised_fraction": 0.31391695107504625,
+   "hack_exponent_A_vs_L": 0.02644983116595324,
+   "n_channel_px": 506408,
+   "n_links_first_order": 14023,
+   "n_knickpoints": 4240,
+   "flow_distance_max_km": 289.9,
+   "acc_max_px": 1650685.0,
+   "acc_median_channel_px": 288.0
+  },
+  "official_det_elev_100m": {
+   "sha256_of_source": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+   "filled_raised_fraction": 0.17078347231360425,
+   "hack_exponent_A_vs_L": -0.027221331976058086,
+   "n_channel_px": 429322,
+   "n_links_first_order": 14099,
+   "n_knickpoints": 4161,
+   "flow_distance_max_km": 246.8,
+   "acc_max_px": 824880.0,
+   "acc_median_channel_px": 334.0
+  }
+ },
+ "channel_network_agreement": {
+  "px_in_both": 175745,
+  "union": 759985,
+  "jaccard": 0.2312,
+  "interpretation": "independent 100 m elevation products agreeing on the channel network is what would license treating the network as data rather than artefacts"
+ },
+ "seconds": 42.1
+}
