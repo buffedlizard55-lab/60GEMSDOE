@@ -272,3 +272,29 @@ lidar-scarp ridge ← `7GEMSDOE/downloads`; dem10-multiphysics ← `12GEMSDOE/do
 **Maximize P(Win)** — slots are spent only on validated, unique, promoted files; this session
 promoted nothing because nothing deserved it. **Own the Outcome** — the negative result is
 published with full evidence so the next session does not re-run a dead lane.
+
+---
+
+## Merged parallel session (on `main` since PR #1 — kept, audited, and lane-checked)
+
+A parallel session of this same brief landed the GEMSDOE32 pipeline in this repository (its own
+`src/gems32` + `src/gemsdoe32` packages, `scripts/`, `tests/`, CI) together with:
+
+* its **H61 knickpoint raster** — `docs/downloads/submission.tif`, sha256 `386e7cd1…5a5e7`,
+  `submission_card.json` holdout 0.01305 on *its own* instrument (not comparable to our pooled
+  evaluator), 983,855 emitted px;
+* the group's **champion** download — `docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif`
+  (owner-reported live **0.2778**, the group best);
+* its fetcher retained as `scripts/fetch_data.py` (used by its CI, `--dest` interface).
+
+**Lane-drift check of THIS session's raster against the parallel session's H61 raster** (the
+registry now includes it): Spearman ρ = **+0.0071** (gate 0.90), 36.7% of our dots within 3 px of
+its dots (gate 70%) → **PASS — not a duplicate**; the two are distinct realizations of the same
+lane, ours sparse and concordance-filtered, theirs dense. Note their `submission_card.json` says
+"promote" on an instrument that was never calibrated against the live board; this session's shared
+evaluator read of our own raster is NEGATIVE, and the promotion decision belongs to the selector
+step in any case.
+
+For the reproduce steps of the merged GEMSDOE32 pipeline see `AGENTS.md`, `CONTRIBUTING.md` and
+`docs/` artifacts it shipped; this README's run card above remains the record of the knickpoint-lane
+session.

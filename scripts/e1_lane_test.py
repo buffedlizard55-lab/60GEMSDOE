@@ -59,7 +59,7 @@ def load_inputs():
     feats = DATA / "training_features.tif"
     if not feats.exists():
         raise SystemExit(
-            "data/training_features.tif missing - run `python scripts/fetch_data.py` "
+            "data/training_features.tif missing - run `python scripts/fetch_bridge.py` "
             "to reassemble the hash-pinned bridge (see README).")
     with rasterio.open(feats) as ds:
         det = ds.read(12).astype(np.float64)

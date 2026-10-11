@@ -1,13 +1,46 @@
-# large data, caches, working artifacts — never commit
-data/training_features.tif
-data/labels.tif
-data/sample_submission.tif
-data/gems-geodawn-numerical-features.tif
-data/work/
-data/*.tif
-.bridge_upstream/
+# Python & build artifacts
 __pycache__/
-*.pyc
+*.py[cod]
+.venv/
+venv/
 .pytest_cache/
-# bridge parts are re-fetchable from the pinned upstream mirror (scripts/fetch_data.py)
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+.cache/
+
+# Large competition rasters and regenerable numpy caches are restored via
+# bash scripts/download_competition_data.sh and python scripts/prepare_data.py
+data/*
+!data/.gitkeep
+!data/README.md
+!data/restore_receipt.json
+!data/prepared_manifest.json
+!data/holdout_surrogate_log.json
+!data/holdout_surrogate_log.csv
+
+*.npy
+*.npz
+*.partial
+*.assembling
+
+# Keep audited submission deliverables and verification sidecars in docs/downloads/
+!docs/downloads/*.tif
+!docs/downloads/*.zip
+!docs/downloads/*.json
+
+# OS / Editor
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- 60GEMSDOE lane session additions ---
+# bridge parts are re-fetchable from the pinned upstream mirror (scripts/fetch_bridge.py)
 data/bridge/gems-geodawn-numerical-features.tif.part-*
+.bridge_upstream/
+# keep the small hash-pinned bridge files (manifest + template + labels) in git
+!data/bridge/
+!data/bridge/manifest.json
+!data/bridge/example_submission.tif
+!data/bridge/existing_faults.tif
