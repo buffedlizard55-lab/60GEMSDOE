@@ -50,3 +50,9 @@ data/bridge/gems-geodawn-numerical-features.tif.part-*
 !data/external/
 !data/external/*.tif
 !data/external/*.json
+
+# 60GEMSDOE session arena/54b1897a (third independent run of the knickpoint lane)
+out/
+data/raw/
+registry/cache/
+*.download

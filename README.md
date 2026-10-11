@@ -289,6 +289,7 @@ lidar-scarp ridge ← `7GEMSDOE/downloads`; dem10-multiphysics ← `12GEMSDOE/do
 
 ## Core values
 
+
 **Maximize P(Win)** — slots are spent only on validated, unique, promoted files; this session
 promoted nothing because nothing deserved it. **Own the Outcome** — the negative result is
 published with full evidence so the next session does not re-run a dead lane.
@@ -529,3 +530,61 @@ did not get; (2) χ-**transient** inversion instead of a χ-steady step; (3) kni
 **recurrence in χ** across basins rather than knickpoint position; (4) a playa /
 closed-basin base-level mask (the fill raises **899,623 cells, 17.4 %** of the valid grid);
 (5) lithology-normalised ksn.
+
+<!-- 60GEMSDOE-H60A-CORRIDOR:BEGIN -->
+## Lane-60 third run (session `arena/54b1897a-60gemsdoe`) — H60-A knickpoint corridors, NEGATIVE
+
+> **File:** [`downloads/gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204-zeros.tif`](downloads/gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204-zeros.tif)
+> (mirrored in `docs/downloads/`) · **report:** [`docs/lane-knick-corridor-report.html`](docs/lane-knick-corridor-report.html)
+> · **run card:** [`evidence/run_card_current.json`](evidence/run_card_current.json)
+> **DOWNLOAD: OK (research / education) · SUBMIT TO THE COMPETITION: NO** — verdict `negative`, 0 slots spent.
+
+* **E1 mandated first test — PROCEED** (the only one of the three runs to pass it): channels crossing
+  withheld fault segments step **+0.1089** log-`ksn` harder than random lines of the
+  same orientation and length, 95 % CI **[0.0586, 0.1569]**, 323
+  withheld components, 59.4 % positive.
+* **E2 leakage canary — clean**: `knickpoint_step` 0.586, `chi` 0.562, `ksn` 0.559, `drainage_area`
+  0.527, `lane_p` 0.518. The deliberate control `dist_to_visible` flags at **0.924**, proving the
+  canary has power.
+* **E3 pooled HOLDOUT-DTI — NEGATIVE** (`gems57-pooled-hide-v2`, α 0.2, β 0.8, 300 m triangular,
+  22641 withheld positives, 159 spatial clusters, 1000 paired
+  draws): lane **0.01639** [0.01223, 0.02061] vs `random_mass_control`
+  0.03908, `ksn_only_no_alignment`
+  0.03118, `distance_only`
+  0.19073. Surface arm
+  0.01377 vs
+  0.05942. It loses to every control,
+  paired CIs excluding zero.
+* **Uniqueness — complete 655/655 scan** (651 fetched + 4 recovered by blob SHA from `55GEMSDOE` git
+  history, all sha256-verified): worst full-footprint ρ **0.02088**
+  (limit 0.90), worst Jaccard 0.01158, no byte- or pixel-identical
+  prior; the literal forward-overlap gate **fires** on 60 dense
+  universal-support priors (worst 1.000) → logged as a duplicate,
+  `unique_literal = false`, `stop_required = true` (IR-60-GATE-01).
+* **Format**: 15/15 local checks pass, every cell finite and in `[0, 1]` (zeros mode, never NaN — the
+  fix for the portal's *"Predicted values must be in range [0, 1]"*), EPSG:32611, 3730 × 3292,
+  transform identical to `sample_submission.tif`, **0** dots on mapped catalogue faults, recomputed
+  from scratch and asserted pixel-identical (`--verify-existing`).
+* **Shared-tool fixes (fixed once, no private fork)**: local-window dilation + a per-cell transect pool
+  in the mandated first test (IR-60-PERF-01); `geomorph.branch_signature` replacing terminal-sink
+  identity as the independence measure, because the basin is internally drained — 1,224 sinks for
+  5.17 M cells made the pre-registered ≥ 3 rule reject 36,556 of 36,633 candidates (IR-60-INDEP-01,
+  fixed before any score was recorded; superseded build kept in `evidence/superseded/`, never linked or
+  scored); `binary_dilation` above 100 k positive cells in the uniqueness scan after a silent OOM
+  (IR-60-MEM-01) plus an incremental rows cache.
+* **Lane inputs** live in `data/official/` (restored through the hash-pinned bridge, receipt
+  `evidence/data_preparation.json`); lane code is `src/gems60/geomorph.py` + `src/gems60/lane.py`
+  (new files — it neither forks nor overwrites `src/gems60chi/` or the first run's `src/gems60/`
+  modules), drivers `scripts/build_geomorph_features.py`, `scripts/run_lane60.py`,
+  `scripts/build_submission60.py`, `scripts/check_uniqueness60.py`, `scripts/write_run_card.py`,
+  `scripts/build_site60.py`; tests `tests/test_geomorph.py` (18 passing).
+* **Irregularities**: IR-60-DATA-01 (3DEP/USGS unreachable → band 12 stands in), IR-60-CITE-01
+  (DOIs cited for manual review, not fetched), IR-60-GATE-01 (literal overlap gate fires on dense
+  priors), IR-60-API-01 (`gh api` REST rate limit → git protocol for large blobs), IR-60-PROXY-01
+  (holdout truth *is* the catalogue), IR-60-MEM-01, IR-60-PERF-01, IR-60-INDEP-01, IR-60-CORPUS-01
+  (resolved: 4 deleted registry rasters recovered from git history).
+* **Next session**: with three convergent negatives, leave this lane. If it is touched again, run
+  H60-D first (gate knickpoints on a coincident `depth_to_base_surf` step — the direct test of the
+  named lithologic mimic) and re-derive the emission bar from the live-anchored truth model instead of
+  the catalogue-proxy holdout.
+<!-- 60GEMSDOE-H60A-CORRIDOR:END -->
