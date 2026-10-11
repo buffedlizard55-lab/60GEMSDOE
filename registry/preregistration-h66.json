@@ -1,0 +1,92 @@
+{
+  "schema": "preregistration/2",
+  "id": "H66-1",
+  "registered_utc": "2026-10-11T15:45:21Z",
+  "registered_by": "session arena/970443fc-60gemsdoe (60GEMSDOE)",
+  "commit_at_registration": "55a85d2c98f38d4b5a40e8bbb50f13e2a98bd56e",
+  "written_before_computation": true,
+  "note": "Written and committed before any H66 number existed. No field in this file is edited after the run; post-hoc observations go in evidence/h66_*.json and the run card.",
+  "lane": "tectonic geomorphology: channel steepness (chi / ksn) and knickpoints, not scarp shape",
+  "hypothesis": "Chi/ksn steepness steps corroborated across >= 3 independent drainages along a common strike mark fault traces that the GIVEN Quaternary catalogue omits. Because the competition's hidden truth is off-catalogue, the lane's mandated first test must be run against off-catalogue fault segments, not against withheld catalogue segments.",
+  "mechanism": "A fault offsets base level; the steepness contrast propagates upstream as a knickpoint (Kirby & Whipple 2012, J. Struct. Geol. 44, 54-75, doi:10.1016/j.jsg.2012.07.009; Perron & Royden 2013, ESPL 38, 570-576, doi:10.1002/esp.3302; Gailleton et al. 2019, ESurf 7, 211-230, doi:10.5194/esurf-7-211-2019). Single-channel steps are ambiguous; strike-aligned corroboration across drainage divides is not, because no single-channel process is strike-aligned.",
+  "why_the_target_changes": {
+    "measured_premise": "evidence/e61_instrument_audit.json (INSTRUMENT, n = 12 live-scored family artifacts) reports Spearman rho vs the live score of -0.9021 for the catalogue-truth DTI and +0.4685 for the SGMC-off-catalogue-truth DTI, +0.7343 for credit-per-pixel and +0.9371 for minus emitted mass.",
+    "consequence": "Every knickpoint-lane run in this repository gated on the catalogue hide-and-recover. That instrument ranks the owner-reported 0.2778 champion LAST of twelve (catalogue credit-per-pixel 0.0100) and the 0.2632 artifact FIRST (0.1192). A lane can therefore pass or fail that gate without any bearing on the leaderboard.",
+    "new_target": "USGS SGMC geologic-map faults rasterised to the competition grid and > 300 m from the given catalogue (62,703 px, evidence/e3_sgmc_locality.json). These are real mapped faults the given catalogue omits - the only in-repository truth set that contains off-catalogue faults."
+  },
+  "named_non_fault_mimic": "Lithologic contacts and basin-fill boundaries (a hard-over-weak contact also steps ksn and can be strike-aligned), alluvial fan-apex and fan-head trenching steps, playa / pluvial-shoreline base levels, channel-head and colluvial-to-fluvial transitions near the A_ch threshold, and SGMC mapping of old, inactive or poorly located traces.",
+  "substrate": {
+    "product": "USGS 3DEP 1/3 arc-second (~10 m) DEM, 18 current 1x1-degree tiles, public domain",
+    "landing": "https://www.usgs.gov/3d-elevation-program",
+    "bucket": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/",
+    "committed_reduction": [
+      "data/external/dem10_chi_100m_i16.tif",
+      "data/external/dem10_chi_100m_u8.tif",
+      "data/external/dem10_chi_100m_sig_i32.tif"
+    ],
+    "reduction_pins": "data/external/dem10_chi_100m.manifest.json",
+    "feature_cache": ".cache/features65 (scripts/build_dem10_cache.py, sha256-checked inputs)",
+    "reason": "This is the same native-10 m reduction H65-1 used, so H66 changes the TARGET and the CONFOUND SET, not the DEM. Any difference is attributable to those two changes."
+  },
+  "declared_parameters": {
+    "band": "step_max_x1000 / 1000 (log ksn ratio, steeper-upstream extreme, 500 m two-segment dz/dchi)",
+    "theta_ref": 0.45,
+    "A0_m2": 1.0,
+    "pixel_m": 100.0,
+    "a_min_cells": 20,
+    "window_cells": 5,
+    "step_floor_ksn": 0.5,
+    "step_winsor_log_ratio": 2.302585092994046,
+    "z_min_candidate": 1.5,
+    "n_drainage_min": 3,
+    "corridor_half_len_px": 6,
+    "corridor_half_width_px": 2,
+    "n_strike_bins": 18,
+    "trace_decay": 0.5,
+    "block_px": 400,
+    "catalogue_buffer_px": 2,
+    "production_dot_budget": 37654,
+    "budget_reason": "37,654 is the emitted mass of the owner-reported 0.2778 champion (registry/rasters/dotted_b2_prune_02778.tif, counted). Matching it removes the strongest known confound (Spearman of minus-mass vs live score = +0.9371) so any live-score difference is attributable to the field, not to thrift.",
+    "min_segment_px_E1": 6,
+    "transects_per_component": 10,
+    "max_components_per_cell": 900,
+    "bootstrap_draws": 1000,
+    "bootstrap_seed": 6601
+  },
+  "confound_set": {
+    "declared_in_brief": ["lithology", "climate gradients", "ephemeral channels", "playa base levels"],
+    "implementation": {
+      "playa_base_level": "cache 'playa' = raised_n >= 50 of 100 fine cells (priority-flood raise > 1 m in >= 50% of the 10 m cells under the competition pixel)",
+      "lithology": "airborne radiometrics from the pinned GeoDAWN pack data/external/geodawn_rad_u8.tif: K (band 1) or Th (band 2) above the 95th footprint percentile = clay-rich / alluvial cover, excluded",
+      "climate_gradient": "blockwise z-score of the step inside 40 km blocks (gems60.lane.blockwise_zscore); never ranked globally",
+      "ephemeral_alluvial": "channel-hood requires contributing area >= 20 cells (0.20 km^2); the 10 m reduction already excludes filled flats and edge-contaminated catchments",
+      "substitution_notice": "H60-A and H65-1 used training_features.tif band 15 (depth_to_base) p90 and band 17 (cond_surf) p95 for the lithology / basin-fill masks. That 419 MB raster is not in git (GitHub 100 MB blob limit) and is absent from this sandbox, so the pinned radiometric substitute above is used instead. Recorded as irregularity IR-66-DATA-01. The shared helper fails closed: it uses training_features.tif whenever that file is present, so H60-A / H65-1 reproduce exactly on a machine that has it."
+    }
+  },
+  "experiments": {
+    "E1": {
+      "name": "mandated first test, run against BOTH targets",
+      "statistic": "mean log-ksn step within 3 px of the segment, minus the mean over 10 random same-orientation same-length transects drawn from the same cell",
+      "E1a_literal_brief": "withheld catalogue segments from the shared hide-and-recover (mode 'all'); reported for comparability with H60-A (+0.1089) and H65-1 (+0.0326); NOT gating",
+      "E1b_off_catalogue": "SGMC off-catalogue segments >= 6 px; random transect pool excludes a 10 px dilation of both the given catalogue and the off-catalogue set",
+      "gate_G1": "PROCEED only if E1b mean > 0 AND the 95% percentile-CI lower bound > 0. Otherwise STOP: the lane has no off-catalogue signal and the emitted file is labelled NEGATIVE / DO NOT SUBMIT."
+    },
+    "E2": {
+      "name": "leakage canary + off-catalogue instrument skill",
+      "canary_rule": "max(AUC, 1-AUC) > 0.90 is leakage until proven otherwise; features tested alone: knickpoint step, ksn, drainage area, lane surface p, distance to visible catalogue",
+      "instrument": "official DTI (alpha 0.2, beta 0.8, 300 m triangular kernel) against sgmc_off_full / sgmc_off_thin8000 / sgmc_off_balanced8000, with the organizer's catalogue mask, exactly as scripts/e61_instrument_audit.py computes it",
+      "controls": "mass-matched (37,654 px) random, ksn-only-no-alignment, distance-to-catalogue-only, and the champion's own dots read from registry/rasters/dotted_b2_prune_02778.tif",
+      "inference": "paired spatial-block bootstrap over 20 km blocks, 1000 draws, seed 6601",
+      "evidence_class": "INSTRUMENT-DTI. This is NOT a HOLDOUT-DTI and NOT an ORGANIZER-CONFIRMED score: the truth is a public proxy, not withheld competition labels.",
+      "gate_G3": "lane credit-per-pixel must exceed the mass-matched random control's with a paired CI excluding 0"
+    },
+    "E3": {
+      "name": "emission, validation, uniqueness, run card",
+      "writer": "shared fail-closed writer (gems57.submission_writer / gems57.validate); float32, EPSG:32611, 3730x3292, transform (100,0,243350,0,-100,4508550), all cells finite, values in [0,1], no nodata tag",
+      "gate_G5_uniqueness": "|Spearman| <= 0.90 and <= 70% of dots within 3 px of any registry raster; if exceeded, log as a duplicate and stop",
+      "gate_G4_portal": "0 NaN anywhere, min 0 max 1, 0 dots on the catalogue, CRS/shape/transform identical to data/official/sample_submission.tif, verified by re-reading the written bytes"
+    }
+  },
+  "budget": "3 experiments, 2 hours; no submission slot is spent by this session (promotion is a separate selector step)",
+  "verdict_rule": "PROMOTE only if G1 AND G2 AND G3 AND G4 AND G5 all pass. Any failure => NEGATIVE, and the file is still published, portal-safe, with a DO-NOT-SUBMIT banner. Negative results are deliverables."
+}

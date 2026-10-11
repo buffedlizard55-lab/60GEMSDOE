@@ -4,6 +4,48 @@
 <link rel=canonical href="docs/index.html">
 <link rel=stylesheet href="docs/assets/site.css">
 <meta http-equiv=refresh content="0; url=docs/index.html"></head><body>
+<!-- H66-STATUS:BEGIN -->
+<div class=wrap style="border:3px solid #b42318;background:#fffafa;padding:12px 16px;margin:8px auto">
+<h2 style="margin:0 0 6px">&#128680; READ THIS FIRST (2026-10-11, session H66) &mdash; the newest unique TIF and whether you may submit it</h2>
+<table>
+<tr><th>file</th><th>download</th><th>submit to the portal?</th></tr>
+<tr><td><b>Newest unique TIF (generated this session, H66-2)</b><br><code>gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif</code><br>
+<span style="color:#5b7183">37,654 dots &middot; sha256 <code>66f93c821cf7b8f9&hellip;</code></span></td>
+<td><a class=btn href="docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif" download>&#11015; .tif</a>
+<a class="btn alt" href="docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.zip" download>.zip</a>
+<a href="docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros-runcard.json">run card</a>
+<a href="docs/downloads/checks-gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif.json">checks</a></td>
+<td style="color:#b42318"><b>DOWNLOAD: OK &middot; SUBMIT: NO.</b> Verdict <b>NEGATIVE</b>.
+The pre-registered first test against <i>off-catalogue</i> faults returned
+-0.0860 (95&nbsp;% CI [-0.1372, -0.0220], 86 segments)
+&rarr; <b>STOP</b>. On the off-catalogue instrument the lane scores
+INSTRUMENT-DTI 0.00913 against a mass-matched random control's 0.07253
+(paired -0.06339, CI [-0.06720, -0.05927], 0&nbsp;% of 1,000 draws positive).
+It is research evidence, not a candidate.</td></tr>
+<tr><td><b>Group champion, already scored</b><br><code>gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</code></td>
+<td><a class="btn alt" href="docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif" download>&#11015; .tif</a></td>
+<td>Already scored: owner-reported live <b>0.2778</b> (no organizer receipt exists for these bytes).
+Uploading it again spends a slot and repeats a known number.</td></tr>
+<tr><td><b>Registry primary</b><br><code>gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif</code></td>
+<td><a class="btn alt" href="docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif" download>&#11015; .tif</a></td>
+<td><b>NOT CLEARED</b> for a slot by any local instrument. Unique and portal-safe; a bounded-downside bet.</td></tr>
+</table>
+<p style="margin:6px 0 0"><b>Bottom line: this session cleared no file for a submission slot.</b>
+Format is not the issue &mdash; the H66 file is single-band float32, EPSG:32611, 3730&times;3292,
+<b>0 NaN, min 0.0, max 1.0, no nodata tag, 0 dots on the mapped catalogue</b>, so the portal error
+<i>&ldquo;Predicted values must be in range [0, 1]&rdquo;</i> cannot come from it. The issue is skill:
+the tectonic-geomorphology lane measures <i>below</i> random dots on the only local truth set that
+contains off-catalogue faults. If you upload it anyway for research, use the name
+<code>60GEMSDOE-H66-2-KNICK-BOTHLIMBS-37654</code> and the note
+<code>H66-2 chi/ksn both-limb steepness steps, &gt;=3 drainages, 37654 dots off-catalogue; E1 off-cat -0.086 STOP: NEGATIVE, research only</code> (129/140 characters).
+Full write-up: <a href="docs/h66-report.html">docs/h66-report.html</a> &middot;
+run card <a href="docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros-runcard.json">JSON</a>.
+The previous sessions' boards follow below and are unchanged.
+Public leaderboard top as last recorded in this repository: <b>0.4133</b>
+(<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a>; not re-readable from this sandbox &mdash; see IR-66-LB-01).</p>
+</div>
+<!-- H66-STATUS:END -->
+
 <!-- H65-STATUS:BEGIN -->
 <div class=wrap style="border:3px solid #b42318;background:#fff5f5;padding:12px 16px;margin:8px auto">
 <h2 style="margin:0 0 6px">Read this first (2026-10-11, H65-1): is a file here OK to submit?</h2>
@@ -31,26 +73,23 @@ Full report: <a href="docs/h65-report.html">docs/h65-report.html</a>. Public lea
 </div>
 <!-- H65-STATUS:END -->
 
-
-<div class=wrap style="border:2px solid #0a7d33;background:#f0fff4;padding:10px 14px;margin:8px 0"><b>2026-10-11 H61-A XCRD &mdash; unique artifact of session H61-H63:</b> <a href="docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif">download gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif</a> (<a href="docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.zip">zip</a>, <a href="docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-audit.json">audit</a>) &mdash; <b>OK to download</b>; slot decision <b>NOT CLEARED</b> (explicit bounded-downside bet: screens 2.46 vs the champion's 1.62 at equal 37,654-dot mass; independent LiDAR scarp screen 0.48&times;). <a href="docs/research/h61-h63-session-20261011.md">full write-up</a>. The GEMS61 artifact below keeps its own NEGATIVE verdict.</div>
-
 <main class=wrap style="padding-top:26px">
 <h1>60GEMSDOE — DOE GEMS Prize (DrivenData #306)</h1>
 <div class=dl>
 <h2>&#11015;&nbsp;ONE-CLICK SUBMISSION FILE</h2>
-<p><a class="btn" href="docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif">Download gems61-lane-thermal-knick-40000px-20261011T020352Z.tif</a> <a class="btn alt" href="docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.zip">.zip (single GeoTIFF inside)</a> </p>
-<p><b>Filename:</b> <code>gems61-lane-thermal-knick-40000px-20261011T020352Z.tif</code><br>
-<b>Unique submission name to use:</b> <code>60GEMSDOE-G61-LANE-THERMAL-40000</code><br>
+<p><a class="btn" href="docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif">Download 60GEMSDOE-H61A-XCRD-37654px.tif</a> <a class="btn alt" href="docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.zip">.zip (single GeoTIFF inside)</a> </p>
+<p><b>Filename:</b> <code>60GEMSDOE-H61A-XCRD-37654px.tif</code><br>
+<b>Unique submission name to use:</b> <code>60GEMSDOE-H61-A XCRD</code><br>
 <b>Note to paste into the submit form's <em>Note (optional)</em> field
-(114/200 characters):</b><br>
-<code>chi/ksn knickpoint strike-concordance x INGENIOUS thermal corroboration; 40000 dots; E1-audited selector; UNSCORED</code></p>
+(131/200 characters):</b><br>
+<code>H61-A XCRD: 30-channel off-catalogue detector; 37,654 dots &gt;=350 m from catalogue; unique vs 35 rasters; UNSCORED, projection only.</code></p>
 <p class=mut>single band · float32 · EPSG:32611 · 100 m · 3292&times;3730 ·
-40,000 predicted pixels · every cell finite · every value in [0, 1] ·
-0 NaN anywhere · no nodata tag · sha256 <code>a856efbac5e22919&hellip;</code>
+37,654 predicted pixels · every cell finite · every value in [0, 1] ·
+0 NaN anywhere · no nodata tag · sha256 <code>3ede96840cdc1a5c&hellip;</code>
 </p>
-<p><b>Already-scored fallback:</b> <a href="docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">owner-reported 0.2778 champion (already-scored; label corrected 2026-10-11, IR-65-EXEC-01)</a> </p>
+<p><b>Already-scored fallback:</b> <a href="docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">0.2708 anchor (already-scored base)</a> </p>
 <h3>Identification pack &mdash; the other two queries</h3><table><tr><th>slot</th><th>file</th><th>sha256</th><th>what it gives</th></tr><tr><td><b>ANCHOR (already-scored base)</b></td><td><a href="docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</a> </td><td class=mut>c55bafc470054e82&hellip;</td><td class=mut>the owner-reported 0.2778 champion emission (H33-2-B2); kept downloadable as the audit-trail anchor and as the only already-scored upload</td></tr><tr><td><b>SECONDARY (Tier 2)</b></td><td><a href="docs/downloads/gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif">gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif</a> </td><td class=mut>f81e26d7712d1a4a&hellip;</td><td class=mut>Tier 2 candidate: d2.8 emission (44,090 px) with 500 uncorroborated speckles pruned and 2,500 priority-ordered H32 dots added on the dip-projected step, transtensional swarm and MT clay-cap surfaces; 46,090 px; 0 on-catalogue</td></tr></table>
-<p class=warn><b>Status.</b> PRIMARY = this session&#x27;s GEMS61 thermally-corroborated knickpoint-lane file. ITS VERDICT IS NEGATIVE: it is unique, format-valid, leakage-free and fully documented, but it is NOT recommended for a weekly slot. Measured: pooled HOLDOUT-DTI (evaluator gems52-pooled-hide-v1, 36,439 withheld positives, 20 km-block bootstrap, 1,000 draws / 161 clusters) = 0.002495, 95% CI [0.001506, 0.003511]; paired difference versus the owner-reported 0.2778 champion control -0.001417 [-0.002430, -0.000312] and versus a mass-matched random control -0.037464 [-0.040658, -0.034271] - it loses to every control and sits ~76x below the family&#x27;s hard slot gate (best promotable holdout DTI 0.190147). Root cause measured separately (E2b): both available 100 m elevation products fail published drainage-network validity tests (Hack exponent b = +0.026 and -0.027 against 1.6-2.0 for real networks; channel networks agree at Jaccard 0.231), so this is a SUBSTRATE (resolution) verdict, not a detector verdict. NO ORGANISER SCORE EXISTS for this or any artifact in this repository. The already-scored fallback anchor is linked below.</p>
+<p class=warn><b>Status.</b> PRIMARY = H61-A XCRD (2026-10-11), the session&#x27;s UNIQUE artifact: max |Spearman| 0.024 against all 35 registry rasters, worst within-3-px share 46 % (brief&#x27;s stop rule 70 %). DOWNLOAD: YES. SLOT DECISION: NOT CLEARED - no local instrument can certify it beats the owner-reported 0.2778 (the repository&#x27;s catalogue hide-and-recover gate scores every off-catalogue emission exactly 0 by construction: evidence/e6_blocked_gate.json), so it is an explicit bounded-downside bet (only the best submission counts). Screens: 2.46 vs the champion&#x27;s 1.62 at equal 37,654-dot mass on the one mass-normalised screen that reproduces the ladder (Spearman +0.94, evidence/e2b_xcrd_screen.json); independent LiDAR scarp screen NEGATIVE (0.48x), stated on purpose. The parallel 2026-10-11b GEMS61 lane artifact keeps its own NEGATIVE verdict and is retained alongside.</p>
 </div>
 <div class=card><b>Full site:</b> <a href="docs/index.html">evidence, instruments, hypotheses and the
 irregularity register &rarr;</a> &nbsp;·&nbsp; <a href="docs/executive-summary.html">how to submit, step by step &rarr;</a>

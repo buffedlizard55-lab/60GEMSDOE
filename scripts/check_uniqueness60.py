@@ -96,10 +96,11 @@ def main() -> int:
         sys.path.insert(0, str(ROOT / "scripts"))
         from gems60 import geomorph as gm
         from gems60 import lane as L
-        from run_lane60 import confound_masks, load
+        from run_lane60 import confound_masks, load, load_step
         import os
         cache = ROOT / ".cache" / os.environ.get("GEMS60_FEATURE_CACHE", "features60")
-        step = np.load(cache / "step.npy")
+        import os as _os
+        step = load_step()
         channel = np.load(cache / "channel.npy")
         if (cache / "branch_sig.npy").is_file():      # substrate-supplied independence (H65-1)
             branch = np.load(cache / "branch_sig.npy").astype(np.int64)

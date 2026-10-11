@@ -6,7 +6,7 @@
 <div class=dlbtn><a class="btn" href="downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif">&#11015; Download the submission GeoTIFF</a> <a class="btn alt" href="downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.zip">.zip</a></div>
 </div></header>
 <div class=values><div class=wrap><b>Core Values.</b> <b>Maximize P(Win)</b> — every weekly submission slot is an experiment, not a lottery ticket. <b>Own the Outcome</b> — every claim here carries an evidence class, and the defect in our own previously-shipped primary was measured, published and replaced rather than quietly dropped.</div></div>
-<main class=wrap><h2 style="margin-top:6px">The 40 registered candidates, ranked by expected value per unit of cost</h2>
+<main class=wrap><h2 style="margin-top:6px">The 45 registered candidates, ranked by expected value per unit of cost</h2>
 <p class=mut>Each row names the layers it needs, the physical signature, why it can catch a fault the
 USGS&nbsp;/&nbsp;INGENIOUS catalogue lacks, how it differs from everything the group has already run,
 and its measured status. Nothing is promoted to a submission slot without passing the holdout and
@@ -172,6 +172,26 @@ the slot gate.</p>
 <td>10 m knickpoints (H65-1 output) + global-datum chi</td><td>knickpoints from one base-level fall sit at similar chi in neighbouring basins (Crosby &amp; Whipple 2006, Geomorphology 82, 16-38); cluster in chi, project the cluster&#x27;s downstream end onto the range front</td>
 <td>ties a knickpoint population to the fault that generated it even after the knickpoints migrated kilometres upstream</td><td>H65-1 used knickpoint POSITION; this uses chi-space recurrence (listed as next step (3) by the 2nd lane run, never built)</td>
 <td>UNVALIDATED; low (H65-1 shows 10 m knickpoint support barely enriched near faults) · cost high · data: USGS 3DEP 10 m - verified obtainable</td>
+<td>PROPOSED</td></tr><tr><td>41</td><td><b>H66-1</b><br>Chi/ksn steepness-step corridors mark faults the given catalogue omits; test them against off-catalogue truth, not against the catalogue</td>
+<td>native 3DEP 10 m chi/ksn reduction (data/external/dem10_chi_100m_*.tif); USGS SGMC faults rasterised to the grid, minus a 3 px catalogue buffer; GeoDAWN airborne radiometrics K/Th for the lithology confound</td><td>log(ksn_up/ksn_down) two-segment step, blockwise z-scored, corroborated by &gt;= 3 independent drainages inside a strike corridor</td>
+<td>the hidden set is off-catalogue by construction, so the lane must be scored against faults the given catalogue omits</td><td>changes the TARGET set, not the detector; every previous lane run gated on the catalogue hide-and-recover</td>
+<td>MEASURED: INSTRUMENT-DTI 0.00630 vs mass-matched random 0.07253 on 62,703 off-catalogue px; first test -0.1128 [-0.1738, -0.0437] -&gt; STOP · cost low (all rasters committed) · data: in repository, hash-pinned</td>
+<td>EXECUTED 2026-10-11: NEGATIVE. evidence/h66_runcard.json</td></tr><tr><td>42</td><td><b>H66-2</b><br>The downstream-steepening limb of the same statistic (max(step_max, -step_min)) is the signature that survives in alluvial hanging-wall ground</td>
+<td>the same 10 m chi/ksn reduction, band step_min as well as step_max</td><td>|log ksn ratio| extremum rather than the upstream-only extremum; 53,116 candidates in place of 43,131</td>
+<td>H65&#x27;s diagnostics put the off-catalogue targets lower in the local relief than the catalogue, where the upstream limb is weak (Crosby &amp; Whipple 2006, JGR 111 F03014)</td><td>H60-A and H65-1 both used step_max only</td>
+<td>MEASURED: first test -0.0860 [-0.1372, -0.0220] -&gt; STOP; INSTRUMENT-DTI 0.00913 vs random 0.07253 · cost low · data: in repository</td>
+<td>EXECUTED 2026-10-11: NEGATIVE (this is the shipped artefact)</td></tr><tr><td>43</td><td><b>H66-3</b><br>Instrument before field: no further detector work until a local statistic reproduces the live ladder</td>
+<td>registry/rasters calibration anchors (12 live-scored artefacts, hash-pinned); SGMC off-catalogue truth, terrain-balanced variants; registry/observations.jsonl</td><td>Spearman of each candidate statistic against owner-reported live score; leave-one-anchor-out so one artefact cannot carry the correlation. Measured this session: SGMC off-catalogue credit-per-pixel orders the top five live scores exactly (0.1488 &gt; 0.1409 &gt; 0.1368 &gt; 0.1288 &gt; 0.1056 for live 0.2778 &gt; 0.2708 &gt; 0.2632 &gt; 0.2600 &gt; 0.2477) and its one large violation is the dense r13 lattice (0.1155 at live 0.0904)</td>
+<td>the selector, not the field, is the binding constraint: the instrument the family gates on ranks the 0.2778 champion last of twelve</td><td>e61 measured the correlation once with n = 12 and no resampling; this adds leave-one-out CIs and a preregistered acceptance threshold</td>
+<td>UNVALIDATED; it does not emit, it decides what may be emitted · cost low (rasters already committed) · data: in repository</td>
+<td>PROPOSED - first experiment of the next session</td></tr><tr><td>44</td><td><b>H66-4</b><br>Coverage-first screening: measure what fraction of off-catalogue trace a detector&#x27;s support can reach BEFORE fitting it</td>
+<td>any candidate support mask (channels, scarps, lineaments, basin edges); SGMC off-catalogue truth</td><td>share of off-catalogue fault pixels with detector support within 300 m, against the footprint background</td>
+<td>measured this session: of 1,200 sampled off-catalogue segments only 124 are &gt;= 600 m long and 38 of those have no bedrock channel within 3 px - a channel-based detector cannot see them at any resolution</td><td>no session has screened support coverage before running a detector; four lane runs were spent finding it after the fact</td>
+<td>UNVALIDATED; a gate, not an emitter · cost very low · data: in repository</td>
+<td>PROPOSED</td></tr><tr><td>45</td><td><b>H66-5</b><br>Mass-thrift sweep on the champion&#x27;s own field at the metric&#x27;s break-even point</td>
+<td>registry/rasters/dotted_b2_prune_02778.tif (owner-reported 0.2778); gems52.metric credit bar 0.2 * DTI</td><td>DTI as a function of emitted mass for one fixed field; the stationary point is where the marginal dot&#x27;s realised credit equals 0.2 * DTI</td>
+<td>irrelevant to detection: this is the emission lever, and minus-mass is the strongest single correlate of live score measured here (Spearman +0.9371, n = 12)</td><td>the family thinned by eye (d1.5 -&gt; d2.8 -&gt; b2); nobody has swept mass on the champion field and located the metric&#x27;s own break-even</td>
+<td>UNVALIDATED; bounded upside, bounded downside, cheapest experiment available · cost very low · data: in repository</td>
 <td>PROPOSED</td></tr></table>
 <h2>Promotion rules (preregistered)</h2>
 <ol>
@@ -198,7 +218,7 @@ enrichment over background — so the discovery lane is genuinely unexploited, n
 with displacements mostly below 5&nbsp;cm — a real fault the catalogue lacks, which is why H60-1 is
 first on the list.</li></ul></main>
 <footer><div class=wrap>
-Site generated 2026-10-11 11:28 UTC from <code>registry/*.json</code> and <code>evidence/*.json</code> by
+Site generated 2026-10-11 16:23 UTC from <code>registry/*.json</code> and <code>evidence/*.json</code> by
 <code>scripts/build_site.py</code>. Owner-reported scores are labelled <em>claim</em>; the only
 scores this repository reads itself are the other teams' public-leaderboard rows.
 <a href="https://github.com/buffedlizard55-lab/60GEMSDOE">Repository</a> ·

@@ -1,0 +1,166 @@
+{
+  "file": "gems60-h66-offcat-knick-37654-20261011T160106Z-b37f96d829b7-zeros.tif",
+  "sha256": "ec6fbdb3a17677b1d3bc77643779d86a065f747eafe1982fe2ee21f00a325306",
+  "bytes": 105462,
+  "submission_name": "gems60-h66-offcat-knick-37654-20261011T160106Z-b37f96d829b7",
+  "note": "H66-1 chi/ksn knickpoint corridors, 37654 dots off-catalogue; E1 off-catalogue test FAILED -0.113 [-0.174,-0.044]; NEGATIVE, research only",
+  "note_chars": 138,
+  "validator": {
+    "file": "/home/user/60GEMSDOE/downloads/gems60-h66-offcat-knick-37654-20261011T160106Z-b37f96d829b7-zeros.tif",
+    "bytes": 105462,
+    "sha256": "ec6fbdb3a17677b1d3bc77643779d86a065f747eafe1982fe2ee21f00a325306",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030664964579045773,
+    "emitted_positive_pixels": 37654,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 37654,
+    "footprint_fraction": 0.007286874781441169
+  },
+  "template_report": {
+    "path": "/home/user/60GEMSDOE/downloads/gems60-h66-offcat-knick-37654-20261011T160106Z-b37f96d829b7-zeros.tif",
+    "bytes": 105462,
+    "sha256": "ec6fbdb3a17677b1d3bc77643779d86a065f747eafe1982fe2ee21f00a325306",
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "ref_bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "blocksize": [
+      256,
+      256
+    ],
+    "fixture_grid": false,
+    "has_validity_mask": false,
+    "nan_pixels": 0,
+    "infinity_pixels": 0,
+    "n_nan": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030664964579045773,
+    "n_nonzero": 37654,
+    "mass": 37654.0,
+    "mass_outside_footprint": 0,
+    "problems": [],
+    "ok": true,
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+  },
+  "zip_file": "gems60-h66-offcat-knick-37654-20261011T160106Z-b37f96d829b7-zeros.zip",
+  "zip_sha256": "e6e8e3570de8024bef667a2304f959b406575d4c649fa53ebbd53622365ea4e8",
+  "approved_for_weekly_slot": false,
+  "promoted": false,
+  "submission_slots_used": 0,
+  "status": "locally validated within separately recorded inventory scope; not organizer acceptance or slot approval",
+  "metadata": {
+    "lane": "tectonic-geomorphology",
+    "hypothesis": "H66-1",
+    "substrate": "native 3DEP 10 m chi/ksn (18 pinned tiles) reduced to the 100 m grid; radiometric lithology mask",
+    "parameters": {
+      "budget": 37654,
+      "z_min": 1.5,
+      "n_drainage_min": 3,
+      "corridor_half_len_px": 6,
+      "corridor_half_width_px": 2,
+      "theta_ref": 0.45,
+      "a_min_cells": 20,
+      "window_cells": 5
+    },
+    "surface_diagnostics": {
+      "channel_pixels": 786299,
+      "valid_channel_pixels": 730622,
+      "candidate_pixels": 43131,
+      "z_min": 1.5,
+      "block_px": 400,
+      "n_drainage_min": 3,
+      "corridor_half_len_px": 6,
+      "corridor_half_width_px": 2,
+      "trace_decay": 0.5,
+      "regional_modal_strike_deg": 25.0,
+      "candidate_pixels_scanned": 43131,
+      "aligned_candidates": 38512,
+      "n_drainage_p50": 5.0,
+      "n_drainage_p90": 10.0,
+      "n_drainage_max": 23,
+      "trace_pixels": 373624,
+      "trace_only_pixels": 333590,
+      "positive_pixels": 376721,
+      "p_max": 1.0
+    },
+    "confounds": {
+      "playa_px": 550267,
+      "basin_fill_px": 258104,
+      "conductive_px": 251815,
+      "excluded_px": 893496,
+      "lithology_source": "SUBSTITUTE geodawn_rad_u8.tif K p95 + Th p95 (training_features.tif absent; IR-66-DATA-01)",
+      "channel_excluded_px": 55677,
+      "channel_px": 786299,
+      "rad_K_p95": 208.0,
+      "rad_Th_p95": 208.0
+    }
+  }
+}

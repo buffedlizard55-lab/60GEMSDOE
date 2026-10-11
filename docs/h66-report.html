@@ -1,0 +1,127 @@
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>H66 session report &mdash; 60GEMSDOE</title>
+<link rel=stylesheet href="assets/site.css"></head><body>
+<header class=top><div class=wrap><h1>H66 &mdash; the knickpoint lane scored against off-catalogue truth</h1>
+<nav><a href="index.html">Home</a> <a href="executive-summary.html">Make a submission</a>
+<a href="research.html">Research</a> <a href="hypotheses.html">Hypotheses</a>
+<a href="leaderboard.html">Leaderboard</a> <a href="sources.html">Sources</a>
+<a href="irregularities.html">Irregularities</a></nav>
+<div class=dlbtn><a class="btn" href="downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif">&#11015; Newest TIF (H66-2): research only, do NOT submit</a>
+<a class="btn alt" href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">&#11015; Champion (already scored 0.2778)</a>
+<a class="btn alt" href="downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif">Registry primary</a></div>
+</div></header>
+<main class=wrap>
+<p><b>Verdict: NEGATIVE. Download OK, submit NO. No submission slot was spent.</b></p>
+
+<h2>1. The one-click file</h2>
+<table>
+<tr><th>field</th><th>value</th></tr>
+<tr><td>file</td><td><a href="downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif" download><code>gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif</code></a>
+ &middot; <a href="downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.zip" download>.zip</a></td></tr>
+<tr><td>portal name</td><td><code>60GEMSDOE-H66-2-KNICK-BOTHLIMBS-37654</code></td></tr>
+<tr><td>portal note</td><td><code>H66-2 chi/ksn both-limb steepness steps, &gt;=3 drainages, 37654 dots off-catalogue; E1 off-cat -0.086 STOP: NEGATIVE, research only</code> (129/140)</td></tr>
+<tr><td>sha256</td><td><code>66f93c821cf7b8f91f14a1fba1746b7d58b1435f71b0004f599ee5c9d00ab944</code></td></tr>
+<tr><td>dots / on catalogue</td><td>37,654 / 0</td></tr>
+<tr><td>format</td><td>float32 &middot; EPSG:32611 &middot;
+[3730, 3292] &middot; NaN 0 &middot;
+min 0.0 max 1.0 &middot;
+nodata tag None &middot;
+transform matches the sample submission: True &middot;
+all checks passed: True</td></tr>
+<tr><td>receipts</td><td><a href="downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros-runcard.json">run card</a>
+ &middot; <a href="downloads/checks-gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif.json">format checks</a>
+ &middot; <a href="downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.json">build receipt</a></td></tr>
+</table>
+
+<h2>2. Why this session changed the target set</h2>
+<p>The repository's own instrument audit
+(<a href="../evidence/e61_instrument_audit.json"><code>evidence/e61_instrument_audit.json</code></a>,
+INSTRUMENT class, n = 12 live-scored family artefacts) ranks local truth sets by their Spearman
+correlation with the live score:</p>
+<table><tr><th>local truth set</th><th>Spearman vs live score</th></tr>
+<tr><td>catalogue hide-and-recover DTI (<b>the gate every knickpoint-lane run used</b>)</td><td><b>&minus;0.9021</b></td></tr>
+<tr><td>catalogue thinned to 8,000 px</td><td>&minus;0.3916</td></tr>
+<tr><td>SGMC off-catalogue, full</td><td>&minus;0.2797</td></tr>
+<tr><td>SGMC off-catalogue thinned to 8,000 px</td><td><b>+0.4685</b></td></tr>
+<tr><td>credit per emitted pixel</td><td>+0.7343</td></tr>
+<tr><td>minus emitted mass</td><td>+0.9371</td></tr></table>
+<p>That instrument gives the owner-reported 0.2778 champion the <i>lowest</i> catalogue
+credit-per-pixel of the twelve (0.0100) and the 0.2632 artefact the highest (0.1192). A lane can
+therefore pass or fail that gate with no bearing on the leaderboard. H66 keeps the lane's detector
+and changes the target to the only local truth set that contains <i>off-catalogue</i> faults:
+USGS SGMC geologic-map faults more than 300 m from the given catalogue (62,703 px).</p>
+
+<h2>3. The mandated first test, run against both targets</h2>
+<table><tr><th>target</th><th>n</th><th>mean paired step difference</th><th>95 % CI</th><th>verdict</th></tr>
+<tr><td>E1a &mdash; withheld catalogue segments (the literal brief; not gating)</td>
+<td>262</td>
+<td>-0.0218</td>
+<td>[-0.0600, +0.0167]</td>
+<td>STOP</td></tr>
+<tr><td><b>E1b &mdash; SGMC off-catalogue segments (gating)</b></td>
+<td>86</td>
+<td><b>-0.0860</b></td>
+<td><b>[-0.1372, -0.0220]</b></td>
+<td><b>STOP</b></td></tr></table>
+<p>Channels crossing off-catalogue faults carry <i>smaller</i> steepness steps than random
+same-orientation lines, and only 20 %
+of segments are positive. Coverage is the mechanism: of 1,200 sampled off-catalogue components
+(22,854 exist), only
+124 are &ge; 600 m long and
+38 of those have no bedrock-channel
+pixel within 3 px at all. <b>The channel network does not cross most off-catalogue traces.</b></p>
+
+<h2>4. Off-catalogue instrument skill at the champion's own mass (37,654 dots)</h2>
+<table><tr><th>arm</th><th>DTI</th><th>credit / px</th><th>dots</th></tr><tr><td>champion_02778_owner_report</td><td class=mut>0.09606</td><td class=mut>0.14878</td><td class=mut>37,654</td></tr><tr><td>random_mass_control</td><td class=mut>0.07253</td><td class=mut>0.11214</td><td class=mut>37,654</td></tr><tr><td>ksn_only_no_alignment</td><td class=mut>0.06456</td><td class=mut>0.09874</td><td class=mut>37,654</td></tr><tr><td>distance_only</td><td class=mut>0.02890</td><td class=mut>0.04432</td><td class=mut>37,654</td></tr><tr><td><b>lane</b></td><td class=mut>0.00913</td><td class=mut>0.01398</td><td class=mut>37,654</td></tr></table>
+<p class=mut>Evidence class: INSTRUMENT-DTI (public proxy truth; <b>not</b> HOLDOUT-DTI, <b>not</b>
+an organizer-confirmed score). Paired 20 km spatial-block bootstrap, 1,000 draws, seed 6601.</p>
+<table><tr><th>paired difference</th><th>mean</th><th>95 % CI</th><th>draws positive</th></tr><tr><td>lane &minus; ksn_only_no_alignment</td><td>-0.05514</td><td>[-0.06727, -0.04344]</td><td>0 %</td></tr><tr><td>lane &minus; distance_only</td><td>-0.01970</td><td>[-0.02435, -0.01569]</td><td>0 %</td></tr><tr><td>lane &minus; random_mass_control</td><td>-0.06339</td><td>[-0.06720, -0.05927]</td><td>0 %</td></tr><tr><td>lane &minus; champion_02778_owner_report</td><td>-0.08670</td><td>[-0.09776, -0.07660]</td><td>0 %</td></tr></table>
+
+<h2>5. Leakage canary</h2>
+<table><tr><th>feature</th><th>AUC vs off-catalogue truth</th><th>AUC vs catalogue (full footprint)</th><th>flag</th></tr><tr><td>knickpoint_step</td><td>0.4878</td><td>0.5004</td><td>ok</td></tr><tr><td>ksn</td><td>0.4952</td><td>0.5037</td><td>ok</td></tr><tr><td>drainage_area</td><td>0.4877</td><td>0.4995</td><td>ok</td></tr><tr><td>lane_p</td><td>0.4755</td><td>0.5028</td><td>ok</td></tr><tr><td>dist_to_visible</td><td>0.5280</td><td>1.0000</td><td>LEAK</td></tr></table>
+<p class=mut>Rule: max(AUC, 1&minus;AUC) &gt; 0.90 is leakage until proven otherwise.
+<code>dist_to_visible</code> scores 1.000 against the catalogue by construction &mdash; it is the
+harness's positive control, not a leak.</p>
+
+<h2>6. Gates and uniqueness</h2>
+<table><tr><td>G1_first_test_off_catalogue</td><td><b>STOP</b></td></tr><tr><td>G2_leakage_canary</td><td><b>PASS</b></td></tr><tr><td>G3_beats_mass_matched_random</td><td><b>FAIL</b></td></tr><tr><td>G4_portal_format</td><td><b>PASS</b></td></tr><tr><td>G5_uniqueness</td><td><b>FAIL</b></td></tr></table>
+<p>Uniqueness scanned <b>68</b> GeoTIFFs physically present in this
+checkout (the pinned 655-raster corpus lives in <code>.cache/registry</code>, which is not in git, so
+it was not rescanned &mdash; limitation L-66-01). Against the
+57 sparse, submission-like rasters <b>no gate trips</b>:
+worst |Spearman| 0.5411 (limit 0.90), worst 3-px share
+0.6105 (limit 0.70). Two ~200k-dot dense priors do trip the 3-px
+co-location gate while carrying |&rho;| &lt; 0.01, i.e. co-location without any rank similarity:</p>
+<table><tr><th>dense prior</th><th>their dots</th><th>my dots within 3 px</th><th>random control mean</th><th>excess</th></tr><tr><td>registry/rasters/calib_r13lattice_00904.tif</td><td>206,895</td><td>0.9994</td><td>0.6763</td><td>+0.3231</td></tr><tr><td>registry/rasters/r14_union_tips10_lat6.tif</td><td>192,231</td><td>0.7546</td><td>0.5154</td><td>+0.2391</td></tr></table>
+<p>The first H66 emission (upstream limb, declared parameters) was <b>rejected</b> by this gate at
+0.7572 within 3 px of the H65-1 file and is kept in <code>evidence/superseded/</code> with its
+explanation. That is the finding: a lane run that reuses the declared parameters cannot produce a
+unique artefact.</p>
+
+<h2>7. What this session changed in the shared tools (fixed once, never forked)</h2>
+<ul>
+<li><code>scripts/run_lane60.py</code>: <code>confound_masks</code> fails closed to the pinned GeoDAWN
+radiometric pack when the 419 MB <code>training_features.tif</code> is absent, and records
+<code>lithology_source</code> in every receipt (IR-66-DATA-01).</li>
+<li><code>scripts/run_lane60.py</code>: new <code>load_step()</code> /
+<code>GEMS60_STEP_STATISTIC</code>, used by <code>run_lane60</code>,
+<code>build_submission60</code>, <code>check_uniqueness60</code> and <code>run_h66</code>. The default
+<code>upstream</code> reproduces H60-A and H65-1 exactly.</li>
+<li><code>scripts/check_uniqueness66.py</code>: local-corpus uniqueness audit with the IR-60-GATE-01
+random-excess control and an explicit sparse/dense split.</li>
+<li><code>scripts/run_h66.py</code>: the off-catalogue first test and the paired spatial-block
+bootstrap of the official DTI; unit-tested in <code>tests/test_h66.py</code>.</li>
+</ul>
+
+<h2>8. Next steps</h2>
+<ol>
+<li>Stop running the knickpoint lane. Four independent runs (H60-A, H61, H65-1, H66) now place it
+below mass-matched random on both available truth sets.</li>
+<li>Spend the next session's budget on the instrument, not on another field: the selector can only
+be trusted once a local statistic reproduces the live ladder, and the best one measured so far is
+credit-per-pixel against SGMC off-catalogue truth (&rho; = +0.734, n = 12).</li>
+<li>Fetch the pinned 655-raster registry corpus on an unrestricted runner so the uniqueness gate is
+complete rather than partial.</li>
+</ol>
+</main></body></html>
