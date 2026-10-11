@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""H71 — union artifact: the live-scored champion plus the H70-A convergent-cover complement.
+"""H71 — union artifact: the live-scored champion plus the H71-A convergent-cover complement.
 
 Preregistered in ``registry/preregistration-h71.json`` before this file was run.
 
@@ -8,10 +8,10 @@ Why this is the top candidate
 The champion's own mass ladder shows every *removal* of catalogue-flank mass paid
 (+0.0108 for the d=1 px shell, +0.0070 for the d=2 px shell, owner-reported).  Removal is a spent
 direction at the kernel edge.  The unexplored direction is *addition* of mass whose credit is
-measured rather than assumed: the H70-A complement measured credit/dot 0.4018 on the
+measured rather than assumed: the H71-A complement measured credit/dot 0.4018 on the
 population-matched SGMC-off-catalogue instrument, against the algebra's break-even
 ``c > 0.2*s = 0.0556``.  This runner builds that union as one artifact and tests it with the same
-gate set as H70.
+gate set as H71.
 
 Guard disclosure: ``scripts/stop_guard.py`` is imported, its verdict is printed and stored in the
 run card verbatim, and it is deliberately not used as a gate (this runner is not a lane runner).
@@ -36,7 +36,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
-import build_h70_field as B70                      # noqa: E402  (import + reuse, no fork)
+import build_h71_field as B71                      # noqa: E402  (import + reuse, no fork)
 from gems57 import grid as G57                     # noqa: E402
 from gems57 import holdout as HO                   # noqa: E402
 from gems57 import metric as M                     # noqa: E402
@@ -53,7 +53,7 @@ EXT = ROOT / "data" / "external"
 
 CHAMPION = DL / "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif"
 CHAMPION_SHA = "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
-ADDEND = DL / "gems60-h70a-convcomp-6000-20261011T185116Z-zeros.tif"
+ADDEND = DL / "gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif"
 ADDEND_SHA = "5c22c464a40e15bae84463f921a6c704d29b45c67dd334c08202320d7b7e68e0"
 
 # Champion-family rasters: overlap with these is lineage by construction (see prereg IR-H71-LINE-01).
@@ -62,7 +62,7 @@ LINEAGE_PATTERNS = (
     "GEMSDOE28__h27-4-r1-solo", "dotted_d2_8_02600", "dotted_d2_8_02708",
     "GEMSDOE25__dotted-h19-5-d2-8", "gems25-dotted-h19-5-d2-8",
     "19GEMSDOE__h19-5-powerlaw-budget-multiline", "GEMSDOE24__h25-1-dotted-h19-5-d1-5",
-    "gems32-probe-S1-ANCHOR", "gems60-h70a-convcomp-6000", "gems60-h69a-champ-half",
+    "gems32-probe-S1-ANCHOR", "gems60-h71a-convcomp-6000", "gems60-h69a-champ-half",
     "gems60-h69b-champ-nulladd",
 )
 RANDOM_SEEDS = (7101, 7102, 7103, 7104, 7105)
@@ -87,17 +87,17 @@ def read_mask(path: Path) -> np.ndarray:
 
 
 def terms(arm: np.ndarray, truth: np.ndarray) -> dict:
-    """Per-20 km-block TP/FP/dot-count terms, exactly as B70.paired_block_bootstrap does them."""
+    """Per-20 km-block TP/FP/dot-count terms, exactly as B71.paired_block_bootstrap does them."""
     m = np.asarray(arm) > 0
     cover, q, _ = M.max_cover(m.astype(np.float64), truth)
     py, px = np.nonzero(m)
     fpw = 1.0 - q[py, px]
     h, w = truth.shape
-    ncols = (w + B70.BLOCK_PX - 1) // B70.BLOCK_PX
-    nb = ((h + B70.BLOCK_PX - 1) // B70.BLOCK_PX) * ncols
+    ncols = (w + B71.BLOCK_PX - 1) // B71.BLOCK_PX
+    nb = ((h + B71.BLOCK_PX - 1) // B71.BLOCK_PX) * ncols
     ty, tx = np.nonzero(truth)
-    tb = (ty // B70.BLOCK_PX) * ncols + (tx // B70.BLOCK_PX)
-    pb = (py // B70.BLOCK_PX) * ncols + (px // B70.BLOCK_PX)
+    tb = (ty // B71.BLOCK_PX) * ncols + (tx // B71.BLOCK_PX)
+    pb = (py // B71.BLOCK_PX) * ncols + (px // B71.BLOCK_PX)
     return dict(tp=np.bincount(tb, weights=np.asarray(cover, np.float64), minlength=nb),
                 fp=np.bincount(pb, weights=fpw, minlength=nb),
                 n=np.bincount(pb, minlength=nb).astype(np.float64),
@@ -160,7 +160,7 @@ def main() -> int:
         import stop_guard
         buf = io.StringIO()
         with redirect_stdout(buf):
-            stopped = stop_guard.lane_is_stopped(ROOT, "H71 union of live-scored champion and H70-A")
+            stopped = stop_guard.lane_is_stopped(ROOT, "H71 union of live-scored champion and H71-A")
         guard = dict(called=True, verdict="STOPPED" if stopped else "CLEAR",
                      output=buf.getvalue().strip(),
                      interpretation=("printed for the record; not used as a gate (not a lane runner, "
@@ -174,10 +174,10 @@ def main() -> int:
         print(f"champion sha mismatch {champ_sha}")
         return 2
     if add_sha != ADDEND_SHA:
-        print(f"H70-A sha mismatch {add_sha}")
+        print(f"H71-A sha mismatch {add_sha}")
         return 2
-    card_a = json.loads((ROOT_EV / "h70a_runcard.json").read_text())
-    mark(f"constituents verified: champion {champ_sha[:12]} H70-A {add_sha[:12]} "
+    card_a = json.loads((ROOT_EV / "h71a_runcard.json").read_text())
+    mark(f"constituents verified: champion {champ_sha[:12]} H71-A {add_sha[:12]} "
          f"(card verdict {card_a['verdict']})")
 
     grid = G57.load_grid()
@@ -189,31 +189,31 @@ def main() -> int:
         return 3
     union = champ | add
     d_cat = ndi.distance_transform_edt(~cat)
-    mark(f"union {int(union.sum()):,} dots (champion {int(champ.sum()):,} + H70-A {int(add.sum()):,}); "
+    mark(f"union {int(union.sum()):,} dots (champion {int(champ.sum()):,} + H71-A {int(add.sum()):,}); "
          f"min d_catalogue {d_cat[union].min():.2f} px")
 
-    # restricted pool of the H70-A profile: needed for mass-matched random additions
-    score, allowed, field_diag, champ_again, wash = B70.build_field(grid, "restricted")
+    # restricted pool of the H71-A profile: needed for mass-matched random additions
+    score, allowed, field_diag, champ_again, wash = B71.build_field(grid, "restricted")
     assert np.array_equal(champ_again, champ)
     pool = np.flatnonzero(allowed.ravel())
     mark(f"restricted pool {pool.size:,} px (field diag recorded)")
 
     sample = ROOT / "data/official/sample_submission.tif"
     name = f"60GEMSDOE-H71-UNION-CHAMP-CONVCOMP-{int(union.sum())}-{STAMP}"
-    note = ("H71 union: live-scored champion (37654 dots, 0.2778 owner-reported) plus the H70-A "
+    note = ("H71 union: live-scored champion (37654 dots, 0.2778 owner-reported) plus the H71-A "
             "convergent-cover complement (6000 dots, credit/dot 0.4018 on SGMC-off)")
     rec = SW.write_submission(DL / f"gems60-h71-union-champ-convcomp-{int(union.sum())}-{STAMP}-zeros.tif",
                               union.astype(np.float32), sample, fp, note=note[:140], name=name[:140],
                               catalogue=cat,
                               metadata={"preregistration": "registry/preregistration-h71.json",
-                                        "components": {"champion_sha256": champ_sha, "h70a_sha256": add_sha},
+                                        "components": {"champion_sha256": champ_sha, "h71a_sha256": add_sha},
                                         "declared_mass_dots": int(union.sum())})
     mark(f"wrote {rec['file']} sha {rec['sha256'][:16]} validator={rec['validator']['all_checks_passed']}")
 
     # ---------------- G1: population-matched instrument ---------------- #
-    sgmc = B70.read_stack(EXT / "sgmc_faults_100m.tif", nodata=255.0)[0] > 0
+    sgmc = B71.read_stack(EXT / "sgmc_faults_100m.tif", nodata=255.0)[0] > 0
     offcat = I.sgmc_off_catalogue(sgmc, cat, fp, buffer_px=3)
-    arms = {"H71_union": union, "champion": champ, "H70A_added": add}
+    arms = {"H71_union": union, "champion": champ, "H71A_added": add}
     for s in RANDOM_SEEDS:
         r = np.random.default_rng(s)
         pick = r.choice(pool.size, size=int(add.sum()), replace=False)
@@ -224,8 +224,8 @@ def main() -> int:
     for k, v in inst.items():
         mark(f"  sgmc_off {k:14s} dti={v['dti']:.5f} credit/px={v['credit_per_px']:.4f} dots={v['emitted_px']:,}")
     t = {k: terms(v, offcat) for k, v in arms.items()}
-    paired_vs_champ = paired(t["H71_union"], t["champion"], draws=B70.BOOT_DRAWS, seed=B70.BOOT_SEED)
-    paired_vs_add = paired(t["H71_union"], t["H70A_added"], draws=B70.BOOT_DRAWS, seed=B70.BOOT_SEED)
+    paired_vs_champ = paired(t["H71_union"], t["champion"], draws=B71.BOOT_DRAWS, seed=B71.BOOT_SEED)
+    paired_vs_add = paired(t["H71_union"], t["H71A_added"], draws=B71.BOOT_DRAWS, seed=B71.BOOT_SEED)
     rand_cpp = [t[f"random_add_{s}"]["tpw"] / max(1, t[f"random_add_{s}"]["dots"]) for s in RANDOM_SEEDS]
     champ_cpp = t["champion"]["tpw"] / max(1, t["champion"]["dots"])
     union_cpp = t["H71_union"]["tpw"] / max(1, t["H71_union"]["dots"])
@@ -233,11 +233,11 @@ def main() -> int:
         rule=("PASS iff credit/dot(H71) > credit/dot(champion) and the paired block-bootstrap "
               "lower bound of DTI(H71)-DTI(champion) on the SGMC-off-catalogue truth is > 0"),
         union_credit_per_dot=union_cpp, champion_credit_per_dot=champ_cpp,
-        added_credit_per_dot=t["H70A_added"]["tpw"] / max(1, t["H70A_added"]["dots"]),
+        added_credit_per_dot=t["H71A_added"]["tpw"] / max(1, t["H71A_added"]["dots"]),
         random_add_credit_per_dot_mean=float(np.mean(rand_cpp)),
         random_add_credit_per_dot_each={str(s): rand_cpp[i] for i, s in enumerate(RANDOM_SEEDS)},
         paired_union_minus_champion=paired_vs_champ,
-        paired_union_minus_h70a=paired_vs_add,
+        paired_union_minus_h71a=paired_vs_add,
         break_even=BREAK_EVEN_NOTE,
         verdict=("PASS" if (union_cpp > champ_cpp and paired_vs_champ["delta_dti_ci95"][0] > 0) else "FAIL"))
     mark(f"G1 {gate_g1['verdict']}: union c/dot {union_cpp:.4f} vs champion {champ_cpp:.4f} "
@@ -248,7 +248,7 @@ def main() -> int:
     # ---------------- G2: registered holdout ---------------- #
     ctx = HO.build_holdout(grid)
     cells = [c for c in ctx.cells if c.mode == "all"]
-    h_arms = {"H71_union": union, "champion": champ, "H70A_added": add,
+    h_arms = {"H71_union": union, "champion": champ, "H71A_added": add,
               "random_add_mass_matched": arms[f"random_add_{RANDOM_SEEDS[0]}"]}
     hterms: dict = {k: [] for k in h_arms}
     for cell in cells:
@@ -257,11 +257,11 @@ def main() -> int:
         fold = dict(region=cell.active, visible=np.zeros_like(cell.active), truth=truth_crop)
         for k, arr in h_arms.items():
             _, tt = EH.evaluate(arr[bb].astype(np.float32), fold, grid.footprint[bb],
-                                block_side=B70.BLOCK_PX, origin=(bb[0].start, bb[1].start),
+                                block_side=B71.BLOCK_PX, origin=(bb[0].start, bb[1].start),
                                 global_shape=(grid.height, grid.width))
             hterms[k].append(tt)
     pooled = EH.pooled_summary({k: np.sum(v, axis=0) for k, v in hterms.items()},
-                               draws=B70.BOOT_DRAWS, seed=B70.BOOT_SEED, candidate="H71_union")
+                               draws=B71.BOOT_DRAWS, seed=B71.BOOT_SEED, candidate="H71_union")
     delta = pooled["paired_differences"]["champion"]
     gate_g2 = dict(rule="PASS iff pooled HOLDOUT-DTI(H71) - HOLDOUT-DTI(champion) >= -0.002",
                    union_dti=pooled["scores"]["H71_union"]["dti"],
@@ -339,15 +339,15 @@ def main() -> int:
                           worst_raster=None if not eligible else min(
                               (r for r in eligible if r["representation"] == "dot_field"),
                               key=lambda r: -r["artifact_dots_within_3px"])["raster"],
-                          passes=bool(art_max is not None and art_max <= B70.OVERLAP_LIMIT)),
+                          passes=bool(art_max is not None and art_max <= B71.OVERLAP_LIMIT)),
             increment=dict(max_dots_within_3px=inc_max,
                            worst_raster=None if worst_inc is None else worst_inc["raster"],
-                           passes=bool(inc_max is not None and inc_max <= B70.OVERLAP_LIMIT),
+                           passes=bool(inc_max is not None and inc_max <= B71.OVERLAP_LIMIT),
                            note="the standing <=70% clause applied to the 6,000 new dots only"),
             literal=dict(max_dots_within_3px=max(r["artifact_dots_within_3px"] for r in rows),
                          worst_raster=max(rows, key=lambda r: r["artifact_dots_within_3px"])["raster"],
                          passes=bool(max(r["artifact_dots_within_3px"] for r in rows)
-                                     <= B70.OVERLAP_LIMIT))),
+                                     <= B71.OVERLAP_LIMIT))),
         exclusions=dict(
             definition=("set aside as universal blockers when the comparator's own dots lie within "
                         "3 px of >99% of the footprint (no emission can avoid them - IR-60-UNIQ-DENSE-01), "
@@ -370,19 +370,19 @@ def main() -> int:
                       "by design; overlap with the champion's ancestors is structural and disclosed, and "
                       "the increment reading is the one that answers the standing clause's question "
                       "(does the new mass duplicate an existing artifact?)"),
-        verdict=("PASS" if (art_max is not None and art_max <= B70.OVERLAP_LIMIT
-                            and inc_max is not None and inc_max <= B70.OVERLAP_LIMIT
-                            and rho_max is not None and rho_max <= B70.RHO_LIMIT
+        verdict=("PASS" if (art_max is not None and art_max <= B71.OVERLAP_LIMIT
+                            and inc_max is not None and inc_max <= B71.OVERLAP_LIMIT
+                            and rho_max is not None and rho_max <= B71.RHO_LIMIT
                             and byte_unique)
-                 else ("QUALIFIED" if (inc_max is not None and inc_max <= B70.OVERLAP_LIMIT
-                                       and rho_max is not None and rho_max <= B70.RHO_LIMIT
+                 else ("QUALIFIED" if (inc_max is not None and inc_max <= B71.OVERLAP_LIMIT
+                                       and rho_max is not None and rho_max <= B71.RHO_LIMIT
                                        and byte_unique) else "FAIL")),
         qualifier=("QUALIFIED means: the standing <=70% clause PASSES on the new mass (the increment "
                    "reading, which is the clause's question), the artifact is byte- and pixel-unique and "
                    "|rho| <= 0.90, but the clause FAILS on the artifact as a whole against rasters that "
                    "themselves contain the champion's support - structurally, because 37,654 of the "
                    "43,654 dots ARE the already-scored champion. The owner must weigh that explicitly; "
-                   "if a virgin artifact is required, H70-A (6,000 dots, literal PASS at 0.5187) is the "
+                   "if a virgin artifact is required, H71-A (6,000 dots, literal PASS at 0.5187) is the "
                    "clean alternative."))
     mark(f"G3 {gate_g3['verdict']}: artifact max {art_max} increment max {inc_max} "
          f"(worst increment {None if worst_inc is None else worst_inc['raster']}) rho_max {rho_max} | "
@@ -403,9 +403,9 @@ def main() -> int:
             champion=dict(file=CHAMPION.name, sha256=champ_sha, dots=int(champ.sum()),
                           live_score=0.2778, live_score_class="OWNER-REPORTED / UNVERIFIED"),
             added=dict(file=ADDEND.name, sha256=add_sha, dots=int(add.sum()),
-                       source_card="evidence/h70a_runcard.json", source_verdict=card_a["verdict"],
+                       source_card="evidence/h71a_runcard.json", source_verdict=card_a["verdict"],
                        credit_per_dot_sgmc_off=card_a["gates"]["G1_population_matched"]
-                       ["h70_credit_per_dot"])),
+                       ["h71a_credit_per_dot"])),
         artifact=dict(file=rec["file"], sha256=rec["sha256"], bytes=rec["bytes"], zip=rec["zip_file"],
                       zip_sha256=rec["zip_sha256"], submission_name=rec["submission_name"],
                       note=rec["note"], note_chars=rec["note_chars"],
@@ -423,7 +423,7 @@ def main() -> int:
             "bounded at -0.013 if the added mass carries zero live credit. As an ARTIFACT: it is a "
             "superset of an already-scored file, so if the standing uniqueness clause must hold on the "
             "whole artifact (not only on the new mass), the owner should either accept the disclosed "
-            "inheritance or submit H70-A instead - which is literally unique but scores low alone."),
+            "inheritance or submit H71-A instead - which is literally unique but scores low alone."),
         interpretation=("The union tests one thing: whether measured-credit complementary mass pays when "
                         "added to the best-scoring artifact we own. G1 is the decisive gate; G2 is a no-harm "
                         "clause on an instrument known to be blind to off-catalogue arms; a PROMOTE is a "

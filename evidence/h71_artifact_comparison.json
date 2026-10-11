@@ -1,0 +1,385 @@
+{
+  "run": "H71-artifact-comparison",
+  "generated_utc": "20261011T192821Z",
+  "evidence_class": "proxies only (HOLDOUT-DTI + INSTRUMENT-DTI); NOT organizer-confirmed",
+  "governance": "registry/current_site_status.json STOP + the literal 70-raster uniqueness rule with no dense/lattice exception: any arm whose max_overlap > 0.70 is NOT CLEARED to submit, and the two lattice comparators put every arm above 0.70",
+  "arms": {
+    "champion_h33_2_b2": {
+      "file": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+      "dots": 37654,
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
+    },
+    "H65_1_lane": {
+      "file": "gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+      "dots": 40000,
+      "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e"
+    },
+    "H66_1_lane": {
+      "file": "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+      "dots": 40000,
+      "sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1"
+    },
+    "H68_1_lane": {
+      "file": "gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif",
+      "dots": 40000,
+      "sha256": "f4aa17400c7ff9ae12a428862ccaa4e2b0397015a3a7e7b55aa006341599f8ed"
+    },
+    "H71A_probe": {
+      "file": "gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
+      "dots": 6000,
+      "sha256": "5c22c464a40e15bae84463f921a6c704d29b45c67dd334c08202320d7b7e68e0"
+    },
+    "H71B_field": {
+      "file": "gems60-h71b-convcomp-12000-20261011T184819Z-zeros.tif",
+      "dots": 12000,
+      "sha256": "4f2fbeed356fed1ce7721f8ae3ed5a78d880acb525159b8964864831ec5058c8"
+    },
+    "H72_union": {
+      "file": "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif",
+      "dots": 43654,
+      "sha256": "79e3fafab1adf16ec5d1b0549dcf4bcdd4e7b40abc6aa5c1791334939ae4581d"
+    },
+    "H68_1_plus_H71A": {
+      "file": "derived",
+      "dots": 45943,
+      "sha256": null
+    }
+  },
+  "instrument_sgmc_off": {
+    "champion_h33_2_b2": {
+      "dti": 0.094626,
+      "tpw": 5481.229,
+      "fpw": 35240.6,
+      "fnw": 56744.771,
+      "n_truth": 62226,
+      "mass": 37654.0,
+      "emitted_px": 37654,
+      "credit_per_px": 0.145568
+    },
+    "H65_1_lane": {
+      "dti": 0.007586,
+      "tpw": 438.114,
+      "fpw": 39407.216,
+      "fnw": 61787.886,
+      "n_truth": 62226,
+      "mass": 40000.0,
+      "emitted_px": 40000,
+      "credit_per_px": 0.010953
+    },
+    "H66_1_lane": {
+      "dti": 0.065068,
+      "tpw": 3784.434,
+      "fpw": 38116.835,
+      "fnw": 58441.566,
+      "n_truth": 62226,
+      "mass": 40000.0,
+      "emitted_px": 40000,
+      "credit_per_px": 0.094611
+    },
+    "H68_1_lane": {
+      "dti": 0.064183,
+      "tpw": 3731.162,
+      "fpw": 38030.088,
+      "fnw": 58494.838,
+      "n_truth": 62226,
+      "mass": 40000.0,
+      "emitted_px": 40000,
+      "credit_per_px": 0.093279
+    },
+    "H71A_probe": {
+      "dti": 0.046999,
+      "tpw": 2410.863,
+      "fpw": 5165.043,
+      "fnw": 59815.137,
+      "n_truth": 62226,
+      "mass": 6000.0,
+      "emitted_px": 6000,
+      "credit_per_px": 0.401811
+    },
+    "H71B_field": {
+      "dti": 0.132652,
+      "tpw": 7036.626,
+      "fpw": 9288.172,
+      "fnw": 55189.374,
+      "n_truth": 62226,
+      "mass": 12000.0,
+      "emitted_px": 12000,
+      "credit_per_px": 0.586386
+    },
+    "H72_union": {
+      "dti": 0.132577,
+      "tpw": 7880.092,
+      "fpw": 40405.644,
+      "fnw": 54345.908,
+      "n_truth": 62226,
+      "mass": 43654.0,
+      "emitted_px": 43654,
+      "credit_per_px": 0.180512
+    },
+    "H68_1_plus_H71A": {
+      "dti": 0.100447,
+      "tpw": 5987.368,
+      "fpw": 43144.734,
+      "fnw": 56238.632,
+      "n_truth": 62226,
+      "mass": 45943.0,
+      "emitted_px": 45943,
+      "credit_per_px": 0.130322
+    }
+  },
+  "holdout_pooled": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "alpha": 0.2,
+    "beta": 0.8,
+    "triangular_radius_m": 300.0,
+    "pooled": true,
+    "scores": {
+      "champion_h33_2_b2": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.004384809306270314,
+        "ci95": [
+          0.0037906676883073284,
+          0.005052262364409612
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 141.44240077765525,
+        "fpw": 70581.39004526673,
+        "fnw": 22499.557599222342
+      },
+      "H65_1_lane": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.001411347928664142,
+        "ci95": [
+          0.0010289241616710627,
+          0.0018339322594887785
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 46.63914052781996,
+        "fpw": 74618.42869097591,
+        "fnw": 22594.360859472185
+      },
+      "H66_1_lane": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.008925475532707975,
+        "ci95": [
+          0.007312571294431464,
+          0.0104527696730862
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 296.0544191254394,
+        "fpw": 74987.92647585829,
+        "fnw": 22344.94558087455
+      },
+      "H68_1_lane": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.03663965958713929,
+        "ci95": [
+          0.033575933126232554,
+          0.03981673185741457
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 1214.0487840471624,
+        "fpw": 73896.08652823884,
+        "fnw": 21426.951215952835
+      },
+      "H71A_probe": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 0.0,
+        "fpw": 11318.0,
+        "fnw": 22641.0
+      },
+      "H71B_field": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.0008444961383348327,
+        "ci95": [
+          0.0005252232400669283,
+          0.0011990430727812592
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 19.09957344248338,
+        "fpw": 22499.55750148322,
+        "fnw": 22621.900426557513
+      },
+      "H72_union": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.004097289710062712,
+        "ci95": [
+          0.0035230613039367127,
+          0.004726578549053878
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 141.44240077765525,
+        "fpw": 81899.39004526671,
+        "fnw": 22499.557599222342
+      },
+      "H68_1_plus_H71A": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.03431801583307877,
+        "ci95": [
+          0.031330073602226075,
+          0.037272417717084415
+        ],
+        "withheld_positive_pixels": 22641,
+        "tpw": 1214.0487840471624,
+        "fpw": 85104.08652823884,
+        "fnw": 21426.951215952835
+      }
+    },
+    "best_comparable_control": "H68_1_lane",
+    "paired_differences": {
+      "champion_h33_2_b2": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.02993320652680846,
+        "ci95": [
+          0.027315249073382734,
+          0.03242789929119617
+        ],
+        "withheld_positive_pixels": 22641
+      },
+      "H65_1_lane": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.032906667904414634,
+        "ci95": [
+          0.030002826836341766,
+          0.03581257338669884
+        ],
+        "withheld_positive_pixels": 22641
+      },
+      "H66_1_lane": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.025392540300370796,
+        "ci95": [
+          0.02352776335877619,
+          0.027211117334840138
+        ],
+        "withheld_positive_pixels": 22641
+      },
+      "H68_1_lane": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": -0.0023216437540605137,
+        "ci95": [
+          -0.0027626433346954206,
+          -0.0019563924154729372
+        ],
+        "withheld_positive_pixels": 22641
+      },
+      "H71A_probe": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.03431801583307877,
+        "ci95": [
+          0.031330073602226075,
+          0.037272417717084415
+        ],
+        "withheld_positive_pixels": 22641
+      },
+      "H71B_field": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.03347351969474394,
+        "ci95": [
+          0.03060877489221283,
+          0.036193848895737415
+        ],
+        "withheld_positive_pixels": 22641
+      },
+      "H72_union": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.03022072612301606,
+        "ci95": [
+          0.027612504769060082,
+          0.03277137865311803
+        ],
+        "withheld_positive_pixels": 22641
+      }
+    },
+    "bootstrap": {
+      "method": "paired physical spatial-cluster percentile",
+      "clusters": 158,
+      "draws": 1000,
+      "seed": 7001,
+      "confidence": 0.95,
+      "caveat": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval."
+    },
+    "implementation_sha256": {
+      "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+      "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+      "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+      "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+    }
+  },
+  "literal_uniqueness": {
+    "champion_h33_2_b2": {
+      "max_overlap": 1.0,
+      "worst": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "max_abs_rho": 1.0
+    },
+    "H65_1_lane": {
+      "max_overlap": 0.998825,
+      "worst": "calib_r13lattice_00904.tif",
+      "max_abs_rho": 0.663295
+    },
+    "H66_1_lane": {
+      "max_overlap": 0.998675,
+      "worst": "calib_r13lattice_00904.tif",
+      "max_abs_rho": 0.09425
+    },
+    "H68_1_lane": {
+      "max_overlap": 0.9985,
+      "worst": "calib_r13lattice_00904.tif",
+      "max_abs_rho": 0.065299
+    },
+    "H71A_probe": {
+      "max_overlap": 1.0,
+      "worst": "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
+      "max_abs_rho": 0.363102
+    },
+    "H71B_field": {
+      "max_overlap": 0.99825,
+      "worst": "calib_r13lattice_00904.tif",
+      "max_abs_rho": 0.031339
+    },
+    "H72_union": {
+      "max_overlap": 1.0,
+      "worst": "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
+      "max_abs_rho": 1.0
+    },
+    "H68_1_plus_H71A": {
+      "max_overlap": 0.998215,
+      "worst": "r13_lattice_s5_00904.tif",
+      "max_abs_rho": 0.144217
+    }
+  },
+  "cross_overlap": {
+    "h71a_dots_within_3px_of_h68_1": 0.110333,
+    "h68_1_dots_within_3px_of_h71a": 0.0251,
+    "note": "if the probes are mutually distant, the H68-1 field and the H71-A complement are additive in max-cover terms; if not, the complement is already covered by H68-1"
+  },
+  "seconds": 176.6,
+  "protocol_note": "the holdout numbers in this file use the 8 cells with mode == 'all' of gems57-pooled-hide-v2 (block_side 200 px, shared evaluator) and are comparable ACROSS THE ARMS IN THIS FILE ONLY. They are not the pooled numbers printed in the repository's run cards (e.g. this protocol gives H66-1 0.008925 and H68-1 0.036640 while the cards report 0.065739 and 0.171894 with a different cell/aggregation set). Ranking within this file is what the comparison is for; no absolute value here is a leaderboard estimate.",
+  "governance_note": "measured here: EVERY arm, including the already-scored champion and main's H65-1/H66-1/H68-1, exceeds the literal 0.70 3-px overlap because the two lattice comparators cover 99.87% of the footprint within 3 px; nothing in this file is cleared to submit, and no dense/lattice exception is claimed",
+  "annotation": {
+    "kind": "post-hoc explanatory field only; no measured value was changed",
+    "added_utc": "2026-10-11T19:40:00Z"
+  }
+}

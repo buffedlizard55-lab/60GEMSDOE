@@ -1,9 +1,9 @@
 {
   "evidence_class": "DATA-MEASUREMENT",
   "hypothesis": "H65-1",
-  "generated_utc": "2026-10-11T05:25:42Z",
+  "generated_utc": "2026-10-11T15:56:11Z",
   "source_manifest": {
-    "run_id": "38113556275",
+    "run_id": "38115164310",
     "files": {
       "dem10_chi_100m_i16.tif": {
         "bytes": 12777098,

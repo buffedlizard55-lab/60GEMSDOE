@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""H70 — complementary-cover emission of a convergent-evidence field (profiles A and B).
+"""H71 — complementary-cover emission of a convergent-evidence field (profiles A and B).
 
-Preregistered in ``registry/preregistration-h70.json`` (with two dated amendments) before this
+Preregistered in ``registry/preregistration-h71.json`` (with two dated amendments) before this
 file was run.
 
 Profiles
 --------
-``H70_PROFILE=broad``      (default) the full convergent-evidence emission at 12,000 dots.
-``H70_PROFILE=restricted`` the same ranking restricted to cells >3 px from the two non-lattice
+``H71_PROFILE=broad``      (default) the full convergent-evidence emission at 12,000 dots.
+``H71_PROFILE=restricted`` the same ranking restricted to cells >3 px from the two non-lattice
                            near-space-filling local rasters, at the largest declared mass the
                            restricted pool can hold (6,000 / 4,000 / 3,000).
 
@@ -244,7 +244,7 @@ def paired_block_bootstrap(arms: dict, truth: np.ndarray, draws=BOOT_DRAWS, seed
                                               float(np.quantile(cpp, 0.975))],
                          tpw=float(tt), fpw=float(ff), dots=int(t["n"].sum()),
                          n_truth=int(kk))
-    ref = "H70"
+    ref = "H71"
     for name in list(per):
         if name == ref:
             continue
@@ -327,12 +327,12 @@ def uniqueness_scan(mine: np.ndarray, my_fp: np.ndarray, skip_names: tuple) -> d
 
 def main() -> int:
     t0 = time.time()
-    prof = os.environ.get("H70_PROFILE", "broad")
+    prof = os.environ.get("H71_PROFILE", "broad")
     tag = "A" if prof == "restricted" else "B"
     log: list[str] = []
 
     def mark(msg: str) -> None:
-        line = f"[H70-{tag}] {msg} ({time.time() - t0:.1f}s)"
+        line = f"[H71-{tag}] {msg} ({time.time() - t0:.1f}s)"
         print(line, flush=True)
         log.append(line)
 
@@ -341,7 +341,7 @@ def main() -> int:
         import stop_guard
         buf = io.StringIO()
         with redirect_stdout(buf):
-            stopped = stop_guard.lane_is_stopped(ROOT, f"H70-{tag} complementary-cover emission")
+            stopped = stop_guard.lane_is_stopped(ROOT, f"H71-{tag} complementary-cover emission")
         guard_report = dict(called=True, verdict="STOPPED" if stopped else "CLEAR",
                             output=buf.getvalue().strip(),
                             interpretation=("printed for the record; not used as a gate because this "
@@ -379,18 +379,18 @@ def main() -> int:
 
     d_cat = ndi.distance_transform_edt(~cat)
     d_champ = ndi.distance_transform_edt(~champ)
-    h70 = np.zeros(fp.shape, np.float32)
-    h70[ys, xs] = 1.0
-    mark(f"emitted {int(h70.sum()):,} dots; min d_catalogue={d_cat[h70 > 0].min():.2f} px "
-         f"min d_incumbent={d_champ[h70 > 0].min():.2f} px")
+    h71 = np.zeros(fp.shape, np.float32)
+    h71[ys, xs] = 1.0
+    mark(f"emitted {int(h71.sum()):,} dots; min d_catalogue={d_cat[h71 > 0].min():.2f} px "
+         f"min d_incumbent={d_champ[h71 > 0].min():.2f} px")
 
     sample = ROOT / "data/official/sample_submission.tif"
-    name = f"60GEMSDOE-H70-{tag}-CONVCOMP-{n_target}-{STAMP}"
-    note = (f"H70-{tag} complementary-cover probe: {n_target} dots >=400 m from every incumbent dot, "
+    name = f"60GEMSDOE-H71-{tag}-CONVCOMP-{n_target}-{STAMP}"
+    note = (f"H71-{tag} complementary-cover probe: {n_target} dots >=400 m from every incumbent dot, "
             "convergent-evidence ranking; field probe, not slot-cleared")
-    rec = SW.write_submission(DL / f"gems60-h70{tag.lower()}-convcomp-{n_target}-{STAMP}-zeros.tif",
-                             h70, sample, fp, note=note[:140], name=name[:140], catalogue=cat,
-                             metadata={"preregistration": "registry/preregistration-h70.json",
+    rec = SW.write_submission(DL / f"gems60-h71{tag.lower()}-convcomp-{n_target}-{STAMP}-zeros.tif",
+                             h71, sample, fp, note=note[:140], name=name[:140], catalogue=cat,
+                             metadata={"preregistration": "registry/preregistration-h71.json",
                                        "profile": prof, "min_sep_px": MIN_SEP_PX,
                                        "complement_px": COMPLEMENT_PX})
     mark(f"wrote {rec['file']} sha {rec['sha256'][:16]}")
@@ -399,7 +399,7 @@ def main() -> int:
     sgmc = read_stack(EXT / "sgmc_faults_100m.tif", nodata=255.0)[0] > 0
     offcat = I.sgmc_off_catalogue(sgmc, cat, fp, buffer_px=3)
     cand = np.flatnonzero(allowed.ravel())
-    arms = {"champion": champ, "H70": h70 > 0, "union": (champ | (h70 > 0))}
+    arms = {"champion": champ, "H71": h71 > 0, "union": (champ | (h71 > 0))}
     for s in RANDOM_SEEDS:
         r = np.random.default_rng(s)
         pick = r.choice(cand.size, size=min(n_target, cand.size), replace=False)
@@ -419,22 +419,22 @@ def main() -> int:
     boot = paired_block_bootstrap({k: v.astype(np.float64) for k, v in arms.items()}, offcat)
     rand_cpp = [boot[f"random_{s}"]["credit_per_dot"] for s in RANDOM_SEEDS]
     g1_lo = boot["paired_vs_random_7001"]["ci95"][0]
-    gate_g1 = dict(rule="credit/dot(H70) > mean(5 mass-matched controls from the same pool) and paired CI lower > 0",
-                   h70_credit_per_dot=boot["H70"]["credit_per_dot"],
-                   h70_ci95=boot["H70"]["credit_per_dot_ci95"],
+    gate_g1 = dict(rule="credit/dot(H71) > mean(5 mass-matched controls from the same pool) and paired CI lower > 0",
+                   h71_credit_per_dot=boot["H71"]["credit_per_dot"],
+                   h71_ci95=boot["H71"]["credit_per_dot_ci95"],
                    random_credit_per_dot_each={s: boot[f"random_{s}"]["credit_per_dot"] for s in RANDOM_SEEDS},
                    random_credit_per_dot_mean=float(np.mean(rand_cpp)),
                    champion_credit_per_dot=boot["champion"]["credit_per_dot"],
                    paired_delta_vs_random_7001=boot["paired_vs_random_7001"],
-                   verdict=("PASS" if (boot["H70"]["credit_per_dot"] > float(np.mean(rand_cpp)) and g1_lo > 0)
+                   verdict=("PASS" if (boot["H71"]["credit_per_dot"] > float(np.mean(rand_cpp)) and g1_lo > 0)
                             else "FAIL"))
-    mark(f"G1 {gate_g1['verdict']}: H70 {gate_g1['h70_credit_per_dot']:.4f} vs random "
+    mark(f"G1 {gate_g1['verdict']}: H71 {gate_g1['h71_credit_per_dot']:.4f} vs random "
          f"{gate_g1['random_credit_per_dot_mean']:.4f} vs champion {gate_g1['champion_credit_per_dot']:.4f}")
 
     # ---------------- registered holdout ---------------- #
     ctx = HO.build_holdout(grid)
     cells = [c for c in ctx.cells if c.mode == "all"]
-    h_arms = {"champion": champ, "H70": h70 > 0, "union": (champ | (h70 > 0)),
+    h_arms = {"champion": champ, "H71": h71 > 0, "union": (champ | (h71 > 0)),
               "random_mass_matched": arms["random_7001"], "distance_only": dm}
     terms: dict = {k: [] for k in h_arms}
     for cell in cells:
@@ -457,7 +457,7 @@ def main() -> int:
     mark(f"G2 {gate_g2['verdict']}: union {gate_g2['union_dti']:.6f} champion "
          f"{gate_g2['champion_dti']:.6f} delta {gate_g2['delta']:+.6f}")
 
-    uniq = uniqueness_scan(h70 > 0, fp, (Path(rec["file"]).name,))
+    uniq = uniqueness_scan(h71 > 0, fp, (Path(rec["file"]).name,))
     mark(f"uniqueness literal {uniq['literal']['max_dot_overlap_within_3px']:.4f} vs "
          f"{uniq['literal']['worst_raster']} | like-for-like "
          f"{uniq['like_for_like']['max_dot_overlap_within_3px']:.4f} vs {uniq['like_for_like']['worst_raster']}")
@@ -466,8 +466,8 @@ def main() -> int:
                                    and uniq["literal"]["passes_rho"]
                                    and rec["validator"]["all_checks_passed"]) else "NEGATIVE")
     out = dict(
-        run=f"H70-{tag}", hypothesis_id="GEMS60-H70", profile=prof, generated_utc=STAMP,
-        preregistration="registry/preregistration-h70.json",
+        run=f"H71-{tag}", hypothesis_id="GEMS60-H71", profile=prof, generated_utc=STAMP,
+        preregistration="registry/preregistration-h71.json",
         evidence_class="HOLDOUT-DTI + INSTRUMENT-DTI (proxies; NOT organizer-confirmed)",
         guard_report=guard_report,
         champion=dict(file=CHAMPION.name, sha256=champ_sha, dots=int(champ.sum()),
@@ -478,18 +478,18 @@ def main() -> int:
                       submission_name=rec["submission_name"], note=rec["note"],
                       note_chars=rec["note_chars"],
                       validator_all_checks_passed=rec["validator"]["all_checks_passed"],
-                      emitted=int(h70.sum())),
+                      emitted=int(h71.sum())),
         gates=dict(G1_population_matched=gate_g1, G2_registered_holdout=gate_g2,
                    G3_uniqueness=uniq,
                    G4_portal=dict(all_checks_passed=rec["validator"]["all_checks_passed"])),
         instrument_sgmc_off=inst, instrument_bootstrap=boot, holdout_pooled=pooled,
         verdict=verdict,
-        interpretation=("H70 measures whether complementary mass on a convergent-evidence ranking "
+        interpretation=("H71 measures whether complementary mass on a convergent-evidence ranking "
                         "carries above-bar credit on a population-matched instrument. A PASS makes the "
                         "field worth scaling; it is not a leaderboard prediction and not a slot decision."),
         seconds=round(time.time() - t0, 1), log=log)
-    (EVID / f"h70{tag.lower()}_runcard.json").write_text(json.dumps(out, indent=2, default=float) + "\n")
-    mark(f"verdict {verdict}; wrote evidence/h70{tag.lower()}_runcard.json")
+    (EVID / f"h71{tag.lower()}_runcard.json").write_text(json.dumps(out, indent=2, default=float) + "\n")
+    mark(f"verdict {verdict}; wrote evidence/h71{tag.lower()}_runcard.json")
     return 0
 
 

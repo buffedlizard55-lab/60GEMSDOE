@@ -36,6 +36,9 @@ def sha256(p: Path) -> str:
 
 
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "historical H67 promotion publisher"):
+        return 2
     hold = load("evidence/h67_holdout.json")
     (ROOT / "evidence" / "h67_e2_canary.json").write_text(json.dumps({
         "evidence_class": "HOLDOUT-DTI",

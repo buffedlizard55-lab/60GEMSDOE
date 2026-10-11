@@ -1,18 +1,7 @@
 #!/usr/bin/env python3
-"""The SEPARATE promotion step: decide promote / negative from the run's own receipts.
+"""Separate selection diagnostics; literal overlap is binding, null controls cannot waive it.
 
-Nothing here re-runs the lane or re-measures the metric.  It reads ``evidence/``, adds the two
-controls the protocol demands but the pipeline cannot compute for itself --
-
-  1. the registry-overlap CONTROL: the naive ">70% of dots within 3 px of raster X" rule is checked
-     against the same statistic for a uniform-random dot set of the same size and for the coverage
-     of the whole footprint by that raster's (2r+1)^2 halo.  A rule that a null set also passes is
-     not evidence of duplication (protocol item IR-H87-001: never waive silently, always report);
-  2. the instrument-bias diagnostic: AUC of elevation-derived fields against the off-catalogue
-     truth, so a negative result can be read against how the instrument samples relief.
-
-and applies the pre-registered promotion rules.  Prints a verdict and writes
-``evidence/selector_verdict.json``.
+A stopped lane never reaches this legacy selector. It does not authorize uploads.
 """
 from __future__ import annotations
 
@@ -31,13 +20,21 @@ EV = ROOT / "evidence"
 PROMOTE_RULES = {
     "first_test_passes": "evidence/first_test.json passes == true",
     "lane_beats_random_off_catalogue": "off-catalogue HOLDOUT-DTI at the matched budget > random",
-    "uniqueness_excess_below_stop": "max overlap EXCESS over the random control < 0.70 and "
-                                    "max |Spearman| < 0.90 vs every registry raster",
+    "literal_uniqueness": "raw 3px overlap <= 0.70 and abs(rho) <= 0.90; complete scan required",
     "no_leakage_flag": "leakage canary flagged_gt_0.90 == []",
 }
 
 
+def literal_uniqueness(overlap, rho, complete):
+    """Unknown coverage, nonfinite statistics and any threshold breach fail closed."""
+    return bool(complete is True and np.isfinite(overlap) and np.isfinite(rho)
+                and 0 <= overlap <= 0.70 and abs(rho) <= 0.90)
+
+
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "legacy selector"):
+        return 2
     ft = json.loads((EV / "first_test.json").read_text())
     card = json.loads((EV / "run_card.json").read_text())
     uniq = json.loads((EV / "uniqueness.json").read_text())
@@ -83,8 +80,9 @@ def main() -> int:
     checks = {
         "first_test_passes": bool(ft["passes"]),
         "lane_beats_random_off_catalogue": bool(lane_dti > rand_dti),
-        "uniqueness_excess_below_stop": bool(worst["excess_over_random"] < 0.70
-                                             and uniq.get("max_abs_spearman", 1.0) < 0.90),
+        "literal_uniqueness": literal_uniqueness(
+            worst["frac_dots_within_3px"], uniq.get("max_abs_spearman", float("nan")),
+            uniq.get("full_registry_clearance", False)),
         "no_leakage_flag": canary.get("flagged_gt_0.90", []) == [],
     }
     promote = all(checks.values())
@@ -104,10 +102,7 @@ def main() -> int:
                                      "merged_ci95": card["holdouts"][
                                          "submitted_raster_vs_off_catalogue"]["ci95"]},
         "overlap_control": {"worst": worst, "all": overlap,
-                            "note": "the naive >70%-overlap stop rule fires against a raster whose "
-                                    "(2r+1)^2 halo already covers most of the footprint; the "
-                                    "excess over the random control is the quantity that can "
-                                    "actually indicate duplication"},
+                            "note": "Null overlap is diagnostic only. Dense registry rasters are not exempt from the literal stop rule."},
         "instrument_bias": bias,
         "registry_rasters": len(names),
     }

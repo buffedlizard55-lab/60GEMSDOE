@@ -1,14 +1,14 @@
 {
-  "run": "H70-A",
-  "hypothesis_id": "GEMS60-H70",
+  "run": "H71-A",
+  "hypothesis_id": "GEMS60-H71",
   "profile": "restricted",
   "generated_utc": "20261011T185116Z",
-  "preregistration": "registry/preregistration-h70.json",
+  "preregistration": "registry/preregistration-h71.json",
   "evidence_class": "HOLDOUT-DTI + INSTRUMENT-DTI (proxies; NOT organizer-confirmed)",
   "guard_report": {
     "called": true,
     "verdict": "STOPPED",
-    "output": "STOP GUARD: H70-A complementary-cover emission not run \u2014 The H65-1 preregistered first test was INCONCLUSIVE (95% CI crosses zero); under the pre-registered rule, failure to establish a positive signal means STOP. The H65 report prohibits rerunning the knickpoint lane at any resolution. No follow-up experiment or submission is authorized..\nNo experiment or GeoTIFF was generated. Do not override without separate authorization.",
+    "output": "STOP GUARD: H71-A complementary-cover emission not run \u2014 The H65-1 preregistered first test was INCONCLUSIVE (95% CI crosses zero); under the pre-registered rule, failure to establish a positive signal means STOP. The H65 report prohibits rerunning the knickpoint lane at any resolution. No follow-up experiment or submission is authorized..\nNo experiment or GeoTIFF was generated. Do not override without separate authorization.",
     "interpretation": "printed for the record; not used as a gate because this runner is not a lane runner (see preregistration)"
   },
   "champion": {
@@ -89,22 +89,22 @@
     "note": "comparator coverage is measured over the footprint: a comparator within 3 px of >70% of the footprint makes the <=70% dot clause unsatisfiable for any emission"
   },
   "artifact": {
-    "file": "gems60-h70a-convcomp-6000-20261011T185116Z-zeros.tif",
+    "file": "gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
     "sha256": "5c22c464a40e15bae84463f921a6c704d29b45c67dd334c08202320d7b7e68e0",
     "bytes": 74127,
-    "zip": "gems60-h70a-convcomp-6000-20261011T185116Z-zeros.zip",
+    "zip": "gems60-h71a-convcomp-6000-20261011T185116Z-zeros.zip",
     "zip_sha256": "bb73ed53eec302efba54748f04181700a97abe53208b4a9f7d174f4d2f631231",
-    "submission_name": "60GEMSDOE-H70-A-CONVCOMP-6000-20261011T185116Z",
-    "note": "H70-A complementary-cover probe: 6000 dots >=400 m from every incumbent dot, convergent-evidence ranking; field probe, not slot-cleared",
+    "submission_name": "60GEMSDOE-H71-A-CONVCOMP-6000-20261011T185116Z",
+    "note": "H71-A complementary-cover probe: 6000 dots >=400 m from every incumbent dot, convergent-evidence ranking; field probe, not slot-cleared",
     "note_chars": 135,
     "validator_all_checks_passed": true,
     "emitted": 6000
   },
   "gates": {
     "G1_population_matched": {
-      "rule": "credit/dot(H70) > mean(5 mass-matched controls from the same pool) and paired CI lower > 0",
-      "h70_credit_per_dot": 0.4018105710673297,
-      "h70_ci95": [
+      "rule": "credit/dot(H71) > mean(5 mass-matched controls from the same pool) and paired CI lower > 0",
+      "h71_credit_per_dot": 0.4018105710673297,
+      "h71_ci95": [
         0.343098452868996,
         0.47270220011036074
       ],
@@ -280,7 +280,7 @@
       "emitted_px": 37654,
       "credit_per_px": 0.145568
     },
-    "H70": {
+    "H71": {
       "dti": 0.046999,
       "tpw": 2410.863,
       "fpw": 5165.043,
@@ -378,7 +378,7 @@
       "dots": 37654,
       "n_truth": 62226
     },
-    "H70": {
+    "H71": {
       "dti": 0.04699907017505275,
       "dti_ci95": [
         0.04256622340367305,
@@ -584,7 +584,7 @@
         "fpw": 70581.39004526673,
         "fnw": 22499.557599222342
       },
-      "H70": {
+      "H71": {
         "evidence_class": "HOLDOUT-DTI",
         "evaluator_version": "gems57-pooled-hide-v2",
         "dti": 0.0,
@@ -649,7 +649,7 @@
         ],
         "withheld_positive_pixels": 22641
       },
-      "H70": {
+      "H71": {
         "evidence_class": "HOLDOUT-DTI",
         "evaluator_version": "gems57-pooled-hide-v2",
         "delta": 0.004097289710062712,
@@ -695,30 +695,44 @@
       "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
     }
   },
-  "verdict": "PROMOTE-PROBE",
+  "verdict": "NEGATIVE-DO-NOT-SUBMIT (research evidence only)",
   "interpretation": "H70 measures whether complementary mass on a convergent-evidence ranking carries above-bar credit on a population-matched instrument. A PASS makes the field worth scaling; it is not a leaderboard prediction and not a slot decision.",
   "seconds": 170.8,
   "log": [
-    "[H70-A] stop_guard: STOPPED (0.0s)",
-    "[H70-A] field pool=265,134 of base 3,666,787 (11.1s)",
-    "[H70-A] emitted 6,000 dots; min d_catalogue=3.16 px min d_incumbent=4.12 px (12.7s)",
-    "[H70-A] wrote gems60-h70a-convcomp-6000-20261011T185116Z-zeros.tif sha 5c22c464a40e15ba (13.5s)",
-    "[H70-A]   sgmc_off champion     dti=0.09463 credit/px=0.1456 dots=37,654 (24.7s)",
-    "[H70-A]   sgmc_off H70          dti=0.04700 credit/px=0.4018 dots=6,000 (24.7s)",
-    "[H70-A]   sgmc_off union        dti=0.13258 credit/px=0.1805 dots=43,654 (24.7s)",
-    "[H70-A]   sgmc_off random_7001  dti=0.00358 credit/px=0.0304 dots=6,000 (24.7s)",
-    "[H70-A]   sgmc_off random_7002  dti=0.00411 credit/px=0.0349 dots=6,000 (24.7s)",
-    "[H70-A]   sgmc_off random_7003  dti=0.00441 credit/px=0.0375 dots=6,000 (24.7s)",
-    "[H70-A]   sgmc_off random_7004  dti=0.00359 credit/px=0.0305 dots=6,000 (24.7s)",
-    "[H70-A]   sgmc_off random_7005  dti=0.00406 credit/px=0.0345 dots=6,000 (24.7s)",
-    "[H70-A]   sgmc_off distance_only dti=0.00889 credit/px=0.0756 dots=6,000 (24.7s)",
-    "[H70-A] G1 PASS: H70 0.4018 vs random 0.0336 vs champion 0.1456 (34.1s)",
-    "[H70-A] G2 PASS: union 0.004097 champion 0.004385 delta -0.000288 (66.6s)",
-    "[H70-A] uniqueness literal 0.9963 vs calib_r13lattice_00904.tif | like-for-like 0.9963 vs calib_r13lattice_00904.tif (170.8s)"
+    "[H71-A] stop_guard: STOPPED (0.0s)",
+    "[H71-A] field pool=265,134 of base 3,666,787 (11.1s)",
+    "[H71-A] emitted 6,000 dots; min d_catalogue=3.16 px min d_incumbent=4.12 px (12.7s)",
+    "[H71-A] wrote gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif sha 5c22c464a40e15ba (13.5s)",
+    "[H71-A]   sgmc_off champion     dti=0.09463 credit/px=0.1456 dots=37,654 (24.7s)",
+    "[H71-A]   sgmc_off H70          dti=0.04700 credit/px=0.4018 dots=6,000 (24.7s)",
+    "[H71-A]   sgmc_off union        dti=0.13258 credit/px=0.1805 dots=43,654 (24.7s)",
+    "[H71-A]   sgmc_off random_7001  dti=0.00358 credit/px=0.0304 dots=6,000 (24.7s)",
+    "[H71-A]   sgmc_off random_7002  dti=0.00411 credit/px=0.0349 dots=6,000 (24.7s)",
+    "[H71-A]   sgmc_off random_7003  dti=0.00441 credit/px=0.0375 dots=6,000 (24.7s)",
+    "[H71-A]   sgmc_off random_7004  dti=0.00359 credit/px=0.0305 dots=6,000 (24.7s)",
+    "[H71-A]   sgmc_off random_7005  dti=0.00406 credit/px=0.0345 dots=6,000 (24.7s)",
+    "[H71-A]   sgmc_off distance_only dti=0.00889 credit/px=0.0756 dots=6,000 (24.7s)",
+    "[H71-A] G1 PASS: H70 0.4018 vs random 0.0336 vs champion 0.1456 (34.1s)",
+    "[H71-A] G2 PASS: union 0.004097 champion 0.004385 delta -0.000288 (66.6s)",
+    "[H71-A] uniqueness literal 0.9963 vs calib_r13lattice_00904.tif | like-for-like 0.9963 vs calib_r13lattice_00904.tif (170.8s)"
   ],
   "g3_addendum": {
     "utc": "2026-10-11T18:58:00Z",
     "reason": "the satisfiable-comparator reading was added after the broad run; this addendum recomputes G3 for the shipped artifact from the shipped bytes and re-derives the verdict.  No threshold changed and no earlier number was removed.",
     "instrument": "scripts/h70_uniqueness.py"
+  },
+  "verdict_as_measured": "PROMOTE-PROBE",
+  "governance": {
+    "status": "NOT CLEARED FOR SUBMISSION (DO NOT SUBMIT)",
+    "authority": "registry/current_site_status.json (channel-steepness lane STOP) and the literal 70-raster uniqueness rule with no dense/lattice exception, as reviewed on main (docs/research/submission-status-review.md, tests/test_current_gate.py)",
+    "dense_raster_note": "the two lattice comparators (calib_r13lattice_00904.tif, r13_lattice_s5_00904.tif) lie within 3 px of 99.87% of the footprint, so the literal clause fails for every emission in the project, including the already-scored champion; no exception is claimed here",
+    "note": "research evidence for the owner's selector; not a cleared submission and not an organizer-confirmed score",
+    "verdict_as_measured": "PROMOTE-PROBE"
+  },
+  "renumbering": {
+    "from_id": "GEMS60-H70 (complementary-cover emission family)",
+    "to_id": "GEMS60-H71 (H71-A 6,000-dot probe, H71-B 12,000-dot field) and GEMS60-H72 (union)",
+    "reason": "a concurrent session registered and ran an unrelated H70-1 on main (paired-polarity chi/ksn lane run, first test STOP). This card was renamed to remove the identifier collision; the artifact bytes, the measurements and the gates are unchanged.",
+    "log_text_note": "log lines inside this card are verbatim from the run and still say 'H70': the run happened before the rename"
   }
 }

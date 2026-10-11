@@ -58,7 +58,14 @@ _STATUS_BLOCK = re.compile(
 
 
 def preserve_status_blocks(path: Path, new_text: str) -> str:
-    """Re-insert any ``X-STATUS`` blocks the existing page carried, just after <body>."""
+    """Preserve parallel boards only when authoritative status explicitly permits them.
+
+    Historical promotions must never precede a STOP notice. Evidence remains in
+    version control and the archived README; a current page is not an archive.
+    """
+    status = read("registry/current_site_status.json", {})
+    if status.get("status") not in {"ACTIVE", "AUTHORIZED"}:
+        return _STATUS_BLOCK.sub("", new_text)
     if not path.is_file():
         return new_text
     old = path.read_text()

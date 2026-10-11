@@ -32,6 +32,10 @@ def lane_is_stopped(root: Path, runner: str) -> bool:
         print(f"STOP GUARD: {runner} not run — cannot read authoritative lane status ({exc}).")
         return True
 
+    if not isinstance(status, dict):
+        print(f"STOP GUARD: {runner} not run — lane status must be an object.")
+        return True
+
     if "channel-steepness" not in status.get("active_lane", ""):
         print(f"STOP GUARD: {runner} not run — channel-steepness is not the registered active lane.")
         return True
@@ -42,10 +46,17 @@ def lane_is_stopped(root: Path, runner: str) -> bool:
         return True
 
     latest = status.get("latest_first_test") or {}
+    if not isinstance(latest, dict):
+        print(f"STOP GUARD: {runner} not run — latest first test must be an object.")
+        return True
     latest_decision = str(latest.get("decision", "")).upper()
     latest_result = str(latest.get("result", "")).upper()
     if "STOP" in latest_decision or latest_result in _STOP_VERDICTS:
         print(f"STOP GUARD: {runner} not run — latest recorded first test is {latest_result or latest_decision}; the PROCEED gate failed.")
+        return True
+
+    if latest_result != "PROCEED" or not latest.get("evidence"):
+        print(f"STOP GUARD: {runner} not run — affirmative first-test evidence is missing.")
         return True
 
     paths: list[Path] = []
@@ -74,7 +85,13 @@ def lane_is_stopped(root: Path, runner: str) -> bool:
             print(f"STOP GUARD: {runner} not run — recorded first-test evidence is unreadable ({path}: {exc}).")
             return True
 
+        if not isinstance(record, dict):
+            print(f"STOP GUARD: {runner} not run — first-test evidence must be an object.")
+            return True
         verdict = _verdict(record)
+        if latest_evidence and path == root / str(latest_evidence) and verdict != "PROCEED":
+            print(f"STOP GUARD: {runner} not run — latest evidence is {verdict}, not PROCEED; STOP applies.")
+            return True
         if verdict in _STOP_VERDICTS:
             detail = "INCONCLUSIVE fails the preregistered PROCEED gate" if verdict == "INCONCLUSIVE" else f"recorded verdict is {verdict}"
             print(f"STOP GUARD: {runner} not run — {path.relative_to(root)}: {detail}; STOP applies.")

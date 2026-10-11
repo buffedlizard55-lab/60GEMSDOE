@@ -1,14 +1,14 @@
 {
-  "run": "H71",
-  "hypothesis_id": "GEMS60-H71",
+  "run": "H72",
+  "hypothesis_id": "GEMS60-H72",
   "generated_utc": "20261011T191739Z",
-  "preregistration": "registry/preregistration-h71.json",
+  "preregistration": "registry/preregistration-h72.json",
   "evidence_class": "HOLDOUT-DTI + INSTRUMENT-DTI (proxies; NOT organizer-confirmed)",
   "guard_report": {
     "called": true,
     "verdict": "STOPPED",
-    "output": "STOP GUARD: H71 union of live-scored champion and H70-A not run \u2014 The H65-1 preregistered first test was INCONCLUSIVE (95% CI crosses zero); under the pre-registered rule, failure to establish a positive signal means STOP. The H65 report prohibits rerunning the knickpoint lane at any resolution. No follow-up experiment or submission is authorized..\nNo experiment or GeoTIFF was generated. Do not override without separate authorization.",
-    "interpretation": "printed for the record; not used as a gate (not a lane runner, see registry/preregistration-h71.json)"
+    "output": "STOP GUARD: H72 union of live-scored champion and H70-A not run \u2014 The H65-1 preregistered first test was INCONCLUSIVE (95% CI crosses zero); under the pre-registered rule, failure to establish a positive signal means STOP. The H65 report prohibits rerunning the knickpoint lane at any resolution. No follow-up experiment or submission is authorized..\nNo experiment or GeoTIFF was generated. Do not override without separate authorization.",
+    "interpretation": "printed for the record; not used as a gate (not a lane runner, see registry/preregistration-h72.json)"
   },
   "constituents": {
     "champion": {
@@ -19,27 +19,27 @@
       "live_score_class": "OWNER-REPORTED / UNVERIFIED"
     },
     "added": {
-      "file": "gems60-h70a-convcomp-6000-20261011T185116Z-zeros.tif",
+      "file": "gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
       "sha256": "5c22c464a40e15bae84463f921a6c704d29b45c67dd334c08202320d7b7e68e0",
       "dots": 6000,
-      "source_card": "evidence/h70a_runcard.json",
+      "source_card": "evidence/h71a_runcard.json",
       "source_verdict": "PROMOTE-PROBE",
       "credit_per_dot_sgmc_off": 0.4018105710673297
     }
   },
   "artifact": {
-    "file": "gems60-h71-union-champ-convcomp-43654-20261011T191739Z-zeros.tif",
+    "file": "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif",
     "sha256": "79e3fafab1adf16ec5d1b0549dcf4bcdd4e7b40abc6aa5c1791334939ae4581d",
     "bytes": 161221,
-    "zip": "gems60-h71-union-champ-convcomp-43654-20261011T191739Z-zeros.zip",
+    "zip": "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.zip",
     "zip_sha256": "9d74a1377c4637fdcd7533c0d72ed9bfcf0fd978443664ff7774c8c552bf6aae",
-    "submission_name": "60GEMSDOE-H71-UNION-CHAMP-CONVCOMP-43654-20261011T191739Z",
-    "note": "H71 union: live-scored champion (37654 dots, 0.2778 owner-reported) plus the H70-A convergent-cover complement (6000 dots, credit/dot 0.4018",
+    "submission_name": "60GEMSDOE-H72-UNION-CHAMP-CONVCOMP-43654-20261011T191739Z",
+    "note": "H72 union: live-scored champion (37654 dots, 0.2778 owner-reported) plus the H70-A convergent-cover complement (6000 dots, credit/dot 0.4018",
     "note_chars": 140,
     "validator_all_checks_passed": true,
     "emitted": 43654,
     "nan_variant": {
-      "file": "gems60-h71-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
+      "file": "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
       "sha256": "c8a76393aa543462a4fc58c986055e267ed0ea3da135fe1378a1235cf0096d5e",
       "bytes": 204974,
       "fill_outside": "NaN (spec-literal, matching the official sample submission)",
@@ -62,7 +62,7 @@
   },
   "gates": {
     "G1_population_matched": {
-      "rule": "PASS iff credit/dot(H71) > credit/dot(champion) and the paired block-bootstrap lower bound of DTI(H71)-DTI(champion) on the SGMC-off-catalogue truth is > 0",
+      "rule": "PASS iff credit/dot(H72) > credit/dot(champion) and the paired block-bootstrap lower bound of DTI(H72)-DTI(champion) on the SGMC-off-catalogue truth is > 0",
       "union_credit_per_dot": 0.18051247620135302,
       "champion_credit_per_dot": 0.14556830779484137,
       "added_credit_per_dot": 0.40181057106732987,
@@ -108,7 +108,7 @@
       "verdict": "PASS"
     },
     "G2_registered_holdout": {
-      "rule": "PASS iff pooled HOLDOUT-DTI(H71) - HOLDOUT-DTI(champion) >= -0.002",
+      "rule": "PASS iff pooled HOLDOUT-DTI(H72) - HOLDOUT-DTI(champion) >= -0.002",
       "union_dti": 0.004097289710062712,
       "champion_dti": 0.004384809306270314,
       "delta": -0.0002875195962076015,
@@ -206,7 +206,7 @@
             "increment_dots_within_3px": 0.063
           },
           {
-            "raster": "gems60-h70a-convcomp-6000-20261011T185116Z-zeros.tif",
+            "raster": "gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
             "their_dots": 6000,
             "artifact_dots_within_3px": 0.137444,
             "increment_dots_within_3px": 1.0
@@ -600,11 +600,11 @@
       "max_abs_spearman_eligible": 0.839631,
       "increment_max_including_lineage": {
         "max_dots_within_3px": 1.0,
-        "worst_raster": "gems60-h70a-convcomp-6000-20261011T185116Z-zeros.tif",
+        "worst_raster": "gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
         "note": "reported so that no lineage exclusion can hide a duplication signal in the new mass"
       },
       "byte_unique": true,
-      "lineage_note": "IR-H71-LINE-01: this artifact is a strict superset of our own live-scored champion by design; overlap with the champion's ancestors is structural and disclosed, and the increment reading is the one that answers the standing clause's question (does the new mass duplicate an existing artifact?)",
+      "lineage_note": "IR-H72-LINE-01: this artifact is a strict superset of our own live-scored champion by design; overlap with the champion's ancestors is structural and disclosed, and the increment reading is the one that answers the standing clause's question (does the new mass duplicate an existing artifact?)",
       "verdict": "QUALIFIED",
       "qualifier": "QUALIFIED means: the standing <=70% clause PASSES on the new mass (the increment reading, which is the clause's question), the artifact is byte- and pixel-unique and |rho| <= 0.90, but the clause FAILS on the artifact as a whole against rasters that themselves contain the champion's support - structurally, because 37,654 of the 43,654 dots ARE the already-scored champion. The owner must weigh that explicitly; if a virgin artifact is required, H70-A (6,000 dots, literal PASS at 0.5187) is the clean alternative."
     },
@@ -613,7 +613,7 @@
     }
   },
   "instrument_sgmc_off": {
-    "H71_union": {
+    "H72_union": {
       "dti": 0.132577,
       "tpw": 7880.092,
       "fpw": 40405.644,
@@ -702,7 +702,7 @@
     "triangular_radius_m": 300.0,
     "pooled": true,
     "scores": {
-      "H71_union": {
+      "H72_union": {
         "evidence_class": "HOLDOUT-DTI",
         "evaluator_version": "gems57-pooled-hide-v2",
         "dti": 0.004097289710062712,
@@ -823,26 +823,40 @@
       }
     }
   },
-  "verdict": "PROMOTE-CANDIDATE-UNIQUENESS-QUALIFIED",
+  "verdict": "NEGATIVE-DO-NOT-SUBMIT (research evidence only)",
   "owner_decision_required": "One upload, two readings. As a CANDIDATE: the union strictly contains the live-scored champion and adds 6,000 dots whose credit was measured at 0.4018 per dot on a population-matched real-fault instrument, against the break-even 0.0556; downside is bounded at -0.013 if the added mass carries zero live credit. As an ARTIFACT: it is a superset of an already-scored file, so if the standing uniqueness clause must hold on the whole artifact (not only on the new mass), the owner should either accept the disclosed inheritance or submit H70-A instead - which is literally unique but scores low alone.",
   "interpretation": "The union tests one thing: whether measured-credit complementary mass pays when added to the best-scoring artifact we own. G1 is the decisive gate; G2 is a no-harm clause on an instrument known to be blind to off-catalogue arms; a PROMOTE is a candidate for the owner's selector, never an organizer-confirmed score.",
   "seconds": 155.6,
   "log": [
-    "[H71] stop_guard STOPPED (0.0s)",
-    "[H71] constituents verified: champion c55bafc47005 H70-A 5c22c464a40e (card verdict PROMOTE-PROBE) (0.0s)",
-    "[H71] union 43,654 dots (champion 37,654 + H70-A 6,000); min d_catalogue 2.24 px (1.1s)",
-    "[H71] restricted pool 265,134 px (field diag recorded) (11.3s)",
-    "[H71] wrote gems60-h71-union-champ-convcomp-43654-20261011T191739Z-zeros.tif sha 79e3fafab1adf16e validator=True (12.1s)",
-    "[H71]   sgmc_off H71_union      dti=0.13258 credit/px=0.1805 dots=43,654 (21.0s)",
-    "[H71]   sgmc_off champion       dti=0.09463 credit/px=0.1456 dots=37,654 (21.0s)",
-    "[H71]   sgmc_off H70A_added     dti=0.04700 credit/px=0.4018 dots=6,000 (21.0s)",
-    "[H71]   sgmc_off random_add_7101 dti=0.00333 credit/px=0.0283 dots=6,000 (21.0s)",
-    "[H71]   sgmc_off random_add_7102 dti=0.00396 credit/px=0.0337 dots=6,000 (21.0s)",
-    "[H71]   sgmc_off random_add_7103 dti=0.00472 credit/px=0.0401 dots=6,000 (21.0s)",
-    "[H71]   sgmc_off random_add_7104 dti=0.00410 credit/px=0.0349 dots=6,000 (21.0s)",
-    "[H71]   sgmc_off random_add_7105 dti=0.00370 credit/px=0.0314 dots=6,000 (21.0s)",
-    "[H71] G1 PASS: union c/dot 0.1805 vs champion 0.1456 (added 0.4018, random 0.0337); paired DTI delta +0.03799 [+0.03379,+0.04208] (28.5s)",
-    "[H71] G2 PASS: union 0.004097 champion 0.004385 delta -0.000288 (55.5s)",
-    "[H71] G3 QUALIFIED: artifact max 0.852316 increment max 0.518667 (worst increment gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif) rho_max 0.839631 | excluded 2 universal + 62 lineage (155.6s)"
-  ]
+    "[H72] stop_guard STOPPED (0.0s)",
+    "[H72] constituents verified: champion c55bafc47005 H70-A 5c22c464a40e (card verdict PROMOTE-PROBE) (0.0s)",
+    "[H72] union 43,654 dots (champion 37,654 + H70-A 6,000); min d_catalogue 2.24 px (1.1s)",
+    "[H72] restricted pool 265,134 px (field diag recorded) (11.3s)",
+    "[H72] wrote gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif sha 79e3fafab1adf16e validator=True (12.1s)",
+    "[H72]   sgmc_off H72_union      dti=0.13258 credit/px=0.1805 dots=43,654 (21.0s)",
+    "[H72]   sgmc_off champion       dti=0.09463 credit/px=0.1456 dots=37,654 (21.0s)",
+    "[H72]   sgmc_off H70A_added     dti=0.04700 credit/px=0.4018 dots=6,000 (21.0s)",
+    "[H72]   sgmc_off random_add_7101 dti=0.00333 credit/px=0.0283 dots=6,000 (21.0s)",
+    "[H72]   sgmc_off random_add_7102 dti=0.00396 credit/px=0.0337 dots=6,000 (21.0s)",
+    "[H72]   sgmc_off random_add_7103 dti=0.00472 credit/px=0.0401 dots=6,000 (21.0s)",
+    "[H72]   sgmc_off random_add_7104 dti=0.00410 credit/px=0.0349 dots=6,000 (21.0s)",
+    "[H72]   sgmc_off random_add_7105 dti=0.00370 credit/px=0.0314 dots=6,000 (21.0s)",
+    "[H72] G1 PASS: union c/dot 0.1805 vs champion 0.1456 (added 0.4018, random 0.0337); paired DTI delta +0.03799 [+0.03379,+0.04208] (28.5s)",
+    "[H72] G2 PASS: union 0.004097 champion 0.004385 delta -0.000288 (55.5s)",
+    "[H72] G3 QUALIFIED: artifact max 0.852316 increment max 0.518667 (worst increment gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif) rho_max 0.839631 | excluded 2 universal + 62 lineage (155.6s)"
+  ],
+  "verdict_as_measured": "PROMOTE-CANDIDATE-UNIQUENESS-QUALIFIED",
+  "governance": {
+    "status": "NOT CLEARED FOR SUBMISSION (DO NOT SUBMIT)",
+    "authority": "registry/current_site_status.json (channel-steepness lane STOP) and the literal 70-raster uniqueness rule with no dense/lattice exception, as reviewed on main (docs/research/submission-status-review.md, tests/test_current_gate.py)",
+    "dense_raster_note": "the two lattice comparators (calib_r13lattice_00904.tif, r13_lattice_s5_00904.tif) lie within 3 px of 99.87% of the footprint, so the literal clause fails for every emission in the project, including the already-scored champion; no exception is claimed here",
+    "note": "research evidence for the owner's selector; not a cleared submission and not an organizer-confirmed score",
+    "verdict_as_measured": "PROMOTE-CANDIDATE-UNIQUENESS-QUALIFIED"
+  },
+  "renumbering": {
+    "from_id": "GEMS60-H70 (complementary-cover emission family)",
+    "to_id": "GEMS60-H71 (H71-A 6,000-dot probe, H71-B 12,000-dot field) and GEMS60-H72 (union)",
+    "reason": "a concurrent session registered and ran an unrelated H70-1 on main (paired-polarity chi/ksn lane run, first test STOP). This card was renamed to remove the identifier collision; the artifact bytes, the measurements and the gates are unchanged.",
+    "log_text_note": "log lines inside this card are verbatim from the run and still say 'H70': the run happened before the rename"
+  }
 }

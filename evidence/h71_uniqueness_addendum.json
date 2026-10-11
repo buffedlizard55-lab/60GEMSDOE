@@ -2,7 +2,7 @@
   "generated_utc": "2026-10-11T18:58:00Z",
   "results": {
     "B": {
-      "artifact": "gems60-h70b-convcomp-12000-20261011T184819Z-zeros.tif",
+      "artifact": "gems60-h71b-convcomp-12000-20261011T184819Z-zeros.tif",
       "verdict": "NEGATIVE",
       "literal": 0.99825,
       "literal_raster": "calib_r13lattice_00904.tif",
@@ -17,7 +17,7 @@
       ]
     },
     "A": {
-      "artifact": "gems60-h70a-convcomp-6000-20261011T185116Z-zeros.tif",
+      "artifact": "gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
       "verdict": "PROMOTE-PROBE",
       "literal": 0.996333,
       "literal_raster": "calib_r13lattice_00904.tif",
@@ -31,5 +31,11 @@
         "r13_lattice_s5_00904.tif"
       ]
     }
+  },
+  "renumbering": {
+    "from_id": "GEMS60-H70 (complementary-cover emission family)",
+    "to_id": "GEMS60-H71 (H71-A 6,000-dot probe, H71-B 12,000-dot field) and GEMS60-H72 (union)",
+    "reason": "a concurrent session registered and ran an unrelated H70-1 on main (paired-polarity chi/ksn lane run, first test STOP). This card was renamed to remove the identifier collision; the artifact bytes, the measurements and the gates are unchanged.",
+    "log_text_note": "log lines inside this card are verbatim from the run and still say 'H70': the run happened before the rename"
   }
 }

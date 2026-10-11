@@ -1,0 +1,1965 @@
+{
+  "review_date": "2026-10-11",
+  "kind": "LOCAL FORMAT AUDIT, not organizer acceptance",
+  "sample": "data/official/sample_submission.tif",
+  "rasters": [
+    {
+      "path": "docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+      "bytes": 1603424,
+      "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "nan",
+      "blocksize": [
+        1,
+        3292
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": true,
+      "nan_pixels": 7111787,
+      "infinity_pixels": 0,
+      "n_nan": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.008532381616532803,
+      "n_nonzero": 44090,
+      "mass": 44090.0,
+      "mass_outside_footprint": 0,
+      "problems": [
+        "7111787 NaN/infinite pixels: fail our all-finite export policy (public spec permits outside-footprint NaN)",
+        "nodata tag outside all-finite [0,1] export policy"
+      ],
+      "ok": false,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+      "bytes": 836982,
+      "sha256": "3e78737f0da8dd2ca66cc6caac0ce8eeefcd6715707f8d1bd3091845cd9bcc30",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        1,
+        3292
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590636420994997,
+      "n_nonzero": 44090,
+      "mass": 44090.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+      "bytes": 355310,
+      "sha256": "1e404763feb330b9f9735767bd8bfd96ee50d5c0185ace5c40fef34a5c70306a",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "nan",
+      "blocksize": [
+        1,
+        3292
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": true,
+      "nan_pixels": 7111787,
+      "infinity_pixels": 0,
+      "n_nan": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.008708487264811993,
+      "n_nonzero": 45000,
+      "mass": 45000.0,
+      "mass_outside_footprint": 0,
+      "problems": [
+        "7111787 NaN/infinite pixels: fail our all-finite export policy (public spec permits outside-footprint NaN)",
+        "nodata tag outside all-finite [0,1] export policy"
+      ],
+      "ok": false,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems32-bayesopt-dilation-scarp-d28-20261004-zeros.tif",
+      "bytes": 302357,
+      "sha256": "2c1861f1dbf5bfe7e594db93cf2fedb5708e345b150c4ab58538a1fd1391047d",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        1,
+        3292
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0036647457163780928,
+      "n_nonzero": 45000,
+      "mass": 45000.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems32-lazygreedy-maxcov-44090-supconfined-zeros.tif",
+      "bytes": 806599,
+      "sha256": "f43ea85e2b7f20101d719277ccfe24c22a01b65effb9ea4ad39ea193fb843fe5",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        1,
+        3292
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590636420994997,
+      "n_nonzero": 44090,
+      "mass": 44090.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems32-probe-S1-ANCHOR-identical-to-live-02600.tif",
+      "bytes": 806758,
+      "sha256": "4dc4cc54b061cb4567a5500c8fa2bfe750a39340b02c8cdbb4308916f36cbcc3",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        1,
+        3292
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590636420994997,
+      "n_nonzero": 44090,
+      "mass": 44090.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems32-probe-S2-SCALE-lambda-0.5.tif",
+      "bytes": 799095,
+      "sha256": "d6462b76bce1a54920bd4e9d61700f3a1cc2f8dedf89d93651f74d10144c0243",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        1,
+        3292
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 0.5,
+      "mean": 0.0017953182104974985,
+      "n_nonzero": 44090,
+      "mass": 22045.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems32-probe-S3-NULLADD-2000px.tif",
+      "bytes": 810344,
+      "sha256": "da4193e3a2e0470908b5bd1e28de97f25ee1ce15c57c959d0b623414d200692a",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        1,
+        3292
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003753514029085636,
+      "n_nonzero": 46090,
+      "mass": 46090.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems60-chi-knickpoint-cast-lane-v1-6000-dots-zeros.tif",
+      "bytes": 226472,
+      "sha256": "af68d90ec9d3927c6b9c80352f7eb5216ba95023e51fc366b6a71a1097fbe139",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        1,
+        3292
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0004886327660642564,
+      "n_nonzero": 6000,
+      "mass": 6000.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems60-h60a-knick-corridor-40000-20261011T011509Z-372c9d7dd204-zeros.tif",
+      "bytes": 111604,
+      "sha256": "e9dbbb64e1d52b3b2786df53b79699af098222f4a99d9dcc73e658de15ca88cc",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0032575519289821386,
+      "n_nonzero": 40000,
+      "mass": 40000.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-nan.tif",
+      "bytes": 1560705,
+      "sha256": "8cbd52542e7bb8ea4949497d4f1b40f2f7936167f87d841f9242fe29f85e1383",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "nan",
+      "blocksize": [
+        1,
+        3292
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": true,
+      "nan_pixels": 7111787,
+      "infinity_pixels": 0,
+      "n_nan": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0072868745774030685,
+      "n_nonzero": 37654,
+      "mass": 37654.0,
+      "mass_outside_footprint": 0,
+      "problems": [
+        "7111787 NaN/infinite pixels: fail our all-finite export policy (public spec permits outside-footprint NaN)",
+        "nodata tag outside all-finite [0,1] export policy"
+      ],
+      "ok": false,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
+      "bytes": 127363,
+      "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0030664964579045773,
+      "n_nonzero": 37654,
+      "mass": 37654.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-nan.tif",
+      "bytes": 156902,
+      "sha256": "df9849b0056b2d1f12b10b94210c9bd0cfb163674f0a7b2c29572a721d75652b",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "nan",
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": true,
+      "nan_pixels": 7111787,
+      "infinity_pixels": 0,
+      "n_nan": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.009289052337408066,
+      "n_nonzero": 48000,
+      "mass": 48000.0,
+      "mass_outside_footprint": 0,
+      "problems": [
+        "7111787 NaN/infinite pixels: fail our all-finite export policy (public spec permits outside-footprint NaN)",
+        "nodata tag outside all-finite [0,1] export policy"
+      ],
+      "ok": false,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif",
+      "bytes": 114694,
+      "sha256": "b8d29b2f445ccc9746af53e0716e22b866bb5747297cf81aa2ab973660af6857",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0039090621285140514,
+      "n_nonzero": 48000,
+      "mass": 48000.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif",
+      "bytes": 101295,
+      "sha256": "2b859cf93be06cf4e5a4fe2f66ef2561e2ad5a516e0059705b8131d753dff589",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243349.965575182,
+        4135550.0,
+        572549.965575182,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243349.965575182,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0029317967128008604,
+      "n_nonzero": 36000,
+      "mass": 36000.0,
+      "mass_outside_footprint": 0,
+      "problems": [
+        "transform differs from sample_submission.tif",
+        "bounds BoundingBox(left=243349.965575182, bottom=4135550.0, right=572549.965575182, top=4508550.0) != reference BoundingBox(left=243350.0, bottom=4135550.0, right=572550.0, top=4508550.0)",
+        "transform differs from pinned competition transform (100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)"
+      ],
+      "ok": false,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+      "bytes": 104586,
+      "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0032575519289821386,
+      "n_nonzero": 40000,
+      "mass": 40000.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance",
+      "pinned_sha256_matches": true
+    },
+    {
+      "path": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+      "bytes": 144835,
+      "sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0032575519289821386,
+      "n_nonzero": 40000,
+      "mass": 40000.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif",
+      "bytes": 96075,
+      "sha256": "56f9f89ec97c265e6b9e75031c94441ca80688f556040fe20c5ab18105082ef8",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0032575519289821386,
+      "n_nonzero": 40000,
+      "mass": 40000.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif",
+      "bytes": 111211,
+      "sha256": "66f93c821cf7b8f91f14a1fba1746b7d58b1435f71b0004f599ee5c9d00ab944",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0030664964579045773,
+      "n_nonzero": 37654,
+      "mass": 37654.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif",
+      "bytes": 144419,
+      "sha256": "f4aa17400c7ff9ae12a428862ccaa4e2b0397015a3a7e7b55aa006341599f8ed",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0032575519289821386,
+      "n_nonzero": 40000,
+      "mass": 40000.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
+      "bytes": 78835,
+      "sha256": "c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0006232510786503553,
+      "n_nonzero": 7653,
+      "mass": 7653.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif",
+      "bytes": 75800,
+      "sha256": "a856efbac5e229194da7374c720eb83d5fd2e88568657b0f763a2e6af3d95d90",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0032575519289821386,
+      "n_nonzero": 40000,
+      "mass": 40000.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-nan.tif",
+      "bytes": 379333,
+      "sha256": "fe01ebd3961d6911bfa731111d4d3de75923e642c2276e1d7f6109de9236fd85",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "nan",
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": true,
+      "nan_pixels": 7111787,
+      "infinity_pixels": 0,
+      "n_nan": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.008532381616532803,
+      "n_nonzero": 44090,
+      "mass": 44090.0,
+      "mass_outside_footprint": 0,
+      "problems": [
+        "7111787 NaN/infinite pixels: fail our all-finite export policy (public spec permits outside-footprint NaN)",
+        "nodata tag outside all-finite [0,1] export policy"
+      ],
+      "ok": false,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-d28-ref02600-repro-44090-20261004T183200Z-426073b6-zeros.tif",
+      "bytes": 243828,
+      "sha256": "e4985b78c4d99e185686de639dffb16084a71cf5b673b1e7474f7c898493c2c3",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590636420994997,
+      "n_nonzero": 44090,
+      "mass": 44090.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-h32a-dip-projected-step-46090-20261004T183200Z-838fcd84-nan.tif",
+      "bytes": 385762,
+      "sha256": "564d569b8500e3c615457d0325f063c25f827ebb0703f249d7a043b2b25cdba9",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "nan",
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": true,
+      "nan_pixels": 7111787,
+      "infinity_pixels": 0,
+      "n_nan": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.00891942624002695,
+      "n_nonzero": 46090,
+      "mass": 46090.0,
+      "mass_outside_footprint": 0,
+      "problems": [
+        "7111787 NaN/infinite pixels: fail our all-finite export policy (public spec permits outside-footprint NaN)",
+        "nodata tag outside all-finite [0,1] export policy"
+      ],
+      "ok": false,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-h32a-dip-projected-step-46090-20261004T183200Z-838fcd84-zeros.tif",
+      "bytes": 250381,
+      "sha256": "dee5c5c6bc390ed39638f1638819c10d4e1ae52537c4a900930651dfd19754b7",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003753514029085636,
+      "n_nonzero": 46090,
+      "mass": 46090.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-h32b-transtensional-swarm-45890-20261004T183200Z-27b7c9e6-nan.tif",
+      "bytes": 384916,
+      "sha256": "1a3b1d63e1759ac71b7a187b893bad93abe09273178c8e64dcbb327c37f2a035",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "nan",
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": true,
+      "nan_pixels": 7111787,
+      "infinity_pixels": 0,
+      "n_nan": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.008880721405148506,
+      "n_nonzero": 45890,
+      "mass": 45890.0,
+      "mass_outside_footprint": 0,
+      "problems": [
+        "7111787 NaN/infinite pixels: fail our all-finite export policy (public spec permits outside-footprint NaN)",
+        "nodata tag outside all-finite [0,1] export policy"
+      ],
+      "ok": false,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-h32b-transtensional-swarm-45890-20261004T183200Z-27b7c9e6-zeros.tif",
+      "bytes": 249551,
+      "sha256": "fe0b511435cf80eb55a78b36555a0650fa9d626822f08a3d3221615a9bf12a68",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0037372263614088297,
+      "n_nonzero": 45890,
+      "mass": 45890.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-h32c-mt-claycap-breach-45890-20261004T183200Z-a5963d0a-nan.tif",
+      "bytes": 385772,
+      "sha256": "c09ebb73c49ef8553bf4834ef93856c870cdea72551e4268769299c2a4d31d4d",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "nan",
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": true,
+      "nan_pixels": 7111787,
+      "infinity_pixels": 0,
+      "n_nan": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.008880721405148506,
+      "n_nonzero": 45890,
+      "mass": 45890.0,
+      "mass_outside_footprint": 0,
+      "problems": [
+        "7111787 NaN/infinite pixels: fail our all-finite export policy (public spec permits outside-footprint NaN)",
+        "nodata tag outside all-finite [0,1] export policy"
+      ],
+      "ok": false,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-h32c-mt-claycap-breach-45890-20261004T183200Z-a5963d0a-zeros.tif",
+      "bytes": 250718,
+      "sha256": "fe96521c3ef3b9cb728792ebe943717976680d9511239aac601f632946bdce9a",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0037372263614088297,
+      "n_nonzero": 45890,
+      "mass": 45890.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-h32d-equalbudget-44090-20261004T183200Z-350cdc3f-nan.tif",
+      "bytes": 379319,
+      "sha256": "cc03eb8472e3c08dc7eea3e67a1d943191be78561fa850e7a0fd4225843f77be",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "nan",
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": true,
+      "nan_pixels": 7111787,
+      "infinity_pixels": 0,
+      "n_nan": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.008532381616532803,
+      "n_nonzero": 44090,
+      "mass": 44090.0,
+      "mass_outside_footprint": 0,
+      "problems": [
+        "7111787 NaN/infinite pixels: fail our all-finite export policy (public spec permits outside-footprint NaN)",
+        "nodata tag outside all-finite [0,1] export policy"
+      ],
+      "ok": false,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-h32d-equalbudget-44090-20261004T183200Z-350cdc3f-zeros.tif",
+      "bytes": 243967,
+      "sha256": "133bacd0031f865a9df2888de71abeba863118458d37d61ab08c388f415b3b96",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003590636420994997,
+      "n_nonzero": 44090,
+      "mass": 44090.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-nan.tif",
+      "bytes": 385688,
+      "sha256": "c3a0cbb14ca60f66934223e4455b970481d0229d2b8095afb3f023233e607621",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "nan",
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": true,
+      "nan_pixels": 7111787,
+      "infinity_pixels": 0,
+      "n_nan": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.00891942624002695,
+      "n_nonzero": 46090,
+      "mass": 46090.0,
+      "mass_outside_footprint": 0,
+      "problems": [
+        "7111787 NaN/infinite pixels: fail our all-finite export policy (public spec permits outside-footprint NaN)",
+        "nodata tag outside all-finite [0,1] export policy"
+      ],
+      "ok": false,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif",
+      "bytes": 250577,
+      "sha256": "f81e26d7712d1a4a9d3d5393037b09849400c3976d1ebd40e2760a586f2adc2f",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.003753514029085636,
+      "n_nonzero": 46090,
+      "mass": 46090.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif",
+      "bytes": 355443,
+      "sha256": "baeae3219bba6a19bc8cfe79224e28555c50184b7c1ca65c2a822f54807c77dd",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "nan",
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": true,
+      "nan_pixels": 7111787,
+      "infinity_pixels": 0,
+      "n_nan": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0072868745774030685,
+      "n_nonzero": 37654,
+      "mass": 37654.0,
+      "mass_outside_footprint": 0,
+      "problems": [
+        "7111787 NaN/infinite pixels: fail our all-finite export policy (public spec permits outside-footprint NaN)",
+        "nodata tag outside all-finite [0,1] export policy"
+      ],
+      "ok": false,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+      "bytes": 219065,
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0030664964579045773,
+      "n_nonzero": 37654,
+      "mass": 37654.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-nan.tif",
+      "bytes": 358154,
+      "sha256": "a99f68ea3de6a8e464a73a819429486ac619d9b94d725a393d2e0e5d911ab60d",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "nan",
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": true,
+      "nan_pixels": 7111787,
+      "infinity_pixels": 0,
+      "n_nan": 7111787,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.00746104447171092,
+      "n_nonzero": 38554,
+      "mass": 38554.0,
+      "mass_outside_footprint": 0,
+      "problems": [
+        "7111787 NaN/infinite pixels: fail our all-finite export policy (public spec permits outside-footprint NaN)",
+        "nodata tag outside all-finite [0,1] export policy"
+      ],
+      "ok": false,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/gemsdoe32-h33-h33-2b2-plus-h33-1-20261004T220000Z-31588dc7-zeros.tif",
+      "bytes": 221921,
+      "sha256": "91c2e7764beada782e1f2d8f0d5c940f078d0e328de6f5868e6d552dbc50832e",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0031397913116961718,
+      "n_nonzero": 38554,
+      "mass": 38554.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    {
+      "path": "docs/downloads/submission.tif",
+      "bytes": 5641329,
+      "sha256": "386e7cd1ea67cac24ec3b64b797037585732928a94f66160e48d27cfebe5a5e7",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": "nan",
+      "blocksize": [
+        1,
+        3292
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 5.223645051284487e-19,
+      "mean": 1.9375986407909112e-22,
+      "n_nonzero": 983855,
+      "mass": 2.3792083533968964e-15,
+      "mass_outside_footprint": 0,
+      "problems": [
+        "nodata tag outside all-finite [0,1] export policy"
+      ],
+      "ok": false,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    }
+  ],
+  "raster_count": 39,
+  "format_pass_count": 25,
+  "new_rasters_created": 0,
+  "slots_used": 0
+}

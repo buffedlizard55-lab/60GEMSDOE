@@ -150,37 +150,78 @@ def prepare_candidates(step: np.ndarray, channel: np.ndarray, exclude: np.ndarra
     return z, cand, diag
 
 
+def surface_kwargs_from_meta(meta_cfg: dict, cache_dir, exclude: np.ndarray | None = None) -> dict:
+    """Extract optional corridor/piedmont/bridge parameters from meta.json and cache_dir."""
+    from pathlib import Path
+    cdir = Path(cache_dir)
+    kw: dict = {
+        "include_positive_channels": bool(meta_cfg.get("include_positive_channels", False)),
+        "strict_aligned_corridors": bool(meta_cfg.get("strict_aligned_corridors", False)),
+        "half_len": int(meta_cfg.get("corridor_half_len_px", CORRIDOR_HALF_LEN_PX)),
+        "half_width": int(meta_cfg.get("corridor_half_width_px", CORRIDOR_HALF_WIDTH_PX)),
+        "trace_decay": float(meta_cfg.get("trace_decay", TRACE_DECAY)),
+        "strike_bridge_weight": float(meta_cfg.get("strike_bridge_weight", 0.0)),
+        "strike_bridge_perp_px": float(meta_cfg.get("strike_bridge_perp_px", 3.0)),
+        "strike_bridge_par_px": float(meta_cfg.get("strike_bridge_par_px", 18.0)),
+    }
+    if kw["strict_aligned_corridors"] and (cdir / "pied_z.npy").is_file():
+        kw["pied_z"] = np.load(cdir / "pied_z.npy")
+        kw["exclude"] = exclude
+    return kw
+
+
 def surface_from_candidates(z: np.ndarray, cand: np.ndarray, terminal: np.ndarray,
                             visible: np.ndarray, diag: dict | None = None, *,
                             n_drainage_min: int = N_DRAINAGE_MIN,
                             half_len: int = CORRIDOR_HALF_LEN_PX,
                             half_width: int = CORRIDOR_HALF_WIDTH_PX,
+                            trace_decay: float = TRACE_DECAY,
                             regional_strike: float | None = None,
                             max_candidates: int = 120_000,
-                            include_positive_channels: bool = False) -> SurfaceResult:
+                            include_positive_channels: bool = False,
+                            strict_aligned_corridors: bool = False,
+                            pied_z: np.ndarray | None = None,
+                            exclude: np.ndarray | None = None,
+                            strike_bridge_weight: float = 0.0,
+                            strike_bridge_perp_px: float = 3.0,
+                            strike_bridge_par_px: float = 18.0) -> SurfaceResult:
     """Fold-dependent half: visible-catalogue strike, corridor corroboration, p."""
     diag = dict(diag or {})
     diag.update(n_drainage_min=n_drainage_min, corridor_half_len_px=half_len,
-                corridor_half_width_px=half_width, trace_decay=TRACE_DECAY)
+                corridor_half_width_px=half_width, trace_decay=trace_decay,
+                strict_aligned_corridors=strict_aligned_corridors,
+                strike_bridge_weight=strike_bridge_weight)
     p = np.zeros(z.shape, np.float32)
     ndr = np.zeros(z.shape, np.int32)
     ys, xs = np.nonzero(cand)
     if ys.size == 0:
         diag.update(aligned_candidates=0, trace_pixels=0, positive_pixels=0)
         return SurfaceResult(p, diag, ndr)
-    if ys.size > max_candidates:
-        keep = np.argsort(-z[ys, xs], kind="stable")[:max_candidates]
+    cap = 160_000 if strict_aligned_corridors else max_candidates
+    if ys.size > cap:
+        keep = np.argsort(-z[ys, xs], kind="stable")[:cap]
         ys, xs = ys[keep], xs[keep]
-        diag["candidates_capped_to"] = max_candidates
+        diag["candidates_capped_to"] = cap
 
-    strike_near, coh, dvis = nearest_visible_strike(visible)
-    regional = (regional_modal_strike(strike_near, coh, visible)
+    vis = np.asarray(visible, bool)
+    strike_all, coh_all = gm.structure_strike(vis.astype(np.float32), sigma_px=STRIKE_SIGMA_PX)
+    if vis.any():
+        dvis, (iy, ix) = ndi.distance_transform_edt(~vis, return_indices=True)
+        strike_near = strike_all[iy, ix]
+        coh = coh_all[iy, ix]
+    else:
+        dvis = np.full(vis.shape, np.inf)
+        iy = ix = np.zeros(vis.shape, np.int32)
+        strike_near, coh = strike_all, coh_all
+    del strike_all, coh_all
+
+    regional = (regional_modal_strike(strike_near, coh, vis)
                 if regional_strike is None else float(regional_strike))
     diag.update(regional_modal_strike_deg=float(np.rad2deg(regional)))
     bins_all = strike_bins(strike_near, regional, coh)
-    b = bins_all[ys, xs]
+    ndr_cor_len = 8 if strict_aligned_corridors else half_len
     ndr_vals = gm.distinct_drainages_in_corridor((ys, xs), terminal, strike_near,
-                                                 half_len, half_width)
+                                                 ndr_cor_len, half_width)
     ndr[ys, xs] = ndr_vals
     aligned = ndr_vals >= n_drainage_min
     diag.update(candidate_pixels_scanned=int(ys.size), aligned_candidates=int(aligned.sum()),
@@ -188,21 +229,79 @@ def surface_from_candidates(z: np.ndarray, cand: np.ndarray, terminal: np.ndarra
                 n_drainage_p90=float(np.percentile(ndr_vals, 90)),
                 n_drainage_max=int(ndr_vals.max()))
 
-    if include_positive_channels:
-        s = np.where(np.isfinite(z) & (z > 0), z * np.float32(0.05), np.float32(0.0)).astype(np.float32)
-    else:
+    if strict_aligned_corridors:
+        # Strict brief compliance (fixes IR-68-UNALIGNED-01): keep ONLY knickpoints that
+        # align across >= n_drainage_min independent drainages along a common strike, plus
+        # range-front piedmont-coupled steep-channel corridors.
         s = np.zeros(z.shape, np.float32)
-    s[ys, xs] = np.maximum(s[ys, xs], z[ys, xs])
-    if aligned.any():
-        ay, ax = ys[aligned], xs[aligned]
-        s[ay, ax] += np.float32(1.0 + np.log2(np.maximum(ndr_vals[aligned], 1)))
-        tmask, tscore = stamp_corridors(ay, ax, bins_all[ay, ax], s[ay, ax], z.shape,
-                                        half_len, half_width, decay=TRACE_DECAY)
-        trace_only = tmask & (s < tscore)
-        s[trace_only] = tscore[trace_only]
-        diag.update(trace_pixels=int(tmask.sum()), trace_only_pixels=int(trace_only.sum()))
+        chan_pos = np.where(np.isfinite(z) & (z > 0), z, np.float32(0.0)).astype(np.float32)
+        chan_env = ndi.maximum_filter(chan_pos, size=5)
+        del chan_pos
+        not_excl = (~np.asarray(exclude, bool)) if exclude is not None else np.ones(z.shape, bool)
+        if aligned.any():
+            ay, ax = ys[aligned], xs[aligned]
+            aval = z[ay, ax] + np.float32(1.0 + np.log2(np.maximum(ndr_vals[aligned], 1)))
+            s[ay, ax] = aval
+            tmask, tscore = stamp_corridors(ay, ax, bins_all[ay, ax], aval, z.shape,
+                                            half_len, half_width, decay=trace_decay)
+            trace_only = tmask & (s < tscore)
+            s[trace_only] = tscore[trace_only]
+            if pied_z is not None:
+                cor_env = ndi.binary_dilation(tmask, iterations=2) & not_excl
+                s[cor_env] = np.maximum(
+                    s[cor_env],
+                    (0.5 * chan_env[cor_env] + 0.5 * pied_z[cor_env]) * np.float32(0.55),
+                )
+            diag.update(trace_pixels=int(tmask.sum()), trace_only_pixels=int(trace_only.sum()))
+        else:
+            diag.update(trace_pixels=0, trace_only_pixels=0)
+        if pied_z is not None:
+            pied_cor = not_excl & (chan_env > 0.20) & (pied_z > 0.25)
+            s[pied_cor] = np.maximum(
+                s[pied_cor],
+                (0.50 * chan_env[pied_cor] + 0.50 * pied_z[pied_cor]) * np.float32(0.40),
+            )
+        else:
+            pied_cor = np.zeros(z.shape, bool)
+        del chan_env
+        if strike_bridge_weight > 0.0 and vis.any():
+            gy_idx, gx_idx = np.indices(z.shape, dtype=np.float32)
+            dy = gy_idx - iy.astype(np.float32)
+            dx = gx_idx - ix.astype(np.float32)
+            del gy_idx, gx_idx
+            ang = np.where((coh > 0.25) & np.isfinite(strike_near), strike_near, regional).astype(np.float32)
+            u_row, u_col = -np.cos(ang), np.sin(ang)
+            v_row, v_col = np.sin(ang), np.cos(ang)
+            d_par = np.abs(dy * u_row + dx * u_col)
+            d_perp = np.abs(dy * v_row + dx * v_col)
+            del dy, dx, ang, u_row, u_col, v_row, v_col
+            bridge = np.exp(
+                -(d_perp ** 2) / (2.0 * float(strike_bridge_perp_px) ** 2)
+                - d_par / float(strike_bridge_par_px)
+            ).astype(np.float32)
+            del d_par, d_perp
+            bw = np.float32(strike_bridge_weight)
+            s = np.where(
+                s > 0,
+                s * (1.0 + bw * bridge) + np.where(pied_cor, np.float32(1.5) * bridge, np.float32(0.0)),
+                np.float32(0.0),
+            ).astype(np.float32)
     else:
-        diag.update(trace_pixels=0, trace_only_pixels=0)
+        if include_positive_channels:
+            s = np.where(np.isfinite(z) & (z > 0), z * np.float32(0.05), np.float32(0.0)).astype(np.float32)
+        else:
+            s = np.zeros(z.shape, np.float32)
+        s[ys, xs] = np.maximum(s[ys, xs], z[ys, xs])
+        if aligned.any():
+            ay, ax = ys[aligned], xs[aligned]
+            s[ay, ax] += np.float32(1.0 + np.log2(np.maximum(ndr_vals[aligned], 1)))
+            tmask, tscore = stamp_corridors(ay, ax, bins_all[ay, ax], s[ay, ax], z.shape,
+                                            half_len, half_width, decay=trace_decay)
+            trace_only = tmask & (s < tscore)
+            s[trace_only] = tscore[trace_only]
+            diag.update(trace_pixels=int(tmask.sum()), trace_only_pixels=int(trace_only.sum()))
+        else:
+            diag.update(trace_pixels=0, trace_only_pixels=0)
 
     pos = s > 0
     n_pos = int(pos.sum())

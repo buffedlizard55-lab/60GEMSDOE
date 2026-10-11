@@ -1,11 +1,11 @@
 # Why `h33-h33-2-b2` scored 0.2778, and what can beat it
 
 **Session:** `arena/161d8066-60gemsdoe` · **Date:** 2026-10-11 · **Branch:** `arena/161d8066-60gemsdoe`
-**New evidence this session:** [`evidence/h70a_runcard.json`](../../evidence/h70a_runcard.json),
-[`evidence/h70b_runcard.json`](../../evidence/h70b_runcard.json),
-[`evidence/h70_uniqueness_addendum.json`](../../evidence/h70_uniqueness_addendum.json),
+**New evidence this session:** [`evidence/h71a_runcard.json`](../../evidence/h71a_runcard.json),
+[`evidence/h71b_runcard.json`](../../evidence/h71b_runcard.json),
+[`evidence/h71_uniqueness_addendum.json`](../../evidence/h71_uniqueness_addendum.json),
 [`evidence/h69_probe_build.json`](../../evidence/h69_probe_build.json),
-[`registry/preregistration-h70.json`](../../registry/preregistration-h70.json)
+[`registry/preregistration-h71.json`](../../registry/preregistration-h71.json)
 
 Every number carries a tag: **[measured-here]** (recomputed in this session from committed bytes),
 **[official]** (competition page / leaderboard), **[owner-report]** (the group's own ledger; no
@@ -125,10 +125,10 @@ exact]**. With those three numbers the optimal mass, the exact marginal value of
 and the true bar become arithmetic instead of assumption. Neither probe can lower the standing
 (both are constructed below the anchor by the (★) arithmetic with every plausible parameter set).
 
-## 4. What this session added: H70, a validated *field*, measured off-catalogue
+## 4. What this session added: H71, a validated *field*, measured off-catalogue
 
-Preregistered in `registry/preregistration-h70.json` (two dated amendments recorded before the
-amended builds). H70 asks the population-matched question the catalogue instruments cannot answer:
+Preregistered in `registry/preregistration-h71.json` (two dated amendments recorded before the
+amended builds). H71 asks the population-matched question the catalogue instruments cannot answer:
 **does mass placed where the incumbent has no kernel, ranked by convergent independent evidence,
 carry above-bar credit on real mapped faults that are absent from the catalogue?** Layers, all
 committed: 3DEP-10 m Δk<sub>sn</sub>/k<sub>sn</sub>/knickpoint reduction, 10 m relief / profile
@@ -138,14 +138,14 @@ catalogue. Truth for the measurement: the **62,226 SGMC pixels >300 m from the g
 | arm | dots | SGMC-off credit/dot (95 % CI) | SGMC-off DTI | registered HOLDOUT-DTI |
 |---|---:|---|---:|---:|
 | champion `h33-2-b2` | 37,654 | 0.1456 [0.125, 0.170] | 0.0946 | 0.004385 |
-| **H70-B (broad, 12,000)** | 12,000 | **0.5864 [0.510, 0.667]** | 0.1327 | 0.000844 |
-| H70-A (restricted, 6,000) | 6,000 | **0.4018 [0.35, 0.46]** | 0.0470 | 0.000841 |
-| champion ∪ H70-B | 49,654 | 0.2510 | **0.2038** | 0.004364 |
+| **H71-B (broad, 12,000)** | 12,000 | **0.5864 [0.510, 0.667]** | 0.1327 | 0.000844 |
+| H71-A (restricted, 6,000) | 6,000 | **0.4018 [0.35, 0.46]** | 0.0470 | 0.000841 |
+| champion ∪ H71-B | 49,654 | 0.2510 | **0.2038** | 0.004364 |
 | mass-matched random (5 seeds) | 12,000 | 0.1091 ± 0.005 | ~0.025 | 0.000983 |
 | distance-only control | 12,000 | 0.0667 / 0.0503 | 0.0157 / 0.0089 | 0.0557 |
 
-**[measured-here]** Paired 20 km spatial-block bootstrap: H70-B − random = **+0.1053 DTI
-[+0.0913, +0.1198]**; H70-B − distance-only = +0.1174 [+0.1004, +0.1340]. G1 and G2 **PASS** for
+**[measured-here]** Paired 20 km spatial-block bootstrap: H71-B − random = **+0.1053 DTI
+[+0.0913, +0.1198]**; H71-B − distance-only = +0.1174 [+0.1004, +0.1340]. G1 and G2 **PASS** for
 both profiles; the union does not degrade the registered holdout (Δ = −0.000021 / −0.000288, within
 the ±0.002 gate).
 
@@ -155,18 +155,18 @@ has beaten the champion on a population-matched instrument. (ii) It says nothing
 panel's new faults, which are a different population; the registered holdout, whose truth is the
 catalogue itself, *rewards* the champion and is blind to this mechanism (its ρ against 12 live
 scores is +0.14). (iii) Which artifact may be called unique is a separate, measured question:
-H70-A passes the standing ≤70 % clause against every comparator the clause can discriminate
-(worst 0.5187), is byte- and pixel-unique, and |ρ| ≤ 0.0147 vs all 102 scanned rasters. H70-B does
+H71-A passes the standing ≤70 % clause against every comparator the clause can discriminate
+(worst 0.5187), is byte- and pixel-unique, and |ρ| ≤ 0.0147 vs all 102 scanned rasters. H71-B does
 not (0.9448 vs `r11_greedy_mp.tif`) and is therefore labelled NEGATIVE — it stays a diagnostic.
 
-### 4b. The union artifact (H71) — the candidate this session promotes
+### 4b. The union artifact (H72) — the measured candidate
 
-`bytes = champion ∪ H70-A`, i.e. the live-scored 37,654-dot champion plus the 6,000
+`bytes = champion ∪ H71-A`, i.e. the live-scored 37,654-dot champion plus the 6,000
 convergent-cover dots, **43,654 dots, no dot moved, no dot dropped**
-(`docs/downloads/gems60-h71-union-champ-convcomp-43654-20261011T191739Z-zeros.tif`,
+(`docs/downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif`,
 sha256 `79e3fafab1adf16ec5d1b0549dcf4bcdd4e7b40abc6aa5c1791334939ae4581d`,
-zip `9d74a137…`; card `evidence/h71_runcard.json`, preregistration
-`registry/preregistration-h71.json` + amendment 1, both written before the run).
+zip `9d74a137…`; card `evidence/h72_runcard.json`, preregistration
+`registry/preregistration-h72.json` + amendment 1, both written before the run).
 
 Two portal-legal variants ship, identical inside the footprint: the spec-literal
 `…-191739Z-nan.tif` (sha256 `c8a76393aa543462a4fc58c986055e267ed0ea3da135fe1378a1235cf0096d5e`,
@@ -189,20 +189,57 @@ if the added mass carried exactly zero live credit, the union would score **0.26
 (★) algebra, i.e. −0.013 to −0.017 versus the champion; if the measured credit transfers, the same
 algebra gives **0.361–0.386**. That asymmetry — small bounded loss, large bounded gain — plus a
 +0.038 measured gain on **real mapped faults that the catalogue does not contain**, is why this is
-the artifact to put in front of the owner's selector. It is explicitly *not* claimed as an
+the artifact to put in front of the owner's selector — **after** the governance question in §4c is
+resolved: nothing in this document is cleared to submit today. It is explicitly *not* claimed as an
 organizer-confirmed improvement, and the artifact-level uniqueness caveat is stated rather than
 buried.
 
+### 4c. How the complementary-cover field compares with the lane's own artifacts, and the governance wall
+
+From `evidence/h71_artifact_comparison.json` (every arm on the same 8-cell holdout protocol **and** on
+the same SGMC-off population instrument; **the holdout numbers in that file are comparable across its
+arms only** — the 8-cell protocol prints different absolute values from the pooled numbers in the run
+cards, e.g. H68-1 0.0366 there vs 0.1719 in its own card):
+
+| arm | dots | SGMC-off DTI | SGMC-off credit/dot | 8-cell holdout | literal 3-px max overlap |
+|---|---:|---:|---:|---:|---:|
+| champion `h33-2-b2` | 37,654 | 0.0946 | 0.1456 | 0.004385 | **1.0000** |
+| **H71-B (this session)** | 12,000 | **0.1327** | **0.5864** | 0.000844 | 0.9982 |
+| **H72 union = champion + H71-A** | 43,654 | **0.1326** | 0.1805 | 0.004097 | **1.0000** |
+| H68-1 + H71-A (derived, not built) | 45,943 | 0.1005 | 0.1303 | 0.034318 | 0.9982 |
+| H68-1 (lane, on main) | 40,000 | 0.0642 | 0.0933 | 0.036640 | 0.9985 |
+| H66-1 (lane, on main) | 40,000 | 0.0651 | 0.0946 | 0.008925 | 0.9987 |
+| H65-1 (lane, on main) | 40,000 | 0.0076 | 0.0110 | 0.001411 | 0.9988 |
+
+Two readings, both true:
+
+1. **On the population-matched instrument the complementary field is the strongest signal measured in
+   this project** (0.1327 for H71-B; H72 keeps 0.1326 — the incumbent's mass dilutes the per-dot
+   average without removing the coverage). The lane artifacts sit *below* the champion on that
+   instrument (0.064–0.065) while beating it on the catalogue holdout: the two instruments disagree
+   about the same files, exactly as IR-INSTR-01 says they do.
+2. **Nothing in the table can be submitted.** Every arm's literal 3-px overlap exceeds 0.70 — including
+   the already-scored champion — because `calib_r13lattice_00904.tif` and `r13_lattice_s5_00904.tif`
+   lie within 3 px of **99.87 %** of the footprint. As written, the rule is unsatisfiable for any
+   emission from this project. The governing review on main deliberately allows no dense-raster
+   exception and this document does not ask for one: that is a decision only the owner can make —
+   either the space-filling comparators are excluded from the clause (with the measurement above as
+   the justification), or the clause stands and no artifact is ever cleared.
+
 ## 5. Ranked hypotheses (expected DTI gain × cost, with the reason for the order)
+
+**Read this first:** under the governing lane STOP and the literal uniqueness rule **none of these
+items is submittable today** (§4c) — the ranking is the order in which they produce *evidence*, and
+the first owner decision is the governance one, not the experiment one.
 
 **The empirical fact that drives the order.** The champion's own field is *good enough*; what is
 missing is (i) knowledge of the hidden set's size and of how much credit each dot really earns
 locally, and (ii) mass placed where the incumbent's kernels do not reach. The five items below are
 ordered by *evidence already in hand per slot spent*.
 
-**1. H71 — union: champion ∪ convergent-cover complement (built, validated, READY).**
+**1. H72 — union: champion ∪ convergent-cover complement (built, measured; NOT CLEARED to submit).**
 *Layers:* the champion's own multi-layer field (topo gap closure / Δk<sub>sn</sub> family) plus the
-H70 convergent-evidence field (3DEP-10 m Δk<sub>sn</sub>, k<sub>sn</sub>, knickpoint reduction;
+H71 convergent-evidence field (3DEP-10 m Δk<sub>sn</sub>, k<sub>sn</sub>, knickpoint reduction;
 10 m relief, profile curvature, hillshade lineament; distance to state-map faults >300 m off the
 catalogue). *Physical signature:* a complementary population of real fault trace 0.4–6 km from the
 mapped network, where several independent layers co-fire. *Mimic named:* drainage/erosion
@@ -226,7 +263,7 @@ OWNER-REPORTED anchor.
 The champion still carries 1,091 dots at d ≈ 3 px and 1,487 at d ≈ 4 px from the catalogue; the
 two completed peels paid +0.0108 and +0.0070 (a near-constant ≈ 2.8e-6 per removed dot). Rung 3 is
 a **strict subset** of an artifact already live-scored, so its uniqueness reading is the same
-structural caveat as H71's. *Expected gain:* ≈ +0.003 (rung 3), ≈ +0.004 (rung 4) if the rate
+structural caveat as H72's. *Expected gain:* ≈ +0.003 (rung 3), ≈ +0.004 (rung 4) if the rate
 holds; the rung where it stops holding **measures the organizer's masking halo**, a number no
 competitor can look up. *Cost:* one upload per rung.
 
@@ -255,7 +292,7 @@ independent anomalies: geodetic shear or dilatation, thermal anomaly, conductivi
 seismicity alignment. *Why off-catalogue:* this is the only family of evidence that does not depend
 on the existing compilation at all — it finds structures the compilation never looked for.
 *Mimic:* young volcanic/hydrothermal systems and irrigated playa margins with thermal artifacts.
-*Difference:* every implemented artifact used topography and (for H70) state-map geometry; no
+*Difference:* every implemented artifact used topography and (for H71) state-map geometry; no
 artifact used the geo-energy layers. *Expected gain:* potentially the largest of the five (the #1
 public score, 0.4133, is 0.14 above the champion); *cost:* the geodetic/thermal rasters are **not in
 the checkout** and this sandbox cannot reach `gdr.openei.org` — a GitHub-Actions bridge run is
@@ -271,7 +308,7 @@ and exact identification) come before any new geology.
 
 | layer | needed for | availability, verified |
 |---|---|---|
-| USGS 3DEP 1/3 arc-second DEM tiles (18, pinned sha256) | the 10 m substrate of H66/H70 | **in the repository** (`data/external/dem10_chi_100m.manifest.json`, run 38115164310) |
+| USGS 3DEP 1/3 arc-second DEM tiles (18, pinned sha256) | the 10 m substrate of H66/H71 | **in the repository** (`data/external/dem10_chi_100m.manifest.json`, run 38115164310) |
 | USGS SGMC state-map faults | the off-catalogue truth instrument | **in the repository** (`data/external/sgmc_faults_100m.tif`); 61,664 px >300 m from the catalogue |
 | USGS QFaults v2 / INGENIOUS faults (GDR 1391, DOI 10.15121/1881483) | independent fault inventory | **in the repository, but it is a subset**: 59,064 of 59,065 px lie within 300 m of the given catalogue (IR-30-021), so it is not independent truth |
 | INGENIOUS geodetics, 2 m temperature probes, palaeogeothermal (GDR 1391) | H73 | **not in the checkout**; the catalogue page is `https://gdr.openei.org/submissions/1391`; unreachable from this sandbox (egress allow-list: github/npm/pypi) → needs the existing Actions bridge |
@@ -281,17 +318,17 @@ and exact identification) come before any new geology.
 
 ## 7. Irregularities flagged for review (nothing hidden)
 
-* **IR-H70-UNIQ-01** — the standing ≤70 % 3-px clause is *unsatisfiable* against
+* **IR-H71-UNIQ-01** — the standing ≤70 % 3-px clause is *unsatisfiable* against
   `calib_r13lattice_00904.tif` / `r13_lattice_s5_00904.tif`: their dots lie within 3 px of 99.87 % of
   the footprint **[measured-here]**. Every artifact in the project, past and future, fails that
   literal clause. The satisfiable reading (comparators within 3 px of ≤99 % of the footprint) is
   reported alongside it and is what the verdicts use.
-* **IR-H70-LIKE-01** — `r11_greedy_mp.tif` (73.97 %) and `r14_union_tips10_lat6.tif` (76.20 %) are
+* **IR-H71-LIKE-01** — `r11_greedy_mp.tif` (73.97 %) and `r14_union_tips10_lat6.tif` (76.20 %) are
   also above the clause's threshold coverage, so the clause cannot discriminate for *broad*
-  emissions. This is why H70-B is labelled NEGATIVE on uniqueness while H70-A, built from the
+  emissions. This is why H71-B is labelled NEGATIVE on uniqueness while H71-A, built from the
   restricted pool, passes at 0.5187.
-* **IR-H70-GUARD-01** — `scripts/stop_guard.py` reports STOPPED for anything labelled a
-  channel-steepness run. H70 is an *emission* runner: it recomputes no stopped-lane test, rebuilds
+* **IR-H71-GUARD-01** — `scripts/stop_guard.py` reports STOPPED for anything labelled a
+  channel-steepness run. H71 is an *emission* runner: it recomputes no stopped-lane test, rebuilds
   no lane cache and calls no lane driver. The guard verdict is printed and stored verbatim in both
   run cards, and the deviation is disclosed here and in the preregistration rather than performed
   silently.
@@ -303,31 +340,37 @@ and exact identification) come before any new geology.
 
 ## 8. Remaining work, in order (and who owns each step)
 
-1. **Owner slot decision.** If a slot is available, the evidence supports **one** upload in this
-   order: (a) `H71` union (built, `PROMOTE-CANDIDATE-UNIQUENESS-QUALIFIED`: G1 +0.03799
-   [+0.03379, +0.04208] paired on the population-matched instrument, G2 no-harm, G4 portal pass,
-   new mass uniqueness-clean at 0.5187, artifact-level caveat disclosed) — this is also the
-   measurement of whether complementary credit transfers to the hidden population;
-   (b) if two slots: add `h69A`+`h69B` to pin `T`, `K`, `F` exactly; (c) if the owner requires an
-   artifact that is a virgin mask with no inheritance at all, `H70-A` alone (6,000 dots, literal
-   uniqueness pass) — but it scores low alone and is a probe, not a champion replacement.
-2. **After a return exists:** recompute the optimal mass from the identification equations and pick
-   the single artifact for the *final* selection (the competition scores one chosen submission in
-   both rounds — see the official rules page; the selection is blind, so it must be made on measured
-   evidence, not on a public-board guess).
-3. **H73 tip-extrapolation first test** (new hypothesis ID + preregistration; the H65-1 STOP stands
-   for the lane's original question and must not be edited away). Data are local
-   (`trace_segments_utm11.csv` + the 10 m stack).
-4. **H74 geo-energy convergence** — only worth starting if the owner wants the bridge run to pull
-   the INGENIOUS geodetic/thermal layers; this is the only route that does not depend on the
-   published compilation at all.
-5. **Housekeeping:** `evidence/h70_runcard.json` (run 1) is superseded and marked so on disk;
-   `registry/current_site_status.json` remains STOP for the channel-steepness lane and was not
-   touched by this session; the `gems32-bayesopt-dilation-scarp-d28-d28` density/authorship
-   reconciliation and the `selector` audit remain open from earlier sessions.
+1. **Owner decision — the governance wall (§4c).** The literal "≤70 % of dots within 3 px of any
+   registry raster" rule cannot be met while `calib_r13lattice_00904.tif` / `r13_lattice_s5_00904.tif`
+   are comparators (99.87 % footprint coverage within 3 px), and that rule is what blocks *every*
+   artifact, including the already-scored champion and H65-1/H66-1/H68-1. Options: (i) exclude
+   space-filling comparators from the clause, with this measurement as the justification; (ii) keep the
+   clause and accept that no submission is ever cleared; (iii) replace the dot-overlap rule with a
+   byte/pixel-uniqueness + correlation rule. This session did neither: it did not edit the status file
+   and claims no exception.
+2. **Owner decision — the lane STOP.** `registry/current_site_status.json` still records the H65-1
+   first test as INCONCLUSIVE → STOP, and H68-1 (the lane's best artifact on the catalogue holdout)
+   inherits it. A new hypothesis ID + preregistration can carry a *new* question; the lane's own
+   question stays stopped.
+3. **If a measurement slot ever becomes available** (i.e. once 1 and 2 are resolved), the evidence
+   order is: (a) `H69A`+`H69B` — two uploads that pin `T`, `K`, `F` exactly and convert every later
+   decision into arithmetic; (b) `H72` union — the single artifact that measures whether the
+   complementary field's 0.4018 credit/dot transfers to the hidden population (`H71-A` alone if a
+   virgin mask is required — it is a probe and scores low alone).
+4. **After a return exists:** recompute the optimal mass from the identification equations and choose
+   the single artifact for the *final* selection (the competition scores one chosen submission in both
+   rounds; the choice is blind, so it must rest on measured evidence).
+5. **H73 tip-extrapolation** (new hypothesis ID + preregistration; the H65-1 STOP stands for the
+   lane's original question). Data are local (`trace_segments_utm11.csv` + the 10 m stack).
+6. **H74 geo-energy convergence** — only if the owner wants the bridge run that pulls the INGENIOUS
+   geodetic/thermal layers; the only route that does not depend on the published compilation at all.
+7. **Housekeeping:** the identifier collision with the unrelated **H70-1** lane run merged to main was
+   resolved by renumbering this line to **H71/H72** (cards carry a `renumbering` record; bytes and
+   measurements unchanged). `tests/test_lane_core.py` cannot be collected in this sandbox
+   (`ModuleNotFoundError: numba`) — an environment gap worth fixing before the next lane session.
 
 **Limitations that do not go away.** The hidden population cannot be observed locally; the
-catalogue-based holdout is structurally blind to off-catalogue arms (ρ +0.14 against 12
-owner-reported scores); the 0.2778 anchor is unverified; the uniqueness clause is unsatisfiable
-against space-filling comparators (documented, measured, reported); every measurement costs a slot;
-and nothing in this session is an organizer-confirmed score.
+catalogue-based holdout is structurally blind to off-catalogue arms (ρ +0.14 against 12 owner-reported
+scores); the 0.2778 anchor is unverified; the two local instruments disagree about the same artifacts
+(§4c); the literal uniqueness clause is unsatisfiable as written; and nothing in this session is an
+organizer-confirmed score.

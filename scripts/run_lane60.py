@@ -102,8 +102,34 @@ TRAINING_FEATURES = ROOT / "data/official/training_features.tif"
 GEODAWN_RAD = ROOT / "data/external/geodawn_rad_u8.tif"
 
 
-def confound_masks(step, channel) -> tuple[np.ndarray, dict]:
-    """Declared lithology / base-level / ephemeral-wash confound masks."""
+def confound_masks(step, channel, acc=None, a_min_m2=1e6) -> tuple[np.ndarray, dict]:
+    """Declared lithology / base-level / ephemeral-wash confound masks.
+
+    Two paths, chosen by what the machine actually has; the choice is recorded in
+    the diagnostics so no receipt is ambiguous about which mask was used.
+
+    * **Preferred (H60-A / H65-1 defaults):** ``training_features.tif`` band 15
+      (``depth_to_base_surf``) above its 90th footprint percentile = thick cover,
+      and band 17 (``cond_surf``) above its 95th = clay-rich / evaporitic.
+      Reproduces H60-A and H65-1 byte-for-byte whenever that raster is present.
+    * **Substitute (shared-tool fix, 2026-10-11, session arena/970443fc):** the
+      419 MB feature stack cannot live in git (GitHub 100 MB blob limit) and is
+      absent from an egress-restricted sandbox.  Failing closed here made the
+      whole lane unrunnable, so the pinned GeoDAWN airborne-radiometric pack
+      supplies the lithology mask instead: K (band 1) or Th (band 2) above the
+      95th footprint percentile = clay-rich / alluvial cover.  Radiometric K and
+      Th are the standard lithologic discriminators for exactly this survey
+      (https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and).
+      Recorded as irregularity IR-66-DATA-01; ``lithology_source`` names the path used.
+
+    Ephemeral/litho terms: the H67 cache may carry precomputed
+    ``ephemeral_wash.npy`` / ``litho_core.npy`` arrays (applied when present,
+    session arena/7085de4f); the H66-6 ``acc`` parameter (session
+    arena/b219bfe1) computes the ephemeral-channel mask from the 10 m drainage
+    area band (``acc`` < ``a_min_m2`` cells, default 1e6 m2 = 1 km2) when the
+    cache lacks the precomputed arrays.  ``acc=None`` plus absent arrays
+    reproduces H60-A/H65 exactly.
+    """
     playa = load("playa")
     fp = load("footprint")
     if TRAINING_FEATURES.is_file():
@@ -148,7 +174,43 @@ def confound_masks(step, channel) -> tuple[np.ndarray, dict]:
     diag.update(excluded_px=int(exclude.sum()),
                 channel_excluded_px=int((channel & exclude).sum()),
                 channel_px=int(channel.sum()), **extra)
+    # H66-6 shared-tool extension (2026-10-11, session arena/b219bfe1): the lane
+    # brief's confound list also includes *ephemeral channels*.  When the substrate
+    # cache carries a drainage-area band (``acc``, in 100 m cells), channel cells
+    # with 10 m drainage area below ``a_min_m2`` (default 1e6 m2 = 1 km2, the
+    # standard bedrock-channel threshold) are added to the exclusion.
+    # ``acc=None`` (the default) reproduces H60-A/H65 exactly, so this change is
+    # strictly additive.
+    if acc is not None:
+        acc = np.asarray(acc, np.float64)
+        a_min_cells = a_min_m2 / 1e4          # the cache stores area in 100 m cells
+        ephemeral = channel & (acc < a_min_cells)
+        exclude = exclude | ephemeral
+        diag.update(ephemeral_px=int(ephemeral.sum()), a_min_m2=float(a_min_m2),
+                    excluded_px=int(exclude.sum()),
+                    channel_excluded_px=int((channel & exclude).sum()))
     return exclude, diag
+
+
+def litho_step_mask(footprint, win=15, pct=90) -> tuple[np.ndarray, float]:
+    """H66-6: cells sitting on a step in the basement surface (band 15).
+
+    ``|depth_to_base_surf - median_win(depth_to_base_surf)| > p{pct}`` of that
+    residual over the footprint's finite cells.  A fault that offsets the basement
+    and a lithologic contact both produce this; it is the *named lithologic
+    mimic*'s signature and is therefore a test input, never a positive term.
+    """
+    if not TRAINING_FEATURES.is_file():
+        raise SystemExit("litho_step_mask needs training_features.tif band 15 (depth_to_base_surf); "
+                         "the GeoDAWN substitute path carries no basement-depth band")
+    with rasterio.open(TRAINING_FEATURES) as src:
+        depth = src.read(15).astype(np.float32).astype(np.float64)
+    depth[~np.isfinite(depth) | (np.abs(depth) > 1e30)] = np.nan
+    med = ndi.median_filter(depth, size=win, mode="nearest")
+    res = np.abs(depth - med)
+    valid = np.asarray(footprint, bool) & np.isfinite(res)
+    thr = float(np.nanpercentile(res[valid], pct))
+    return np.asarray(footprint, bool) & np.isfinite(depth) & (res > thr), thr
 
 
 # --------------------------------------------------------------------------- #
@@ -243,7 +305,19 @@ MAX_COMPONENTS_PER_CELL = 900
 
 def run_e1(ctx, step, channel, active_by_cell, truth_by_cell, visible_by_cell,
            modes=("all",), n_transects=TRANSECTS_PER_COMPONENT,
-           max_components=MAX_COMPONENTS_PER_CELL):
+           max_components=MAX_COMPONENTS_PER_CELL, exclude=None, channel_eff=None):
+    """Mandated first test.
+
+    H66-6 shared-tool extension (2026-10-11, session arena/b219bfe1): ``exclude``
+    (the lane brief's confound masks) and ``channel_eff`` (a further channel
+    restriction, e.g. the H66-6 litho arms) are optional.  When given, they are
+    applied to BOTH the observed crossing zone and the random same-orientation
+    control transects (zones and start pool), so the comparison stays matched on
+    the same masked domain.  With both ``None`` the function is byte-identical to
+    the H60-A/H65 behaviour.
+    """
+    exl = np.asarray(exclude, bool) if exclude is not None else None
+    chan = channel_eff if channel_eff is not None else channel
     rows = []
     rng = np.random.default_rng(6001)
     for cell in ctx.cells:
@@ -253,24 +327,32 @@ def run_e1(ctx, step, channel, active_by_cell, truth_by_cell, visible_by_cell,
         truth = truth_by_cell[cell.key][bb]
         active = cell.active
         step_c = step[bb]
-        chan_c = channel[bb]
+        chan_c = chan[bb]
         forbidden = ndi.binary_dilation(truth | visible_by_cell[cell.key][bb], iterations=10)
-        pool = np.nonzero(active & ~forbidden)
+        pool_mask = active & ~forbidden
+        if exl is not None:
+            pool_mask = pool_mask & ~exl[bb]
+        pool = np.nonzero(pool_mask)
         if pool[0].size > 200_000:
             pick = rng.choice(pool[0].size, 200_000, replace=False)
             pool = (pool[0][pick], pool[1][pick])
         lab, n = ndi.label(truth)
+        objs = ndi.find_objects(lab)
         cids = np.arange(1, n + 1)
         if cids.size > max_components:
             cids = np.sort(rng.choice(cids, max_components, replace=False))
         for cid in cids:
-            ys, xs = np.nonzero(lab == cid)
+            sl = objs[int(cid) - 1]
+            if sl is None:
+                continue
+            sub_y, sub_x = np.nonzero(lab[sl] == cid)
+            ys = sub_y + sl[0].start
+            xs = sub_x + sl[1].start
             if ys.size < MIN_COMPONENT_PX:
                 continue
             az, length = component_orientation((ys, xs))
             length = int(np.clip(round(length), MIN_COMPONENT_PX, 60))
-            cy, cx = np.nonzero(lab == cid)
-            win, sub = _dilate_window(step_c.shape, cy, cx, 3)
+            win, sub = _dilate_window(step_c.shape, ys, xs, 3)
             zone = sub & chan_c[win] & active[win]
             vals = step_c[win][zone]
             vals = vals[np.isfinite(vals)]
@@ -345,7 +427,7 @@ def run(args) -> int:
     grid = G57.load_grid()
     mark(f"grid {grid.height}x{grid.width} footprint={int(grid.footprint.sum())} "
          f"catalogue={int(grid.catalogue.sum())}")
-    ctx = HO.build_holdout(grid)
+    ctx = HO.build_holdout(grid, modes=("all",))
     mark(f"holdout cells={len(ctx.cells)}")
 
     step = load_step()
@@ -364,16 +446,20 @@ def run(args) -> int:
     # block-local on the 10 m runner) omits it rather than faking one
     chi = load("chi").astype(np.float64) if (CACHE / "chi.npy").is_file() else None
     acc = load("acc").astype(np.float64)
-    exclude, conf_diag = confound_masks(step, channel)
+    exclude, conf_diag = confound_masks(step, channel,
+                                        acc=acc if getattr(args, "include_ephemeral", False) else None)
     mark(f"confounds {conf_diag}")
     meta_cfg = load_meta()
     z_min = float(meta_cfg.get("z_min", L.Z_MIN))
     min_sep_px = float(meta_cfg.get("min_sep_px", 0.0))
     inc_pos_ch = bool(meta_cfg.get("include_positive_channels", False))
+    surf_kw = L.surface_kwargs_from_meta(meta_cfg, CACHE, exclude=exclude)
 
     z, cand, cand_diag = L.prepare_candidates(step, channel, exclude,
                                               block_px=L.BLOCK_PX, z_min=z_min)
-    cand_diag.update(min_sep_px=min_sep_px, include_positive_channels=inc_pos_ch)
+    cand_diag.update(min_sep_px=min_sep_px, include_positive_channels=inc_pos_ch,
+                     strict_aligned_corridors=bool(meta_cfg.get("strict_aligned_corridors", False)),
+                     strike_bridge_weight=float(meta_cfg.get("strike_bridge_weight", 0.0)))
     mark(f"candidates {cand_diag}")
 
     truth_by_cell = {k: v for k, v in ctx.hidden_by_cell.items()}
@@ -381,14 +467,43 @@ def run(args) -> int:
     active_by_cell = {c.key: c.active for c in ctx.cells}
 
     # ---------------- E1 ---------------- #
+    # H66-6: the lane brief's mandated confound masks applied to the first-test
+    # statistic (both arms of the comparison), and the preregistered litho
+    # arm split (crossing channels on / off a basement-surface step).
+    e1_masked = bool(getattr(args, "e1_mask", False))
     e1_rows = run_e1(ctx, step, channel, active_by_cell, truth_by_cell, visible_by_cell,
-                     modes=("all",))
+                     modes=("all",),
+                     exclude=exclude if e1_masked else None)
     e1 = paired_bootstrap(e1_rows)
+    e1_arms = {}
+    if getattr(args, "e1_arms", False):
+        litho, litho_thr = litho_step_mask(load("footprint"))
+        channel_eff = channel & ~exclude
+        for arm, mask in (("T_no_basement_step", ~litho & channel_eff),
+                          ("L_on_basement_step", litho & channel_eff)):
+            # exclude is passed again so the control start pool is masked exactly
+            # as in the main test (the arm masks already remove those cells from
+            # the statistic, the pool restriction keeps the comparison matched)
+            rows_arm = run_e1(ctx, step, mask, active_by_cell, truth_by_cell,
+                              visible_by_cell, modes=("all",), exclude=exclude)
+            e1_arms[arm] = paired_bootstrap(rows_arm)
+        mark("E1 arms (litho_step thr %.1f m, channel px T %d / L %d): %s" % (
+            litho_thr, int((channel_eff & ~litho).sum()), int((channel_eff & litho).sum()),
+            {k: v["verdict"] for k, v in e1_arms.items()}))
     e1_full = dict(evidence_class="MEASUREMENT", test="withheld-segment steepness step vs "
-                   "random same-orientation transects", summary=e1,
+                   "random same-orientation transects",
+                   masks_applied_to_statistic=e1_masked,
+                   summary=e1,
                    components=len(e1_rows),
                    skipped=sum(1 for r in e1_rows if "skipped" in r),
                    rows=e1_rows)
+    if e1_arms:
+        e1_full["arms"] = e1_arms
+        e1_full["arms_note"] = ("H66-6 prereg: arm T = crossing channel cells on a CONTINUOUS "
+                                "basement surface (uplift reading); arm L = cells on a "
+                                "depth_to_base_surf step (named lithologic mimic). Same "
+                                "statistic, same seeds, control pool restricted to the same "
+                                "masked domain as the observation.")
     (EVID / f"{TAG}_e1_first_test.json").write_text(
         json.dumps(e1_full, indent=2, allow_nan=False) + "\n")
     mark(f"E1 {e1}")
@@ -426,7 +541,7 @@ def run(args) -> int:
         budgets[cell.key] = dict(allowed=n_allowed, budget=budget)
         res = L.surface_from_candidates(z, cand, terminal, vis, dict(cand_diag),
                                         max_candidates=args.max_candidates,
-                                        include_positive_channels=inc_pos_ch)
+                                        **surf_kw)
         p = res.p[bb].astype(np.float64)
         diag_cells.append(dict(cell=cell.key, **res.diagnostics))
         dots = L.top_k_dots(p, allowed, budget, min_sep_px=min_sep_px).astype(np.float32)
@@ -510,6 +625,19 @@ def main() -> int:
         return 0
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--max-candidates", type=int, default=60_000)
+    # H66-6 (2026-10-11, session arena/b219bfe1): the lane brief's mandated
+    # confound masks, applied to the first-test statistic. All three default
+    # OFF, so a bare invocation reproduces H60-A/H65 byte-for-byte.
+    ap.add_argument("--e1-mask", action="store_true",
+                    help="apply the confound masks to the E1 statistic (observed "
+                         "zone, control zones and random start pool)")
+    ap.add_argument("--include-ephemeral", action="store_true",
+                    help="add the lane brief's ephemeral-channel mask (10 m "
+                         "drainage area < 1 km2) to the confound exclusion")
+    ap.add_argument("--e1-arms", action="store_true",
+                    help="preregistered H66-6 arm split of the first test: "
+                         "crossing channels on vs off a basement-surface step "
+                         "(depth_to_base_surf, the named lithologic mimic)")
     return run(ap.parse_args())
 
 
