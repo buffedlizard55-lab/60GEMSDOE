@@ -29,6 +29,12 @@ independently preregistered H73 (paired-basin k_sn contrast). Both are kept - th
 as **H73B**, and the delivered raster keeps the submission name `60GEMSDOE-H73-CHI-COHERENT-CORRIDOR-12000`
 because its bytes, note and receipt were validated under that name.
 
+**Merged.** PR #26 → `main` at `24e3957` (2026-10-11); CI `tests` and `mirrors` green in 56 s and the GitHub Pages
+build succeeded, so the hero above is live on the published site. The site's primary nav Download button now points at
+the H73B file ("OK to submit"), with the sibling `gems60-h73-paired-basin-ksn-20000-...-zeros.tif` kept as a separate
+button labelled "research only, DO NOT SUBMIT"; both artifacts appear in `docs/downloads/submissions_manifest.json`
+(40 rows) with their own verdicts.
+
 ## NEW one-click H73 GeoTIFF — download OK; **DO NOT SUBMIT**
 
 A **newly computed** H73 GeoTIFF was generated in this session; it is not a copy or rename of an earlier raster.
