@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "session": "60GEMSDOE arena/b219bfe1-60gemsdoe",
+  "preregistered_utc": "2026-10-11T15:58:00Z",
+  "written_before": "any H66 number was computed: this file is committed before the first H66 run; the E1/holdout evidence files it gates are written afterwards by the shared driver.",
+  "lane": "tectonic-geomorphology: channel steepness (ksn) and knickpoints, not scarp shape",
+  "hypothesis_id": "H66-1",
+  "executes": "the lane brief's mandated first test with the lane brief's mandated confound masks applied to the test statistic (the step H65-1 did not apply: H65-1's E1 ran on the full 10 m channel field, INCONCLUSIVE +0.0326 [-0.0144, +0.0790]; the masks were computed for candidate preparation but never applied to the E1 statistic itself - flagged IR-66-E1MASK-01)",
+  "hypothesis": "On the native 10 m substrate the lane's first test was confounded: the channel cells that dominate the H65-1 statistic are the exact cells the lane brief orders masked (ephemeral headwater/alluvial reaches, playa base level, thick basin fill, conductive alluvium). After removing those confounds from BOTH the observed crossing statistic and the random same-orientation control transects (matched comparison on the same masked domain), the contrast between channels crossing withheld fault segments and random lines of the same orientation resolves. A second, preregistered arm split tests the named lithologic mimic directly: crossing channels that sit on a step in the basement surface (depth_to_base_surf) versus those that do not.",
+  "mechanism": "A fault offsets base level / rock-uplift rate across independent drainages; the response is a step in ksn = dz/dchi at and upstream of the crossing (Kirby & Whipple 2012, J. Struct. Geol. 44:54-75; Perron & Royden 2013, ESPL 38:570-576; segmentation logic per Gailleton et al., ESurf 7:211-230). Ephemeral alluvial reaches, playa floors and basin-fill cover produce steps that are not uplift steps, so the brief's mask list (lithology, climate gradients, ephemeral channels, playa base levels) is a validity requirement, not an option.",
+  "named_non_fault_mimic": "Lithologic resistance contact along a range front (hard range-core bedrock over soft Tertiary volcaniclastics): strike-aligned across drainages exactly like a fault, and it also steps the basement surface. The E1-litho arm split (coincidence with a depth_to_base_surf step) is the direct test of this mimic. Secondary: migrating transient knickpoints detached from their source, channel-head / colluvial-fluvial transitions near the A_ch threshold, and playa/pluvial base levels.",
+  "substrate": {
+    "source": "USGS 3DEP 1/3 arc-second (~10 m) DEM reduction committed by H65-1 (18 sha256-pinned tiles, public domain)",
+    "cache": ".cache/features65 rebuilt by scripts/build_dem10_cache.py; all 11 arrays re-verified byte-identical (sha256) to evidence/h65_feature_cache.json this session",
+    "step": "step_max/1000 (steeper-upstream extreme log ratio, H65 prereg reduction rule)",
+    "channel": "footprint & step defined (786,299 px, 15.2% of footprint)",
+    "independence": "branch_sig (H65 definition: global 100 m index of the 10 m cell 500 m downstream of the max-|step| cell); 491,728 distinct ids"
+  },
+  "declared_parameters": {
+    "masks": {
+      "playa": "raised_n >= 50 of 100 fine cells (H65 prereg, unchanged); 550,267 px, 1,553 channel px inside",
+      "basin_fill": "depth_to_base_surf > p90 over footprint finite cells (= 1279.33 m); 516,432 px, 82,869 channel px inside (H60-A rule)",
+      "conductive": "cond_surf > p95 over footprint finite cells (= 3.9115); 257,039 px, 36,517 channel px inside (H60-A rule)",
+      "ephemeral": "NEW this session: channel cells with 10 m drainage area A < 1e6 m2 (1 km2), i.e. acc < 100 in the H65 cache; 317,451 px (40.4% of channel). Standard bedrock-channel threshold: fluvial incision analyses of the Great Basin restrict ksn statistics to A >= ~1 km2 to exclude the ephemeral/colluvial-fluvial transition.",
+      "full_exclude": "playa | basin_fill | conductive | ephemeral; removes 386,327 of 786,299 channel px (49.1%), leaves 399,972"
+    },
+    "litho_arm": {
+      "litho_step": "|depth_to_base_surf - median15(depth_to_base_surf)| > p90 of that residual over the footprint's finite cells (= 12.1 m)",
+      "arm_T": "crossing channel cells NOT on a litho_step (basement continuous -> a channel-only step reads as an uplift-rate change)",
+      "arm_L": "crossing channel cells ON a litho_step (basement steps too -> the named lithologic-mimic candidate)",
+      "litho_step_channel_px": 81905,
+      "note": "neither arm is proof of tectonism; arm_T is the pre-declared preferred emission arm because it removes the named mimic, arm_L is reported for the mirror test"
+    },
+    "e1_statistic": "run_lane60.py run_e1 unchanged (10 orientation-matched transects per withheld component, 3 px buffer, min 3 channel px, same RNG seeds 6001/60101 as H65/H60-A), with the full exclude applied to (a) the observed crossing zone, (b) the control transect zones, and (c) the random transect start pool. Control lines are drawn only from the masked domain, keeping the comparison matched.",
+    "e1_population": "withheld whole-segment components of the shared holdout (HO.build_holdout, 4 whole-segment folds; H65 scored 262 of 332 components)",
+    "climate_confound": "NOT MAPPED this session: no free official gridded precipitation product is obtainable inside the sandbox egress allowlist (github.com / npmjs / pypi only). The orographic Sierra rain-shadow gradient is a real, unmapped residual confound; the blockwise 40 km z-score in prepare_candidates partially de-trends it. Flagged as IR-66-CLIM-01 with a named free source (PRISM, https://www.prism.oregonstate.edu/) for a future session with egress."
+  },
+  "decision_rule": {
+    "e1_main": "PROCEED only if the pooled mean paired difference (masked, full lane) > 0 AND its 95% bootstrap CI excludes 0 (percentile over withheld components, 1000 draws, seed 60101). Otherwise STOP per the brief ('if not, stop').",
+    "e1_arms": "reported for arm_T and arm_L with the same rule; used only to choose the emission arm if (and only if) exactly one is PROCEED",
+    "emission_arm": "if e1_main PROCEED: emit from the full masked lane. Else if exactly one arm is PROCEED: emit from that arm (arm_T preferred on a tie). Else: emit from the full masked lane as the session artifact; verdict NEGATIVE.",
+    "holdout": "diagnostic after any verdict (H65 precedent): pooled HOLDOUT-DTI, evaluator gems57-pooled-hide-v2 unchanged, arms lane_h66 / ksn_only_no_alignment / distance_only / random_mass_control, 1000 paired spatial-block draws, seed 60101, 4 whole-segment folds (~22,641 withheld positives); leakage canary per single feature, max(AUC,1-AUC) > 0.90 flags",
+    "promotion_gate": "PROMOTE only if (a) e1_main PROCEED, (b) no canary flag on a lane feature, (c) pooled lane beats EVERY control with paired 95% CI excluding 0, (d) uniqueness rho <= 0.90 and 3-px overlap <= 70% (literal gate; excess-over-random reported beside it) on the surface before placement AND on the final dots, (e) validator 0 problems. Any failure = NEGATIVE: the file is published with SUBMIT: NO.",
+    "slot_policy": "This session selects no submission; promotion is a separate selector step within the weekly cap."
+  },
+  "uniqueness": "check_uniqueness60.py against the family registry corpus (655 rasters, evidence/registry_full_index.json), surface check before placement + final-dot check; random-control excess for the literal 3-px clause per IR-60-GATE-01.",
+  "format": "single-band float32 GeoTIFF, EPSG:32611, 3730x3292, transform (100, 0, 243350, 0, -100, 4508550), all cells finite, values in [0,1], no nodata tag, 0 dots on the mapped catalogue (2 px buffer), 40,000-dot production budget (DENSITY 40000/5106385, H65 production rule)"
+}
