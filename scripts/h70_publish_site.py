@@ -56,12 +56,17 @@ def update_status() -> str:
         "run_card": "evidence/h70_runcard.json",
         "slot_spent": False,
     })
+    # data-driven note: sessions keep appending rows on the same day (parallel sessions race
+    # to main), so count rather than hard-code — H68-1's row joined while H70 was merging.
+    n_all = len(st["post_review_runs"])
+    n_flag = sum("CONTRADICT" in r["verdict"].upper() for r in st["post_review_runs"])
+    num = {0: "No", 1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six"}
     st["post_review_note"] = (
-        "Three of the four post-STOP runs are negative and corroborate the STOP (H66-1/H66-2, "
-        "H66-6, H70-1 — the last preregistered and measured here; its paired-step statistic also "
-        "missed the catalogue-withheld gate). H67-1 claimed a pass, was flagged "
-        "(IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20. No submission "
-        "slot has been spent by any of them."
+        f"{num.get(n_all - n_flag, n_all - n_flag)} of the {num.get(n_all, n_all).lower()} "
+        "post-STOP runs are negative and corroborate the STOP (including H70-1, preregistered and "
+        "measured here; its paired-step statistic also missed the catalogue-withheld gate). H67-1 "
+        "claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by "
+        "PRs #19/#20. No submission slot has been spent by any of them."
     )
     path.write_text(json.dumps(st, indent=2) + "\n")
     return str(path)

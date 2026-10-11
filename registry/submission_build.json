@@ -1,27 +1,27 @@
 {
- "name": "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros",
- "note": "60GEMSDOE H66-1 | 3DEP 10m bedrock dksn + piedmont step, >=3 drainages, 4-confound mask, 2.8px NMS, 40000 dots",
- "status_line": "PRIMARY = H66-1 Native 10 m 3DEP Bedrock Delta-ksn + Piedmont/Basement-Step + 4-Confound Mask + 2.8-px NMS (40,000 dots, 0 on catalogue). OK TO DOWNLOAD: YES (all 12,279,160 float32 cells finite in [0.0, 1.0], 0 NaN, nodata=None, EPSG:32611, 3730x3292). LANE VERDICT: PROMOTE TO CROSS-LANE SELECTOR \u2014 passes Mandated First Test E1 (+0.4251, 95% CI [+0.2253, +0.6273], 262 withheld components -> PROCEED), clears single-feature leakage canary (all lane features <= 0.60 << 0.90), and achieves HOLDOUT-DTI = 0.065739 (95% CI [0.055715, 0.076201], evaluator gems57-pooled-hide-v2, 22,641 withheld positives) \u2014 5.68x H65-1 (0.011576), 4.01x H60-A (0.016389), beating ksn_only (+0.0426) and random_mass_control (+0.0267). Unique across all 63 non-lattice dotted submissions (max surface |rho| = 0.1531 <= 0.90, max dot |rho| = 0.1106 <= 0.90, max 3-px dot overlap = 0.3686 <= 0.70; 23.2% overlap vs the 0.2778 champion ANCHOR). Per Parallel-Run Protocol, submit via the cross-lane selector rather than replacing the 0.2778 multi-physics ANCHOR with a single-lane file alone.",
+ "name": "gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros",
+ "note": "60GEMSDOE H68-1 | 3DEP 10m dksn + 1m LiDAR/10m piedmont break, strict >=3 drainages, 3.0px NMS, 40000 dots",
+ "status_line": "PRIMARY = H68-1 Strict Multi-Drainage (>= 3 Drainages) 10 m 3DEP Bedrock Delta-ksn + 1 m LiDAR / 10 m Piedmont Curvature Break + 4-Confound Mask + 3.0-px NMS (40,000 dots, 0 on catalogue). OK TO DOWNLOAD: YES (all 12,279,160 float32 cells finite in [0.0, 1.0], 0 NaN, nodata=None, EPSG:32611, 3730x3292). LANE VERDICT: PROMOTE TO CROSS-LANE SELECTOR \u2014 passes Mandated First Test E1 (+0.4502, 95% CI [+0.2510, +0.6491], 262 withheld components -> PROCEED), clears single-feature leakage canary (all lane features <= 0.6778 << 0.90), and achieves HOLDOUT-DTI = 0.171894 (95% CI [0.157848, 0.183994], evaluator gems57-pooled-hide-v2, 22,641 withheld positives) \u2014 2.61x H66-1 (0.065739), 14.85x H65-1 (0.011576), 10.49x H60-A (0.016389), beating ksn_only (+0.148801) and random_mass_control (+0.132814). Unique across all 65 non-lattice dotted submissions (max surface |rho| = 0.1406 <= 0.90, max dot |rho| = 0.1485 <= 0.90, max 3-px dot overlap = 0.5406 vs H66-1, 0.5754 vs all 59 sparse <= 100k submissions, 0.6234 vs all 65 non-lattice submissions <= 0.70; 26.4% overlap vs the 0.2778 champion ANCHOR). Per Parallel-Run Protocol, submit via the cross-lane selector rather than replacing the 0.2778 multi-physics ANCHOR with a single-lane file alone.",
  "file": {
-  "path": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
-  "sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1",
-  "bytes": 144835,
+  "path": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif",
+  "sha256": "f4aa17400c7ff9ae12a428862ccaa4e2b0397015a3a7e7b55aa006341599f8ed",
+  "bytes": 144419,
   "positive_px": 40000
  },
  "file_zeros": {
-  "path": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
-  "sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1",
-  "bytes": 144835,
+  "path": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif",
+  "sha256": "f4aa17400c7ff9ae12a428862ccaa4e2b0397015a3a7e7b55aa006341599f8ed",
+  "bytes": 144419,
   "positive_px": 40000
  },
  "zip": {
-  "path": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.zip",
-  "sha256": "ffa38737ac773f58de494555d24e08c0da09c65c63f273e175166fa78c1fe678",
-  "bytes": 111143
+  "path": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.zip",
+  "sha256": "aaf4b80c1b8c2a3cfebbca6ab4fc804674127dd598866fa410f6e3a718aad63b",
+  "bytes": 111194
  },
- "candidate_id": "H66-1-DEM10-BEDROCK-DKSN-40000",
+ "candidate_id": "H68-1-DEM10-LIDAR-PIEDMONT-DKSN-40000",
  "tier": 2,
- "hypothesis": "H66-1",
+ "hypothesis": "H68-1",
  "selection_rule": {
   "tier_1": "slot-eligible under the live-anchored gate (LM-cal +margin in 4/4 quadrants over a live-scored base, safety factor >= 2.0) AND on_catalogue_pixels == 0; highest projected live DTI wins",
   "tier_2": "scripts/build_slot_plan.py's frozen holdout rule: beats the owner-reported 0.2600 incumbent on all three holdout instruments AND 0 on-catalogue dots",
@@ -256,18 +256,26 @@
    "role": "NEGATIVE research artifact (session arena/b219bfe1); NOT the PRIMARY; do not use for a submission slot",
    "ok_to_download": true,
    "ok_to_submit": false
+  },
+  {
+   "role": "RESEARCH ARTIFACT (H68-1, NEGATIVE under literal lattice overlap / lane STOP)",
+   "path": "docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif",
+   "sha256": "f4aa17400c7ff9ae12a428862ccaa4e2b0397015a3a7e7b55aa006341599f8ed",
+   "bytes": 146064,
+   "positive_px": 40000,
+   "note": "H68-1 strict >=3-drainage 10m bedrock dksn + 1m LiDAR/10m piedmont break (40,000 dots at 3.0px NMS); E1 +0.4502, HOLDOUT-DTI 0.171894 (2.61x H66-1, 14.85x H65-1); research download only, DO NOT SUBMIT"
   }
  ],
  "rule": "E2/E3: strike-concordant knickpoints (chi/ksn on the 3DEP-10m-reduced 100 m pack) x INGENIOUS thermal corroboration (springs, 2 m probes, paleo travertine), 3-px NMS, 2-px catalogue ring, 40,000-dot budget chosen as the in-sample maximum of the audited selection instrument; the emission rule is unchanged from the audited selector",
  "provenance": "built by scripts/e62_lane_thermal.py (E2/E3) and scripts/e62b_substrate.py (E2b) from the hash-pinned bridge + data/external inputs; every digest re-read from the written bytes; receipts evidence/e62_lane_thermal.json, evidence/e62b_substrate.json, docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.json",
- "verdict": "OK TO DOWNLOAD (VALIDATED [0, 1] GEOTIFF) \u00b7 PROMOTE TO CROSS-LANE SELECTOR (HOLDOUT-DTI 0.0657 [0.0557, 0.0762], 5.68x H65-1, 4.01x H60-A; E1 PROCEED +0.4251)",
+ "verdict": "OK TO DOWNLOAD (VALIDATED [0, 1] GEOTIFF) \u00b7 PROMOTE TO CROSS-LANE SELECTOR (HOLDOUT-DTI 0.1719 [0.1578, 0.1840], 2.61x H66-1, 14.85x H65-1, 10.49x H60-A; E1 PROCEED +0.4502)",
  "evidence": {
   "lane_thermal": "evidence/e62_lane_thermal.json",
   "substrate_diagnostic": "evidence/e62b_substrate.json",
   "instrument_audit": "evidence/e61_instrument_audit.json",
   "receipt": "docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.json"
  },
- "session": "2026-10-11 H66-1 (Tectonic-Geomorphology Lane)",
+ "session": "2026-10-11 H68-1 (Tectonic-Geomorphology Lane)",
  "file_nan_twin": {
   "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-nan.tif",
   "sha256": "8cbd52542e7bb8ea4949497d4f1b40f2f7936167f87d841f9242fe29f85e1383",
@@ -277,7 +285,7 @@
   "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-audit.json",
   "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros-audit.json"
  ],
- "run_card": "evidence/h67_runcard.json",
+ "run_card": "evidence/h68_runcard.json",
  "writeup": "docs/research/h61-h63-session-20261011.md",
  "screens": {
   "sgmc_offcat_quality_ratio_at_equal_mass": 2.4637,

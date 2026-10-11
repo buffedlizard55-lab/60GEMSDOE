@@ -163,13 +163,16 @@ def main() -> int:
     z_min = float(meta_cfg.get("z_min", L.Z_MIN))
     min_sep_px = float(meta_cfg.get("min_sep_px", 0.0))
     inc_pos_ch = bool(meta_cfg.get("include_positive_channels", False))
+    surf_kw = L.surface_kwargs_from_meta(meta_cfg, CACHE, exclude=exclude)
     z, cand, cand_diag = L.prepare_candidates(step, channel, exclude, z_min=z_min)
-    cand_diag.update(min_sep_px=min_sep_px, include_positive_channels=inc_pos_ch)
+    cand_diag.update(min_sep_px=min_sep_px, include_positive_channels=inc_pos_ch,
+                     strict_aligned_corridors=bool(meta_cfg.get("strict_aligned_corridors", False)),
+                     strike_bridge_weight=float(meta_cfg.get("strike_bridge_weight", 0.0)))
     mark(f"candidates={cand_diag}")
 
     res = L.surface_from_candidates(z, cand, branch, cat, dict(cand_diag),
                                     max_candidates=a.max_candidates,
-                                    include_positive_channels=inc_pos_ch)
+                                    **surf_kw)
     del z, cand
     mark(f"surface {res.diagnostics}")
 

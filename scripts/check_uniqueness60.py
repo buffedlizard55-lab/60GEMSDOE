@@ -123,16 +123,17 @@ def main() -> int:
             branch = gm.branch_signature(np.load(cache / "dircode.npy"), fp,
                                          k=L.CORRIDOR_HALF_LEN_PX - 1).astype(np.int64)
         # H66-6: mirror the production build's mask flags (lazy: acc.npy is only
-        # read when the ephemeral mask is requested); the H67 precomputed
+        # read when the ephemeral mask is requested); the H67/H68 precomputed
         # ephemeral_wash / litho_core arrays apply inside confound_masks when present
         acc = load("acc").astype(np.float64) if a.include_ephemeral else None
         exclude, _conf = confound_masks(step, channel, acc=acc)
         if a.litho_arm != "none":
             litho, _thr = litho_step_mask(fp)
             channel = channel & (litho if a.litho_arm == "L" else ~litho)
+        surf_kw = L.surface_kwargs_from_meta(meta_cfg, cache, exclude=exclude)
         z, cand, cand_diag = L.prepare_candidates(step, channel, exclude, z_min=z_min)
         res = L.surface_from_candidates(z, cand, branch, grid.catalogue, dict(cand_diag),
-                                        include_positive_channels=inc_pos_ch)
+                                        **surf_kw)
         mine = np.clip(np.nan_to_num(res.p, nan=0.0), 0.0, 1.0).astype(np.float32)
         print(f"[uniq] surface rebuilt: positive_px={int((mine > 0).sum())} "
               f"p_max={float(mine.max()):.4f}", flush=True)

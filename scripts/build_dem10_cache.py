@@ -49,11 +49,11 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--cache-dir", default=os.environ.get("GEMS60_FEATURE_CACHE", "features65"))
     ap.add_argument("--tag", default=os.environ.get("GEMS60_TAG", None))
-    ap.add_argument("--mode", choices=("h65", "h66"), default=None)
+    ap.add_argument("--mode", choices=("h65", "h66", "h68"), default=None)
     args = ap.parse_args()
     cache_name = args.cache_dir
-    mode = args.mode or ("h66" if "66" in str(cache_name) else "h65")
-    tag = args.tag or ("h67" if mode == "h66" else "h65")
+    mode = args.mode or ("h68" if "68" in str(cache_name) else "h66" if "66" in str(cache_name) else "h65")
+    tag = args.tag or ("h68" if mode == "h68" else "h67" if mode == "h66" else "h65")
     cache_dir = ROOT / ".cache" / cache_name
 
     man = json.loads((EXT / "dem10_chi_100m.manifest.json").read_text())
@@ -132,6 +132,83 @@ def main() -> int:
         extra_arrays["litho_core"] = litho_core
         extra_arrays["dksn_signed"] = dksn_signed.astype(np.float32)
         extra_arrays["pied_z"] = pied_z.astype(np.float32)
+    elif mode == "h68":
+        # H68-1: multi-scale 10 m bedrock Delta_ksn + 10 m true profile curvature (band 6, fixing
+        # IR-68-TOPOBAND-01) + 10 m slope_max (band 2) + 1 m USGS 3DEP LiDAR cross-scarp / upface
+        # break (bands 8 & 7) + basement-depth horizontal gradient, with strict >=3-drainage
+        # corridor alignment (fixing IR-68-UNALIGNED-01) and anisotropic range-front gap bridging.
+        meta_cfg = dict(
+            mode="h68",
+            z_min=0.75,
+            min_sep_px=3.0,
+            include_positive_channels=False,
+            strict_aligned_corridors=True,
+            corridor_half_len_px=10,
+            corridor_half_width_px=2,
+            trace_decay=0.65,
+            strike_bridge_weight=2.5,
+            strike_bridge_perp_px=3.0,
+            strike_bridge_par_px=18.0,
+        )
+        ku = np.maximum(ksn_max, 0.0)
+        kd = np.maximum(0.0, (ku + 0.5) * np.exp(-np.clip(step_max, -2.3, 2.3)) - 0.5)
+        dksn_signed = np.where(
+            channel,
+            np.log1p(np.maximum(ku - kd, 0.0)) - np.log1p(np.maximum(kd - ku, 0.0)),
+            np.nan,
+        ).astype(np.float32)
+
+        def _norm_u8(path: Path, band: int, valid_mask: np.ndarray | None = None) -> np.ndarray:
+            with rasterio.open(path) as src:
+                tnod = src.nodata
+                arr = src.read(band).astype(np.float32)
+            if tnod is not None:
+                arr[arr == tnod] = np.nan
+            if valid_mask is not None:
+                arr[~valid_mask] = np.nan
+            med = float(np.nanmedian(arr[fp]))
+            std = float(np.nanstd(arr[fp])) + 1e-6
+            zz = np.clip((arr - med) / std, -2.0, 4.0)
+            return np.where(np.isfinite(zz), zz, 0.0).astype(np.float32)
+
+        with rasterio.open(EXT / "lidar_scarp_features_u8.tif") as src:
+            valid_lid = src.read(12) > 0
+        pied_z = (
+            0.25 * _norm_u8(EXT / "topo_10m_derived_100m_u8.tif", 6)
+            + 0.20 * _norm_u8(EXT / "topo_10m_derived_100m_u8.tif", 2)
+            + 0.25 * _norm_u8(EXT / "lidar_scarp_features_u8.tif", 8, valid_lid)
+            + 0.15 * _norm_u8(EXT / "lidar_scarp_features_u8.tif", 7, valid_lid)
+        ).astype(np.float32)
+        del valid_lid
+
+        with rasterio.open(ROOT / "data/official/training_features.tif") as src:
+            depth = src.read(15).astype(np.float32)
+        depth[~np.isfinite(depth) | (np.abs(depth) > 1e30)] = np.nan
+        dfill = np.where(np.isfinite(depth), depth, float(np.nanmedian(depth[fp]))).astype(np.float32)
+        gy, gx = np.gradient(ndi.gaussian_filter(dfill, sigma=2.0))
+        del dfill
+        dbase_grad = np.hypot(gy, gx).astype(np.float32)
+        del gy, gx
+        g_med, g_std = float(np.nanmedian(dbase_grad[fp])), float(np.nanstd(dbase_grad[fp])) + 1e-6
+        pied_z = (
+            pied_z
+            + 0.15 * np.where(np.isfinite(dbase_grad), np.clip((dbase_grad - g_med) / g_std, -2.0, 4.0), 0.0)
+        ).astype(np.float32)
+        del dbase_grad
+        step = np.where(channel, dksn_signed + 0.35 * pied_z, np.nan)
+
+        ephemeral_wash = channel & (ksn_max < 10.0)
+        z = np.where(fp & np.isfinite(zmean), zmean, np.nan)
+        zf = np.where(np.isfinite(z), z, float(np.nanmedian(z))).astype(np.float32)
+        med20 = ndi.median_filter(zf[::10, ::10], size=20)
+        med20 = np.kron(med20, np.ones((10, 10), dtype=np.float32))[:z.shape[0], :z.shape[1]]
+        rel_elev = (z - med20).astype(np.float32)
+        d_p25 = float(np.nanpercentile(depth[fp], 25))
+        litho_core = fp & (rel_elev > 180.0) & np.isfinite(depth) & (depth < d_p25)
+        extra_arrays["ephemeral_wash"] = ephemeral_wash
+        extra_arrays["litho_core"] = litho_core
+        extra_arrays["dksn_signed"] = dksn_signed.astype(np.float32)
+        extra_arrays["pied_z"] = pied_z.astype(np.float32)
     else:
         step = raw_step
 
@@ -161,12 +238,14 @@ def main() -> int:
                 distinct_branches=int(np.unique(branch[channel]).size),
                 footprint_px_with_valid_dem=int((fp & (valid_n > 0)).sum()))
     rec = dict(evidence_class="DATA-MEASUREMENT",
-               hypothesis=("H66-1" if mode == "h66" else "H65-1"),
+               hypothesis=("H68-1" if mode == "h68" else "H66-1" if mode == "h66" else "H65-1"),
                generated_utc=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                source_manifest=dict(run_id=man.get("run_id"), files=man["files"],
                                     tiles=len(man["source"]["tiles"]),
                                     blocks_ok=man["blocks_ok"], blocks_total=man["blocks_total"]),
-               rule=("H66-1 bedrock delta-ksn + piedmont/basement-step + 4-confound masks"
+               rule=("H68-1 10m bedrock delta-ksn + 1m LiDAR/10m piedmont break + strict >=3-drainage strike corridor + 3.0px NMS"
+                     if mode == "h68"
+                     else "H66-1 bedrock delta-ksn + piedmont/basement-step + 4-confound masks"
                      if mode == "h66"
                      else "evidence/preregistration_h65.json -> declared_parameters.reduction_to_100m"),
                meta=meta_cfg, diagnostics=diag, files=files)

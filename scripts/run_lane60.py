@@ -337,17 +337,22 @@ def run_e1(ctx, step, channel, active_by_cell, truth_by_cell, visible_by_cell,
             pick = rng.choice(pool[0].size, 200_000, replace=False)
             pool = (pool[0][pick], pool[1][pick])
         lab, n = ndi.label(truth)
+        objs = ndi.find_objects(lab)
         cids = np.arange(1, n + 1)
         if cids.size > max_components:
             cids = np.sort(rng.choice(cids, max_components, replace=False))
         for cid in cids:
-            ys, xs = np.nonzero(lab == cid)
+            sl = objs[int(cid) - 1]
+            if sl is None:
+                continue
+            sub_y, sub_x = np.nonzero(lab[sl] == cid)
+            ys = sub_y + sl[0].start
+            xs = sub_x + sl[1].start
             if ys.size < MIN_COMPONENT_PX:
                 continue
             az, length = component_orientation((ys, xs))
             length = int(np.clip(round(length), MIN_COMPONENT_PX, 60))
-            cy, cx = np.nonzero(lab == cid)
-            win, sub = _dilate_window(step_c.shape, cy, cx, 3)
+            win, sub = _dilate_window(step_c.shape, ys, xs, 3)
             zone = sub & chan_c[win] & active[win]
             vals = step_c[win][zone]
             vals = vals[np.isfinite(vals)]
@@ -422,7 +427,7 @@ def run(args) -> int:
     grid = G57.load_grid()
     mark(f"grid {grid.height}x{grid.width} footprint={int(grid.footprint.sum())} "
          f"catalogue={int(grid.catalogue.sum())}")
-    ctx = HO.build_holdout(grid)
+    ctx = HO.build_holdout(grid, modes=("all",))
     mark(f"holdout cells={len(ctx.cells)}")
 
     step = load_step()
@@ -448,10 +453,13 @@ def run(args) -> int:
     z_min = float(meta_cfg.get("z_min", L.Z_MIN))
     min_sep_px = float(meta_cfg.get("min_sep_px", 0.0))
     inc_pos_ch = bool(meta_cfg.get("include_positive_channels", False))
+    surf_kw = L.surface_kwargs_from_meta(meta_cfg, CACHE, exclude=exclude)
 
     z, cand, cand_diag = L.prepare_candidates(step, channel, exclude,
                                               block_px=L.BLOCK_PX, z_min=z_min)
-    cand_diag.update(min_sep_px=min_sep_px, include_positive_channels=inc_pos_ch)
+    cand_diag.update(min_sep_px=min_sep_px, include_positive_channels=inc_pos_ch,
+                     strict_aligned_corridors=bool(meta_cfg.get("strict_aligned_corridors", False)),
+                     strike_bridge_weight=float(meta_cfg.get("strike_bridge_weight", 0.0)))
     mark(f"candidates {cand_diag}")
 
     truth_by_cell = {k: v for k, v in ctx.hidden_by_cell.items()}
@@ -533,7 +541,7 @@ def run(args) -> int:
         budgets[cell.key] = dict(allowed=n_allowed, budget=budget)
         res = L.surface_from_candidates(z, cand, terminal, vis, dict(cand_diag),
                                         max_candidates=args.max_candidates,
-                                        include_positive_channels=inc_pos_ch)
+                                        **surf_kw)
         p = res.p[bb].astype(np.float64)
         diag_cells.append(dict(cell=cell.key, **res.diagnostics))
         dots = L.top_k_dots(p, allowed, budget, min_sep_px=min_sep_px).astype(np.float32)

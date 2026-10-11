@@ -77,11 +77,12 @@ def _common_status(status: dict, *, prefix: str = "") -> str:
 <p><b>Governing STOP record:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
 <strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast {mean_text},
 95% CI [{ci[0]:+.4f}, {ci[1]:+.4f}] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
-The earlier c7653 run also stopped. Later H66/H67 artifacts do not lift this STOP; their literal uniqueness clearance failed. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
+The earlier c7653 run also stopped. Later H66/H67/H68 artifacts do not lift this STOP; their literal uniqueness clearance failed against the dense calibration lattice corpus. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
 <p><a class="btn" href="{tif}" download>Download the existing H65-1 GeoTIFF for research only</a>
+<a class="btn alt" href="{prefix}downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif" download>Download H68-1 GeoTIFF (research only)</a>
 <strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
 <p>H65-1 diagnostic <b>HOLDOUT-DTI</b>: {hold_text} [{hold['ci95'][0]:.5f}, {hold['ci95'][1]:.5f}],
-{hold['withheld_positive_pixels']:,} withheld positives (`{_e(hold['evaluator'])}`); not a leaderboard score.
+{hold['withheld_positive_pixels']:,} withheld positives (`{_e(hold['evaluator'])}`); H68-1 diagnostic <b>HOLDOUT-DTI</b>: 0.171894 [0.157848, 0.183994] (2.61× H66-1, 14.85× H65-1, E1 +0.4502 [+0.2510, +0.6491], max non-lattice 3-px overlap 0.6234 ≤ 0.70, literal 70-raster overlap 0.9985 &gt; 0.70 → verdict NEGATIVE, <a href="{prefix}downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros-runcard.json">H68-1 run card</a> · <a href="{prefix}downloads/checks-gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif.json">H68-1 format checks</a>); not a leaderboard score.
 <a href="{receipt}">Local format receipt</a> · <a href="{report}">Full review</a> ·
 <a href="{card}">final JSON run card</a> · <a href="{snapshot}">manual 50-row public-board snapshot</a></p></div>'''
 
