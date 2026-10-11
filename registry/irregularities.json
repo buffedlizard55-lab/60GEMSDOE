@@ -444,6 +444,39 @@
    "severity": "low",
    "statement": "Session brief's quoted leaderboard targets (0.3195, later 0.3774) are stale relative to the repository's verified snapshot (public top xiaofanhu 0.4133 on 2026-10-11, 50 rows). The group's own best remains owner-reported 0.2778 (the participant row at rank 23 shows the same value; byte attribution of files to that row is not possible from public data).",
    "mitigation": "All H70 planning used 0.4133 as the public target; the score-gap algebra in docs/research/h70-paired-knickpoint-trains.md is computed against it."
+  },
+  {
+   "id": "IR-H73-POPULATION-FLIP-01",
+   "date": "2026-10-11",
+   "severity": "high",
+   "status": "open",
+   "finding": "H73 paired-basin statistic passed catalogue-withheld E1 (+0.2841, CI [+0.1439,+0.4205], n=186) but failed SGMC-off-catalogue E1 (-0.2909, CI [-0.4757,-0.0947], n=70).",
+   "impact": "The signal does not transfer to the preregistered catalogue-missing proxy population; H73 is negative and no slot is authorized.",
+   "evidence": "evidence/h73_e1_first_test.json",
+   "statement": "H73 paired-basin statistic passed catalogue-withheld E1 (+0.2841, CI [+0.1439,+0.4205], n=186) but failed SGMC-off-catalogue E1 (-0.2909, CI [-0.4757,-0.0947], n=70). The signal does not transfer to the preregistered catalogue-missing proxy population; H73 is negative and no slot is authorized.",
+   "mitigation": "Negative verdict, no portal slot; see evidence/h73_e1_first_test.json"
+  },
+  {
+   "id": "IR-H73-LITERAL-OVERLAP-UNSAT-01",
+   "date": "2026-10-11",
+   "severity": "high",
+   "status": "open",
+   "finding": "The complete 655-raster pinned scan plus 25 later local unique rasters contains multiple continuous rasters positive on every footprint cell; any non-empty dot field has 3-px overlap 1.0 with them.",
+   "impact": "The literal <=0.70 overlap clause is mathematically unsatisfiable for every non-empty candidate under the repository definition dot=(value>0). H73 claims no exception and is duplicate-stopped despite exact byte/pixel uniqueness.",
+   "evidence": "evidence/h73_preplacement_uniqueness.json",
+   "statement": "The complete 655-raster pinned scan plus 25 later local unique rasters contains multiple continuous rasters positive on every footprint cell; any non-empty dot field has 3-px overlap 1.0 with them. The literal <=0.70 overlap clause is mathematically unsatisfiable for every non-empty candidate under the repository definition dot=(value>0). H73 claims no exception and is duplicate-stopped despite exact byte/pixel uniqueness.",
+   "mitigation": "Negative verdict, no portal slot; see evidence/h73_preplacement_uniqueness.json"
+  },
+  {
+   "id": "IR-H73-MANDATORY-NEGATIVE-ARTIFACT-01",
+   "date": "2026-10-11",
+   "severity": "medium",
+   "status": "resolved-with-disclosure",
+   "finding": "The owner explicitly required a newly generated TIFF even if scientific promotion gates failed. The shared writer emitted the preregistered H73 array after the duplicate-stop audit.",
+   "impact": "The file is downloadable and locally format-valid but prominently marked DO NOT SUBMIT; no weekly slot was used. This is not a uniqueness-gate waiver.",
+   "evidence": "evidence/h73_runcard.json",
+   "statement": "The owner explicitly required a newly generated TIFF even if scientific promotion gates failed. The shared writer emitted the preregistered H73 array after the duplicate-stop audit. The file is downloadable and locally format-valid but prominently marked DO NOT SUBMIT; no weekly slot was used. This is not a uniqueness-gate waiver.",
+   "mitigation": "Negative verdict, no portal slot; see evidence/h73_runcard.json"
   }
  ]
 }

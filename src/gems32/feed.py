@@ -76,6 +76,19 @@ def build(root: Path = ROOT) -> dict:
             "report": stop_audit["report"],
             "note": "Snapshot of this repository; NOT a live DrivenData score feed.",
         }
+    h73 = _read_json(root / "evidence" / "h73_runcard.json")
+    if h73:
+        # Newer negative run supersedes the dated H68 status in the feed without
+        # erasing H68's historical evidence or inventing a portal approval.
+        feed["current_lane_decision"] = {
+            "run": h73["run"], "verdict": h73["verdict"],
+            "submit_to_competition": h73["submit_to_competition"],
+            "new_tiff_generated": True, "download_ok": h73["download_ok"],
+            "research_raster_sha256": h73["raster_sha256"],
+            "holdout_dti": h73["holdout_dti"],
+            "report": "docs/research/h73-result-and-h33-analysis.md",
+            "note": h73["selector_decision"],
+        }
 
     hyp = _read_json(reg / "hypotheses.json", {"hypotheses": []})
     feed["hypotheses"] = hyp["hypotheses"]

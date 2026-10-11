@@ -211,5 +211,17 @@
   "bytes": 818144,
   "sha256": "9afe74ab2b2fa631e9276cd8e8685fc76086d96d01181101998309b0c0d06a47",
   "note": "registered 2026-10-09 (session 2): this lane's session-2 submission, built on the corrected strike frame (IR-57-STRIKE-01); see IR-57-OVERLAP-01 for the same-lane overlap disclosure"
+ },
+ {
+  "repo": "60GEMSDOE",
+  "submission": "H73-1 paired-basin ksn (negative research artifact; HOLDOUT-DTI 0.085263)",
+  "owner_reported_score": null,
+  "mode": "zeros",
+  "blob_sha": "(this repository)",
+  "path": "docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif",
+  "file": "docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif",
+  "bytes": 95592,
+  "sha256": "594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3",
+  "note": "registered 2026-10-11: exact-byte/pixel unique negative artifact; literal overlap gate failed; DO NOT SUBMIT"
  }
 ]

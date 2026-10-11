@@ -1,16 +1,35 @@
 # 60GEMSDOE — channel steepness / χ / knickpoints
 
-## ONE-CLICK download — research only; NOT OK to submit
+## NEW one-click H73 GeoTIFF — download OK; **DO NOT SUBMIT**
 
-**No competition submission is cleared. No new TIFF was generated in this review.**
-The lane's first-test STOP and the literal uniqueness gate prohibit another experiment or promotion.
+A **newly computed** H73 GeoTIFF was generated in this session; it is not a copy or rename of an earlier raster.
+It is exact-byte and decoded-pixel unique across the complete 655-raster pinned index plus 25 later local unique-SHA rasters.
+It passes every local portal-format check, but its scientific/overlap gates failed, so **no competition submission is cleared**.
 
-[Download the existing H65-1 GeoTIFF](docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif)
-— **DO NOT SUBMIT**. This is an existing negative-result artifact, not a newly named or copied submission.
+**[Download the NEW H73 `.tif`](docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif)** ·
+[one-TIFF `.zip`](docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.zip) ·
+[format receipt](docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.json) ·
+[JSON run card](docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros-runcard.json)
 
-[Download the H68-1 GeoTIFF (`gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif`)](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif) · [`.zip`](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.zip) · [H68-1 run card](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros-runcard.json) · [H68-1 format checks](docs/downloads/checks-gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif.json)
-— **OK TO DOWNLOAD FOR RESEARCH: YES (`float32` in `[0, 1]`, `0 NaN`, `40,000` dots at `3.0 px` NMS, `sha256: f4aa17400c7ff9ae12a428862ccaa4e2b0397015a3a7e7b55aa006341599f8ed`) · OK TO SUBMIT TO COMPETITION: NO (`DO NOT SUBMIT`; `verdict: "negative"` under the governing H65-1 lane STOP and literal 70-raster lattice overlap `0.9985 > 0.70`)**.
-- **H68-1 diagnostic `HOLDOUT-DTI` (`gems57-pooled-hide-v2`, `22,641` withheld positives):** **`0.171894`**, 95% CI **`[0.157848, 0.183994]`** (**`2.61×` H66-1**, **`14.85×` H65-1**, **`10.49×` H60-A**; paired `+0.148801` over `ksn_only` and `+0.132814` over `random_mass_control`), after fixing `IR-68-UNALIGNED-01` (where ~70% of H66-1 dots spilled onto un-aligned single-drainage candidates with `ndr_vals < 3`) and `IR-68-TOPOBAND-01` (reading true 10 m profile curvature band 6 + 1 m LiDAR scarp bands 7–8; E1 `+0.4502 [+0.2510, +0.6491]`). Across all 65 non-lattice rasters max 3-px dot overlap is `0.6234 <= 0.70` (`0.5406` vs H66-1, `0.2640` vs H33-2-B2), and max Spearman `|rho| = 0.1485 <= 0.90`.
+- **OK to download:** **YES**.
+- **OK to submit to DrivenData:** **NO — NOT OK to submit; DO NOT SUBMIT**. H73 is a negative research deliverable; no weekly slot was used.
+- **Format:** PASS — one `float32` band; EPSG:32611; 3730×3292; exact sample transform; all 12,279,160 values finite and in `[0,1]`; 0 outside-footprint positives; 0 mapped-catalogue positives.
+- **SHA-256:** `594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3` (95,592 bytes).
+- **HOLDOUT-DTI** (`gems57-pooled-hide-v2`, 22,641 withheld positives): **0.085263**, 95% CI **[0.074915, 0.096019]**; this did not beat H68's recorded 0.171894.
+- **First test:** catalogue-withheld contrast **+0.2841 [+0.1439,+0.4205]**, `n=186`, PROCEED; the preregistered SGMC-off-catalogue gate was **−0.2909 [−0.4757,−0.0947]**, `n=70`, STOP.
+- **Uniqueness:** no byte-identical or decoded-identical raster among 680 checked; exact full-footprint max `|Spearman|=0.1561 <= 0.90`. Literal 3-px overlap is **1.0 > 0.70** because multiple earlier continuous registry rasters are positive on every footprint cell. No lattice/dense-field exception is claimed; protocol verdict is DUPLICATE-STOP.
+- **Portal name (record only; not approved):** `60GEMSDOE-H73-PAIRED-BASIN-KSN-20000-20261011T200117Z`.
+- **Note (94 chars):** `H73 paired-basin ksn, 20k weighted cells; holdout negative; unique bytes/pixels; DO NOT SUBMIT`.
+
+[Ranked hypotheses and official sources](docs/research/h73-ranked-hypotheses-2026-10-11.md) ·
+[H73 result and evidence-qualified H33/0.2778 analysis](docs/research/h73-result-and-h33-analysis.md) ·
+[Complete 680-raster audit](evidence/h73_preplacement_uniqueness.json) ·
+[Executive summary](docs/executive-summary.html) · [Site](docs/index.html)
+
+### Historical H68 comparator (research only)
+
+[Download H68-1](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros.tif) · [run card](docs/downloads/gems60-h68-dem10-lidar-piedmont-dksn-40000-20261011T185033Z-6e9b1e286c45-zeros-runcard.json).
+H68-1 `HOLDOUT-DTI` was `0.171894 [0.157848,0.183994]`; it also remains **DO NOT SUBMIT**.
 
 [Executive summary](docs/executive-summary.html) · [Site](docs/index.html) ·
 [Review and limitations](docs/research/submission-status-review.md) ·

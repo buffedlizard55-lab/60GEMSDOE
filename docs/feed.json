@@ -1,7 +1,7 @@
 {
- "generated_utc": "2026-10-11T19:18:44Z",
+ "generated_utc": "2026-10-11T20:01:17Z",
  "repo": "60GEMSDOE",
- "session": "2026-10-11 lane stop audit (H68) + H70-1 paired-polarity knickpoint trains: preregistered G1 first test STOP; NEGATIVE result, no new TIFF, no slot spent. Research TIFF download remains H65-1 (do not submit).",
+ "session": "H73-1 paired-basin ksn: one preregistered experiment; new byte/pixel-unique format-valid negative TIFF generated; SGMC, holdout, and literal overlap gates failed; DO NOT SUBMIT; no slot spent.",
  "current_official_leaderboard_top": {
   "rank": 1,
   "score": 0.4133,
@@ -19,6 +19,41 @@
   "status": "H33-2-B2 0.2778 is owner-reported; no organizer receipt ties it to exact bytes. An archived report calls a same-named file 0.2708; identity/scores are unreconciled. Public ranks 23 and 36 are not file attributions."
  },
  "submissions": [
+  {
+   "name": "60GEMSDOE-H73-PAIRED-BASIN-KSN-20000-20261011T200117Z",
+   "file": "downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif",
+   "sha256": "594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3",
+   "dots": 20000,
+   "verdict": "NEGATIVE - download OK; DO NOT SUBMIT (SGMC first-test, holdout, and literal overlap gates failed)",
+   "evidence_class": "HOLDOUT-DTI",
+   "evaluator_version": "gems57-pooled-hide-v2",
+   "holdout_dti": 0.08526338663944742,
+   "ci95": [
+    0.0749149264080278,
+    0.0960187658071518
+   ],
+   "withheld_positive_pixels": 22641,
+   "first_test": {
+    "catalogue_withheld_mean": 0.28412843979744706,
+    "catalogue_withheld_ci95": [
+     0.14391160514809828,
+     0.4204521239540545
+    ],
+    "catalogue_n": 186,
+    "sgmc_off_catalogue_mean": -0.2909107910828162,
+    "sgmc_off_catalogue_ci95": [
+     -0.47572908448426354,
+     -0.09473771457829959
+    ],
+    "sgmc_n": 70,
+    "verdict": "STOP"
+   },
+   "uniqueness": "Byte/pixel unique across 680 checked; max |Spearman| 0.1561 PASS; literal 3-px overlap 1.0 FAIL; DUPLICATE-STOP.",
+   "validator": "All local format/range checks passed; not organizer acceptance.",
+   "submitted_to_competition": false,
+   "archive_status": "latest generated negative research artifact; download OK; DO NOT SUBMIT; zero slots used",
+   "run_card": "downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros-runcard.json"
+  },
   {
    "name": "60GEMSDOE-H65-1-DEM10-KNICK-40000",
    "file": "downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
@@ -300,6 +335,41 @@
    },
    "artifact": "docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
    "clearance": "Feature-by-feature leakage audit and full pre-/post-placement registry uniqueness clearance were not established."
+  },
+  "latest_generated_artifact": {
+   "name": "60GEMSDOE-H73-PAIRED-BASIN-KSN-20000-20261011T200117Z",
+   "file": "downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif",
+   "sha256": "594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3",
+   "dots": 20000,
+   "verdict": "NEGATIVE - download OK; DO NOT SUBMIT (SGMC first-test, holdout, and literal overlap gates failed)",
+   "evidence_class": "HOLDOUT-DTI",
+   "evaluator_version": "gems57-pooled-hide-v2",
+   "holdout_dti": 0.08526338663944742,
+   "ci95": [
+    0.0749149264080278,
+    0.0960187658071518
+   ],
+   "withheld_positive_pixels": 22641,
+   "first_test": {
+    "catalogue_withheld_mean": 0.28412843979744706,
+    "catalogue_withheld_ci95": [
+     0.14391160514809828,
+     0.4204521239540545
+    ],
+    "catalogue_n": 186,
+    "sgmc_off_catalogue_mean": -0.2909107910828162,
+    "sgmc_off_catalogue_ci95": [
+     -0.47572908448426354,
+     -0.09473771457829959
+    ],
+    "sgmc_n": 70,
+    "verdict": "STOP"
+   },
+   "uniqueness": "Byte/pixel unique across 680 checked; max |Spearman| 0.1561 PASS; literal 3-px overlap 1.0 FAIL; DUPLICATE-STOP.",
+   "validator": "All local format/range checks passed; not organizer acceptance.",
+   "submitted_to_competition": false,
+   "archive_status": "latest generated negative research artifact; download OK; DO NOT SUBMIT; zero slots used",
+   "run_card": "downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros-runcard.json"
   }
  },
  "h33_claim_review": {

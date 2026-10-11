@@ -9,7 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "docs"
 STATUS = json.loads((ROOT / "registry" / "current_site_status.json").read_text())
-ACTIVE_TIFF = ROOT / STATUS["research_artifact"]["path"]
+ACTIVE_RECORD = STATUS.get("latest_generated_artifact", STATUS["research_artifact"])
+ACTIVE_TIFF = ROOT / ACTIVE_RECORD["path"]
 ACTIVE_NAME = ACTIVE_TIFF.name
 
 
@@ -30,12 +31,12 @@ def test_current_site_status_is_stopped_and_research_only():
     assert STATUS["latest_first_test"]["result"] == "INCONCLUSIVE"
     assert STATUS["status"] == "STOP"
     assert STATUS["recommended_competition_submission"] is None
-    assert STATUS["new_tiff_created_in_this_review"] is False
+    assert STATUS["new_tiff_created_in_this_review"] is True
     assert STATUS["submission_slots_used_in_this_review"] == 0
-    assert STATUS["research_artifact"]["download_ok_for_research"] is True
-    assert STATUS["research_artifact"]["submit_to_competition"] is False
+    assert ACTIVE_RECORD.get("download_ok", ACTIVE_RECORD.get("download_ok_for_research")) is True
+    assert ACTIVE_RECORD["submit_to_competition"] is False
     assert ACTIVE_TIFF.is_file()
-    assert hashlib.sha256(ACTIVE_TIFF.read_bytes()).hexdigest() == STATUS["research_artifact"]["sha256"]
+    assert hashlib.sha256(ACTIVE_TIFF.read_bytes()).hexdigest() == ACTIVE_RECORD["sha256"]
 
 
 def test_root_pages_link_to_current_research_artifact():

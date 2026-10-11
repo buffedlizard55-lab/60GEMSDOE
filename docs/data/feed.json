@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generated_utc": "2026-10-11T19:18:44Z",
+ "generated_utc": "2026-10-11T20:07:52Z",
  "sources": [
   {
    "id": "competition",
@@ -569,7 +569,7 @@
   "active_lane": "channel-steepness / \u03c7 / knickpoints",
   "status": "STOP",
   "stop_reason": "The H65-1 preregistered first test was INCONCLUSIVE (95% CI crosses zero); under the pre-registered rule, failure to establish a positive signal means STOP. The H65 report prohibits rerunning the knickpoint lane at any resolution. No follow-up experiment or submission is authorized.",
-  "new_tiff_created_in_this_review": false,
+  "new_tiff_created_in_this_review": true,
   "submission_slots_used_in_this_review": 0,
   "recommended_competition_submission": null,
   "research_artifact": {
@@ -717,17 +717,61 @@
     "artifact": "none (first-test STOP precedes emission)",
     "run_card": "evidence/h70_runcard.json",
     "slot_spent": false
+   },
+   {
+    "session": "arena/17ded5b3-60gemsdoe (this session)",
+    "id": "H73-1",
+    "verdict": "NEGATIVE \u2014 catalogue first test +0.2841 [+0.1439,+0.4205] passed, but preregistered SGMC off-catalogue gate -0.2909 [-0.4757,-0.0947] STOP; HOLDOUT-DTI 0.085263 [0.074915,0.096019] < H68 0.171894; literal overlap 1.0 >0.70",
+    "artifact": "gems60-h73-paired-basin-ksn-20000-20261011T200117Z-594e05573e5a-zeros (new exact bytes/pixels; format-valid negative artifact)",
+    "run_card": "evidence/h73_runcard.json",
+    "slot_spent": false,
+    "download": "docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif"
    }
   ],
-  "post_review_note": "Four of the five post-STOP runs are negative and corroborate the STOP (including H70-1, preregistered and measured here; its paired-step statistic also missed the catalogue-withheld gate). H67-1 claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20. No submission slot has been spent by any of them."
+  "post_review_note": "Five of the six post-STOP runs are negative and corroborate the STOP (including H70-1 and H73-1, preregistered and measured here). H67-1 claimed a pass, was flagged (IR-H66C-STOPCONFLICT-01), and its promotion was reversed by PRs #19/#20. H73 generated a new negative research TIFF, but no competition submission slot has been spent.",
+  "latest_generated_artifact": {
+   "id": "H73-1",
+   "path": "docs/downloads/gems60-h73-paired-basin-ksn-20000-20261011T200117Z-zeros.tif",
+   "sha256": "594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3",
+   "download_ok": true,
+   "submit_to_competition": false,
+   "verdict": "negative",
+   "reason": "dual first-test gate, holdout-improvement gate and literal overlap gate failed"
+  }
  },
  "current_lane_decision": {
+  "run": "H73-1",
   "verdict": "negative",
   "submit_to_competition": false,
-  "new_tiff_generated": false,
-  "research_raster_sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1",
-  "report": "docs/research/2026-10-11-lane-stop-audit.md",
-  "note": "Snapshot of this repository; NOT a live DrivenData score feed."
+  "new_tiff_generated": true,
+  "download_ok": true,
+  "research_raster_sha256": "594e05573e5aca3e661ac48c71e27edc7dbe8030777992e60068a4b368903cb3",
+  "holdout_dti": {
+   "evidence_class": "HOLDOUT-DTI",
+   "evaluator_version": "gems57-pooled-hide-v2",
+   "withheld_positive_pixels": 22641,
+   "dti": 0.08526338663186674,
+   "ci95": [
+    0.0749149264446467,
+    0.0960187658379737
+   ],
+   "tpw": 2014.935566250866,
+   "fpw": 25580.549169592075,
+   "fnw": 20626.064433749125,
+   "recorded_h68_best": {
+    "run": "H68-1",
+    "dti": 0.171894,
+    "ci95": [
+     0.157848,
+     0.183994
+    ],
+    "same_evaluator": "gems57-pooled-hide-v2"
+   },
+   "gate_beats_h68": false,
+   "not_a_leaderboard_score": true
+  },
+  "report": "docs/research/h73-result-and-h33-analysis.md",
+  "note": "DO NOT SUBMIT: SGMC dual gate failed, HOLDOUT-DTI 0.085263 did not beat H68 0.171894, and literal registry overlap is 1.0 > 0.70. No weekly slot used."
  },
  "hypotheses": [
   {
@@ -3081,6 +3125,39 @@
    "severity": "low",
    "statement": "Session brief's quoted leaderboard targets (0.3195, later 0.3774) are stale relative to the repository's verified snapshot (public top xiaofanhu 0.4133 on 2026-10-11, 50 rows). The group's own best remains owner-reported 0.2778 (the participant row at rank 23 shows the same value; byte attribution of files to that row is not possible from public data).",
    "mitigation": "All H70 planning used 0.4133 as the public target; the score-gap algebra in docs/research/h70-paired-knickpoint-trains.md is computed against it."
+  },
+  {
+   "id": "IR-H73-POPULATION-FLIP-01",
+   "date": "2026-10-11",
+   "severity": "high",
+   "status": "open",
+   "finding": "H73 paired-basin statistic passed catalogue-withheld E1 (+0.2841, CI [+0.1439,+0.4205], n=186) but failed SGMC-off-catalogue E1 (-0.2909, CI [-0.4757,-0.0947], n=70).",
+   "impact": "The signal does not transfer to the preregistered catalogue-missing proxy population; H73 is negative and no slot is authorized.",
+   "evidence": "evidence/h73_e1_first_test.json",
+   "statement": "H73 paired-basin statistic passed catalogue-withheld E1 (+0.2841, CI [+0.1439,+0.4205], n=186) but failed SGMC-off-catalogue E1 (-0.2909, CI [-0.4757,-0.0947], n=70). The signal does not transfer to the preregistered catalogue-missing proxy population; H73 is negative and no slot is authorized.",
+   "mitigation": "Negative verdict, no portal slot; see evidence/h73_e1_first_test.json"
+  },
+  {
+   "id": "IR-H73-LITERAL-OVERLAP-UNSAT-01",
+   "date": "2026-10-11",
+   "severity": "high",
+   "status": "open",
+   "finding": "The complete 655-raster pinned scan plus 25 later local unique rasters contains multiple continuous rasters positive on every footprint cell; any non-empty dot field has 3-px overlap 1.0 with them.",
+   "impact": "The literal <=0.70 overlap clause is mathematically unsatisfiable for every non-empty candidate under the repository definition dot=(value>0). H73 claims no exception and is duplicate-stopped despite exact byte/pixel uniqueness.",
+   "evidence": "evidence/h73_preplacement_uniqueness.json",
+   "statement": "The complete 655-raster pinned scan plus 25 later local unique rasters contains multiple continuous rasters positive on every footprint cell; any non-empty dot field has 3-px overlap 1.0 with them. The literal <=0.70 overlap clause is mathematically unsatisfiable for every non-empty candidate under the repository definition dot=(value>0). H73 claims no exception and is duplicate-stopped despite exact byte/pixel uniqueness.",
+   "mitigation": "Negative verdict, no portal slot; see evidence/h73_preplacement_uniqueness.json"
+  },
+  {
+   "id": "IR-H73-MANDATORY-NEGATIVE-ARTIFACT-01",
+   "date": "2026-10-11",
+   "severity": "medium",
+   "status": "resolved-with-disclosure",
+   "finding": "The owner explicitly required a newly generated TIFF even if scientific promotion gates failed. The shared writer emitted the preregistered H73 array after the duplicate-stop audit.",
+   "impact": "The file is downloadable and locally format-valid but prominently marked DO NOT SUBMIT; no weekly slot was used. This is not a uniqueness-gate waiver.",
+   "evidence": "evidence/h73_runcard.json",
+   "statement": "The owner explicitly required a newly generated TIFF even if scientific promotion gates failed. The shared writer emitted the preregistered H73 array after the duplicate-stop audit. The file is downloadable and locally format-valid but prominently marked DO NOT SUBMIT; no weekly slot was used. This is not a uniqueness-gate waiver.",
+   "mitigation": "Negative verdict, no portal slot; see evidence/h73_runcard.json"
   }
  ]
 }

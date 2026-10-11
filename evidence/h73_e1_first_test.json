@@ -1,0 +1,55 @@
+{
+  "evidence_class": "MEASUREMENT",
+  "hypothesis": "H73-1",
+  "evaluator": "shared same-orientation transect test in scripts/run_lane60.py/run_h66.py",
+  "statistic": "0.70 z(paired-basin log1p(ksn) gradient) + 0.30 z(persistent positive dksn)",
+  "catalogue_withheld": {
+    "gating": true,
+    "summary": {
+      "evidence_class": "MEASUREMENT",
+      "n_components": 186,
+      "mean": 0.2841284397788601,
+      "median": 0.16746914349496364,
+      "ci95": [
+        0.1439116050771773,
+        0.4204521240279678
+      ],
+      "fraction_positive": 0.5752688172043011,
+      "component_std": 0.942410546038218,
+      "bootstrap": {
+        "draws": 1000,
+        "seed": 60101,
+        "method": "percentile over withheld components"
+      },
+      "verdict": "PROCEED"
+    },
+    "rows_scored": 186,
+    "rows_skipped": 146
+  },
+  "sgmc_offcatalogue_gt300m": {
+    "gating": true,
+    "offcatalogue_px": 62703,
+    "summary": {
+      "evidence_class": "MEASUREMENT",
+      "n_components": 70,
+      "mean": -0.29091079110146634,
+      "median": -0.4677824303507805,
+      "ci95": [
+        -0.47572908451195284,
+        -0.09473771456374598
+      ],
+      "fraction_positive": 0.2857142857142857,
+      "component_std": 0.8074458859961374,
+      "bootstrap": {
+        "draws": 1000,
+        "seed": 60101,
+        "method": "percentile over withheld components"
+      },
+      "verdict": "STOP"
+    },
+    "rows_scored": 70,
+    "rows_skipped": 54
+  },
+  "dual_gate_passed": false,
+  "decision": "STOP"
+}
