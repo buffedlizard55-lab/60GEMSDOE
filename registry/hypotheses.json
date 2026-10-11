@@ -625,7 +625,7 @@
    "expected_dti": "RANK 5 by cost-adjusted expectation: unknown ceiling, possibly high, but implementation is high-cost and the data is unreachable from this sandbox",
    "cost": "high: ~716 tiles; requires an egress-capable runner",
    "data_status": "SOURCE NAMED + PINS EXIST, OBTAINABILITY PARTIAL: https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif (USGS 3DEP, public domain; 716 URLs + sha256 pins upstream data/dem_links.json; egress probe evidence/probe-egress-receipt.json shows HTTP 200 from a GitHub Actions runner, but THIS sandbox cannot reach the host - measured, see docs/irregularities.html)",
-   "status": "EXECUTED 2026-10-11 as H65-1 (session arena/96ecd67e): NEGATIVE. Native 3DEP 10 m on 18 pinned 1x1-degree tiles (not ~716: that count is for 1 m tiles); first test INCONCLUSIVE +0.0326 [-0.0144, +0.0790] -> STOP; HOLDOUT-DTI 0.01158 [0.0084, 0.0146] vs random 0.03908. evidence/h65_runcard.json  |  2026-10-11 H66-1 (session arena/b219bfe1): the masked variant (brief's four named confounds masked in the statistic) is ALSO NEGATIVE - the lane is exhausted at both resolutions and with/without confound masking."
+   "status": "EXECUTED 2026-10-11 as H65-1 (session arena/96ecd67e): NEGATIVE. Native 3DEP 10 m on 18 pinned 1x1-degree tiles (not ~716: that count is for 1 m tiles); first test INCONCLUSIVE +0.0326 [-0.0144, +0.0790] -> STOP; HOLDOUT-DTI 0.01158 [0.0084, 0.0146] vs random 0.03908. evidence/h65_runcard.json  |  2026-10-11 H66-6 (session arena/b219bfe1): the masked variant (brief's four named confounds masked in the statistic) is ALSO NEGATIVE - the lane is exhausted at both resolutions and with/without confound masking."
   },
   {
    "id": "H65-1",
@@ -642,7 +642,7 @@
    "expected_dti": "MEASURED: HOLDOUT-DTI 0.01158 [0.0084, 0.0146] (gems57-pooled-hide-v2, 22,641 withheld positives) < random 0.03908",
    "cost": "done (Actions run 38113556275, ~4 min wall)",
    "data_status": "obtained and pinned",
-   "status": "NEGATIVE: first test INCONCLUSIVE -> STOP; resolution was NOT the cause (E1 at 100 m +0.1089 vs 10 m +0.0326)  |  Superseded as the lane's newest artifact by H66-1 (masked variant, also NEGATIVE); retained as research artifact."
+   "status": "NEGATIVE: first test INCONCLUSIVE -> STOP; resolution was NOT the cause (E1 at 100 m +0.1089 vs 10 m +0.0326)  |  Superseded as the lane's newest artifact by H66-2 (both-limb) and H66-6 (masked), both also NEGATIVE; retained as research artifact."
   },
   {
    "id": "H65-2",
@@ -660,7 +660,7 @@
    "expected_dti": "UNVALIDATED; best of the slate because H65-1's step support is only 1.04-1.19x enriched near mapped faults, while junctions are where mapped faults are",
    "cost": "medium: one new reduction band in scripts/dem10_block.py + one runner run (~4 min)",
    "data_status": "USGS 3DEP 10 m - verified obtainable 2026-10-11 (18 tiles, n39w119 sha256 b7fe301c... matches the independent probe pin)",
-   "status": "PROPOSED - first experiment of the next session"
+   "status": "DEFERRED / NOT AUTHORIZED after H65-1 INCONCLUSIVE\u2192STOP; H65-1 report prohibits rerunning the knickpoint lane at any resolution. Historical proposal only; no experiment, TIFF, or slot."
   },
   {
    "id": "H65-3",
@@ -678,7 +678,7 @@
    "expected_dti": "UNVALIDATED; moderate",
    "cost": "medium-high (valley-width extraction at 10 m)",
    "data_status": "USGS 3DEP 10 m - verified obtainable",
-   "status": "PROPOSED"
+   "status": "DEFERRED / NOT AUTHORIZED after H65-1 INCONCLUSIVE\u2192STOP; H65-1 report prohibits rerunning the knickpoint lane at any resolution. Historical proposal only; no experiment, TIFF, or slot."
   },
   {
    "id": "H65-4",
@@ -695,7 +695,7 @@
    "expected_dti": "UNVALIDATED; low-moderate (coarse localisation, ~km)",
    "cost": "high (global chi datum across blocks)",
    "data_status": "USGS 3DEP 10 m - verified obtainable",
-   "status": "PROPOSED"
+   "status": "DEFERRED / NOT AUTHORIZED after H65-1 INCONCLUSIVE\u2192STOP; H65-1 report prohibits rerunning the knickpoint lane at any resolution. Historical proposal only; no experiment, TIFF, or slot."
   },
   {
    "id": "H65-5",
@@ -712,12 +712,193 @@
    "expected_dti": "UNVALIDATED; low (H65-1 shows 10 m knickpoint support barely enriched near faults)",
    "cost": "high",
    "data_status": "USGS 3DEP 10 m - verified obtainable",
-   "status": "PROPOSED"
+   "status": "DEFERRED / NOT AUTHORIZED after H65-1 INCONCLUSIVE\u2192STOP; H65-1 report prohibits rerunning the knickpoint lane at any resolution. Historical proposal only; no experiment, TIFF, or slot."
   },
   {
    "id": "H66-1",
-   "rank": 36,
-   "slate": "H66 (2026-10-11, session arena/b219bfe1) - masked variant of the 10 m lane",
+   "rank": 41,
+   "slate": "H66 (2026-10-11, session arena/970443fc) - ranked after the off-catalogue re-test",
+   "slate_rank": 1,
+   "title": "Chi/ksn steepness-step corridors mark faults the given catalogue omits; test them against off-catalogue truth, not against the catalogue",
+   "layers": [
+    "native 3DEP 10 m chi/ksn reduction (data/external/dem10_chi_100m_*.tif)",
+    "USGS SGMC faults rasterised to the grid, minus a 3 px catalogue buffer",
+    "GeoDAWN airborne radiometrics K/Th for the lithology confound"
+   ],
+   "signature": "log(ksn_up/ksn_down) two-segment step, blockwise z-scored, corroborated by >= 3 independent drainages inside a strike corridor",
+   "why_off_catalogue": "the hidden set is off-catalogue by construction, so the lane must be scored against faults the given catalogue omits",
+   "differs_from_repo": "changes the TARGET set, not the detector; every previous lane run gated on the catalogue hide-and-recover",
+   "expected_dti": "MEASURED: INSTRUMENT-DTI 0.00630 vs mass-matched random 0.07253 on 62,703 off-catalogue px; first test -0.1128 [-0.1738, -0.0437] -> STOP",
+   "cost": "low (all rasters committed)",
+   "data_status": "in repository, hash-pinned",
+   "status": "EXECUTED 2026-10-11: NEGATIVE. evidence/h66_runcard.json"
+  },
+  {
+   "id": "H66-2",
+   "rank": 42,
+   "slate": "H66 (2026-10-11, session arena/970443fc) - ranked after the off-catalogue re-test",
+   "slate_rank": 2,
+   "title": "The downstream-steepening limb of the same statistic (max(step_max, -step_min)) is the signature that survives in alluvial hanging-wall ground",
+   "layers": [
+    "the same 10 m chi/ksn reduction, band step_min as well as step_max"
+   ],
+   "signature": "|log ksn ratio| extremum rather than the upstream-only extremum; 53,116 candidates in place of 43,131",
+   "why_off_catalogue": "H65's diagnostics put the off-catalogue targets lower in the local relief than the catalogue, where the upstream limb is weak (Crosby & Whipple 2006, JGR 111 F03014)",
+   "differs_from_repo": "H60-A and H65-1 both used step_max only",
+   "expected_dti": "MEASURED: first test -0.0860 [-0.1372, -0.0220] -> STOP; INSTRUMENT-DTI 0.00913 vs random 0.07253",
+   "cost": "low",
+   "data_status": "in repository",
+   "status": "EXECUTED 2026-10-11: NEGATIVE (this is the shipped artefact)"
+  },
+  {
+   "id": "H66-3",
+   "rank": 43,
+   "slate": "H66 (2026-10-11, session arena/970443fc) - ranked after the off-catalogue re-test",
+   "slate_rank": 3,
+   "title": "Instrument before field: no further detector work until a local statistic reproduces the live ladder",
+   "layers": [
+    "registry/rasters calibration anchors (12 live-scored artefacts, hash-pinned)",
+    "SGMC off-catalogue truth, terrain-balanced variants",
+    "registry/observations.jsonl"
+   ],
+   "signature": "Spearman of each candidate statistic against owner-reported live score; leave-one-anchor-out so one artefact cannot carry the correlation. Measured this session: SGMC off-catalogue credit-per-pixel orders the top five live scores exactly (0.1488 > 0.1409 > 0.1368 > 0.1288 > 0.1056 for live 0.2778 > 0.2708 > 0.2632 > 0.2600 > 0.2477) and its one large violation is the dense r13 lattice (0.1155 at live 0.0904)",
+   "why_off_catalogue": "the selector, not the field, is the binding constraint: the instrument the family gates on ranks the 0.2778 champion last of twelve",
+   "differs_from_repo": "e61 measured the correlation once with n = 12 and no resampling; this adds leave-one-out CIs and a preregistered acceptance threshold",
+   "expected_dti": "UNVALIDATED; it does not emit, it decides what may be emitted",
+   "cost": "low (rasters already committed)",
+   "data_status": "in repository",
+   "status": "PROPOSED - first experiment of the next session"
+  },
+  {
+   "id": "H66-4",
+   "rank": 44,
+   "slate": "H66 (2026-10-11, session arena/970443fc) - ranked after the off-catalogue re-test",
+   "slate_rank": 4,
+   "title": "Coverage-first screening: measure what fraction of off-catalogue trace a detector's support can reach BEFORE fitting it",
+   "layers": [
+    "any candidate support mask (channels, scarps, lineaments, basin edges)",
+    "SGMC off-catalogue truth"
+   ],
+   "signature": "share of off-catalogue fault pixels with detector support within 300 m, against the footprint background",
+   "why_off_catalogue": "measured this session: of 1,200 sampled off-catalogue segments only 124 are >= 600 m long and 38 of those have no bedrock channel within 3 px - a channel-based detector cannot see them at any resolution",
+   "differs_from_repo": "no session has screened support coverage before running a detector; four lane runs were spent finding it after the fact",
+   "expected_dti": "UNVALIDATED; a gate, not an emitter",
+   "cost": "very low",
+   "data_status": "in repository",
+   "status": "PROPOSED"
+  },
+  {
+   "id": "H66-5",
+   "rank": 45,
+   "slate": "H66 (2026-10-11, session arena/970443fc) - ranked after the off-catalogue re-test",
+   "slate_rank": 5,
+   "title": "Mass-thrift sweep on the champion's own field at the metric's break-even point",
+   "layers": [
+    "registry/rasters/dotted_b2_prune_02778.tif (owner-reported 0.2778)",
+    "gems52.metric credit bar 0.2 * DTI"
+   ],
+   "signature": "DTI as a function of emitted mass for one fixed field; the stationary point is where the marginal dot's realised credit equals 0.2 * DTI",
+   "why_off_catalogue": "irrelevant to detection: this is the emission lever, and minus-mass is the strongest single correlate of live score measured here (Spearman +0.9371, n = 12)",
+   "differs_from_repo": "the family thinned by eye (d1.5 -> d2.8 -> b2); nobody has swept mass on the champion field and located the metric's own break-even",
+   "expected_dti": "UNVALIDATED; bounded upside, bounded downside, cheapest experiment available",
+   "cost": "very low",
+   "data_status": "in repository",
+   "status": "PROPOSED"
+  },
+  {
+   "id": "H67-1",
+   "rank": 41,
+   "title": "3DEP 10 m Bedrock-Subtracted Absolute Knickpoint Steepness Step (\u0394ksn = ku - kd) + Piedmont Slope-Break Strike Corridor",
+   "status": "VALIDATED \u2014 HOLDOUT-DTI 0.065739 [0.055715, 0.076201] (5.68x H65-1, 4.01x H60-A); E1 PASS (+0.4251 [+0.2253, +0.6273])",
+   "layers": [
+    "data/external/dem10_chi_100m_i16.tif (band 1 ksn_max, band 2 step_max, band 5 drainage_px_10m)",
+    "data/external/topo_10m_derived_100m_u8.tif (band 1 slope_break_200m, band 5 dev_mean_500m)",
+    "data/external/lidar_scarp_features_u8.tif (band 1 scarp_100, band 4 tpi_300)",
+    "data/official/training_features.tif (band 12 det_elev, band 15 depth_to_base_surf, band 17 cond_surf)"
+   ],
+   "mechanism": "Recovers exact 10 m absolute steepness difference \u0394ksn = ku - kd = (ksn_max + 0.5)*(1 - exp(-step_max)) across the 11-cell (110 m) moving-window reach, restricts candidate channels to bedrock-incising reaches (ksn_max >= 10 m^0.9, drainage_px_10m >= 200), couples with 10 m piedmont slope-break / incision contrast (0.25*pied_z), masks 4 named confounds (playa, deep basin fill, conductive clay, lithologic intrusive cores), and enforces >= 3 independent drainages (branch_sig_100m) along a common 22-azimuth strike corridor with 2.8 px (280 m) minimum-separation NMS.",
+   "why_missing_from_catalogue": "USGS Qfaults and INGENIOUS regional compilations stop at range-front scarps where late-Holocene alluvial fans bury surface rupture or where distributed relay ramps split displacement across parallel piedmont strands; bedrock channels and incised fan heads preserve the base-level fall \u0394ksn across multiple adjacent catchments along strike.",
+   "difference_from_existing": "Fixes the fatal small-denominator log-ratio pathology in H65-1 (log((ku+0.5)/(kd+0.5)), where 39.6% of >2x steps occurred on flat washes with ksn < 10) and fixes the contiguous 13x5 corridor-brick quantization defect in src/gems60/lane.py via 280 m minimum-separation NMS.",
+   "expected_dti_delta": "+0.0542 HOLDOUT-DTI over H65-1 (measured: 0.065739 vs 0.011576)",
+   "cost": "low (15 s cache build + 70 s 8-cell holdout evaluation)",
+   "evidence": {
+    "class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "withheld_positives_px": 22641,
+    "e1_first_test_mean": 0.425069,
+    "e1_first_test_ci95": [
+     0.225307,
+     0.627304
+    ],
+    "e1_fraction_positive": 0.603053,
+    "holdout_dti_binary_40k": 0.065739,
+    "holdout_dti_ci95": [
+     0.055715,
+     0.076201
+    ],
+    "paired_delta_vs_ksn_only": 0.042646,
+    "paired_delta_vs_ksn_only_ci95": [
+     0.035357,
+     0.050183
+    ],
+    "paired_delta_vs_random": 0.026659,
+    "paired_delta_vs_random_ci95": [
+     0.016745,
+     0.037273
+    ],
+    "artifact": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+    "sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1"
+   }
+  },
+  {
+   "id": "H67-2",
+   "rank": 42,
+   "title": "Iso-\u03c7 Elevation Step (\u0394z_\u03c7) Across Neighboring Catchments Sharing a Common Piedmont Base Level",
+   "status": "PROPOSED \u2014 ranked #2 in Round H66/H67 tectonic-geomorphology slate",
+   "layers": [
+    "data/external/dem10_chi_100m_i16.tif (band 3 chi_at_max, band 5 drainage_px_10m)",
+    "data/official/training_features.tif (band 12 det_elev, band 15 depth_to_base_surf)"
+   ],
+   "mechanism": "Following Perron & Royden (2013), in steady-state uniform-rock uplift z(x) = z_b + (U/K)^n * \u03c7(x); a dip-slip fault crossing multiple adjacent catchments introduces an iso-\u03c7 elevation offset \u0394z_\u03c7 between channels at matched \u03c7 above the shared piedmont base level z_b.",
+   "why_missing_from_catalogue": "Catches eroded bedrock fault-line scarps and intrabasin horst-bounding faults that lack preserved Quaternary alluvial scarps in Qfaults.",
+   "difference_from_existing": "Uses integral elevation difference at matched \u03c7 across neighboring basins rather than local derivative d(z)/d(\u03c7) within a single reach.",
+   "expected_dti_delta": "+0.015 to +0.025 HOLDOUT-DTI",
+   "cost": "medium (requires common base-level re-anchoring across tile boundaries; see IR-65-TILE-01)"
+  },
+  {
+   "id": "H67-3",
+   "rank": 43,
+   "title": "Paired-Catchment Footwall/Hanging-Wall Steepness Ratio + Gravity Horizontal Gradient Corroboration",
+   "status": "PROPOSED \u2014 ranked #3 in Round H66/H67 tectonic-geomorphology slate",
+   "layers": [
+    "data/external/dem10_chi_100m_i16.tif (band 1 ksn_max, band 2 step_max)",
+    "data/official/training_features.tif (band 2 cba_hgm, band 4 isostatic_gravity, band 15 depth_to_base_surf)"
+   ],
+   "mechanism": "Combines strike-aligned 10 m bedrock \u0394ksn steps across >= 3 drainages with the horizontal gradient of Complete Bouguer Anomaly (cba_hgm) to verify that the surface knickpoint belt overlies a basement density step.",
+   "why_missing_from_catalogue": "Identifies concealed range-front step-over faults where surface channels incise thin pediments above buried basement steps.",
+   "difference_from_existing": "Requires explicit channel-steepness step alignment first, using gravity gradient solely as a colocation gate rather than a primary ridge tracer (unlike H19-5/H33).",
+   "expected_dti_delta": "+0.020 to +0.035 HOLDOUT-DTI",
+   "cost": "medium"
+  },
+  {
+   "id": "H67-4",
+   "rank": 44,
+   "title": "Drainage-Divide \u03c7-Asymmetry (Willett et al. 2014) + Range-Front Outlet Alignment",
+   "status": "PROPOSED \u2014 ranked #4 in Round H66/H67 tectonic-geomorphology slate",
+   "layers": [
+    "data/external/dem10_chi_100m_i16.tif (band 3 chi_at_max, band 1 ksn_max)",
+    "data/external/topo_10m_derived_100m_u8.tif (band 5 dev_mean_500m, band 7 plan_curv)"
+   ],
+   "mechanism": "Active asymmetric horst tilting drives drainage divide migration toward the back-tilted block, creating systematic across-divide \u0394\u03c7 differences at channel heads paired with high-ksn outlets on the range-front fault.",
+   "why_missing_from_catalogue": "Detects block-tilting normal faults in poorly mapped interior ranges where alluvial aprons have been stripped.",
+   "difference_from_existing": "Measures cross-divide \u03c7 disequilibrium at channel heads coupled to outlet steepness steps.",
+   "expected_dti_delta": "+0.008 to +0.015 HOLDOUT-DTI",
+   "cost": "high"
+  },
+  {
+   "id": "H66-6",
+   "rank": 46,
+   "slate": "H66c (2026-10-11, session arena/b219bfe1) - masked variant of the 10 m lane (renumbered from H66-1 to avoid the id collision with session arena/970443fc's H66-1..H66-5)",
    "slate_rank": 0,
    "title": "Masked 10 m chi/ksn strike-concordant knickpoints (H62-5 with the brief's four named confounds masked in the statistic)",
    "layers": [
@@ -726,19 +907,19 @@
    ],
    "signature": "same H65-1 statistic (blockwise z-scored dz/dchi two-segment step, >=3 independent drainages in strike corridors), but candidates crossing masked confound cells are excluded from the statistic itself, not just from the emitted dots; preregistered arms T (crossing on continuous basement) and L (crossing on a depth-to-basement step)",
    "why_off_catalogue": "tests whether H65-1's negative was confound inflation; if masking changes nothing, the knickpoint method is exhausted",
-   "differs_from_repo": "first run with the brief's named confounds masked inside the statistic (H65-1 masked none of them in the statistic)",
+   "differs_from_repo": "first run with the brief's named confounds masked inside the statistic (H65-1 masked none of them in the statistic); independent of H66-1..H66-5 (session arena/970443fc) and of H67 (session arena/7085de4f)",
    "expected_dti": "MEASURED: HOLDOUT-DTI 0.00960 [0.00654, 0.01307] (gems57-pooled-hide-v2, 22,641 withheld positives) < random 0.03908; masked E1 +0.0404 [-0.0029, +0.0871] INCONCLUSIVE -> STOP",
-   "cost": "done (this session, ~2 min wall on cached features)",
-   "status": "EXECUTED 2026-10-11 (session arena/b219bfe1): NEGATIVE. Masked first test INCONCLUSIVE (+0.0404, 239 comps) -> preregistered stop; pooled HOLDOUT-DTI 0.00960 below mass-matched random 0.03908 (paired -0.02948, CI excludes 0). 6th consecutive negative of the lane; the method is fully exhausted. evidence/h66_runcard.json",
+   "cost": "done (this session, ~2 min wall on cached features; ran 16:01-16:11 UTC, predating the parallel STOP registration)",
+   "status": "EXECUTED 2026-10-11 (session arena/b219bfe1): NEGATIVE. Masked first test INCONCLUSIVE (+0.0404, 239 comps) -> preregistered stop; pooled HOLDOUT-DTI 0.00960 below mass-matched random 0.03908 (paired -0.02948, CI excludes 0). Corroborates the parallel STOP registration (registry/current_site_status.json); the lane is exhausted. evidence/h66c_runcard.json",
    "evidence": [
-    "evidence/h66_e1_first_test.json",
-    "evidence/h66_holdout.json",
-    "evidence/h66_uniqueness_surface.json",
-    "evidence/h66_uniqueness_dots.json",
-    "evidence/h66_overlap_control_dots.json",
-    "evidence/h66_runcard.json"
+    "evidence/h66c_e1_first_test.json",
+    "evidence/h66c_holdout.json",
+    "evidence/h66c_uniqueness_surface.json",
+    "evidence/h66c_uniqueness_dots.json",
+    "evidence/h66c_overlap_control_dots.json",
+    "evidence/h66c_runcard.json"
    ]
   }
  ],
- "updated_utc": "2026-10-11T16:45:36Z"
+ "updated_utc": "2026-10-11T18:26:47Z"
 }

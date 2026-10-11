@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import html
 import json
+import re
 import sys
 import time
 
@@ -44,6 +45,31 @@ def read(path: str, default=None):
         return json.loads(p.read_text())
     except Exception:
         return default
+
+
+# Marker-delimited blocks inserted by the lane publishers (scripts/h65_publish_site.py,
+# scripts/h66_publish_site.py, scripts/build_site60.py, ...) must survive a regeneration.
+# Without this, whoever runs build_site.py last silently deletes every other parallel
+# session's status board from the shared pages -- which is exactly what happened on
+# 2026-10-11 when three sessions published in sequence.  Shared-tool fix, session H66.
+_STATUS_BLOCK = re.compile(
+    r"<!--\s*([A-Za-z0-9_-]+)-STATUS:BEGIN\s*-->.*?<!--\s*\1-STATUS:END\s*-->\n?",
+    re.S)
+
+
+def preserve_status_blocks(path: Path, new_text: str) -> str:
+    """Re-insert any ``X-STATUS`` blocks the existing page carried, just after <body>."""
+    if not path.is_file():
+        return new_text
+    old = path.read_text()
+    kept = [m.group(0) for m in _STATUS_BLOCK.finditer(old) if m.group(0) not in new_text]
+    if not kept:
+        return new_text
+    m = re.search(r"<body[^>]*>", new_text)
+    if not m:
+        return new_text
+    i = m.end()
+    return new_text[:i] + "\n" + "".join(kept) + new_text[i:]
 
 
 def page(title: str, body: str, active: str = "", dl_btn: str = "") -> str:
@@ -726,6 +752,20 @@ organizer-authenticated, and naming inconsistencies. Each item is also tracked b
 
 
 def main() -> int:
+    active_status = read("registry/current_site_status.json")
+    if (active_status and active_status.get("status") == "STOP"
+            and not active_status.get("recommended_competition_submission")):
+        fl = FEED.build(ROOT)
+        from build_current_review_site import render as render_current_review_site
+        current_review = render_current_review_site(ROOT)
+        print(json.dumps({
+            "mode": "active stop review",
+            "current_review": current_review,
+            "leaderboard_rows": len(fl.get("leaderboard", [])),
+            "submission_recommendation": None,
+        }, indent=2))
+        return 0
+
     fl = FEED.build(ROOT)
     sub = read("registry/submission_build.json")
     name = (sub or {}).get("name", "gems32-h19-5-maxcov-r1")
@@ -759,7 +799,7 @@ def main() -> int:
     }
     DOCS.mkdir(exist_ok=True)
     for fname, html_text in pages.items():
-        (DOCS / fname).write_text(html_text)
+        (DOCS / fname).write_text(preserve_status_blocks(DOCS / fname, html_text))
 
     # ---- every other page that lives under docs/ must also offer the registry primary ------------
     # Sibling lane sessions ship their own standalone report pages (lane-chi-report.html,
@@ -780,9 +820,17 @@ def main() -> int:
             if page_path.name in pages:
                 continue
             text = page_path.read_text()
-            if _primary_name in text:
-                continue
             import re as _re
+            text = _re.sub(
+                r'<div class=dlbtn style="margin:10px 0;padding:10px 14px;border:2px solid #b45309;[^"]*">'
+                r'<b>Registry primary[^<]*</b>.*?</div>\n?',
+                "",
+                text,
+                flags=_re.DOTALL,
+            )
+            if _primary_name in text:
+                page_path.write_text(text)
+                continue
             new_text, n = _re.subn(r'(<body[^>]*>\s*)', lambda m: m.group(1) + banner, text, count=1)
             if n:
                 page_path.write_text(new_text)
@@ -804,7 +852,7 @@ def main() -> int:
 irregularity register &rarr;</a> &nbsp;·&nbsp; <a href="docs/executive-summary.html">how to submit, step by step &rarr;</a>
 &nbsp;·&nbsp; <a href="README.md">README</a> &nbsp;·&nbsp; <a href="https://github.com/buffedlizard55-lab/60GEMSDOE">repository</a></div>
 </main></body></html>"""
-    (ROOT / "index.html").write_text(landing)
+    (ROOT / "index.html").write_text(preserve_status_blocks(ROOT / "index.html", landing))
 
     # ---- root stubs for the other pages ---------------------------------------------------------
     # GitHub Pages publishes the repository *root* (server-side setting, source main:/), so

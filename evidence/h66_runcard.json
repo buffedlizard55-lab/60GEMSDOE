@@ -1,232 +1,252 @@
 {
- "run": "H66-1",
- "registry_hypothesis": "H62-5 (true-10 m chi/ksn concordance), H66-1 masked variant",
- "lane": "tectonic geomorphology: chi / ksn / knickpoints",
- "generated_utc": "2026-10-11T16:44:00Z",
- "preregistration": {
-  "file": "evidence/h66_e1_first_test.json (stop rule) + run_lane60.py H66-1 arms (same session, preregistered before the first test ran)",
-  "preregistered_utc": "2026-10-11T15:58:00Z"
- },
- "hypothesis": "If the H65-1 knickpoint signal was inflated by the brief's named confounds (playa/pluvial shoreline, basin fill, conductive ground-water discharge, ephemeral low-area channels), then applying those confound masks to the statistic itself should change the first-test verdict; the masked statistic's withheld-crossing contrast still carries no fault signal (E1 stays INCONCLUSIVE) and the pooled holdout DTI stays far below the mass-matched random control.",
- "mechanism": "A fault offsets base level; the steepness contrast propagates upstream as a knickpoint (Kirby & Whipple 2012, J. Struct. Geol. 44, 54-75; Perron & Royden 2013, ESPL 38, 570-576; Gailleton et al. 2019, ESurf 7, 211-230). H66-1 additionally masks, from the channel-cell population entering the statistic, cells on playa, in basin fill, on high-conductance surface (ground-water discharge mimic), and in ephemeral channels (A < 1e6 m2), per the lane brief's mandated confound list.",
- "mimicking_non_fault_process": "The brief's named mimics, now MEASURED as masks: playa/pluvial shorelines (550,267 px), basin fill (516,432 px), conductive surface (257,039 px), ephemeral channels (317,451 px of the 786,299 channel px; 386,327 channel px excluded total). With all four masked, the masked first-test mean moved only from +0.0326 (H65-1, 262 comps) to +0.0404 (239 comps) and the CI still straddles zero: the confounds did not create the (non-)signal.",
- "substrate": {
-  "source": "USGS 3DEP 1/3 arc-second (~10 m) DEM, current 1x1-degree tiles (public domain) - H65-1 reduction, sha-pinned",
-  "url_pattern": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/<tile>/USGS_13_<tile>.tif",
-  "feature_cache": ".cache/features65 (rebuilt this session from the sha-pinned 10 m TIFs; all 11 arrays match the pinned manifest)",
-  "manifest": "data/external/dem10_chi_100m.manifest.json"
- },
- "confound_masks_px": {
-  "evidence_class": "MEASUREMENT",
-  "playa": 550267,
-  "basin_fill": 516432,
-  "conductive": 257039,
-  "ephemeral": 317451,
-  "channel_excluded": 386327,
-  "channel_total": 786299,
-  "excluded_total": 1399516,
-  "a_min_m2": 1000000.0,
-  "note": "masks applied to the statistic (masks_applied_to_statistic=true), not just to the emitted dots"
- },
- "first_test_E1": {
-  "evidence_class": "MEASUREMENT",
-  "statistic": "mean log-ksn step contrast, withheld-crossing channels minus same-orientation random lines, confound masks applied to the statistic",
-  "masks_applied_to_statistic": true,
-  "mean": 0.04039842808701666,
-  "ci95": [
-   -0.002870678727197792,
-   0.08710208994789784
-  ],
-  "median": -0.004214679975479613,
-  "n_components": 239,
-  "skipped_components": 81,
-  "fraction_positive": 0.4895397489539749,
-  "verdict": "INCONCLUSIVE",
-  "arms": {
-   "T_no_basement_step": {
+  "run": "H66",
+  "generated_utc": "2026-10-11T16:18:01Z",
+  "session": "arena/970443fc-60gemsdoe (60GEMSDOE)",
+  "lane": "tectonic geomorphology: channel steepness (chi / ksn) and knickpoints, not scarp shape",
+  "preregistration": {
+    "file": "registry/preregistration-h66.json",
+    "registered_utc": "2026-10-11T15:45:21Z"
+  },
+  "hypothesis": "Chi/ksn steepness steps corroborated across >= 3 independent drainages along a common strike mark fault traces that the GIVEN Quaternary catalogue omits. Because the competition's hidden truth is off-catalogue, the lane's mandated first test must be run against off-catalogue fault segments, not against withheld catalogue segments.",
+  "mechanism": "A fault offsets base level; the steepness contrast propagates upstream as a knickpoint (Kirby & Whipple 2012, J. Struct. Geol. 44, 54-75, doi:10.1016/j.jsg.2012.07.009; Perron & Royden 2013, ESPL 38, 570-576, doi:10.1002/esp.3302; Gailleton et al. 2019, ESurf 7, 211-230, doi:10.5194/esurf-7-211-2019). Single-channel steps are ambiguous; strike-aligned corroboration across drainage divides is not, because no single-channel process is strike-aligned.",
+  "mimicking_non_fault_process": "Lithologic contacts and basin-fill boundaries (a hard-over-weak contact also steps ksn and can be strike-aligned), alluvial fan-apex and fan-head trenching steps, playa / pluvial-shoreline base levels, channel-head and colluvial-to-fluvial transitions near the A_ch threshold, and SGMC mapping of old, inactive or poorly located traces.",
+  "step_statistic": "abs",
+  "substrate": "USGS 3DEP 1/3 arc-second (~10 m) DEM, 18 current 1x1-degree tiles, public domain",
+  "budget_note": "3 experiments declared; 4 measurement rounds were run because the first emission FAILED the uniqueness gate (75.7% of its dots within 3 px of the H65-1 file) and had to be re-emitted on a different limb of the same statistic. Logged rather than hidden.",
+  "first_test_E1a_literal_brief": {
     "evidence_class": "MEASUREMENT",
-    "n_components": 174,
-    "mean": 0.0029678024377174958,
+    "target": "withheld catalogue segments (shared hide-and-recover, mode 'all')",
+    "gating": false,
+    "n_components": 262,
+    "mean": -0.021788554044593966,
     "ci95": [
-     -0.040415324465084695,
-     0.05060360704061481
+      -0.05996931781224429,
+      0.01670215966203115
     ],
-    "verdict": "INCONCLUSIVE"
-   },
-   "L_on_basement_step": {
+    "verdict": "STOP",
+    "reproduces": "H65-1 recorded mean +0.0326 on the same cache (evidence/h65_runcard.json)"
+  },
+  "first_test_E1b_off_catalogue": {
     "evidence_class": "MEASUREMENT",
-    "n_components": 14,
-    "mean": 0.06957234976651457,
+    "target": "USGS SGMC faults > 300 m from the given catalogue",
+    "gating": true,
+    "gate": "G1: mean > 0 AND ci95 lower bound > 0",
+    "n_components_scored": 86,
+    "components_sampled": 124,
+    "offcat_components_total": 22854,
+    "skip_reasons": {
+      "no channel crossing": 38
+    },
+    "mean": -0.08600321363221856,
     "ci95": [
-     -0.12416896047447255,
-     0.29792759877913993
+      -0.13722563560978168,
+      -0.021960945433693146
     ],
-    "verdict": "INCONCLUSIVE (underpowered, n=14)"
-   }
+    "fraction_positive": 0.19767441860465115,
+    "verdict": "STOP",
+    "gate_G1": "STOP"
   },
-  "rule": "brief: 'if not, stop' -> INCONCLUSIVE fails the preregistered PROCEED gate -> STOP; the full masked lane is emitted as the research artifact (emission rule)",
-  "file": "evidence/h66_e1_first_test.json"
- },
- "holdout_dti": {
-  "evidence_class": "HOLDOUT-DTI",
-  "evaluator_version": "gems57-pooled-hide-v2",
-  "n_withheld_positives": 22641,
-  "alpha": 0.2,
-  "beta": 0.8,
-  "kernel_m": 300.0,
-  "bootstrap": {
-   "method": "paired physical spatial-cluster percentile",
-   "clusters": 159,
-   "draws": 1000,
-   "seed": 60101
+  "holdout_dti": {
+    "evidence_class": "NOT COMPUTED THIS SESSION",
+    "reason": "the catalogue hide-and-recover HOLDOUT-DTI was not recomputed: the 3-experiment budget went to E1a/E1b/E2, and evidence/e61_instrument_audit.json measures that instrument at Spearman -0.9021 against the live board, so it cannot change this verdict.",
+    "same_lane_same_substrate_previous_measurement": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "n_withheld_positives": 22641,
+      "dti": 0.01158,
+      "ci95": [
+        0.0084,
+        0.01462
+      ],
+      "source": "evidence/h65_runcard.json (H65-1, native 10 m, upstream limb)"
+    }
   },
-  "lane": {
-   "dti": 0.009598840531222471,
-   "ci95": [
-    0.006540940977949029,
-    0.013074468339030563
-   ]
+  "instrument_dti": {
+    "evidence_class": "INSTRUMENT-DTI (public proxy truth; NOT HOLDOUT-DTI, NOT ORGANIZER-CONFIRMED)",
+    "truth_set": "sgmc_off_full (USGS SGMC faults > 300 m from the given catalogue)",
+    "n_truth": 62703,
+    "per_arm_dti": {
+      "lane": 0.009128,
+      "ksn_only_no_alignment": 0.064562,
+      "distance_only": 0.028896,
+      "random_mass_control": 0.072525,
+      "champion_02778_owner_report": 0.09606
+    },
+    "per_arm_credit_per_px": {
+      "lane": 0.013984,
+      "ksn_only_no_alignment": 0.098745,
+      "distance_only": 0.044319,
+      "random_mass_control": 0.112136,
+      "champion_02778_owner_report": 0.148783
+    },
+    "paired_lane_minus_random": {
+      "mean": -0.06339026800769353,
+      "ci95": [
+        -0.06720371052349361,
+        -0.05927371975327392
+      ],
+      "fraction_positive": 0.0
+    },
+    "paired_lane_minus_champion": {
+      "mean": -0.08669591441888144,
+      "ci95": [
+        -0.09776134304000371,
+        -0.07660115857493044
+      ],
+      "fraction_positive": 0.0
+    },
+    "bootstrap": {
+      "method": "paired 20 km spatial-block percentile",
+      "block_px": 200,
+      "n_blocks": 323,
+      "draws": 1000,
+      "seed": 6601
+    },
+    "instrument_provenance": "evidence/e61_instrument_audit.json spearman_vs_live",
+    "gate_G3": {
+      "reference": "sgmc_off_full lane_minus_random_mass_control",
+      "mean": -0.06339026800769353,
+      "ci95": [
+        -0.06720371052349361,
+        -0.05927371975327392
+      ],
+      "fraction_positive": 0.0,
+      "verdict": "FAIL"
+    }
   },
-  "ksn_only_control": {
-   "dti": 0.020000330272770532,
-   "ci95": [
-    0.015987081101515387,
-    0.024420352069865904
-   ]
+  "leakage_canary": {
+    "rule": "max(AUC,1-AUC) > 0.90 is leakage until proven otherwise",
+    "rows": [
+      {
+        "feature": "knickpoint_step",
+        "auc_offcat": 0.4878236583665064,
+        "auc_catalogue_full_footprint": 0.5004193506303727,
+        "max_abs_auc": 0.5121763416334937,
+        "leakage_flag": false
+      },
+      {
+        "feature": "ksn",
+        "auc_offcat": 0.4951703259359482,
+        "auc_catalogue_full_footprint": 0.50372867071689,
+        "max_abs_auc": 0.5048296740640519,
+        "leakage_flag": false
+      },
+      {
+        "feature": "drainage_area",
+        "auc_offcat": 0.4877448067754615,
+        "auc_catalogue_full_footprint": 0.4995484046299737,
+        "max_abs_auc": 0.5122551932245385,
+        "leakage_flag": false
+      },
+      {
+        "feature": "lane_p",
+        "auc_offcat": 0.47545753384049666,
+        "auc_catalogue_full_footprint": 0.502814022723114,
+        "max_abs_auc": 0.5245424661595033,
+        "leakage_flag": false
+      },
+      {
+        "feature": "dist_to_visible",
+        "auc_offcat": 0.5279549460791481,
+        "auc_catalogue_full_footprint": 1.0,
+        "max_abs_auc": 1.0,
+        "leakage_flag": true
+      }
+    ],
+    "positive_control_note": "dist_to_visible scores 1.000 against the catalogue by construction; it is the harness's positive control, not a leak"
   },
-  "random_mass_control": {
-   "dti": 0.03908023346196293,
-   "ci95": [
-    0.03567772377036994,
-    0.04231026849449676
-   ]
+  "correlation_vs_registry": {
+    "unique": false,
+    "rasters_scanned": 68,
+    "pinned_corpus_rescanned": false,
+    "worst_spearman_full_footprint": 0.5411206390422485,
+    "worst_rho_submission": "gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+    "worst_dot_overlap": 0.999415732724279,
+    "worst_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
+    "worst_overlap_excess_over_random": 0.5817761725181919,
+    "rho_limit": 0.9,
+    "overlap_limit": 0.7,
+    "duplicate_count": 2,
+    "note": "the pinned 655-raster corpus lives in .cache/registry, which is not in git; coverage this session is the 68 GeoTIFFs physically present in the checkout"
   },
-  "distance_only_control": {
-   "dti": 0.19073008022090832,
-   "ci95": [
-    0.1819994346977787,
-    0.19964658277767058
-   ]
+  "artifact": {
+    "file": "downloads/gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif",
+    "sha256": "66f93c821cf7b8f91f14a1fba1746b7d58b1435f71b0004f599ee5c9d00ab944",
+    "zip_sha256": "b1555a4be2739038061188c0629f33e109e664ea93a4a815d786465fdd36e386",
+    "bytes": 111211,
+    "dots": 37654
   },
-  "paired_lane_minus_control": {
-   "ksn_only_no_alignment": {
-    "delta": -0.01040148974154806,
-    "ci95": [
-     -0.015656016336189852,
-     -0.005590196934869137
-    ]
-   },
-   "distance_only": {
-    "delta": -0.18113123968968584,
-    "ci95": [
-     -0.1902560454200415,
-     -0.17262148234584962
-    ]
-   },
-   "random_mass_control": {
-    "delta": -0.02948139293074046,
-    "ci95": [
-     -0.033908555811680334,
-     -0.024882575820705445
-    ]
-   }
+  "validator": {
+    "all_checks_passed": true,
+    "failed_checks": [],
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "crs": "EPSG:32611",
+    "shape": [
+      3730,
+      3292
+    ],
+    "dtype": "float32",
+    "nodata_tag": null,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "transform_matches_sample_submission": true,
+    "outside_footprint_zero": true,
+    "dots_on_catalogue": 0,
+    "emitted_positive_pixels": 37654,
+    "template_report_ok": true,
+    "template_report_problems": [],
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "full_report": "evidence/h66b_submission_build.json"
   },
-  "slot_gate": "lane 0.00960 << family best promotable 0.190147 (distance_only); SUBMIT: NO",
-  "not_a_leaderboard_score": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval.",
-  "file": "evidence/h66_holdout.json"
- },
- "leakage_canary": {
-  "rule": "max(AUC,1-AUC) > 0.90 is leakage until proven otherwise",
-  "rows": [
-   {
-    "feature": "knickpoint_step",
-    "auc": 0.4830170893322345,
-    "max_abs_auc": 0.5169829106677655,
-    "leakage_flag": false
-   },
-   {
-    "feature": "ksn",
-    "auc": 0.513448177110241,
-    "max_abs_auc": 0.513448177110241,
-    "leakage_flag": false
-   },
-   {
-    "feature": "drainage_area",
-    "auc": 0.482090188218305,
-    "max_abs_auc": 0.5179098117816949,
-    "leakage_flag": false
-   },
-   {
-    "feature": "lane_p",
-    "auc": 0.4875107745872715,
-    "max_abs_auc": 0.5124892254127285,
-    "leakage_flag": false
-   },
-   {
-    "feature": "dist_to_visible",
-    "auc": 0.9243383423012624,
-    "max_abs_auc": 0.9243383423012624,
-    "leakage_flag": true
-   }
-  ],
-  "reading": "every lane feature <= 0.518 (no leakage); dist_to_visible 0.924 is the deliberate positive control (distance to the visible catalogue), flagged as designed, and is not a lane input"
- },
- "uniqueness_vs_registry": {
-  "evidence_class": "REGISTRY-MEASUREMENT",
-  "registry_rasters_checked": "651/655",
-  "surface_max_abs_spearman_full_footprint": 0.038232,
-  "surface_max_abs_spearman_raster": "GEMSDOE48:docs/downloads/GEMSDOE48-H56-OWDS-B2xH33D-20261007-1f7b5a4f18db-unassigned-mtheta.tif",
-  "final_dots_max_abs_spearman_full_footprint": 0.029923283200001843,
-  "final_dots_max_abs_spearman_raster": "GEMSDOE48:docs/downloads/diagnostics/gemsdoe48-h56b-mtheta-126ca59c2801.tif",
-  "final_dots_max_dot_overlap_within_3px": 1.0,
-  "final_dots_max_dot_overlap_raster": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
-  "final_dots_max_jaccard_dot_sets": 0.01115646653786371,
-  "final_dots_max_jaccard_raster": "GEMSDOE48:docs/downloads/GEMSDOE48-H50-2M-PERSIST-20261007-f12e5391bb9c-nan.tif",
-  "byte_unique": true,
-  "pixel_unique": true,
-  "tool_verdict_unique": false,
-  "limits": {
-   "rho": 0.9,
-   "overlap": 0.7
+  "submission_name": "60GEMSDOE-H66-2-KNICK-BOTHLIMBS-37654",
+  "note": "H66-2 chi/ksn both-limb steepness steps, >=3 drainages, 37654 dots off-catalogue; E1 off-cat -0.086 STOP: NEGATIVE, research only",
+  "note_chars": 129,
+  "file_basename": "gems60-h66b-bothlimb-knick-37654-20261011T160938Z-5fc1a5488340-zeros.tif",
+  "gates": {
+    "G1_first_test_off_catalogue": "STOP",
+    "G2_leakage_canary": "PASS",
+    "G3_beats_mass_matched_random": "FAIL",
+    "G4_portal_format": "PASS",
+    "G5_uniqueness": "FAIL"
   },
-  "surface_file": "evidence/h66_uniqueness_surface.json",
-  "final_dots_file": "evidence/h66_uniqueness_dots.json",
-  "scope_note": "651/655 registry rasters fetched; the 4 missing are the known 55GEMSDOE blobs (IR-60-CORPUS-01). Both the lane surface and the final 40,000 dots were checked, per the lane rule.",
-  "overlap_gate_reading": "the literal 3-px overlap clause fires on 58 rasters, all dense (>= 192,231 dots; worst case 5,167,373 = near-full-footprint rasters); 58/58 of them also fire for 5 uniform-random 40,000-dot sets (max excess over random +0.0012, median 0.0), so the firing measures the prior's support density, not copying (IR-60-GATE-01). Post-hoc diagnostic: the tool verdict stays unique=false.",
-  "overlap_control_file": "evidence/h66_overlap_control_dots.json"
- },
- "reproducibility": {
-  "check": "scripts/build_submission60.py --verify-existing (recompute the masked lane from the sha-pinned cache)",
-  "log": [
-   "[C] verify-existing identical=True shipped_nonzero=40000 recomputed_nonzero=40000 (11.7s)",
-   "[C] format ok=True problems=[] nonzero=40000 (12.3s)"
-  ],
-  "identical": true,
-  "irregularity": "IR-H66-BUILD-01: the first build (dot digest 66c49029b6cb, TIF sha 958c176d...) produced 12 dots (of 40,000) that differ from a fresh recompute, and that process was OOM-killed (exit 137) in its built-in final-dot audit. Three independent fresh recomputes are bit-identical to each other and to the shipped file (digest 3306ed8afbcd); the cause of the first build's deviation was not identified. The superseded TIF is kept at /tmp only and is NOT the artifact."
- },
- "artifact": {
-  "file": "docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif",
-  "sha256": "56f9f89ec97c265e6b9e75031c94441ca80688f556040fe20c5ab18105082ef8",
-  "bytes": 96075,
-  "validator_ok": true,
-  "validator_problems": [],
-  "emitted_positive_pixels": 40000,
-  "on_catalogue_positive_pixels": 0,
-  "min": 0.0,
-  "max": 1.0,
-  "n_nan": 0,
-  "zip": "docs/downloads/gems60-h66-masked-knick-40000.zip"
- },
- "submission_name": "gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd",
- "note": "H66-1 10m chi/ksn knickpoints, confound masks (ephemeral/playa/basin-fill/conductive), 40k dots; E1 INCONCLUSIVE -> NEGATIVE, research only",
- "note_chars": 139,
- "verdict": "NEGATIVE",
- "submit": "NO - research artifact only; do not spend a slot (lane 0.00960 HOLDOUT-DTI << family best promotable 0.190147)",
- "lane_status": "6th consecutive negative run of the knickpoint lane; the lane method is now fully exhausted - every named confound is masked in the statistic itself, the first test still fails, and the holdout is below the mass-matched random control.",
- "shared_tool_fixes": [
-  "scripts/run_lane60.py + scripts/build_submission60.py: H66-1 confound-mask extension (playa / basin-fill p90 depth_to_base / conductive p95 / ephemeral A<1e6 m2), applied to the statistic when --include-ephemeral, plus preregistered arm split (T = crossing cells on a continuous basement surface; L = cells on a depth_to_base_surf step)",
-  "scripts/check_uniqueness60.py: --include-ephemeral / --arm for the surface rebuild mirror",
-  "scripts/h65_overlap_control.py: --candidate/--rows/--out CLI (same matched-random control protocol, reusable per session)",
-  "scripts/refresh_feed.py: save the raw leaderboard page next to the parsed snapshot (untested this session - flagged)"
- ]
+  "G5_detail": {
+    "tool_verdict_unique": false,
+    "sparse_rasters": 57,
+    "dense_rasters": 11,
+    "sparse_dots_max": 100000,
+    "literal_gates_vs_57_sparse_submission_like_rasters": true,
+    "worst_abs_rho_vs_sparse": 0.5411206390422485,
+    "worst_overlap_vs_sparse": 0.6105327455250438,
+    "dense_prior_rows_tripping_3px_gate": [
+      {
+        "path": "registry/rasters/calib_r13lattice_00904.tif",
+        "their_dots": 206895,
+        "overlap": 0.999415732724279,
+        "random_control_mean": 0.6763212407712328,
+        "excess_over_random": 0.3230944919530462
+      },
+      {
+        "path": "registry/rasters/r14_union_tips10_lat6.tif",
+        "their_dots": 192231,
+        "overlap": 0.7545546289902799,
+        "random_control_mean": 0.5154087215169703,
+        "excess_over_random": 0.23914590747330966
+      }
+    ],
+    "dense_rows_all_rho_below_0p10": true,
+    "pinned_655_corpus_rescanned": false,
+    "reading": "the tool's unique flag is false for two declared reasons: the pinned 655-raster corpus was not rescanned in this sandbox, and two ~200k-dot dense priors trip the 3-px co-location gate while carrying |rho| < 0.01 (co-location without rank similarity). No sparse, submission-like raster trips either literal gate."
+  },
+  "verdict": "NEGATIVE",
+  "okay_to_download": true,
+  "okay_to_submit": false
 }

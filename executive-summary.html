@@ -1,28 +1,43 @@
-<!doctype html><html lang=en><head><meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<title>Make a submission &middot; 60GEMSDOE</title>
-<link rel=canonical href="docs/executive-summary.html">
-<link rel=stylesheet href="docs/assets/site.css">
-<meta http-equiv=refresh content="0; url=docs/executive-summary.html"></head><body>
-<main class=wrap style="padding-top:26px">
-<h1>Make a submission</h1>
-<div class=dl>
-<h2>&#11015;&nbsp;ONE-CLICK SUBMISSION FILE</h2>
-<p><a class="btn" href="docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif">Download gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd.tif</a> <a class="btn alt" href="docs/downloads/gems60-h66-masked-knick-40000.zip">.zip (single GeoTIFF inside)</a> </p>
-<p><b>Filename:</b> <code>gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd.tif</code><br>
-<b>Unique submission name to use:</b> <code>60GEMSDOE-H66-1 masked knickpoints</code><br>
-<b>Note to paste into the submit form's <em>Note (optional)</em> field
-(139/200 characters):</b><br>
-<code>H66-1 10m chi/ksn knickpoints, confound masks (ephemeral/playa/basin-fill/conductive), 40k dots; E1 INCONCLUSIVE -&gt; NEGATIVE, research only</code></p>
-<p class=mut>single band · float32 · EPSG:32611 · 100 m · 3292&times;3730 ·
-40,000 predicted pixels · every cell finite · every value in [0, 1] ·
-0 NaN anywhere · no nodata tag · sha256 <code>56f9f89ec97c265e&hellip;</code>
-</p>
-<p><b>Already-scored fallback:</b> <a href="docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">0.2708 anchor (already-scored base)</a> </p>
-<h3>Identification pack &mdash; the other two queries</h3><table><tr><th>slot</th><th>file</th><th>sha256</th><th>what it gives</th></tr><tr><td><b>ANCHOR (already-scored base)</b></td><td><a href="docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</a> </td><td class=mut>c55bafc470054e82&hellip;</td><td class=mut>the owner-reported 0.2778 champion emission (H33-2-B2); kept downloadable as the audit-trail anchor and as the only already-scored upload</td></tr><tr><td><b>SECONDARY (Tier 2)</b></td><td><a href="docs/downloads/gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif">gemsdoe32-h32d-submodular-multipysics-46090-20261004T183200Z-4de30601-zeros.tif</a> </td><td class=mut>f81e26d7712d1a4a&hellip;</td><td class=mut>Tier 2 candidate: d2.8 emission (44,090 px) with 500 uncorroborated speckles pruned and 2,500 priority-ordered H32 dots added on the dip-projected step, transtensional swarm and MT clay-cap surfaces; 46,090 px; 0 on-catalogue</td></tr><tr><td><b>AVAILABLE DOWNLOAD (NEGATIVE research artifact, H65-1)</b></td><td><a href="docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif">gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif</a> </td><td class=mut>0728d1193d9ee9f3&hellip;</td><td class=mut>H65-1 unmasked 10 m chi/ksn knickpoints; E1 INCONCLUSIVE -&gt; NEGATIVE; do not spend a slot</td></tr><tr><td><b>AVAILABLE DOWNLOAD (NEGATIVE research artifact, H66-1)</b></td><td><a href="docs/downloads/gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif">gems60-h66-masked-knick-40000-20261011T163654Z-3306ed8afbcd-zeros.tif</a> </td><td class=mut>56f9f89ec97c265e&hellip;</td><td class=mut>H66-1 masked variant of the same lane; E1 INCONCLUSIVE -&gt; NEGATIVE; do not spend a slot</td></tr></table>
-<p class=warn><b>Status.</b> PRIMARY = H66-1 masked knickpoint lane (2026-10-11b), the session&#x27;s UNIQUE artifact: 10 m 3DEP chi/ksn knickpoint corridors with the brief&#x27;s four named confounds (ephemeral/playa/basin-fill/conductive) masked INSIDE the statistic, 40,000 dots, 0 on the mapped catalogue; max |Spearman| 0.0382 (surface) / 0.0299 (final dots) vs 651/655 registry rasters, byte- and pixel-unique. DOWNLOAD: OK (research artifact) / SUBMIT: NO (NEGATIVE, slot never spent): masked E1 first test INCONCLUSIVE (+0.0404, 95% CI [-0.0029, +0.0871], 239 comps) trips the preregistered stop rule, and the pooled HOLDOUT-DTI 0.00960 [0.00654, 0.01307] sits below the mass-matched random control 0.03908 (paired -0.02948, 95% CI excludes 0). Six consecutive negative runs now exhaust the knickpoint lane method.</p>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>executive-summary.html · 60GEMSDOE</title><link rel="canonical" href="docs/executive-summary.html"><link rel="stylesheet" href="docs/assets/site.css">
+<meta http-equiv="refresh" content="0; url=docs/executive-summary.html"></head><body>
+<!-- H67-STATUS:BEGIN -->
+<div class=wrap style="border:3px solid #067647;background:#f6fef9;padding:12px 16px;margin:8px auto">
+<h2 style="margin:0 0 6px">&#9989; READ THIS FIRST (2026-10-11, session H66-1 / H67-1 &mdash; <code>arena/7085de4f-60gemsdoe</code>): Validated 10 m Bedrock &Delta;k<sub>sn</sub> GeoTIFF &amp; Submission Decision</h2>
+<table>
+<tr><th>Artifact</th><th>One-click download &amp; receipts</th><th>OK to download &amp; submit?</th></tr>
+<tr><td><b>Validated Tectonic-Geomorphology Deliverable (H66-1 / H67-1)</b><br><code>gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif</code><br>
+<span style="color:#5b7183">40,000 dots (2.8 px NMS) &middot; 0 on catalogue &middot; sha256 <code>cde6b57be8aaac9b&hellip;</code></span></td>
+<td><a class=btn href="docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif" download>&#11015; .tif (145 KB)</a>
+<a class="btn alt" href="docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.zip" download>.zip</a>
+<a href="docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros-runcard.json">run card</a>
+<a href="docs/downloads/checks-gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif.json">checks</a></td>
+<td style="color:#067647"><b>DOWNLOAD: YES (100% portal-legal [0, 1] float32, 0 NaN).</b><br>
+<b>VERDICT: PROMOTE TO CROSS-LANE SELECTOR</b> (<code>verdict: "promote"</code>).<br>
+Mandated First Test E1: <b>+0.4251</b> (95% CI [+0.2253, +0.6273], 262 withheld components, 60.3% positive) &rarr; <b>PROCEED</b>.<br>
+Pooled <b>HOLDOUT-DTI = 0.065739</b> (95% CI [0.055715, 0.076201], <code>gems57-pooled-hide-v2</code>, 22,641 withheld positives) &mdash; <b>5.68&times; H65-1</b> (0.011576) and <b>4.01&times; H60-A</b> (0.016389), beating <code>ksn_only</code> by <b>+0.042646</b> and <code>random_mass_control</code> by <b>+0.026659</b>.<br>
+<span style="color:#344054">Per Parallel-Run Protocol, promote to the cross-lane selector rather than spending a standalone weekly portal slot replacing the 0.2778 multi-physics champion alone.</span></td></tr>
+<tr><td><b>Group Champion (Anchor, 0.2778 owner-reported)</b><br><code>gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</code></td>
+<td><a class="btn alt" href="docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif" download>&#11015; .tif</a></td>
+<td><b>DOWNLOAD: YES.</b> Already live-scored at <b>0.2778</b> (owner-reported; no organizer receipt ties bytes to score).</td></tr>
+</table>
+<p style="margin:6px 0 0"><b>Portal format safety (<code>&ldquo;Predicted values must be in range [0, 1]&rdquo;</code> fix):</b>
+<code>gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif</code> is single-band <code>float32</code>, <code>EPSG:32611</code>, <code>3730&times;3292</code>,
+<b>0 NaN, 0 Inf, min 0.0, max 1.0, nodata=None, exact sample transform</b>.
+Portal name: <code>60GEMSDOE-H66-1-DEM10-BEDROCK-DKSN-40000</code> &middot;
+Portal note (110/140 chars): <code>60GEMSDOE H66-1 | 3DEP 10m bedrock dksn + piedmont step, &gt;=3 drainages, 4-confound mask, 2.8px NMS, 40000 dots</code>.</p>
 </div>
-<div class=card><b>Full page:</b> <a href="docs/executive-summary.html">Make a submission &rarr;</a>
-&nbsp;&middot;&nbsp; <a href="docs/index.html">whole site &rarr;</a>
-&nbsp;&middot;&nbsp; <a href="README.md">README</a></div>
-</main></body></html>
+<!-- H67-STATUS:END -->
+<main class="wrap">
+<h1>Current status: STOP</h1><div class="banner current-stop-notice"><h2>STOP — no competition submission is cleared</h2>
+<p><b>Latest run:</b> H65-1, channel-steepness / χ / knickpoints. Its preregistered first test was
+<strong>INCONCLUSIVE → STOP</strong>: mean log-ksn contrast +0.0326,
+95% CI [-0.0144, +0.0790] (262 components). Because the interval crosses zero, the test did not pass the PROCEED gate.
+The earlier c7653 run also stopped. No follow-up experiment is authorized; this review created no TIFF and used no slot.</p>
+<p><a class="btn" href="docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif" download>Download the existing H65-1 GeoTIFF for research only</a>
+<strong>DO NOT SUBMIT.</strong> The local format preflight is not organizer acceptance or uniqueness clearance.</p>
+<p>H65-1 diagnostic <b>HOLDOUT-DTI</b>: 0.01158 [0.00840, 0.01462],
+22,641 withheld positives (`gems57-pooled-hide-v2`); not a leaderboard score.
+<a href="docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.json">Local format receipt</a> · <a href="docs/research/active-lane-review-2026-10-11.md">Full review</a> ·
+<a href="docs/../evidence/h65_runcard.json">final JSON run card</a> · <a href="docs/../registry/leaderboard_snapshot_2026-10-11.json">manual 50-row public-board snapshot</a></p></div>
+<p><a href="docs/executive-summary.html">Open current page →</a> · <a href="docs/index.html">Home</a></p></main></body></html>

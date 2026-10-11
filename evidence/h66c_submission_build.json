@@ -1084,7 +1084,7 @@
       }
     ],
     "rows_file": "evidence/uniqueness_rows.jsonl (one row per registry raster)",
-    "merged_from": "evidence/h66_uniqueness.json"
+    "merged_from": "evidence/h66c_uniqueness_dots.json"
   },
   "permission": {
     "okay_to_download": true,

@@ -8,15 +8,16 @@ masked pixel-exactly (staff forum 11516), official DTI (alpha .2, beta .8,
 Arms
   lane7653     this session's knickpoint raster (7,653 dots, capacity-limited)
   canary_anom  raw steepness-anomaly field, same budget, no concordance/masks
-               (leakage canary: a label-free feature cannot leak, but the
-               protocol requires the per-feature holdout read)
-  champion     h33-2-b2 -zeros (owner-reported live 0.2778), as it stands
-  d28          dotted h19-5 d=2.8 -zeros (owner-reported live 0.2600)
-  h274r1       h27-4-r1-solo d2.8 -nan  (owner-reported live 0.2708)
-  h16topo      h16-1 topo-geophys ridges -nan (owner-reported live 0.1855)
+               (one composite-field canary only; it is not a feature-by-feature audit)
+  champion  h33-2-b2 -zeros (legacy owner-reported 0.2778; no receipt ties score to these bytes)
+  d28        dotted h19-5 d=2.8 -zeros (legacy score claim; not a current live-score source)
+  h274r1       h27-4-r1-solo d2.8 -nan (legacy owner score claim 0.2708; not receipt-linked)
+  h16topo      h16-1 topo-geophys ridges -nan (legacy owner score claim 0.1855; not receipt-linked)
 
-Uniqueness gate (brief): Spearman rho <= 0.90 vs every registry raster AND
-<= 70% of our dots within 3 px of any registry raster's dots.
+Partial uniqueness diagnostic: compare the continuous score surface to locally available registry
+rasters before placement (absolute Spearman <= 0.90), then compare final emitted dots after placement
+(<= 70% of our dots within 3 px). This directory's contents must not be presented as the full global
+registry unless coverage is audited.
 """
 from __future__ import annotations
 
@@ -72,8 +73,9 @@ def spearman(a, b, valid):
 def dot_overlap(ours, theirs, valid, r=3):
     o = (ours > 0) & valid
     t = (theirs > 0) & valid
-    if not o.any():
-        return dict(ours_within=float("nan"), theirs_within=float("nan"))
+    if not o.any() or not t.any():
+        return dict(ours_within=float("nan"), theirs_within=float("nan"),
+                    n_ours=int(o.sum()), n_theirs=int(t.sum()))
     t_dil = ndimage.binary_dilation(t, iterations=r)
     o_dil = ndimage.binary_dilation(o, iterations=r)
     return dict(
@@ -83,6 +85,9 @@ def dot_overlap(ours, theirs, valid, r=3):
 
 
 def main():
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "E3 pooled evaluator / submission writer"):
+        return 0
     import rasterio
 
     det, slope_band, cat, valid = load_inputs()
@@ -127,21 +132,20 @@ def main():
     terms_by_arm = {k: np.concatenate(v, axis=0) for k, v in terms_by_arm.items()}
     pooled = EH.pooled_summary(terms_by_arm, draws=2000, seed=SEED, candidate="lane7653")
 
-    # canary AUC of the field on held truth vs non-truth footprint cells
-    ys, xs = [], []
+    # Composite-field ROC-AUC on held truth vs non-truth footprint cells. This one diagnostic
+    # does not replace the required feature-by-feature leakage audit.
     truth_px = np.zeros_like(valid)
-    visible_px = np.zeros_like(valid)
     for f in folds:
         truth_px |= f["truth"] & f["region"]
-        visible_px |= f["visible"]
     tv = field[truth_px & valid]
     nv = field[valid & ~truth_px]
-    from scipy.stats import spearmanr
-    lab = np.r_[np.ones(tv.size), np.zeros(nv.size)]
+    from sklearn.metrics import roc_auc_score
+    lab = np.r_[np.ones(tv.size, dtype=np.uint8), np.zeros(nv.size, dtype=np.uint8)]
     val = np.r_[tv, nv]
-    auc = float(spearmanr(val, lab).statistic * 0.5 + 0.5)
+    auc = float(roc_auc_score(lab, val))
 
-    # uniqueness vs registry
+    # Pre-placement continuous score-surface correlation and post-placement dot overlap.
+    # The in-repo rasters are only the locally available comparison set, not proof of global coverage.
     registry = {}
     for p in sorted(REG.glob("*.tif")):
         try:
@@ -149,10 +153,9 @@ def main():
         except Exception as e:
             print("skip", p.name, e)
     uniq = {}
-    lane_f = lane.astype(np.float64)
     for name, g in registry.items():
         uniq[name] = dict(
-            spearman=spearman(lane_f, g, valid),
+            surface_spearman=spearman(field, g, valid),
             overlap=dot_overlap(lane, g, valid, r=3))
 
     # write the artifact through the fail-closed shared writer
@@ -178,8 +181,13 @@ def main():
     promoted = bool(lane_dti > best_dti)
     verdict = "PROMOTE" if promoted else "NEGATIVE (do not spend a slot; research-only)"
 
-    uniq_ok = all(u["spearman"] <= 0.90 and u["overlap"]["ours_within"] <= 0.70
-                  for u in uniq.values())
+    local_uniqueness_pass = bool(uniq) and all(
+        abs(u["surface_spearman"]) <= 0.90
+        and u["overlap"]["ours_within"] <= 0.70
+        for u in uniq.values())
+    # registry/rasters is a partial local cache; no audited inventory proves global coverage.
+    registry_coverage_audited = False
+    uniq_ok = local_uniqueness_pass and registry_coverage_audited
 
     card = dict(
         hypothesis="Withheld normal-fault segments carry localized channel-steepness "
@@ -196,9 +204,20 @@ def main():
         holdout_all_arms=pooled["scores"],
         paired_differences=pooled["paired_differences"],
         canary=dict(field_auc_vs_held_truth=auc,
-                    note="label-free features cannot leak labels; reported for protocol"),
+                    feature_by_feature_results_present=False,
+                    full_leakage_clearance=False,
+                    note="Composite-field canary only; this does not replace the required feature-by-feature leakage audit."),
         uniqueness=uniq,
         uniqueness_gate_pass=uniq_ok,
+        uniqueness_scope=dict(
+            compared_registry_rasters=len(uniq),
+            pre_placement_surface_check_documented=True,
+            final_dot_check_documented=True,
+            local_gate_pass=local_uniqueness_pass,
+            registry_coverage_audited=registry_coverage_audited,
+            full_registry_clearance=uniq_ok,
+            local_gate_status="PASS among listed rasters only" if local_uniqueness_pass else "FAIL among listed rasters",
+        ),
         validator=receipt["validator"],
         sha256=receipt["sha256"],
         submission_name=receipt["submission_name"],

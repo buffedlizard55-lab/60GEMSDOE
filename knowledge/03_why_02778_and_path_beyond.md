@@ -90,7 +90,7 @@ operating point (|G| ≈ 12.2–12.7k, S = 37.6k):
 |---|---|---|
 | 0.30 | recall ≈ 45 % | ~31k dots |
 | 0.38 (board top 2026-10-04: 0.3262/0.3222) | recall ≈ 55 % | ~25k dots |
-| 0.4133 (H65's 2026-10-11 board read, unverified in-repo — see §6) | recall ≈ 58–60 % | ~23k dots |
+| 0.4133 (board top, manual rendered-page read 2026-10-11 by session arena/970443fc: public row #1 xiaofanhu, 16 submissions — no file attribution) | recall ≈ 58–60 % | ~23k dots |
 
 So beating 0.2778 requires **new information about where unmapped faults are** (recall up)
 or a far sparser file with equally productive dots (mass down). Neither is achievable by
@@ -144,30 +144,35 @@ Five independent implementations of the brief's first test, all on the record:
 | chi-cast | 100 m GeoDAWN abs. elev | STOP twice (AUC 0.459 / 0.4795) | 0.00039 vs matched random 0.00042 | NEGATIVE |
 | GEMS61 thermal | 100 m + INGENIOUS thermal | — | 0.002495 [0.0015, 0.0035] (36,439); loses to mass-matched random | NEGATIVE |
 | **H65-1** | **10 m native 3DEP** | **+0.0326 [−0.0144, +0.0790] INCONCLUSIVE** (262) | 0.01158 [0.0084, 0.0146] vs random 0.03908 (22,641) | NEGATIVE (stop) |
-| **H66-1 (this session)** | 10 m, **brief-mandated confound masks applied to the statistic** + litho arm split | **+0.0404 [−0.0029, +0.0871] INCONCLUSIVE** (239; arms T +0.0030 n=174, L +0.0696 n=14, both INCONCLUSIVE) | **0.00960 [0.00654, 0.01307]** vs random 0.03908, paired −0.02948 [−0.0339, −0.0249] (gems57-pooled-hide-v2, 22,641) | **NEGATIVE (stop)** |
+| **H66-6 (this session)** | 10 m, **brief-mandated confound masks applied to the statistic** + litho arm split | **+0.0404 [−0.0029, +0.0871] INCONCLUSIVE** (239; arms T +0.0030 n=174, L +0.0696 n=14, both INCONCLUSIVE) | **0.00960 [0.00654, 0.01307]** vs random 0.03908, paired −0.02948 [−0.0339, −0.0249] (gems57-pooled-hide-v2, 22,641) | **NEGATIVE (stop)** |
+| H66-1/H66-2 (parallel, `arena/970443fc`) | 10 m chi/ksn, both-limb variant | **−0.0860 [−0.1372, −0.0220]** vs off-catalogue truth (86 segments) | INSTRUMENT-DTI 0.00913 vs random 0.07253 (paired −0.06339) | **NEGATIVE (stop)** |
+| H67-1 (`arena/7085de4f`, PR #17) | 10 m bedrock-subtracted Δksn step + 4-confound mask | **claims +0.4251 [+0.2253, +0.6273] PROCEED** (262) | **claims 0.065739 [0.055715, 0.076201]** (22,641) | **claims PASS/promote — contradicts the STOP file (IR-H66C-STOPCONFLICT-01), pending arbitration; not independently re-derived** |
 
 The lane's named confounds are measured to dominate: step-bearing 10 m channels are only
 1.19× (steps ≥ ln2) / 1.04× (knickpoints) enriched within 300 m of the catalogue
 (`evidence/h65_diagnostics.json`) and sit *lower* in local relief (median −16 m vs a
 20 km median) than the catalogue (+7 m) — the signature of lithologic contacts,
 channel-head transitions and playa base levels, not fault crossings.
-**H66-1 was the last mandated step of the lane method (mask the confounds, then test);
+**H66-6 was the last mandated step of the lane method (mask the confounds, then test);
 its result — masked first test still INCONCLUSIVE (+0.0404, CI straddles 0) and the pooled
 holdout (0.00960) still below the mass-matched random control (0.03908) — is recorded in
-`evidence/h66_runcard.json`. Masking the confounds moved the first-test mean only from
+`evidence/h66c_runcard.json`. Masking the confounds moved the first-test mean only from
 +0.0326 (H65-1) to +0.0404: the confounds did not create the (non-)signal, and the lane is
-closed (6/6 runs negative).**
+closed: every independently confirmed run is negative (8/8), and the sole positive claim — H67-1 of session `arena/7085de4f` — contradicts the STOP registration and is flagged for arbitration (IR-H66C-STOPCONFLICT-01), not accepted.**
 
 ## 7. Irregularities carried forward
 
 * **IR-66-E1MASK-01**: `run_lane60.py`'s first test never applied the confound masks to its
   statistic (they only entered candidate preparation). Fixed once in the shared tool
-  (backward-compatible flags); H66-1 is the first masked first test.
+  (backward-compatible flags); H66-6 is the first masked first test.
 * **IR-66-FEED-01**: the scheduled feed refresh runs succeed but the public leaderboard
   table no longer parses (client-side rendering); the feed's board rows froze at 2026-10-04
-  while the site kept printing them. The raw page is now kept as evidence for offline
-  parser repair; until then the board top is *last verified 2026-10-04: 0.3262 / 0.3222*,
-  and H65's same-day read of 0.4133 is **unverified in-repo**.
+  while the site kept printing them. Resolution (session arena/970443fc, merged as PRs
+  #15/#16): the feed now makes **no automated request to the competition host**; the board
+  top was re-read by manual rendered-page fetch and pinned as
+  `registry/leaderboard_snapshot_2026-10-11.json` (public rows only, no file attribution:
+  #1 xiaofanhu 0.4133, #2 JerryDataWorks 0.3418, #3 alexoktaba 0.3361), which corroborates
+  H65's same-day 0.4133 read.
 * **IR-66-CLIM-01**: the brief's climate-gradient confound (Sierra orographic rain shadow)
   could not be masked — no free official gridded precipitation product is reachable from
   the sandbox egress allowlist. The 40 km blockwise z-score de-trends part of it. Named

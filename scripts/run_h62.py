@@ -64,6 +64,9 @@ def decode_topo_u8(q: np.ndarray, lo: float, hi: float) -> np.ndarray:
 
 
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "H62 preregistered experiment runner"):
+        return 0
     t0 = time.time()
     EVID.mkdir(exist_ok=True)
     OUTDIR.mkdir(exist_ok=True)

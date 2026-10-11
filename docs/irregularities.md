@@ -1,6 +1,14 @@
 # Irregularity and limitation register
 
-Last reviewed: **2026-10-03**. “Fixed” means the repository now mitigates the tooling defect; it does not authenticate competition data or establish score gains.
+Historical IR-30 register last reviewed: **2026-10-03**. “Fixed” means the repository now mitigates the tooling defect; it does not authenticate competition data or establish score gains. Current 60GEMSDOE review state is recorded in [`registry/current_site_status.json`](../registry/current_site_status.json) and the dated [active-lane report](research/active-lane-review-2026-10-11.md).
+
+## Current addendum — 2026-10-11
+
+- **c7653 stop:** preregistered E1 returned NEGATIVE-STOP; no further experiment, new TIFF, or slot is authorized in this lane.
+- **H33 attribution:** 0.2778 is owner-reported / unverified; an archived report calls a same-named file 0.2708. No receipt reconciles the scores or ties either to bytes. Public rank 23 (extradr19, 0.2778) and rank 36 (smrtdoog5, 0.2708) are not project-file attributions (`IR-60-H33-SCORE-20261011`).
+- **Uniqueness / leakage scope:** c7653 has six final binary-dot-mask comparisons only; no pre-placement score-surface Spearman audit or full-registry coverage is documented (`IR-60-UNIQUENESS-SURFACE-20261011`). The run card's legacy 0.50145 “AUC” was actually `(Spearman rho + 1) / 2`, not ROC AUC; feature-by-feature leakage clearance is absent (`IR-60-CANARY-LABEL-20261011`).
+- **Automated leaderboard fetch (fixed):** a scheduled feed script previously fetched the competition page despite the manual-only policy. The fetch/parser was removed from `scripts/refresh_feed.py`; the daily feed now probes only non-competition sources and preserves the last manual board snapshot. See `IR-60-LB-AUTO-20261011` in [`registry/irregularities.json`](../registry/irregularities.json).
+- **Board freshness:** the 50-row official page snapshot is manual and dated 2026-10-11; it can become stale. No automated DrivenData polling is performed.
 
 | ID | Severity | Status | Observation / evidence | Action or consequence |
 | --- | --- | --- | --- | --- |

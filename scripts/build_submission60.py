@@ -36,7 +36,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from gems57 import grid as G57                     # noqa: E402
 from gems57 import gates, submission_writer, uniqueness as U   # noqa: E402
 from gems60 import lane as L                       # noqa: E402
-from run_lane60 import confound_masks, load, litho_step_mask        # noqa: E402
+from run_lane60 import confound_masks, load, load_step, litho_step_mask  # noqa: E402
 
 CACHE = ROOT / ".cache" / os.environ.get("GEMS60_FEATURE_CACHE", "features60")
 # Substrate-agnostic driver (shared-tool change 2026-10-11, session arena/96ecd67e, H65-1):
@@ -46,6 +46,7 @@ CACHE = ROOT / ".cache" / os.environ.get("GEMS60_FEATURE_CACHE", "features60")
 TAG = os.environ.get("GEMS60_TAG", "h60a")
 REGISTRY_CACHE = ROOT / ".cache" / "registry"
 EVID = ROOT / "evidence"
+from run_lane60 import STEP_STATISTIC  # noqa: E402  (selected once, in the shared helper)
 OUT_DIR = ROOT / "downloads"
 SCREEN_CELLS = 400_000
 EXACT_RHO_TRIGGER = 0.70
@@ -98,6 +99,9 @@ def spearman_screen(a: np.ndarray, b: np.ndarray, idx: np.ndarray) -> float:
 
 
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "channel-lane submission builder (H60A/H65)"):
+        return 0
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--budget", type=int, default=40_000)
     ap.add_argument("--max-candidates", type=int, default=120_000)
@@ -105,13 +109,13 @@ def main() -> int:
     ap.add_argument("--hypothesis", default="H60-A")
     ap.add_argument("--note", default=None, help="<=140-char portal note (default: the H60-A note)")
     ap.add_argument("--substrate", default="det_elev band 12, 100 m")
-    # H66-1 (2026-10-11, session arena/b219bfe1): lane-brief confound masks on the
+    # H66-6 (2026-10-11, session arena/b219bfe1): lane-brief confound masks on the
     # production surface. Defaults reproduce H60-A/H65 byte-for-byte.
     ap.add_argument("--include-ephemeral", action="store_true",
                     help="add the ephemeral-channel mask (10 m drainage area < 1 km2) "
                          "to the confound exclusion")
     ap.add_argument("--litho-arm", choices=("none", "T", "L"), default="none",
-                    help="H66-1 preregistered arm: T = candidates on a CONTINUOUS "
+                    help="H66-6 preregistered arm: T = candidates on a CONTINUOUS "
                          "basement surface, L = candidates ON a depth_to_base_surf "
                          "step (the named lithologic mimic)")
     ap.add_argument("--skip-uniqueness", action="store_true",
@@ -131,7 +135,7 @@ def main() -> int:
 
     grid = G57.load_grid()
     fp, cat = grid.footprint, grid.catalogue
-    step = load("step").astype(np.float32).astype(np.float64)
+    step = load_step()
     channel = load("channel")
     from gems60 import geomorph as gm
     if (CACHE / "branch_sig.npy").is_file():
@@ -142,26 +146,35 @@ def main() -> int:
     mark(("independence=substrate branch_sig " if (CACHE / "branch_sig.npy").is_file() else
           f"independence=branch_signature(k={L.CORRIDOR_HALF_LEN_PX - 1}) ") +
          f"distinct={int(np.unique(branch[channel]).size)}")
-    acc = load("acc").astype(np.float64)
-    exclude, conf = confound_masks(step, channel,
-                                   acc=acc if a.include_ephemeral else None)
+    # H66-6: load the drainage-area band only when the ephemeral mask is requested
+    # (the 100 m caches predate the band); the H67 precomputed ephemeral_wash /
+    # litho_core arrays apply automatically inside confound_masks when present
+    acc = load("acc").astype(np.float64) if a.include_ephemeral else None
+    exclude, conf = confound_masks(step, channel, acc=acc)
     if a.litho_arm != "none":
-        # H66-1 preregistered arm split (same litho_step rule as run_lane60.py)
+        # H66-6 preregistered arm split (same litho_step rule as run_lane60.py)
         litho, litho_thr = litho_step_mask(load("footprint"))
         channel = channel & (litho if a.litho_arm == "L" else ~litho)
         conf["litho_arm"] = a.litho_arm
         conf["litho_step_thr_m"] = litho_thr
         mark(f"litho arm {a.litho_arm}: channel px {int(channel.sum())} (thr {litho_thr:.1f} m)")
-    z, cand, cand_diag = L.prepare_candidates(step, channel, exclude)
+    from run_lane60 import load_meta
+    meta_cfg = load_meta()
+    z_min = float(meta_cfg.get("z_min", L.Z_MIN))
+    min_sep_px = float(meta_cfg.get("min_sep_px", 0.0))
+    inc_pos_ch = bool(meta_cfg.get("include_positive_channels", False))
+    z, cand, cand_diag = L.prepare_candidates(step, channel, exclude, z_min=z_min)
+    cand_diag.update(min_sep_px=min_sep_px, include_positive_channels=inc_pos_ch)
     mark(f"candidates={cand_diag}")
 
     res = L.surface_from_candidates(z, cand, branch, cat, dict(cand_diag),
-                                    max_candidates=a.max_candidates)
+                                    max_candidates=a.max_candidates,
+                                    include_positive_channels=inc_pos_ch)
     del z, cand
     mark(f"surface {res.diagnostics}")
 
     allowed = L.allowed_production(fp, cat, L.CATALOGUE_BUFFER_PX)
-    dots = L.top_k_dots(res.p, allowed, a.budget)
+    dots = L.top_k_dots(res.p, allowed, a.budget, min_sep_px=min_sep_px)
     n_dots = int(dots.sum())
     mark(f"dots={n_dots} allowed={int(allowed.sum())} on_catalogue={int((dots & cat).sum())}")
     if n_dots == 0:
@@ -211,8 +224,10 @@ def main() -> int:
             path, pred, ROOT / "data/official/sample_submission.tif", fp,
             note=note, name=name, catalogue=cat,
             metadata=dict(lane="tectonic-geomorphology", hypothesis=a.hypothesis,
-                          substrate=a.substrate,
-                          parameters=dict(budget=a.budget, z_min=L.Z_MIN,
+                          substrate=a.substrate, step_statistic=STEP_STATISTIC,
+                          parameters=dict(budget=a.budget, z_min=z_min,
+                                          min_sep_px=min_sep_px,
+                                          include_positive_channels=inc_pos_ch,
                                           n_drainage_min=L.N_DRAINAGE_MIN,
                                           corridor_half_len_px=L.CORRIDOR_HALF_LEN_PX,
                                           corridor_half_width_px=L.CORRIDOR_HALF_WIDTH_PX,

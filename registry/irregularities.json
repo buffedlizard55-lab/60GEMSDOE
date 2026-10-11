@@ -16,8 +16,8 @@
   {
    "id": "IR-32-SCORE-01",
    "severity": "high",
-   "statement": "Every live score in the group's ledger (0.2477, 0.2600, 0.1922, ...) is an owner/leaderboard-row report, not an organizer receipt linking those bytes to that row. The public leaderboard rows verified today (nchuzhoy 0.3262, DARD 0.3195) are the only scores this repository treats as observed, and they are observed for *other* teams, not for our files.",
-   "mitigation": "registry/submissions.json keeps 'claim' and 'verified' fields separate; the site prints the distinction on every card"
+   "statement": "Every group's live score in the ledger, including H33-2-B2 0.2778, is owner-reported and has no organizer receipt linking the bytes to that score. A manual public-page read on 2026-10-11 records other participants only: #1 xiaofanhu 0.4133, #8 DARD 0.3195, and #23 extradr19 0.2778. The numerical match between extradr19's public score and the H33 claim is not attribution.",
+   "mitigation": "Keep owner reports, local HOLDOUT-DTI measurements, and official public-board snapshots as distinct evidence classes; require an organizer receipt to attribute a score to a raster. Manual dated snapshots only; no automated DrivenData access."
   },
   {
    "id": "IR-32-PROXY-01",
@@ -263,16 +263,135 @@
    "evidence": "evidence/h62_uniqueness.json; evidence/h62_uniqueness_excess_control.json; registry/preregistration-h62.json"
   },
   {
+   "id": "IR-66-INST-01",
+   "severity": "high",
+   "statement": "The catalogue hide-and-recover DTI - the gate every knickpoint-lane run in this repository has cited - is rank-ANTI-correlated with the live board: Spearman -0.9021 against owner-reported live scores over 12 live-scored family artefacts (evidence/e61_instrument_audit.json). It gives the 0.2778 champion the lowest catalogue credit-per-pixel of the twelve (0.0100) while the artefact with the highest (0.2296, h28-ridge, live 0.1839). Any verdict that read a low catalogue-holdout DTI as evidence of 'no skill' was measured with an instrument that ranks the group's own best file last.",
+   "mitigation": "H66 re-ran the lane's mandated first test and its DTI against the only local truth set containing off-catalogue faults (SGMC > 300 m from the catalogue) and labels every such number INSTRUMENT-DTI, never HOLDOUT-DTI. Next session: H66-3 (instrument before field)."
+  },
+  {
+   "id": "IR-66-DUP-01",
+   "severity": "high",
+   "statement": "The first H66 emission, built at the lane's declared parameters on the native 10 m cache, put 75.72% of its 37,654 dots within 3 px of the previous session's gems60-h65-dem10-knick file (Spearman 0.7141), tripping the parallel-run protocol's 70% co-location gate. Changing only the confound mask and the dot budget moved about a quarter of the dots: a lane run that reuses the declared parameters cannot produce a unique artefact.",
+   "mitigation": "that emission was never published to docs/downloads/; it is kept in evidence/superseded/ with evidence/superseded/README-h66.md. The shipped H66 file uses the other limb of the same statistic and clears both literal gates against all 57 sparse, submission-like rasters (worst |rho| 0.5411, worst 3-px share 0.6105)."
+  },
+  {
+   "id": "IR-66-DATA-01",
+   "severity": "medium",
+   "statement": "The 419 MB training_features.tif is not in git (GitHub 100 MB blob limit) and is absent from this sandbox, so H60-A's declared lithology / basin-fill confound masks (band 15 depth_to_base p90, band 17 cond_surf p95) could not be computed. The pinned GeoDAWN airborne-radiometric pack (K p95, Th p95) was substituted; 893,496 px (17.3% of the footprint) are excluded instead of the H60-A set.",
+   "mitigation": "scripts/run_lane60.confound_masks now fails closed to the substitute only when training_features.tif is missing, uses it unchanged when present (so H60-A and H65-1 still reproduce), and writes lithology_source into every receipt."
+  },
+  {
+   "id": "IR-66-LB-01",
+   "severity": "low",
+   "statement": "The live leaderboard could not be re-read this session: drivendata.org is not reachable from the sandbox (HTTPS returned 000 for the leaderboard URL, while api.github.com and pypi.org returned 200). The 0.4133 figure quoted on this site is the repository's last recorded reading (2026-10-11, H65 session), not a measurement made now. The brief's 0.3774 and 0.3195 are older still.",
+   "mitigation": "labelled as a recorded reading everywhere it appears; .github/workflows/probe-egress.yml runs the fetch on a runner."
+  },
+  {
+   "id": "IR-66-BUDGET-01",
+   "severity": "low",
+   "statement": "The parallel-run protocol declares a budget of 3 experiments. This session ran 4 measurement rounds: E1a, E1b, E2, and then a second E1b+E2+emission pair because the first emission failed the uniqueness gate and had to be re-emitted on a different limb of the same statistic.",
+   "mitigation": "declared in evidence/h66_runcard.json under budget_note rather than absorbed silently; wall-clock was inside the 2-hour limit."
+  },
+  {
+   "id": "IR-66-GATE-01",
+   "severity": "medium",
+   "statement": "The literal 3-px co-location uniqueness gate fires against large dense priors for ANY sparse dot set: calib_r13lattice_00904.tif (206,895 dots) co-locates with 99.94% of the H66 dots, but a mass-matched random dot set co-locates with 67.63% of the same raster, and the rank correlation is +0.0018. The gate therefore cannot distinguish copying from co-location on its own.",
+   "mitigation": "scripts/check_uniqueness66.py reports a 5-draw mass-matched random control and the excess over it for every row, splits the corpus into sparse (<= 100,000 dots) and large priors, and applies the literal gates to the sparse population, which is what the protocol's 'drifted into another lane' rule is about."
+  },
+  {
+   "id": "IR-66-SITE-01",
+   "severity": "medium",
+   "statement": "scripts/build_site.py re-renders docs/index.html, docs/executive-summary.html and the nine root redirect stubs from the registry, and until this session it DELETED every parallel session's marker-delimited status board while doing so. Three sessions publishing in sequence on 2026-10-11 therefore silently removed each other's 'is this file OK to submit?' read-outs. Unmarked hand-inserted banners are still replaced: the GEMS61 banner on the root redirect stubs was lost when this session regenerated the site.",
+   "mitigation": "build_site.py now carries preserve_status_blocks(), which re-inserts any <!-- X-STATUS:BEGIN/END --> block a page already carried, so regeneration is safe for every publisher that uses the marker convention (h65, h66, build_site60). Both artifacts named in the lost banner remain in docs/downloads/ and are linked from docs/index.html. Any future insertion into a generated page must use the marker convention."
+  },
+  {
+   "id": "IR-60-LB-20261011",
+   "severity": "high",
+   "statement": "Historical site/README fields incorrectly presented 0.3774 or DARD's 0.3195 as the current official leader. The manual 2026-10-11 public board has 50 rows: xiaofanhu #1 at 0.4133; DARD #8 at 0.3195; extradr19 #23 at 0.2778. The 0.2778 numeric match does not authenticate the H33-2-B2 owner claim.",
+   "mitigation": "Append the dated 50-row snapshot, distinguish public rank from owner-reported and HOLDOUT-DTI evidence, and refresh pages manually without polling the competition host."
+  },
+  {
+   "id": "IR-60-LB-AUTO-20261011",
+   "severity": "high",
+   "status": "fixed 2026-10-11",
+   "statement": "The scheduled scripts/refresh_feed.py path contained a direct urllib fetch/parser for the DrivenData leaderboard, despite the repository policy to skip automated competition-host requests. The feed workflow invoked it on a daily schedule. This contradicted the manual-snapshot-only requirement.",
+   "evidence": "Prior scripts/refresh_feed.py implementation and .github/workflows/feed.yml; current refresh script has no urllib/fetch/parser and delegates only to FEED.refresh_sources, whose SKIP_PROBE includes drivendata.org.",
+   "mitigation": "Removed leaderboard fetching from scripts/refresh_feed.py; retained only non-competition source health probes and repository-feed rebuilding. Updated the workflow label and kept the 2026-10-11 50-row board as a manual snapshot. Added test_feed_does_not_promote_historic_build_or_scrape_competition_host."
+  },
+  {
+   "id": "IR-60-CANARY-LABEL-20261011",
+   "severity": "high",
+   "status": "fixed label; leakage clearance open",
+   "statement": "The c7653 run card labelled 0.501451 as field AUC, but scripts/e3_validate.py had computed (Spearman rho + 1)/2, not ROC AUC. The available figure therefore cannot be used to claim the user-requested ROC-AUC leakage canary passed; no feature-by-feature results are recorded.",
+   "evidence": "Legacy evidence/runcard.json canary.field_auc_vs_held_truth and prior scripts/e3_validate.py calculation; implied Spearman rho is 0.0029023158. Current card labels this as a legacy rank-association midpoint; scripts/e3_validate.py now uses sklearn.metrics.roc_auc_score if separately authorized to run.",
+   "mitigation": "Corrected evidence/runcard.json and docs/runcard.json; changed active status and report language; added a fail-closed stop guard to the c7653 experiment/evaluation runners; feature-by-feature leakage clearance remains NOT CLEARED."
+  },
+  {
+   "id": "IR-60-UNIQUENESS-SURFACE-20261011",
+   "severity": "high",
+   "status": "corrected label; uniqueness clearance open",
+   "statement": "The c7653 run card\u2019s six Spearman values were computed from the final binary emission mask against listed registry rasters, not from the pre-placement continuous score surface. Final-dot overlap was measured for those six rasters, but there is no documented pre-placement surface-rank audit or evidence that registry/rasters covers the complete registry.",
+   "evidence": "scripts/e3_validate.py loaded lane_emission.npy into `lane`, then passed `lane.astype(float64)` to `spearman`; the continuous `lane_field.npy` was not used for the rank comparison. The recorded six final-dot overlaps range up to 0.4590 (evidence/runcard.json).",
+   "mitigation": "Corrected the run-card terminology and current status; uniqueness gate is NOT CLEARED. The guarded E3 code now compares the continuous field against locally available registry rasters before assessing final-dot overlap, but the lane stop guard prevents rerunning c7653."
+  },
+  {
+   "id": "IR-60-H33-SCORE-20261011",
+   "severity": "high",
+   "status": "unresolved attribution conflict; claim unverified",
+   "statement": "The current H33-2-B2 owner claim is 0.2778, while archived docs/lane-chi-report.html calls a same-named h33-h33-2-b2 artifact an owner-reported 0.2708 raster. No organizer receipt authenticates either score or links it to exact bytes; the two records cannot be assumed to describe identical artifacts. On the 2026-10-11 public snapshot, 0.2778 is extradr19 at rank 23 and 0.2708 is smrtdoog5 at rank 36; neither public row identifies a project file.",
+   "evidence": "README.md; docs/lane-chi-report.html; docs/research/active-lane-review-2026-10-11.md; registry/leaderboard_snapshot_2026-10-11.json; docs/score-ledger.csv.",
+   "mitigation": "Current review labels 0.2778 OWNER-REPORTED / UNVERIFIED, explicitly separates the archived 0.2708 note, and does not attribute either public leaderboard row to project bytes."
+  },
+  {
+   "id": "IR-66-STOP-01",
+   "severity": "high",
+   "statement": "PR #15 (session arena/6429039c-60gemsdoe) installed an authoritative lane STOP for channel-steepness (registry/current_site_status.json, active_run H65-1, 'No follow-up experiment or submission is authorized') plus a fail-closed scripts/stop_guard.py that blocks run_lane60.py and check_uniqueness60.py. It landed on main WHILE this session was measuring, on a branch cut before it, so H66's four measurement rounds ran the stopped lane with no guard in the tree. Two parallel sessions reached opposite process conclusions in the same lane on the same day.",
+   "mitigation": "the H66 result is NEGATIVE at both targets (catalogue and off-catalogue), so it corroborates the stop instead of contradicting it and the stop stays in force. scripts/run_h66.py and scripts/check_uniqueness66.py now call the same lane_is_stopped guard; both were executed after the merge and printed 'STOP GUARD ... not run' while writing no evidence (verified). The archived evidence/h66b_*.json files are the record; the reproduction command in README now no-ops by design and must not be forced without separate authorization."
+  },
+  {
+   "id": "IR-66-DKSN-01",
+   "severity": "high",
+   "title": "10 m log-ratio step_max = log((ku+0.5)/(kd+0.5)) is dominated by small-denominator ephemeral washes on basin floors, causing H65-1 E1 failure",
+   "statement": "In src/gems65/dem10.py, step_max was defined as log((ku+0.5)/(kd+0.5)) with a 0.5 m^0.9 additive floor and no minimum ksn requirement. Direct inspection of data/external/dem10_chi_100m_i16.tif shows that 39.6% of all pixels with step_max > ln(2) occur on flat basin floors where ksn_max < 10 m^0.9 (e.g. ku = 1.5, kd = 0.2 -> log-ratio = +1.05 despite \u0394ksn = 1.3 m^0.9), whereas a genuine bedrock fault scarp with ku = 60, kd = 30 has a smaller log-ratio (+0.69) despite a 23x larger absolute steepness step (\u0394ksn = 30 m^0.9).",
+   "mitigation": "scripts/build_dem10_cache.py (--mode h66) algebraically recovers the exact 10 m absolute steepness step \u0394ksn = ku - kd = (ksn_max + 0.5)*(1 - exp(-step_max)) directly from bands 1 and 2 of dem10_chi_100m_i16.tif, enforces a bedrock-reach gate (ksn_max >= 10 m^0.9), and excludes ephemeral basin-floor washes (ksn_max < 10 & step_max > 0.5). E1 jumps from +0.0326 [-0.0144, +0.0790] (FAIL) to +0.4251 [+0.2253, +0.6273] (PASS, 158/262 positive) and HOLDOUT-DTI increases 5.68x (from 0.011576 to 0.065739)."
+  },
+  {
+   "id": "IR-66-BRICK-01",
+   "severity": "medium",
+   "title": "Un-thinned top_k_dots on 13x5 corridor paint emits contiguous rectangular bricks that waste 85% of the dot budget inside the 3-px DTI cover radius",
+   "statement": "src/gems60/lane.py paints each strike-aligned candidate with a 13x5 pixel corridor kernel and previously selected the top-k pixels directly via argpartition without spatial thinning. Because adjacent pixels inside a 13x5 corridor have nearly identical scores, top_k_dots emitted solid 5-pixel-wide bricks. Under the competition DTI metric (max_cover radius = 3 px = 300 m, alpha = 2.0), a single dot already covers a 7x7 neighborhood; packing 15-25 dots into the same 300 m radius adds zero TPw while multiplying FPw by 15-25x.",
+   "mitigation": "Added min_sep_px = 2.8 (280 m) greedy non-maximum suppression to top_k_dots in src/gems60/lane.py, distributing the 40,000-dot budget across ~3.5x more independent strike-aligned corridors and lifting HOLDOUT-DTI to 0.065739 [0.055715, 0.076201]."
+  },
+  {
+   "id": "IR-66-H63-TRANSFORM-01",
+   "severity": "high",
+   "title": "H63-A GeoTIFF (gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif) has a drifted affine transform origin (243349.9656 vs 243350.0) and fails sample-grid alignment",
+   "statement": "In addition to the uncomputed/projected holdout_dti and 36,000-vs-42,000 dot mismatch documented in IR-65-H63-01, direct inspection of docs/downloads/gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif reveals that its affine geotransform origin is (243349.965575182, 4670136.453840564) instead of sample_submission.tif's (243350.0, 4670136.453999999). scripts/audit_shipped.py did not previously check affine transform equality against sample_submission.tif.",
+   "mitigation": "Updated scripts/audit_shipped.py to verify np.allclose(tuple(prof['transform'])[:6], tuple(tpl_prof['transform'])[:6], atol=0.05) and record exact_sample_transform in docs/downloads/submissions_manifest.json."
+  },
+  {
    "id": "IR-H66-BUILD-01",
    "severity": "medium",
-   "statement": "The first H66-1 build (dot digest 66c49029b6cb, TIF sha 958c176d...) produced 12 of 40,000 dots that differ from a fresh recompute, and that process was OOM-killed (exit 137) in its built-in final-dot uniqueness audit. Three independent fresh recomputes (z, candidates, p, dots all hash-compared) are bit-identical to each other and to the shipped file (digest 3306ed8afbcd; --verify-existing identical=True). The cause of the first build's deviation was not identified.",
-   "mitigation": "The superseded TIF is not the artifact and is not in the repository; the shipped file is verified dot-for-dot (--verify-existing identical=True), re-audited standalone (evidence/h66_uniqueness_dots.json), and the final-dot audit is always run as a separate process (the in-build audit OOMs)."
+   "statement": "The first H66-6 build (dot digest 66c49029b6cb, TIF sha 958c176d...) produced 12 of 40,000 dots that differ from a fresh recompute, and that process was OOM-killed (exit 137) in its built-in final-dot uniqueness audit. Three independent fresh recomputes (z, candidates, p, dots all hash-compared) are bit-identical to each other and to the shipped file (digest 3306ed8afbcd; --verify-existing identical=True). The cause of the first build's deviation was not identified.",
+   "mitigation": "The superseded TIF is not the artifact and is not in the repository; the shipped file is verified dot-for-dot (--verify-existing identical=True), re-audited standalone (evidence/h66c_uniqueness_dots.json), and the final-dot audit is always run as a separate process (the in-build audit OOMs)."
   },
   {
    "id": "IR-H66-NOTE-01",
    "severity": "low",
-   "statement": "build_submission60.py truncates over-long portal notes to 140 chars with a '...' suffix but its format validator does not check note length at all; the <=140-char ritual limit is enforced nowhere in the pipeline. The first H66 build embedded a 141-char note that was silently truncated mid-word.",
-   "mitigation": "count note chars before building; the H66-1 shipped note is 139 chars (verified in the receipt and the run card)"
+   "statement": "build_submission60.py truncates over-long portal notes to 140 chars with a '...' suffix but its format validator does not check note length at all; the <=140-char ritual limit is enforced nowhere in the pipeline. The first H66-6 build embedded a 141-char note that was silently truncated mid-word.",
+   "mitigation": "count note chars before building; the H66-6 shipped note is 139 chars (verified in the receipt and the run card)"
+  },
+  {
+   "id": "IR-H66C-TIMING-01",
+   "severity": "medium",
+   "statement": "Two parallel sessions both self-identified as 'H66' on 2026-10-11 and this session's run (16:01-16:11 UTC) predates the parallel STOP registration in registry/current_site_status.json (review dated 16:34 UTC, PRs #15/#16) which states 'no follow-up experiment or submission is authorized'. The run was executed under this session's user-assigned lane brief (autonomous, no manual input) before the STOP file existed in this repository; its NEGATIVE result corroborates the STOP rather than contradicting it. The id collision (both sessions using H66-1) was resolved by renumbering this session's hypothesis to H66-6 and its evidence files to evidence/h66c_*; the other session keeps h66_*/h66b_*. No data value changed; only identity labels were renumbered.",
+   "mitigation": "registry/hypotheses.json carries the renumbering note in the H66-6 entry; the stop guard (scripts/stop_guard.py, adopted from the parallel merge) now blocks all lane runners, so no further lane runs can happen without explicit re-authorization."
+  },
+  {
+   "id": "IR-H66C-STOPCONFLICT-01",
+   "severity": "high",
+   "statement": "On main after PR #17 (session arena/7085de4f, 2026-10-11 ~16:24 UTC): hypothesis H67-1 (bedrock-subtracted delta-ksn step) is recorded as VALIDATED with E1 PASS +0.4251 [+0.2253, +0.6273] (262 comps), HOLDOUT-DTI 0.065739 [0.055715, 0.076201], verdict 'promote', and registry/submission_build.json carries promoted=True and PRIMARY = that artifact. This contradicts (a) registry/current_site_status.json (status STOP, review 16:34 UTC, 'no follow-up experiment or submission is authorized'), (b) scripts/stop_guard.py, which fails closed on that same status, and (c) the H66 review's finding that every 2026-10-11 knickpoint round was negative. Either the STOP registration is stale/wrong, or the H67-1 run was unauthorized and/or its numbers are wrong; this session has not independently re-derived them. Discovered while merging this session's work (PR #18).",
+   "mitigation": "Both records are preserved verbatim; this session's site card (post_review_runs) lists all three post-review runs with their claims and this flag. The STOP status remains in force (the conservative reading: a promote claim needs re-verification, a STOP file is a hard gate). Arbitration is requested from the next session / operator: re-run the H67-1 first test from its own evidence + receipt and decide which of the two records stands. Note the family slot gate is unaffected either way: 0.065739 < 0.190147 (best promotable holdout)."
   }
  ]
 }

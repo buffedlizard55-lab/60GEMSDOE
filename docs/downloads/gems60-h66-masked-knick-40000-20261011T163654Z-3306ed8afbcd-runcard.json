@@ -1,10 +1,10 @@
 {
- "run": "H66-1",
+ "run": "H66-6", "renumbered_from": "H66-1 (session arena/970443fc claimed the id first; IR-H66C-TIMING-01)",
  "registry_hypothesis": "H62-5 (true-10 m chi/ksn concordance), H66-1 masked variant",
  "lane": "tectonic geomorphology: chi / ksn / knickpoints",
  "generated_utc": "2026-10-11T16:44:00Z",
  "preregistration": {
-  "file": "evidence/h66_e1_first_test.json (stop rule) + run_lane60.py H66-1 arms (same session, preregistered before the first test ran)",
+  "file": "evidence/h66c_e1_first_test.json (stop rule) + run_lane60.py H66-1 arms (same session, preregistered before the first test ran)",
   "preregistered_utc": "2026-10-11T15:58:00Z"
  },
  "hypothesis": "If the H65-1 knickpoint signal was inflated by the brief's named confounds (playa/pluvial shoreline, basin fill, conductive ground-water discharge, ephemeral low-area channels), then applying those confound masks to the statistic itself should change the first-test verdict; the masked statistic's withheld-crossing contrast still carries no fault signal (E1 stays INCONCLUSIVE) and the pooled holdout DTI stays far below the mass-matched random control.",
@@ -65,7 +65,7 @@
    }
   },
   "rule": "brief: 'if not, stop' -> INCONCLUSIVE fails the preregistered PROCEED gate -> STOP; the full masked lane is emitted as the research artifact (emission rule)",
-  "file": "evidence/h66_e1_first_test.json"
+  "file": "evidence/h66c_e1_first_test.json"
  },
  "holdout_dti": {
   "evidence_class": "HOLDOUT-DTI",
@@ -133,7 +133,7 @@
   },
   "slot_gate": "lane 0.00960 << family best promotable 0.190147 (distance_only); SUBMIT: NO",
   "not_a_leaderboard_score": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval.",
-  "file": "evidence/h66_holdout.json"
+  "file": "evidence/h66c_holdout.json"
  },
  "leakage_canary": {
   "rule": "max(AUC,1-AUC) > 0.90 is leakage until proven otherwise",
@@ -189,11 +189,11 @@
    "rho": 0.9,
    "overlap": 0.7
   },
-  "surface_file": "evidence/h66_uniqueness_surface.json",
-  "final_dots_file": "evidence/h66_uniqueness_dots.json",
+  "surface_file": "evidence/h66c_uniqueness_surface.json",
+  "final_dots_file": "evidence/h66c_uniqueness_dots.json",
   "scope_note": "651/655 registry rasters fetched; the 4 missing are the known 55GEMSDOE blobs (IR-60-CORPUS-01). Both the lane surface and the final 40,000 dots were checked, per the lane rule.",
   "overlap_gate_reading": "the literal 3-px overlap clause fires on 58 rasters, all dense (>= 192,231 dots; worst case 5,167,373 = near-full-footprint rasters); 58/58 of them also fire for 5 uniform-random 40,000-dot sets (max excess over random +0.0012, median 0.0), so the firing measures the prior's support density, not copying (IR-60-GATE-01). Post-hoc diagnostic: the tool verdict stays unique=false.",
-  "overlap_control_file": "evidence/h66_overlap_control_dots.json"
+  "overlap_control_file": "evidence/h66c_overlap_control_dots.json"
  },
  "reproducibility": {
   "check": "scripts/build_submission60.py --verify-existing (recompute the masked lane from the sha-pinned cache)",

@@ -87,6 +87,9 @@ def fetch_tile(name: str, dest: Path) -> dict:
 
 
 def main() -> int:
+    from stop_guard import lane_is_stopped
+    if lane_is_stopped(ROOT, "H65 10 m DEM/channel feature block builder"):
+        return 0
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--by", type=int, required=True)
     ap.add_argument("--bx", type=int, required=True)

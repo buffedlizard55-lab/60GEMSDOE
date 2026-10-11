@@ -1,12 +1,7 @@
-# H65-1 (executes H62-5): the tectonic-geomorphology lane at native USGS 3DEP 10 m.
-#
-# The development sandbox cannot reach prd-tnm.s3.amazonaws.com (IR-60-DATA-01); a GitHub-hosted
-# runner can (evidence/probe-egress-receipt.json, run 38103732408: HTTP 200 + tile sha256 pin).
-# This workflow tiles the 3730 x 3292 competition grid into 6 x 6 blocks, runs the 10 m channel
-# network for each block with an 8 km halo, reduces it to the 100 m grid, merges, and COMMITS the
-# three compact rasters + a provenance manifest back to the branch that triggered it.  The commit
-# in git is the observation channel (Actions artifacts are served from a host outside the
-# sandbox allow-list).
+# Historical H65-1 3DEP feature-preparation workflow. H65-1 stopped at its preregistered first test.
+# Automatic push triggering is disabled, and every job fails closed on the recorded STOP before
+# installing dependencies, downloading elevation tiles, building blocks, or committing data. Do not
+# change or bypass the guard to rerun the knickpoint lane at another resolution.
 #
 # Official source (public domain): USGS 3DEP 1/3 arc-second DEM, current 1x1 degree tiles
 #   https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/nYYwXXX/USGS_13_nYYwXXX.tif
@@ -15,9 +10,6 @@ name: dem10-chi
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - '.github/workflows/dem10-chi.yml'
 
 permissions:
   contents: write
@@ -40,10 +32,31 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          sparse-checkout-cone-mode: false
           sparse-checkout: |
             src
             scripts
             data/official
+            registry/current_site_status.json
+            evidence/e1_lane_test.json
+            evidence/h65_e1_first_test.json
+      - name: fail closed on the recorded lane STOP
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          from pathlib import Path
+          root = Path('.')
+          status = json.loads((root / 'registry/current_site_status.json').read_text())
+          if status.get('status') != 'ACTIVE' or status.get('recommended_competition_submission') is None:
+              print('STOP GUARD: H65-1 is stopped; no DEM10 lane preparation is authorized.')
+              sys.exit(1)
+          for name in ('evidence/e1_lane_test.json', 'evidence/h65_e1_first_test.json'):
+              data = json.loads((root / name).read_text())
+              verdict = data.get('summary', {}).get('verdict', data.get('verdict'))
+              if str(verdict).upper() in {'NEGATIVE-STOP', 'NEGATIVE', 'INCONCLUSIVE', 'STOP', 'FAIL'}:
+                  print(f'STOP GUARD: {name} has verdict {verdict}; do not rerun this lane.')
+                  sys.exit(1)
+          PY
       - name: runner facts
         run: python3 -V; nproc; free -m | head -2; df -h / | tail -1
       - name: install
@@ -68,11 +81,32 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          sparse-checkout-cone-mode: false
           sparse-checkout: |
             src
             scripts
             data/official
             data/external
+            registry/current_site_status.json
+            evidence/e1_lane_test.json
+            evidence/h65_e1_first_test.json
+      - name: fail closed on the recorded lane STOP
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          from pathlib import Path
+          root = Path('.')
+          status = json.loads((root / 'registry/current_site_status.json').read_text())
+          if status.get('status') != 'ACTIVE' or status.get('recommended_competition_submission') is None:
+              print('STOP GUARD: H65-1 is stopped; no DEM10 lane preparation is authorized.')
+              sys.exit(1)
+          for name in ('evidence/e1_lane_test.json', 'evidence/h65_e1_first_test.json'):
+              data = json.loads((root / name).read_text())
+              verdict = data.get('summary', {}).get('verdict', data.get('verdict'))
+              if str(verdict).upper() in {'NEGATIVE-STOP', 'NEGATIVE', 'INCONCLUSIVE', 'STOP', 'FAIL'}:
+                  print(f'STOP GUARD: {name} has verdict {verdict}; do not rerun this lane.')
+                  sys.exit(1)
+          PY
       - name: install
         run: python3 -m pip install --quiet --no-input numpy rasterio
       - uses: actions/download-artifact@v4
