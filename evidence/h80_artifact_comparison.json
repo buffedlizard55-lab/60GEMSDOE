@@ -1,0 +1,398 @@
+{
+ "generated_utc": "2026-10-11T20:37:22Z",
+ "evidence_class": "MEASUREMENT",
+ "tool": "scripts/build_h71_field.py::uniqueness_scan + greedy cKDTree one-to-one",
+ "radius_px": 3.0,
+ "grain_px": 100.0,
+ "scope": "registry/rasters + docs/downloads + downloads + submission + evidence (grid-matched)",
+ "union_49654": {
+  "dots": 49654,
+  "literal": {
+   "max_dot_overlap_within_3px": 0.998409,
+   "worst_raster": "calib_r13lattice_00904.tif",
+   "max_abs_spearman": 0.934597,
+   "passes_overlap": false,
+   "passes_rho": false
+  },
+  "like_for_like": {
+   "definition": "dot-field comparators (support <= 20% of footprint) that are not universal blockers themselves",
+   "max_dot_overlap_within_3px": 0.886394,
+   "worst_raster": "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
+   "passes_overlap": false
+  },
+  "satisfiable": {
+   "definition": "comparators within 3 px of <= 70% of the footprint, i.e. the subset against which the clause is decidable; a comparator above that coverage satisfies the clause's own limit itself, so the clause carries no discriminating information against it (measured, reported, and listed separately)",
+   "max_dot_overlap_within_3px": 0.886394,
+   "worst_raster": "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
+   "passes_overlap": false
+  },
+  "universal_blockers": [
+   "calib_r13lattice_00904.tif",
+   "r11_greedy_mp.tif",
+   "r13_lattice_s5_00904.tif",
+   "r14_union_tips10_lat6.tif"
+  ],
+  "scanned": 118,
+  "seconds": 110.2,
+  "top_rows": [
+   {
+    "raster": "calib_r13lattice_00904.tif",
+    "source": "registry/rasters/calib_r13lattice_00904.tif",
+    "their_dots": 206895,
+    "representation": "dot_field",
+    "support_fraction": 0.040039,
+    "dot_overlap_within_3px": 0.998409,
+    "their_dots_within_3px_of_mine": 0.211595,
+    "spearman": 0.009152,
+    "footprint_fraction_within_3px": 0.998713,
+    "byte_identical": false
+   },
+   {
+    "raster": "r13_lattice_s5_00904.tif",
+    "source": "registry/rasters/r13_lattice_s5_00904.tif",
+    "their_dots": 206895,
+    "representation": "dot_field",
+    "support_fraction": 0.040039,
+    "dot_overlap_within_3px": 0.998409,
+    "their_dots_within_3px_of_mine": 0.211595,
+    "spearman": 0.009152,
+    "footprint_fraction_within_3px": 0.998713,
+    "byte_identical": false
+   },
+   {
+    "raster": "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
+    "source": "docs/downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
+    "their_dots": 43654,
+    "representation": "dot_field",
+    "support_fraction": 0.008448,
+    "dot_overlap_within_3px": 0.886394,
+    "their_dots_within_3px_of_mine": 1.0,
+    "spearman": 0.934597,
+    "footprint_fraction_within_3px": 0.18198,
+    "byte_identical": false
+   },
+   {
+    "raster": "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif",
+    "source": "docs/downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif",
+    "their_dots": 43654,
+    "representation": "dot_field",
+    "support_fraction": 0.008448,
+    "dot_overlap_within_3px": 0.886394,
+    "their_dots_within_3px_of_mine": 1.0,
+    "spearman": 0.934597,
+    "footprint_fraction_within_3px": 0.18198,
+    "byte_identical": false
+   },
+   {
+    "raster": "gems60-h69b-champ-nulladd-2000px-20261011T182938Z-zeros.tif",
+    "source": "docs/downloads/gems60-h69b-champ-nulladd-2000px-20261011T182938Z-zeros.tif",
+    "their_dots": 39654,
+    "representation": "dot_field",
+    "support_fraction": 0.007674,
+    "dot_overlap_within_3px": 0.767229,
+    "their_dots_within_3px_of_mine": 0.960206,
+    "spearman": 0.847123,
+    "footprint_fraction_within_3px": 0.161937,
+    "byte_identical": false
+   },
+   {
+    "raster": "19GEMSDOE__h19-5-powerlaw-budget-multiline.tif",
+    "source": "registry/rasters/19GEMSDOE__h19-5-powerlaw-budget-multiline.tif",
+    "their_dots": 121131,
+    "representation": "dot_field",
+    "support_fraction": 0.023442,
+    "dot_overlap_within_3px": 0.762255,
+    "their_dots_within_3px_of_mine": 0.893512,
+    "spearman": 0.476899,
+    "footprint_fraction_within_3px": 0.196095,
+    "byte_identical": false
+   }
+  ],
+  "one_to_one": {
+   "calib_r13lattice_00904.tif": {
+    "matched": 39436,
+    "of_mine": 49654,
+    "fraction": 0.794216,
+    "theirs": 206895
+   },
+   "r11_greedy_mp.tif": {
+    "matched": 26721,
+    "of_mine": 49654,
+    "fraction": 0.538144,
+    "theirs": 272853
+   },
+   "r14_union_tips10_lat6.tif": {
+    "matched": 20977,
+    "of_mine": 49654,
+    "fraction": 0.422463,
+    "theirs": 192231
+   },
+   "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif": {
+    "matched": 43654,
+    "of_mine": 49654,
+    "fraction": 0.879164,
+    "theirs": 43654
+   }
+  }
+ },
+ "champion_37654": {
+  "dots": 37654,
+  "literal": {
+   "max_dot_overlap_within_3px": 1.0,
+   "worst_raster": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+   "max_abs_spearman": 1.0,
+   "passes_overlap": false,
+   "passes_rho": false
+  },
+  "like_for_like": {
+   "definition": "dot-field comparators (support <= 20% of footprint) that are not universal blockers themselves",
+   "max_dot_overlap_within_3px": 1.0,
+   "worst_raster": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+   "passes_overlap": false
+  },
+  "satisfiable": {
+   "definition": "comparators within 3 px of <= 70% of the footprint, i.e. the subset against which the clause is decidable; a comparator above that coverage satisfies the clause's own limit itself, so the clause carries no discriminating information against it (measured, reported, and listed separately)",
+   "max_dot_overlap_within_3px": 1.0,
+   "worst_raster": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+   "passes_overlap": false
+  },
+  "universal_blockers": [
+   "calib_r13lattice_00904.tif",
+   "r11_greedy_mp.tif",
+   "r13_lattice_s5_00904.tif",
+   "r14_union_tips10_lat6.tif"
+  ],
+  "scanned": 118,
+  "seconds": 112.2,
+  "top_rows": [
+   {
+    "raster": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+    "source": "docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+    "their_dots": 44090,
+    "representation": "dot_field",
+    "support_fraction": 0.008532,
+    "dot_overlap_within_3px": 1.0,
+    "their_dots_within_3px_of_mine": 0.881719,
+    "spearman": 0.923803,
+    "footprint_fraction_within_3px": 0.171911,
+    "byte_identical": false
+   },
+   {
+    "raster": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+    "source": "docs/downloads/gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-zeros.tif",
+    "their_dots": 44090,
+    "representation": "dot_field",
+    "support_fraction": 0.008532,
+    "dot_overlap_within_3px": 1.0,
+    "their_dots_within_3px_of_mine": 0.881719,
+    "spearman": 0.923803,
+    "footprint_fraction_within_3px": 0.171911,
+    "byte_identical": false
+   },
+   {
+    "raster": "gems32-lazygreedy-maxcov-44090-supconfined-zeros.tif",
+    "source": "docs/downloads/gems32-lazygreedy-maxcov-44090-supconfined-zeros.tif",
+    "their_dots": 44090,
+    "representation": "dot_field",
+    "support_fraction": 0.008532,
+    "dot_overlap_within_3px": 1.0,
+    "their_dots_within_3px_of_mine": 0.888954,
+    "spearman": 0.396752,
+    "footprint_fraction_within_3px": 0.163819,
+    "byte_identical": false
+   },
+   {
+    "raster": "gems32-probe-S1-ANCHOR-identical-to-live-02600.tif",
+    "source": "docs/downloads/gems32-probe-S1-ANCHOR-identical-to-live-02600.tif",
+    "their_dots": 44090,
+    "representation": "dot_field",
+    "support_fraction": 0.008532,
+    "dot_overlap_within_3px": 1.0,
+    "their_dots_within_3px_of_mine": 0.881719,
+    "spearman": 0.923803,
+    "footprint_fraction_within_3px": 0.171911,
+    "byte_identical": false
+   },
+   {
+    "raster": "gems32-probe-S2-SCALE-lambda-0.5.tif",
+    "source": "docs/downloads/gems32-probe-S2-SCALE-lambda-0.5.tif",
+    "their_dots": 44090,
+    "representation": "dot_field",
+    "support_fraction": 0.008532,
+    "dot_overlap_within_3px": 1.0,
+    "their_dots_within_3px_of_mine": 0.881719,
+    "spearman": 0.923803,
+    "footprint_fraction_within_3px": 0.171911,
+    "byte_identical": false
+   },
+   {
+    "raster": "gems32-probe-S3-NULLADD-2000px.tif",
+    "source": "docs/downloads/gems32-probe-S3-NULLADD-2000px.tif",
+    "their_dots": 46090,
+    "representation": "dot_field",
+    "support_fraction": 0.008919,
+    "dot_overlap_within_3px": 1.0,
+    "their_dots_within_3px_of_mine": 0.843458,
+    "spearman": 0.902615,
+    "footprint_fraction_within_3px": 0.18307,
+    "byte_identical": false
+   }
+  ],
+  "one_to_one": {
+   "calib_r13lattice_00904.tif": {
+    "matched": 28279,
+    "of_mine": 37654,
+    "fraction": 0.751022,
+    "theirs": 206895
+   },
+   "r11_greedy_mp.tif": {
+    "matched": 26721,
+    "of_mine": 37654,
+    "fraction": 0.709646,
+    "theirs": 272853
+   },
+   "r14_union_tips10_lat6.tif": {
+    "matched": 20977,
+    "of_mine": 37654,
+    "fraction": 0.557099,
+    "theirs": 192231
+   },
+   "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif": {
+    "matched": 37654,
+    "of_mine": 37654,
+    "fraction": 1.0,
+    "theirs": 43654
+   }
+  }
+ },
+ "complement_12000": {
+  "dots": 12000,
+  "literal": {
+   "max_dot_overlap_within_3px": 0.996083,
+   "worst_raster": "calib_r13lattice_00904.tif",
+   "max_abs_spearman": 0.691388,
+   "passes_overlap": false,
+   "passes_rho": true
+  },
+  "like_for_like": {
+   "definition": "dot-field comparators (support <= 20% of footprint) that are not universal blockers themselves",
+   "max_dot_overlap_within_3px": 0.529917,
+   "worst_raster": "gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
+   "passes_overlap": true
+  },
+  "satisfiable": {
+   "definition": "comparators within 3 px of <= 70% of the footprint, i.e. the subset against which the clause is decidable; a comparator above that coverage satisfies the clause's own limit itself, so the clause carries no discriminating information against it (measured, reported, and listed separately)",
+   "max_dot_overlap_within_3px": 0.529917,
+   "worst_raster": "gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
+   "passes_overlap": true
+  },
+  "universal_blockers": [
+   "calib_r13lattice_00904.tif",
+   "r11_greedy_mp.tif",
+   "r13_lattice_s5_00904.tif",
+   "r14_union_tips10_lat6.tif"
+  ],
+  "scanned": 118,
+  "seconds": 111.6,
+  "top_rows": [
+   {
+    "raster": "calib_r13lattice_00904.tif",
+    "source": "registry/rasters/calib_r13lattice_00904.tif",
+    "their_dots": 206895,
+    "representation": "dot_field",
+    "support_fraction": 0.040039,
+    "dot_overlap_within_3px": 0.996083,
+    "their_dots_within_3px_of_mine": 0.063191,
+    "spearman": 0.003387,
+    "footprint_fraction_within_3px": 0.998713,
+    "byte_identical": false
+   },
+   {
+    "raster": "r13_lattice_s5_00904.tif",
+    "source": "registry/rasters/r13_lattice_s5_00904.tif",
+    "their_dots": 206895,
+    "representation": "dot_field",
+    "support_fraction": 0.040039,
+    "dot_overlap_within_3px": 0.996083,
+    "their_dots_within_3px_of_mine": 0.063191,
+    "spearman": 0.003387,
+    "footprint_fraction_within_3px": 0.998713,
+    "byte_identical": false
+   },
+   {
+    "raster": "gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
+    "source": "docs/downloads/gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
+    "their_dots": 6000,
+    "representation": "dot_field",
+    "support_fraction": 0.001161,
+    "dot_overlap_within_3px": 0.529917,
+    "their_dots_within_3px_of_mine": 1.0,
+    "spearman": 0.691388,
+    "footprint_fraction_within_3px": 0.032064,
+    "byte_identical": false
+   },
+   {
+    "raster": "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
+    "source": "docs/downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
+    "their_dots": 43654,
+    "representation": "dot_field",
+    "support_fraction": 0.008448,
+    "dot_overlap_within_3px": 0.529917,
+    "their_dots_within_3px_of_mine": 0.137444,
+    "spearman": 0.2502,
+    "footprint_fraction_within_3px": 0.18198,
+    "byte_identical": false
+   },
+   {
+    "raster": "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif",
+    "source": "docs/downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif",
+    "their_dots": 43654,
+    "representation": "dot_field",
+    "support_fraction": 0.008448,
+    "dot_overlap_within_3px": 0.529917,
+    "their_dots_within_3px_of_mine": 0.137444,
+    "spearman": 0.2502,
+    "footprint_fraction_within_3px": 0.18198,
+    "byte_identical": false
+   },
+   {
+    "raster": "h60_union_d2_75308.tif",
+    "source": "registry/rasters/h60_union_d2_75308.tif",
+    "their_dots": 75308,
+    "representation": "dot_field",
+    "support_fraction": 0.014574,
+    "dot_overlap_within_3px": 0.385083,
+    "their_dots_within_3px_of_mine": 0.075503,
+    "spearman": 0.00902,
+    "footprint_fraction_within_3px": 0.31934,
+    "byte_identical": false
+   }
+  ],
+  "one_to_one": {
+   "calib_r13lattice_00904.tif": {
+    "matched": 11383,
+    "of_mine": 12000,
+    "fraction": 0.948583,
+    "theirs": 206895
+   },
+   "r11_greedy_mp.tif": {
+    "matched": 0,
+    "of_mine": 12000,
+    "fraction": 0.0,
+    "theirs": 272853
+   },
+   "r14_union_tips10_lat6.tif": {
+    "matched": 0,
+    "of_mine": 12000,
+    "fraction": 0.0,
+    "theirs": 192231
+   },
+   "gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif": {
+    "matched": 6000,
+    "of_mine": 12000,
+    "fraction": 0.5,
+    "theirs": 43654
+   }
+  }
+ }
+}

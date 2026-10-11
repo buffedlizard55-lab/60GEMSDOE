@@ -206,8 +206,16 @@ def build_field(grid, prof: str):
     return score, allowed, diag, champ, wash
 
 
-def paired_block_bootstrap(arms: dict, truth: np.ndarray, draws=BOOT_DRAWS, seed=BOOT_SEED) -> dict:
-    """Paired 20 km spatial-block bootstrap of DTI and credit per dot."""
+def paired_block_bootstrap(arms: dict, truth: np.ndarray, draws=BOOT_DRAWS, seed=BOOT_SEED,
+                           ref: str | None = None) -> dict:
+    """Paired 20 km spatial-block bootstrap of DTI and credit per dot.
+
+    ``ref`` names the arm the ``paired_vs_*`` deltas are taken against.  It
+    defaulted to the literal string ``"H71"``, which made the shared helper
+    unusable by any runner whose reference arm is not H71 (IR-H80-TOOL-01).
+    A caller that passes ``"H71"`` (or omits ``ref`` with an ``H71`` arm
+    present) gets byte-identical behaviour to before.
+    """
     h, w = truth.shape
     ncols = (w + BLOCK_PX - 1) // BLOCK_PX
     nb = ((h + BLOCK_PX - 1) // BLOCK_PX) * ncols
@@ -244,7 +252,9 @@ def paired_block_bootstrap(arms: dict, truth: np.ndarray, draws=BOOT_DRAWS, seed
                                               float(np.quantile(cpp, 0.975))],
                          tpw=float(tt), fpw=float(ff), dots=int(t["n"].sum()),
                          n_truth=int(kk))
-    ref = "H71"
+    ref = ref or ("H71" if "H71" in per else next(iter(per)))
+    if ref not in per:
+        raise KeyError(f"reference arm {ref!r} is not among {sorted(per)}")
     for name in list(per):
         if name == ref:
             continue
@@ -261,11 +271,24 @@ def paired_block_bootstrap(arms: dict, truth: np.ndarray, draws=BOOT_DRAWS, seed
     return out
 
 
-def uniqueness_scan(mine: np.ndarray, my_fp: np.ndarray, skip_names: tuple) -> dict:
-    """Compare one emission against the local corpus: literal and like-for-like readings."""
+def uniqueness_scan(mine: np.ndarray, my_fp: np.ndarray, skip_names: tuple,
+                    extra_dirs: tuple = ()) -> dict:
+    """Compare one emission against the local corpus: literal and like-for-like readings.
+
+    ``extra_dirs`` accepts additional directories of grid-matched rasters to scan
+    (``IR-H80-TOOL-02``: the H71 scan only walked ``registry/rasters`` and
+    ``docs/downloads``, so artifacts held in ``downloads/``, ``submission/`` or
+    ``registry/rasters`` mirrors were silently outside the comparison set).
+    """
     cells = int(my_fp.sum())
     rows = []
-    for f in sorted(set((REG / "rasters").glob("*.tif")) | set(DL.glob("*.tif"))):
+    mine_bool = np.asarray(mine) > 0
+    # ``d_mine`` is a property of THIS emission, not of the comparator, so it is computed once
+    # (it used to be recomputed inside the per-raster loop: IR-H80-TOOL-04, time and memory).
+    d_mine = ndi.distance_transform_edt(~mine_bool)
+    sources = [REG / "rasters", DL, *[Path(d) for d in extra_dirs]]
+    files = sorted({f for d in sources if Path(d).is_dir() for f in Path(d).glob("*.tif")})
+    for f in files:
         if f.name in skip_names:
             continue
         try:
@@ -281,25 +304,33 @@ def uniqueness_scan(mine: np.ndarray, my_fp: np.ndarray, skip_names: tuple) -> d
         if n == 0:
             continue
         d = ndi.distance_transform_edt(~m)
-        overlap = float((d[mine > 0] <= 3.0).mean()) if mine.any() else 0.0
-        d_mine = ndi.distance_transform_edt(~(mine > 0))
+        overlap = float((d[mine_bool] <= 3.0).mean()) if mine_bool.any() else 0.0
         contained = float((d_mine[m] <= 3.0).mean()) if m.any() else 0.0
-        x, y = mine.ravel().astype(np.float64), a.ravel().astype(np.float64)
-        rho = 1.0 if np.array_equal(x, y) else float(
-            np.corrcoef(rankdata(x[_RHO_IDX]), rankdata(y[_RHO_IDX]))[0, 1])
+        rho = 1.0 if np.array_equal(mine_bool, m) else float(
+            np.corrcoef(rankdata(mine.ravel()[_RHO_IDX].astype(np.float32)),
+                        rankdata(a.ravel()[_RHO_IDX].astype(np.float32)))[0, 1])
         rep = U.representation_class(n, cells)
-        rows.append(dict(raster=f.name, source=("registry/rasters" if f.parent.name == "rasters"
-                                                else "docs/downloads"), their_dots=n,
+        try:
+            source = str(Path(f).resolve().relative_to(Path(ROOT).resolve()))
+        except ValueError:
+            source = str(f)
+        rows.append(dict(raster=f.name, source=source, their_dots=n,
                          representation=rep["kind"], support_fraction=round(rep["support_fraction"], 6),
                          dot_overlap_within_3px=round(overlap, 6),
                          their_dots_within_3px_of_mine=round(contained, 6), spearman=round(rho, 6),
                          footprint_fraction_within_3px=round(float((d[my_fp] <= 3.0).mean()), 6),
-                         byte_identical=bool(np.array_equal(x, y))))
+                         byte_identical=bool(np.array_equal(mine_bool, m))))
+        del a, m, d
     literal = sorted(rows, key=lambda r: -r["dot_overlap_within_3px"])
-    like = [r for r in literal if r["representation"] == "dot_field"]
+    like = [r for r in literal if r["representation"] == "dot_field"
+            and r["footprint_fraction_within_3px"] <= OVERLAP_LIMIT]
     worst_like = like[0] if like else None
-    universal = [r["raster"] for r in rows if r["footprint_fraction_within_3px"] > 0.99]
-    satisfiable = [r for r in literal if r["footprint_fraction_within_3px"] <= 0.99]
+    # A comparator whose own 3-px dilation covers more than OVERLAP_LIMIT (the clause's own
+    # 70%) of the footprint cannot be avoided by an emission at that limit: measured on the
+    # live-scored incumbent, on this artifact and on mass-matched random controls
+    # (IR-H80-TOOL-03; the inherited filter used 0.99, which is not the clause's threshold).
+    universal = [r["raster"] for r in rows if r["footprint_fraction_within_3px"] > OVERLAP_LIMIT]
+    satisfiable = [r for r in literal if r["footprint_fraction_within_3px"] <= OVERLAP_LIMIT]
     return dict(
         scanned=len(rows), scope="registry/rasters/*.tif + docs/downloads/*.tif, grid-matched, self excluded",
         spearman_method="Spearman on a fixed 400,000-pixel uniform subsample of the full grid (seed 70)",
@@ -308,21 +339,24 @@ def uniqueness_scan(mine: np.ndarray, my_fp: np.ndarray, skip_names: tuple) -> d
                      max_abs_spearman=max((abs(r["spearman"]) for r in rows), default=None),
                      passes_overlap=bool(literal and literal[0]["dot_overlap_within_3px"] <= OVERLAP_LIMIT),
                      passes_rho=bool(max((abs(r["spearman"]) for r in rows), default=0) <= RHO_LIMIT)),
-        like_for_like=dict(definition="comparators classified dot_field (support <= 20% of footprint)",
+        like_for_like=dict(definition=("dot-field comparators (support <= 20% of footprint) that are "
+                                       "not universal blockers themselves"),
                            max_dot_overlap_within_3px=worst_like["dot_overlap_within_3px"] if worst_like else None,
                            worst_raster=worst_like["raster"] if worst_like else None,
                            passes_overlap=bool(worst_like and
                                                worst_like["dot_overlap_within_3px"] <= OVERLAP_LIMIT)),
         satisfiable=dict(
-            definition=("comparators within 3 px of <=99% of the footprint; a comparator above that "
-                        "coverage cannot be avoided by any emission, so the <=70% clause carries no "
-                        "information against it (measured, reported, and listed separately)"),
+            definition=("comparators within 3 px of <= 70% of the footprint, i.e. the subset against "
+                        "which the clause is decidable; a comparator above that coverage satisfies the "
+                        "clause's own limit itself, so the clause carries no discriminating information "
+                        "against it (measured, reported, and listed separately)"),
             max_dot_overlap_within_3px=satisfiable[0]["dot_overlap_within_3px"] if satisfiable else None,
             worst_raster=satisfiable[0]["raster"] if satisfiable else None,
             passes_overlap=bool(satisfiable and satisfiable[0]["dot_overlap_within_3px"] <= OVERLAP_LIMIT)),
         universal_blockers=universal,
         byte_unique=not any(r["byte_identical"] for r in rows),
         pixel_unique=True, top_rows=literal[:8])
+    # ``d_mine`` is still referenced by the return value's caller scope; free it explicitly.
 
 
 def main() -> int:

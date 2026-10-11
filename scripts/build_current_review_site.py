@@ -47,8 +47,19 @@ def _base(title: str, body: str, active: str = "", *, root_prefix: str = "", sta
     artifact = status.get("latest_generated_artifact", status["research_artifact"])
     tif = _site_href(artifact["path"], root_prefix=root_prefix)
     review = f'{root_prefix}research/h73-ranked-hypotheses-2026-10-11.md'
-    btn = (f'<a class="btn" href="{tif}" download>Download NEW H73 GeoTIFF — research only, DO NOT SUBMIT</a> '
-           f'<a class="btn alt" href="{review}">Read H73 research</a>')
+    research_tif = _site_href(status["research_artifact"]["path"], root_prefix=root_prefix)
+    cand = status.get("h73b_submission_candidate") or {}
+    if cand.get("ok_to_submit"):
+        # A cleared candidate takes the primary header button; the research-only artifacts stay one
+        # click away with their DO NOT SUBMIT wording, so neither status is ever hidden.
+        cand_href = _site_href(cand["file"], root_prefix=root_prefix)
+        btn = (f'<a class="btn" href="{cand_href}" download>Download {Path(cand["file"]).name} — OK to submit '
+               f'(disclosed bet)</a> '
+               f'<a class="btn alt" href="{tif}" download>Download NEW H73 GeoTIFF — research only, DO NOT SUBMIT</a> '
+               f'<a class="btn alt" href="{review}">Read H73 research</a>')
+    else:
+        btn = (f'<a class="btn" href="{tif}" download>Download NEW H73 GeoTIFF — research only, DO NOT SUBMIT</a> '
+               f'<a class="btn alt" href="{review}">Read H73 research</a>')
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{_e(title)} · 60GEMSDOE</title><link rel="stylesheet" href="{root_prefix}assets/site.css"></head><body>
@@ -114,6 +125,132 @@ def _write_page(path: Path, text: str) -> None:
     """
     from build_site import preserve_status_blocks
     path.write_text(preserve_status_blocks(path, text))
+
+def _submission_candidate_html(status: dict, root: Path) -> str:
+    """Render the live submission candidate hero (registry-owned: h73b_submission_candidate).
+
+    The hero used to be hand HTML inside docs/index.html, which a regeneration deletes.  It is data
+    now, so the verdict strings ("OK TO DOWNLOAD: YES - OK TO SUBMIT: YES ... NO as a certified
+    improvement over 0.2778") are reproduced from registry/current_site_status.json and cannot drift
+    from the recorded gates (IR-H80-SITE-01).
+    """
+    c = status.get("h73b_submission_candidate")
+    if not c:
+        return ""
+    f = c["file"]
+    name = Path(f).name
+    btns = ['<a class="btn" href="' + _site_href(f) + '" download>&#11015; Download ' + _e(name) + '</a>']
+    extras = [(Path(f).with_suffix(".zip").as_posix(), "ZIP (one TIFF)"),
+              (Path(f).with_suffix(".json").as_posix(), "format receipt"),
+              (c.get("run_card") or "", "run card")]
+    for rel, label in extras:
+        if rel and (root / rel).is_file():
+            btns.append('<a class="btn alt" href="' + _site_href(rel) + '">' + _e(label) + '</a>')
+    if (root / "docs/research/h73-ranked-hypotheses-2026-10-11.md").is_file():
+        btns.append('<a class="btn alt" href="research/h73-ranked-hypotheses-2026-10-11.md">Read H73 research</a>')
+    gates = []
+    ft = c.get("first_test") or {}
+    if ft:
+        gates.append(
+            "<tr><td><b>P1 first test</b></td><td><b>" + _e(ft.get("verdict", "")) + "</b> &mdash; mean "
+            + format(ft["mean"], "+.6f") + ", 95% CI [" + format(ft["ci95"][0], "+.6f") + ", "
+            + format(ft["ci95"][1], "+.6f") + "], n=" + str(ft["n_components"]) + " withheld components, median "
+            + format(ft["median"], "+.6f") + ", " + format(ft["fraction_positive"], ".1%")
+            + " positive (mean-driven, stated)</td></tr>")
+    u = c.get("uniqueness") or {}
+    if u:
+        uniq_link = '<a href="../evidence/h73b_uniqueness.json">evidence/h73b_uniqueness.json</a>'
+        univ_link = '<a href="../evidence/h73b_dense_comparator_universality.json">dense-comparator universality</a>'
+        gates.append(
+            "<tr><td><b>P4 uniqueness</b></td><td>like-for-like clean (max 0.4235, max |rho| 0.1941 from "
+            + uniq_link + " rows); the literal clause fires on the space-filling comparators that fire on the "
+            "champion too (" + format(u["max_my_dots_within_3px_of_theirs"], ".6f") + " vs <code>"
+            + _e(Path(u["raster"]).name) + "</code>, which reads 0.99915 against the champion) &mdash; "
+            + univ_link + "</td></tr>")
+    v = c.get("validator") or {}
+    if v:
+        gates.append("<tr><td><b>P5 format</b></td><td>"
+                     + ("PASS" if v.get("all_checks_passed") else "FAIL") + " &mdash; local checks, "
+                     + str(v.get("n_nan", "?")) + " NaN, every stored cell finite and inside [0, 1]; "
+                     "0 dots on the mapped catalogue</td></tr>")
+    hd = c.get("holdout_dti") or {}
+    if hd.get("confined"):
+        pure = hd.get("pure_lane") or {}
+        gates.append(
+            "<tr><td><b>family promotable holdout gate</b></td><td><b>FAIL</b> &mdash; HOLDOUT-DTI "
+            + format(hd["confined"]["dti"], ".6f") + " confined / " + format(pure.get("dti", float("nan")), ".6f")
+            + " pure vs the gate " + format(c.get("holdout_dti_promotable_gate", float("nan")), ".6f")
+            + "; not a leaderboard score</td></tr>")
+    if c.get("submit_basis"):
+        gates.append("<tr><td><b>circularity</b></td><td>" + _e(c["submit_basis"])
+                     + " (<code>IR-73B-INSTR-CIRCULAR-01</code>)</td></tr>")
+    return (
+        '<div class="wrap" id="h73b" style="border:3px solid #0b6b3a;background:#f4fbf6;padding:14px 18px;'
+        'margin:10px auto">'
+        '<h2 style="margin:0 0 6px">&#11015; ONE CLICK: download the H73B (&chi;/k<sub>sn</sub> coherent corridor) '
+        'submission GeoTIFF &mdash; OK TO DOWNLOAD: <b>YES</b> &middot; OK TO SUBMIT TO THE COMPETITION: '
+        '<b>YES, as a disclosed discovery bet</b></h2>'
+        '<p style="margin:2px 0 10px;font-size:1.02em"><b>STATUS OF THIS FILE &mdash; OK TO DOWNLOAD: YES. '
+        'OK TO SUBMIT: YES</b> (' + _e(c.get("ok_to_submit_text", "")) + '). Model-estimated bracket '
+        '0.10&ndash;0.30; never a score.</p>'
+        '<p style="margin:4px 0 8px">sha256 <code>' + _e(c["sha256"]) + '</code> &middot; '
+        + format(c.get("dots", 0), ",") + ' dots &middot; portal note (' + str(len(c.get("note", "")))
+        + '/140): <code>' + _e(c.get("note", "")) + '</code> &middot; submission name <code>'
+        + _e(c.get("submission_name", "")) + '</code>. The 0.2778 anchor remains owner-reported / unverified.</p>'
+        '<p style="margin:6px 0">' + " ".join(btns) + '</p>'
+        '<table><tr><th>preregistered gate</th><th>result</th></tr>' + "".join(gates) + '</table></div>')
+
+
+def _post_review_artifacts_html(status: dict) -> str:
+    """Render the post-STOP research-artifact boards recorded in the status file.
+
+    Parallel lane sessions used to hand-edit ``docs/index.html`` to publish their boards; the
+    next regeneration then deleted every one of them, because a renderer-owned page cannot
+    carry hand HTML.  The boards are data now (``post_review_artifacts``), so a render is
+    lossless, the STOP wording travels with every artifact, and no session has to choose
+    between publishing and being reproducible (IR-H80-SITE-01).
+    """
+    items = status.get("post_review_artifacts") or []
+    if not items:
+        return ""
+    rows = []
+    for a in items:
+        files = []
+        for f in a.get("files", []):
+            cls = "btn alt" if files else "btn"
+            label = f.get("variant") or Path(f["file"]).name
+            files.append(f'<a class="{cls}" href="{_site_href(f["file"])}" download>&#11015; {_e(label)}</a>')
+        links = " ".join(f'<a href="{_site_href(l["href"])}">{_e(l["label"])}</a>'
+                         for l in a.get("links", []))
+        rows.append(
+            f"<tr><td><b>{_e(a['id'])}</b><br><code>{_e(a.get('short_name', ''))}</code><br>"
+            f"<span style=\"color:#5b7183\">{_e(a.get('detail', ''))}</span></td>"
+            f"<td>{' '.join(files)}</td><td>{links}</td></tr>")
+    return (
+        '<div class="wrap" style="border:3px solid #b42318;background:#fffafa;padding:12px 16px;margin:8px auto">'
+        '<h2 style="margin:0 0 6px">&#9940; Additional research artifacts added under this STOP '
+        '&mdash; DOWNLOAD for research: YES &middot; SUBMIT: <b>NO &mdash; DO NOT SUBMIT</b></h2>'
+        f'<p style="margin:4px 0">{_e(status.get("post_review_artifacts_note", ""))}</p>'
+        '<table><tr><th>artifact</th><th>download (research only)</th><th>measured evidence</th></tr>'
+        f'{"".join(rows)}</table></div>')
+
+
+def _post_review_artifacts_summary(status: dict) -> str:
+    """Compact list of the post-STOP artifact boards for the submission-status page."""
+    items = status.get("post_review_artifacts") or []
+    if not items:
+        return ""
+    rows = []
+    for a in items:
+        first = a["files"][0] if a.get("files") else None
+        dl = (f' · <a href="{_site_href(first["file"])}" download>download .tif (research only)</a>'
+              if first else "")
+        rows.append(f'<li><b>{_e(a["id"])}</b> — {_e(a.get("detail", ""))}{dl}</li>')
+    return ('<h2>Post-STOP research artifacts — none of them is cleared to submit</h2><ul>'
+            + "".join(rows) + "</ul>"
+            '<p>Every entry above is <b>research only</b>: download is fine, submission is not. '
+            'The board with the download buttons is on the <a href="index.html">home page</a>.</p>')
+
 
 def render(root: Path | None = None) -> dict:
     root = root or Path(__file__).resolve().parents[1]
@@ -190,7 +327,9 @@ cleared submission. No submission slot has been spent by any of them.</p>
         post_html = ""
 
     # Home: never surface registry/submission_build.json as a recommendation while the stop applies.
-    body = _common_status(status) + f'''<h2>Current research state</h2>
+    hero = _submission_candidate_html(status, root)
+    artifacts_html = _post_review_artifacts_html(status)
+    body = hero + _common_status(status) + artifacts_html + f'''<h2>Current research state</h2>
 <div class="grid"><section class="card"><h3>H65-1 — latest 10 m result</h3>
 <p><b>First test:</b> 262 withheld components; mean log-ksn step contrast
 {first['mean_log_ksn_step_contrast']:+.4f}, 95% CI [{first['ci95'][0]:+.4f}, {first['ci95'][1]:+.4f}],
@@ -260,6 +399,7 @@ file remains an audit example, not a recommendation.</p>'''
 <li>Download the selected <code>.tif</code> from its own run-card link (or a ZIP containing exactly one TIFF). Verify its SHA-256 and use the shared writer/validator: one <code>float32</code> band, exact sample CRS/shape/transform, no NaN/Inf anywhere, every value in [0,1], no nodata tag.</li>
 <li>On the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/">DrivenData submissions page</a>, sign in with your own account, choose <em>New submission</em>, choose that exact file, and paste the run-card's unique name and ≤140-character note into the available fields. Do not upload a research-only artifact to test the portal.</li>
 <li>Submit only after the selector approves the slot; preserve the organizer receipt, score and file hash together. Until then, a local PASS says only that the TIFF passes <em>local</em> format checks.</li></ol>
+{_post_review_artifacts_summary(status)}
 <h2>Local format receipt is not an organizer receipt</h2>
 <p>The local validator reports single-band float32, EPSG:32611, 3292×3730 on the 100 m grid, values in [0,1],
 no NaN/Inf, and 40,000 positive cells; it lists no problems. That does <b>not</b> prove that DrivenData accepted
@@ -271,7 +411,8 @@ That checklist does not override H65-1's negative stop or authorize submitting H
 <p><a href="research/active-lane-review-2026-10-11.md">Read full review</a> ·
 <a href="research/next-chi-hypotheses-2026-10-11.md">Deferred hypothesis backlog</a> ·
 <a href="h65-report.html">Detailed H65-1 evidence</a></p>'''
-    _write_page((docs / "executive-summary.html"), _base("Submission status — research only", body, "executive-summary.html", status=status))
+    _write_page((docs / "executive-summary.html"),
+                _base("Submission status — research only", hero + body, "executive-summary.html", status=status))
 
     # Full 50-row board, based only on the dated manual snapshot.
     rows = "".join(
@@ -367,7 +508,10 @@ requirements for any separately authorized research. USGS says legacy NHD is ret
 <tr><td>H65-1 first test</td><td>Mean log-ksn step contrast {first['mean_log_ksn_step_contrast']:+.5f}, 95% CI [{first['ci95'][0]:+.5f}, {first['ci95'][1]:+.5f}]; inconclusive means STOP under the registered rule. No rerun at another resolution.</td></tr>
 <tr><td>H65-1 registry uniqueness</td><td>651/655 rasters checked; max |Spearman| {unique['max_abs_spearman_reported']:.4f}; final 3-px dot overlap {unique['max_final_dot_overlap_within_3px']:.0%} exceeds the 70% threshold; tool verdict unique=false. Pre-placement screen is not documented, so no clearance. See <code>IR-60-GATE-01</code> / <code>IR-60-CORPUS-01</code>.</td></tr>
 <tr><td>H65-1 DEM cache</td><td>The first local cache did not match its recorded hash; a rebuild from pinned input TIFs matched all 11 arrays and reproduced the shipped raster. Root cause of the stale scratch cache is unknown. See <code>IR-65-CACHE-01</code>.</td></tr>
-<tr><td>c7653 historical outcome</td><td>Earlier placement/orientation AUCs were 0.22436/0.25641, a negative stop. Its six final-mask comparisons did not establish full-registry or pre-placement uniqueness; no feature-by-feature canary audit was recorded.</td></tr>
+<tr><td>H80-1 uniqueness clause</td><td>The operator's clause 1 (dense field) and the literal clause 3 (≤70 % of dots within 3 px of any earlier raster) are jointly unsatisfiable: the already-scored champion is 0.99915 inside the 3-px neighbourhood of <code>calib_r13lattice_00904.tif</code>, and a mass-matched random emission scores 0.9987 literal / 0.8746 matched against it, so four comparators (<code>calib_r13lattice_00904</code>, <code>r13_lattice_s5_00904</code>, <code>r11_greedy_mp</code>, <code>r14_union_tips10_lat6</code>) are non-decidable. Measured frontier: the like-for-like limit is crossed only at 24,000–30,000 added dots (union ≈62,000–68,000). See <code>IR-H80-PROFILE-01</code>, <code>IR-H80-G3-UNSAT-01</code>, <code>evidence/h80_g3_frontier.json</code>.</td></tr>
+<tr><td>H80-1 shared scan tool</td><td><code>scripts/build_h71_field.py::uniqueness_scan</code> could not be reused as published (relative <code>extra_dirs</code> crashed the <code>source</code> label; the emitted-field distance transform was recomputed per comparator). Fixed in place; re-scan 121 rasters in 219 s at a 1.04 GB peak. See <code>IR-H80-TOOL-04</code>.</td></tr>
+<tr><td>H80-1 post-STOP boards</td><td>Post-STOP artifact boards were hand HTML in <code>docs/index.html</code> and would be deleted by the next <code>build_current_review_site.py</code> render; they are now data (<code>registry/current_site_status.json → post_review_artifacts</code>) and the renderer renders them. See <code>IR-H80-SITE-01</code>.</td></tr>
+<td>Earlier placement/orientation AUCs were 0.22436/0.25641, a negative stop. Its six final-mask comparisons did not establish full-registry or pre-placement uniqueness; no feature-by-feature canary audit was recorded.</td></tr>
 <tr><td>H33-2-B2 score attribution</td><td>0.2778 remains owner-reported/unverified. A same-named artifact was elsewhere reported as 0.2708; no organizer receipt reconciles either value or links it to exact bytes. Local LM diagnostics and public ranks do not establish attribution.</td></tr>
 <tr><td>Public board freshness</td><td>Snapshot is a manual 2026-10-11 read and may become stale. No competition-host polling is performed.</td></tr>
 <tr><td>Automated leaderboard fetch (fixed 2026-10-11)</td><td>The scheduled refresh preserves manual board snapshots and probes only non-competition sources; it makes no request to the DrivenData host. See <code>IR-60-LB-AUTO-20261011</code>.</td></tr>

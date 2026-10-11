@@ -1,79 +1,103 @@
 {
-  "generated_utc": "2026-10-11T19:41:00Z",
-  "session": "arena/161d8066-60gemsdoe",
-  "governance": "registry/current_site_status.json STOP (channel-steepness) and the literal 70-raster uniqueness rule with no dense/lattice exception. Under both, NOTHING in this file is cleared for submission; every artifact below is research evidence for the owner's selector.",
-  "identification_note": "identifiers were renamed on 2026-10-11 to avoid a collision with the unrelated H70-1 lane run merged to main; artifact bytes and measurements are unchanged",
-  "artifacts": [
+ "generated_utc": "2026-10-11T20:49:08Z",
+ "session": "arena/3c52f2be-60gemsdoe",
+ "governance": "registry/current_site_status.json STOP (channel-steepness) and the literal 70-raster uniqueness rule with no dense/lattice exception. Under both, NOTHING in this file is cleared for submission; every artifact below is research evidence for the owner's selector.",
+ "identification_note": "identifiers were renamed on 2026-10-11 to avoid a collision with the unrelated H70-1 lane run merged to main; artifact bytes and measurements are unchanged",
+ "artifacts": [
+  {
+   "id": "GEMS60-H72",
+   "kind": "candidate-union",
+   "submit": "NO (DO NOT SUBMIT)",
+   "dots": 43654,
+   "files": [
     {
-      "id": "GEMS60-H72",
-      "kind": "candidate-union",
-      "submit": "NO (DO NOT SUBMIT)",
-      "dots": 43654,
-      "files": [
-        {
-          "file": "docs/downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
-          "sha256": "c8a76393aa543462a4fc58c986055e267ed0ea3da135fe1378a1235cf0096d5e",
-          "variant": "NaN outside the footprint; null mask pixel-identical to data/official/sample_submission.tif"
-        },
-        {
-          "file": "docs/downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif",
-          "sha256": "79e3fafab1adf16ec5d1b0549dcf4bcdd4e7b40abc6aa5c1791334939ae4581d",
-          "variant": "zeros outside the footprint"
-        }
-      ],
-      "card": "evidence/h72_runcard.json",
-      "key_evidence": "G1 population-matched: added mass 0.4018 credit/dot (break-even 0.0556); union - champion paired +0.03799 DTI [+0.03379, +0.04208]. G2 registered holdout (8-cell protocol): -0.000288. Literal uniqueness 1.0000 vs the lattice - fails, as it does for every artifact in the project."
+     "file": "docs/downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-nan.tif",
+     "sha256": "c8a76393aa543462a4fc58c986055e267ed0ea3da135fe1378a1235cf0096d5e",
+     "variant": "NaN outside the footprint; null mask pixel-identical to data/official/sample_submission.tif"
     },
     {
-      "id": "GEMS60-H71-A",
-      "kind": "probe",
-      "submit": "NO (DO NOT SUBMIT)",
-      "dots": 6000,
-      "files": [
-        {
-          "file": "docs/downloads/gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
-          "sha256": "5c22c464a40e15bae84463f921a6c704d29b45c67dd334c08202320d7b7e68e0"
-        }
-      ],
-      "card": "evidence/h71a_runcard.json",
-      "key_evidence": "SGMC-off credit/dot 0.4018 vs 0.0336 mass-matched random; satisfiable-reading overlap 0.5187; |rho| <= 0.0147 over 102 rasters; literal 1.0000 vs the lattice"
-    },
-    {
-      "id": "GEMS60-H71-B",
-      "kind": "field-diagnostic",
-      "submit": "NO (DO NOT SUBMIT)",
-      "dots": 12000,
-      "files": [
-        {
-          "file": "docs/downloads/gems60-h71b-convcomp-12000-20261011T184819Z-zeros.tif",
-          "sha256": "4f2fbeed356fed1ce7721f8ae3ed5a78d880acb525159b8964864831ec5058c8"
-        }
-      ],
-      "card": "evidence/h71b_runcard.json",
-      "key_evidence": "strongest field measured: SGMC-off DTI 0.13265, 0.5864 credit/dot; literal uniqueness 0.9982 - fails"
-    },
-    {
-      "id": "GEMS60-H69-A/B",
-      "kind": "identification-pair",
-      "submit": "NO (DO NOT SUBMIT) - diagnostics only",
-      "files": [
-        {
-          "file": "docs/downloads/gems60-h69a-champ-half-20261011T182938Z-zeros.tif",
-          "sha256": "14724cf39af7a08e5be2aa7df2113c23d85cbbb4e0bbfd4725bfeede147d5076",
-          "dots": 37654
-        },
-        {
-          "file": "docs/downloads/gems60-h69b-champ-nulladd-2000px-20261011T182938Z-zeros.tif",
-          "sha256": "9cd5197014f64bbc5e9fce194929b882c65a8179dbbade8e1de1aba39549f426",
-          "dots": 39654
-        }
-      ],
-      "record": "evidence/h69_probe_build.json",
-      "key_evidence": "two uploads plus the 0.2778 anchor identify T, K and F exactly (scripts/h69_recovery.py self-test exact)"
+     "file": "docs/downloads/gems60-h72-union-champ-convcomp-43654-20261011T191739Z-zeros.tif",
+     "sha256": "79e3fafab1adf16ec5d1b0549dcf4bcdd4e7b40abc6aa5c1791334939ae4581d",
+     "variant": "zeros outside the footprint"
     }
-  ],
-  "comparison": "evidence/h71_artifact_comparison.json",
-  "not_included": {
-    "H70-1 (main)": "the unrelated lane run merged to main; its card is evidence/h70_runcard.json on main"
+   ],
+   "card": "evidence/h72_runcard.json",
+   "key_evidence": "G1 population-matched: added mass 0.4018 credit/dot (break-even 0.0556); union - champion paired +0.03799 DTI [+0.03379, +0.04208]. G2 registered holdout (8-cell protocol): -0.000288. Literal uniqueness 1.0000 vs the lattice - fails, as it does for every artifact in the project."
+  },
+  {
+   "id": "GEMS60-H71-A",
+   "kind": "probe",
+   "submit": "NO (DO NOT SUBMIT)",
+   "dots": 6000,
+   "files": [
+    {
+     "file": "docs/downloads/gems60-h71a-convcomp-6000-20261011T185116Z-zeros.tif",
+     "sha256": "5c22c464a40e15bae84463f921a6c704d29b45c67dd334c08202320d7b7e68e0"
+    }
+   ],
+   "card": "evidence/h71a_runcard.json",
+   "key_evidence": "SGMC-off credit/dot 0.4018 vs 0.0336 mass-matched random; satisfiable-reading overlap 0.5187; |rho| <= 0.0147 over 102 rasters; literal 1.0000 vs the lattice"
+  },
+  {
+   "id": "GEMS60-H71-B",
+   "kind": "field-diagnostic",
+   "submit": "NO (DO NOT SUBMIT)",
+   "dots": 12000,
+   "files": [
+    {
+     "file": "docs/downloads/gems60-h71b-convcomp-12000-20261011T184819Z-zeros.tif",
+     "sha256": "4f2fbeed356fed1ce7721f8ae3ed5a78d880acb525159b8964864831ec5058c8"
+    }
+   ],
+   "card": "evidence/h71b_runcard.json",
+   "key_evidence": "strongest field measured: SGMC-off DTI 0.13265, 0.5864 credit/dot; literal uniqueness 0.9982 - fails"
+  },
+  {
+   "id": "GEMS60-H69-A/B",
+   "kind": "identification-pair",
+   "submit": "NO (DO NOT SUBMIT) - diagnostics only",
+   "files": [
+    {
+     "file": "docs/downloads/gems60-h69a-champ-half-20261011T182938Z-zeros.tif",
+     "sha256": "14724cf39af7a08e5be2aa7df2113c23d85cbbb4e0bbfd4725bfeede147d5076",
+     "dots": 37654
+    },
+    {
+     "file": "docs/downloads/gems60-h69b-champ-nulladd-2000px-20261011T182938Z-zeros.tif",
+     "sha256": "9cd5197014f64bbc5e9fce194929b882c65a8179dbbade8e1de1aba39549f426",
+     "dots": 39654
+    }
+   ],
+   "record": "evidence/h69_probe_build.json",
+   "key_evidence": "two uploads plus the 0.2778 anchor identify T, K and F exactly (scripts/h69_recovery.py self-test exact)"
+  },
+  {
+   "id": "GEMS60-H80",
+   "kind": "candidate-union",
+   "dots": 49654,
+   "submit": "NO (DO NOT SUBMIT)",
+   "files": [
+    {
+     "file": "docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.tif",
+     "sha256": "ad25643354857a1071f3d5ce7de8da711f22e1ed2096e7acd8d14f560f5ad459",
+     "variant": "zeros outside the footprint (shared writer output)"
+    },
+    {
+     "file": "docs/downloads/gems60-h80-convcomp-49654-20261011T202055Z-zeros.zip",
+     "sha256": "9520df97c2588fe958e6029f696a00eddcfeaaa46d43a7b02c70c86bafa9fec3",
+     "variant": "ZIP containing the single TIFF"
+    }
+   ],
+   "card": "evidence/h80_runcard.json",
+   "key_evidence": "two-profile field; adopted baseline7 (facet/front/strike layer gains +0.0007/+0.0003/-0.0078, none significant). G1 PASS (0.5864 credit/dot vs 0.1074 random); G2 PASS by tolerance only and below champion (0.003844 vs 0.004385, -0.0005); G3 FAIL (like-for-like 0.8864, literal 0.9984); G4 not run. Literal clause 3 is unsatisfiable for any emission containing the champion (champion alone 0.99915 vs the lattice).",
+   "validator": {
+    "local_format_preflight": "ok",
+    "organizer_acceptance_recorded": false
+   }
   }
+ ],
+ "comparison": "evidence/h71_artifact_comparison.json",
+ "not_included": {
+  "H70-1 (main)": "the unrelated lane run merged to main; its card is evidence/h70_runcard.json on main"
+ }
 }
