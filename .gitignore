@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+.cache/
+.pytest_cache/
+.venv/
+out/
+# Large source rasters and generated feature caches are restored by hash, never committed.
+data/official/training_features.tif
+data/official/*.partial
+data/raw/
+registry/cache/
+*.download
+*.partial
+
+# Third-party inputs restored by scripts/prepare_data.py (hash-pinned, re-downloadable):
+# the bridge copies of the official rasters and the large USGS/GDR extracts.
+data/bridge/
+data/external/

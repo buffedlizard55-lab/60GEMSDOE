@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Science &amp; sources &middot; 60GEMSDOE</title>
+<link rel="stylesheet" href="assets/site.css"></head><body>
+<header><h1>Science, hypotheses and verified sources</h1></header>
+<section><h2>Hypothesis H60-A</h2><p>Bedrock channels that cross an active normal fault carry an upstream-steepening knickpoint; a knickpoint corroborated by &gt;=3 independent drainage networks inside a strike-aligned corridor marks a fault trace, including traces absent from the USGS/INGENIOUS catalogue.</p>
+<p><strong>Mechanism.</strong> Fault-crossing channels record a step in rock-uplift rate as a step in normalized steepness ksn = S*(A/A0)^theta along chi (Kirby &amp; Whipple 2012; Perron &amp; Royden 2013). Single-channel knickpoints are ambiguous; strike-aligned corroboration across drainage divides is not, because no single-channel process is strike-aligned.</p>
+<p><strong>Named non-fault mimic.</strong> Lithologic contact / basin-fill boundary: a hard-to-soft rock contact also steps ksn and can be strike-aligned across drainages. Secondary mimics: closed-basin (playa) base level, ephemeral/alluvial reaches, regional climate-precipitation gradient, and post-wildfire or landslide-derived steepening.</p>
+<p><strong>Confound controls.</strong></p><ul><li>climate/regional gradient: knickpoint magnitude is z-scored inside 40 km blocks (blockwise_zscore), never ranked globally</li><li>playa / closed-basin base level: cells whose priority-flood raise exceeds 20 m are excluded (542,309 px measured)</li><li>lithology / basin fill: cells with depth_to_base_surf above its 90th footprint percentile are excluded (thick sedimentary cover = no bedrock channel)</li><li>ephemeral / alluvial: cells with cond_surf above its 95th percentile are excluded (clay-rich, evaporitic, non-bedrock)</li><li>channel-hood: only pixels with contributing area &gt;= 20 cells (0.20 km^2) are eligible</li></ul>
+<p><strong>Declared parameters.</strong></p><pre>{
+  &quot;band&quot;: &quot;12 det_elev (Detrended elevation - topography with regional trends removed)&quot;,
+  &quot;theta_ref&quot;: 0.45,
+  &quot;A0_m2&quot;: 1.0,
+  &quot;pixel_m&quot;: 100.0,
+  &quot;a_min_cells&quot;: 20,
+  &quot;knickpoint_window_cells&quot;: 5,
+  &quot;step_floor_ksn&quot;: 0.5,
+  &quot;step_winsor_log_ratio&quot;: 2.302585092994046,
+  &quot;z_min_candidate&quot;: 1.5,
+  &quot;n_drainage_min&quot;: 3,
+  &quot;corridor_half_len_px&quot;: 6,
+  &quot;corridor_half_width_px&quot;: 2,
+  &quot;n_strike_bins&quot;: 18,
+  &quot;trace_decay&quot;: 0.5,
+  &quot;block_px&quot;: 400,
+  &quot;catalogue_buffer_px&quot;: 2,
+  &quot;production_dot_budget&quot;: 40000
+}</pre>
+</section>
+<section><h2>Three further candidate hypotheses (ranked, not yet run)</h2>
+<table><tr><th>#</th><th>hypothesis</th><th>layer(s)</th><th>signature targeted</th><th>why it finds an unmapped fault</th><th>differs from repo</th><th>expected DTI gain / cost</th></tr>
+<tr><td>H60-B</td><td>&chi;-space knickpoint <em>clusters</em> at equal &chi;, not equal distance</td><td>band 12 det_elev + band 19 slope</td><td>isochronous breakpoints along &chi; (Perron &amp; Royden)</td><td>a base-level fall propagates to equal &chi; in every drainage, so the pattern is a line even where the scarp is buried</td><td>no sibling uses &chi; at all</td><td>medium / low (all local)</td></tr>
+<tr><td>H60-C</td><td>Drainage-divide migration asymmetry across mapped faults predicts the unmapped continuation</td><td>band 12 + derived divide lines</td><td>divide-height asymmetry (Vx index)</td><td>divides migrate away from the uplifted block; the signal survives alluvial burial that hides the trace</td><td>geometry of divides, not fault-zone damage</td><td>medium / medium</td></tr>
+<tr><td>H60-D</td><td>Bedrock-channel incision pinned by <code>depth_to_base_surf</code> (band 15) steps</td><td>band 15 + band 12</td><td>coincidence of a basement-depth gradient with a ksn step</td><td>removes the lithologic mimic: a ksn step with no basement step is rock-type, not fault</td><td>uses a band no sibling lane has touched</td><td>high value / low cost</td></tr>
+</table></section>
+<section><h2>Verified sources for manual review</h2>
+<table><tr><th>source</th><th>link</th><th>what was taken from it</th></tr><tr><td>Competition page (metric, weights, kernel)</td><td>https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/</td><td>alpha=0.2, beta=0.8, R=300 m triangular kernel; login-walled from this sandbox</td></tr><tr><td>Competition leaderboard</td><td>https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/</td><td>public board context only; never a file receipt</td></tr><tr><td>Reference solution (official)</td><td>https://github.com/drivendataorg/gems-prize-reference-solution</td><td>cloned and read in this session; U-Net MC-CV baseline, no data bundled</td></tr><tr><td>Submission format / rules PDF (DOE OSTI 96647)</td><td>https://docs.nlr.gov/docs/fy26osti/96647.pdf</td><td>single-band GeoTIFF, must match CRS/shape/geotransform, values in [0,1]</td></tr><tr><td>USGS GeoDAWN airborne magnetic &amp; radiometric surveys (NW Great Basin)</td><td>https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and</td><td>DOI 10.5066/P93LGLVQ; source of the geodawn bands in the feature stack</td></tr><tr><td>INGENIOUS / GDR submission 1391</td><td>https://gdr.openei.org/submissions/1391</td><td>well &amp; spring temperature/chemistry + Quaternary fault traces (CC BY 4.0)</td></tr><tr><td>USGS 3DEP elevation (the lane&#x27;s named free DEM)</td><td>https://www.usgs.gov/3d-elevation-program</td><td>NOT reachable from this sandbox; det_elev band 12 used instead (IR-60-DATA-01)</td></tr><tr><td>EPSG:32611 (UTM zone 11N)</td><td>https://epsg.io/32611</td><td>submission CRS, verified against the bridged sample_submission.tif</td></tr><tr><td>Tversky index</td><td>https://en.wikipedia.org/wiki/Tversky_index</td><td>the DTI is a distance-weighted Tversky index; alpha/beta as published</td></tr><tr><td>Kirby &amp; Whipple (2012), JGR 117 F04002</td><td>https://doi.org/10.1029/2011JF002090</td><td>expression of active tectonics in eroding landscapes: knickpoints &amp; ksn</td></tr><tr><td>Perron &amp; Royden (2013), ESPL 40 703-716</td><td>https://doi.org/10.1002/esp.3310</td><td>chi transform: an integral method for channel profile analysis</td></tr><tr><td>Royden &amp; Perron (2013), ESPL 40 1043-1058</td><td>https://doi.org/10.1002/esp.3309</td><td>sliding-window ksn estimation</td></tr><tr><td>Gailleton et al. (2019), Earth Surface Dynamics 7 647-668</td><td>https://doi.org/10.5194/esurf-7-647-2019</td><td>reproducible knickpoint segmentation on z(chi)</td></tr><tr><td>Wobus et al. (2006), GSA Special Paper 398 55-74</td><td>https://doi.org/10.1130/2006.2398(04)</td><td>normalized steepness ksn = S (A/A0)^theta</td></tr><tr><td>Barnes, Lehman &amp; Mulla (2014), Computers &amp; Geosciences 62 124-138</td><td>https://doi.org/10.1016/j.cageo.2013.10.004</td><td>priority-flood depression filling</td></tr><tr><td>Sibling repository holding the highest owner-reported score (0.2778)</td><td>https://github.com/buffedlizard55-lab/GEMSDOE32</td><td>h33-h33-2-b2 audit JSON read in this session; owner-reported, not a receipt</td></tr><tr><td>Sibling template repository (shared tools reused here)</td><td>https://github.com/buffedlizard55-lab/57GEMSDOE</td><td>src/gems57/{grid,holdout,evaluate_holdout,metric,emit,gates,validate,submission_writer,uniqueness}.py</td></tr></table>
+<p class="warn">Only github.com, api.github.com, codeload.github.com, pypi.org, files.pythonhosted.org
+and registry.npmjs.org are reachable from this sandbox. DrivenData, USGS, DOI and github.io links are
+recorded for manual review and were <strong>not</strong> fetched here (IR-60-CITE-01).</p></section>
+<footer><a href="index.html">&larr; overview</a></footer></body></html>

@@ -1,0 +1,219 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Audit &middot; 60GEMSDOE</title>
+<link rel="stylesheet" href="assets/site.css"></head><body>
+<header><h1>Audit tables (machine-generated)</h1></header>
+<section><h2>Data provenance &amp; pins</h2>
+<table><tr><th>file</th><th>sha256</th><th>bytes</th><th>verified</th></tr>
+<tr><td>data/official/labels.tif</td><td><code>7ba308ccdc4418b31a178f4f&hellip;</code></td><td class='num'>425830</td><td>True</td></tr><tr><td>data/official/existing_faults.tif</td><td><code>7ba308ccdc4418b31a178f4f&hellip;</code></td><td class='num'>425830</td><td>True</td></tr><tr><td>data/official/sample_submission.tif</td><td><code>2176d08e485aa2cd2860ce8d&hellip;</code></td><td class='num'>1599597</td><td>True</td></tr><tr><td>data/official/training_features.tif</td><td><code>&hellip;</code></td><td class='num'>None</td><td>False</td></tr><tr><td>data/external/sgmc_faults_100m.tif</td><td><code>26d142c4c93282cd94f6950a&hellip;</code></td><td class='num'>213034</td><td>True</td></tr><tr><td>data/external/derived_sgmc_faults_100m.tif</td><td><code>643cbe992ef4ba37588fb469&hellip;</code></td><td class='num'>198602</td><td>True</td></tr><tr><td>data/external/trace_segments_utm11.csv</td><td><code>c5edf9df3e0e1413c5278488&hellip;</code></td><td class='num'>5283577</td><td>True</td></tr><tr><td>data/external/qfault_attributes.csv</td><td><code>3b8745f0086a57b8255f6679&hellip;</code></td><td class='num'>5786456</td><td>True</td></tr>
+</table></section>
+<section><h2>Feature build log (band 12 &rarr; chi/ksn/knickpoints)</h2>
+<table><tr><th>step</th><th>t (s)</th><th>diagnostics</th></tr><tr><td>labels</td><td class='num'>0.4</td><td><code>{&#x27;footprint_pixels&#x27;: 5167373, &#x27;catalogue_pixels&#x27;: 60988}</code></td></tr><tr><td>dem_loaded</td><td class='num'>4.7</td><td><code>{&#x27;band&#x27;: 12, &#x27;finite&#x27;: 5164312, &#x27;nan_inside_footprint&#x27;: 3061, &#x27;min&#x27;: -589.9837036132812, &#x27;max&#x27;: 1469.9127197265625, &#x27;sha256&#x27;: &#x27;4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5&#x27;}</code></td></tr><tr><td>nan_repaired</td><td class='num'>13.7</td><td><code>{&#x27;repaired&#x27;: 3061, &#x27;still_nan&#x27;: 0}</code></td></tr><tr><td>priority_flood</td><td class='num'>41.8</td><td><code>{&#x27;cells&#x27;: 5167373, &#x27;closed&#x27;: 5167373, &#x27;waves&#x27;: 0, &#x27;raised&#x27;: 914097.0, &#x27;max_raise_m&#x27;: 283.6378701171898}</code></td></tr><tr><td>d8</td><td class='num'>44.1</td><td><code>{&#x27;outlets&#x27;: 7113011, &#x27;routed&#x27;: 5166149}</code></td></tr><tr><td>upslope_area</td><td class='num'>47.7</td><td><code>{&#x27;max_cells&#x27;: 825425.0, &#x27;max_level&#x27;: 2335, &#x27;mean_cells_inside_footprint&#x27;: 581.9197478099607}</code></td></tr><tr><td>drainage_identity</td><td class='num'>52.0</td><td><code>{&#x27;distinct_terminals&#x27;: 1224}</code></td></tr><tr><td>chi</td><td class='num'>53.8</td><td><code>{&#x27;theta&#x27;: 0.45, &#x27;max_chi&#x27;: 51.03868127724301, &#x27;median_chi_channels&#x27;: 9.94344130810904}</code></td></tr><tr><td>ksn</td><td class='num'>56.5</td><td><code>{&#x27;channel_pixels&#x27;: 942898, &#x27;ksn_p50&#x27;: 10.603668663977382, &#x27;ksn_p95&#x27;: 79.26397683098526, &#x27;ksn_p999&#x27;: 251.93641339339712}</code></td></tr><tr><td>knickpoint_step</td><td class='num'>62.8</td><td><code>{&#x27;window&#x27;: 5, &#x27;channel_with_both_windows&#x27;: 942898, &#x27;step_p50&#x27;: -0.025207733855965246, &#x27;step_p95&#x27;: 0.8486523981338138, &#x27;step_p999&#x27;: 2.302585092994046, &#x27;frac_step_positive&#x27;: 0.39045474696096505, &#x27;step_floor_ksn&#x27;: 0.5, &#x27;step_winsor&#x27;: 2.302585092994046}</code></td></tr><tr><td>confound_masks</td><td class='num'>63.0</td><td><code>{&#x27;playa_basin_floor_pixels&#x27;: 542309, &#x27;max_raise_m&#x27;: 283.6378701171898, &#x27;raise_p99&#x27;: 188.0346732031248}</code></td></tr><tr><td>cached</td><td class='num'>64.5</td><td><code>{&#x27;files&#x27;: 14}</code></td></tr></table></section>
+<section><h2>Registry fetch receipt</h2>
+<p>fetched 651, errors 4,
+complete False. Error rows:</p>
+<pre>[
+  {
+    &quot;repo&quot;: &quot;55GEMSDOE&quot;,
+    &quot;path&quot;: &quot;docs/downloads/audit-h55-160k/h55-tensor2d-strikegate-160000dots-20261009T164334Z-nan.tif&quot;,
+    &quot;sha256&quot;: &quot;c3185ec459f84c5fd9a9c117f4611c25ec754e1a113c12139baca60e29501d74&quot;,
+    &quot;error&quot;: &quot;path not present at HEAD&quot;
+  },
+  {
+    &quot;repo&quot;: &quot;55GEMSDOE&quot;,
+    &quot;path&quot;: &quot;docs/downloads/audit-h55-160k/h55-tensor2d-strikegate-160000dots-20261009T164334Z-zeros.tif&quot;,
+    &quot;sha256&quot;: &quot;ffd2a892b750022b6fbe0bcd0759099421eab1b9e354fc5f7e2793d082859273&quot;,
+    &quot;error&quot;: &quot;path not present at HEAD&quot;
+  },
+  {
+    &quot;repo&quot;: &quot;55GEMSDOE&quot;,
+    &quot;path&quot;: &quot;docs/downloads/h56-multiscale-tensor-persistence-40000dots-20261009T162812Z-nan.tif&quot;,
+    &quot;sha256&quot;: &quot;2d288ebc99218fd14bfab6b0d700fda579e65ba304f806b3ca4b2a88b6b7d7c9&quot;,
+    &quot;error&quot;: &quot;path not present at HEAD&quot;
+  },
+  {
+    &quot;repo&quot;: &quot;55GEMSDOE&quot;,
+    &quot;path&quot;: &quot;docs/downloads/h56-multiscale-tensor-persistence-40000dots-20261009T162812Z-zeros.tif&quot;,
+    &quot;sha256&quot;: &quot;43743afdb030b739465d4754aabd8605bceef49bcc836bee93e9094807d4695f&quot;,
+    &quot;error&quot;: &quot;path not present at HEAD&quot;
+  }
+]</pre></section>
+<section><h2>Cell-level diagnostics</h2>
+<pre>[
+  {
+    &quot;cell&quot;: &quot;draw20_foldNW_all&quot;,
+    &quot;channel_pixels&quot;: 942898,
+    &quot;valid_channel_pixels&quot;: 718058,
+    &quot;candidate_pixels&quot;: 36620,
+    &quot;z_min&quot;: 1.5,
+    &quot;block_px&quot;: 400,
+    &quot;n_drainage_min&quot;: 3,
+    &quot;corridor_half_len_px&quot;: 6,
+    &quot;corridor_half_width_px&quot;: 2,
+    &quot;trace_decay&quot;: 0.5,
+    &quot;regional_modal_strike_deg&quot;: 25.0,
+    &quot;candidate_pixels_scanned&quot;: 36620,
+    &quot;aligned_candidates&quot;: 32986,
+    &quot;n_drainage_p50&quot;: 6.0,
+    &quot;n_drainage_p90&quot;: 10.0,
+    &quot;n_drainage_max&quot;: 27,
+    &quot;trace_pixels&quot;: 346890,
+    &quot;trace_only_pixels&quot;: 312699,
+    &quot;positive_pixels&quot;: 349319,
+    &quot;p_max&quot;: 1.0
+  },
+  {
+    &quot;cell&quot;: &quot;draw20_foldNE_all&quot;,
+    &quot;channel_pixels&quot;: 942898,
+    &quot;valid_channel_pixels&quot;: 718058,
+    &quot;candidate_pixels&quot;: 36620,
+    &quot;z_min&quot;: 1.5,
+    &quot;block_px&quot;: 400,
+    &quot;n_drainage_min&quot;: 3,
+    &quot;corridor_half_len_px&quot;: 6,
+    &quot;corridor_half_width_px&quot;: 2,
+    &quot;trace_decay&quot;: 0.5,
+    &quot;regional_modal_strike_deg&quot;: 25.0,
+    &quot;candidate_pixels_scanned&quot;: 36620,
+    &quot;aligned_candidates&quot;: 32981,
+    &quot;n_drainage_p50&quot;: 6.0,
+    &quot;n_drainage_p90&quot;: 10.0,
+    &quot;n_drainage_max&quot;: 27,
+    &quot;trace_pixels&quot;: 346726,
+    &quot;trace_only_pixels&quot;: 312530,
+    &quot;positive_pixels&quot;: 349150,
+    &quot;p_max&quot;: 1.0
+  },
+  {
+    &quot;cell&quot;: &quot;draw20_foldSW_all&quot;,
+    &quot;channel_pixels&quot;: 942898,
+    &quot;valid_channel_pixels&quot;: 718058,
+    &quot;candidate_pixels&quot;: 36620,
+    &quot;z_min&quot;: 1.5,
+    &quot;block_px&quot;: 400,
+    &quot;n_drainage_min&quot;: 3,
+    &quot;corridor_half_len_px&quot;: 6,
+    &quot;corridor_half_width_px&quot;: 2,
+    &quot;trace_decay&quot;: 0.5,
+    &quot;regional_modal_strike_deg&quot;: 25.0,
+    &quot;candidate_pixels_scanned&quot;: 36620,
+    &quot;aligned_candidates&quot;: 32972,
+    &quot;n_drainage_p50&quot;: 6.0,
+    &quot;n_drainage_p90&quot;: 10.0,
+    &quot;n_drainage_max&quot;: 27,
+    &quot;trace_pixels&quot;: 346940,
+    &quot;trace_only_pixels&quot;: 312741,
+    &quot;positive_pixels&quot;: 349361,
+    &quot;p_max&quot;: 1.0
+  },
+  {
+    &quot;cell&quot;: &quot;draw20_foldSE_all&quot;,
+    &quot;channel_pixels&quot;: 942898,
+    &quot;valid_channel_pixels&quot;: 718058,
+    &quot;candidate_pixels&quot;: 36620,
+    &quot;z_min&quot;: 1.5,
+    &quot;block_px&quot;: 400,
+    &quot;n_drainage_min&quot;: 3,
+    &quot;corridor_half_len_px&quot;: 6,
+    &quot;corridor_half_width_px&quot;: 2,
+    &quot;trace_decay&quot;: 0.5,
+    &quot;regional_modal_strike_deg&quot;: 25.0,
+    &quot;candidate_pixels_scanned&quot;: 36620,
+    &quot;aligned_candidates&quot;: 32984,
+    &quot;n_drainage_p50&quot;: 6.0,
+    &quot;n_drainage_p90&quot;: 10.0,
+    &quot;n_drainage_max&quot;: 27,
+    &quot;trace_pixels&quot;: 346739,
+    &quot;trace_only_pixels&quot;: 312545,
+    &quot;positive_pixels&quot;: 349165,
+    &quot;p_max&quot;: 1.0
+  },
+  {
+    &quot;cell&quot;: &quot;draw21_foldNW_all&quot;,
+    &quot;channel_pixels&quot;: 942898,
+    &quot;valid_channel_pixels&quot;: 718058,
+    &quot;candidate_pixels&quot;: 36620,
+    &quot;z_min&quot;: 1.5,
+    &quot;block_px&quot;: 400,
+    &quot;n_drainage_min&quot;: 3,
+    &quot;corridor_half_len_px&quot;: 6,
+    &quot;corridor_half_width_px&quot;: 2,
+    &quot;trace_decay&quot;: 0.5,
+    &quot;regional_modal_strike_deg&quot;: 25.0,
+    &quot;candidate_pixels_scanned&quot;: 36620,
+    &quot;aligned_candidates&quot;: 32969,
+    &quot;n_drainage_p50&quot;: 6.0,
+    &quot;n_drainage_p90&quot;: 10.0,
+    &quot;n_drainage_max&quot;: 27,
+    &quot;trace_pixels&quot;: 346844,
+    &quot;trace_only_pixels&quot;: 312649,
+    &quot;positive_pixels&quot;: 349269,
+    &quot;p_max&quot;: 1.0
+  },
+  {
+    &quot;cell&quot;: &quot;draw21_foldNE_all&quot;,
+    &quot;channel_pixels&quot;: 942898,
+    &quot;valid_channel_pixels&quot;: 718058,
+    &quot;candidate_pixels&quot;: 36620,
+    &quot;z_min&quot;: 1.5,
+    &quot;block_px&quot;: 400,
+    &quot;n_drainage_min&quot;: 3,
+    &quot;corridor_half_len_px&quot;: 6,
+    &quot;corridor_half_width_px&quot;: 2,
+    &quot;trace_decay&quot;: 0.5,
+    &quot;regional_modal_strike_deg&quot;: 25.0,
+    &quot;candidate_pixels_scanned&quot;: 36620,
+    &quot;aligned_candidates&quot;: 32983,
+    &quot;n_drainage_p50&quot;: 6.0,
+    &quot;n_drainage_p90&quot;: 10.0,
+    &quot;n_drainage_max&quot;: 27,
+    &quot;trace_pixels&quot;: 346676,
+    &quot;trace_only_pixels&quot;: 312482,
+    &quot;positive_pixels&quot;: 349102,
+    &quot;p_max&quot;: 1.0
+  },
+  {
+    &quot;cell&quot;: &quot;draw21_foldSW_all&quot;,
+    &quot;channel_pixels&quot;: 942898,
+    &quot;valid_channel_pixels&quot;: 718058,
+    &quot;candidate_pixels&quot;: 36620,
+    &quot;z_min&quot;: 1.5,
+    &quot;block_px&quot;: 400,
+    &quot;n_drainage_min&quot;: 3,
+    &quot;corridor_half_len_px&quot;: 6,
+    &quot;corridor_half_width_px&quot;: 2,
+    &quot;trace_decay&quot;: 0.5,
+    &quot;regional_modal_strike_deg&quot;: 25.0,
+    &quot;candidate_pixels_scanned&quot;: 36620,
+    &quot;aligned_candidates&quot;: 32959,
+    &quot;n_drainage_p50&quot;: 6.0,
+    &quot;n_drainage_p90&quot;: 10.0,
+    &quot;n_drainage_max&quot;: 27,
+    &quot;trace_pixels&quot;: 346274,
+    &quot;trace_only_pixels&quot;: 312076,
+    &quot;positive_pixels&quot;: 348696,
+    &quot;p_max&quot;: 1.0
+  },
+  {
+    &quot;cell&quot;: &quot;draw21_foldSE_all&quot;,
+    &quot;channel_pixels&quot;: 942898,
+    &quot;valid_channel_pixels&quot;: 718058,
+    &quot;candidate_pixels&quot;: 36620,
+    &quot;z_min&quot;: 1.5,
+    &quot;block_px&quot;: 400,
+    &quot;n_drainage_min&quot;: 3,
+    &quot;corridor_half_len_px&quot;: 6,
+    &quot;corridor_half_width_px&quot;: 2,
+    &quot;trace_decay&quot;: 0.5,
+    &quot;regional_modal_strike_deg&quot;: 25.0,
+    &quot;candidate_pixels_scanned&quot;: 36620,
+    &quot;aligned_candidates&quot;: 32989,
+    &quot;n_drainage_p50&quot;: 6.0,
+    &quot;n_drainage_p90&quot;: 10.0,
+    &quot;n_drainage_max&quot;: 30,
+    &quot;trace_pixels&quot;: 346667,
+    &quot;trace_only_pixels&quot;: 312472,
+    &quot;positive_pixels&quot;: 349092,
+    &quot;p_max&quot;: 1.0
+  }
+]</pre></section>
+<footer><a href="index.html">&larr; overview</a></footer></body></html>
