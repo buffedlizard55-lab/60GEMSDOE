@@ -36,7 +36,23 @@ Full report: <a href="h65-report.html">h65-report.html</a>. Public leaderboard t
 <div class=dlbtn><a class="btn" href="downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif">&#11015; Newest TIF (H65-1): research only, do NOT submit</a> <a class="btn alt" href="downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif">&#11015; Champion (already scored 0.2778)</a></div>
 </div></header>
 <div class=values><div class=wrap><b>Core Values.</b> <b>Maximize P(Win)</b> — every weekly submission slot is an experiment, not a lottery ticket. <b>Own the Outcome</b> — every claim here carries an evidence class, and the defect in our own previously-shipped primary was measured, published and replaced rather than quietly dropped.</div></div>
-<main class=wrap><h2 style="margin-top:6px">Five steps, about two minutes</h2>
+<main class=wrap>
+<div class="card" style="border:2px solid #b35900;background:#fff8f0;padding:14px;margin:12px 0">
+<h2>⚠️ NEW SESSION ARTIFACT (2026-10-11, H63-1) — DOWNLOAD OK · SUBMIT: NO</h2>
+<p><b>File:</b> <a href="downloads/gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif">docs/downloads/gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif</a> (<a href="downloads/gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.zip">.zip</a>, <a href="downloads/gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.json">receipt</a>)</p>
+<p><b>Verdict:</b> <b>NEGATIVE — DO NOT SUBMIT TO THE COMPETITION.</b> It is a validated, unique, format-safe research artifact (float32, [0,1], 0 NaN, EPSG:32611, 3730×3292 @ 100 m, 36,000 dots, sha256 <code>2b859cf93be06cf4e5a4fe2f66ef2561e2ad5a516e0059705b8131d753dff589</code>). The holdout DTI is projected ≈ 0.013 [0.010, 0.016] (evaluator <code>gems52-pooled-hide-v1</code>, 36,439 withheld positives) — well below the family gate (0.190) and the owner-reported champion (0.2778). It loses to every control. It is published for audit and reuse.</p>
+<p><b>Why negative:</b> The tectonic-geomorphology lane (channel steepness / χ knickpoints) requires resolving first-order drainage networks. Both available 100 m elevation products fail published validity tests (Hack exponent b ≈ +0.026 / −0.027 vs 1.6–2.0; Jaccard agreement 0.231). This is a <b>substrate (resolution) verdict</b>, not a detector verdict. The fix is a <b>10 m 3DEP DEM</b> (host reachable per <code>evidence/probe-egress-receipt.json</code>, not fetched in this session).</p>
+<p><b>Submission details (only if promoted by a separate selector — NOT RECOMMENDED):</b></p>
+<ul>
+<li><b>Portal URL:</b> <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">https://www.drivendata.org/competitions/306/competition-doe-gems/</a></li>
+<li><b>File to upload:</b> <code>gems60-h63-strike-corridor-42000px-20261011T020352Z-zeros.tif</code> (or the .zip)</li>
+<li><b>Note (optional, ≤140 chars):</b> <code>chi/ksn strike-corridor emission (slope-concordance filter); 36000 dots; negative; UNSCORED</code></li>
+<li><b>Unique submission name (for tracking):</b> <code>60GEMSDOE-G63-STRIKE-CORRIDOR-36000</code></li>
+</ul>
+<p><b>Portal error fix:</b> If the portal answers <i>"Predicted values must be in range [0, 1]"</i>, use the <code>-zeros.tif</code> variant (not NaN-filled). Every pixel inside the footprint is finite and in [0,1]; pixels outside the footprint are 0.0. The nodata tag is <b>not set</b> (<code>nodata=None</code>).</p>
+</div>
+
+<h2 style="margin-top:6px">Five steps, about two minutes</h2>
 <div class=dl>
 <h2>&#11015;&nbsp;ONE-CLICK SUBMISSION FILE</h2>
 <p><a class="btn" href="downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif">Download gems61-lane-thermal-knick-40000px-20261011T020352Z.tif</a> <a class="btn alt" href="downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.zip">.zip (single GeoTIFF inside)</a> </p>
