@@ -1,0 +1,118 @@
+{
+  "n_dots": 3770,
+  "budget": {
+    "n_dots": 150,
+    "bracket": [
+      {
+        "dti_assumed": 0.008639782503993906,
+        "bar": 0.0017279565007987812,
+        "keep_fraction": 0.0017279565007987812,
+        "quantile_on_positive_values": 788.0750122070312,
+        "n_dots": 150
+      },
+      {
+        "dti_assumed": 0.010799728129992381,
+        "bar": 0.0021599456259984765,
+        "keep_fraction": 0.0021599456259984765,
+        "quantile_on_positive_values": 788.0750122070312,
+        "n_dots": 150
+      },
+      {
+        "dti_assumed": 0.013499660162490476,
+        "bar": 0.0026999320324980953,
+        "keep_fraction": 0.0026999320324980953,
+        "quantile_on_positive_values": 788.0750122070312,
+        "n_dots": 150
+      }
+    ],
+    "n_allowed": 25191,
+    "spacing_px": 18.327029219161517,
+    "note": "budget derived from the marginal-acceptance bar alpha*DTI at three assumed DTI"
+  },
+  "spacing_px": 1.4142135623730951,
+  "confound": {
+    "catalogue_ring_m": 200.0,
+    "ring_px": 305335,
+    "playa_px": 759635,
+    "stripe_rows": 56
+  },
+  "allowed_px": 4124740,
+  "allowed_gated_px": 25191,
+  "min_drainages": 3,
+  "primary": {
+    "file": "gems60-chi-ksn-knick-coherent-3770px-20261011T010511Z-zeros.tif",
+    "sha256": "d3c411f5137c65f530bf1e2846482d4a06a5ac9a1b27d8d90dc0ec344d84692a",
+    "bytes": 65898,
+    "width": 3292,
+    "height": 3730,
+    "count": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "crs_epsg": 32611,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "n_finite": 12279160,
+    "n_nonfinite": 0,
+    "min_finite": 0.0,
+    "max_finite": 1.0,
+    "n_values_outside_0_1": 0,
+    "n_positive": 3770,
+    "mass": 3770.0,
+    "n_distinct_positive_values": 1,
+    "checks": {
+      "single_band_float32": true,
+      "crs_epsg_32611": true,
+      "shape_matches": true,
+      "transform_matches": true,
+      "all_values_in_0_1": true,
+      "no_nan_in_finite_container": true
+    },
+    "passes_portal_range_test": true,
+    "passes_all_literal_checks": true
+  },
+  "nan_variant": {
+    "file": "gems60-chi-ksn-knick-coherent-3770px-20261011T010511Z-nan.tif",
+    "sha256": "4878334499bba92d34d7575805e8336032cef2beb79fb77acb02aab51b42a948",
+    "bytes": 108286,
+    "width": 3292,
+    "height": 3730,
+    "count": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "crs_epsg": 32611,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": "nan",
+    "n_finite": 5167373,
+    "n_nonfinite": 7111787,
+    "min_finite": 0.0,
+    "max_finite": 1.0,
+    "n_values_outside_0_1": 0,
+    "n_positive": 3770,
+    "mass": 3770.0,
+    "n_distinct_positive_values": 1,
+    "checks": {
+      "single_band_float32": true,
+      "crs_epsg_32611": true,
+      "shape_matches": true,
+      "transform_matches": true,
+      "all_values_in_0_1": true,
+      "no_nan_in_finite_container": false
+    },
+    "passes_portal_range_test": true,
+    "passes_all_literal_checks": false
+  }
+}

@@ -44,3 +44,9 @@ data/bridge/gems-geodawn-numerical-features.tif.part-*
 !data/bridge/manifest.json
 !data/bridge/example_submission.tif
 !data/bridge/existing_faults.tif
+
+# Lane 1 (chi/ksn knickpoint strike traces): the public-domain USGS 3DEP 10 m product,
+# mean-reduced to the competition 100 m grid, is committed so the lane reproduces offline.
+!data/external/
+!data/external/*.tif
+!data/external/*.json

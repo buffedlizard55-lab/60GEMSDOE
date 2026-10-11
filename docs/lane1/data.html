@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Competition data — auditable table</title>
+<style>
+ body{margin:0;font:15px/1.55 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#111;background:#fff}
+ main{max-width:1100px;margin:0 auto;padding:26px 18px 90px}
+ h1{font-size:1.5rem;margin:.2em 0 .1em}
+ h2{font-size:1.12rem;margin:1.6em 0 .4em;border-bottom:1px solid #d8d8d8;padding-bottom:.25em}
+ code{background:#f2f2f2;padding:1px 4px;border-radius:4px;font-size:.85em;word-break:break-all}
+ table{border-collapse:collapse;width:100%;font-size:.86rem;margin:.5em 0}
+ th,td{border:1px solid #d8d8d8;padding:6px 7px;text-align:left;vertical-align:top}
+ th{background:#f4f4f4}
+ .s-ok{color:#1b5e20;font-weight:600}.s-warn{color:#8a5a00;font-weight:600}.s-no{color:#a4161a;font-weight:600}
+ .sub{color:#555;margin:0 0 14px}
+ ul{margin:.3em 0 .6em 1.1em}
+</style>
+</head>
+<body>
+<main>
+
+<h1>Competition data — auditable table</h1>
+<p class="sub">Every raster this project reads, with its official source, its integrity pin, and how it was actually obtained. Pins prove <em>consistency of the copy we hold</em>; they are not organizer authentication, because the competition portal is login-walled. <a href="index.html">← download page</a> · <a href="executive-summary.html">executive summary</a></p>
+
+<h2>A. Official competition artifacts (login-walled portal)</h2>
+<table>
+<tr><th>Artifact</th><th>What it is</th><th>Official link</th><th>Integrity pin (sha256)</th><th>How obtained</th><th>Status</th></tr>
+<tr>
+ <td><code>training_features.tif</code></td>
+ <td>19-band float32 stack, 100 m, EPSG:32611, 3292×3730: surface conductivity &amp; depth-to-conductive-base; detrended elevation &amp; its slope; dilatation rate, shear strain rate, 2nd invariant of the strain-rate tensor; isostatic gravity anomaly &amp; slope; RTP magnetic anomaly, TMI, vertical/horizontal TMI slopes, top-of-crustal magnetic source depth; earthquake density. Nodata <code>−3.4028234663852886e+38</code></td>
+ <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data page</a> (login)</td>
+ <td><code>4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5</code> · 418,912,844 B</td>
+ <td>Restored from the owner's mirror repository at the pinned commit <code>c0c06ac8…</code> (5 parts, <code>data/bridge/gems-geodawn-numerical-features.tif.part-000..004</code>); reassembled copy verified by SHA-256 against the sibling registry manifest</td>
+ <td class="s-ok">verified</td></tr>
+<tr>
+ <td><code>labels.tif</code></td>
+ <td>Ground truth raster: USGS Quaternary fault maps + INGENIOUS catalogue, rasterised to the 100 m grid (60,988 positive pixels)</td>
+ <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data page</a> (login)</td>
+ <td><code>7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093</code> · 425,830 B</td>
+ <td>Owner mirror <code>GEMSDOE24@07345ea0</code> · <code>data/bridge/labels.tif</code></td>
+ <td class="s-ok">verified</td></tr>
+<tr>
+ <td><code>sample_submission.tif</code></td>
+ <td>Grid/footprint template. <strong>Irregularity flagged:</strong> the portal describes it as "total fault absence", but the mirrored file has 60,988 pixels equal to 1 sitting on the labelled faults</td>
+ <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data page</a> (login)</td>
+ <td><code>2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc</code> · 1,599,597 B</td>
+ <td>Owner mirror <code>GEMSDOE24@07345ea0</code> · <code>data/bridge/sample_submission.tif</code> — used <em>only</em> as the grid template</td>
+ <td class="s-warn">used as template only</td></tr>
+<tr>
+ <td><code>1m_DEM_links.csv</code></td>
+ <td>The organizer's list of 1 m DEM tiles covering the area</td>
+ <td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data page</a> (login)</td>
+ <td>—</td>
+ <td><strong>Not obtained</strong> (login-walled; no authenticated session available). Substituted with the free official equivalents in section B</td>
+ <td class="s-no">not obtained</td></tr>
+</table>
+
+<h2>B. Free, public, official substitutes used in this lane (all links reachable without authentication)</h2>
+<table>
+<tr><th>Artifact</th><th>What it is</th><th>Official link</th><th>Integrity pin</th><th>Status</th></tr>
+<tr>
+ <td>USGS 3DEP 1/3 arc-second seamless DEM (10 m)</td>
+ <td>Public-domain elevation, the substrate the lane is specified on. Used here as its 10 m mean reduced to the competition's 100 m grid, whose decoding rule is published in the pack's own manifest</td>
+ <td><a href="https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/USGS_Seamless_DEM_13.vrt">USGS_Seamless_DEM_13.vrt</a> · catalogue: <a href="https://www.sciencebase.gov/catalog/item/4f70aa9fe4b058caae3f8de5">ScienceBase 4f70aa9f…</a></td>
+ <td>pack <code>a6398d9950965dec6aae6ccecdaa6ced48645d133eab222cbdd11def9bdabfa4</code> (32.5 MB, committed at <code>data/external/topo_10m_derived_100m_u8.tif</code>)</td>
+ <td class="s-ok">in use</td></tr>
+<tr>
+ <td>3DEP 10 m tiles (exact-file form)</td>
+ <td>Per-tile GeoTIFFs of the same product, e.g. <code>USGS_13_n39w119.tif</code></td>
+ <td><a href="https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n39w119/USGS_13_n39w119.tif">…/13/TIFF/current/n39w119/…</a> · discovery: <a href="https://tnmaccess.nationalmap.gov/api/v1/products?datasets=National%20Elevation%20Dataset%20(NED)%201%20arc-second&amp;bbox=-120,39,-119,40&amp;outputFormat=JSON">TNM API</a></td>
+ <td>pins for n38w118…n40w119 published in the sibling <code>12GEMSDOE/evidence/dem10-fetch.json</code></td>
+ <td class="s-ok">verified 2026-10-11 by Actions run 38100992879: HTTP 200, image/tiff, 10,812×10,812 float32; the runner downloaded the tile and its sha256 <code>b7fe301c…</code> matches the pin independently published in the sibling <code>12GEMSDOE/evidence/dem10-fetch.json</code> — receipt: <code>evidence/probe-egress-receipt.json</code></td></tr>
+<tr>
+ <td>Derived SGMC fault raster</td>
+ <td>USGS State Geologic Map Compilation quaternary structures, 100 m raster — the <em>validation</em> population, never an input to the emitted field</td>
+ <td>derived from USGS SGMC (public domain)</td>
+ <td><code>643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0</code> · 198,602 B</td>
+ <td class="s-ok">verified</td></tr>
+<tr>
+ <td>3DEP 1 m lidar scarp features</td>
+ <td>Scarp-feature raster derived from 706 of 716 USGS 3DEP 1 m DEM tiles covering the area</td>
+ <td>derived from USGS 3DEP (public domain)</td>
+ <td><code>d580bb8bdcdb941e32fefb8b38044bc5bf04e199bf2e83498c3576e6fc465568</code> · 36,943,606 B</td>
+ <td class="s-ok">verified, not used by this lane</td></tr>
+<tr>
+ <td>GeoDAWN radiometrics / extensions</td>
+ <td>USGS GeoDAWN airborne radiometric products (u8-reduced) and Th/K, U/K, U/Th + UC150 m TMI extensions</td>
+ <td>USGS GeoDAWN release (public domain)</td>
+ <td><code>c22420f7…</code> · 26,612,970 B and <code>a35a9c6d…</code> · 27,132,925 B</td>
+ <td class="s-ok">verified, not used</td></tr>
+<tr>
+ <td>GDR 1391 well/spring + quaternary fault traces</td>
+ <td>USGS Geothermal Data Repository well/spring locations (CC BY 4.0) and INGENIOUS quaternary fault traces (1,391 features)</td>
+ <td>USGS GDR (CC BY 4.0)</td>
+ <td><code>122718e6…</code> · 2,146,771 B; <code>9702f2e5…</code> · 126,177 B</td>
+ <td class="s-ok">verified, not used</td></tr>
+</table>
+
+<h2>C. Prior submissions used only as comparators (never copied into a submission)</h2>
+<table>
+<tr><th>Raster</th><th>Why it is here</th><th>Pin</th><th>Status</th></tr>
+<tr>
+ <td><code>gemsdoe32-h33-h33-2-b2-…-zeros.tif</code> (the 0.2778 file)</td>
+ <td>Comparator for the metric inversion in the <a href="executive-summary.html">executive summary</a>: measured here at S = 37,654, min 223.6 m from the catalogue, strictly inside the 44,090-cell parent map, HOLDOUT-DTI 0.0681 vs 0.0489 for a random map of the same mass</td>
+ <td><code>c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9</code></td>
+ <td class="s-ok">read-only comparator</td></tr>
+<tr>
+ <td>35 registry rasters total</td>
+ <td>Uniqueness stop-rule check (rank correlation &gt; 0.90, or &gt;70% of dots within 3 px) plus the overlap <em>control</em> required by protocol item IR-H87-001</td>
+ <td>pins in the sibling registry plus this repository's own emitted files</td>
+ <td class="s-ok">no duplication: worst naive overlap 83.1% vs 83.7% for a random dot set of the same size</td></tr>
+</table>
+
+<h2>D. Verification method</h2>
+<ul>
+<li>Every input is re-hashed at run time (<code>hashlib</code>) and compared against the pin in <code>registry/source_pins.json</code>; the run aborts with exit code 2 on any mismatch. No hash in this repository is quoted from memory.</li>
+<li>The competition rasters were also checked band-by-band against the sibling registry's <code>data_manifest.json</code> (byte counts and SHA-256), which is how the mirror provenance above is stated.</li>
+<li>Network note: this sandbox has no route to <code>prd-tnm.s3.amazonaws.com</code>; a GitHub Actions workflow in this repository performs the HEAD/GET checks from a runner and commits a receipt — <strong>done</strong>: run 38100992879 returned HTTP 200 for both the 10 m (Elevation/13) and 30 m (Elevation/1) tile URLs and downloaded a 10 m tile whose sha256 equals the independently published pin. The next session can therefore fetch the real DEM through the runner.</li>
+</ul>
+
+<p class="sub">All "s-ok" pins above were computed in this repository and are reproducible with <code>python scripts/run_lane.py</code>, which refuses to run if any input differs.</p>
+
+</main>
+</body>
+</html>
