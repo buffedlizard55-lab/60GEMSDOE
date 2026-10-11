@@ -1,391 +1,399 @@
 {
-  "generated_utc": "2026-10-11T05:23:57Z",
-  "repo": "60GEMSDOE",
-  "session": "2026-10-11 manual review: H65-1 INCONCLUSIVE -> STOP; no rerun at any resolution, no new TIFF or slot in this review. c7653 is an earlier NEGATIVE-STOP. H61/H62/H63 and H65-2..H65-5 proposals are historical/deferred only.",
-  "current_official_leaderboard_top": {
-    "rank": 1,
-    "score": 0.4133,
-    "participant": "xiaofanhu",
-    "verified": "2026-10-11",
-    "public_rows": 50,
-    "snapshot": "../registry/leaderboard_snapshot_2026-10-11.json",
-    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
-    "scope": "public leaderboard only; dynamic; no file attribution"
+ "generated_utc": "2026-10-11T18:47:46Z",
+ "repo": "60GEMSDOE",
+ "session": "2026-10-11 H70-1 paired-polarity knickpoint trains: G1 first test -0.0347 [-0.0853, +0.0126] -> STOP; NEGATIVE result, no new TIFF, no slot. E1b off-catalogue diagnostic +0.0567 [+0.0103, +0.1030] recorded for H71.",
+ "current_official_leaderboard_top": {
+  "rank": 1,
+  "score": 0.4133,
+  "participant": "xiaofanhu",
+  "verified": "2026-10-11",
+  "public_rows": 50,
+  "snapshot": "../registry/leaderboard_snapshot_2026-10-11.json",
+  "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+  "scope": "public leaderboard only; dynamic; no file attribution"
+ },
+ "group_best_owner_reported": {
+  "score": 0.2778,
+  "file": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
+  "evidence_class": "OWNER-REPORT",
+  "status": "H33-2-B2 0.2778 is owner-reported; no organizer receipt ties it to exact bytes. An archived report calls a same-named file 0.2708; identity/scores are unreconciled. Public ranks 23 and 36 are not file attributions."
+ },
+ "submissions": [
+  {
+   "name": "60GEMSDOE-H65-1-DEM10-KNICK-40000",
+   "file": "downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+   "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
+   "dots": 40000,
+   "verdict": "NEGATIVE - research-only; do not submit (first-test INCONCLUSIVE -> STOP; raw 3-px overlap gate fails)",
+   "evidence_class": "HOLDOUT-DTI",
+   "evaluator_version": "gems57-pooled-hide-v2",
+   "holdout_dti": 0.01158,
+   "ci95": [
+    0.0084,
+    0.01462
+   ],
+   "withheld_positive_pixels": 22641,
+   "first_test": {
+    "mean": 0.03259120937549255,
+    "ci95": [
+     -0.014353584532868854,
+     0.07899523324810305
+    ],
+    "median": -0.009159043588752754,
+    "n_components": 262,
+    "verdict": "INCONCLUSIVE -> STOP"
+   },
+   "uniqueness": "NOT CLEARED: 651/655 checked; max |Spearman| 0.0282; max final 3-px dot overlap 1.00 against 0.70; pre-placement surface screen not documented; tool unique=false.",
+   "validator": "Local format/range preflight passed with 0 listed problems; not organizer acceptance.",
+   "submitted_to_competition": false,
+   "archive_status": "latest recorded run; STOP; download for research only; do not submit or spend a slot"
   },
-  "group_best_owner_reported": {
-    "score": 0.2778,
-    "file": "h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
-    "evidence_class": "OWNER-REPORT",
-    "status": "H33-2-B2 0.2778 is owner-reported; no organizer receipt ties it to exact bytes. An archived report calls a same-named file 0.2708; identity/scores are unreconciled. Public ranks 23 and 36 are not file attributions."
+  {
+   "name": "h62-1-undercover-step-48000px-20261011T020550Z",
+   "file": "downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif",
+   "sha256": "b8d29b2f445ccc9746af53e0716e22b866bb5747297cf81aa2ab973660af6857",
+   "dots": 48000,
+   "verdict": "NEGATIVE - research-only; do not submit (failed gates G2, G3, G4)",
+   "evidence_class": "HOLDOUT-DTI",
+   "evaluator_version": "gems52-pooled-hide-v1",
+   "holdout_dti": 0.0042028353060120215,
+   "ci95": [
+    0.0032113908162253145,
+    0.005281897645342627
+   ],
+   "withheld_positive_pixels": 36414,
+   "prereg": "registry/preregistration-h62.json (written before computation)",
+   "uniqueness": "G0 surface PASS (max |rho| 0.0995); G4 raw FAIL (83.1% <=3px of r13_lattice, excess-over-random -0.0059, rank |rho| 0.0156)",
+   "validator": "0 problems (receipt: docs/downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.json)",
+   "submitted_to_competition": false,
+   "archive_status": "historical, not current, research-only; G2/G3/G4 negative; do not submit"
   },
-  "submissions": [
-    {
-      "name": "60GEMSDOE-H65-1-DEM10-KNICK-40000",
-      "file": "downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
-      "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
-      "dots": 40000,
-      "verdict": "NEGATIVE - research-only; do not submit (first-test INCONCLUSIVE -> STOP; raw 3-px overlap gate fails)",
-      "evidence_class": "HOLDOUT-DTI",
-      "evaluator_version": "gems57-pooled-hide-v2",
-      "holdout_dti": 0.01158,
-      "ci95": [
-        0.0084,
-        0.01462
-      ],
-      "withheld_positive_pixels": 22641,
-      "first_test": {
-        "mean": 0.03259120937549255,
-        "ci95": [
-          -0.014353584532868854,
-          0.07899523324810305
-        ],
-        "median": -0.009159043588752754,
-        "n_components": 262,
-        "verdict": "INCONCLUSIVE -> STOP"
-      },
-      "uniqueness": "NOT CLEARED: 651/655 checked; max |Spearman| 0.0282; max final 3-px dot overlap 1.00 against 0.70; pre-placement surface screen not documented; tool unique=false.",
-      "validator": "Local format/range preflight passed with 0 listed problems; not organizer acceptance.",
-      "submitted_to_competition": false,
-      "archive_status": "latest recorded run; STOP; download for research only; do not submit or spend a slot"
-    },
-    {
-      "name": "h62-1-undercover-step-48000px-20261011T020550Z",
-      "file": "downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.tif",
-      "sha256": "b8d29b2f445ccc9746af53e0716e22b866bb5747297cf81aa2ab973660af6857",
-      "dots": 48000,
-      "verdict": "NEGATIVE - research-only; do not submit (failed gates G2, G3, G4)",
-      "evidence_class": "HOLDOUT-DTI",
-      "evaluator_version": "gems52-pooled-hide-v1",
-      "holdout_dti": 0.0042028353060120215,
-      "ci95": [
-        0.0032113908162253145,
-        0.005281897645342627
-      ],
-      "withheld_positive_pixels": 36414,
-      "prereg": "registry/preregistration-h62.json (written before computation)",
-      "uniqueness": "G0 surface PASS (max |rho| 0.0995); G4 raw FAIL (83.1% <=3px of r13_lattice, excess-over-random -0.0059, rank |rho| 0.0156)",
-      "validator": "0 problems (receipt: docs/downloads/gems60-h62-1-undercover-step-48000px-20261011T020550Z-zeros.json)",
-      "submitted_to_competition": false,
-      "archive_status": "historical, not current, research-only; G2/G3/G4 negative; do not submit"
-    },
-    {
-      "name": "gems61-lane-thermal-knick-40000px-20261011T020352Z",
-      "file": "downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif",
-      "sha256": "a856efbac5e229194da7374c720eb83d5fd2e88568657b0f763a2e6af3d95d90",
-      "dots": 40000,
-      "verdict": "NEGATIVE (resolution-limited) - research-only; do not submit",
-      "evidence_class": "HOLDOUT-DTI",
-      "holdout_dti": 0.002495104638095785,
-      "ci95": [
-        0.0015064297795352602,
-        0.00351135785500254
-      ],
-      "withheld_positive_pixels": 36439,
-      "paired_delta_vs_champion": [
-        -0.001417,
-        -0.00243,
-        -0.000312
-      ],
-      "uniqueness": "NOT CLEARED: raw 3-px overlap 84.37% / 70.12% exceeds the 70% gate; excess-over-random is diagnostic only and does not pass the gate.",
-      "validator": "0 problems (all-finite float32, min 0.0, max 1.0, 0 NaN, 0 on catalogue)",
-      "submitted_to_competition": false,
-      "archive_status": "historical, not current, research-only; do not submit"
-    },
-    {
-      "name": "gems60-knickpoint-lane-c7653-20261011T000000Z",
-      "file": "downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
-      "sha256": "c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c",
-      "dots": 7653,
-      "verdict": "NEGATIVE - research-only; do not submit",
-      "evidence_class": "HOLDOUT-DTI",
-      "holdout_dti": 0.0021375045131882472,
-      "ci95": [
-        0.0017900288395109047,
-        0.002513410633773401
-      ],
-      "uniqueness": "NOT CLEARED: six archived final binary-dot-mask comparisons only; no pre-placement score-surface Spearman screen or complete-registry coverage.",
-      "validator": "0 problems",
-      "submitted_to_competition": false,
-      "leakage": "NOT CLEARED: legacy 0.50145 was (Spearman rho + 1)/2, not ROC AUC; no feature-by-feature canary table.",
-      "first_test_verdict": "NEGATIVE-STOP",
-      "download_status": "research only; DO NOT SUBMIT",
-      "archive_status": "current research artifact only; NEGATIVE-STOP; do not submit"
-    }
-  ],
-  "anchor_owner_scored": {
-    "name": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
-    "file": "downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
-    "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
-    "live_score_owner_reported": 0.2778,
-    "dots": 37654,
-    "on_catalogue_dots": 0,
-    "role": "Owner-reported H33-2-B2 anchor; no organizer receipt tying score to bytes; unchanged for research comparison only"
+  {
+   "name": "gems61-lane-thermal-knick-40000px-20261011T020352Z",
+   "file": "downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.tif",
+   "sha256": "a856efbac5e229194da7374c720eb83d5fd2e88568657b0f763a2e6af3d95d90",
+   "dots": 40000,
+   "verdict": "NEGATIVE (resolution-limited) - research-only; do not submit",
+   "evidence_class": "HOLDOUT-DTI",
+   "holdout_dti": 0.002495104638095785,
+   "ci95": [
+    0.0015064297795352602,
+    0.00351135785500254
+   ],
+   "withheld_positive_pixels": 36439,
+   "paired_delta_vs_champion": [
+    -0.001417,
+    -0.00243,
+    -0.000312
+   ],
+   "uniqueness": "NOT CLEARED: raw 3-px overlap 84.37% / 70.12% exceeds the 70% gate; excess-over-random is diagnostic only and does not pass the gate.",
+   "validator": "0 problems (all-finite float32, min 0.0, max 1.0, 0 NaN, 0 on catalogue)",
+   "submitted_to_competition": false,
+   "archive_status": "historical, not current, research-only; do not submit"
   },
-  "lane_gate": {
-    "latest_run": "H65-1",
-    "latest_first_test": "INCONCLUSIVE -> STOP; mean +0.032591 log-ksn step contrast, 95% CI [-0.014354, +0.078995], 262 components; failed preregistered PROCEED gate.",
-    "holdout": "HOLDOUT-DTI 0.01158 [0.00840, 0.01462], 22,641 withheld positives, evaluator gems57-pooled-hide-v2; random-mass control 0.03908 [0.03568, 0.04231]. Not a leaderboard score.",
-    "uniqueness": "NOT CLEARED: 651/655 rasters checked; max |Spearman| 0.0282; final-dot 3-px overlap 1.00 > 0.70; pre-placement surface check not documented; tool unique=false.",
-    "leakage": "Four lane features checked individually; max(AUC,1-AUC) <= 0.5179. dist_to_visible 0.9243 is a deliberate positive control, not a lane input.",
-    "stop_rule": "H65-1 stop is binding; do not rerun at any resolution. The earlier c7653 E1 was also NEGATIVE-STOP.",
-    "submission": "No recommendation; research-only TIFF; 0 slots used."
-  },
-  "irregularities": [
-    "2026-10-11 manual official board read: #1 xiaofanhu 0.4133; DARD #8 0.3195; extradr19 #23 0.2778. Public scores are not this project's scores; the H33 numeric match is not attribution.",
-    "rules PDF host in brief (docs.nlr.gov) wrong; real host www.nlr.gov, DOI 10.2172/3818146",
-    "official sample_submission.tif contains the 60,988-px catalogue pattern despite 'total fault absence' wording",
-    "mirrored example_submission.tif is 7,172,775 cells of 1.0 (complement of the label zero-set) - flagged, never used",
-    "sandbox egress blocks prd-tnm.s3.amazonaws.com / ScienceBase: 10m/1m raw DEM not fetchable here; runner path verified HTTP 200",
-    "local instruments cannot rank the live leaderboard (E1 audit + LM 2/6 orderings) - never promote on a local rank alone",
-    "sandbox egress blocks prd-tnm.s3.amazonaws.com / ScienceBase: 10m/1m raw DEM not fetchable here (source free+official; 716 pinned URLs)",
-    "requirements.txt was missing numba (CI could not collect tests/test_lane_core.py) - fixed in this run",
-    "scripts/e3_validate.py pointed at a private sandbox path /home/user/registry_rasters - fixed to registry/rasters in this run",
-    "scripts/run_lane.py did not accept the manifest's external/ destination for derived_sgmc_faults_100m_u8.tif - fixed in this run",
-    "the raw 70% dot-overlap gate is uninformative against dense lattice registry rasters (matched random also scores 83.7%); family selector already uses excess-over-random - protocol text should adopt the excess form",
-    "Fixed 2026-10-11: scheduled refresh_feed.py previously fetched DrivenData; fetch/parser removed, workflow now preserves manual board snapshots and probes only non-competition sources.",
-    "Fixed evidence label 2026-10-11: c7653 run card called (Spearman rho + 1)/2 a field AUC; corrected to a rank-association diagnostic, not ROC AUC. Feature-by-feature leakage audit remains absent.",
-    "Fixed evidence label 2026-10-11: c7653 Spearman values were computed on final binary-dot masks, not the pre-placement continuous score surface; six post-placement overlap checks do not establish global registry clearance.",
-    "H33 score attribution irregularity: archived lane-chi report calls a same-named file 0.2708; current owner claim is 0.2778; neither has an organizer receipt tying score to exact bytes (IR-60-H33-SCORE-20261011).",
-    "H61 thermal artifact raw overlap exceeds the 70% gate; the later excess-over-random diagnostic is not a retroactive pass."
-  ],
-  "next_steps": [
-    "Respect H65-1 INCONCLUSIVE -> STOP; do not rerun the knickpoint lane at any resolution, generate another TIFF, or spend a slot.",
-    "Keep the four channel-steepness hypotheses UNTESTED / DEFERRED; this list is not authorization. H65-1 says do not rerun this lane.",
-    "The official public board is a manual 2026-10-11 snapshot; update only through a permitted manual rendered-page review, never an automated competition-host request."
-  ],
-  "h62_gate": {
-    "experiment": "H62-1 archived run; not current",
-    "prereg": "60H62-PREREG-1",
-    "gates": {
-      "G0_surface_uniqueness": "PASS (max |rho| 0.0995 <= 0.90)",
-      "G1_leakage_canary": "PASS (field AUC 0.4537; no feature > 0.90)",
-      "G2_beats_random": "FAIL (hideout 4/4 folds OK; off-catalogue 0/9 budget rungs)",
-      "G3_beats_holdout_best": "FAIL (0.00420 vs d28 0.08623)",
-      "G4_dots_uniqueness_raw": "FAIL (83.1% <=3px of r13_lattice vs gate 70%; excess-over-random -0.0059; |rho| 0.0156)"
-    },
-    "result": "NEGATIVE - no slot spent",
-    "status": "historical; negative; raw G4 gate failed; do not submit"
-  },
-  "leaderboard_snapshot": {
-    "observed_date": "2026-10-11",
-    "rows": 50,
-    "file": "../registry/leaderboard_snapshot_2026-10-11.json",
-    "top": {
-      "rank": 1,
-      "participant": "xiaofanhu",
-      "score": 0.4133
-    },
-    "DARD": {
-      "rank": 8,
-      "score": 0.3195
-    },
-    "extradr19": {
-      "rank": 23,
-      "score": 0.2778
-    },
-    "retrieval": "manual page fetch; no automated competition-host request"
-  },
-  "active_lane_review": {
-    "lane": "channel steepness / chi / knickpoints",
-    "latest_run": "H65-1",
-    "artifact": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
-    "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
-    "artifact_status": "existing local-format-valid research artifact; download for research only; do not submit; uniqueness not cleared; no slot approval",
-    "first_test": {
-      "test": "withheld-segment steepness-step contrast vs same-orientation random transects",
-      "n_components": 262,
-      "mean_log_ksn_step_contrast": 0.03259120937549255,
-      "median": -0.009159043588752754,
-      "fraction_positive": 0.4732824427480916,
-      "ci95": [
-        -0.014353584532868854,
-        0.07899523324810305
-      ],
-      "result": "INCONCLUSIVE",
-      "decision": "STOP (does not pass preregistered PROCEED gate)",
-      "evidence": "evidence/h65_e1_first_test.json"
-    },
-    "holdout": {
-      "evidence_class": "HOLDOUT-DTI",
-      "evaluator": "gems57-pooled-hide-v2",
-      "withheld_positive_pixels": 22641,
-      "mean": 0.01158,
-      "ci95": [
-        0.0084,
-        0.01462
-      ],
-      "random_mass_control": 0.03908,
-      "random_mass_control_ci95": [
-        0.03568,
-        0.04231
-      ],
-      "not_a_leaderboard_score": true,
-      "evidence": "evidence/h65_holdout.json"
-    },
-    "decision": "STOP; no rerun at any resolution; this review created no TIFF and used no slot",
-    "uniqueness": {
-      "expected_registry_rasters": 655,
-      "checked_registry_rasters": 651,
-      "complete_accessible_scan": false,
-      "max_abs_spearman_reported": 0.02819544413278874,
-      "max_final_dot_overlap_within_3px": 1.0,
-      "limits": {
-        "abs_spearman": 0.9,
-        "dot_overlap": 0.7
-      },
-      "byte_unique_among_checked": true,
-      "pixel_unique_among_checked": true,
-      "tool_verdict_unique": false,
-      "preplacement_surface_spearman_check_documented": false,
-      "postplacement_final_dot_overlap_check_documented": true,
-      "clearance": "NOT CLEARED: the raw 3-px overlap exceeds the 70% limit and the scan is incomplete. A matched random-control diagnostic does not override the literal gate.",
-      "evidence": "evidence/h65_uniqueness.json",
-      "overlap_control_evidence": "evidence/h65_overlap_control.json"
-    },
-    "leakage_canaries": {
-      "feature_by_feature_audit": "Recorded for all four lane inputs: knickpoint_step max(AUC,1-AUC)=0.517; ksn=0.5134; drainage_area=0.5179; lane_p=0.5167. The deliberate dist_to_visible positive control is 0.9243 and is not a lane input.",
-      "evidence": "evidence/h65_runcard.json",
-      "note": "This result does not retroactively clear the incomplete c7653 leakage audit."
-    },
-    "previous_c7653": {
-      "status": "NEGATIVE-STOP; historical, not the latest result",
-      "first_test": {
-        "placement_null_auc": 0.22436,
-        "orientation_matched_null_auc": 0.25641
-      },
-      "holdout_dti": {
-        "mean": 0.0021375,
-        "ci95": [
-          0.00179003,
-          0.00251341
-        ],
-        "withheld_positives": 36414,
-        "evaluator": "gems52-pooled-hide-v1"
-      },
-      "artifact": "docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
-      "clearance": "Feature-by-feature leakage audit and full pre-/post-placement registry uniqueness clearance were not established."
-    }
-  },
-  "h33_claim_review": {
-    "artifact": "H33-2-B2",
-    "owner_reported_score": 0.2778,
-    "organizer_confirmed": false,
-    "local_validation": "evidence/h33_validation.json reports 2,545 pixels pruned within 2 px, 37,654 remain; LM-calibrated mean 0.2679205 vs base 0.2630510 (+0.0048695; 4/4 folds), not a live score.",
-    "public_numeric_match": "extradr19 is rank 23 at 0.2778 on the 2026-10-11 public page; coincidence only; no attribution.",
-    "archived_same_name_score_claim": 0.2708,
-    "scores_reconciled_to_identical_bytes": false,
-    "organizer_receipt_linking_score_to_exact_raster_bytes": false,
-    "interpretation": "Owner-reported 0.2778 remains unverified; archived same-name 0.2708 claim is unreconciled. Local LM delta is instrument evidence only; public board rows do not attribute files."
-  },
-  "active_site_status": {
-    "review_date": "2026-10-11",
-    "active_run": "H65-1",
-    "active_lane": "channel-steepness / χ / knickpoints",
-    "status": "STOP",
-    "stop_reason": "The H65-1 preregistered first test was INCONCLUSIVE (95% CI crosses zero); under the pre-registered rule, failure to establish a positive signal means STOP. The H65 report prohibits rerunning the knickpoint lane at any resolution. No follow-up experiment or submission is authorized.",
-    "new_tiff_created_in_this_review": false,
-    "submission_slots_used_in_this_review": 0,
-    "recommended_competition_submission": null,
-    "research_artifact": {
-      "path": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
-      "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
-      "submission_name": "60GEMSDOE-H65-1-DEM10-KNICK-40000",
-      "artifact_filename_id": "gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b",
-      "note": "H65-1 native 3DEP 10m chi/ksn knickpoints, >=3 independent drainages, 40000 dots; E1 failed: NEGATIVE, research only",
-      "note_chars": 116,
-      "download_ok_for_research": true,
-      "submit_to_competition": false,
-      "format_validation": "Local preflight passed: single-band float32 EPSG:32611, 3292x3730 on the official 100 m grid, 40,000 in-footprint positives, finite values in [0,1], 0 listed problems. This is not organizer acceptance, uniqueness clearance, or upload approval.",
-      "validator_receipt": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.json",
-      "run_card": "evidence/h65_runcard.json"
-    },
-    "latest_first_test": {
-      "test": "withheld-segment steepness-step contrast vs same-orientation random transects",
-      "n_components": 262,
-      "mean_log_ksn_step_contrast": 0.03259120937549255,
-      "median": -0.009159043588752754,
-      "fraction_positive": 0.4732824427480916,
-      "ci95": [
-        -0.014353584532868854,
-        0.07899523324810305
-      ],
-      "result": "INCONCLUSIVE",
-      "decision": "STOP (does not pass preregistered PROCEED gate)",
-      "evidence": "evidence/h65_e1_first_test.json"
-    },
-    "latest_holdout": {
-      "evidence_class": "HOLDOUT-DTI",
-      "evaluator": "gems57-pooled-hide-v2",
-      "withheld_positive_pixels": 22641,
-      "mean": 0.01158,
-      "ci95": [
-        0.0084,
-        0.01462
-      ],
-      "random_mass_control": 0.03908,
-      "random_mass_control_ci95": [
-        0.03568,
-        0.04231
-      ],
-      "not_a_leaderboard_score": true,
-      "evidence": "evidence/h65_holdout.json"
-    },
-    "leakage_review": {
-      "feature_by_feature_audit": "Recorded for all four lane inputs: knickpoint_step max(AUC,1-AUC)=0.517; ksn=0.5134; drainage_area=0.5179; lane_p=0.5167. The deliberate dist_to_visible positive control is 0.9243 and is not a lane input.",
-      "evidence": "evidence/h65_runcard.json",
-      "note": "This result does not retroactively clear the incomplete c7653 leakage audit."
-    },
-    "registry_uniqueness_review": {
-      "expected_registry_rasters": 655,
-      "checked_registry_rasters": 651,
-      "complete_accessible_scan": false,
-      "max_abs_spearman_reported": 0.02819544413278874,
-      "max_final_dot_overlap_within_3px": 1.0,
-      "limits": {
-        "abs_spearman": 0.9,
-        "dot_overlap": 0.7
-      },
-      "byte_unique_among_checked": true,
-      "pixel_unique_among_checked": true,
-      "tool_verdict_unique": false,
-      "preplacement_surface_spearman_check_documented": false,
-      "postplacement_final_dot_overlap_check_documented": true,
-      "clearance": "NOT CLEARED: the raw 3-px overlap exceeds the 70% limit and the scan is incomplete. A matched random-control diagnostic does not override the literal gate.",
-      "evidence": "evidence/h65_uniqueness.json",
-      "overlap_control_evidence": "evidence/h65_overlap_control.json"
-    },
-    "previous_run_c7653": {
-      "status": "NEGATIVE-STOP; historical, not the latest result",
-      "first_test": {
-        "placement_null_auc": 0.22436,
-        "orientation_matched_null_auc": 0.25641
-      },
-      "holdout_dti": {
-        "mean": 0.0021375,
-        "ci95": [
-          0.00179003,
-          0.00251341
-        ],
-        "withheld_positives": 36414,
-        "evaluator": "gems52-pooled-hide-v1"
-      },
-      "artifact": "docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
-      "clearance": "Feature-by-feature leakage audit and full pre-/post-placement registry uniqueness clearance were not established."
-    },
-    "leaderboard_snapshot": "registry/leaderboard_snapshot_2026-10-11.json",
-    "leaderboard_source": "Manual rendered-page read of the official public leaderboard; no automated request",
-    "h33_claim": {
-      "reported_score": 0.2778,
-      "status": "OWNER-REPORTED / UNVERIFIED",
-      "local_lm_instrument_delta": 0.0048695,
-      "organizer_receipt_linking_score_to_raster": false,
-      "archived_same_name_score_claim": 0.2708,
-      "scores_reconciled_to_identical_bytes": false,
-      "public_rows_are_project_file_attributions": false,
-      "interpretation": "Neither the 0.2778 nor 0.2708 claim is verified against the exact TIFF bytes by an organizer receipt. Public leaderboard rows and a local LM-calibrated delta do not establish file attribution or a live-score improvement."
-    },
-    "report": "docs/research/active-lane-review-2026-10-11.md",
-    "hypothesis_backlog": "docs/research/next-chi-hypotheses-2026-10-11.md",
-    "final_run_card": "evidence/h65_runcard.json"
+  {
+   "name": "gems60-knickpoint-lane-c7653-20261011T000000Z",
+   "file": "downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
+   "sha256": "c4f006133f7203ac5a26715dbe774f9892efcb15815001900256cd9cb7b0a64c",
+   "dots": 7653,
+   "verdict": "NEGATIVE - research-only; do not submit",
+   "evidence_class": "HOLDOUT-DTI",
+   "holdout_dti": 0.0021375045131882472,
+   "ci95": [
+    0.0017900288395109047,
+    0.002513410633773401
+   ],
+   "uniqueness": "NOT CLEARED: six archived final binary-dot-mask comparisons only; no pre-placement score-surface Spearman screen or complete-registry coverage.",
+   "validator": "0 problems",
+   "submitted_to_competition": false,
+   "leakage": "NOT CLEARED: legacy 0.50145 was (Spearman rho + 1)/2, not ROC AUC; no feature-by-feature canary table.",
+   "first_test_verdict": "NEGATIVE-STOP",
+   "download_status": "research only; DO NOT SUBMIT",
+   "archive_status": "current research artifact only; NEGATIVE-STOP; do not submit"
   }
+ ],
+ "anchor_owner_scored": {
+  "name": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros",
+  "file": "downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+  "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "live_score_owner_reported": 0.2778,
+  "dots": 37654,
+  "on_catalogue_dots": 0,
+  "role": "Owner-reported H33-2-B2 anchor; no organizer receipt tying score to bytes; unchanged for research comparison only"
+ },
+ "lane_gate": {
+  "latest_run": "H65-1",
+  "latest_first_test": "INCONCLUSIVE -> STOP; mean +0.032591 log-ksn step contrast, 95% CI [-0.014354, +0.078995], 262 components; failed preregistered PROCEED gate.",
+  "holdout": "HOLDOUT-DTI 0.01158 [0.00840, 0.01462], 22,641 withheld positives, evaluator gems57-pooled-hide-v2; random-mass control 0.03908 [0.03568, 0.04231]. Not a leaderboard score.",
+  "uniqueness": "NOT CLEARED: 651/655 rasters checked; max |Spearman| 0.0282; final-dot 3-px overlap 1.00 > 0.70; pre-placement surface check not documented; tool unique=false.",
+  "leakage": "Four lane features checked individually; max(AUC,1-AUC) <= 0.5179. dist_to_visible 0.9243 is a deliberate positive control, not a lane input.",
+  "stop_rule": "H65-1 stop is binding; do not rerun at any resolution. The earlier c7653 E1 was also NEGATIVE-STOP.",
+  "submission": "No recommendation; research-only TIFF; 0 slots used."
+ },
+ "irregularities": [
+  "2026-10-11 manual official board read: #1 xiaofanhu 0.4133; DARD #8 0.3195; extradr19 #23 0.2778. Public scores are not this project's scores; the H33 numeric match is not attribution.",
+  "rules PDF host in brief (docs.nlr.gov) wrong; real host www.nlr.gov, DOI 10.2172/3818146",
+  "official sample_submission.tif contains the 60,988-px catalogue pattern despite 'total fault absence' wording",
+  "mirrored example_submission.tif is 7,172,775 cells of 1.0 (complement of the label zero-set) - flagged, never used",
+  "sandbox egress blocks prd-tnm.s3.amazonaws.com / ScienceBase: 10m/1m raw DEM not fetchable here; runner path verified HTTP 200",
+  "local instruments cannot rank the live leaderboard (E1 audit + LM 2/6 orderings) - never promote on a local rank alone",
+  "sandbox egress blocks prd-tnm.s3.amazonaws.com / ScienceBase: 10m/1m raw DEM not fetchable here (source free+official; 716 pinned URLs)",
+  "requirements.txt was missing numba (CI could not collect tests/test_lane_core.py) - fixed in this run",
+  "scripts/e3_validate.py pointed at a private sandbox path /home/user/registry_rasters - fixed to registry/rasters in this run",
+  "scripts/run_lane.py did not accept the manifest's external/ destination for derived_sgmc_faults_100m_u8.tif - fixed in this run",
+  "the raw 70% dot-overlap gate is uninformative against dense lattice registry rasters (matched random also scores 83.7%); family selector already uses excess-over-random - protocol text should adopt the excess form",
+  "Fixed 2026-10-11: scheduled refresh_feed.py previously fetched DrivenData; fetch/parser removed, workflow now preserves manual board snapshots and probes only non-competition sources.",
+  "Fixed evidence label 2026-10-11: c7653 run card called (Spearman rho + 1)/2 a field AUC; corrected to a rank-association diagnostic, not ROC AUC. Feature-by-feature leakage audit remains absent.",
+  "Fixed evidence label 2026-10-11: c7653 Spearman values were computed on final binary-dot masks, not the pre-placement continuous score surface; six post-placement overlap checks do not establish global registry clearance.",
+  "H33 score attribution irregularity: archived lane-chi report calls a same-named file 0.2708; current owner claim is 0.2778; neither has an organizer receipt tying score to exact bytes (IR-60-H33-SCORE-20261011).",
+  "H61 thermal artifact raw overlap exceeds the 70% gate; the later excess-over-random diagnostic is not a retroactive pass."
+ ],
+ "next_steps": [
+  "Respect H65-1 INCONCLUSIVE -> STOP; do not rerun the knickpoint lane at any resolution, generate another TIFF, or spend a slot.",
+  "Keep the four channel-steepness hypotheses UNTESTED / DEFERRED; this list is not authorization. H65-1 says do not rerun this lane.",
+  "The official public board is a manual 2026-10-11 snapshot; update only through a permitted manual rendered-page review, never an automated competition-host request."
+ ],
+ "h62_gate": {
+  "experiment": "H62-1 archived run; not current",
+  "prereg": "60H62-PREREG-1",
+  "gates": {
+   "G0_surface_uniqueness": "PASS (max |rho| 0.0995 <= 0.90)",
+   "G1_leakage_canary": "PASS (field AUC 0.4537; no feature > 0.90)",
+   "G2_beats_random": "FAIL (hideout 4/4 folds OK; off-catalogue 0/9 budget rungs)",
+   "G3_beats_holdout_best": "FAIL (0.00420 vs d28 0.08623)",
+   "G4_dots_uniqueness_raw": "FAIL (83.1% <=3px of r13_lattice vs gate 70%; excess-over-random -0.0059; |rho| 0.0156)"
+  },
+  "result": "NEGATIVE - no slot spent",
+  "status": "historical; negative; raw G4 gate failed; do not submit"
+ },
+ "leaderboard_snapshot": {
+  "observed_date": "2026-10-11",
+  "rows": 50,
+  "file": "../registry/leaderboard_snapshot_2026-10-11.json",
+  "top": {
+   "rank": 1,
+   "participant": "xiaofanhu",
+   "score": 0.4133
+  },
+  "DARD": {
+   "rank": 8,
+   "score": 0.3195
+  },
+  "extradr19": {
+   "rank": 23,
+   "score": 0.2778
+  },
+  "retrieval": "manual page fetch; no automated competition-host request"
+ },
+ "active_lane_review": {
+  "lane": "channel steepness / chi / knickpoints",
+  "latest_run": "H65-1",
+  "artifact": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+  "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
+  "artifact_status": "existing local-format-valid research artifact; download for research only; do not submit; uniqueness not cleared; no slot approval",
+  "first_test": {
+   "test": "withheld-segment steepness-step contrast vs same-orientation random transects",
+   "n_components": 262,
+   "mean_log_ksn_step_contrast": 0.03259120937549255,
+   "median": -0.009159043588752754,
+   "fraction_positive": 0.4732824427480916,
+   "ci95": [
+    -0.014353584532868854,
+    0.07899523324810305
+   ],
+   "result": "INCONCLUSIVE",
+   "decision": "STOP (does not pass preregistered PROCEED gate)",
+   "evidence": "evidence/h65_e1_first_test.json"
+  },
+  "holdout": {
+   "evidence_class": "HOLDOUT-DTI",
+   "evaluator": "gems57-pooled-hide-v2",
+   "withheld_positive_pixels": 22641,
+   "mean": 0.01158,
+   "ci95": [
+    0.0084,
+    0.01462
+   ],
+   "random_mass_control": 0.03908,
+   "random_mass_control_ci95": [
+    0.03568,
+    0.04231
+   ],
+   "not_a_leaderboard_score": true,
+   "evidence": "evidence/h65_holdout.json"
+  },
+  "decision": "STOP; no rerun at any resolution; this review created no TIFF and used no slot",
+  "uniqueness": {
+   "expected_registry_rasters": 655,
+   "checked_registry_rasters": 651,
+   "complete_accessible_scan": false,
+   "max_abs_spearman_reported": 0.02819544413278874,
+   "max_final_dot_overlap_within_3px": 1.0,
+   "limits": {
+    "abs_spearman": 0.9,
+    "dot_overlap": 0.7
+   },
+   "byte_unique_among_checked": true,
+   "pixel_unique_among_checked": true,
+   "tool_verdict_unique": false,
+   "preplacement_surface_spearman_check_documented": false,
+   "postplacement_final_dot_overlap_check_documented": true,
+   "clearance": "NOT CLEARED: the raw 3-px overlap exceeds the 70% limit and the scan is incomplete. A matched random-control diagnostic does not override the literal gate.",
+   "evidence": "evidence/h65_uniqueness.json",
+   "overlap_control_evidence": "evidence/h65_overlap_control.json"
+  },
+  "leakage_canaries": {
+   "feature_by_feature_audit": "Recorded for all four lane inputs: knickpoint_step max(AUC,1-AUC)=0.517; ksn=0.5134; drainage_area=0.5179; lane_p=0.5167. The deliberate dist_to_visible positive control is 0.9243 and is not a lane input.",
+   "evidence": "evidence/h65_runcard.json",
+   "note": "This result does not retroactively clear the incomplete c7653 leakage audit."
+  },
+  "previous_c7653": {
+   "status": "NEGATIVE-STOP; historical, not the latest result",
+   "first_test": {
+    "placement_null_auc": 0.22436,
+    "orientation_matched_null_auc": 0.25641
+   },
+   "holdout_dti": {
+    "mean": 0.0021375,
+    "ci95": [
+     0.00179003,
+     0.00251341
+    ],
+    "withheld_positives": 36414,
+    "evaluator": "gems52-pooled-hide-v1"
+   },
+   "artifact": "docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
+   "clearance": "Feature-by-feature leakage audit and full pre-/post-placement registry uniqueness clearance were not established."
+  }
+ },
+ "h33_claim_review": {
+  "artifact": "H33-2-B2",
+  "owner_reported_score": 0.2778,
+  "organizer_confirmed": false,
+  "local_validation": "evidence/h33_validation.json reports 2,545 pixels pruned within 2 px, 37,654 remain; LM-calibrated mean 0.2679205 vs base 0.2630510 (+0.0048695; 4/4 folds), not a live score.",
+  "public_numeric_match": "extradr19 is rank 23 at 0.2778 on the 2026-10-11 public page; coincidence only; no attribution.",
+  "archived_same_name_score_claim": 0.2708,
+  "scores_reconciled_to_identical_bytes": false,
+  "organizer_receipt_linking_score_to_exact_raster_bytes": false,
+  "interpretation": "Owner-reported 0.2778 remains unverified; archived same-name 0.2708 claim is unreconciled. Local LM delta is instrument evidence only; public board rows do not attribute files."
+ },
+ "active_site_status": {
+  "review_date": "2026-10-11",
+  "active_run": "H65-1",
+  "active_lane": "channel-steepness / \u03c7 / knickpoints",
+  "status": "STOP",
+  "stop_reason": "The H65-1 preregistered first test was INCONCLUSIVE (95% CI crosses zero); under the pre-registered rule, failure to establish a positive signal means STOP. The H65 report prohibits rerunning the knickpoint lane at any resolution. No follow-up experiment or submission is authorized.",
+  "new_tiff_created_in_this_review": false,
+  "submission_slots_used_in_this_review": 0,
+  "recommended_competition_submission": null,
+  "research_artifact": {
+   "path": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+   "sha256": "0728d1193d9ee9f31e800ea8f9167058a409e5e17bdb24c1127ae94f3225375e",
+   "submission_name": "60GEMSDOE-H65-1-DEM10-KNICK-40000",
+   "artifact_filename_id": "gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b",
+   "note": "H65-1 native 3DEP 10m chi/ksn knickpoints, >=3 independent drainages, 40000 dots; E1 failed: NEGATIVE, research only",
+   "note_chars": 116,
+   "download_ok_for_research": true,
+   "submit_to_competition": false,
+   "format_validation": "Local preflight passed: single-band float32 EPSG:32611, 3292x3730 on the official 100 m grid, 40,000 in-footprint positives, finite values in [0,1], 0 listed problems. This is not organizer acceptance, uniqueness clearance, or upload approval.",
+   "validator_receipt": "docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.json",
+   "run_card": "evidence/h65_runcard.json"
+  },
+  "latest_first_test": {
+   "test": "withheld-segment steepness-step contrast vs same-orientation random transects",
+   "n_components": 262,
+   "mean_log_ksn_step_contrast": 0.03259120937549255,
+   "median": -0.009159043588752754,
+   "fraction_positive": 0.4732824427480916,
+   "ci95": [
+    -0.014353584532868854,
+    0.07899523324810305
+   ],
+   "result": "INCONCLUSIVE",
+   "decision": "STOP (does not pass preregistered PROCEED gate)",
+   "evidence": "evidence/h65_e1_first_test.json"
+  },
+  "latest_holdout": {
+   "evidence_class": "HOLDOUT-DTI",
+   "evaluator": "gems57-pooled-hide-v2",
+   "withheld_positive_pixels": 22641,
+   "mean": 0.01158,
+   "ci95": [
+    0.0084,
+    0.01462
+   ],
+   "random_mass_control": 0.03908,
+   "random_mass_control_ci95": [
+    0.03568,
+    0.04231
+   ],
+   "not_a_leaderboard_score": true,
+   "evidence": "evidence/h65_holdout.json"
+  },
+  "leakage_review": {
+   "feature_by_feature_audit": "Recorded for all four lane inputs: knickpoint_step max(AUC,1-AUC)=0.517; ksn=0.5134; drainage_area=0.5179; lane_p=0.5167. The deliberate dist_to_visible positive control is 0.9243 and is not a lane input.",
+   "evidence": "evidence/h65_runcard.json",
+   "note": "This result does not retroactively clear the incomplete c7653 leakage audit."
+  },
+  "registry_uniqueness_review": {
+   "expected_registry_rasters": 655,
+   "checked_registry_rasters": 651,
+   "complete_accessible_scan": false,
+   "max_abs_spearman_reported": 0.02819544413278874,
+   "max_final_dot_overlap_within_3px": 1.0,
+   "limits": {
+    "abs_spearman": 0.9,
+    "dot_overlap": 0.7
+   },
+   "byte_unique_among_checked": true,
+   "pixel_unique_among_checked": true,
+   "tool_verdict_unique": false,
+   "preplacement_surface_spearman_check_documented": false,
+   "postplacement_final_dot_overlap_check_documented": true,
+   "clearance": "NOT CLEARED: the raw 3-px overlap exceeds the 70% limit and the scan is incomplete. A matched random-control diagnostic does not override the literal gate.",
+   "evidence": "evidence/h65_uniqueness.json",
+   "overlap_control_evidence": "evidence/h65_overlap_control.json"
+  },
+  "previous_run_c7653": {
+   "status": "NEGATIVE-STOP; historical, not the latest result",
+   "first_test": {
+    "placement_null_auc": 0.22436,
+    "orientation_matched_null_auc": 0.25641
+   },
+   "holdout_dti": {
+    "mean": 0.0021375,
+    "ci95": [
+     0.00179003,
+     0.00251341
+    ],
+    "withheld_positives": 36414,
+    "evaluator": "gems52-pooled-hide-v1"
+   },
+   "artifact": "docs/downloads/gems60-knickpoint-lane-c7653-20261011T000000Z.tif",
+   "clearance": "Feature-by-feature leakage audit and full pre-/post-placement registry uniqueness clearance were not established."
+  },
+  "leaderboard_snapshot": "registry/leaderboard_snapshot_2026-10-11.json",
+  "leaderboard_source": "Manual rendered-page read of the official public leaderboard; no automated request",
+  "h33_claim": {
+   "reported_score": 0.2778,
+   "status": "OWNER-REPORTED / UNVERIFIED",
+   "local_lm_instrument_delta": 0.0048695,
+   "organizer_receipt_linking_score_to_raster": false,
+   "archived_same_name_score_claim": 0.2708,
+   "scores_reconciled_to_identical_bytes": false,
+   "public_rows_are_project_file_attributions": false,
+   "interpretation": "Neither the 0.2778 nor 0.2708 claim is verified against the exact TIFF bytes by an organizer receipt. Public leaderboard rows and a local LM-calibrated delta do not establish file attribution or a live-score improvement."
+  },
+  "report": "docs/research/active-lane-review-2026-10-11.md",
+  "hypothesis_backlog": "docs/research/next-chi-hypotheses-2026-10-11.md",
+  "final_run_card": "evidence/h65_runcard.json"
+ },
+ "latest_run": {
+  "id": "H70-1",
+  "verdict": "negative",
+  "new_tiff": false,
+  "slot_used": false,
+  "run_card": "../evidence/h70_runcard.json",
+  "primary_download_unchanged": "downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif"
+ }
 }

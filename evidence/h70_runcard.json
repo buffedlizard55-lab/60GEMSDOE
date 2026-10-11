@@ -1,0 +1,91 @@
+{
+  "run": "H70-1",
+  "hypothesis_id": "H70-1",
+  "lane": "tectonic geomorphology: chi / ksn / knickpoints (paired-polarity trains)",
+  "generated_utc": "2026-10-11T18:47:46Z",
+  "preregistration": "registry/preregistration-h70.json",
+  "budget_use": {
+    "experiments_used": 1,
+    "experiments_cap": 3,
+    "reason_not_more": "the mandated first test is the protocol's stop condition; running further preregistrations in the same hour to find a passing gate would be gate-shopping",
+    "session_wall_time_minutes": null
+  },
+  "hypothesis": "An active fault that steps the range-front base level drives a migrating incision wave up each transverse footwall drainage; in chi space that wave is a trapped PAIR of opposite-polarity steepness steps on the same branch: an upstream steepened crest (step_max > 0) and, exactly 500 m downstream along the same flow path (the committed substrate sig band), the wave's leading edge (step_min < 0). pair_strength = min(crest, base_drop), floored at ln(1.25), blockwise z-scored at 40 km, corroborated across >= 3 independent drainages along a common strike, was hypothesised to mark active fault traces the given Quaternary catalogue omits, with single-flank lithologic steps filtered out by the pairing itself.",
+  "mechanism": "Kirby & Whipple (2012) base-level-step -> knickpoint; Perron & Royden (2013) chi normalisation; Wobus et al. (2006) / Berlin & Anderson (2007) knickpoint waves: the profile steepens at the crest while the reach immediately downstream of the wave face remains gentle relative to the unperturbed reach below it, so the wave carries one positive and one negative chi-slope step, pinned to the same branch. Gailleton et al. (2019) segmentation motivates the fixed-window two-segment approximation used by the committed 10 m substrate.",
+  "named_non_fault_mimic_process": "A resistant-over-weak dipping lithologic couplet (its two contacts make a paired step as a channel crosses the unit twice). Countered by the radiometric-contact-gradient mask, the low-radioelement high-relief core mask, the >= 3-drainage along-strike alignment rule and 40 km blockwise standardization. Secondary mimics: debris-flow headcuts and fan-head trenches (ephemeral-wash mask ksn_max < 10 m^0.9), playa and closed-basin floors (raised_n >= 50), DEM fill artefacts.",
+  "substrate": {
+    "source": "USGS 3DEP 1/3 arc-second (~10 m) DEM, 18 tiles (public domain) -> committed 100 m reduction",
+    "manifest": "data/external/dem10_chi_100m.manifest.json (sha256-checked before computing)",
+    "feature_cache_receipt": "evidence/h70_feature_cache.json",
+    "channel_pixels": 786299,
+    "pair_defined_channel_pixels": 743640,
+    "candidate_pixels_after_confounds_and_floor": 13720
+  },
+  "first_test_G1_GATING": {
+    "evidence_class": "MEASUREMENT",
+    "target": "withheld catalogue segments (mode 'all', 8 cells, seeds 20/21 \u2014 the identical draw every prior lane run used)",
+    "n_components": 241,
+    "mean": -0.03469608848006856,
+    "median": 0.049123004314606075,
+    "ci95": [
+      -0.08530424352747466,
+      0.01264583296723547
+    ],
+    "fraction_positive": 0.6016597510373444,
+    "verdict": "STOP",
+    "gate": "G1: verdict == PROCEED (mean > 0 AND 95% CI lower bound > 0) required; anything else stops the lane",
+    "gate_verdict": "STOP",
+    "distribution_note": "median is positive (+0.049) while the mean is negative (-0.035): 60.2% of withheld crossings show a paired-step excess but a minority shows a strong deficit, so the skew kills the pooled contrast. No post-hoc rescue is claimed."
+  },
+  "first_test_ablation_and_diagnostics": {
+    "crest_only_ablation_identical_kernel": {
+      "evidence_class": "MEASUREMENT",
+      "mean": 0.032591207591210106,
+      "ci95": [
+        -0.014353586758144493,
+        0.07899523208377333
+      ],
+      "verdict": "INCONCLUSIVE",
+      "verification_certificate": "the crest-only ablation reproduces H65-1's published INCONCLUSIVE first test on the identical holdout draw and seeds to ~1e-9 (H65-1: mean 0.03259120937549255, CI [-0.0143535845, +0.0789952332]; H70 ablation: mean 0.03259120759121011, CI [-0.0143535868, +0.0789952321]) \u2014 run_h70's E1 path is the shared one, not a fork"
+    },
+    "E1b_sgmc_off_catalogue_NON_GATING": {
+      "evidence_class": "MEASUREMENT",
+      "n_components": 85,
+      "mean": 0.05673608173227323,
+      "median": 0.05300944212358444,
+      "ci95": [
+        0.010346126782969709,
+        0.10300385759671851
+      ],
+      "fraction_positive": 0.6235294117647059,
+      "verdict_if_it_were_gating": "PROCEED",
+      "reading": "the pairing is elevated at SGMC off-catalogue crossings (+0.057 [+0.010, +0.103]) \u2014 the opposite sign from H66's single-limb dksn (-0.113 STOP). The preregistration binds: G1 is the catalogue-withheld test; flip-flopping gates after seeing numbers is exactly the malpractice the protocol forbids, so this diagnostic changes nothing about the verdict and is recorded as research evidence for the next preregistered question."
+    }
+  },
+  "holdout_dti": {
+    "evidence_class": "HOLDOUT-DTI",
+    "dti": null,
+    "ci95": null,
+    "withheld_positive_pixels": null,
+    "reason": "not run: G1 STOP halts the lane before any surface exists (protocol rule 2 / prereg gates)"
+  },
+  "leakage_canary": {
+    "ran": false,
+    "reason": "canary is defined on the lane emission domain, which G1 STOP prevents from existing"
+  },
+  "correlation_overlap_vs_registry": "not applicable: no surface was built and no dots were emitted",
+  "raster_sha256": null,
+  "validator_output": null,
+  "submission_name": null,
+  "submission_note": null,
+  "verdict": "negative",
+  "what_would_have_been_shipped": "nothing. The negative card is the deliverable. The incumbent validated lane artifact (H66-1, docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif) remains portal-legal and unique; whether its selector promotion stands is unchanged by H70 (H70 probes a different statistic and adds the IR-70-SEL-01 selection-history caveat).",
+  "next_preregistered_question_recommended": "H71: paired-basin ksn contrast across fault blocks (rank 1 of the deferred backlog): the E1b flip (+0.0567 off-catalogue with CI > 0) says the PAIRED signal does live on mapped structures absent from the catalogue, but the pixel-crossing test population is the wrong one for it; test it at basin scale on a fresh 10 m substrate with explicit catchment pairing, masked for erodibility, with E1a-catalogue and E1b-SGMC-off both preregistered as gating before any number is seen.",
+  "links": {
+    "run_log": "evidence/h70_run.log",
+    "e1_rows": "evidence/h70_e1_first_test.json",
+    "feature_cache": "evidence/h70_feature_cache.json",
+    "lane_stop_record": "evidence/h70_lane_stop.json",
+    "preregistration": "registry/preregistration-h70.json"
+  }
+}

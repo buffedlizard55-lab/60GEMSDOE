@@ -1,0 +1,13 @@
+H70-1: paired-polarity knickpoint trains. Preregistration registry/preregistration-h70.json.
+H70-1: IR-70-GOV-01 governance deviation as registered (no fork of stopped runners; G1 enforced).
+[H70] grid 3730x3292 footprint=5,167,373 catalogue=60,988 (0.2s)
+[H70] confounds {'playa_px': 550267, 'basin_fill_px': 258104, 'conductive_px': 251815, 'lithology_source': 'SUBSTITUTE geodawn_rad_u8.tif K p95 + Th p95 (training_features.tif absent; IR-66-DATA-01)', 'ephemeral_wash_px': 186546, 'excluded_px': 2508880, 'channel_excluded_px': 408884, 'channel_px': 786299, 'rad_K_p95': 208.0, 'rad_Th_p95': 208.0, 'radcg70_px': 1590106, 'litho_core70_px': 205142, 'exclude_extra70_px': 1755180} (1.5s)
+[H70] candidates {'channel_pixels': 786299, 'valid_channel_pixels': 362607, 'candidate_pixels': 18005, 'z_min': 1.0, 'block_px': 400, 'pair_floor': 0.22314355131420976, 'candidate_pixels_after_pair_floor': 13720, 'min_sep_px': 2.8, 'include_positive_channels': True} (2.2s)
+[H70] crest ablation candidates {'channel_pixels': 786299, 'valid_channel_pixels': 377415, 'candidate_pixels': 33795, 'z_min': 1.0, 'block_px': 400} (2.2s)
+[H70] holdout cells=16 (28.2s)
+[H70] E1a pair_strength (GATING) {'evidence_class': 'MEASUREMENT', 'n_components': 241, 'mean': -0.03469608848006856, 'median': 0.049123004314606075, 'ci95': [-0.08530424352747466, 0.01264583296723547], 'fraction_positive': 0.6016597510373444, 'component_std': 0.37613837430407504, 'bootstrap': {'draws': 1000, 'seed': 60101, 'method': 'percentile over withheld components'}, 'verdict': 'STOP'} (79.0s)
+[H70] E1a crest-only ablation (mechanism contrast) {'evidence_class': 'MEASUREMENT', 'n_components': 262, 'mean': 0.032591207591210106, 'median': -0.009159055794589213, 'ci95': [-0.014353586758144493, 0.07899523208377333], 'fraction_positive': 0.4732824427480916, 'component_std': 0.3896411519749987, 'bootstrap': {'draws': 1000, 'seed': 60101, 'method': 'percentile over withheld components'}, 'verdict': 'INCONCLUSIVE'} (126.8s)
+[H70] SGMC 83,593 px | off-catalogue (>300 m) 62,703 px (127.0s)
+[H70] E1b off-catalogue diagnostic (NON-GATING) {'evidence_class': 'MEASUREMENT', 'n_components': 85, 'mean': 0.05673608173227323, 'median': 0.05300944212358444, 'ci95': [0.010346126782969709, 0.10300385759671851], 'fraction_positive': 0.6235294117647059, 'component_std': 0.22161867160929496, 'bootstrap': {'draws': 1000, 'seed': 60101, 'method': 'percentile over withheld components'}, 'verdict': 'PROCEED'} (170.8s)
+[H70] G1 STOP (170.8s)
+[H70] wrote evidence/h70_lane_stop.json -- STOP (170.8s)
