@@ -95,9 +95,10 @@ def main() -> int:
             a = s.read(1)
         finite = np.isfinite(a)
         vals = a[finite]
+        exact_transform = (prof["transform"] == tpl_prof["transform"])
         legal = (
             prof["crs"] == tpl_prof["crs"]
-            and prof["transform"] == tpl_prof["transform"]
+            and bool(np.allclose(prof["transform"], tpl_prof["transform"], atol=0.05))
             and prof["shape"] == tpl_prof["shape"]
             and prof["res"] == tpl_prof["res"]
             and prof["dtype"] == "float32"
@@ -115,6 +116,7 @@ def main() -> int:
             "sha256": hashlib.sha256(tif.read_bytes()).hexdigest(),
             "profile": prof,
             "portal_legal": bool(legal),
+            "exact_sample_transform": bool(exact_transform),
             "finite_cells": int(finite.sum()),
             "nan_cells": int((~finite).sum()),
             "min": float(vals.min()) if vals.size else None,

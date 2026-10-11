@@ -90,29 +90,36 @@ def main() -> int:
                     help="audit the continuous lane SURFACE (rank field before dot placement) "
                          "instead of the shipped dots, as the parallel-run protocol requires "
                          "both to be checked")
+    ap.add_argument("--local-corpus", action="store_true",
+                    help="scan all committed local registry rasters (registry/rasters, "
+                         "docs/downloads, submission) when .cache/registry is not populated")
     a = ap.parse_args()
     t0 = time.time()
     grid = G57.load_grid()
     fp = grid.footprint
+    import os
+    cache_name = os.environ.get("GEMS60_FEATURE_CACHE", "features60")
     if a.surface:
         # rebuild the exact production surface from the cached feature stack
         sys.path.insert(0, str(ROOT / "scripts"))
         from gems60 import geomorph as gm
         from gems60 import lane as L
-        from run_lane60 import confound_masks, load, load_step
-        import os
-        cache = ROOT / ".cache" / os.environ.get("GEMS60_FEATURE_CACHE", "features60")
-        import os as _os
+        from run_lane60 import confound_masks, load, load_meta, load_step
+        cache = ROOT / ".cache" / cache_name
+        meta_cfg = load_meta()
+        z_min = float(meta_cfg.get("z_min", L.Z_MIN))
+        inc_pos_ch = bool(meta_cfg.get("include_positive_channels", False))
         step = load_step()
         channel = np.load(cache / "channel.npy")
-        if (cache / "branch_sig.npy").is_file():      # substrate-supplied independence (H65-1)
+        if (cache / "branch_sig.npy").is_file():      # substrate-supplied independence (H65-1 / H66-1)
             branch = np.load(cache / "branch_sig.npy").astype(np.int64)
         else:
             branch = gm.branch_signature(np.load(cache / "dircode.npy"), fp,
                                          k=L.CORRIDOR_HALF_LEN_PX - 1).astype(np.int64)
         exclude, _conf = confound_masks(step, channel)
-        z, cand, cand_diag = L.prepare_candidates(step, channel, exclude)
-        res = L.surface_from_candidates(z, cand, branch, grid.catalogue, dict(cand_diag))
+        z, cand, cand_diag = L.prepare_candidates(step, channel, exclude, z_min=z_min)
+        res = L.surface_from_candidates(z, cand, branch, grid.catalogue, dict(cand_diag),
+                                        include_positive_channels=inc_pos_ch)
         mine = np.clip(np.nan_to_num(res.p, nan=0.0), 0.0, 1.0).astype(np.float32)
         print(f"[uniq] surface rebuilt: positive_px={int((mine > 0).sum())} "
               f"p_max={float(mine.max()):.4f}", flush=True)
@@ -127,8 +134,31 @@ def main() -> int:
     rng = np.random.default_rng(6060)
     fp_idx = np.flatnonzero(fp.ravel())
     screen_idx = np.sort(rng.choice(fp_idx, size=min(SCREEN_CELLS, fp_idx.size), replace=False))
-    index = json.loads((ROOT / "evidence" / "registry_full_index.json").read_text())
-    rows_index = index["rasters"]
+    cand_sha = (hashlib.sha256(a.candidate.read_bytes()).hexdigest()
+                if a.candidate and a.candidate.is_file() else None)
+    if a.local_corpus:
+        local_tifs = sorted(set(
+            list((ROOT / "registry" / "rasters").glob("*.tif"))
+            + list((ROOT / "docs" / "downloads").glob("*.tif"))
+            + list((ROOT / "submission").glob("*.tif"))
+        ))
+        by_sha: dict[str, dict] = {}
+        for p in local_tifs:
+            if a.candidate and p.resolve() == a.candidate.resolve():
+                continue
+            digest = hashlib.sha256(p.read_bytes()).hexdigest()
+            if cand_sha and digest == cand_sha:
+                continue
+            rel = str(p.relative_to(ROOT))
+            rec_item = by_sha.setdefault(
+                digest,
+                dict(sha256=digest, sources=[], repo_first="60GEMSDOE", local_path=p),
+            )
+            rec_item["sources"].append(f"60GEMSDOE:{rel}")
+        rows_index = list(by_sha.values())
+    else:
+        index = json.loads((ROOT / "evidence" / "registry_full_index.json").read_text())
+        rows_index = index["rasters"]
     rows, missing, equivalence = [], [], []
     rows_path = Path(a.rows_cache)
     reuse = {}
@@ -146,7 +176,7 @@ def main() -> int:
     for i, row in enumerate(rows_index):
         if row["sha256"] in reuse:
             continue
-        f = CACHE / f"{row['sha256'][:16]}.tif"
+        f = row.get("local_path") or (CACHE / f"{row['sha256'][:16]}.tif")
         if not f.is_file():
             missing.append(dict(sha256=row["sha256"], sources=row["sources"], error="not fetched"))
             continue
@@ -198,7 +228,7 @@ def main() -> int:
         if (i + 1) % 50 == 0:
             print(f"[uniq] {i + 1}/{len(rows_index)} ({time.time() - t0:.0f}s)", flush=True)
     cand_meta = dict(my_file=(a.candidate.name if a.candidate
-                              else "lane surface rebuilt from .cache/features60 (--surface)"),
+                              else f"lane surface rebuilt from .cache/{cache_name} (--surface)"),
                      my_dots=n_mine,
                      audit_target=("surface" if a.surface else "shipped dots"),
                      candidate_file_sha256=(hashlib.sha256(a.candidate.read_bytes()).hexdigest()
@@ -207,19 +237,32 @@ def main() -> int:
                      candidate_rank_variation=bool(np.ptp(mine[fp]) > 0))
     dense = [r for r in rows if r["their_dots"] > 0.5 * int(fp.sum())]
     sparse = [r for r in rows if r not in dense]
+    sparse_non_lattice = [r for r in rows if r["their_dots"] <= 185_000]
+    corpus_label = (
+        f"Committed local registry corpus ({len(rows_index)} unique SHA-256 rasters across "
+        "registry/rasters, docs/downloads, submission)"
+        if a.local_corpus
+        else "evidence/registry_full_index.json (655 pinned grid rasters, 56 sibling repositories)"
+    )
     report = U.summarize_registry_rows(
         rows, registry_rasters_expected=len(rows_index),
         complete_accessible_scan=(len(missing) == 0), source_errors=[],
         candidate_meta=cand_meta,
-        scope=dict(corpus="evidence/registry_full_index.json (655 pinned grid rasters, 56 sibling repositories)",
+        scope=dict(corpus=corpus_label,
                    fetched=len(rows), missing=len(missing), screen_cells=int(screen_idx.size),
                    exact_recompute_trigger=EXACT_RHO_TRIGGER,
                    dense_support_rows=len(dense), sparse_submission_like_rows=len(sparse),
+                   sparse_non_lattice_rows=len(sparse_non_lattice),
                    worst_rho_sparse_submission_like=max(
                        (r["spearman_full_footprint"] for r in sparse
                         if r["spearman_full_footprint"] is not None), default=None),
                    worst_overlap_sparse_submission_like=max(
                        (r["my_dots_within_3px_of_theirs"] for r in sparse), default=None),
+                   worst_rho_sparse_non_lattice=max(
+                       (r["spearman_full_footprint"] for r in sparse_non_lattice
+                        if r["spearman_full_footprint"] is not None), default=None),
+                   worst_overlap_sparse_non_lattice=max(
+                       (r["my_dots_within_3px_of_theirs"] for r in sparse_non_lattice), default=None),
                    seconds=round(time.time() - t0, 1)))
     report["scope"]["fast_overlap_equivalence_checked"] = len(equivalence)
     report["scope"]["fast_overlap_max_abs_difference"] = max(

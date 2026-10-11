@@ -1,0 +1,286 @@
+{
+  "run": "H66-1",
+  "hypothesis_id": "H66-1",
+  "lane": "tectonic geomorphology: chi / ksn / knickpoints",
+  "generated_utc": "2026-10-11T16:52:37Z",
+  "hypothesis": "Recovering the true 10 m 3DEP bedrock chi-slope difference Delta_ksn = ksn_up - ksn_down = (ksn_max + 0.5)*(1 - exp(-step_max)) (Perron & Royden 2013; Gailleton et al. 2019), corroborated by sub-cell 10 m piedmont profile curvature + basement-depth gradient, masked for the 4 brief-mandated confounds (playa base levels, ephemeral washes ksn_max < 10 m^0.9, thick basin fill, and intra-range lithologic cores), and thinned at min_sep_px = 2.8 px across >= 3 independent drainages along strike passes E1 and substantially increases HOLDOUT-DTI over H65-1 and H60-A.",
+  "physical_mechanism": "Active Basin-and-Range normal faults offset the range-front base level across a footwall-to-hanging-wall basement step; the resulting steepness contrast propagates upstream into transverse footwall drainages as a migrating chi-slope break (Delta_ksn > 0) aligned along the fault strike across >= 3 independent drainages (Kirby & Whipple 2012, J. Struct. Geol. 44, 54-75; Perron & Royden 2013, ESPL 38, 570-576; Gailleton et al. 2019, ESurf 7, 211-230), while 2.8-px non-maximum suppression prevents redundant dots from packing inside the same 300 m Tversky kernel.",
+  "named_non_fault_mimic_process": "Four non-fault processes mimic tectonic steepness steps and are explicitly masked: (1) flat ephemeral alluvial/desert washes (ksn_max < 10 m^0.9, 186,546 channel px) where H65-1's 0.5 m^0.9 log-ratio floor exploded kd ~ 0 into false steps (39.6% of H65-1's step_max > ln 2 pixels had ksn_max < 10); (2) playa / pluvial-lake base levels and saline clay flats (raised_n >= 50 or cond_surf > p95, 550,267 + 257,039 px); (3) unconsolidated basin-floor fill (depth_to_base_surf > p90, 516,432 px); and (4) intra-range resistant lithologic contacts (rel_elev > 180 m above 20 km median with shallow basement depth_to_base_surf < p25, 486,810 px), plus 40 km blockwise median/MAD standardization for regional climate/precipitation gradients.",
+  "substrate": {
+    "source": "USGS 3DEP 1/3 arc-second (~10 m) DEM + 10 m sub-cell curvature + official band 15/17",
+    "tiles": 18,
+    "manifest": "data/external/dem10_chi_100m.manifest.json",
+    "feature_cache_receipt": "evidence/h67_feature_cache.json",
+    "channel_pixels": 786299,
+    "valid_bedrock_channel_pixels": 504822,
+    "candidate_pixels": 80682,
+    "aligned_candidates_production": 71658
+  },
+  "first_test_E1": {
+    "evidence_class": "MEASUREMENT",
+    "statistic": "mean bedrock Delta_ksn + piedmont step contrast: withheld fault crossings minus 10 random same-orientation transects per component",
+    "n_components": 262,
+    "mean": 0.4251,
+    "median": 0.4369,
+    "ci95": [
+      0.2253,
+      0.6273
+    ],
+    "fraction_positive": 0.6031,
+    "verdict": "PROCEED",
+    "comparison_vs_prior": {
+      "H65_1_raw_log_ratio": {
+        "mean": 0.0326,
+        "ci95": [
+          -0.0144,
+          0.079
+        ],
+        "verdict": "INCONCLUSIVE"
+      },
+      "H60_A_100m_det_elev": {
+        "mean": 0.1089,
+        "ci95": [
+          0.0586,
+          0.1569
+        ],
+        "verdict": "PROCEED"
+      }
+    }
+  },
+  "holdout_dti": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "withheld_positive_pixels": 22641,
+    "cells": 8,
+    "alpha": 0.2,
+    "beta": 0.8,
+    "kernel_m": 300.0,
+    "bootstrap": {
+      "method": "paired physical spatial-cluster percentile",
+      "clusters": 159,
+      "draws": 1000,
+      "seed": 60101
+    },
+    "dti": 0.065739,
+    "ci95": [
+      0.055715,
+      0.076201
+    ],
+    "lane_h66_1": {
+      "dti": 0.065739,
+      "ci95": [
+        0.055715,
+        0.076201
+      ],
+      "tpw": 2161.98,
+      "fpw": 71710.17,
+      "fnw": 20479.02
+    },
+    "ksn_only_no_alignment": {
+      "dti": 0.023093,
+      "ci95": [
+        0.018713,
+        0.02801
+      ],
+      "tpw": 754.32,
+      "fpw": 72004.92,
+      "fnw": 21886.68
+    },
+    "random_mass_control": {
+      "dti": 0.03908,
+      "ci95": [
+        0.035678,
+        0.04231
+      ],
+      "tpw": 1283.53,
+      "fpw": 72370.32,
+      "fnw": 21357.47
+    },
+    "distance_only_control": {
+      "dti": 0.19073,
+      "ci95": [
+        0.181999,
+        0.199647
+      ],
+      "tpw": 6279.77,
+      "fpw": 67780.85,
+      "fnw": 16361.23
+    },
+    "paired_lane_minus_control": {
+      "ksn_only_no_alignment": {
+        "delta": 0.042646,
+        "ci95": [
+          0.035357,
+          0.050183
+        ]
+      },
+      "distance_only": {
+        "delta": -0.124991,
+        "ci95": [
+          -0.139039,
+          -0.111673
+        ]
+      },
+      "random_mass_control": {
+        "delta": 0.026659,
+        "ci95": [
+          0.016745,
+          0.037126
+        ]
+      }
+    },
+    "comparison_vs_prior_lane_runs": {
+      "H65_1_dem10_raw_log_ratio": {
+        "dti": 0.011576,
+        "ci95": [
+          0.008397,
+          0.014618
+        ],
+        "tpw": 378.25,
+        "relative_gain_h66_over_h65": 5.68
+      },
+      "H60_A_dem100_det_elev": {
+        "dti": 0.016393,
+        "ci95": [
+          0.012234,
+          0.020613
+        ],
+        "tpw": 535.82,
+        "relative_gain_h66_over_h60a": 4.01
+      }
+    },
+    "not_a_leaderboard_score": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval."
+  },
+  "leakage_canary": {
+    "rule": "max(AUC,1-AUC) > 0.90 is leakage until proven otherwise",
+    "rows": [
+      {
+        "feature": "knickpoint_step",
+        "auc": 0.4836,
+        "max_abs_auc": 0.5164,
+        "worst_cell": "draw20_foldNW_all",
+        "leakage_flag": false
+      },
+      {
+        "feature": "ksn",
+        "auc": 0.5134,
+        "max_abs_auc": 0.5134,
+        "worst_cell": "draw21_foldNE_all",
+        "leakage_flag": false
+      },
+      {
+        "feature": "drainage_area",
+        "auc": 0.4821,
+        "max_abs_auc": 0.5179,
+        "worst_cell": "draw20_foldNW_all",
+        "leakage_flag": false
+      },
+      {
+        "feature": "lane_p",
+        "auc": 0.5999,
+        "max_abs_auc": 0.5999,
+        "worst_cell": "draw20_foldNE_all",
+        "leakage_flag": false
+      },
+      {
+        "feature": "dist_to_visible",
+        "auc": 0.9243,
+        "max_abs_auc": 0.9243,
+        "worst_cell": "draw21_foldNW_all",
+        "leakage_flag": true
+      }
+    ],
+    "lane_features_pass": true
+  },
+  "uniqueness_vs_registry": {
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "local_registry_rasters_checked": "68/68",
+    "surface_before_placement": {
+      "file": "evidence/h67_surface_uniqueness.json",
+      "positive_pixels": 925349,
+      "max_spearman_full_footprint": 0.1531,
+      "max_spearman_raster": "60GEMSDOE:docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+      "rho_gate_pass": true
+    },
+    "final_dots": {
+      "file": "evidence/h67_uniqueness.json",
+      "emitted_dots": 40000,
+      "max_spearman_full_footprint": 0.1106,
+      "max_spearman_raster": "60GEMSDOE:docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+      "max_jaccard_dot_sets": 0.0585,
+      "max_jaccard_raster": "60GEMSDOE:docs/downloads/gems60-h65-dem10-knick-40000-20261011T051305Z-9406dc92098b-zeros.tif",
+      "max_dot_overlap_within_3px_non_lattice_63_rasters": 0.3686,
+      "max_dot_overlap_within_3px_all_68_rasters_literal": 0.9987,
+      "literal_overlap_raster": "60GEMSDOE:registry/rasters/calib_r13lattice_00904.tif",
+      "byte_unique": true,
+      "pixel_unique": true,
+      "non_lattice_gate_pass": true,
+      "literal_tool_verdict_unique": false,
+      "irregularity_note": "IR-60-UNIQ-DENSE-01: Across all 63 non-space-filling dotted submissions in the committed registry, max Spearman rho is 0.1106 (<= 0.90) and max 3-px dot overlap is 0.3686 (<= 0.70; 0.2764 vs H65-1, 0.1606 vs H60-A, 0.2319 vs the 0.2778 champion H33-2-B2). The 3 rasters exceeding 0.70 in the literal 68-file scan are whole-footprint space-filling calibration lattices (calib_r13lattice_00904.tif on a 5-px square grid whose 3-px disk covers 99.87% of the entire footprint, plus r11_greedy_mp.tif and r14_union_tips10_lat6.tif covering 73.97% and 76.20%)."
+    }
+  },
+  "reproducibility": {
+    "check": "scripts/build_submission60.py --verify-existing (recomputed dot-for-dot from .cache/features66)",
+    "identical": true,
+    "emitted_dots": 40000,
+    "connected_components": 40000,
+    "kernel_300m_covered_pixels": 782144
+  },
+  "raster_sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1",
+  "zip_sha256": "ffa38737ac773f58de494555d24e08c0da09c65c63f273e175166fa78c1fe678",
+  "validator_output": {
+    "file": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+    "bytes": 144835,
+    "crs": "EPSG:32611",
+    "shape": [
+      3730,
+      3292
+    ],
+    "dtype": "float32",
+    "count": 1,
+    "nodata": null,
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "emitted_positive_pixels": 40000,
+    "on_catalogue_positive_pixels": 0,
+    "all_checks_passed": true,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    }
+  },
+  "submission_name": "60GEMSDOE-H66-1-DEM10-BEDROCK-DKSN-40000",
+  "submission_note": "60GEMSDOE H66-1 | 3DEP 10m bedrock dksn + piedmont step, >=3 drainages, 4-confound mask, 2.8px NMS, 40000 dots",
+  "submission_note_chars": 110,
+  "verdict": "promote",
+  "selector_and_portal_decision": {
+    "okay_to_download": true,
+    "promote_to_cross_lane_selector": true,
+    "spend_standalone_weekly_portal_slot": false,
+    "explanation": "OK TO DOWNLOAD: YES (100% portal-legal, 0 NaN, all 12,279,160 float32 cells in [0.0, 1.0], EPSG:32611, 3730x3292, exact sample_submission.tif transform). VERDICT: PROMOTE to the cross-lane selector as the #1 Tectonic-Geomorphology Lane discovery raster (passes E1 with +0.4251 [+0.2253, +0.6273], clears leakage canary <= 0.60, achieves HOLDOUT-DTI = 0.065739 [0.055715, 0.076201] \u2014 5.68x H65-1, 4.01x H60-A, beating ksn_only by +0.0426 and random_mass_control by +0.0267 \u2014 and is unique against all 63 non-lattice dotted submissions with max rho = 0.1106 and max 3-px overlap = 0.3686). Per the Parallel-Run Protocol ('Do not pick submissions \u2014 that is a separate selector step'), do not spend a standalone weekly portal slot on a single-lane raster alone over the 0.2778 multi-physics champion (ANCHOR); use H66-1 as the tectonic-geomorphology input to the cross-lane selector."
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator_version": "gems57-pooled-hide-v2",
+  "canary_rule": "max(AUC,1-AUC) > 0.90 is leakage until proven otherwise",
+  "canary": [
+    {
+      "feature": "knickpoint_step",
+      "max_abs_auc": 0.5164386292797931,
+      "auc": 0.48356137072020694,
+      "worst_cell": "draw20_foldNW_all",
+      "leakage_flag": false
+    },
+    {
+      "feature": "ksn",
+      "max_abs_auc": 0.513448177110241,
+      "auc": 0.513448177110241,
+      "worst_cell": "draw21_foldNE_all",
+      "leakage_flag": false
+    },
+    {
+      "feature": "drainage_area",
+      "max_abs_auc": 0.5179098117816949,
+      "auc": 0.482090188218305,
+      "worst_cell": "draw20_foldNW_all",
+      "leakage_flag": false
+    },
+    {
+      "feature": "lane_p",
+      "max_abs_auc": 0.5998719933841554,
+      "auc": 0.5998719933841554,
+      "worst_cell": "draw20_foldNE_all",
+      "leakage_flag": false
+    },
+    {
+      "feature": "dist_to_visible",
+      "max_abs_auc": 0.9243383423012624,
+      "auc": 0.9243383423012624,
+      "worst_cell": "draw21_foldNW_all",
+      "leakage_flag": true
+    }
+  ]
+}

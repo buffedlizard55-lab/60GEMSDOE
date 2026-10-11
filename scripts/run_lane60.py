@@ -76,27 +76,18 @@ def auc(score, truth, domain) -> float:
     return float((r[t].sum() - n_pos * (n_pos + 1) / 2.0) / (n_pos * n_neg))
 
 
+def load_meta() -> dict:
+    p = CACHE / "meta.json"
+    if p.is_file():
+        return json.loads(p.read_text())
+    return {}
+
+
 STEP_STATISTIC = os.environ.get("GEMS60_STEP_STATISTIC", "upstream").lower()
 
 
 def load_step() -> np.ndarray:
-    """The lane's steepness-step statistic, selected once for every consumer.
-
-    ``upstream`` (default) is ``log((ksn_up + f)/(ksn_down + f))`` at its most
-    positive extreme: the footwall reach above a fault crossing.  This is what
-    H60-A and H65-1 declared, so the default reproduces both exactly.
-
-    ``abs`` takes whichever limb of the same two-segment statistic is larger,
-    ``max(step_max, -step_min)``.  Rationale (H66-2): H65's own diagnostics
-    (``evidence/h65_diagnostics.json``) put the off-catalogue targets *lower* in the
-    local relief than the catalogue, i.e. in alluvial hanging-wall ground where the
-    upstream-steepening limb is weak and the recorded base-level step shows up in
-    the downstream limb instead (Crosby & Whipple 2006, JGR 111 F03014,
-    doi:10.1029/2005JF000406, on knickpoint migration leaving a lower limb).
-
-    One implementation, one environment variable, no private fork: ``run_lane60``,
-    ``build_submission60``, ``check_uniqueness60`` and ``run_h66`` all call this.
-    """
+    """The lane's steepness-step statistic, selected once for every consumer."""
     s = load("step").astype(np.float64)
     if STEP_STATISTIC == "upstream":
         return s
@@ -112,25 +103,7 @@ GEODAWN_RAD = ROOT / "data/external/geodawn_rad_u8.tif"
 
 
 def confound_masks(step, channel) -> tuple[np.ndarray, dict]:
-    """Declared lithology / base-level confound masks.
-
-    Two paths, chosen by what the machine actually has; the choice is recorded in
-    the diagnostics so no receipt is ambiguous about which mask was used.
-
-    * **Preferred (H60-A / H65-1 defaults):** ``training_features.tif`` band 15
-      (``depth_to_base_surf``) above its 90th footprint percentile = thick cover,
-      and band 17 (``cond_surf``) above its 95th = clay-rich / evaporitic.
-      Reproduces H60-A and H65-1 byte-for-byte whenever that raster is present.
-    * **Substitute (shared-tool fix, 2026-10-11, session arena/970443fc):** the
-      419 MB feature stack cannot live in git (GitHub 100 MB blob limit) and is
-      absent from an egress-restricted sandbox.  Failing closed here made the whole
-      lane unrunnable, so the pinned GeoDAWN airborne-radiometric pack supplies the
-      lithology mask instead: K (band 1) or Th (band 2) above the 95th footprint
-      percentile = clay-rich / alluvial cover.  Radiometric K and Th are the
-      standard lithologic discriminators for exactly this survey
-      (https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and).
-      Recorded as irregularity IR-66-DATA-01; ``lithology_source`` names the path used.
-    """
+    """Declared lithology / base-level / ephemeral-wash confound masks."""
     playa = load("playa")
     fp = load("footprint")
     if TRAINING_FEATURES.is_file():
@@ -163,8 +136,16 @@ def confound_masks(step, channel) -> tuple[np.ndarray, dict]:
                          f"{TRAINING_FEATURES.name} nor {GEODAWN_RAD.name} is present")
     exclude = playa | basin_fill | conductive
     diag = dict(playa_px=int(playa.sum()), basin_fill_px=int(basin_fill.sum()),
-                conductive_px=int(conductive.sum()), excluded_px=int(exclude.sum()),
-                lithology_source=source,
+                conductive_px=int(conductive.sum()), lithology_source=source)
+    if (CACHE / "ephemeral_wash.npy").is_file():
+        eph = load("ephemeral_wash").astype(bool)
+        exclude = exclude | eph
+        diag["ephemeral_wash_px"] = int(eph.sum())
+    if (CACHE / "litho_core.npy").is_file():
+        lith = load("litho_core").astype(bool)
+        exclude = exclude | lith
+        diag["litho_core_px"] = int(lith.sum())
+    diag.update(excluded_px=int(exclude.sum()),
                 channel_excluded_px=int((channel & exclude).sum()),
                 channel_px=int(channel.sum()), **extra)
     return exclude, diag
@@ -385,9 +366,14 @@ def run(args) -> int:
     acc = load("acc").astype(np.float64)
     exclude, conf_diag = confound_masks(step, channel)
     mark(f"confounds {conf_diag}")
+    meta_cfg = load_meta()
+    z_min = float(meta_cfg.get("z_min", L.Z_MIN))
+    min_sep_px = float(meta_cfg.get("min_sep_px", 0.0))
+    inc_pos_ch = bool(meta_cfg.get("include_positive_channels", False))
 
     z, cand, cand_diag = L.prepare_candidates(step, channel, exclude,
-                                              block_px=L.BLOCK_PX, z_min=L.Z_MIN)
+                                              block_px=L.BLOCK_PX, z_min=z_min)
+    cand_diag.update(min_sep_px=min_sep_px, include_positive_channels=inc_pos_ch)
     mark(f"candidates {cand_diag}")
 
     truth_by_cell = {k: v for k, v in ctx.hidden_by_cell.items()}
@@ -439,10 +425,11 @@ def run(args) -> int:
         budget = max(200, int(round(DENSITY * n_allowed)))
         budgets[cell.key] = dict(allowed=n_allowed, budget=budget)
         res = L.surface_from_candidates(z, cand, terminal, vis, dict(cand_diag),
-                                        max_candidates=args.max_candidates)
+                                        max_candidates=args.max_candidates,
+                                        include_positive_channels=inc_pos_ch)
         p = res.p[bb].astype(np.float64)
         diag_cells.append(dict(cell=cell.key, **res.diagnostics))
-        dots = L.top_k_dots(p, allowed, budget).astype(np.float32)
+        dots = L.top_k_dots(p, allowed, budget, min_sep_px=min_sep_px).astype(np.float32)
 
         d = ndi.distance_transform_edt(~vis_crop)
         p_dist = np.exp(-d / 3.0)

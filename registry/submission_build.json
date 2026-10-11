@@ -1,27 +1,27 @@
 {
- "name": "60GEMSDOE-H61A-XCRD-37654px",
- "note": "H61-A XCRD: 30-channel off-catalogue detector; 37,654 dots >=350 m from catalogue; unique vs 35 rasters; UNSCORED, projection only.",
- "status_line": "PRIMARY = H61-A XCRD (2026-10-11), the session's UNIQUE artifact: max |Spearman| 0.024 against all 35 registry rasters, worst within-3-px share 46 % (brief's stop rule 70 %). DOWNLOAD: YES. SLOT DECISION: NOT CLEARED - no local instrument can certify it beats the owner-reported 0.2778 (the repository's catalogue hide-and-recover gate scores every off-catalogue emission exactly 0 by construction: evidence/e6_blocked_gate.json), so it is an explicit bounded-downside bet (only the best submission counts). Screens: 2.46 vs the champion's 1.62 at equal 37,654-dot mass on the one mass-normalised screen that reproduces the ladder (Spearman +0.94, evidence/e2b_xcrd_screen.json); independent LiDAR scarp screen NEGATIVE (0.48x), stated on purpose. The parallel 2026-10-11b GEMS61 lane artifact keeps its own NEGATIVE verdict and is retained alongside.",
+ "name": "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros",
+ "note": "60GEMSDOE H66-1 | 3DEP 10m bedrock dksn + piedmont step, >=3 drainages, 4-confound mask, 2.8px NMS, 40000 dots",
+ "status_line": "PRIMARY = H66-1 Native 10 m 3DEP Bedrock Delta-ksn + Piedmont/Basement-Step + 4-Confound Mask + 2.8-px NMS (40,000 dots, 0 on catalogue). OK TO DOWNLOAD: YES (all 12,279,160 float32 cells finite in [0.0, 1.0], 0 NaN, nodata=None, EPSG:32611, 3730x3292). LANE VERDICT: PROMOTE TO CROSS-LANE SELECTOR \u2014 passes Mandated First Test E1 (+0.4251, 95% CI [+0.2253, +0.6273], 262 withheld components -> PROCEED), clears single-feature leakage canary (all lane features <= 0.60 << 0.90), and achieves HOLDOUT-DTI = 0.065739 (95% CI [0.055715, 0.076201], evaluator gems57-pooled-hide-v2, 22,641 withheld positives) \u2014 5.68x H65-1 (0.011576), 4.01x H60-A (0.016389), beating ksn_only (+0.0426) and random_mass_control (+0.0267). Unique across all 63 non-lattice dotted submissions (max surface |rho| = 0.1531 <= 0.90, max dot |rho| = 0.1106 <= 0.90, max 3-px dot overlap = 0.3686 <= 0.70; 23.2% overlap vs the 0.2778 champion ANCHOR). Per Parallel-Run Protocol, submit via the cross-lane selector rather than replacing the 0.2778 multi-physics ANCHOR with a single-lane file alone.",
  "file": {
-  "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
-  "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
-  "bytes": 127363,
-  "positive_px": 37654
+  "path": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+  "sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1",
+  "bytes": 144835,
+  "positive_px": 40000
  },
  "file_zeros": {
-  "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.tif",
-  "sha256": "3ede96840cdc1a5c856df86da5036c3f9a19341b03310c6943c15dbef8bc4e1c",
-  "bytes": 127363,
-  "positive_px": 37654
+  "path": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.tif",
+  "sha256": "cde6b57be8aaac9b3e35df6c90e26fd51a95b190653acc375d354ae69a5eada1",
+  "bytes": 144835,
+  "positive_px": 40000
  },
  "zip": {
-  "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros.zip",
-  "sha256": "b9e66142e20d103dd4bf9663d56b532b754c372deb28b31cd1efe406a560cdfd",
-  "bytes": 86350
+  "path": "docs/downloads/gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros.zip",
+  "sha256": "ffa38737ac773f58de494555d24e08c0da09c65c63f273e175166fa78c1fe678",
+  "bytes": 111143
  },
- "candidate_id": "H61-A XCRD",
+ "candidate_id": "H66-1-DEM10-BEDROCK-DKSN-40000",
  "tier": 2,
- "hypothesis": "H61-A",
+ "hypothesis": "H66-1",
  "selection_rule": {
   "tier_1": "slot-eligible under the live-anchored gate (LM-cal +margin in 4/4 quadrants over a live-scored base, safety factor >= 2.0) AND on_catalogue_pixels == 0; highest projected live DTI wins",
   "tier_2": "scripts/build_slot_plan.py's frozen holdout rule: beats the owner-reported 0.2600 incumbent on all three holdout instruments AND 0 on-catalogue dots",
@@ -248,14 +248,14 @@
  ],
  "rule": "E2/E3: strike-concordant knickpoints (chi/ksn on the 3DEP-10m-reduced 100 m pack) x INGENIOUS thermal corroboration (springs, 2 m probes, paleo travertine), 3-px NMS, 2-px catalogue ring, 40,000-dot budget chosen as the in-sample maximum of the audited selection instrument; the emission rule is unchanged from the audited selector",
  "provenance": "built by scripts/e62_lane_thermal.py (E2/E3) and scripts/e62b_substrate.py (E2b) from the hash-pinned bridge + data/external inputs; every digest re-read from the written bytes; receipts evidence/e62_lane_thermal.json, evidence/e62b_substrate.json, docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.json",
- "verdict": "OK TO DOWNLOAD; slot NOT CLEARED (explicit bounded-downside bet). Superseded parallel-session claims and their negative verdicts are preserved in superseded_primaries.",
+ "verdict": "OK TO DOWNLOAD (VALIDATED [0, 1] GEOTIFF) \u00b7 PROMOTE TO CROSS-LANE SELECTOR (HOLDOUT-DTI 0.0657 [0.0557, 0.0762], 5.68x H65-1, 4.01x H60-A; E1 PROCEED +0.4251)",
  "evidence": {
   "lane_thermal": "evidence/e62_lane_thermal.json",
   "substrate_diagnostic": "evidence/e62b_substrate.json",
   "instrument_audit": "evidence/e61_instrument_audit.json",
   "receipt": "docs/downloads/gems61-lane-thermal-knick-40000px-20261011T020352Z.json"
  },
- "session": "2026-10-11 H61-H63",
+ "session": "2026-10-11 H66-1 (Tectonic-Geomorphology Lane)",
  "file_nan_twin": {
   "path": "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-nan.tif",
   "sha256": "8cbd52542e7bb8ea4949497d4f1b40f2f7936167f87d841f9242fe29f85e1383",
@@ -265,7 +265,7 @@
   "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-audit.json",
   "docs/downloads/gems60-h61a-xcrd-37654px-20261011T021923Z-zeros-audit.json"
  ],
- "run_card": "evidence/run_card_h61_20261011.json",
+ "run_card": "evidence/h67_runcard.json",
  "writeup": "docs/research/h61-h63-session-20261011.md",
  "screens": {
   "sgmc_offcat_quality_ratio_at_equal_mass": 2.4637,
@@ -285,8 +285,18 @@
   }
  },
  "approved_for_weekly_slot": false,
- "promoted": false,
+ "promoted": true,
  "superseded_primaries": [
+  {
+   "name": "gems60-h66-dem10-bedrock-dksn-40000-20261011T162456Z-dbafa4373009-zeros",
+   "verdict": "OK TO DOWNLOAD (VALIDATED [0, 1] GEOTIFF) \u00b7 PROMOTE TO CROSS-LANE SELECTOR (HOLDOUT-DTI 0.0657 [0.0557, 0.0762], 5.68x H65-1, 4.01x H60-A; E1 PROCEED +0.4251)",
+   "status_line": "PRIMARY = H66-1 Native 10 m 3DEP Bedrock Delta-ksn + Piedmont/Basement-Step + 4-Confound Mask + 2.8-px NMS (40,000 dots, 0 on catalogue). OK TO DOWNLOAD: YES (all 12,279,160 float32 cells finite in [0.0, 1.0], 0 NaN, nodata=None, EPSG:32611, 3730x3292). LANE VERDICT: PROMOTE TO CROSS-LANE SELECTOR \u2014 passes Mandated First Test E1 (+0.4251, 95% CI [+0.2253, +0.6273], 262 withheld components -> PROCEED), clears single-feature leakage canary (all lane features <= 0.60 << 0.90), and achieves HOLDOUT-DTI = 0.065739 (95% CI [0.055715, 0.076201], evaluator gems57-pooled-hide-v2, 22,641 withheld positives) \u2014 5.68x H65-1 (0.011576), 4.01x H60-A (0.016389), beating ksn_only (+0.0426) and random_mass_control (+0.0267). Unique across all 63 non-lattice dotted submissions (max surface |rho| = 0.1531 <= 0.90, max dot |rho| = 0.1106 <= 0.90, max 3-px dot overlap = 0.3686 <= 0.70; 23.2% overlap vs the 0.2778 champion ANCHOR). Per Parallel-Run Protocol, submit via the cross-lane selector rather than replacing the 0.2778 multi-physics ANCHOR with a single-lane file alone."
+  },
+  {
+   "name": "60GEMSDOE-H61A-XCRD-37654px",
+   "verdict": "OK TO DOWNLOAD; slot NOT CLEARED (explicit bounded-downside bet). Superseded parallel-session claims and their negative verdicts are preserved in superseded_primaries.",
+   "status_line": "PRIMARY = H61-A XCRD (2026-10-11), the session's UNIQUE artifact: max |Spearman| 0.024 against all 35 registry rasters, worst within-3-px share 46 % (brief's stop rule 70 %). DOWNLOAD: YES. SLOT DECISION: NOT CLEARED - no local instrument can certify it beats the owner-reported 0.2778 (the repository's catalogue hide-and-recover gate scores every off-catalogue emission exactly 0 by construction: evidence/e6_blocked_gate.json), so it is an explicit bounded-downside bet (only the best submission counts). Screens: 2.46 vs the champion's 1.62 at equal 37,654-dot mass on the one mass-normalised screen that reproduces the ladder (Spearman +0.94, evidence/e2b_xcrd_screen.json); independent LiDAR scarp screen NEGATIVE (0.48x), stated on purpose. The parallel 2026-10-11b GEMS61 lane artifact keeps its own NEGATIVE verdict and is retained alongside."
+  },
   {
    "name": "gems61-lane-thermal-knick-40000px-20261011T020352Z",
    "verdict": "NEGATIVE - deliverable negative result; do not spend a submission slot (brief: never submit anything that has not beaten the family's best promotable holdout)",

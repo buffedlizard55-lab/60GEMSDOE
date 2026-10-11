@@ -156,7 +156,8 @@ def surface_from_candidates(z: np.ndarray, cand: np.ndarray, terminal: np.ndarra
                             half_len: int = CORRIDOR_HALF_LEN_PX,
                             half_width: int = CORRIDOR_HALF_WIDTH_PX,
                             regional_strike: float | None = None,
-                            max_candidates: int = 120_000) -> SurfaceResult:
+                            max_candidates: int = 120_000,
+                            include_positive_channels: bool = False) -> SurfaceResult:
     """Fold-dependent half: visible-catalogue strike, corridor corroboration, p."""
     diag = dict(diag or {})
     diag.update(n_drainage_min=n_drainage_min, corridor_half_len_px=half_len,
@@ -187,14 +188,17 @@ def surface_from_candidates(z: np.ndarray, cand: np.ndarray, terminal: np.ndarra
                 n_drainage_p90=float(np.percentile(ndr_vals, 90)),
                 n_drainage_max=int(ndr_vals.max()))
 
-    s = np.zeros(z.shape, np.float32)
-    s[ys, xs] = z[ys, xs]
+    if include_positive_channels:
+        s = np.where(np.isfinite(z) & (z > 0), z * np.float32(0.05), np.float32(0.0)).astype(np.float32)
+    else:
+        s = np.zeros(z.shape, np.float32)
+    s[ys, xs] = np.maximum(s[ys, xs], z[ys, xs])
     if aligned.any():
         ay, ax = ys[aligned], xs[aligned]
         s[ay, ax] += np.float32(1.0 + np.log2(np.maximum(ndr_vals[aligned], 1)))
         tmask, tscore = stamp_corridors(ay, ax, bins_all[ay, ax], s[ay, ax], z.shape,
                                         half_len, half_width, decay=TRACE_DECAY)
-        trace_only = tmask & (s <= 0)
+        trace_only = tmask & (s < tscore)
         s[trace_only] = tscore[trace_only]
         diag.update(trace_pixels=int(tmask.sum()), trace_only_pixels=int(trace_only.sum()))
     else:
@@ -244,12 +248,16 @@ def allowed_production(footprint: np.ndarray, catalogue: np.ndarray,
     return fp & ~cat
 
 
-def top_k_dots(p: np.ndarray, allowed: np.ndarray, budget: int, seed: int = 60) -> np.ndarray:
+def top_k_dots(p: np.ndarray, allowed: np.ndarray, budget: int, seed: int = 60,
+               min_sep_px: float = 0.0) -> np.ndarray:
     """Top-``budget`` allowed cells by ``p``, ties broken by a fixed RNG.
 
     Tie-breaking is randomised but seeded, so a rank plateau cannot smuggle a
     raster-order artefact into the emission (the failure mode documented for the
-    sibling family's earliest dotted files).
+    sibling family's earliest dotted files).  When ``min_sep_px > 0``, greedy
+    spatial-hash non-maximum suppression enforces a minimum Euclidean spacing of
+    ``min_sep_px`` pixels so multiple dots do not pack into the same 300 m
+    Tversky kernel.
     """
     p = np.asarray(p, np.float64)
     al = np.asarray(allowed, bool) & (p > 0)
@@ -258,7 +266,40 @@ def top_k_dots(p: np.ndarray, allowed: np.ndarray, budget: int, seed: int = 60) 
         return np.zeros(p.shape, bool)
     rng = np.random.default_rng(seed)
     key = p[ys, xs] + rng.random(ys.size) * 1e-9
-    order = np.argsort(-key, kind="stable")[:min(int(budget), ys.size)]
+    order = np.argsort(-key, kind="stable")
+    if min_sep_px <= 0.0:
+        order = order[:min(int(budget), ys.size)]
+        out = np.zeros(p.shape, bool)
+        out[ys[order], xs[order]] = True
+        return out
+    sep2 = float(min_sep_px) ** 2
+    cell_sz = max(1, int(np.ceil(min_sep_px)))
+    buckets: dict[tuple[int, int], list[tuple[int, int]]] = {}
+    keep_y: list[int] = []
+    keep_x: list[int] = []
+    target = int(budget)
+    for idx in order:
+        y, x = int(ys[idx]), int(xs[idx])
+        by, bx = y // cell_sz, x // cell_sz
+        ok = True
+        for oy in (-1, 0, 1):
+            for ox in (-1, 0, 1):
+                for qy, qx in buckets.get((by + oy, bx + ox), ()):
+                    if (qy - y) ** 2 + (qx - x) ** 2 < sep2:
+                        ok = False
+                        break
+                if not ok:
+                    break
+            if not ok:
+                break
+        if ok:
+            keep_y.append(y)
+            keep_x.append(x)
+            buckets.setdefault((by, bx), []).append((y, x))
+            if len(keep_y) >= target:
+                break
     out = np.zeros(p.shape, bool)
-    out[ys[order], xs[order]] = True
+    if keep_y:
+        out[keep_y, keep_x] = True
     return out
+
